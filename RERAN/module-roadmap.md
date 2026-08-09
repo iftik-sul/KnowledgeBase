@@ -1,0 +1,173 @@
+---
+project: RERAN
+type: overview
+status: current
+updated: 2026-08-09
+contains_proposals: true
+derived_from:
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
+  - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
+tags:
+  - roadmap
+  - modules
+  - planning
+---
+
+# RERAN Module Roadmap
+
+A survey of all eight user groups against the source material: what exists, what is documented, what is missing, and in what order to build it.
+
+**Scope:** post-login functionality only. Registration and onboarding are excluded from this project.
+
+---
+
+## The Landscape
+
+| Group | Module | Services | Roles | Sub-systems | Documentation status |
+| :---- | :---- | :---: | :---: | :---: | :---- |
+| **A** | Regulatory Authority & Governance | **0** | 8 | 6 | Not started — see gap below |
+| **B** | Real Estate Developers | 27 | 4 | 3 | UI scaffolded; no service flows |
+| **C** | Financial & Trust Institutions | 18 | 4 | 3 | Roles, services, payments, questions |
+| **D** | Real Estate Service Companies | 26 | 4 | 4 | Not started |
+| **E+F** | Individual User | 41 | 6 | 4 | 43 service flows written; count needs audit |
+| **G** | Allied Professionals & Service Trustees | **0** | 4 | 3 | Not started — see note below |
+| **H** | Public & Informational Users | 33 | 2 | 2 | Not started |
+| | **Total** | **145** | **28** | | |
+
+Service counts are verified row by row against the master service table and reconcile exactly with the source workbook's own summary. The individual-user module's internally documented count of 39 is the only figure in the project that does not reconcile — see Known Issues.
+
+---
+
+## The Group A Gap
+
+**Group A owns zero services, yet appears as approver on nearly every one of the other 145.**
+
+The user group structure gives Group A eight roles and six platform sub-systems:
+
+* Admin & Configuration Console
+* Licensing & Registry Engine
+* Escrow / Trust-Account Audit System
+* Inspection & Enforcement Module
+* Tribunal & Remote-Litigation System
+* Revenue & Settlement Dashboard
+
+The PRD independently specifies three feature modules covering the same ground: staff workflow and case management, reporting and analytics, and administration/security/audit.
+
+So the regulator's own system is described at capability level in two source documents, but has no entries at all in the service table — because the service table catalogues services *offered to external users*, not the internal work of processing them.
+
+**Why this matters:** every one of the 145 external services terminates in a Group A action. The Compliance & Escrow Auditor alone is the approver for all 18 Group C services and most of Group B's. Without Group A documented, no external service flow can describe what happens after submission, and the back-office is the largest unspecified area of the platform.
+
+> **Proposed** — Group A should be documented as a module organised by sub-system rather than by service, since it has no service catalogue. The six sub-systems above become the module's top-level structure, with each documenting the queues, decisions, and actions available to the roles that operate it. Needs client confirmation.
+
+### Estimated shape
+
+| Sub-system | Primary roles | Feeds from |
+| :---- | :---- | :---- |
+| Licensing & Registry Engine | Licensing & Registration Officer | B, D licensing services |
+| Escrow / Trust-Account Audit | Compliance & Escrow Auditor | B escrow services, C approvals |
+| Transaction Audit Queue | Compliance & Escrow Auditor | C transaction services, E title services |
+| Tribunal & Remote-Litigation | Dispute Adjudication Officer | D, F dispute services |
+| Inspection & Enforcement | Inspection & Enforcement Officer | B construction filings |
+| Revenue & Settlement | Revenue & Finance Officer | All fee-bearing services |
+| Admin & Configuration | System Super Administrator | Platform-wide |
+
+---
+
+## The Group G Note
+
+Group G also owns zero services, but for a different and less concerning reason.
+
+Survey Companies, Valuers, Conveyancers and Registration Trustee Centres appear constantly *inside* other groups' workflows — "developer designates an accredited survey company", "visit Real Estate Registration Trustee Centres", "survey company prepares data and matches it to approved plans". They are participants in other groups' services rather than applicants with their own catalogue.
+
+The Trustee Centre is the most heavily used: it is a named channel on a large share of the 145 services, acting on behalf of walk-in customers.
+
+> **Proposed** — Group G may not need a service catalogue at all, but does need documented interfaces for the actions it performs inside other groups' flows: survey data submission, valuation filing, and Trustee Centre operator transactions. Whether this is a module or a set of shared interface documents is an open question. Needs client confirmation.
+
+---
+
+## Module Profiles
+
+### Group B — Real Estate Developers (27 services)
+
+The most heavily regulated external group, and the only one with UI documented before service flows — the reverse of the project's derivation chain.
+
+| Source category | Services |
+| :---- | :---: |
+| Real Estate Development Services | 21 |
+| Real Estate Licensing Service | 2 |
+| Title Deed Data Services | 4 |
+
+Escrow dominates: account activation, transfer, profit withdrawal, payment release, mortgage deposit, bank guarantee cancellation, expense cap amendment. Every one of these routes through a Group C Account Trustee, making B and C tightly coupled.
+
+**Existing work:** 19 screens scaffolded in `modules/real-estate-developer/ui/screens/`, bodies empty, pending migration from the 295 KB source UI file.
+
+### Group D — Real Estate Service Companies (26 services)
+
+Four distinct sub-domains under one group — the most internally varied module.
+
+| Source category | Services |
+| :---- | :---: |
+| Jointly Owned Property Services | 11 |
+| Real Estate Licensing Services | 8 |
+| Real Estate Rental Services | 3 |
+| Real Estate Transaction Services | 2 |
+| Real Estate Dispute Services | 2 |
+
+Jointly-owned property is effectively its own product: owners' associations, service-charge budgets, escrow accounts for joint properties, appointing auditors. Several JOP services mirror Group B's escrow services with different actors.
+
+### Group H — Public & Informational (33 services)
+
+Highest service count, lowest complexity. Almost every service follows the same three-step shape: log in, select service, view information. No approver, no fee in most cases, no application lifecycle.
+
+The exceptions worth noting: Fee Payment Receipt, Fee Refund Request (seven business days, Ministry of Finance approval), and Track Your Case — these have real workflows. The other 30 are lookups.
+
+**Assessment:** cheapest module per service by a wide margin. A single well-designed lookup pattern covers most of it.
+
+### Group E+F — Individual User (41 services)
+
+Already documented, with one outstanding issue — see Known Issues.
+
+---
+
+## Proposed Sequence
+
+> **Proposed** — sequencing is our recommendation, not a client requirement. Needs confirmation.
+
+**1. Group A.** Everything else terminates here, and its absence blocks every other module's flows from describing what happens after submission. Also the largest unknown, so learning its shape early de-risks the rest.
+
+**2. Group B service flows.** UI already exists; writing the flows underneath completes the module and corrects the inverted derivation chain. Also unblocks the B↔C escrow coupling.
+
+**3. Group C service flows.** Nine of eighteen are writable now; the rest wait on the open questions already sent.
+
+**4. Group H.** Cheap, high volume, mostly one repeated pattern. Good candidate for batch work once the patterns from A and B are established.
+
+**5. Group D.** Largest remaining unknown after A, and the JOP sub-domain may warrant splitting.
+
+**6. Group G interfaces.** Once the flows that reference survey companies and Trustee Centres exist, their interfaces can be derived from actual usage rather than guessed.
+
+---
+
+## Known Issues
+
+| Issue | Module | Status |
+| :---- | :---- | :---- |
+| Documented service count is 39; source count is 41 | Individual User | Open — needs row-by-row audit |
+| UI documented before service flows | Real Estate Developer | Open — flows to be written underneath |
+| 295 KB source UI file not yet split | Real Estate Developer | Open — 19 screen files scaffolded and empty |
+| 43 service and feature docs not yet moved into `service-flows/` | Individual User | Open — mechanical move |
+| 23 client questions outstanding | Financial & Trust | Sent, awaiting answers |
+| No application status vocabulary exists platform-wide | All | Proposed for Group C; needs a platform decision |
+| Root README lists seven projects; only RERAN is active | Project | Open |
+
+---
+
+## Cross-Cutting Observations
+
+**Escrow is the platform's spine.** It appears in Group B (developer drawdowns), Group C (trustee certification, auditor review), Group D (jointly-owned property accounts), and Group A (compliance audit). Four groups, one mechanism. It is the strongest candidate for a shared reference document rather than four independent descriptions.
+
+**The Trustee Centre channel is pervasive.** A large share of services across E, F and C list Real Estate Registration Trustee Centres as a channel, sometimes as the only channel. Whether those services gain online equivalents is a scope decision that affects several modules at once.
+
+**Every fee-bearing service pays after audit approval, not at submission.** This is stated once, in the pipeline definition, and has consequences for every module's screens and statuses. It belongs in a platform-level document, not repeated per module.
+
+**Three groups share the same four application-management features.** Submit, Track, Respond to Information Request, Resubmit. Documented for Individual User, proposed for Group C, and certainly needed by B and D. These should be defined once at platform level.
