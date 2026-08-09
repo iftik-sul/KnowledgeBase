@@ -3,7 +3,7 @@ project: RERAN
 module: individual-user
 type: overview
 status: current
-updated: 2026-08-09
+updated: 2026-08-10
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -25,7 +25,7 @@ This module's documentation was split from a single combined file, `RERAN_ indiv
 | Section | Count |
 | :---- | :---: |
 | Roles | 6 |
-| Business Services | 39 |
+| Business Services | 43 |
 | Shared Platform Features | 12 |
 
 ## Roles (6)
@@ -34,9 +34,9 @@ This module's documentation was split from a single combined file, `RERAN_ indiv
 
 ## Services Overview
 
-* [services-overview.md](services-overview.md) — the 8 business service categories, summary tables, and the distinction between Business Services and Shared Platform Features.
+* [services-overview.md](services-overview.md) — the 8 business service categories, summary tables, service provenance (sourced vs. extrapolated), and the distinction between Business Services and Shared Platform Features.
 
-## Business Services (39)
+## Business Services (43)
 
 ### Verification Services (3)
 
@@ -44,7 +44,7 @@ This module's documentation was split from a single combined file, `RERAN_ indiv
 * [service-02-verify-development-project.md](service-flows/service-02-verify-development-project.md)
 * [service-03-verify-property.md](service-flows/service-03-verify-property.md)
 
-### Property Ownership & Transaction Services (13)
+### Property Ownership & Transaction Services (14)
 
 * [service-04-register-property-ownership.md](service-flows/service-04-register-property-ownership.md)
 * [service-05-transfer-property-ownership.md](service-flows/service-05-transfer-property-ownership.md)
@@ -59,8 +59,9 @@ This module's documentation was split from a single combined file, `RERAN_ indiv
 * [service-14-register-usufruct-right.md](service-flows/service-14-register-usufruct-right.md)
 * [service-15-amend-usufruct-right.md](service-flows/service-15-amend-usufruct-right.md)
 * [service-16-terminate-usufruct-right.md](service-flows/service-16-terminate-usufruct-right.md)
+* [service-41-register-company.md](service-flows/service-41-register-company.md)
 
-### Title & Land Registration Services (6)
+### Title & Land Registration Services (7)
 
 * [service-17-grant-registration.md](service-flows/service-17-grant-registration.md)
 * [service-18-grant-completion.md](service-flows/service-18-grant-completion.md)
@@ -68,8 +69,9 @@ This module's documentation was split from a single combined file, `RERAN_ indiv
 * [service-20-register-community-land.md](service-flows/service-20-register-community-land.md)
 * [service-21-register-partners-division.md](service-flows/service-21-register-partners-division.md)
 * [service-22-register-industrial-commercial-land-ownership.md](service-flows/service-22-register-industrial-commercial-land-ownership.md)
+* [service-43-exchange-properties.md](service-flows/service-43-exchange-properties.md)
 
-### Tenancy Services (6)
+### Tenancy Services (7)
 
 * [service-23-register-lease.md](service-flows/service-23-register-lease.md)
 * [service-24-renew-lease.md](service-flows/service-24-renew-lease.md)
@@ -77,11 +79,13 @@ This module's documentation was split from a single combined file, `RERAN_ indiv
 * [service-26-submit-tenancy-dispute.md](service-flows/service-26-submit-tenancy-dispute.md)
 * [service-27-cancel-tenancy-contract.md](service-flows/service-27-cancel-tenancy-contract.md)
 * [service-28-request-rental-valuation.md](service-flows/service-28-request-rental-valuation.md)
+* [service-40-upload-building-details-for-leasing.md](service-flows/service-40-upload-building-details-for-leasing.md)
 
-### Power of Attorney Services (2)
+### Power of Attorney Services (3)
 
 * [service-29-register-power-of-attorney.md](service-flows/service-29-register-power-of-attorney.md)
 * [service-30-act-on-behalf-of-property-owner.md](service-flows/service-30-act-on-behalf-of-property-owner.md)
+* [service-42-cancel-power-of-attorney.md](service-flows/service-42-cancel-power-of-attorney.md)
 
 ### Property Information & Certificate Services (5)
 
