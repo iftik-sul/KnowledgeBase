@@ -5,8 +5,10 @@ type: service-flow
 status: current
 updated: 2026-08-09
 derived_from:
-  - "RERAN/modules/individual-user/RERAN_ individual user_service_flows.md"
+  - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
+  - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
   - individual-user
   - service-flow
