@@ -3,7 +3,7 @@ project: RERAN
 module: individual-user
 type: overview
 status: current
-updated: 2026-08-09
+updated: 2026-08-10
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -42,7 +42,8 @@ These services enable users to register, transfer, update, and manage property o
 * Service \#13 – Amend Lease-to-Own  
 * Service \#14 – Register Usufruct Right  
 * Service \#15 – Amend Usufruct Right  
-* Service \#16 – Terminate Usufruct Right
+* Service \#16 – Terminate Usufruct Right  
+* Service \#41 – Register Company
 
 ### 3. Title & Land Registration Services
 
@@ -53,7 +54,8 @@ These services allow users to register, update, and manage land ownership, title
 * Service \#19 – Register Heirs Ownership  
 * Service \#20 – Register Community Land  
 * Service \#21 – Register Partners Division  
-* Service \#22 – Register Industrial & Commercial Land Ownership
+* Service \#22 – Register Industrial & Commercial Land Ownership  
+* Service \#43 – Exchange Properties
 
 ### 4. Tenancy Services
 
@@ -64,14 +66,16 @@ These services support tenancy registration, lease renewal, tenancy management, 
 * Service \#25 – Manage Lease  
 * Service \#26 – Submit Tenancy Dispute  
 * Service \#27 – Cancel Tenancy Contract  
-* Service \#28 – Request Rental Valuation
+* Service \#28 – Request Rental Valuation  
+* Service \#40 – Upload Building Details for Leasing
 
 ### 5. Power of Attorney Services
 
 These services enable property owners to legally authorize another individual to act on their behalf for property-related matters.
 
 * Service \#29 – Register Power of Attorney  
-* Service \#30 – Act on Behalf of Property Owner
+* Service \#30 – Act on Behalf of Property Owner  
+* Service \#42 – Cancel Power of Attorney
 
 ### 6. Property Information & Certificate Services
 
@@ -102,14 +106,27 @@ These services provide mechanisms for users to lodge complaints and monitor comp
 | Category | Number of Services |
 | :---- | :---: |
 | Verification Services | 3 |
-| Property Ownership & Transaction Services | 13 |
-| Title & Land Registration Services | 6 |
-| Tenancy Services | 6 |
-| Power of Attorney Services | 2 |
+| Property Ownership & Transaction Services | 14 |
+| Title & Land Registration Services | 7 |
+| Tenancy Services | 7 |
+| Power of Attorney Services | 3 |
 | Property Information & Certificate Services | 5 |
 | Diaspora Services | 2 |
 | Consumer Protection Services | 2 |
-| **Total Business Services** | **39** |
+| **Total Business Services** | **43** |
+
+## Service Provenance
+
+Every service file's frontmatter now carries a `source_type` field:
+
+| Value | Meaning | Count |
+| :---- | :---- | :---: |
+| `sourced` | Traces to an explicit row in `RERAN_service_flows_v2.md`'s master Service Workflows table | 32 |
+| `extrapolated` | Derived from role descriptions in the source (e.g. "Property Buyer/Investor verifies developer/project") rather than an explicit workflow row, per the standing instruction to fill gaps in incomplete client material | 11 |
+
+The 11 extrapolated services: Verify Developer/Development Project/Property (\#1–\#3), Register Property Ownership (\#4), Manage Lease (\#25), Act on Behalf of Property Owner (\#30), Remote Identity Verification/Remote Property Transactions (\#36–\#37), Submit/Track Complaint (\#38–\#39).
+
+The master table has 41 rows for Groups E+F (Owners & Landlords: 28; Tenants & Consumers: 13), not 43. The counts don't need to match: 10 tenant-dispute rows (distinct procedures — Dispute Case, Preliminary Suit, Appeal, Grievance, Petition to Reconsider, Order on a Petition, Offer and Deposit, Performance Order, Grievance Against Performance Order, Execution Case) were consolidated into one documented service, Submit Tenancy Dispute (\#26); one row (lease registration/renewal) was split into two documented services (\#23, \#24); two "amendment" rows were likely consolidated into one (\#7). The 4 services added 2026-08-10 (\#40–\#43) closed a genuine gap: explicit source rows that had no documented counterpart at all.
 
 ## Shared Platform Features
 
