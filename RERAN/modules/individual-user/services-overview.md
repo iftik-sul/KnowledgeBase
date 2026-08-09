@@ -5,7 +5,10 @@ type: overview
 status: current
 updated: 2026-08-09
 derived_from:
-  - "RERAN/modules/individual-user/RERAN_ individual user_service_flows.md"
+  - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
+  - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
   - individual-user
   - services-overview
@@ -106,7 +109,7 @@ These services provide mechanisms for users to lodge complaints and monitor comp
 | Property Information & Certificate Services | 5 |
 | Diaspora Services | 2 |
 | Consumer Protection Services | 2 |
-| **Total Business Services** | **35** |
+| **Total Business Services** | **39** |
 
 ## Shared Platform Features
 
