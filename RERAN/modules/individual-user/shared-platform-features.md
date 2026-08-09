@@ -31,7 +31,7 @@ Examples:
 * Register Power of Attorney  
 * Submit Complaint
 
-See [feature-01-submit-application.md](feature-01-submit-application.md) for full detail.
+See [feature-01-submit-application.md](service-flows/feature-01-submit-application.md) for full detail.
 
 ## Feature #2 – Track Application Status
 
@@ -46,7 +46,7 @@ Examples:
 * Power of Attorney  
 * Remote Transactions
 
-See [feature-02-track-application-status.md](feature-02-track-application-status.md) for full detail.
+See [feature-02-track-application-status.md](service-flows/feature-02-track-application-status.md) for full detail.
 
 ## Feature #3 – Respond to Information Request
 
@@ -59,7 +59,7 @@ Examples:
 * Provide additional explanations  
 * Submit revised supporting evidence
 
-See [feature-03-respond-to-information-request.md](feature-03-respond-to-information-request.md) for full detail.
+See [feature-03-respond-to-information-request.md](service-flows/feature-03-respond-to-information-request.md) for full detail.
 
 ## Feature #4 – Resubmit Returned Application
 
@@ -72,7 +72,7 @@ Examples:
 * Invalid information  
 * Incorrect payment evidence
 
-See [feature-04-resubmit-returned-application.md](feature-04-resubmit-returned-application.md) for full detail.
+See [feature-04-resubmit-returned-application.md](service-flows/feature-04-resubmit-returned-application.md) for full detail.
 
 ## This order mirrors the lifecycle of almost every RERAN application:
 
