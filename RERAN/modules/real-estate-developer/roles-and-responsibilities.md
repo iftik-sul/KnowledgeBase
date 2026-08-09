@@ -27,7 +27,9 @@ The senior executive or owner of the real estate development company. They overs
 * Review escrow status  
 * Track regulatory compliance  
 * Make business decisions  
-* Represent the company before RERA
+* Represent the company before RERA  
+* Review organizational reports  
+* Monitor company performance
 
 ### Practical Example
 
@@ -63,7 +65,8 @@ The employee responsible for handling all registrations and regulatory submissio
 * Upload required documents  
 * Submit applications  
 * Respond to RERA requests  
-* Track approval progress
+* Track approval progress  
+* Generate registration reports
 
 ### Practical Example
 
@@ -98,7 +101,8 @@ The employee responsible for property sales records and ensuring all legally req
 * Submit sales disclosures  
 * Maintain buyer information  
 * Update property status  
-* Ensure sales comply with regulations
+* Ensure sales comply with regulations  
+* Generate sales reports
 
 ### Practical Example
 
@@ -130,7 +134,8 @@ The employee responsible for coordinating escrow-related activities between the 
 * Submit escrow documents  
 * Track construction milestones  
 * Monitor fund releases  
-* Resolve escrow-related issues
+* Resolve escrow-related issues  
+* Generate escrow reports
 
 ### Practical Example
 
@@ -167,4 +172,3 @@ In short:
 * **Project Registration Officer** → Registers projects and manages regulatory applications.  
 * **Sales & Disclosure Officer** → Handles property sales and mandatory disclosures.  
 * **Escrow Liaison** → Coordinates escrow accounts and construction fund releases.
-
