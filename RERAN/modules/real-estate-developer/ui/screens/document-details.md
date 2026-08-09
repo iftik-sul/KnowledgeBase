@@ -290,17 +290,7 @@ Primary Button
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar  
-* Information Cards  
-* KPI Cards  
-* Embedded Document Viewer  
-* Data Tables  
-* Status Badges  
-* Activity Timeline  
-* Version History Component  
-* Buttons  
-* Empty State
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -326,7 +316,6 @@ Document Details
 * The page supports every document type stored in the RERA platform.  
 * All information is presented in **read-only mode**.  
 * The embedded document viewer allows executives to inspect documents without downloading them, while maintaining secure access controls and a complete audit trail.
-
 
 ### Project Registration Officer
 
@@ -508,18 +497,11 @@ Displays automated and regulatory verification results.
 
 #### **Automatic Validation**
 
-* File uploaded successfully  
-* Correct file format  
-* File size within limit  
-* Virus scan completed  
-* Metadata complete
+See [validation-rules.md](../validation-rules.md#document-upload-rules) for the file-integrity check list — including a conflict between this role's version and the other two operational roles'.
 
 #### **Regulatory Verification**
 
-* Pending Review  
-* Information Requested  
-* Verified  
-* Rejected
+See [status-badges.md](../status-badges.md#document-status) ("Document Details screen — Regulatory Verification" subsection) for the status vocabulary — the source uses three different, unreconciled vocabularies for document status; see that section for all three.
 
 Display results using:
 
@@ -601,18 +583,7 @@ Secondary Button
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (Background \+ HorizontalBorder)  
-* Progress Tracker  
-* Embedded Document Viewer  
-* Information Cards  
-* Editable Form Components  
-* File Upload Component  
-* Validation Panel  
-* Version History Table  
-* Status Badges  
-* Timeline  
-* Buttons
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -659,7 +630,6 @@ This will be the Project Registration Officer's reporting workspace, allowing of
 * Pending Tasks  
 * Approval Progress  
 * Submission History
-
 
 ### Sales & Disclosure Officer
 
@@ -845,19 +815,11 @@ Displays both automatic and regulatory verification results.
 
 #### **Automatic Validation**
 
-* File uploaded successfully  
-* Supported file format  
-* File size within limit  
-* Virus scan completed  
-* Metadata completed  
-* Required document linked
+See [validation-rules.md](../validation-rules.md#document-upload-rules) for the file-integrity check list — including a conflict with the Registration Officer's shorter version of this same check list.
 
 #### **Regulatory Verification**
 
-* Pending Review  
-* Information Requested  
-* Verified  
-* Rejected
+See [status-badges.md](../status-badges.md#document-status) ("Document Details screen — Regulatory Verification" subsection) for the status vocabulary — the source uses three different, unreconciled vocabularies for document status; see that section for all three.
 
 Display results using:
 
@@ -960,19 +922,7 @@ If the document has just been created:
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (Background \+ HorizontalBorder)  
-* Progress Tracker  
-* Embedded Document Viewer  
-* Information Cards  
-* Editable Form Components  
-* File Upload Component  
-* Validation Panel  
-* Version History Table  
-* Status Badges  
-* Communication Thread  
-* Timeline  
-* Buttons
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -1006,7 +956,6 @@ Document Details
 * Version history must be preserved for every replacement to provide a full regulatory audit trail.  
 * The **Submit for Verification** action remains disabled until all mandatory validations pass.  
 * Personally identifiable buyer information should be protected according to the platform's security and privacy requirements.
-
 
 ### Escrow Liaison
 
@@ -1171,19 +1120,11 @@ Displays automatic and regulatory verification results.
 
 #### **Automatic Validation**
 
-* File uploaded successfully  
-* Supported file format  
-* File size within limit  
-* Virus scan completed  
-* Metadata completed  
-* Required document linked
+See [validation-rules.md](../validation-rules.md#document-upload-rules) for the file-integrity check list — including a conflict with the Registration Officer's shorter version of this same check list.
 
 #### **Regulatory Verification**
 
-* Pending Review  
-* Information Requested  
-* Verified  
-* Rejected
+See [status-badges.md](../status-badges.md#document-status) ("Document Details screen — Regulatory Verification" subsection) for the status vocabulary — the source uses three different, unreconciled vocabularies for document status; see that section for all three.
 
 Display results using:
 
@@ -1283,16 +1224,7 @@ Each activity displays:
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (**Background \+ HorizontalBorder**)  
-* Information Tabs  
-* Embedded Document Viewer  
-* Information Cards  
-* Status Badges  
-* Version History Table  
-* Communication Thread  
-* Activity Timeline  
-* Confirmation Dialogs
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -1322,7 +1254,6 @@ Save Changes / Submit Response
 * Every uploaded revision creates a new document version while preserving the complete audit trail.  
 * All communications with RERA and Financial Institutions are recorded in the Communication History.  
 * The screen follows the standardized **Information Tabs** pattern used across all operational detail pages in the platform.
-
 
 ## User Flow
 

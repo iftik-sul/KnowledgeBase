@@ -150,19 +150,11 @@ The Developer Principal has oversight access only.
 
 ### Sales Status Badges
 
-* Reserved  
-* Sold  
-* Completed  
-* Cancelled
+See [status-badges.md](../status-badges.md#sales-status) for the status vocabulary — including a conflict between the Principal's and the Officer's lists.
 
 ### Disclosure Status Badges
 
-* Not Submitted  
-* Submitted  
-* Under Review  
-* Approved  
-* Returned  
-* Rejected
+See [status-badges.md](../status-badges.md#disclosure-status) for the status vocabulary — including a conflict between the Principal's and the Officer's lists.
 
 ### Section 4 — Sales Analytics
 
@@ -212,17 +204,7 @@ Components
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar  
-* KPI Cards  
-* Search Bar  
-* Filter Bar  
-* Data Table  
-* Analytics Cards  
-* Status Badges  
-* Pagination  
-* Empty State  
-* Buttons
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -381,24 +363,11 @@ Available actions depend on the current status.
 
 ### Sales Status Badges
 
-Use the shared status badge component.
-
-* Draft  
-* Reserved  
-* Sold  
-* Completed  
-* Cancelled
+See [status-badges.md](../status-badges.md#sales-status) for the status vocabulary — including a conflict between the Principal's and the Officer's lists.
 
 ### Disclosure Status Badges
 
-* Not Started  
-* Draft  
-* Submitted  
-* Under Review  
-* Information Requested  
-* Returned  
-* Approved  
-* Rejected
+See [status-badges.md](../status-badges.md#disclosure-status) for the status vocabulary — including a conflict between the Principal's and the Officer's lists.
 
 ### Bulk Actions
 
@@ -462,17 +431,7 @@ Bottom of the table.
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (Background \+ HorizontalBorder)  
-* KPI Cards  
-* Search Bar  
-* Filter Bar  
-* Data Table  
-* Status Badges  
-* Analytics Cards  
-* Pagination  
-* Buttons  
-* Empty State
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 

@@ -45,7 +45,6 @@ The page uses the shared **Background \+ HorizontalBorder** component.
 * Submit Request *(Enabled only after validation passes)*  
 * More Actions
 
-
 Top Bar  
 ↓  
 Fund Release Header  
@@ -202,29 +201,7 @@ Upload documents required for fund release.
 
 ### Section 7 — Validation Summary
 
-Automatic validation before submission.
-
-Validation checks include:
-
-* Mandatory fields completed  
-* Escrow account is active  
-* Milestone eligible for release  
-* Requested amount within approved limit  
-* Required documents uploaded  
-* Engineer verification completed  
-* Quantity Surveyor verification completed  
-* Duplicate release request check  
-* File verification completed
-
-Display results using:
-
-* ✅ Passed  
-* ⚠ Warning  
-* ❌ Error
-
-Selecting an issue scrolls directly to the affected section.
-
-The **Submit Request** button remains disabled until all mandatory validations pass.
+See [validation-rules.md](../validation-rules.md) for the shared automatic-validation mechanism and the common field-level checks (required fields, required documents, file verification). This screen's own additional checks: Escrow account is active, Milestone eligible for release, Requested amount within approved limit, Engineer verification completed, Quantity Surveyor verification completed, Duplicate release request check.
 
 ### Section 8 — RERA / Bank Queries
 
@@ -293,7 +270,6 @@ Each activity displays:
 * Description  
 * Status
 
-
 ## Empty State
 
 If this is a newly created request:
@@ -312,17 +288,7 @@ If this is a newly created request:
 
 ## Reused Components
 
-* Left Sidebar  
-* Top Bar (**Background \+ HorizontalBorder**)  
-* Progress Tracker  
-* Information Cards  
-* Form Sections  
-* Document Upload Table  
-* Validation Panel  
-* Communication Thread  
-* Activity Timeline  
-* Status Badges  
-* Buttons
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ## Validation
 

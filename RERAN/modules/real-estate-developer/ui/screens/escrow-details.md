@@ -293,17 +293,7 @@ Primary Button
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar  
-* Information Cards  
-* KPI Cards  
-* Progress Timeline  
-* Data Tables  
-* Status Badges  
-* Activity Timeline  
-* Document Viewer  
-* Empty State  
-* Buttons
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -446,13 +436,7 @@ Displays every release request associated with the escrow account.
 
 #### **Status**
 
-* Draft  
-* Submitted  
-* Under Review  
-* Approved  
-* Released  
-* Returned  
-* Rejected
+See [status-badges.md](../status-badges.md#fund-release-status) for the status vocabulary — including a conflict between this list, the Principal's escrow-management.md list, and the Escrow Liaison's own escrow-management.md list.
 
 #### **Actions**
 
@@ -477,11 +461,7 @@ Displays all construction milestones linked to this escrow account.
 
 #### **Status**
 
-* Pending  
-* In Progress  
-* Submitted  
-* Verified  
-* Returned
+See [status-badges.md](../status-badges.md#milestone-verification-status-additional-vocabulary-found-during-consolidation) for the status vocabulary.
 
 ### Tab 4 — Documents
 
@@ -569,17 +549,7 @@ If no milestones or releases exist yet:
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (**Background \+ HorizontalBorder**)  
-* Summary Card  
-* Information Cards  
-* Tabs  
-* Data Tables  
-* Timeline  
-* Status Badges  
-* Document List  
-* Alert Panel  
-* Buttons
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 

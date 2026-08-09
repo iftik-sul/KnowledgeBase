@@ -140,13 +140,7 @@ Located above the table.
 
 ### Status Badges
 
-* Draft  
-* Submitted  
-* Under Review  
-* Pending Additional Information  
-* Approved  
-* Rejected  
-* Withdrawn
+See [status-badges.md](../status-badges.md#application-status) for the status vocabulary — including a conflict between the Principal's and the operational roles' lists.
 
 ### Priority Indicators
 
@@ -245,18 +239,7 @@ Components
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar  
-* KPI Cards  
-* Search Bar  
-* Filter Bar  
-* Data Table  
-* Analytics Cards  
-* Timeline Widget  
-* Status Badges  
-* Pagination  
-* Empty State  
-* Buttons
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -276,7 +259,6 @@ Application Details
 * It serves as the single source of truth for every regulatory application submitted by the organization.  
 * Executives can quickly identify bottlenecks, delayed approvals, rejected submissions, and applications requiring additional information.  
 * All submission, editing, and response activities remain the responsibility of the relevant operational roles (Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison, etc.).
-
 
 ### Project Registration Officer
 
@@ -373,14 +355,7 @@ Located above the table.
 
 ### Status Badges
 
-* Draft  
-* Submitted  
-* Under Review  
-* Information Requested  
-* Returned  
-* Approved  
-* Rejected  
-* Withdrawn
+See [status-badges.md](../status-badges.md#application-status) for the status vocabulary — including a conflict between the Principal's and the operational roles' lists.
 
 ### Priority
 
@@ -507,18 +482,7 @@ Components
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (Background \+ HorizontalBorder)  
-* KPI Cards  
-* Search Bar  
-* Filter Bar  
-* Data Table  
-* Status Badges  
-* Timeline  
-* Task Cards  
-* Pagination  
-* Empty State  
-* Buttons
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -562,7 +526,6 @@ This will be the operational workspace where the Project Registration Officer ca
 * Resubmit returned applications  
 * Track the approval workflow  
 * View the complete communication history with RERA
-
 
 ### Sales & Disclosure Officer
 
@@ -659,14 +622,7 @@ Located above the table.
 
 #### **Status Badges**
 
-* Draft  
-* Submitted  
-* Under Review  
-* Information Requested  
-* Returned  
-* Approved  
-* Rejected  
-* Withdrawn
+See [status-badges.md](../status-badges.md#application-status) for the status vocabulary — including a conflict between the Principal's and the operational roles' lists.
 
 #### **Priority**
 
@@ -795,18 +751,7 @@ Bottom of the table.
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (Background \+ HorizontalBorder)  
-* KPI Cards  
-* Search Bar  
-* Filter Bar  
-* Data Table  
-* Status Badges  
-* Timeline  
-* Task Cards  
-* Pagination  
-* Buttons  
-* Empty State
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -829,7 +774,6 @@ Applications
 * Users should be able to continue unfinished draft applications directly from this screen.  
 * Every submission, buyer information update, document upload, correction, and regulatory response must be recorded in the application's audit trail.  
 * The page emphasizes actionable work rather than analytics, enabling officers to quickly identify pending disclosure tasks and compliance deadlines.
-
 
 ### Escrow Liaison
 
@@ -924,14 +868,7 @@ Located above the table.
 
 #### **Status Badges**
 
-* Draft  
-* Submitted  
-* Under Review  
-* Information Requested  
-* Returned  
-* Approved  
-* Rejected  
-* Withdrawn
+See [status-badges.md](../status-badges.md#application-status) for the status vocabulary — including a conflict between the Principal's and the operational roles' lists.
 
 #### **Priority**
 
@@ -1062,16 +999,7 @@ Bottom of the table.
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (**Background \+ HorizontalBorder**)  
-* KPI Cards  
-* Search Bar  
-* Filter Bar  
-* Data Table  
-* Status Badges  
-* Pagination  
-* Empty State  
-* Confirmation Dialogs
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -1099,7 +1027,6 @@ Track the approval process until the application is completed
 * Applications are grouped by project and escrow account for easier tracking.  
 * Operational actions are available only while the application is editable.  
 * Status badges and workflow behavior follow the platform's shared design system.
-
 
 ## User Flow
 

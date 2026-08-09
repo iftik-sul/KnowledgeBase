@@ -278,7 +278,6 @@ Each activity displays:
 * Activity Description  
 * Status
 
-
 ## Empty State
 
 If no additional queries, communications, or activities exist:
@@ -289,17 +288,7 @@ If no additional queries, communications, or activities exist:
 
 ## Reused Components
 
-* Left Sidebar  
-* Top Bar (**Background \+ HorizontalBorder**)  
-* Information Tabs  
-* Status Badges  
-* Detail Cards  
-* Data Tables  
-* Document List  
-* Timeline  
-* Communication Thread  
-* Empty State  
-* Confirmation Dialogs
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ## Validation
 

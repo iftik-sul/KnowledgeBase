@@ -317,17 +317,7 @@ Primary Button
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar  
-* Information Cards  
-* KPI Cards  
-* Workflow Timeline  
-* Data Tables  
-* Status Badges  
-* Activity Timeline  
-* Document Viewer  
-* Empty State  
-* Buttons
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -527,26 +517,7 @@ Example documents include:
 
 ### Section 6 — Validation Summary
 
-Automatic validation before submission.
-
-Checks include:
-
-* Required fields completed  
-* Required documents uploaded  
-* Related project eligibility  
-* Related property validation  
-* Duplicate submission check  
-* File verification
-
-Display
-
-* ✅ Passed  
-* ⚠ Warning  
-* ❌ Error
-
-Selecting an issue navigates directly to the affected section.
-
-The **Submit to RERA** button remains disabled until all mandatory checks pass.
+See [validation-rules.md](../validation-rules.md) for the shared automatic-validation mechanism and the common field-level checks (required fields, required documents, file verification). This screen's own additional checks: Related project eligibility, Related property validation, Duplicate submission check.
 
 ### Section 7 — RERA Queries
 
@@ -623,17 +594,7 @@ Secondary Button
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (Background \+HorizontalBorder)  
-* Progress Tracker  
-* Information Cards  
-* Editable Form Components  
-* File Upload Component  
-* Validation Panel  
-* Status Badges  
-* Conversation Component  
-* Timeline  
-* Buttons
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -867,28 +828,7 @@ Examples
 
 ### Section 6 — Validation Summary
 
-Automatic validation before submission.
-
-Validation checks include:
-
-* Required fields completed  
-* Buyer information completed  
-* Property registration verified  
-* Required documents uploaded  
-* Duplicate application check  
-* Sale amount validation  
-* Buyer identity validation  
-* File verification
-
-Display
-
-* ✅ Passed  
-* ⚠ Warning  
-* ❌ Error
-
-Selecting an issue navigates directly to the affected section.
-
-The **Submit to RERA** button remains disabled until all mandatory checks pass.
+See [validation-rules.md](../validation-rules.md) for the shared automatic-validation mechanism and the common field-level checks (required fields, required documents, file verification). This screen's own additional checks: Buyer information completed, Property registration verified, Duplicate application check, Sale amount validation, Buyer identity validation.
 
 ### Section 7 — RERA Queries
 
@@ -967,17 +907,7 @@ Secondary Button
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (Background \+ HorizontalBorder)  
-* Progress Tracker  
-* Information Cards  
-* Editable Form Components  
-* File Upload Component  
-* Validation Panel  
-* Status Badges  
-* Communication Thread  
-* Timeline  
-* Buttons
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -1150,27 +1080,7 @@ Examples
 
 ### Tab 4 — Validation Summary
 
-Automatic validation before submission.
-
-Validation checks include:
-
-* Mandatory fields completed  
-* Escrow account verified  
-* Financial institution selected  
-* Required documents uploaded  
-* Related project eligibility verified  
-* Duplicate application check  
-* File verification completed
-
-Display:
-
-* ✅ Passed  
-* ⚠ Warning  
-* ❌ Error
-
-Selecting an issue navigates directly to the affected section.
-
-The **Submit to RERA / Financial Institution** button remains disabled until all mandatory validations pass.
+See [validation-rules.md](../validation-rules.md) for the shared automatic-validation mechanism and the common field-level checks (required fields, required documents, file verification). This screen's own additional checks: Escrow account verified, Financial institution selected, Related project eligibility verified, Duplicate application check.
 
 ### Tab 5 — RERA / Bank Queries
 
@@ -1249,16 +1159,7 @@ This screen is only accessible after selecting an application. If the record can
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (**Background \+ HorizontalBorder**)  
-* Information Tabs  
-* Status Badges  
-* Information Cards  
-* Document Upload Table  
-* Validation Panel  
-* Communication Thread  
-* Activity Timeline  
-* Confirmation Dialogs
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 

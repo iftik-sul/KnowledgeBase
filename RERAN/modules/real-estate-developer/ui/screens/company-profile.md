@@ -146,13 +146,7 @@ Displays regulatory registration details.
 * Renewal Status  
 * Assigned RERA Office
 
-Status badges:
-
-* Active  
-* Pending Renewal  
-* Expiring Soon  
-* Suspended  
-* Expired
+See [status-badges.md](../status-badges.md#company--rera-license-status) for the status vocabulary.
 
 ### Section 5 — Corporate Information
 
@@ -283,7 +277,6 @@ Button
 
 * View Complete Audit History
 
-
 ## Empty State
 
 If the organization profile is incomplete:
@@ -298,17 +291,7 @@ Primary Button
 
 ## Reused Components
 
-* Left Sidebar  
-* Top Bar  
-* Information Cards  
-* KPI Cards  
-* Data Tables  
-* Office Cards  
-* Status Badges  
-* Document List  
-* Audit Timeline  
-* Buttons  
-* Empty State
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ## Validation
 

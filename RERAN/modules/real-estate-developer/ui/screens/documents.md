@@ -146,17 +146,11 @@ Located above the table.
 
 ### Verification Status
 
-* Verified  
-* Pending Review  
-* Returned  
-* Rejected  
-* Expired
+See [status-badges.md](../status-badges.md#document-status) for the status vocabulary — the source uses three different, unreconciled vocabularies for document status; see that section for all three.
 
 ### Expiry Status
 
-* Valid  
-* Expiring Soon  
-* Expired
+See [status-badges.md](../status-badges.md#document-status) ("Expiry Status" subsection).
 
 ### Section 3 — Documents Table
 
@@ -249,18 +243,7 @@ Components
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar  
-* KPI Cards  
-* Search Bar  
-* Filter Bar  
-* Data Table  
-* Analytics Cards  
-* Timeline Widget  
-* Status Badges  
-* Pagination  
-* Empty State  
-* Buttons
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -280,7 +263,6 @@ Document Details
 * It aggregates documents from every operational module into a single searchable interface.  
 * Users can monitor document completeness, verification status, and expiry without navigating between multiple modules.  
 * Uploading, replacing, or deleting documents is handled by the responsible operational teams according to their permissions.
-
 
 ### Project Registration Officer
 
@@ -381,13 +363,7 @@ Located above the table.
 
 ### Verification Status
 
-* Draft  
-* Pending Verification  
-* Verified  
-* Information Requested  
-* Returned  
-* Rejected  
-* Expired
+See [status-badges.md](../status-badges.md#document-status) for the status vocabulary — the source uses three different, unreconciled vocabularies for document status; see that section for all three.
 
 ### Section 3 — Documents Table
 
@@ -505,19 +481,7 @@ Components
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (Background \+ HorizontalBorder)  
-* KPI Cards  
-* Search Bar  
-* Filter Bar  
-* Data Table  
-* Status Badges  
-* Timeline  
-* Task Cards  
-* Pagination  
-* File Upload Component  
-* Buttons  
-* Empty State
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -559,7 +523,6 @@ This screen will be the Project Registration Officer's operational workspace for
 * Respond to RERA document requests  
 * Review version history  
 * Track document activity and audit history
-
 
 ### Escrow Liaison
 
@@ -661,13 +624,7 @@ Located above the table.
 
 #### **Verification Status**
 
-* Draft  
-* Pending Verification  
-* Verified  
-* Information Requested  
-* Returned  
-* Rejected  
-* Expired
+See [status-badges.md](../status-badges.md#document-status) for the status vocabulary — the source uses three different, unreconciled vocabularies for document status; see that section for all three.
 
 ### Section 3 — Documents Table
 
@@ -787,16 +744,7 @@ Located at the bottom of the table.
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (**Background \+ HorizontalBorder**)  
-* KPI Cards  
-* Search Bar  
-* Filter Panel  
-* Data Table  
-* Status Badges  
-* Pagination  
-* Empty State  
-* Confirmation Dialogs
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -823,7 +771,6 @@ Open Document Details when additional action is required
 * Editing and replacement are available only while the document is in an editable status.  
 * Verification statuses are synchronized with both Financial Institution and RERA review workflows.  
 * Uses the platform's shared document management components and status indicators.
-
 
 ## User Flow
 

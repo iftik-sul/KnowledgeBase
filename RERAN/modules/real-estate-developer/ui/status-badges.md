@@ -145,6 +145,10 @@ The Escrow Liaison's list is the odd one out twice over: it has no "Draft" or "E
 
 [notifications.md](screens/notifications.md) — a per-notification read state, consistent across all roles (only documented once, under the Principal's version, but nothing in any other role's block contradicts it): Unread, Read, Archived (3 states). No conflict.
 
+### Company / RERA License Status
+
+[company-profile.md](screens/company-profile.md) (Principal only — this screen has no other role's version to compare against, so no conflict is possible): Active, Pending Renewal, Expiring Soon, Suspended, Expired (5 states), covering the developer organization's own RERA license, distinct from any project's or application's status. Found under a plain "Status badges:" prose lead-in rather than a heading, easy to miss on a first pass of the source — added here for completeness.
+
 ### Report Generation Status
 
 [reports.md](screens/reports.md) — the processing state of a generated report file. **Identical across all four roles** — the one legend in this whole file with no conflict at all: Processing, Completed, Failed, Expired (4 states).

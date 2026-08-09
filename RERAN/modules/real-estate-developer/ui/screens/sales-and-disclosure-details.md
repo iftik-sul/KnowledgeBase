@@ -266,17 +266,7 @@ Primary Button
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar  
-* Information Cards  
-* KPI Cards  
-* Progress Tracker  
-* Data Tables  
-* Status Badges  
-* Activity Timeline  
-* Document Viewer  
-* Empty State  
-* Buttons
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -499,28 +489,7 @@ Examples
 
 ### Section 7 — Validation Summary
 
-Automatic validation before submission.
-
-Validation checks include:
-
-* Mandatory fields completed  
-* Buyer information completed  
-* Property eligibility verified  
-* Required documents uploaded  
-* Duplicate disclosure check  
-* Sale value validation  
-* Buyer identity validation  
-* File verification
-
-Display results using:
-
-* ✅ Passed  
-* ⚠ Warning  
-* ❌ Error
-
-Selecting an issue scrolls directly to the affected field.
-
-The **Submit to RERA** button remains disabled until all mandatory validations pass.
+See [validation-rules.md](../validation-rules.md) for the shared automatic-validation mechanism and the common field-level checks (required fields, required documents, file verification). This screen's own additional checks: Buyer information completed, Property eligibility verified, Duplicate disclosure check, Sale value validation, Buyer identity validation.
 
 ### Section 8 — RERA Queries
 
@@ -597,17 +566,7 @@ Secondary Button
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (Background \+ HorizontalBorder)  
-* Progress Tracker  
-* Information Cards  
-* Editable Form Components  
-* File Upload Component  
-* Validation Panel  
-* Status Badges  
-* Communication Thread  
-* Timeline  
-* Buttons
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
