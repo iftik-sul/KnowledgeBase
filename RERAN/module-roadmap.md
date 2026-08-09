@@ -2,7 +2,7 @@
 project: RERAN
 type: overview
 status: current
-updated: 2026-08-09
+updated: 2026-08-10
 contains_proposals: true
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
@@ -27,15 +27,17 @@ A survey of all eight user groups against the source material: what exists, what
 | Group | Module | Services | Roles | Sub-systems | Documentation status |
 | :---- | :---- | :---: | :---: | :---: | :---- |
 | **A** | Regulatory Authority & Governance | **0** | 8 | 6 | Not started — see gap below |
-| **B** | Real Estate Developers | 27 | 4 | 3 | UI scaffolded; no service flows |
-| **C** | Financial & Trust Institutions | 18 | 4 | 3 | Roles, services, payments, questions |
-| **D** | Real Estate Service Companies | 26 | 4 | 4 | Not started |
-| **E+F** | Individual User | 41 | 6 | 4 | 43 service flows written; count needs audit |
-| **G** | Allied Professionals & Service Trustees | **0** | 4 | 3 | Not started — see note below |
-| **H** | Public & Informational Users | 33 | 2 | 2 | Not started |
+| **B** | Real Estate Developers | 27 | 4 | 3 | UI complete (19 screens); no service flows |
+| **C** | Financial & Trust Institutions | 18 | 4 | 3 | Roles, services, payments, questions; no service flows |
+| **D** | Real Estate Service Companies | 26 | 4 | 4 | Roles, services overview; no service flows |
+| **E+F** | Individual User | 41 | 6 | 4 | 43 service flows written; no UI; count needs audit |
+| **G** | Allied Professionals & Service Trustees | **0** | 4 | 3 | Roles documented; interfaces not written — see note below |
+| **H** | Public & Informational Users | 33 | 2 | 2 | Roles, services overview; no service flows |
 | | **Total** | **145** | **28** | | |
 
 Service counts are verified row by row against the master service table and reconcile exactly with the source workbook's own summary. The individual-user module's internally documented count of 39 is the only figure in the project that does not reconcile — see Known Issues.
+
+**Pattern worth naming:** every module that has moved past roles/overview has done so unevenly. Group B has full UI and no service flows. Individual User has full service flows and no UI. No module has both yet — the two halves of the pipeline are being worked in different modules rather than completed one module at a time.
 
 ---
 
@@ -82,6 +84,8 @@ Survey Companies, Valuers, Conveyancers and Registration Trustee Centres appear 
 
 The Trustee Centre is the most heavily used: it is a named channel on a large share of the 145 services, acting on behalf of walk-in customers.
 
+Roles are now documented (`modules/allied-professionals/roles-and-responsibilities.md`), but the interfaces themselves are not yet written.
+
 > **Proposed** — Group G may not need a service catalogue at all, but does need documented interfaces for the actions it performs inside other groups' flows: survey data submission, valuation filing, and Trustee Centre operator transactions. Whether this is a module or a set of shared interface documents is an open question. Needs client confirmation.
 
 ---
@@ -100,7 +104,7 @@ The most heavily regulated external group, and the only one with UI documented b
 
 Escrow dominates: account activation, transfer, profit withdrawal, payment release, mortgage deposit, bank guarantee cancellation, expense cap amendment. Every one of these routes through a Group C Account Trustee, making B and C tightly coupled.
 
-**Existing work:** 19 screens scaffolded in `modules/real-estate-developer/ui/screens/`, bodies empty, pending migration from the 295 KB source UI file.
+**Status:** all 19 screens migrated to `modules/real-estate-developer/ui/screens/`, shared component/validation/status-badge docs consolidated, source UI file retired. No service-flow documents exist yet — the UI describes screens with nothing underneath specifying the business rules they implement.
 
 ### Group D — Real Estate Service Companies (26 services)
 
@@ -116,6 +120,8 @@ Four distinct sub-domains under one group — the most internally varied module.
 
 Jointly-owned property is effectively its own product: owners' associations, service-charge budgets, escrow accounts for joint properties, appointing auditors. Several JOP services mirror Group B's escrow services with different actors.
 
+**Status:** roles and services overview documented. No individual service-flow documents written yet.
+
 ### Group H — Public & Informational (33 services)
 
 Highest service count, lowest complexity. Almost every service follows the same three-step shape: log in, select service, view information. No approver, no fee in most cases, no application lifecycle.
@@ -124,9 +130,25 @@ The exceptions worth noting: Fee Payment Receipt, Fee Refund Request (seven busi
 
 **Assessment:** cheapest module per service by a wide margin. A single well-designed lookup pattern covers most of it.
 
+**Status:** roles and services overview documented. No service-flow documents written yet — the proposed single parameterised flow plus catalogue table is still just a proposal.
+
 ### Group E+F — Individual User (41 services)
 
-Already documented, with one outstanding issue — see Known Issues.
+Service flows complete: 43 files under `modules/individual-user/service-flows/`, moved into that folder from the module root. Roles, services overview, and shared platform features also documented.
+
+**Status:** the most complete module on the service-flow side, and the only one with zero UI work — no `ui/` folder exists for this module at all. Also the one open count discrepancy in the project — see Known Issues.
+
+### Group C — Financial & Trust Institutions (18 services)
+
+Roles, services overview, and a payments document are complete. 23 open questions sent to the client are recorded in `modules/financial-trust-institutions/open-questions.md`.
+
+**Status:** no service-flow documents written yet. Per the original scoping, 9 of 18 services are answerable from source material now; the remaining 9 wait on client responses.
+
+### Group G — Allied Professionals & Service Trustees (0 services)
+
+Roles documented. See "The Group G Note" above for why this module has no service catalogue and what it needs instead.
+
+**Status:** interfaces not yet written.
 
 ---
 
@@ -138,13 +160,15 @@ Already documented, with one outstanding issue — see Known Issues.
 
 **2. Group B service flows.** UI already exists; writing the flows underneath completes the module and corrects the inverted derivation chain. Also unblocks the B↔C escrow coupling.
 
-**3. Group C service flows.** Nine of eighteen are writable now; the rest wait on the open questions already sent.
+**3. Individual User UI.** The mirror image of #2 — flows exist, screens don't. Closing this and #2 leaves the project with two fully round-tripped modules (source → flows → UI) to use as the house style for everything after.
 
-**4. Group H.** Cheap, high volume, mostly one repeated pattern. Good candidate for batch work once the patterns from A and B are established.
+**4. Group C service flows.** Nine of eighteen are writable now; the rest wait on the open questions already sent.
 
-**5. Group D.** Largest remaining unknown after A, and the JOP sub-domain may warrant splitting.
+**5. Group H.** Cheap, high volume, mostly one repeated pattern. Good candidate for batch work once the patterns from A and B are established.
 
-**6. Group G interfaces.** Once the flows that reference survey companies and Trustee Centres exist, their interfaces can be derived from actual usage rather than guessed.
+**6. Group D.** Largest remaining unknown after A, and the JOP sub-domain may warrant splitting.
+
+**7. Group G interfaces.** Once the flows that reference survey companies and Trustee Centres exist, their interfaces can be derived from actual usage rather than guessed.
 
 ---
 
@@ -154,11 +178,13 @@ Already documented, with one outstanding issue — see Known Issues.
 | :---- | :---- | :---- |
 | Documented service count is 39; source count is 41 | Individual User | Open — needs row-by-row audit |
 | UI documented before service flows | Real Estate Developer | Open — flows to be written underneath |
-| 295 KB source UI file not yet split | Real Estate Developer | Open — 19 screen files scaffolded and empty |
-| 43 service and feature docs not yet moved into `service-flows/` | Individual User | Open — mechanical move |
+| No UI documented at all | Individual User | Open — the mirror-image gap of Real Estate Developer's |
 | 23 client questions outstanding | Financial & Trust | Sent, awaiting answers |
 | No application status vocabulary exists platform-wide | All | Proposed for Group C; needs a platform decision |
-| Root README lists seven projects; only RERAN is active | Project | Open |
+| Root `KnowledgeBase/README.md` lists seven projects; only RERAN is active | Project | Open |
+| `RERAN/README.md` has four stub sections ("Modules", "Tech Stack", "Stakeholders", "Entry Points" all say "To be completed") despite this roadmap holding most of that detail already | Project | Open |
+
+**Resolved since this roadmap was first written:** the 43 individual-user service/feature docs have been moved into `service-flows/`; the 295 KB Group B UI source file has been fully split into 19 screen files plus consolidated component/validation/status-badge docs and retired.
 
 ---
 
