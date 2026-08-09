@@ -10,13 +10,8 @@ This repository is designed to be AI-friendly, making it easy for AI assistants 
 
 ## Projects
 
-- RERAN
-- ERP
-- SkudX
-- 3i
-- LoyaltyPoints
-- OstadLagbo
-- FindYourClone
+- **RERAN** — active. See [RERAN/README.md](RERAN/README.md) and [RERAN/module-roadmap.md](RERAN/module-roadmap.md).
+- ERP, SkudX, 3i, LoyaltyPoints, OstadLagbo, FindYourClone — reserved placeholders. Not yet active; each real client engagement gets its own project folder when work begins (ERP in particular is a sample folder, not a specific client).
 
 Each project maintains its own documentation while following the same documentation standards.
 
