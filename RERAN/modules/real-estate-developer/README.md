@@ -16,6 +16,8 @@ tags:
 
 Documentation for RERAN user Group B — licensed development companies that register projects and off-plan sales, operate escrow accounts, and file construction progress. The most heavily regulated external group.
 
+The module enables registered real estate development companies to participate in the RERA ecosystem by registering development projects, submitting property registrations, managing property sales disclosures, coordinating escrow activities, and interacting with RERA throughout the development lifecycle. Each registered developer is treated as a single organization; users within the organization are assigned predefined business roles with role-based permissions, with the Developer Principal / Director serving as the primary organizational representative.
+
 ## Roles (4)
 
 * [roles-and-responsibilities.md](roles-and-responsibilities.md) — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison.
@@ -40,9 +42,9 @@ Documentation for RERAN user Group B — licensed development companies that reg
 
 ## Known Gap from Source Retirement
 
-The original combined UI document (`ui-design/RERAN_real_estate_developer_ui.md`) has been migrated into this module's structured files and deleted. Two pieces of its content were never migrated and no longer exist anywhere:
+The original combined UI document (`ui-design/RERAN_real_estate_developer_ui.md`) has been migrated into this module's structured files and deleted. One piece of its content was never migrated and has since been restored from git history; one piece was correctly left out as genuine duplication:
 
-* A short "Module Overview" paragraph and a second, shorter "Roles & Responsibilities" section (four roles, Purpose/Responsibilities format) that duplicated — in briefer form — what [roles-and-responsibilities.md](roles-and-responsibilities.md) already documents in full. Flagged as unmigrated when found, and left out on the judgment that it was redundant with content already captured elsewhere, not a distinct business rule.
-* The misplaced Sales & Disclosure Officer Documents-screen fragment referenced in Open Questions above.
+* **Restored:** a per-role reporting responsibility ("Generate registration/sales/escrow reports" for the three operational roles; "Review organizational reports" and "Monitor company performance" for the Principal) was present in a second, shorter Roles & Responsibilities section in the source but absent from every role's Main Responsibilities in [roles-and-responsibilities.md](roles-and-responsibilities.md). Added back above. The module overview paragraph from the same source section is now included at the top of this file.
+* **Correctly left out:** that same shorter section's per-role "Purpose" paragraphs restated the existing "Who are they?" text, and its Organization Structure tree duplicates the one already in [navigation.md](navigation.md).
 
-Both were reported at the time they were found. Recorded here since the source they lived in no longer exists to consult.
+The misplaced Sales & Disclosure Officer Documents-screen fragment (see Open Questions above) remains a separate, unresolved item.
