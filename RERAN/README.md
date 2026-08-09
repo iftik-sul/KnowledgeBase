@@ -2,7 +2,7 @@
 project: RERAN
 type: overview
 status: current
-updated: 2026-08-07
+updated: 2026-08-10
 tags:
   - project
   - overview
@@ -22,7 +22,7 @@ The documentation in this repository is the authoritative source of project know
 
 ## Modules
 
-> To be completed.
+See [module-roadmap.md](module-roadmap.md) for the full breakdown: all eight user groups, service counts, documentation status per module, and the proposed build sequence.
 
 ## Tech Stack
 
