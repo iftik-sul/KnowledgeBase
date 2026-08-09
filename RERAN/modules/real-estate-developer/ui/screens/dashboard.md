@@ -5,7 +5,8 @@ type: ui-spec
 status: current
 updated: 2026-08-09
 derived_from:
-  - "RERAN/modules/real-estate-developer/ui-design/RERAN_real_estate_developer_ui.md"
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
   - real-estate-developer
   - ui-spec
@@ -243,21 +244,9 @@ Primary actions:
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (Background \+ HorizontalBorder)  
-* Welcome Banner  
-* KPI Cards  
-* Action Cards  
-* Data Tables  
-* Status Badges  
-* Timeline  
-* Alert Cards  
-* Buttons  
-* Search Component  
-* Empty State Component
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 This dashboard is designed for **executive monitoring**, allowing the Developer Principal / Director to understand the organization's overall operational and regulatory status at a glance without performing day-to-day operational tasks.
-
 
 ### Project Registration Officer
 
@@ -482,17 +471,7 @@ Secondary Button
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (Background \+ HorizontalBorder)  
-* Welcome Banner  
-* KPI Cards  
-* Quick Action Cards  
-* Data Tables  
-* Status Badges  
-* Timeline  
-* Task List  
-* Buttons  
-* Empty State
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -516,7 +495,6 @@ Dashboard
 * The emphasis is on **creating, submitting, tracking, and responding** rather than monitoring.  
 * KPI cards and task lists should prioritize actionable work, overdue items, and pending responses from RERA.  
 * The primary CTAs (**Register New Project** and **Register Property**) should always remain prominently visible to support the officer's day-to-day workflow. This aligns with the Project Registration Officer's responsibilities of project registration, application submission, document management, and registration tracking.
-
 
 ### Sales & Disclosure Officer
 
@@ -744,17 +722,7 @@ Secondary Button
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (Background \+ HorizontalBorder)  
-* Welcome Banner  
-* KPI Cards  
-* Quick Action Cards  
-* Data Tables  
-* Status Badges  
-* Timeline  
-* Task List  
-* Buttons  
-* Empty State
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -773,7 +741,6 @@ Dashboard
 * Returned disclosures and pending RERA requests should always appear at the top of the dashboard.  
 * The primary CTAs (**Record Property Sale** and **Create Sales Disclosure**) remain permanently visible to support the officer's daily workflow.  
 * The dashboard should surface buyer-document issues early to prevent delays in disclosure approval.
-
 
 ### Escrow Liaison
 
@@ -1008,17 +975,7 @@ For a newly assigned Escrow Liaison:
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (**Background \+ HorizontalBorder**)  
-* Welcome Banner  
-* KPI Cards  
-* Quick Action Cards  
-* Search Bar  
-* Data Tables  
-* Status Badges  
-* Timeline Widget  
-* Buttons  
-* Empty State
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -1050,7 +1007,6 @@ Dashboard
 * High-priority alerts (returned requests, pending bank confirmations, overdue milestones, and upcoming fund releases) should always appear at the top.  
 * KPI cards should be interactive and filter the corresponding records.  
 * Escrow statuses, milestone statuses, and fund release statuses should reuse the platform's existing status badge components for consistency.
-
 
 ## User Flow
 

@@ -5,7 +5,8 @@ type: ui-spec
 status: current
 updated: 2026-08-09
 derived_from:
-  - "RERAN/modules/real-estate-developer/ui-design/RERAN_real_estate_developer_ui.md"
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
   - real-estate-developer
   - ui-spec
@@ -341,18 +342,7 @@ Primary Button
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar  
-* KPI Cards  
-* Category Cards  
-* Filter Bar  
-* Data Tables  
-* Analytics Widgets  
-* Status Badges  
-* Pagination  
-* Empty State  
-* Export Button  
-* Generate Report Button
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -385,7 +375,6 @@ Reports
 * Users can create ad hoc reports, reuse saved templates, or schedule recurring reports.  
 * Access to report data respects the user's role and organizational permissions.  
 * Generated reports are read-only snapshots and do not modify operational records.
-
 
 ### Project Registration Officer
 
@@ -592,10 +581,7 @@ Table displaying recently generated reports.
 
 #### **Status**
 
-* Processing  
-* Completed  
-* Failed  
-* Expired
+See [status-badges.md](../status-badges.md#report-generation-status).
 
 ### Section 7 — Pending Operational Insights
 
@@ -647,16 +633,7 @@ Secondary Button
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (Background \+ HorizontalBorder)  
-* KPI Cards  
-* Report Category Cards  
-* Filter Bar  
-* Data Tables  
-* Analytics Widgets  
-* Status Badges  
-* Buttons  
-* Empty State
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -683,7 +660,6 @@ Reports
 * Officers can generate ad hoc reports, reuse saved templates, or schedule recurring reports for operational monitoring.  
 * Reports should help identify bottlenecks such as returned applications, missing documents, pending validations, and approaching regulatory deadlines.  
 * Generated reports are read-only snapshots and do not modify operational records.
-
 
 ### Sales & Disclosure Officer
 
@@ -905,10 +881,7 @@ Display recently generated reports.
 
 #### **Status**
 
-* Processing  
-* Completed  
-* Failed  
-* Expired
+See [status-badges.md](../status-badges.md#report-generation-status).
 
 ### Section 7 — Pending Operational Insights
 
@@ -960,16 +933,7 @@ Each widget includes a **View Detailed Report** action.
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (Background \+ HorizontalBorder)  
-* KPI Cards  
-* Report Category Cards  
-* Filter Bar  
-* Data Tables  
-* Analytics Widgets  
-* Status Badges  
-* Buttons  
-* Empty State
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -997,7 +961,6 @@ Reports
 * Reports focus on **property sales, buyer information, disclosure compliance, supporting documents, payment status, and regulatory performance**.  
 * Users can generate reports on demand, save frequently used report configurations, schedule recurring reports, and export them in multiple formats.  
 * Operational insight widgets should surface items requiring immediate attention, enabling officers to quickly identify overdue disclosures, missing buyer documents, and pending RERA actions.
-
 
 ### Escrow Liaison
 
@@ -1216,10 +1179,7 @@ Display recently generated reports.
 
 #### **Status**
 
-* Processing  
-* Completed  
-* Failed  
-* Expired
+See [status-badges.md](../status-badges.md#report-generation-status).
 
 ### Section 7 — Pending Operational Insights
 
@@ -1268,17 +1228,7 @@ Each insight includes:
 
 ### Reused Components
 
-* Developer Operational Sidebar  
-* Background \+ HorizontalBorder  
-* KPI Cards  
-* Report Category Cards  
-* Filter Panel  
-* Data Tables  
-* Status Badges  
-* Empty State  
-* Pagination  
-* Export Dialog  
-* Schedule Report Dialog
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -1305,7 +1255,6 @@ Export / Download / Schedule Report
 * Scheduled reports are automatically generated according to the configured frequency.  
 * Reports can be exported in PDF, Excel, or CSV formats.  
 * Report permissions follow the Escrow Liaison role and do not expose data outside assigned escrow operations.
-
 
 ## User Flow
 

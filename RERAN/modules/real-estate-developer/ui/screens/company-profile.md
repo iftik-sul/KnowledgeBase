@@ -5,7 +5,8 @@ type: ui-spec
 status: current
 updated: 2026-08-09
 derived_from:
-  - "RERAN/modules/real-estate-developer/ui-design/RERAN_real_estate_developer_ui.md"
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
   - real-estate-developer
   - ui-spec
@@ -146,13 +147,7 @@ Displays regulatory registration details.
 * Renewal Status  
 * Assigned RERA Office
 
-Status badges:
-
-* Active  
-* Pending Renewal  
-* Expiring Soon  
-* Suspended  
-* Expired
+See [status-badges.md](../status-badges.md#company--rera-license-status) for the status vocabulary.
 
 ### Section 5 — Corporate Information
 
@@ -283,7 +278,6 @@ Button
 
 * View Complete Audit History
 
-
 ## Empty State
 
 If the organization profile is incomplete:
@@ -298,17 +292,7 @@ Primary Button
 
 ## Reused Components
 
-* Left Sidebar  
-* Top Bar  
-* Information Cards  
-* KPI Cards  
-* Data Tables  
-* Office Cards  
-* Status Badges  
-* Document List  
-* Audit Timeline  
-* Buttons  
-* Empty State
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ## Validation
 

@@ -5,7 +5,8 @@ type: ui-spec
 status: current
 updated: 2026-08-09
 derived_from:
-  - "RERAN/modules/real-estate-developer/ui-design/RERAN_real_estate_developer_ui.md"
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
   - real-estate-developer
   - ui-spec
@@ -216,12 +217,7 @@ Displays organization support history.
 
 ### Ticket Status
 
-* Open  
-* In Progress  
-* Waiting for Customer  
-* Escalated  
-* Resolved  
-* Closed
+See [status-badges.md](../status-badges.md#ticket-status-help--support) for the status vocabulary — no two of the four roles' lists agree exactly.
 
 ### Section 5 — System Status
 
@@ -315,17 +311,7 @@ Secondary Button
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar  
-* KPI Cards  
-* Quick Action Cards  
-* Search Bar  
-* Data Tables  
-* Knowledge Base Cards  
-* Status Badges  
-* System Status Widget  
-* Buttons  
-* Empty State
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -352,7 +338,6 @@ Help & Support
 * Ticket visibility is organization-wide for authorized executive users, allowing leadership to monitor unresolved issues affecting operations.  
 * Support interactions should be linked to related modules (Projects, Applications, Escrow, etc.) to provide context and improve resolution time.  
 * The System Status section should display real-time service availability and planned maintenance announcements.
-
 
 ### Project Registration Officer
 
@@ -517,13 +502,7 @@ Display all support requests created by the organization or assigned to the offi
 
 #### **Ticket Status**
 
-* Draft  
-* Open  
-* In Progress  
-* Waiting for Customer  
-* Escalated  
-* Resolved  
-* Closed
+See [status-badges.md](../status-badges.md#ticket-status-help--support) for the status vocabulary — no two of the four roles' lists agree exactly.
 
 ### Section 5 — System Status
 
@@ -613,17 +592,7 @@ Secondary Button
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (Background \+ HorizontalBorder)  
-* KPI Cards  
-* Quick Action Cards  
-* Search Bar  
-* Data Tables  
-* Knowledge Base Cards  
-* Status Badges  
-* System Status Widget  
-* Buttons  
-* Empty State
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -652,7 +621,6 @@ Help & Support
 * Support tickets should allow linking directly to a **Project**, **Property Registration**, **Application**, or **Document** to give RERA support full context.  
 * The System Status section should display real-time platform health and planned maintenance notices.  
 * Officers should receive notifications whenever a support ticket is updated or requires additional information.
-
 
 ### Sales & Disclosure Officer
 
@@ -815,13 +783,7 @@ Display all support requests created by the organization or assigned to the offi
 
 #### **Ticket Status**
 
-* Draft  
-* Open  
-* In Progress  
-* Waiting for Customer  
-* Escalated  
-* Resolved  
-* Closed
+See [status-badges.md](../status-badges.md#ticket-status-help--support) for the status vocabulary — no two of the four roles' lists agree exactly.
 
 ### Section 5 — System Status
 
@@ -911,17 +873,7 @@ Allow officers to submit platform improvement ideas.
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (Background \+ HorizontalBorder)  
-* KPI Cards  
-* Quick Action Cards  
-* Search Bar  
-* Data Tables  
-* Knowledge Base Cards  
-* Status Badges  
-* System Status Widget  
-* Buttons  
-* Empty State
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -950,7 +902,6 @@ Help & Support
 * Support tickets should be linked to the relevant **Sale, Sales Disclosure, Buyer Record, Application, or Document** where applicable to give RERA support full context.  
 * Critical regulatory issues (such as failed disclosure submissions or buyer verification failures) should be surfaced with high-priority indicators and recommended next steps.  
 * Officers should be able to continue working while waiting for support responses, except where a regulatory blocker prevents submission.
-
 
 ### Escrow Liaison
 
@@ -1095,11 +1046,7 @@ Display submitted support requests.
 
 #### **Ticket Status**
 
-* Open  
-* In Progress  
-* Waiting for User  
-* Resolved  
-* Closed
+See [status-badges.md](../status-badges.md#ticket-status-help--support) for the status vocabulary — no two of the four roles' lists agree exactly.
 
 #### **Ticket Actions**
 
@@ -1166,16 +1113,7 @@ Support Agent
 
 ### Reused Components
 
-* Developer Operational Sidebar  
-* Background \+ HorizontalBorder  
-* KPI Cards  
-* Search Bar  
-* Filter Panel  
-* Knowledge Base List  
-* Ticket Table  
-* Contact Cards  
-* Empty State  
-* Pagination
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -1204,7 +1142,6 @@ Track Ticket Status
 * Frequently accessed articles appear higher in search results.  
 * Users can track ticket progress and receive notifications when support staff respond.  
 * System status is displayed to inform users of maintenance windows or service disruptions.
-
 
 ## User Flow
 

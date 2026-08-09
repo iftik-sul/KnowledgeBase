@@ -5,7 +5,8 @@ type: ui-spec
 status: current
 updated: 2026-08-09
 derived_from:
-  - "RERAN/modules/real-estate-developer/ui-design/RERAN_real_estate_developer_ui.md"
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
   - real-estate-developer
   - ui-spec
@@ -145,16 +146,7 @@ The Developer Principal has read access only. Registration activities are perfor
 
 ### Registration Status Badges
 
-Use the shared status badge component.
-
-* Draft  
-* Submitted  
-* Under Review  
-* Information Requested  
-* Approved  
-* Rejected
-
-Badge colors follow the existing RERA design system.
+See [status-badges.md](../status-badges.md#property-registration-status) for the status vocabulary — including a conflict between the Principal's and the Registration Officer's lists. (This role's version of the source additionally noted "Badge colors follow the existing RERA design system" — see the note at the top of status-badges.md on why no actual colours survived migration.)
 
 ### Section 4 — Registration Insights
 
@@ -208,17 +200,7 @@ Components
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar  
-* KPI Cards  
-* Search Bar  
-* Filter Bar  
-* Data Table  
-* Status Badges  
-* Analytics Cards  
-* Pagination  
-* Empty State  
-* Buttons
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -370,15 +352,7 @@ Actions depend on registration status.
 
 ### Registration Status Badges
 
-Use the shared status badge component.
-
-* Draft  
-* Submitted  
-* Under Review  
-* Information Requested  
-* Returned  
-* Approved  
-* Rejected
+See [status-badges.md](../status-badges.md#property-registration-status) for the status vocabulary — including a conflict between the Principal's and the Registration Officer's lists.
 
 ### Bulk Actions
 
@@ -445,17 +419,7 @@ Components:
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (Background \+ HorizontalBorder)  
-* KPI Cards  
-* Search Bar  
-* Filter Bar  
-* Data Table  
-* Status Badges  
-* Analytics Cards  
-* Pagination  
-* Buttons  
-* Empty State
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 

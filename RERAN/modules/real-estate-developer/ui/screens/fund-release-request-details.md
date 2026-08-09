@@ -5,7 +5,8 @@ type: ui-spec
 status: current
 updated: 2026-08-09
 derived_from:
-  - "RERAN/modules/real-estate-developer/ui-design/RERAN_real_estate_developer_ui.md"
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
   - real-estate-developer
   - ui-spec
@@ -278,7 +279,6 @@ Each activity displays:
 * Activity Description  
 * Status
 
-
 ## Empty State
 
 If no additional queries, communications, or activities exist:
@@ -289,17 +289,7 @@ If no additional queries, communications, or activities exist:
 
 ## Reused Components
 
-* Left Sidebar  
-* Top Bar (**Background \+ HorizontalBorder**)  
-* Information Tabs  
-* Status Badges  
-* Detail Cards  
-* Data Tables  
-* Document List  
-* Timeline  
-* Communication Thread  
-* Empty State  
-* Confirmation Dialogs
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ## Validation
 

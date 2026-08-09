@@ -5,7 +5,8 @@ type: ui-spec
 status: current
 updated: 2026-08-09
 derived_from:
-  - "RERAN/modules/real-estate-developer/ui-design/RERAN_real_estate_developer_ui.md"
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
   - real-estate-developer
   - ui-spec
@@ -203,27 +204,7 @@ Actions
 
 ### Section 6 — Validation Summary
 
-Automatic validation panel.
-
-Validation checks include:
-
-* Mandatory fields completed  
-* Approved project selected  
-* Required documents uploaded  
-* Duplicate property registration check  
-* Unit number uniqueness  
-* Address validation  
-* File verification
-
-Display results using:
-
-* ✅ Passed  
-* ⚠ Warning  
-* ❌ Error
-
-Selecting an issue scrolls directly to the affected section.
-
-The **Submit to RERA** button remains disabled until all critical validations pass.
+See [validation-rules.md](../validation-rules.md) for the shared automatic-validation mechanism and the common field-level checks (required fields, required documents, file verification). This screen's own additional checks: Approved project selected, Duplicate property registration check, Unit number uniqueness, Address validation.
 
 ### Section 7 — RERA Queries
 
@@ -279,16 +260,7 @@ Secondary Button
 
 ## Reused Components
 
-* Left Sidebar  
-* Top Bar (Background \+ HorizontalBorder)  
-* Progress Tracker  
-* Information Cards  
-* Form Components  
-* File Upload Component  
-* Validation Panel  
-* Status Badges  
-* Timeline  
-* Buttons
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ## Validation
 

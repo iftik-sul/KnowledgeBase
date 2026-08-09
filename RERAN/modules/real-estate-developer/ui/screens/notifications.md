@@ -5,7 +5,8 @@ type: ui-spec
 status: current
 updated: 2026-08-09
 derived_from:
-  - "RERAN/modules/real-estate-developer/ui-design/RERAN_real_estate_developer_ui.md"
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
   - real-estate-developer
   - ui-spec
@@ -153,9 +154,7 @@ Located above the notification list.
 
 ### Status
 
-* Unread  
-* Read  
-* Archived
+See [status-badges.md](../status-badges.md#notification-status).
 
 ### Section 3 — Notifications List
 
@@ -255,16 +254,7 @@ Components
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar  
-* KPI Cards  
-* Filter Bar  
-* Notification Cards  
-* Timeline Widget  
-* Status Badges  
-* Pagination  
-* Empty State  
-* Buttons
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -287,7 +277,6 @@ Notifications
 * High-priority and action-required notifications should remain pinned at the top until acknowledged.  
 * Every notification should include deep links to the relevant module (Project, Property Registration, Escrow, Application, Document, etc.) to reduce navigation time.  
 * Read/unread status is tracked per user and synchronized across devices.
-
 
 ### Project Registration Officer
 
@@ -495,17 +484,7 @@ Secondary Button
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (Background \+ HorizontalBorder)  
-* KPI Cards  
-* Filter Bar  
-* Notification Cards  
-* Data Table  
-* Timeline/List Component  
-* Status Badges  
-* Priority Indicators  
-* Buttons  
-* Empty State
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -534,7 +513,6 @@ Notifications
 * Selecting a notification should navigate directly to the related **Project**, **Property Registration**, **Application**, or **Document**.  
 * Notifications should update in real time whenever RERA requests information, changes an application status, verifies documents, schedules inspections, or publishes important announcements.  
 * Read/unread status should synchronize across all devices for the logged-in user.
-
 
 ### Sales & Disclosure Officer
 
@@ -747,17 +725,7 @@ Each announcement displays:
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (Background \+ HorizontalBorder)  
-* KPI Cards  
-* Filter Bar  
-* Notification Cards  
-* Data Table  
-* Timeline/List Component  
-* Status Badges  
-* Priority Indicators  
-* Buttons  
-* Empty State
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -786,7 +754,6 @@ Notifications
 * Selecting a notification should navigate directly to the related **Sale Record, Sales Disclosure, Application, or Document**, allowing the officer to resolve issues with minimal navigation.  
 * Notifications should be grouped by **Today**, **Yesterday**, **Earlier This Week**, and **Earlier** to improve readability.  
 * Badge counters should update in real time as notifications are received or resolved.
-
 
 ### Escrow Liaison
 
@@ -1001,16 +968,7 @@ Notification Bell
 
 ### Reused Components
 
-* Developer Operational Sidebar  
-* Background \+ HorizontalBorder  
-* KPI Cards  
-* Filter Panel  
-* Priority Alert Cards  
-* Notification List  
-* Status Badges  
-* Empty State  
-* Pagination  
-* Notification Settings Dialog
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -1036,7 +994,6 @@ Mark Notification as Read
 * Critical notifications remain pinned until resolved or acknowledged.  
 * Users can configure notification preferences by module and priority.  
 * Notifications link directly to the relevant operational record for faster action.
-
 
 ## User Flow
 

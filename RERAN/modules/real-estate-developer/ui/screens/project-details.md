@@ -5,7 +5,8 @@ type: ui-spec
 status: current
 updated: 2026-08-09
 derived_from:
-  - "RERAN/modules/real-estate-developer/ui-design/RERAN_real_estate_developer_ui.md"
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
   - real-estate-developer
   - ui-spec
@@ -259,16 +260,7 @@ Primary Button
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar  
-* Information Cards  
-* KPI Cards  
-* Progress Tracker  
-* Data Table  
-* Status Badges  
-* Timeline  
-* Buttons  
-* Empty State
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -447,24 +439,7 @@ Actions
 
 ### Section 5 — Validation Summary
 
-Automatic validation panel.
-
-Checks include:
-
-* Mandatory fields completed  
-* Required documents uploaded  
-* Duplicate project check  
-* Date validation  
-* Location validation  
-* File verification
-
-Display:
-
-* ✅ Passed  
-* ⚠ Warning  
-* ❌ Error
-
-Selecting an issue scrolls directly to the affected field.
+See [validation-rules.md](../validation-rules.md) for the shared automatic-validation mechanism and the common field-level checks (required fields, required documents, file verification). This screen's own additional checks: Duplicate project check, Date validation, Location validation.
 
 ### Section 6 — RERA Queries
 
@@ -519,16 +494,7 @@ Secondary Button
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (Background \+ HorizontalBorder)  
-* Progress Tracker  
-* Information Cards  
-* Form Components  
-* File Upload Component  
-* Validation Panel  
-* Status Badges  
-* Timeline  
-* Buttons
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 

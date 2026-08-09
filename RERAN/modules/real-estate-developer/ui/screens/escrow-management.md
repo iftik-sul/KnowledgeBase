@@ -5,7 +5,8 @@ type: ui-spec
 status: current
 updated: 2026-08-09
 derived_from:
-  - "RERAN/modules/real-estate-developer/ui-design/RERAN_real_estate_developer_ui.md"
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
   - real-estate-developer
   - ui-spec
@@ -151,21 +152,11 @@ This screen is read-only for the Developer Principal.
 
 ### Escrow Status Badges
 
-* Active  
-* Pending  
-* Milestone Under Review  
-* Funds Released  
-* Suspended  
-* Closed
+See [status-badges.md](../status-badges.md#escrow-status) for the status vocabulary — including a conflict between the Principal's and the Escrow Liaison's lists.
 
 ### Fund Release Status Badges
 
-* Not Requested  
-* Requested  
-* Under Review  
-* Approved  
-* Released  
-* Rejected
+See [status-badges.md](../status-badges.md#fund-release-status) for the status vocabulary — including a conflict between the Principal's and the Escrow Liaison's lists.
 
 ### Section 4 — Fund Release Overview
 
@@ -227,17 +218,7 @@ Components
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar  
-* KPI Cards  
-* Search Bar  
-* Filter Bar  
-* Data Table  
-* Analytics Cards  
-* Status Badges  
-* Pagination  
-* Empty State  
-* Buttons
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -377,20 +358,11 @@ Display all escrow accounts assigned to the developer.
 
 #### **Escrow Status**
 
-* Pending Registration  
-* Active  
-* Suspended  
-* Closed
+See [status-badges.md](../status-badges.md#escrow-status) for the status vocabulary — including a conflict between the Principal's and the Escrow Liaison's lists.
 
 #### **Fund Release Status**
 
-* No Request  
-* Pending Approval  
-* Under Review  
-* Approved  
-* Released  
-* Returned  
-* Rejected
+See [status-badges.md](../status-badges.md#fund-release-status) for the status vocabulary — including a conflict between the Principal's and the Escrow Liaison's lists.
 
 ### Row Actions
 
@@ -432,15 +404,7 @@ Escrow Account
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (**Background \+HorizontalBorder**)  
-* Search Bar  
-* Filter Bar  
-* Data Table  
-* Status Badges  
-* Pagination  
-* Empty State  
-* Overflow Action Menu
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 

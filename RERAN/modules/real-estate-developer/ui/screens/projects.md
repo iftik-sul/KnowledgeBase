@@ -5,7 +5,8 @@ type: ui-spec
 status: current
 updated: 2026-08-09
 derived_from:
-  - "RERAN/modules/real-estate-developer/ui-design/RERAN_real_estate_developer_ui.md"
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
   - real-estate-developer
   - ui-spec
@@ -142,14 +143,7 @@ The Principal / Director has oversight responsibilities, so this screen focuses 
 
 ### Project Status Badges
 
-Use existing platform badge styles.
-
-* Draft  
-* Pending Review  
-* Approved  
-* Rejected  
-* Suspended  
-* Completed
+See [status-badges.md](../status-badges.md#project-status) for the status vocabulary — including a conflict between the Principal's and the Registration Officer's lists.
 
 ### Empty State
 
@@ -175,16 +169,7 @@ Components:
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar  
-* KPI Cards  
-* Search Bar  
-* Filter Bar  
-* Data Table  
-* Status Badges  
-* Pagination  
-* Empty State  
-* Buttons
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -203,7 +188,6 @@ Project Details
 * This is an **executive portfolio view**, optimized for monitoring rather than project administration.  
 * All project creation, document submission, and registration activities are handled by the **Project Registration Officer**, while the Principal / Director uses this screen to review progress and organizational performance.  
 * The table should support sorting by Project Name, Status, Progress, and Last Updated.
-
 
 ### Project Registration Officer
 
@@ -324,16 +308,7 @@ Available actions depend on project status.
 
 ### Project Status Badges
 
-Use the shared status component.
-
-* Draft  
-* Submitted  
-* Under Review  
-* Information Requested  
-* Returned  
-* Approved  
-* Rejected  
-* Completed
+See [status-badges.md](../status-badges.md#project-status) for the status vocabulary — including a conflict between the Principal's and the Registration Officer's lists.
 
 ### Bulk Actions
 
@@ -372,16 +347,7 @@ Components:
 
 ### Reused Components
 
-* Left Sidebar  
-* Top Bar (Background \+ HorizontalBorder)  
-* KPI Cards  
-* Search Bar  
-* Filter Bar  
-* Data Table  
-* Status Badges  
-* Pagination  
-* Buttons  
-* Empty State
+See [components.md](../components.md) for definitions of every component used on this screen.
 
 ### User Flow
 
@@ -402,7 +368,6 @@ Projects
 * Unlike the Developer Principal's version, this page supports **creating, editing, submitting, correcting, and resubmitting** projects.  
 * Projects returned by RERA should be clearly highlighted with high-visibility status badges and surfaced near the top of the list.  
 * "Register Properties" becomes available only after the development project reaches the appropriate approved status, following the defined registration workflow.
-
 
 ## User Flow
 
