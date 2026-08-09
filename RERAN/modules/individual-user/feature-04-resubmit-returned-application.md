@@ -1,7 +1,7 @@
 ---
 project: RERAN
 module: individual-user
-type: feature
+type: service-flow
 status: current
 updated: 2026-08-09
 derived_from:

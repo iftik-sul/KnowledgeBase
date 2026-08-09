@@ -1,7 +1,7 @@
 ---
 project: RERAN
 module: individual-user
-type: reference
+type: user-group
 status: current
 updated: 2026-08-09
 derived_from:
