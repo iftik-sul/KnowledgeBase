@@ -3,6 +3,7 @@ project: RERAN
 module: individual-user
 type: service-flow
 status: current
+source_type: sourced
 updated: 2026-08-09
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
