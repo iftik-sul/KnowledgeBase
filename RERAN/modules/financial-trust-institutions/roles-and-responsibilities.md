@@ -24,12 +24,12 @@ This document describes post-login responsibilities only. Account creation and o
 
 | Role | Player | Services owned | Primary sub-system |
 | :---- | :---- | :---: | :---- |
-| Mortgage Officer | Bank lending desk | 17 | Online Mortgage System |
-| Institution Relationship Manager | Bank admin | 1 | Trust-Account Approval & Renewal |
-| Account Trustee | Approved escrow trustee | 0 — see below | Trust-Account Approval & Renewal |
-| Auditing Bureau Officer | Approved auditor | 0 — see below | Trust-Account Approval & Renewal |
+| Mortgage Officer | Bank lending desk | 9 (#3–#11), plus #12–#17 where bank-originated (unconfirmed) | Online Mortgage System |
+| Institution Relationship Manager | Bank admin | 3 (#1, #2, #18) | Trust-Account Approval & Renewal |
+| Account Trustee | Approved escrow trustee | 0 — see below | Escrow Request Queue (Group B-originated) |
+| Auditing Bureau Officer | Approved auditor | 0 — see below | Transaction Audit Queue |
 
-> **Source gap.** The master service table assigns 17 of 18 Group C services to the Mortgage Officer and 1 to the Institution Relationship Manager. Account Trustee and Auditing Bureau Officer own no numbered services, yet the user group structure describes substantial functions for both. Their post-login behaviour below is proposed, not sourced.
+> **Source gap.** The master service table's responsible-role column assigns 15 of 18 services to the Mortgage Officer and 1 to the Institution Relationship Manager, but `open-questions.md` A4 finds that column unreliable as a per-service assignment — it names the Mortgage Officer for Trustee Centre counter transactions with no lending component. The counts above are the re-derived ownership from `services-overview.md`, not the source column taken at face value. Account Trustee and Auditing Bureau Officer own no numbered service, yet the user group structure describes substantial functions for both. Their post-login behaviour below is proposed, not sourced.
 
 ---
 
