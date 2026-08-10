@@ -38,9 +38,10 @@ An heir or their representative visits a Real Estate Registration Trustee Centre
 
 ### Applicant
 
-* Trustee Centre Operator (Group G), acting on the heirs' behalf in assisted mode
+* Mortgage Officer — where the transaction is bank-originated (A4's conditional)
+* Trustee Centre Operator (Group G) — otherwise, acting on the heirs' behalf in assisted mode
 
-> **Proposed** — the source assigns responsible role to the **Mortgage Officer**. `open-questions.md` A4 identifies heirs' sale by name as one of the Trustee Centre counter transactions with no lending component that should not sit with the mortgage desk. This document follows A4's re-derivation. **Confidence: Medium**, per the answers doc — contradicts the source's responsible-role column.
+> **Proposed** — the source assigns responsible role to the **Mortgage Officer**. `open-questions.md` A4's rule is conditional — "Mortgage Officer where bank-originated; otherwise executed by a Trustee Centre operator on the customer's behalf" — not an unconditional reassignment. This document keeps both branches: the Trustee Centre Operator path is what row 40 itself sources (a walk-in "Move to Real Estate Registration Trustee centers" with no bank-employee involvement); the Mortgage Officer / bank-originated branch is preserved because A4 allows for it in principle, but **no row among the title & ownership transaction rows (38, 40–44) describes a bank-originated workflow**, so that branch is not sourced here and is carried forward as an open question rather than asserted as fact or silently dropped. **Confidence: Medium**, per the answers doc — the Trustee-Centre branch contradicts the source's responsible-role column, and that should be visible to the client.
 
 ### Heirs
 
@@ -105,7 +106,7 @@ Paid by the customer at the Trustee Centre — sourced (row 40: "Customer pays f
 
 Heir(s) / Authorized Representative
 
-Visit Real Estate Registration Trustee Centre *(C2: assisted mode)*  
+Visit Real Estate Registration Trustee Centre *(C2: this is the sourced path for this service; Section 4 carries A4's Mortgage Officer / bank-originated branch as unconfirmed rather than asserting a direct online path here — see Open Questions)*  
 ↓  
 Submit Required Documents
 
@@ -249,7 +250,7 @@ Upon successful completion, the system generates:
 
 ## 21. Business Rules
 
-1. Only a Trustee Centre operator, acting on the heirs' behalf, may process this application. *(Proposed — A4 re-derivation; the source assigns this to the Mortgage Officer.)*
+1. This application may be processed by a Mortgage Officer where bank-originated, or otherwise by a Trustee Centre operator acting on the heirs' behalf (A4's conditional). *(Proposed — no row sources a bank-originated variant for this service; only the Trustee-Centre path is confirmed by row 40.)*
 2. Heirship must be established by valid probate or administration documentation before the sale can proceed.  
 3. Payment is required at the counter before the application is finalized.  
 4. Each heir's share of proceeds is distributed to their nominated bank account as part of completion.  
@@ -261,4 +262,5 @@ Upon successful completion, the system generates:
 
 1. **How disputes among heirs over shares are handled** within this workflow. Not specified in source.  
 2. **Validation method for bank account details** used for distribution (e.g., account-name matching against the heir's identity). Not specified in source.  
-3. **Exact fee amount.** Client data — see `open-questions.md` B5.
+3. **Whether a bank-originated path (Mortgage Officer, per A4's conditional) exists for this service at all.** No row among 38, 40–44 describes bank-employee entry the way the mortgage rows (30–33, 39) do; this document sources only the Trustee-Centre-assisted path and treats the bank-originated branch as unconfirmed rather than absent.  
+4. **Exact fee amount.** Client data — see `open-questions.md` B5.

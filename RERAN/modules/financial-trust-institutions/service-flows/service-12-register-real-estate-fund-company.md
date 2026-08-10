@@ -38,9 +38,10 @@ The fund company's representative visits a Real Estate Registration Trustee Cent
 
 ### Applicant
 
-* Trustee Centre Operator (Group G), acting on the fund company's behalf in assisted mode
+* Mortgage Officer — where the transaction is bank-originated (A4's conditional)
+* Trustee Centre Operator (Group G) — otherwise, acting on the fund company's behalf in assisted mode
 
-> **Proposed** — the source assigns responsible role to the **Mortgage Officer**, but row 38's workflow shows no bank-employee or online-mortgage-system involvement: "Customer visits Real Estate Services Registration Trustees Centers. → Submit documents. → Employee enters all transaction data, checks and approves." `open-questions.md` A4 flags exactly this pattern — trustee-counter transactions with no lending component should not sit with the mortgage desk. This document follows A4's re-derivation: execution by a Trustee Centre operator on the customer's behalf (Group G), not the Mortgage Officer. **Confidence: Medium**, per the answers doc — it contradicts the source's responsible-role column, and that should be visible to the client.
+> **Proposed** — the source assigns responsible role to the **Mortgage Officer**, but row 38's workflow shows no bank-employee or online-mortgage-system involvement: "Customer visits Real Estate Services Registration Trustees Centers. → Submit documents. → Employee enters all transaction data, checks and approves." `open-questions.md` A4's rule is conditional — "Mortgage Officer where bank-originated; otherwise executed by a Trustee Centre operator on the customer's behalf" — not an unconditional reassignment. This document keeps both branches: the Trustee Centre Operator path is what row 38 itself sources; the Mortgage Officer / bank-originated branch is preserved because A4 allows for it in principle, but **no row among the title & ownership transaction rows (38, 40–44) describes a bank-originated workflow**, so that branch is not sourced here and is carried forward as an open question rather than asserted as fact or silently dropped. **Confidence: Medium**, per the answers doc — the Trustee-Centre branch contradicts the source's responsible-role column, and that should be visible to the client.
 
 ### Customer
 
@@ -88,7 +89,9 @@ Paid by the customer (the fund company) at the Trustee Centre counter, and an e-
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (Group A) — sourced: the Trustee Centre employee "enters all transaction data, checks and approves," which is documented here as the RERA regulatory gate rather than a separate institutional maker-checker layer, since no institution (in the Group C corporate-account sense) originates this transaction.
+**Compliance & Escrow Auditor** (Group A) — sourced directly from row 38's approver column, as it is for every Group C service.
+
+> **Proposed** — row 38's workflow text separately describes an "Employee [who] enters all transaction data, checks and approves." Whether that check-and-approve step *is* the Compliance & Escrow Auditor's regulatory review, or a preliminary Trustee Centre check distinct from a separate RERA audit step, is not stated in source — the two are bundled into one clause. This document treats the workflow's "checks and approves" as the Group A approval gate itself, since no institutional maker-checker layer applies here (no corporate account originates this transaction) — but that specific mapping is an inference, not a sourced fact, and is labeled as such rather than folded into the sourced claim above.
 
 ## 11. Expected Processing Time
 
@@ -98,7 +101,7 @@ Paid by the customer (the fund company) at the Trustee Centre counter, and an e-
 
 Customer (Fund Company Representative)
 
-Visit Real Estate Registration Trustee Centre *(C2: online-capable service, documented here in its assisted mode, since the source names only the Trustee Centre as channel)*  
+Visit Real Estate Registration Trustee Centre *(C2: this is the sourced path for this service; Section 4 carries A4's Mortgage Officer / bank-originated branch as unconfirmed rather than asserting a direct online path here — see Open Questions)*  
 ↓  
 Submit Required Documents
 
@@ -236,7 +239,7 @@ Upon successful completion, the system generates:
 
 ## 21. Business Rules
 
-1. Only a Trustee Centre operator, acting on the fund company's behalf, may process this application. *(Proposed — A4 re-derivation; the source assigns this to the Mortgage Officer.)*
+1. This application may be processed by a Mortgage Officer where bank-originated, or otherwise by a Trustee Centre operator acting on the fund company's behalf (A4's conditional). *(Proposed — no row sources a bank-originated variant for this service; only the Trustee-Centre path is confirmed by row 38.)*
 2. The fund company must be validly constituted before its interest can be registered.  
 3. Payment is required at the counter before the application is finalized, and an e-receipt is issued as proof.  
 4. Approved registrations update the official register of privileges.  
@@ -247,4 +250,5 @@ Upon successful completion, the system generates:
 
 1. **Eligibility criteria for what qualifies as a "real estate fund company"** for register-of-privileges purposes. Not specified in source.  
 2. **Relationship between the register of privileges and the ordinary property title register** — whether registration here also requires or triggers a separate title registration. Not specified in source.  
-3. **Exact fee amount.** Client data — see `open-questions.md` B5.
+3. **Whether a bank-originated path (Mortgage Officer, per A4's conditional) exists for this service at all.** No row among 38, 40–44 describes bank-employee entry the way the mortgage rows (30–33, 39) do; this document sources only the Trustee-Centre-assisted path and treats the bank-originated branch as unconfirmed rather than absent.  
+4. **Exact fee amount.** Client data — see `open-questions.md` B5.

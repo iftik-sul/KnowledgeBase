@@ -91,12 +91,12 @@ Title-deed transactions executed through the institution rather than by the owne
 | Role | Services | Basis |
 | :---- | :---: | :---- |
 | Institution Relationship Manager | 3 (#1, #2, #18) | #1–#2: A4 re-derivation (source names Account Trustee; IRM is described as maintaining registration and renewing trustee/auditor approvals). #18: sourced directly — row 45 already names the IRM. |
-| Mortgage Officer | 9 (#3–#11) | Sourced — mortgage and finance-lease lifecycle, the only rows whose workflow text shows bank-originated entry ("bank employee enters ... via online mortgage system"). |
-| Trustee Centre Operator (Group G, assisted mode) | 6 (#12–#17) | A4 re-derivation — title & ownership transaction rows show customer walk-in entry with no bank involvement, despite the source column naming the Mortgage Officer. |
+| Mortgage Officer | 9 (#3–#11), plus #12–#17 where bank-originated | Sourced for #3–#11 — the only rows whose workflow text shows bank-originated entry ("bank employee enters ... via online mortgage system"). A4's rule for #12–#17 is conditional, not absolute — "Mortgage Officer where bank-originated; otherwise executed by a Trustee Centre operator" — but no row among 38, 40–44 sources a bank-originated variant for those six, so this branch is carried as unconfirmed rather than counted. |
+| Trustee Centre Operator (Group G, assisted mode) | 6 (#12–#17) | A4's *otherwise* branch — title & ownership transaction rows show customer walk-in entry with no bank involvement, despite the source column naming the Mortgage Officer. This is the only branch of A4's conditional that rows 38, 40–44 actually source; see each service flow's Open Questions for the unconfirmed Mortgage Officer branch. |
 | Account Trustee | 0 | Acts within Group B escrow services (A2); owns no numbered Group C service. |
 | Auditing Bureau Officer | 0 | Acts as the internal certification gate on Mortgage Officer transactions (A1/D2), modelled as a permission scope rather than service ownership. |
 
-This replaces the previous count (Mortgage Officer 17 / Institution Relationship Manager 1), which took the source's responsible-role column at face value.
+The #12–#17 count reflects only the sourced (Trustee Centre) branch of A4's conditional — it is not a claim that these six services can *only* ever be bank-originated-excluded. This replaces the previous count (Mortgage Officer 17 / Institution Relationship Manager 1), which took the source's responsible-role column at face value.
 
 ## Shared Platform Features
 
