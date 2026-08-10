@@ -8,6 +8,7 @@ derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
+  - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
 tags:
   - roadmap
   - modules
@@ -20,6 +21,8 @@ A survey of all eight user groups against the source material: what exists, what
 
 **Scope:** post-login functionality only. Registration and onboarding are excluded from this project.
 
+Services that the source material does not contain but the PRD or Nigerian law appears to require are catalogued separately in [proposed-services.md](proposed-services.md). This roadmap covers only the sourced 145.
+
 ---
 
 ## The Landscape
@@ -28,16 +31,16 @@ A survey of all eight user groups against the source material: what exists, what
 | :---- | :---- | :---: | :---: | :---: | :---- |
 | **A** | Regulatory Authority & Governance | **0** | 8 | 6 | Not started — see gap below |
 | **B** | Real Estate Developers | 27 | 4 | 3 | UI complete (19 screens); no service flows |
-| **C** | Financial & Trust Institutions | 18 | 4 | 3 | Roles, services, payments, questions; no service flows |
+| **C** | Financial & Trust Institutions | 18 | 4 | 3 | 18 service-flow files written, 16 of them thin; no UI |
 | **D** | Real Estate Service Companies | 26 | 4 | 4 | Roles, services overview; no service flows |
-| **E+F** | Individual User | 41 | 6 | 4 | 43 service flows written; no UI; count needs audit |
+| **E+F** | Individual User | 41 | 6 | 4 | 43 service flows written; count reconciled; no UI |
 | **G** | Allied Professionals & Service Trustees | **0** | 4 | 3 | Roles documented; interfaces not written — see note below |
 | **H** | Public & Informational Users | 33 | 2 | 2 | Roles, services overview; no service flows |
 | | **Total** | **145** | **28** | | |
 
-Service counts are verified row by row against the master service table and reconcile exactly with the source workbook's own summary. The individual-user module's internally documented count of 39 is the only figure in the project that does not reconcile — see Known Issues.
+Service counts are verified row by row against the master service table and reconcile exactly with the source workbook's own summary. The individual-user module's count now reconciles too — see Known Issues for how.
 
-**Pattern worth naming:** every module that has moved past roles/overview has done so unevenly. Group B has full UI and no service flows. Individual User has full service flows and no UI. No module has both yet — the two halves of the pipeline are being worked in different modules rather than completed one module at a time.
+**Pattern worth naming:** every module that has moved past roles/overview has done so unevenly. Group B has full UI and no service flows. Individual User has full service flows and no UI. Group C now has a file per service but little inside them. No module has both stages complete yet.
 
 ---
 
@@ -73,6 +76,8 @@ So the regulator's own system is described at capability level in two source doc
 | Inspection & Enforcement | Inspection & Enforcement Officer | B construction filings |
 | Revenue & Settlement | Revenue & Finance Officer | All fee-bearing services |
 | Admin & Configuration | System Super Administrator | Platform-wide |
+
+The Inspection & Enforcement Officer is the emptiest role in the project: a named sub-system, an enforcement mandate in the PRD, and not one service anywhere in the source that produces an inspection, a stop-work notice, or a penalty. See `proposed-services.md` P-30 to P-32.
 
 ---
 
@@ -132,17 +137,23 @@ The exceptions worth noting: Fee Payment Receipt, Fee Refund Request (seven busi
 
 **Status:** roles and services overview documented. No service-flow documents written yet — the proposed single parameterised flow plus catalogue table is still just a proposal.
 
-### Group E+F — Individual User (41 services)
+### Group E+F — Individual User (41 sourced services, 43 documented)
 
-Service flows complete: 43 files under `modules/individual-user/service-flows/`, moved into that folder from the module root. Roles, services overview, and shared platform features also documented.
+Service flows complete: 43 files under `modules/individual-user/service-flows/`.  Roles, services overview, and shared platform features also documented.
 
-**Status:** the most complete module on the service-flow side, and the only one with zero UI work — no `ui/` folder exists for this module at all. Also the one open count discrepancy in the project — see Known Issues.
+The 41-to-43 relationship reconciles: ten tenant-dispute source rows are legitimately consolidated into one service, thirty-two services trace directly to source rows, and eleven are extrapolated from role descriptions rather than explicit rows. The `source_type` frontmatter field (`sourced` / `extrapolated`) records which is which.
+
+**Status:** the most complete module on the service-flow side, and the only one with zero UI work — no `ui/` folder exists for this module at all.
 
 ### Group C — Financial & Trust Institutions (18 services)
 
 Roles, services overview, and a payments document are complete. 23 open questions sent to the client are recorded in `modules/financial-trust-institutions/open-questions.md`.
 
-**Status:** no service-flow documents written yet. Per the original scoping, 9 of 18 services are answerable from source material now; the remaining 9 wait on client responses.
+**Status:** all 18 service-flow files now exist under `service-flows/`, but only Service #1 has substantive depth. The other seventeen average around 1 KB and record workflow, documents, fees, channel, output and SLA as "not specified in the available source material."
+
+That characterisation is wrong for most of them. Rows 28–45 of the master service table carry a workflow sequence, channel, issued document and SLA for every one of the 18. Mortgage registration (row 30) alone specifies the four-step bank-to-department sequence, both channels, five possible output documents and a 20–25 minute SLA — none of which reached `service-03-mortgage-registration.md`.
+
+The genuine open questions — fee settlement model, status vocabulary, the Service #1/#2 role inconsistency — remain genuinely open. But they are a smaller set than the current files imply. See Known Issues.
 
 ### Group G — Allied Professionals & Service Trustees (0 services)
 
@@ -156,13 +167,13 @@ Roles documented. See "The Group G Note" above for why this module has no servic
 
 > **Proposed** — sequencing is our recommendation, not a client requirement. Needs confirmation.
 
-**1. Group A.** Everything else terminates here, and its absence blocks every other module's flows from describing what happens after submission. Also the largest unknown, so learning its shape early de-risks the rest.
+**1. Group C flow backfill.** Smallest job on the list and it corrects a live inaccuracy: eighteen files currently assert the source is silent where it is not. Backfilling from rows 28–45 costs little and removes a misleading artefact from the repo.
 
-**2. Group B service flows.** UI already exists; writing the flows underneath completes the module and corrects the inverted derivation chain. Also unblocks the B↔C escrow coupling.
+**2. Group A.** Everything else terminates here, and its absence blocks every other module's flows from describing what happens after submission. Also the largest unknown, so learning its shape early de-risks the rest.
 
-**3. Individual User UI.** The mirror image of #2 — flows exist, screens don't. Closing this and #2 leaves the project with two fully round-tripped modules (source → flows → UI) to use as the house style for everything after.
+**3. Group B service flows.** UI already exists; writing the flows underneath completes the module and corrects the inverted derivation chain. Also unblocks the B↔C escrow coupling.
 
-**4. Group C service flows.** Nine of eighteen are writable now; the rest wait on the open questions already sent.
+**4. Individual User UI.** The mirror image of #3 — flows exist, screens don't. Closing this and #3 leaves the project with two fully round-tripped modules (source → flows → UI) to use as the house style for everything after.
 
 **5. Group H.** Cheap, high volume, mostly one repeated pattern. Good candidate for batch work once the patterns from A and B are established.
 
@@ -170,21 +181,24 @@ Roles documented. See "The Group G Note" above for why this module has no servic
 
 **7. Group G interfaces.** Once the flows that reference survey companies and Trustee Centres exist, their interfaces can be derived from actual usage rather than guessed.
 
+The proposed-services list runs alongside this sequence rather than inside it: it needs a client decision before any of it becomes documentation work.
+
 ---
 
 ## Known Issues
 
 | Issue | Module | Status |
 | :---- | :---- | :---- |
-| Documented service count is 39; source count is 41 | Individual User | Open — needs row-by-row audit |
+| 17 of 18 service flows are thin stubs that record source-available data as unspecified | Financial & Trust | Open — backfill from master table rows 28–45 |
 | UI documented before service flows | Real Estate Developer | Open — flows to be written underneath |
 | No UI documented at all | Individual User | Open — the mirror-image gap of Real Estate Developer's |
 | 23 client questions outstanding | Financial & Trust | Sent, awaiting answers |
 | No application status vocabulary exists platform-wide | All | Proposed for Group C; needs a platform decision |
 | Root `KnowledgeBase/README.md` lists seven projects; only RERAN is active | Project | Open |
 | `RERAN/README.md` has four stub sections ("Modules", "Tech Stack", "Stakeholders", "Entry Points" all say "To be completed") despite this roadmap holding most of that detail already | Project | Open |
+| The service catalogue carries instruments from its source jurisdiction that have no Nigerian equivalent (usufruct, Taqeemi certificate) while omitting ones that are mandatory here (Governor's Consent, C-of-O) | Project | Open — see proposed-services.md |
 
-**Resolved since this roadmap was first written:** the 43 individual-user service/feature docs have been moved into `service-flows/`; the 295 KB Group B UI source file has been fully split into 19 screen files plus consolidated component/validation/status-badge docs and retired.
+**Resolved since this roadmap was first written:** the 43 individual-user service/feature docs have been moved into `service-flows/`; the 295 KB Group B UI source file has been fully split into 19 screen files plus consolidated component/validation/status-badge docs and retired; the individual-user 39-vs-41 count discrepancy has been audited and closed, with four genuinely undocumented services added and a `source_type` field introduced to distinguish sourced from extrapolated services; all 18 Group C service-flow files created.
 
 ---
 
@@ -197,3 +211,5 @@ Roles documented. See "The Group G Note" above for why this module has no servic
 **Every fee-bearing service pays after audit approval, not at submission.** This is stated once, in the pipeline definition, and has consequences for every module's screens and statuses. It belongs in a platform-level document, not repeated per module.
 
 **Three groups share the same four application-management features.** Submit, Track, Respond to Information Request, Resubmit. Documented for Individual User, proposed for Group C, and certainly needed by B and D. These should be defined once at platform level.
+
+**The service catalogue and the PRD were written from different starting points.** The catalogue is a mature, operational service list ported from another jurisdiction's land department; the PRD is written for Nigeria from first principles. They agree on registration, licensing and payments, and diverge sharply on complaints, enforcement and title instruments. Reconciling the two is the substance of `proposed-services.md`.

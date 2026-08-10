@@ -2,7 +2,7 @@
 project: RERAN
 type: standard
 status: current
-updated: 2026-08-09
+updated: 2026-08-10
 tags:
   - standard
   - meta
@@ -22,17 +22,21 @@ Modules follow the eight groups defined in the RERA Nigeria User Group Structure
 
 | Module folder | User group | Abbrev. | Status |
 | :---- | :---- | :---: | :---- |
-| `individual-user` | Property owners, landlords, tenants, buyers, diaspora investors, PoA holders | IU | Documented |
-| `real-estate-developer` | Group B — Real Estate Developers | RED | In progress |
-| `financial-trust-institutions` | Group C — Financial & Trust Institutions | FTI | Planned |
-| `regulatory-authority` | Group A — Regulatory Authority & Governance | RA | Planned |
-| `real-estate-service-companies` | Group D — Real Estate Service Companies | RESC | Planned |
-| `allied-professionals` | Group G — Allied Professionals & Service Trustees | AP | Planned |
-| `public-users` | Group H — Public & Informational Users | PU | Planned |
+| `individual-user` | Property owners, landlords, tenants, buyers, diaspora investors, PoA holders | IU | Service flows complete; no UI |
+| `real-estate-developer` | Group B — Real Estate Developers | RED | UI complete; no service flows |
+| `financial-trust-institutions` | Group C — Financial & Trust Institutions | FTI | Service flows drafted (thin); no UI |
+| `real-estate-service-companies` | Group D — Real Estate Service Companies | RESC | Roles and overview only |
+| `public-users` | Group H — Public & Informational Users | PU | Roles and overview only |
+| `allied-professionals` | Group G — Allied Professionals & Service Trustees | AP | Roles only; no service catalogue |
+| `regulatory-authority` | Group A — Regulatory Authority & Governance | RA | Not started |
 
 Groups E (Property Owners & Landlords) and F (Tenants & Consumers) are both natural persons and are documented together as `individual-user`.
 
 Abbreviations are for document IDs (`RERAN-IU-FLOW-001`).
+
+### Status Vocabulary
+
+The status column describes which stages of the derivation chain a module has reached, not how complete any one stage is. A module whose files exist but are thin placeholders is described as *drafted*, not *complete*. Per-stage detail lives in [module-roadmap.md](module-roadmap.md).
 
 ---
 
@@ -108,6 +112,19 @@ Beyond the base types in the repository standards, RERAN uses:
 | module root | `<document-name>.md` | `roles-and-responsibilities.md` |
 
 Service numbers are stable once assigned and are not renumbered when a service is deprecated.
+
+---
+
+## Service Numbering
+
+Two number series exist and must not be mixed:
+
+| Series | Range | Meaning |
+| :---- | :---- | :---- |
+| Sourced | `service-NN` within a module | A service that traces to a row in the master service table, or is extrapolated from role descriptions in the source. The `source_type` frontmatter field records which. |
+| Proposed | `P-NN` project-wide | A service proposed by us that has no basis in the source material. Listed in [proposed-services.md](proposed-services.md). |
+
+A proposed service only enters a module's `service-NN` series once the client accepts it, at which point it takes the next free number in that module and its `P-NN` entry is marked accepted.
 
 ---
 
