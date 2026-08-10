@@ -93,10 +93,10 @@ These are capabilities the source material assumes exist because its own service
 
 | ID | Proposed service | Group | Referenced at | Note |
 | :---- | :---- | :---: | :---- | :---- |
-| **P-22** | Wallet account — top-up, balance, statement, refund-to-wallet | All | Row 86 | The purchaser workflow instructs the buyer to "pay via Wallet Account". No service anywhere defines the wallet, how it is funded, or what happens to a balance. |
+| **P-22** | Wallet account — top-up, balance, statement, refund-to-wallet | All | Row 86 | The purchaser workflow instructs the buyer to "pay via Wallet Account". No service anywhere defines the wallet, how it is funded, or what happens to a balance. The institutional settlement account (Group C, question B1) is the same primitive with a different account type. |
 | **P-23** | Digital safe / document vault | All | Row 87 | "All uploaded via digital safe." Referenced once, defined nowhere, and implicitly relied on by every service that reuses previously submitted documents. |
 | **P-24** | Power of Attorney registration and revocation | E | Row 97, Registration Flow 2 | Row 97 covers PoA *cancellation* notarisation only. Flow 2 requires a notarised PoA before a diaspora investor's representative gains transactional rights — with no service to lodge one. The catalogue can cancel a PoA it has no way to create. |
-| **P-25** | Manage delegated staff and permission scopes | B, C, D | Registration flows §4 | Companies are given the duty to "add or revoke delegated staff" post-registration. In scope by our own scope rule, and unwritten. |
+| **P-25** | Manage delegated staff and permission scopes | B, C, D | Registration flows §4 | Companies are given the duty to "add or revoke delegated staff" post-registration. In scope by our own scope rule, and unwritten. Also the mechanism that carries maker-checker certification — see Group C question A1. |
 | **P-26** | Appointment booking for Trustee Centre and Land Department visits | E, F | Channel analysis | A large share of services are walk-in only. In a system whose SLAs are measured in minutes, the queue is the real service time. |
 | **P-27** | NDPA data-subject request (access, correction, erasure, consent withdrawal) | All | NFR-04 | NDPA 2023 compliance is a stated constraint and NDPC is a named stakeholder. Data-subject rights are a statutory obligation with no service behind them. |
 | **P-28** | Multi-currency statement and FX view | F | Registration Flow 2 | Diaspora accounts are activated "with multi-currency tracking enabled". Nothing in the catalogue tracks anything in multiple currencies. |
@@ -122,21 +122,87 @@ The roadmap already records that Group A has no services. These are the specific
 
 The reverse of this analysis. Not proposed additions — proposed subtractions, and lower confidence than anything above.
 
-| Sourced service | Concern |
-| :---- | :---- |
-| Rows 3, 93–95 — usufruct registration, amendment, termination | Usufruct is a civil-law instrument. Nigeria's nearest equivalents are the statutory and customary rights of occupancy under the Land Use Act, which behave differently. Either these map onto rights of occupancy and should be renamed, or they do not apply. |
-| Row 126 — Verification of Taqeemi certificate | Taqeemi is a named valuation scheme in the source jurisdiction. The Nigerian equivalent would be ESVARBON-registered valuation. |
-| Row 114 — Names of ancient and modern regions | A locality-naming lookup specific to the source jurisdiction's history. |
-| Rows 2, 89–92 — rent-to-own / lease-to-own | Exists in Nigeria but is not a registered instrument in the same way. Needs legal confirmation before it is built as a registration service. |
-| "Land Department" as channel on most rows | Nigeria has no federal Land Department; land vests in State Governors. Every channel reference needs remapping to RERAN, the State Lands Bureau, or a Trustee Centre. |
+| Sourced service | Concern | Proposed disposition |
+| :---- | :---- | :---- |
+| Rows 3, 93–95 — usufruct registration, amendment, termination | Usufruct is a civil-law instrument. Nigeria's nearest equivalents are the statutory and customary rights of occupancy under the Land Use Act, which behave differently. | **Rename, do not retire.** The underlying need — registering a right to use land short of ownership — is real in Nigeria. Map to right of occupancy and re-derive the workflow. |
+| Row 126 — Verification of Taqeemi certificate | Taqeemi is a named valuation scheme in the source jurisdiction. | **Rename** to ESVARBON-registered valuation verification, which registration Flow 6 already treats as the accreditation authority for valuers. |
+| Row 114 — Names of ancient and modern regions | A locality-naming lookup specific to the source jurisdiction's history. | **Retire.** No Nigerian analogue. If a locality gazetteer is wanted, it is a different service against state and LGA boundaries. |
+| Rows 2, 89–92 — rent-to-own / lease-to-own | Exists in Nigeria but is not a registered instrument in the same way. | **Reclassify** from title registration to contract registration, pending legal opinion. Do not build against a title-transfer model. |
+| "Land Department" as channel on most rows | Nigeria has no federal Land Department; land vests in State Governors. | **Remap** every channel reference to RERAN, the State Lands Bureau, or a Trustee Centre. This is a find-and-replace across the whole catalogue and should be done once, deliberately. |
+
+**Caveat that applies to this whole section:** these are documentation judgements, not legal opinions. The PRD's own risk table commits to "legal advisory engagement in Phase 1". This table is what that engagement should be handed on day one.
 
 ---
 
-## Questions For The Client
+## Proposed Answers To The Open Questions
 
-1. Is the 145-service catalogue a fixed contractual scope, or a starting point we are expected to adapt to Nigerian law?
-2. Governor's Consent (P-09): does the platform track it, mediate it, or ignore it? The answer changes every transfer service in Groups C and E.
-3. Does the complaints capability the PRD specifies (P-01 to P-03) sit inside the existing tribunal services, or is it a separate consumer-protection surface?
-4. Which services from the source jurisdiction have no Nigerian legal basis and should be retired before we document them?
-5. Is USSD in launch scope? FR-15 says yes; the service catalogue says the channel does not exist.
-6. Who owns the wallet (P-22) and the document vault (P-23) — are they platform features rather than services, and if so, whose module documents them?
+Rather than hold this document pending client input, each question carries the position we will work to unless told otherwise.
+
+### 1. Is the 145-service catalogue fixed contractual scope, or a starting point?
+
+**A floor, not a ceiling — and Tier 1 is not a scope increase.**
+
+The distinction matters commercially. The catalogue is the only artefact carrying SLAs and channels, so it is what delivery will be measured against; all 145 get built. But Tier 1 items are already contracted *through the PRD*, which carries its own numbered requirements and a sign-off page. FR-11 is as binding as any row in the workbook. Those eight services are not new asks — they are places where the catalogue undercounts an obligation the PRD already creates.
+
+Tiers 2 to 5 are genuine additions and should be handled as costed change requests, with P-09 raised first because it has legal consequences rather than merely functional ones.
+
+**Recommended framing to the client:** "the catalogue and the PRD disagree about scope; here is where, and here is which we think governs."
+
+### 2. Governor's Consent — track, mediate, or ignore?
+
+**Track in v1. Mediate in v2. Ignoring is not available.**
+
+Ignoring fails on its own terms: an unconsented assignment is void under s.22 of the Land Use Act, so a platform that issues a registration certificate over one is issuing a worthless instrument, and doing so under a government seal. That is a liability, not a gap.
+
+Full mediation — lodging the consent application, collecting the fee, tracking it through the Governor's office — requires exactly the state-level bilateral agreements the PRD explicitly places out of scope for v1.0.
+
+So v1 tracks: consent status, reference number and date become mandatory fields on every transfer, mortgage and sublease service; issuance is blocked without them; the field is verified against the State Lands Bureau wherever the P-34 sync layer reaches. That is buildable now, creates the data needed for v2, and closes the liability.
+
+### 3. Do complaints sit inside the tribunal services, or on a separate surface?
+
+**Separate intake, shared case engine.**
+
+They are different in kind. A tribunal case is adjudicative — RERAN judges between two private parties and issues a judgment. A PRD complaint is administrative — a citizen reports a licensee, RERAN investigates as regulator and may sanction. Different burden of proof, different outcome, different SLA: KPI 4 gives complaints 30 calendar days, while the tribunal rows run 7 to 13 business days per stage.
+
+But both need parties, evidence, hearings, SLA timers, escalation and a determination record. Build one case-management engine with two case types, rather than two systems or one blurred one.
+
+### 4. Which source-jurisdiction services should be retired?
+
+**Answered in the table above** — one retirement, two renames, one reclassification, and one catalogue-wide channel remap. Every disposition is recorded there with its reasoning.
+
+The part we cannot supply is legal sign-off. Recommend the Phase 1 legal advisor the PRD already commits to is engaged against that table specifically, as their first task rather than a general review.
+
+### 5. Is USSD in launch scope?
+
+**Yes, but as three services, not a porting exercise.**
+
+FR-15 makes USSD payment a Must Have, and the risk table names USSD/SMS as the mitigation for the connectivity limits that threaten adoption in secondary markets. It cannot be deferred without dropping a Must Have.
+
+But porting document-heavy services to a menu protocol is neither possible nor useful. Propose a deliberately narrow USSD surface: verify a title or licence by reference number, check application status, and retrieve a payment reference for offline settlement. Everything else stays on web and app.
+
+That satisfies FR-15, serves the users the channel exists for, and costs a fraction of a full port.
+
+### 6. Who owns the wallet and the document vault?
+
+**Neither is a service, and neither belongs to a user group. They are platform capabilities, and the project has nowhere to put them.**
+
+This is the more useful finding. Four separate observations converge on the same missing structure:
+
+* the wallet (P-22) and document vault (P-23) are used by every group;
+* the four application-management features are documented for individual users, proposed for Group C, and needed by B and D;
+* the status vocabulary should be defined once platform-wide (Group C question D1);
+* escrow spans four groups and the roadmap already flags it as needing one shared reference rather than four descriptions.
+
+The project standards define a module as a user group. Cross-cutting capability has no home, so it keeps getting re-proposed inside whichever module hits it first.
+
+**Recommendation:** add a `RERAN/platform/` stage alongside `modules/`, holding capabilities that no single user group owns — wallet and settlement accounts, document vault, application-management features, status vocabulary, escrow reference, notifications, payments. This is a change to `project-standards.md` and should be made deliberately rather than absorbed.
+
+---
+
+## What Still Needs The Client
+
+After the answers above, three things genuinely cannot be resolved from the documents:
+
+1. **The published fee schedule.** Only RERA holds it. Does not block build — fees are configuration under FR-16.
+2. **Legal sign-off on the retire/rename table.** A documentation judgement is not a legal opinion.
+3. **Commercial acceptance of Tiers 2–5.** We can recommend; only the client can fund.
