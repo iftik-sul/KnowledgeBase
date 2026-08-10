@@ -3,175 +3,319 @@ project: RERAN
 module: financial-trust-institutions
 type: service-flow
 status: draft
-updated: 2026-08-11
 contains_proposals: true
+updated: 2026-08-10
 derived_from:
-  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md" (row 30)
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/modules/financial-trust-institutions/services-overview.md"
   - "RERAN/modules/financial-trust-institutions/open-questions.md"
+  - "RERAN/modules/financial-trust-institutions/roles-and-responsibilities.md"
+  - "RERAN/modules/financial-trust-institutions/payments.md"
 tags:
   - financial-trust-institutions
   - service-flow
+  - mortgage
 ---
 
 # Service #3 – Mortgage Registration
 
 **Service Category:** Mortgage Services
 
+**Source row:** 30 of `RERAN_service_flows_v2.md`. This is the reference workflow for the mortgage lifecycle — Services #4 (amendment), #5 (transfer) and #6 (release) are defined by the source as variants of this flow and are expanded in full in their own documents, per the issue's instruction not to reproduce a bare cross-reference.
+
 ## 1. Service Overview
 
-The **Mortgage Registration** service is a Group C service defined by row 30 of the master service table. This document carries forward the row’s workflow, channel, output and SLA, while marking design detail not enumerated by the source as proposed.
+The **Mortgage Registration** service records a new mortgage against a registered property title, on the bank's initiative and at the bank's cost, subject to internal certification and RERA audit before the record and the associated fee take effect.
 
 ## 2. Purpose
 
-Provide a controlled and auditable route to complete mortgage registration and issue the source-specified output after regulatory review and settlement.
+Register a mortgage against a verified title so the lending institution's security interest is legally recognized on the property registry, protecting the interests of the lender, the borrower, and any subsequent party who searches the title.
 
 ## 3. Description
 
-Customer prepares mortgage requirements with the bank; a bank employee enters all documents through the Online Mortgage System; the bank auditor audits it; the Department audits it; fees are deducted from the bank account; outputs are emailed. Trustee-centre assistance follows the same service.
+The customer (borrower) completes mortgage requirements directly with the bank — loan approval, valuation, executed mortgage deed. A Mortgage Officer then enters the transaction into the Online Mortgage System, attaching the required documents. The transaction is certified internally by the institution's own checker before it is sent to RERA's Transaction Audit queue. On approval, the fee is deducted from the institution's settlement account and the output documents are delivered to the customer by email. The same service can alternatively be processed in assisted mode at a Real Estate Registration Trustee Centre.
 
 ## 4. Who Can Apply
 
-* **Mortgage Officer** for the applicable transaction.
-* An accredited Trustee Centre or Land Department operator may act for the customer where the source names that counter. **Proposed** — this is assisted access to the same online service, not a separate offline channel.
-* The underlying institution or customer must be identified for the request. **Proposed**
+### Applicant (Lending Institution)
+
+* Mortgage Officer — primary channel, via the Online Mortgage System  
+* Trustee Centre Operator (Group G) — assisted mode, acting on the institution's behalf at a Real Estate Registration Trustee Centre *(C2: this is the same online service in assisted mode, not a separate channel)*
+
+### Counterparty (Borrower / Property Owner)
+
+* Registered Property Owner granting the mortgage, who must hold a verified RERAN title
 
 ## 5. Prerequisites
 
-* Active corporate or operator account with a filing permission scope. **Proposed**
-* Relevant property, institutional, mortgage, lease or contract reference.
-* Authority to act for the represented institution or customer. **Proposed**
-* Supporting documents ready for upload or operator-assisted capture. **Proposed**
-* Sufficient settlement-account balance before fee settlement. **Proposed**
+* Registered RERAN institution (Group C) account, with a Mortgage Officer provisioned under the corporate account.  
+* Property is registered with RERAN and its title is verified.  
+* Customer has completed mortgage requirements with the bank (loan approval, valuation, executed mortgage deed) before system entry.  
+* Institution's settlement account holds a sufficient prefunded balance to absorb the fee once approved (B1, B4).
 
 ## 6. Required Information
 
-* Applicant and represented customer/institution details. **Proposed**
-* Relevant property, title, mortgage, lease, contract or register reference. **Proposed**
-* Transaction-specific details, effective date and declarations. **Proposed**
-* Contact email for delivery where the source says the output is emailed. **Proposed**
+### Institution Information
+
+* Institution Name  
+* Mortgage Officer Identifier  
+* Institution Reference Number
+
+### Borrower (Property Owner) Information
+
+* Full Name  
+* National Identification Number (NIN)  
+* Contact Information
+
+### Property Information
+
+* Property Registration Number  
+* Property Address  
+* Property Type
+
+### Mortgage Information
+
+* Loan Amount  
+* Mortgage Term  
+* Interest Rate  
+* Mortgagee (Institution) Details  
+* Mortgage Deed Reference
 
 ## 7. Required Documents
 
-> **Proposed** — row 30 says to submit or enter documents but does not enumerate them. This working list is analogous to the individual-user template and remains client data for confirmation.
+> **Proposed** — the source names the documents entered ("all documents") without enumerating them. The list below is proposed by analogy with the individual-user module's Service #8 (which shares the same instrument) and what a mortgage registration plainly requires.
 
-* current title/property reference
-* mortgage instrument or instruction
-* lender authority
-* party identity and authority evidence
-* supporting transaction documentation
+* Existing Certificate of Title  
+* Mortgage Agreement / Deed of Mortgage  
+* Loan Offer Letter  
+* Property Valuation Report  
+* Government-issued Identification (Borrower / Property Owner)  
+* Internal Certification Record *(the institution's own maker-checker sign-off — see Section 10)*  
+* Other supporting documents required by RERAN
 
 ## 8. Service Fee
 
-> **Proposed** — fee amounts are unavailable client data.
-
 Applicable according to the RERAN fee schedule.
+
+> **Proposed** — per `open-questions.md` B6, fees for mortgage services are proposed as **ad valorem on the secured amount, banded, with a floor and a cap**. The exact schedule is client data (B5).
 
 ## 9. Payment Required
 
-**Yes.**
+**Yes**
 
-> **Proposed** — after approval, the fee is deducted from the institution’s standing pre-funded RERAN account, rather than through a pay-then-submit checkout. The source’s payment step remains applicable. An assisted operator records the same online transaction, not a separate offline payment flow.
+Deducted from the institution's standing, prefunded settlement account **after** RERA approval — not paid by the borrower, and not collected before submission. This is the **Institution Account Debit** model (B1): the source lists "Fee balance" among this service's issued deliverables, which is a standing-account statement line rather than a per-transaction receipt (B9), and is only meaningful if a running balance exists to report.
+
+This differs from the individual-user pay-then-submit model: here, submission is free; the fee is settled only once RERA has approved the transaction, per the platform's Lodge → Validate → Audit → **Pay** → Issue pipeline.
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor (Group A).** A configured internal certification is a maker-checker permission scope on the corporate account, not a fifth Group C role. **Proposed**
+**Two gates**, sourced from row 30 ("transaction audited by bank auditor" before it is "sent to Department for auditing"):
+
+1. **Internal Certifier** — a delegated staff member holding the institution's checker permission scope (A1/D2). The source's "bank auditor" step is modelled as this scope, not as a fifth platform role.  
+2. **Compliance & Escrow Auditor** (Group A) — the external regulatory gate. All 18 Group C services are approved here; no Group C service is self-approving.
 
 ## 11. Expected Processing Time
 
 **20–25 minutes.**
 
+Sourced from row 30 as a single end-to-end figure (unlike Services #1/#2, this SLA is not split into waiting/delivery components, so the A6 reading does not apply here).
+
 ## 12. Processing Workflow
 
-1. The applicant signs in, or an accredited operator opens the same service in assisted mode. **Proposed**
-2. The applicant selects **Mortgage Registration**, enters required data and submits documents.
-3. The platform validates completeness and relevant references. **Proposed**
-4. For a bank-originated filing, a delegated checker scope certifies or returns it before RERAN submission. **Proposed**
-5. The Compliance & Escrow Auditor reviews, approves, returns for correction or rejects.
-6. After approval, the standing account settles the fee. **Proposed**
-7. The platform issues the source-specified output and records the transaction; delivery is electronic where stated.
+Borrower (Customer)
 
-**Source workflow detail:** Customer prepares mortgage requirements with the bank; a bank employee enters all documents through the Online Mortgage System; the bank auditor audits it; the Department audits it; fees are deducted from the bank account; outputs are emailed. Trustee-centre assistance follows the same service.
+Complete Mortgage Requirements with Bank  
+↓  
+Provide Mortgage Documents to Bank
+
+↓
+
+Mortgage Officer
+
+Login to Online Mortgage System  
+↓  
+Select Registered Property  
+↓  
+Enter Borrower & Mortgage Information  
+↓  
+Upload Required Documents  
+↓  
+Submit for Internal Certification
+
+↓
+
+Internal Certifier (checker permission scope)
+
+Review Transaction  
+↓  
+Certify, or Return to Mortgage Officer
+
+↓
+
+RERA
+
+Receive Transaction in Transaction Audit Queue  
+↓  
+Audit Transaction  
+↓  
+Approve, Return, or Reject  
+↓  
+Deduct Fee from Institution Settlement Account  
+↓  
+Generate Output Documents  
+↓  
+Deliver Outputs to Customer via Email
+
+### Assisted-Mode Alternative (C2)
+
+Trustee Centre Operator
+
+Customer / Institution Representative Visits Real Estate Registration Trustee Centre  
+↓  
+Submit Documents  
+↓  
+Enter Transaction into System on the Institution's Behalf  
+↓  
+Pay Fees at Counter  
+↓  
+Receive Output via Email
+
+> **Proposed** — the source's "–V" variant reads only as "Visit trustee office, submit docs, enter system, pay fees, receive output via email," without stating whether the counter payment still draws from the institution's settlement account or is a separate at-counter mechanism. Documented as the same online service in assisted mode per C2, but the payment-source question is carried forward — see Open Questions.
 
 ## 13. Application Status Flow
 
-> **Proposed** — the source gives no status vocabulary; this applies the agreed platform core and Group C extension.
+Draft  
+↓  
+Pending Internal Certification  
+↓  
+*(Returned by Certifier → back to Draft)*  
+↓  
+Submitted  
+↓  
+Under Review  
+↓  
+Information Requested  
+↓  
+Returned for Correction  
+↓  
+Approved — Awaiting Payment  
+↓  
+Completed
 
-Draft → Pending Internal Certification → Returned by Certifier → Submitted → Under Review → Information Requested → Returned for Correction → Approved — Awaiting Payment → Completed
+### Additional Statuses
 
-Exception statuses: Rejected, Withdrawn, Payment Failed and Approval Expired. An approved but unsettled item expires after 30 calendar days. **Proposed**
+* Returned by Certifier  
+* Rejected  
+* Withdrawn  
+* Expired *(approved but unsettled for 30 calendar days — B3)*
+
+Uses the platform core status vocabulary plus the Group C extension (D1): `Pending Internal Certification` and `Returned by Certifier` sit before `Submitted`, since this service's two-gate pattern is directly sourced (unlike Services #1/#2).
 
 ## 14. Possible Outcomes
 
-* Approved and completed, with output issued.
-* Returned for correction or additional information.
-* Rejected with documented reason.
-* Payment failure for insufficient standing balance. **Proposed**
-* Approval Expired after the 30-day settlement window. **Proposed**
+* Mortgage Successfully Registered  
+* Additional Information Requested  
+* Application Returned (internal certifier or RERA)  
+* Application Rejected  
+* Insufficient Settlement Balance / Payment Failed  
+* Approval Expired  
+* Application Withdrawn
 
 ## 15. Output
 
-The source specifies the following output(s):
+Upon successful completion, the system generates:
 
-* Certificate of Title
-* Title deed
-* Usufruct title deed
-* Statement Certificate
-* Provisional Sale Registration Certificate
-* Fee balance
-
-A **fee balance** is the standing-account position after deduction; a payment receipt or e-receipt voucher proves a single settlement. They are distinct artefacts. **Proposed**
+* The applicable one of: Certificate of Title / Title Deed / Usufruct Title Deed / Statement Certificate / Provisional Sale Registration Certificate, depending on the property's existing registration type — sourced (row 30)  
+* Fee Balance — the institution's updated settlement-account statement line, **not** a payment receipt (B9)
 
 ## 16. Related Services
 
-* [Group C services overview](../services-overview.md) and [payment model](../payments.md).
-* Individual User Service #8 – Register Sale of Mortgaged Property, the ownership-transfer end of a transaction involving the mortgage-side action.
-* Application tracking, document management, corporate permission scopes and settlement account. **Proposed**
+* Service #4 — Mortgage Amendment  
+* Service #5 — Mortgage Transfer  
+* Service #6 — Mortgage Release  
+* Service #7 — Grant Property Mortgage  
+* Individual-user Service #8 — Register Sale of Mortgaged Property *(cross-module: describes the seller/purchaser side of a sale where the property carries a mortgage this service registered; that flow's Mortgage Release Letter corresponds to this module's Service #6)*
 
 ## 17. UI Screens
 
-> **Proposed** — derived from the source workflow and the individual-user template.
-
-* Service selection; application details; reference validation; document upload; review and submission.
-* Internal certification queue where maker-checker is enabled.
-* RERAN review, information request and decision view.
-* Settlement-account balance/payment result; output download and application timeline.
+* Services  
+* Mortgage Registration  
+* Select Property  
+* Borrower Information  
+* Mortgage Information  
+* Document Upload  
+* Internal Certification Queue  
+* Application Review  
+* Settlement Account Confirmation  
+* Application Submitted  
+* Application Details  
+* Registration Confirmation
 
 ## 18. API Requirements
 
-> **Proposed** — derived from the source workflow and the individual-user template.
-
-* Retrieve and validate relevant property, title, institution and transaction references.
-* Create, save, submit, return and resubmit applications; upload/retrieve documents.
-* Route internal certification and RERAN audit; record decision reasons.
-* Calculate fees, check and debit standing balance, issue output/receipt/balance entry and send notifications.
+* Retrieve Institution Properties  
+* Retrieve Property Details  
+* Validate Property Ownership  
+* Validate Title Status  
+* Upload Documents  
+* Submit for Internal Certification  
+* Retrieve Certification Status  
+* Calculate Service Fee  
+* Check Settlement Account Balance  
+* Submit Mortgage Registration Application  
+* Retrieve Application Status  
+* Deduct Settlement Account Fee  
+* Generate Certificate of Title / Statement Certificate  
+* Update Mortgage Registry  
+* Send Notifications
 
 ## 19. Database Entities
 
-> **Proposed** — derived from the source workflow and the individual-user template.
-
-* Corporate Account, Permission Scope, User, Customer/Institution and assisted Operator.
-* Property, Title Record and relevant Mortgage, Finance Lease or Contract record.
-* Application, Service Request, Document, Certification Action, Audit Decision and Audit Log.
-* Settlement Account, Fee Charge, Payment Receipt, Fee Balance Ledger Entry, Issued Document and Notification.
+* User  
+* Institution  
+* Institution Staff  
+* Permission Scope  
+* Property  
+* Property Ownership  
+* Mortgage  
+* Certification Record  
+* Application  
+* Service Request  
+* Document  
+* Settlement Account  
+* Settlement Transaction  
+* Notification  
+* Audit Log
 
 ## 20. Acceptance Criteria
 
-> **Proposed** — derived from the source workflow and the individual-user template.
-
-* An authorised applicant or assisted operator can start and save the service request.
-* Required information and documents validate before submission.
-* A maker-checker scope can certify or return a bank-originated request where configured.
-* RERAN can approve, return or reject with a reason.
-* An approved request debits the standing account before outputs release.
-* Source-specified outputs issue electronically and the full trail is auditable.
-* Fee balance and receipt remain distinct where both apply.
+* Mortgage Officer can initiate mortgage registration against a registered title (or a Trustee Centre operator, in assisted mode).  
+* System validates the property is registered and its title is verified before registration.  
+* Internal certifier can certify or return the transaction before it reaches RERA.  
+* Required information and documents are validated before submission.  
+* Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
+* Fee is deducted from the institution's settlement account only after approval.  
+* Submission is blocked if the projected settlement balance after fees would go negative.  
+* Application receives a unique application reference number.  
+* Approved registrations update the official mortgage and property registry.  
+* Institution and customer receive completion notifications.  
+* All activities are recorded in the audit log.
 
 ## 21. Business Rules
 
-1. The workflow, channel, output and SLA are sourced from row 30.
-2. The source’s named Trustee Centre or Land Department is an assisted mode of the same online service. **Proposed**
-3. Internal certification is a permission scope, not a new role. **Proposed**
-4. Fees settle after approval from a standing pre-funded account; negative balances are prohibited. **Proposed**
-5. No amount is invented: the fee schedule remains client data.
-6. The detailed documents remain genuinely open because the source only says “submit documents”; Section 7 carries a marked working proposal instead of dropping that question.
-7. No statutory window or SLA beyond row 30 is asserted.
+1. Only a Mortgage Officer acting under the lending institution's corporate account, or a Trustee Centre operator acting on the institution's behalf in assisted mode, may initiate mortgage registration.  
+2. The property must be registered with RERAN and its title verified before a mortgage can be registered against it.  
+3. The transaction must pass internal institutional certification (maker-checker) before it is routed to RERA (A1/D2).  
+4. Payment is deducted from the institution's standing settlement account only after RERA approval, never before submission (B1).  
+5. Submission is blocked if the projected settlement account balance after fees would go negative; a low-balance warning is shown at a configurable threshold (B4).  
+6. An approved but unsettled transaction lapses to Expired after 30 calendar days (B3).  
+7. Every application receives a unique application reference number.  
+8. All applications, certifications, approvals, settlement deductions, and notifications are permanently recorded in the audit trail.
+
+## Open Questions
+
+The following could not be closed by row 30 or by the answers doc, and are carried forward rather than dropped:
+
+1. **Does the Trustee-Centre-assisted variant draw from the institution's settlement account, or use a separate at-counter payment?** The source's "pay fees" at the counter is ambiguous against the account-debit model established for the primary channel.  
+2. **Which of the five possible output documents applies to a given mortgage** (Certificate of Title vs. Title Deed vs. Usufruct Title Deed vs. Statement Certificate vs. Provisional Sale Registration Certificate)? The source lists all five as possibilities without stating the selection criteria.  
+3. **Exact fee schedule** (bands, floor, cap). Client data — see `open-questions.md` B5, B6.

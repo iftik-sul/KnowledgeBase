@@ -3,169 +3,240 @@ project: RERAN
 module: financial-trust-institutions
 type: service-flow
 status: draft
-updated: 2026-08-11
 contains_proposals: true
+updated: 2026-08-10
 derived_from:
-  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md" (row 44)
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/modules/financial-trust-institutions/services-overview.md"
   - "RERAN/modules/financial-trust-institutions/open-questions.md"
 tags:
   - financial-trust-institutions
   - service-flow
+  - title-ownership
+  - title-deed
 ---
 
-# Service #17 – Issue Title Deed
+# Service #17 – Issuance of Title Deed
 
 **Service Category:** Title & Ownership Transaction Services
 
+**Source row:** 44 of `RERAN_service_flows_v2.md`.
+
 ## 1. Service Overview
 
-The **Issue Title Deed** service is a Group C service defined by row 44 of the master service table. This document carries forward the row’s workflow, channel, output and SLA, while marking design detail not enumerated by the source as proposed.
+The **Issuance of Title Deed** service issues an electronic title deed certificate for a registered property, whether as a first issuance or a replacement of an existing one.
 
 ## 2. Purpose
 
-Provide a controlled and auditable route to complete issue title deed and issue the source-specified output after regulatory review and settlement.
+Give a property owner formal, electronic evidence of registered title, issued directly by RERA following review of the ownership record and supporting evidence.
 
 ## 3. Description
 
-Documents are submitted, data is entered, fees are paid, the transaction is reviewed and approved, and the title deed is emailed.
+The applicant visits the Land Department, submits the required documents, and the transaction data is entered into the system. The applicant pays the fee, RERA reviews and approves the issuance, and the applicant receives the title deed by email.
 
 ## 4. Who Can Apply
 
-* **Mortgage Officer where bank-originated; otherwise a Trustee Centre operator acting for the customer** for the applicable transaction.
-* An accredited Trustee Centre or Land Department operator may act for the customer where the source names that counter. **Proposed** — this is assisted access to the same online service, not a separate offline channel.
-* The underlying institution or customer must be identified for the request. **Proposed**
+### Applicant
+
+* Mortgage Officer — where the transaction is bank-originated (A4's conditional)
+* Trustee Centre Operator (Group G) / Land Department counter staff — otherwise, acting on the customer's behalf in assisted mode
+
+> **Proposed** — the source assigns responsible role to the **Mortgage Officer**. `open-questions.md` A4's rule is conditional — "Mortgage Officer where bank-originated; otherwise executed by a Trustee Centre operator on the customer's behalf" — not an unconditional reassignment. This document keeps both branches: the Land Department counter path is what row 44 itself sources (a walk-in visit with no bank-employee involvement); the Mortgage Officer / bank-originated branch is preserved because A4 allows for it in principle, but **no row among the title & ownership transaction rows (38, 40–44) describes a bank-originated workflow**, so that branch is not sourced here and is carried forward as an open question rather than asserted as fact or silently dropped. **Confidence: Medium**, per the answers doc — the counter-staff branch contradicts the source's responsible-role column, and that should be visible to the client.
+
+### Customer
+
+* Registered Property Owner, or Authorized Representative
 
 ## 5. Prerequisites
 
-* Active corporate or operator account with a filing permission scope. **Proposed**
-* Relevant property, institutional, mortgage, lease or contract reference.
-* Authority to act for the represented institution or customer. **Proposed**
-* Supporting documents ready for upload or operator-assisted capture. **Proposed**
-* Sufficient settlement-account balance before fee settlement. **Proposed**
+* The property's ownership is established and registrable with RERAN.  
+* Required supporting documents are available.
 
 ## 6. Required Information
 
-* Applicant and represented customer/institution details. **Proposed**
-* Relevant property, title, mortgage, lease, contract or register reference. **Proposed**
-* Transaction-specific details, effective date and declarations. **Proposed**
-* Contact email for delivery where the source says the output is emailed. **Proposed**
+### Property Information
+
+* Property Registration Number *(where an existing record exists)*  
+* Property Address  
+* Property Type
+
+### Applicant Information
+
+* Full Name  
+* National Identification Number (NIN)  
+* Contact Information  
+* Basis for Issuance (first issuance, replacement, allocation)
 
 ## 7. Required Documents
 
-> **Proposed** — row 44 says to submit or enter documents but does not enumerate them. This working list is analogous to the individual-user template and remains client data for confirmation.
+> **Proposed** — the source states only that documents are "submitted," without enumerating them.
 
-* current title/property reference
-* transaction authority evidence
-* party identity evidence
-* supporting transaction documentation
+* Application Form  
+* Proof of Prior Ownership / Allocation  
+* Survey Plan  
+* Government-issued Identification (Applicant)  
+* Other supporting documents required by RERAN
 
 ## 8. Service Fee
-
-> **Proposed** — fee amounts are unavailable client data.
 
 Applicable according to the RERAN fee schedule.
 
 ## 9. Payment Required
 
-**Yes.**
+**Yes**
 
-> **Proposed** — after approval, the fee is deducted from the institution’s standing pre-funded RERAN account, rather than through a pay-then-submit checkout. The source’s payment step remains applicable. An assisted operator records the same online transaction, not a separate offline payment flow.
+Paid by the customer — sourced (row 44, Step 2–6 includes "pay"). **Customer Payment at Counter** model (B9).
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor (Group A).** A configured internal certification is a maker-checker permission scope on the corporate account, not a fifth Group C role. **Proposed**
+**Compliance & Escrow Auditor** (Group A) — sourced (approver column, row 44; Step 2–6 includes "review & approval").
 
 ## 11. Expected Processing Time
 
-**25 minutes.**
+**25 minutes.** Sourced from row 44.
 
 ## 12. Processing Workflow
 
-1. The applicant signs in, or an accredited operator opens the same service in assisted mode. **Proposed**
-2. The applicant selects **Issue Title Deed**, enters required data and submits documents.
-3. The platform validates completeness and relevant references. **Proposed**
-4. For a bank-originated filing, a delegated checker scope certifies or returns it before RERAN submission. **Proposed**
-5. The Compliance & Escrow Auditor reviews, approves, returns for correction or rejects.
-6. After approval, the standing account settles the fee. **Proposed**
-7. The platform issues the source-specified output and records the transaction; delivery is electronic where stated.
+Customer
 
-**Source workflow detail:** Documents are submitted, data is entered, fees are paid, the transaction is reviewed and approved, and the title deed is emailed.
+Visit Land Department *(C2: this is the sourced path for this service; Section 4 carries A4's Mortgage Officer / bank-originated branch as unconfirmed rather than asserting a direct online path here — see Open Questions)*  
+↓  
+Submit Documents
+
+↓
+
+Trustee Centre / Land Department Operator
+
+Enter Transaction Data
+
+↓
+
+Customer
+
+Pay Fees
+
+↓
+
+RERA (Compliance & Escrow Auditor)
+
+Review Application  
+↓  
+Approve, Return, or Reject
+
+↓
+
+RERA
+
+Generate Electronic Title Deed Certificate  
+↓  
+Deliver Title Deed via Email
 
 ## 13. Application Status Flow
 
-> **Proposed** — the source gives no status vocabulary; this applies the agreed platform core and Group C extension.
+Draft  
+↓  
+Submitted  
+↓  
+Under Review  
+↓  
+Information Requested  
+↓  
+Returned for Correction  
+↓  
+Approved — Awaiting Payment  
+↓  
+Completed
 
-Draft → Pending Internal Certification → Returned by Certifier → Submitted → Under Review → Information Requested → Returned for Correction → Approved — Awaiting Payment → Completed
+### Additional Statuses
 
-Exception statuses: Rejected, Withdrawn, Payment Failed and Approval Expired. An approved but unsettled item expires after 30 calendar days. **Proposed**
+* Rejected  
+* Withdrawn
 
 ## 14. Possible Outcomes
 
-* Approved and completed, with output issued.
-* Returned for correction or additional information.
-* Rejected with documented reason.
-* Payment failure for insufficient standing balance. **Proposed**
-* Approval Expired after the 30-day settlement window. **Proposed**
+* Title Deed Successfully Issued  
+* Additional Information Requested  
+* Application Returned  
+* Application Rejected  
+* Payment Failed  
+* Application Withdrawn
 
 ## 15. Output
 
-The source specifies the following output(s):
+Upon successful completion, the system generates:
 
-* Electronic Title Deed Certificate
-
-A **fee balance** is the standing-account position after deduction; a payment receipt or e-receipt voucher proves a single settlement. They are distinct artefacts. **Proposed**
+* Electronic Title Deed Certificate — sourced (row 44)
 
 ## 16. Related Services
 
-* [Group C services overview](../services-overview.md) and [payment model](../payments.md).
-
-* Application tracking, document management, corporate permission scopes and settlement account. **Proposed**
+* Service #15 — Updating Title Deed Information  
+* Service #16 — Split Ownership  
+* Service #13 — Sale Procedure (Heirs)
 
 ## 17. UI Screens
 
-> **Proposed** — derived from the source workflow and the individual-user template.
-
-* Service selection; application details; reference validation; document upload; review and submission.
-* Internal certification queue where maker-checker is enabled.
-* RERAN review, information request and decision view.
-* Settlement-account balance/payment result; output download and application timeline.
+* Services  
+* Issuance of Title Deed  
+* Applicant Information  
+* Property Information  
+* Document Upload  
+* Application Review  
+* Payment  
+* Payment Successful  
+* Application Submitted  
+* Application Details  
+* Title Deed Issued
 
 ## 18. API Requirements
 
-> **Proposed** — derived from the source workflow and the individual-user template.
-
-* Retrieve and validate relevant property, title, institution and transaction references.
-* Create, save, submit, return and resubmit applications; upload/retrieve documents.
-* Route internal certification and RERAN audit; record decision reasons.
-* Calculate fees, check and debit standing balance, issue output/receipt/balance entry and send notifications.
+* Retrieve Property Record, Where Applicable  
+* Validate Ownership Evidence  
+* Upload Documents  
+* Calculate Service Fee  
+* Initiate Payment  
+* Verify Payment  
+* Submit Title Deed Issuance Application  
+* Retrieve Application Status  
+* Generate Electronic Title Deed Certificate  
+* Send Notifications
 
 ## 19. Database Entities
 
-> **Proposed** — derived from the source workflow and the individual-user template.
-
-* Corporate Account, Permission Scope, User, Customer/Institution and assisted Operator.
-* Property, Title Record and relevant Mortgage, Finance Lease or Contract record.
-* Application, Service Request, Document, Certification Action, Audit Decision and Audit Log.
-* Settlement Account, Fee Charge, Payment Receipt, Fee Balance Ledger Entry, Issued Document and Notification.
+* User  
+* Property  
+* Property Ownership  
+* Title Deed  
+* Application  
+* Service Request  
+* Document  
+* Payment  
+* Payment Transaction  
+* Notification  
+* Audit Log
 
 ## 20. Acceptance Criteria
 
-> **Proposed** — derived from the source workflow and the individual-user template.
-
-* An authorised applicant or assisted operator can start and save the service request.
-* Required information and documents validate before submission.
-* A maker-checker scope can certify or return a bank-originated request where configured.
-* RERAN can approve, return or reject with a reason.
-* An approved request debits the standing account before outputs release.
-* Source-specified outputs issue electronically and the full trail is auditable.
-* Fee balance and receipt remain distinct where both apply.
+* Owner or authorized representative can initiate a title deed issuance application at the Land Department.  
+* System validates ownership evidence before allowing issuance.  
+* Application receives a unique application reference number.  
+* Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
+* Payment is completed before the title deed is issued.  
+* Approved applications result in an issued electronic title deed.  
+* Customer receives the title deed on completion.  
+* All activities are recorded in the audit log.
 
 ## 21. Business Rules
 
-1. The workflow, channel, output and SLA are sourced from row 44.
-2. The source’s named Trustee Centre or Land Department is an assisted mode of the same online service. **Proposed**
-3. Internal certification is a permission scope, not a new role. **Proposed**
-4. Fees settle after approval from a standing pre-funded account; negative balances are prohibited. **Proposed**
-5. No amount is invented: the fee schedule remains client data.
-6. The detailed documents remain genuinely open because the source only says “submit documents”; Section 7 carries a marked working proposal instead of dropping that question.
-7. No statutory window or SLA beyond row 44 is asserted.
+1. This application may be processed by a Mortgage Officer where bank-originated, or otherwise by a Trustee Centre / Land Department operator acting on the customer's behalf (A4's conditional). *(Proposed — no row sources a bank-originated variant for this service; only the counter path is confirmed by row 44.)*
+2. Ownership must be established and registrable before a title deed can be issued.  
+3. Payment is required before the application is finalized.  
+4. Approved applications result in an issued electronic title deed on the official registry.  
+5. Every application receives a unique application reference number.  
+6. All applications, approvals, payments, and notifications are permanently recorded in the audit trail.
+
+## Open Questions
+
+1. **How this service differs from a first-time property registration performed outside Group C** (e.g., under the individual-user or developer modules) versus a replacement issuance. Not specified in source.  
+2. **Grounds for replacement issuance** (e.g., lost, damaged, or superseded deed). Not specified in source.  
+3. **Whether a bank-originated path (Mortgage Officer, per A4's conditional) exists for this service at all.** No row among 38, 40–44 describes bank-employee entry the way the mortgage rows (30–33, 39) do; this document sources only the Land Department counter path and treats the bank-originated branch as unconfirmed rather than absent.  
+4. **Exact fee amount.** Client data — see `open-questions.md` B5.
