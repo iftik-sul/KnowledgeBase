@@ -3,183 +3,323 @@ project: RERAN
 module: financial-trust-institutions
 type: decision
 status: draft
-updated: 2026-08-09
+updated: 2026-08-10
+contains_proposals: true
 derived_from:
   - "RERAN/modules/financial-trust-institutions/roles-and-responsibilities.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
   - "RERAN/modules/financial-trust-institutions/payments.md"
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
+  - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
 tags:
   - financial-trust-institutions
   - open-questions
+  - decisions
   - client
 ---
 
-# Group C — Questions for RERA
+# Group C — Questions and Proposed Answers
 
-Questions arising from documenting the Financial & Trust Institutions module. Grouped by decision area rather than by document, so each section can be taken to the right person.
+Twenty-three questions arose from documenting the Financial & Trust Institutions module. Rather than hold the module until the client responds, each now carries a **proposed answer** we will build against unless told otherwise.
 
-Each question states what we assumed in the meantime, so work continues while answers are pending. Where an assumption turns out to be wrong, the affected documents are listed.
+**How to read this:** each answer states a recommendation, the reasoning behind it, how confident we are, and what breaks if it is wrong. Confidence is:
 
-**Scope note:** this covers post-login functionality only. Registration and onboarding are excluded from this project.
+| Level | Meaning |
+| :---- | :---- |
+| **Sourced** | The source material answers this; we had missed it or read it too narrowly |
+| **High** | A strong inference from the source, or the only option that survives contact with the PRD |
+| **Medium** | A reasonable design judgement; a different answer would also be defensible |
+| **Client data** | Cannot be reasoned to. Only RERA holds the answer |
+
+Only one question in twenty-three is client data.
+
+**Scope note:** post-login functionality only. Registration and onboarding are excluded.
 
 ---
 
-## A. Roles — who does what after login
+## The Answer That Resolves Two Questions
 
-The source names four roles but assigns services to only two of them. Two roles have described functions but no system behaviour anywhere.
+A1 and D2 dissolve into a single mechanism, so it is stated once here.
+
+**Internal certification is a permission scope on a corporate account, not a role.**
+
+Registration Flow 5 already establishes the machinery: delegated staff are invited by the company's authorised representative, who "confirms the staff member's permission scope (e.g. escrow filing only)" before activation. A maker-checker gate is that same mechanism with a second scope — *certify* alongside *file*.
+
+This means the platform needs no fifth Group C role, and no separate two-gate model per group. It needs one corporate-account capability — configurable maker-checker — that Groups B, C and D all switch on according to their own governance.
+
+Everything below follows from that.
+
+---
+
+## A. Roles
 
 ### A1. Is the "bank's internal auditor" the Auditing Bureau Officer?
 
-The mortgage registration workflow includes a step where the bank's internal auditor reviews and certifies the transaction before it reaches RERA. That actor is not one of the four named Group C roles.
+**No. They are different actors, and the internal one is not a role at all.**
 
-**Our assumption:** it is the Auditing Bureau Officer.
+The Auditing Bureau Officer is described as an "Approved auditor" who "audits developer escrow accounts and submits independent compliance reports." Three things follow: the object of the audit is a *developer's* escrow account, not the bank's own lending; the auditor is *approved* by RERA, which Services #1 and #2 exist to grant; and the report is *independent*. A bank's internal audit desk certifying its own mortgage filing has none of those properties.
 
-**Why it matters:** this makes the Auditing Bureau Officer a mandatory gate on 17 of the 18 services, rather than a peripheral role. If it is instead a fifth, unnamed role, the module needs another actor and another set of screens.
+So model the internal certification step as a **checker scope** granted to a delegated staff member under Flow 5, per the mechanism above. The Auditing Bureau Officer stays what the source says it is: an approved external firm auditing developer escrow, which is Group B-facing work.
 
-**Affects:** the entire two-gate model, every service flow, every status.
+**Confidence:** High.
 
-### A2. What does the Account Trustee actually see and do in this platform?
+**If wrong:** the module gains a fifth role and a dedicated queue. The screens are broadly the same either way — what changes is provisioning, not interface.
 
-The Account Trustee appears as an approval step inside six Group B developer escrow services — account activation, transfer, profit withdrawal, payment release, mortgage deposit, bank guarantee cancellation — but has no Group C interface described anywhere.
+### A2. What does the Account Trustee do in this platform?
 
-**Our assumption:** they work from a dedicated queue in the RERA platform, reviewing routed developer requests, uploading assessments and certifying releases.
+**A full queue inside the RERA platform, not outcome recording. This is sourced — we had underread it.**
 
-**Alternative:** they work in the bank's own systems and only the outcome is recorded in RERA.
+Rows 8–12 and 20–21 of the master service table put the Trustee mid-flow, acting: "Application sent to Trustee Account → Trustee Account studies capability, uploads & sends docs → Escrow account department audits by approval or rejection." The Trustee uploads documents into the flow. And the SLAs on those rows split into a waiting component and a delivery component (row 8: 20 business hours waiting, 13 delivery) — a waiting time that cannot be measured if the actor works outside the system.
 
-**Affects:** whether this module needs a full escrow queue and certification interface, or just a status display.
+So: an Escrow Request Queue with request detail, document upload, and certify/return actions.
 
-### A3. Is milestone certification a document upload or a structured assessment?
+**Confidence:** Sourced.
 
-When a Trustee certifies that a construction milestone justifies a drawdown, is that an uploaded letter, or a form with defined fields the platform validates?
+**Affects:** confirms the Escrow Request Queue feature already proposed in the services overview.
 
-### A4. Who owns the institution's own approval services?
+### A3. Is milestone certification an upload or a structured assessment?
 
-Services #1 and #2 (approval, renewal and cancellation of Account Trustee & Auditing company standing) are assigned to the **Account Trustee** in the service table, but the role descriptions give responsibility for maintaining registration and renewing approvals to the **Institution Relationship Manager**. The source contradicts itself.
+**Structured assessment, with supporting documents attached.**
 
-**Our assumption:** none — recorded as an open inconsistency.
+FR-04 requires "mandatory documented reasoning" on regulatory decisions, and KPI 8 sets a 95% data-integrity target measured by automated validation. A free-form certification letter can be neither validated nor aggregated. Proposed fields: milestone reference, percentage complete, valuation of works executed, amount certified, variance against the previous certificate, certifier declaration, attachments.
 
-### A5. Does the Institution Relationship Manager get an institution-wide view?
+**Confidence:** Medium — a design judgement, not an inference.
 
-They are responsible for renewals and user provisioning, which implies visibility of expiry dates and staff activity, but no such view is described.
+### A4. Who owns Services #1 and #2?
 
-### A6. SLA for Trustee action on a routed developer request
+**The Institution Relationship Manager. And the ownership problem is wider than these two services.**
 
-Developer-side services state RERA's processing times but not how long the Trustee has to act.
+The role descriptions are the more considered source: the IRM "maintains registration, renews trustee/auditor approvals, provisions users." That is exactly what Services #1 and #2 do. Registration Flow 4 reinforces it — the IRM is the company-level representative, and approval of the institution's own standing is a company-level act.
 
-### A7. Compliance report format
+The service table's responsible-role column looks like a group-level default rather than a per-service assignment: it gives the Mortgage Officer seventeen of eighteen services, including heirs' sale procedures, company share sales, title-deed issuance and split ownership. Those are Trustee Centre counter transactions with no lending component. A mortgage desk does not run them.
 
-Does the Auditing Bureau Officer's independent compliance report follow a RERA-defined template, or the institution's own format?
+**Recommendation:** re-derive ownership per service rather than accepting the column. Proposed:
+
+| Services | Proposed owner |
+| :---- | :---- |
+| #1, #2 — institutional approval | Institution Relationship Manager |
+| #3–#7 — mortgage lifecycle | Mortgage Officer |
+| #8–#11 — finance lease lifecycle | Mortgage Officer |
+| #12–#18 — title and ownership transactions | Mortgage Officer where bank-originated; otherwise executed by a Trustee Centre operator on the customer's behalf (Group G) |
+
+**Confidence:** High for #1/#2. Medium for the wider re-derivation — it contradicts a source column, and that should be visible to the client.
+
+**Affects:** the Service Ownership table in `services-overview.md`, which currently reports Mortgage Officer 17 / IRM 1.
+
+### A5. Does the IRM get an institution-wide view?
+
+**Yes.** Renewals and user provisioning are meaningless without visibility of expiry dates and the staff roster. Profile management (registration flows §4) assigns institutions exactly this: renew approvals, manage user provisioning, update credentials. Proposed view: approval status and expiry countdown, staff roster with permission scopes, transactions in flight by stage, settlement account balance.
+
+**Confidence:** High.
+
+### A6. What SLA applies to Trustee action on a routed request?
+
+**Take it from the waiting-time figure already in the source.**
+
+The escrow service rows carry two numbers — "waiting time 20 business hours; service delivery 13 business hours". The most plausible reading is that waiting time is the queue-and-counterparty portion and delivery is RERA's own processing. On that reading the Trustee SLA is already specified per service, and no new figure is needed.
+
+Where a row gives only one number, propose 24 business hours with escalation to the Compliance & Escrow Auditor on breach.
+
+**Confidence:** Medium — the two-number interpretation is an inference and should be put to the client explicitly, because every escrow SLA in Group B depends on it.
+
+### A7. Does the compliance report follow a RERA template?
+
+**RERA-defined template.** FR-19 requires configurable reports exportable across all regulatory service areas, and KPI 8 measures data integrity by automated validation. Neither works over documents in institution-specific formats. Allow a free-text findings narrative inside a fixed structure.
+
+**Confidence:** Medium.
 
 ---
 
-## B. Payments — the largest gap
-
-Every RERA service is chargeable, but the mechanics for institutional users are largely unspecified.
+## B. Payments
 
 ### B1. Standing account or direct debit?
 
-Mortgage services state that fees are "deducted from the bank's account". This could mean a pre-funded account the institution holds with RERA, or a direct debit against a nominated commercial account.
+**Standing pre-funded account. The source settles this, in a detail we had treated as noise.**
 
-**Our assumption:** a standing, pre-funded account.
+Nearly every Group C mortgage and finance-lease row lists **"Fee balance"** among the issued deliverables, alongside the certificate. A balance is not a receipt. A direct debit produces proof that one payment cleared; only a running account produces a balance worth issuing as an output document.
 
-**Why it matters:** a standing account requires a balance display, top-up flow, transaction ledger, low-balance alerting and periodic statements — none of which appear in any source document, and all of which are build work nobody has scoped. Direct debit requires almost none of it.
+Supporting evidence: the SLAs on these services are 10–25 minutes end to end. Per-transaction gateway authorisation against an external bank account does not fit inside that envelope reliably; deduction from a held balance does.
 
-**This is the single most consequential open question in the module.**
+**Consequence, stated plainly:** the account-management subsystem is in scope. Balance display, top-up, transaction ledger, low-balance alerting and periodic statements are all real build work that appears in no source document and no estimate. That is the item to raise with the client — not the mechanism, which the source supports, but the cost of it.
 
-### B2. If pre-funded: who tops up, and how?
+**Confidence:** High on the mechanism. The scope consequence needs sign-off.
 
-Bank transfer, payment gateway, or an arrangement with RERA finance?
+### B2. If pre-funded, who tops up and how?
+
+The IRM authorises; two rails — bank transfer against a unique institution reference for large amounts, payment gateway for smaller ones. Recommend this uses the **same wallet primitive proposed for individuals** (`proposed-services.md` P-22) with two account types rather than two separate builds.
+
+**Confidence:** Medium.
 
 ### B3. What happens when an approved transaction cannot be settled?
 
-Payment occurs *after* audit approval. If funds are insufficient at that point, does the approval hold indefinitely, expire after a period, or void?
+**Approval holds for 30 calendar days, then lapses to Approval Expired.** Resubmission is required; re-audit is not, unless the underlying title has changed in the interim, in which case it is.
 
-**Our assumption:** it holds in an approved-but-unsettled state and is retryable, with no expiry defined.
+An indefinite hold accumulates a register of half-registered mortgages — approved but unregistered interests, invisible to a searcher. That is precisely the fraud surface the platform exists to close.
+
+**Confidence:** Medium. The 30 days is a proposal; the principle that approvals must expire is the part we would defend.
 
 ### B4. Is there a credit arrangement?
 
-Or is settlement strictly pre-funded with no negative balance permitted?
+**No negative balance.** Regulatory fees are public revenue; extending credit makes RERA an unsecured creditor of a licensed institution it also regulates. Block submission when the projected balance after fees would go negative, and warn at a configurable threshold before that.
+
+**Confidence:** High.
 
 ### B5. Published fee schedule
 
-Is there a fee schedule for the 18 Group C services that can be supplied? None exists in any source document.
+**Client data — the only question here we cannot answer.**
+
+It does not block build. FR-16 specifies a fee schedule engine, meaning fees are configuration rather than code. Treat the schedule as empty configuration to be populated at Phase 1 discovery, and build the engine against a representative test schedule. See `proposed-services.md` P-33 for who configures it.
 
 ### B6. Fee basis for mortgage services
 
-Do fees scale with loan value, property value, or are they flat per transaction?
+**Ad valorem on the secured amount, banded, with a floor and a cap.** FR-16 computes fees from "application type, property value, and classification", which rules out flat-rate. Banding rather than a pure percentage keeps the calculation legible to applicants and matches how registration fees are normally struck.
+
+**Confidence:** Medium — and it is configuration, so a wrong guess is cheap.
 
 ### B7. VAT applicability
 
-Applied to all 18 services, or only some?
+**Applied by default to all fee-bearing services, configurable per service code.** The off-plan workflow states that "seller and purchaser fees plus VAT are computed automatically", and row 11 concerns a cap on "administrative, marketing and VAT expenses". VAT is clearly in the model; exemptions, if any, are exceptions to be configured.
+
+**Confidence:** Medium-high.
 
 ### B8. Institutional approval fees — annual or per application?
 
+**Per approval term, with a two-year validity and a renewal fee at renewal.**
+
+Service #1 is "approval **/ renewal**", which is only meaningful if approvals expire. So a validity period exists and must be stated. Two years is proposed; the platform should hold it as configuration and drive the Approval Expiry Tracking feature from it.
+
+**Confidence:** Medium-high on the structure, proposal on the duration.
+
 ### B9. Are "fee balance", "payment receipt" and "e-receipt voucher" the same thing?
 
-The source uses all three terms across different Group C services. We have treated them as one electronic payment receipt.
+**No — two things, and our earlier assumption that they were one was wrong.** This follows directly from B1.
 
-### B10. Do institutions request refunds through the public refund service?
+| Term | What it is |
+| :---- | :---- |
+| Payment receipt / e-receipt voucher | Proof that a single transaction settled. These two are the same artefact under different names. |
+| Fee balance | The standing account position after that deduction — a statement line, not a receipt. |
 
-A fee refund request service exists for the general public with a seven-business-day turnaround subject to Ministry of Finance approval. Whether institutions use the same route is unstated.
+**Confidence:** Medium-high, contingent on B1.
+
+**Affects:** `payments.md`, which treats all three as one electronic receipt.
+
+### B10. Do institutions use the public refund service?
+
+**No.** Overpayment or a voided transaction credits back to the standing account automatically, same-day. Cash-out to a commercial account happens only on account closure, and that route can reuse the public refund workflow's Ministry of Finance approval.
+
+The public route requires bank attachments and a seven-business-day turnaround subject to Ministry approval. Applying that to a bank whose fee failed to settle on a 20-minute service is disproportionate.
+
+**Confidence:** Medium.
 
 ---
 
-## C. Service structure
+## C. Service Structure
 
-### C1. Are the proposed service categories acceptable?
+### C1. Are the proposed five categories acceptable?
 
-The source groups the 18 services under RERA's internal filing categories — Development (2), Transaction (15), Title-Deed Data (1). We regrouped them by user-facing task:
+**Adopt them, keep the reconciliation table.** Navigation is built from user-facing task grouping; RERA's internal filing categories are preserved for reporting through the reconciliation. Reversible at any point, since the services and their numbers are unchanged.
 
-| Proposed category | Services |
-| :---- | :---: |
-| Institutional Approval Services | 2 |
-| Mortgage Services | 5 |
-| Finance Lease Services | 4 |
-| Title & Ownership Transaction Services | 6 |
-| Contract Services | 1 |
-
-The 18 services themselves are unchanged, and a reconciliation table to the source grouping is maintained.
+**Confidence:** High.
 
 ### C2. Should Trustee Centre–only services gain an online path?
 
-Several Group C services list only Real Estate Registration Trustee Centres as a channel, implying walk-in processing with no online equivalent today. Is bringing them online in scope for this platform, or should the documentation preserve the counter-only route?
+**The question dissolves. There is one service with two access modes, not two services.**
 
-**Our assumption:** preserved as counter-only, since changing it is a scope decision rather than a documentation one.
+Registration Flow 7 provisions Trustee Centre operators with individual NIMC-verified accounts and "per-operator transaction scopes", under audit. That is not a parallel paper channel — it is the same online service, operated by a trained intermediary on a walk-in customer's behalf. The counter is an *assisted mode*, not a separate system.
 
-### C3. Do the four application-management features apply to Group C?
+This is also the only reading compatible with the PRD. US-14 requires diaspora users to transact fully from outside Nigeria; Business Goal 2 targets an 80% processing-time reduction; the platform's stated purpose is removing in-person visits. A title service that can only be performed by physically attending a centre in Lagos fails all three.
 
-Submit Application, Track Application Status, Respond to Information Request, and Resubmit Returned Application are documented for individual users. Group C services follow the same six-stage pipeline, so we have assumed they apply equally.
+**Recommendation:** document every Group C service as online-capable, with an assisted-mode annotation where the source lists the Trustee Centre as the only channel. Whether direct customer access to a given service is *enabled at launch* is then a configuration decision, not an architecture one.
 
-### C4. Are the three proposed institution-specific features correct?
+**Confidence:** High.
 
-We proposed an Internal Certification Queue, an Escrow Request Queue, and Approval Expiry Tracking. Is anything missing, and are these the right shape?
+**Reverses** the earlier assumption that counter-only should be preserved as documented.
+
+### C3. Do the four application-management features apply?
+
+**Yes**, unchanged. Same six-stage pipeline, same needs. They should be defined once at platform level rather than per module — see the answer to Q6 in `proposed-services.md`.
+
+**Confidence:** High.
+
+### C4. Are the three institution-specific features correct?
+
+**Correct but incomplete. Five, not three.**
+
+| Feature | Status |
+| :---- | :---- |
+| Internal Certification Queue | Keep — now understood as a maker-checker scope view (A1) |
+| Escrow Request Queue | Keep — confirmed sourced (A2) |
+| Approval Expiry Tracking | Keep — now driven by a defined validity period (B8) |
+| **Settlement Account** | **Add** — balance, top-up, ledger, statements (B1) |
+| **Staff & Permission Scopes** | **Add** — roster, scope assignment, revocation (A1, A5) |
+
+**Confidence:** Medium-high.
 
 ---
 
-## D. Platform-wide questions raised by this module
+## D. Platform-Wide
 
-These are not Group C–specific, but surfaced here and will affect every module.
+### D1. Status vocabulary — platform-wide or per module?
 
-### D1. Application status vocabulary
+**Platform-wide core, with module extensions.**
 
-No source document enumerates application statuses for any user group. We proposed a set for Group C's two-gate flow.
+FR-18 requires a live operational dashboard across all submissions and FR-19 requires configurable reports "covering all regulatory service areas". Neither is buildable over per-module vocabularies — you cannot count what is at-risk across the platform if each module names its own states.
 
-**Question:** should statuses be defined once platform-wide, or per module? A shared vocabulary is strongly preferable for reporting and for the staff back-office, but only RERA can confirm the list.
+**Proposed core lifecycle, applying to every module:**
+
+| Status | Meaning |
+| :---- | :---- |
+| Draft | Started, not submitted |
+| Submitted | Lodged, awaiting regulator pickup |
+| Under Review | With the regulator |
+| Information Requested | Regulator has raised a query |
+| Returned for Correction | Sent back to the applicant |
+| Approved — Awaiting Payment | Passed audit; fee not yet settled |
+| Rejected | Refused with documented reason |
+| Completed | Settled and output document issued |
+| Withdrawn | Abandoned by the applicant |
+| Expired | Lapsed against a statutory or configured window (see B3) |
+
+**Group C extension:** *Pending Internal Certification* and *Returned by Certifier*, both sitting before Submitted. Any group that enables maker-checker inherits the same two.
+
+**Confidence:** High on the principle, proposal on the specific list.
 
 ### D2. Does the two-gate pattern apply beyond Group C?
 
-Group C actions pass through internal certification inside the institution, then external audit at RERA. Do other corporate groups — developers, service companies — have an equivalent internal gate, or do they submit directly?
+**Yes, and it is a corporate-account feature rather than a group property** — see the mechanism at the top of this document.
+
+The evidence is already in Group B: the Developer Principal "authorises project registrations, escrow drawdowns and completion filings" that the Project Registration Officer and Escrow Liaison prepare. That is a maker-checker gate under a different name. Group D shows the same shape with the Company Dispute Filing Officer under the Brokerage Principal.
+
+Build it once, configurable per corporate account, with the scope set at the point Flow 5 already provides for it.
+
+**Confidence:** High.
 
 ---
 
 ## Summary
 
-| Area | Questions | Blocking? |
-| :---- | :---: | :---- |
-| A. Roles | 7 | A1 and A2 block the service flows |
-| B. Payments | 10 | B1 blocks any payment screen work |
-| C. Service structure | 4 | Non-blocking; affects naming and scope |
-| D. Platform-wide | 2 | D1 should be settled before other modules |
-| **Total** | **23** | |
+| Area | Questions | Answered | Needs client data |
+| :---- | :---: | :---: | :---: |
+| A. Roles | 7 | 7 | 0 |
+| B. Payments | 10 | 9 | 1 (B5, fee schedule) |
+| C. Service structure | 4 | 4 | 0 |
+| D. Platform-wide | 2 | 2 | 0 |
+| **Total** | **23** | **22** | **1** |
 
-**The three to answer first:** A1 (is the internal auditor the Auditing Bureau Officer), A2 (what the Account Trustee does in this platform), and B1 (standing account or direct debit). Between them they determine the module's actor model, its screen count, and whether an entire account-management subsystem is in scope.
+### The four answers that change existing documents
+
+| Answer | What it changes |
+| :---- | :---- |
+| **A4** — ownership re-derived per service | `services-overview.md` Service Ownership table |
+| **B1** — standing account confirmed | `payments.md`; adds a Settlement Account feature and an unscoped subsystem to the estimate |
+| **B9** — fee balance is not a receipt | `payments.md`, which currently merges all three terms |
+| **C2** — counter is an assisted mode | Every Group C service flow's channel section; reverses a prior assumption |
+
+### The three to put in front of the client anyway
+
+Not because we lack an answer, but because the answer costs money or contradicts the source:
+
+1. **B1** — the settlement account subsystem is real build work that nobody has estimated.
+2. **A4** — our proposed ownership contradicts a column in the source workbook.
+3. **A6** — the waiting-time / delivery-time reading sets the SLA for every escrow service in Group B, not just Group C.
