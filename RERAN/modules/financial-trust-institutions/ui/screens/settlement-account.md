@@ -168,6 +168,12 @@ Read-only, and filtered: sees the balance summary and only the ledger entries an
 
 No Fund Account action. Where their own transaction cannot settle, they see the shortfall and a prompt to contact the Relationship Manager.
 
+### Auditing Bureau Officer
+
+Read-only, institution-wide: sees the full Balance Summary and Ledger, not filtered to any one officer's filings — the same institution-wide read this role has on Applications and Documents, for the same audit reason. No Fund Account or Settle action, and no Funding History tab access beyond viewing; funding authorisation is not part of an audit function.
+
+> **Added in the issue #27 navigation cross-check.** Both `navigation.md` and this screen's entry in `README.md`'s Role × Screen Matrix grant this role Read access, but the previous version of this file only documented Institution Relationship Manager and Mortgage Officer. The role was reachable per the matrices and had nothing to see when it got here — this closes that gap rather than leaving the matrix as the only source of truth for what the role can do.
+
 ## User Flow
 
 ```

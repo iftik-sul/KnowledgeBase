@@ -175,7 +175,7 @@ Logout
 
 ### Note
 
-**This role's definition needs correcting.** `roles-and-responsibilities.md` §4 lists internal certification of the Mortgage Officer's filings as its first responsibility. Answer A1 supersedes that — certification is a `certify` scope, not this role. The journey above reflects the corrected definition; the roles document does not yet.
+**This role's definition has been corrected.** `roles-and-responsibilities.md` §4 previously listed internal certification of the Mortgage Officer's filings as its first responsibility. Answer A1 supersedes that — certification is a `certify` scope, not this role — and the roles document was fixed to match in the issue #27 pass. The journey above already reflected the corrected definition; it was written that way before the source document caught up.
 
 ---
 

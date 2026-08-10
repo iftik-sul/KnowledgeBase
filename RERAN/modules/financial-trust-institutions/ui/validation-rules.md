@@ -52,6 +52,7 @@ Per answer B1, fees are deducted from a standing pre-funded account after approv
 2. Where the projected balance after committed fees would fall below zero, the service request form shows a warning at review, before submission.
 3. The account may not go negative — no credit is extended (answer B4).
 4. An approved record left unsettled for 30 calendar days moves to `Approval Expired` and requires resubmission (answer B3). A warning is issued at 7 days and 24 hours.
+5. **The low-balance threshold is a per-institution setting**, edited by `admin` on [institution-profile.md](screens/institution-profile.md#section-3--settlement-preferences-tab), not a platform constant. Every screen that shows a low-balance state — the Settlement Account Balance Card, the Institution Context Header, the Dashboard — reads this one setting rather than each defining its own threshold. Added in this pass because the settlement-account and dashboard screens both referenced "the configured threshold" without either of them defining where it lived.
 
 ## Documented Reasoning
 
