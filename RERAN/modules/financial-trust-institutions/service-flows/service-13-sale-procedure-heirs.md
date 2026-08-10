@@ -3,173 +3,264 @@ project: RERAN
 module: financial-trust-institutions
 type: service-flow
 status: draft
-updated: 2026-08-11
 contains_proposals: true
+updated: 2026-08-10
 derived_from:
-  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md" (row 40)
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/modules/financial-trust-institutions/services-overview.md"
   - "RERAN/modules/financial-trust-institutions/open-questions.md"
 tags:
   - financial-trust-institutions
   - service-flow
+  - title-ownership
+  - heirs
 ---
 
 # Service #13 – Sale Procedure (Heirs)
 
 **Service Category:** Title & Ownership Transaction Services
 
+**Source row:** 40 of `RERAN_service_flows_v2.md`.
+
 ## 1. Service Overview
 
-The **Sale Procedure (Heirs)** service is a Group C service defined by row 40 of the master service table. This document carries forward the row’s workflow, channel, output and SLA, while marking design detail not enumerated by the source as proposed.
+The **Sale Procedure (Heirs)** service processes the sale of a deceased owner's property among or on behalf of the heirs, distributing each heir's share of the proceeds to their bank account as part of registration.
 
 ## 2. Purpose
 
-Provide a controlled and auditable route to complete sale procedure (heirs) and issue the source-specified output after regulatory review and settlement.
+Give heirs a regulated path to sell an inherited property and receive their respective shares of the proceeds, with RERA recording the ownership change and coordinating the financial distribution through its Trusts Department.
 
 ## 3. Description
 
-Customer uses a Trustee Centre; documents are submitted, entered and audited; fees are paid; the transaction is sent to the Trusts Department; heirs’ shares are transferred to bank accounts; outputs are emailed.
+An heir or their representative visits a Real Estate Registration Trustee Centre, submits the required documents, and the Trustee Centre operator enters the transaction and performs an initial audit. The customer pays the applicable fees. The transaction is then sent to RERA's Trusts Department, which transfers each heir's share to their nominated bank account. Outputs are delivered by email.
 
 ## 4. Who Can Apply
 
-* **Mortgage Officer where bank-originated; otherwise a Trustee Centre operator acting for the customer** for the applicable transaction.
-* An accredited Trustee Centre or Land Department operator may act for the customer where the source names that counter. **Proposed** — this is assisted access to the same online service, not a separate offline channel.
-* The underlying institution or customer must be identified for the request. **Proposed**
+### Applicant
+
+* Mortgage Officer — where the transaction is bank-originated (A4's conditional)
+* Trustee Centre Operator (Group G) — otherwise, acting on the heirs' behalf in assisted mode
+
+> **Proposed** — the source assigns responsible role to the **Mortgage Officer**. `open-questions.md` A4's rule is conditional — "Mortgage Officer where bank-originated; otherwise executed by a Trustee Centre operator on the customer's behalf" — not an unconditional reassignment. This document keeps both branches: the Trustee Centre Operator path is what row 40 itself sources (a walk-in "Move to Real Estate Registration Trustee centers" with no bank-employee involvement); the Mortgage Officer / bank-originated branch is preserved because A4 allows for it in principle, but **no row among the title & ownership transaction rows (38, 40–44) describes a bank-originated workflow**, so that branch is not sourced here and is carried forward as an open question rather than asserted as fact or silently dropped. **Confidence: Medium**, per the answers doc — the Trustee-Centre branch contradicts the source's responsible-role column, and that should be visible to the client.
+
+### Heirs
+
+* Registered heirs of the deceased property owner, or their authorized representative(s)
 
 ## 5. Prerequisites
 
-* Active corporate or operator account with a filing permission scope. **Proposed**
-* Relevant property, institutional, mortgage, lease or contract reference.
-* Authority to act for the represented institution or customer. **Proposed**
-* Supporting documents ready for upload or operator-assisted capture. **Proposed**
-* Sufficient settlement-account balance before fee settlement. **Proposed**
+* The property is registered with RERAN under the deceased owner.  
+* Heirship is established (e.g., grant of probate or letters of administration).  
+* Each heir's bank account details are available for distribution of proceeds.  
+* Required supporting documents are available.
 
 ## 6. Required Information
 
-* Applicant and represented customer/institution details. **Proposed**
-* Relevant property, title, mortgage, lease, contract or register reference. **Proposed**
-* Transaction-specific details, effective date and declarations. **Proposed**
-* Contact email for delivery where the source says the output is emailed. **Proposed**
+### Deceased Owner / Property Information
+
+* Property Registration Number  
+* Deceased Owner's Full Name and NIN
+
+### Heir Information
+
+* Full Name, NIN, and Contact Information (per heir)  
+* Share of the Estate (per heir)  
+* Bank Account Details for Distribution (per heir)
+
+### Sale Information
+
+* Sale Value  
+* Purchaser Information, where the property is being sold to a third party
 
 ## 7. Required Documents
 
-> **Proposed** — row 40 says to submit or enter documents but does not enumerate them. This working list is analogous to the individual-user template and remains client data for confirmation.
+> **Proposed** — the source states only that "docs" are submitted, without enumerating them.
 
-* heirship and estate authority evidence
-* title reference
-* settlement instructions
-* party identity and authority evidence
-* supporting transaction documentation
+* Death Certificate of the Deceased Owner  
+* Grant of Probate / Letters of Administration  
+* Existing Certificate of Title  
+* Government-issued Identification (Each Heir)  
+* Sale Agreement, where applicable  
+* Bank Account Confirmation (Each Heir)  
+* Other supporting documents required by RERAN
 
 ## 8. Service Fee
-
-> **Proposed** — fee amounts are unavailable client data.
 
 Applicable according to the RERAN fee schedule.
 
 ## 9. Payment Required
 
-**Yes.**
+**Yes**
 
-> **Proposed** — after approval, the fee is deducted from the institution’s standing pre-funded RERAN account, rather than through a pay-then-submit checkout. The source’s payment step remains applicable. An assisted operator records the same online transaction, not a separate offline payment flow.
+Paid by the customer at the Trustee Centre — sourced (row 40: "Customer pays fees"). **Customer Payment at Counter** model; the output includes Payment Receipts (B9), not a settlement-account fee balance.
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor (Group A).** A configured internal certification is a maker-checker permission scope on the corporate account, not a fifth Group C role. **Proposed**
+**Compliance & Escrow Auditor** (Group A) — sourced (approver column, row 40). RERA's Trusts Department additionally executes the distribution of heirs' shares to their bank accounts after audit, a financial-execution step distinct from the regulatory approval itself.
 
 ## 11. Expected Processing Time
 
-**25–30 minutes.**
+**25–30 minutes.** Sourced from row 40.
 
 ## 12. Processing Workflow
 
-1. The applicant signs in, or an accredited operator opens the same service in assisted mode. **Proposed**
-2. The applicant selects **Sale Procedure (Heirs)**, enters required data and submits documents.
-3. The platform validates completeness and relevant references. **Proposed**
-4. For a bank-originated filing, a delegated checker scope certifies or returns it before RERAN submission. **Proposed**
-5. The Compliance & Escrow Auditor reviews, approves, returns for correction or rejects.
-6. After approval, the standing account settles the fee. **Proposed**
-7. The platform issues the source-specified output and records the transaction; delivery is electronic where stated.
+Heir(s) / Authorized Representative
 
-**Source workflow detail:** Customer uses a Trustee Centre; documents are submitted, entered and audited; fees are paid; the transaction is sent to the Trusts Department; heirs’ shares are transferred to bank accounts; outputs are emailed.
+Visit Real Estate Registration Trustee Centre *(C2: this is the sourced path for this service; Section 4 carries A4's Mortgage Officer / bank-originated branch as unconfirmed rather than asserting a direct online path here — see Open Questions)*  
+↓  
+Submit Required Documents
+
+↓
+
+Trustee Centre Operator
+
+Enter Transaction Data  
+↓  
+Perform Initial Audit
+
+↓
+
+Heir(s) / Authorized Representative
+
+Pay Fees at Counter
+
+↓
+
+RERA (Compliance & Escrow Auditor)
+
+Audit and Approve, Return, or Reject Transaction
+
+↓
+
+RERA Trusts Department
+
+Transfer Each Heir's Share to Their Bank Account
+
+↓
+
+RERA
+
+Generate Output Documents  
+↓  
+Deliver Outputs via Email
 
 ## 13. Application Status Flow
 
-> **Proposed** — the source gives no status vocabulary; this applies the agreed platform core and Group C extension.
+Draft  
+↓  
+Submitted  
+↓  
+Under Review  
+↓  
+Information Requested  
+↓  
+Returned for Correction  
+↓  
+Approved — Awaiting Payment  
+↓  
+Completed
 
-Draft → Pending Internal Certification → Returned by Certifier → Submitted → Under Review → Information Requested → Returned for Correction → Approved — Awaiting Payment → Completed
+### Additional Statuses
 
-Exception statuses: Rejected, Withdrawn, Payment Failed and Approval Expired. An approved but unsettled item expires after 30 calendar days. **Proposed**
+* Rejected  
+* Withdrawn
 
 ## 14. Possible Outcomes
 
-* Approved and completed, with output issued.
-* Returned for correction or additional information.
-* Rejected with documented reason.
-* Payment failure for insufficient standing balance. **Proposed**
-* Approval Expired after the 30-day settlement window. **Proposed**
+* Sale Successfully Registered and Heirs' Shares Distributed  
+* Additional Information Requested  
+* Application Returned  
+* Application Rejected  
+* Payment Failed  
+* Application Withdrawn
 
 ## 15. Output
 
-The source specifies the following output(s):
+Upon successful completion, the system generates:
 
-* Certificate of Title
-* Title deed
-* Map
-* Payment Receipts
-
-A **fee balance** is the standing-account position after deduction; a payment receipt or e-receipt voucher proves a single settlement. They are distinct artefacts. **Proposed**
+* Certificate of Title — sourced (row 40)  
+* Title Deed — sourced (row 40)  
+* Map — sourced (row 40)  
+* Payment Receipts — sourced (row 40); a payment receipt (B9), not a fee balance
 
 ## 16. Related Services
 
-* [Group C services overview](../services-overview.md) and [payment model](../payments.md).
-
-* Application tracking, document management, corporate permission scopes and settlement account. **Proposed**
+* Service #12 — Registration of Real Estate Fund Companies in the Register of Privileges  
+* Service #14 — Company Shares Sale  
+* Service #16 — Split Ownership
 
 ## 17. UI Screens
 
-> **Proposed** — derived from the source workflow and the individual-user template.
-
-* Service selection; application details; reference validation; document upload; review and submission.
-* Internal certification queue where maker-checker is enabled.
-* RERAN review, information request and decision view.
-* Settlement-account balance/payment result; output download and application timeline.
+* Services  
+* Sale Procedure (Heirs)  
+* Heir Information  
+* Property & Sale Information  
+* Document Upload  
+* Application Review  
+* Payment  
+* Payment Successful  
+* Application Submitted  
+* Application Details  
+* Distribution Confirmation  
+* Registration Confirmation
 
 ## 18. API Requirements
 
-> **Proposed** — derived from the source workflow and the individual-user template.
-
-* Retrieve and validate relevant property, title, institution and transaction references.
-* Create, save, submit, return and resubmit applications; upload/retrieve documents.
-* Route internal certification and RERAN audit; record decision reasons.
-* Calculate fees, check and debit standing balance, issue output/receipt/balance entry and send notifications.
+* Retrieve Property Details  
+* Validate Heirship Documentation  
+* Upload Documents  
+* Calculate Service Fee  
+* Initiate Payment  
+* Verify Payment  
+* Submit Heirs' Sale Application  
+* Retrieve Application Status  
+* Distribute Heir Shares to Bank Accounts  
+* Generate Certificate of Title / Title Deed  
+* Generate Map  
+* Send Notifications
 
 ## 19. Database Entities
 
-> **Proposed** — derived from the source workflow and the individual-user template.
-
-* Corporate Account, Permission Scope, User, Customer/Institution and assisted Operator.
-* Property, Title Record and relevant Mortgage, Finance Lease or Contract record.
-* Application, Service Request, Document, Certification Action, Audit Decision and Audit Log.
-* Settlement Account, Fee Charge, Payment Receipt, Fee Balance Ledger Entry, Issued Document and Notification.
+* User  
+* Property  
+* Deceased Owner Record  
+* Heir  
+* Heir Bank Account  
+* Property Sale  
+* Application  
+* Service Request  
+* Document  
+* Payment  
+* Payment Transaction  
+* Notification  
+* Audit Log
 
 ## 20. Acceptance Criteria
 
-> **Proposed** — derived from the source workflow and the individual-user template.
-
-* An authorised applicant or assisted operator can start and save the service request.
-* Required information and documents validate before submission.
-* A maker-checker scope can certify or return a bank-originated request where configured.
-* RERAN can approve, return or reject with a reason.
-* An approved request debits the standing account before outputs release.
-* Source-specified outputs issue electronically and the full trail is auditable.
-* Fee balance and receipt remain distinct where both apply.
+* An heir or authorized representative can initiate the sale procedure at a Trustee Centre.  
+* System validates heirship documentation before allowing the transaction to proceed.  
+* Required information and documents are validated before submission.  
+* Application receives a unique application reference number.  
+* Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
+* Payment is completed at the counter with a payment receipt issued.  
+* Each heir's share is transferred to their nominated bank account upon approval.  
+* Certificate of Title, Title Deed, and Map are generated upon completion.  
+* All heirs receive completion notifications.  
+* All activities are recorded in the audit log.
 
 ## 21. Business Rules
 
-1. The workflow, channel, output and SLA are sourced from row 40.
-2. The source’s named Trustee Centre or Land Department is an assisted mode of the same online service. **Proposed**
-3. Internal certification is a permission scope, not a new role. **Proposed**
-4. Fees settle after approval from a standing pre-funded account; negative balances are prohibited. **Proposed**
-5. No amount is invented: the fee schedule remains client data.
-6. The detailed documents remain genuinely open because the source only says “submit documents”; Section 7 carries a marked working proposal instead of dropping that question.
-7. No statutory window or SLA beyond row 40 is asserted.
+1. This application may be processed by a Mortgage Officer where bank-originated, or otherwise by a Trustee Centre operator acting on the heirs' behalf (A4's conditional). *(Proposed — no row sources a bank-originated variant for this service; only the Trustee-Centre path is confirmed by row 40.)*
+2. Heirship must be established by valid probate or administration documentation before the sale can proceed.  
+3. Payment is required at the counter before the application is finalized.  
+4. Each heir's share of proceeds is distributed to their nominated bank account as part of completion.  
+5. Approved applications update the official property ownership registry.  
+6. Every application receives a unique application reference number.  
+7. All applications, approvals, payments, distributions, and notifications are permanently recorded in the audit trail.
+
+## Open Questions
+
+1. **How disputes among heirs over shares are handled** within this workflow. Not specified in source.  
+2. **Validation method for bank account details** used for distribution (e.g., account-name matching against the heir's identity). Not specified in source.  
+3. **Whether a bank-originated path (Mortgage Officer, per A4's conditional) exists for this service at all.** No row among 38, 40–44 describes bank-employee entry the way the mortgage rows (30–33, 39) do; this document sources only the Trustee-Centre-assisted path and treats the bank-originated branch as unconfirmed rather than absent.  
+4. **Exact fee amount.** Client data — see `open-questions.md` B5.

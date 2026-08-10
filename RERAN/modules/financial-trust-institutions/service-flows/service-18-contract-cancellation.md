@@ -3,171 +3,234 @@ project: RERAN
 module: financial-trust-institutions
 type: service-flow
 status: draft
-updated: 2026-08-11
 contains_proposals: true
+updated: 2026-08-10
 derived_from:
-  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md" (row 45)
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/modules/financial-trust-institutions/services-overview.md"
   - "RERAN/modules/financial-trust-institutions/open-questions.md"
+  - "RERAN/modules/financial-trust-institutions/roles-and-responsibilities.md"
 tags:
   - financial-trust-institutions
   - service-flow
+  - contract
+  - cancellation
 ---
 
 # Service #18 – Contract Cancellation
 
 **Service Category:** Contract Services
 
+**Source row:** 45 of `RERAN_service_flows_v2.md`.
+
 ## 1. Service Overview
 
-The **Contract Cancellation** service is a Group C service defined by row 45 of the master service table. This document carries forward the row’s workflow, channel, output and SLA, while marking design detail not enumerated by the source as proposed.
+The **Contract Cancellation** service cancels a real-estate contract at the Land Department's Customer Center, on the institution's own initiative, with RERA reviewing, auditing and approving the cancellation before an approved e-certificate and e-receipt voucher are issued.
 
 ## 2. Purpose
 
-Provide a controlled and auditable route to complete contract cancellation and issue the source-specified output after regulatory review and settlement.
+Give an institution a regulated path to cancel a real-estate contract it holds, so the registry and any relying party reflect that the contract no longer stands.
 
 ## 3. Description
 
-Documents are submitted to the employee, who enters, audits and approves the transaction; fees are paid, an e-receipt is issued and service outputs are received online.
+The Institution Relationship Manager moves the request to the Land Department's Customer Center and submits documents to an employee, who enters, audits, and approves the cancellation. The customer pays the fee and receives an e-receipt. Outputs are received online.
 
 ## 4. Who Can Apply
 
-* **Mortgage Officer where bank-originated; otherwise a Trustee Centre operator acting for the customer** for the applicable transaction.
-* An accredited Trustee Centre or Land Department operator may act for the customer where the source names that counter. **Proposed** — this is assisted access to the same online service, not a separate offline channel.
-* The underlying institution or customer must be identified for the request. **Proposed**
+### Applicant
+
+* Institution Relationship Manager
+
+Row 45 is the one Group C row whose source responsible-role column already names the **Institution Relationship Manager** — unlike Services #1, #2, and #12–#17, this is not an A4 re-derivation; it matches the source directly and the existing `services-overview.md` table.
 
 ## 5. Prerequisites
 
-* Active corporate or operator account with a filing permission scope. **Proposed**
-* Relevant property, institutional, mortgage, lease or contract reference.
-* Authority to act for the represented institution or customer. **Proposed**
-* Supporting documents ready for upload or operator-assisted capture. **Proposed**
-* Sufficient settlement-account balance before fee settlement. **Proposed**
+* Registered RERAN institution (Group C) account, with an Institution Relationship Manager provisioned.  
+* An existing contract held by the institution that is eligible for cancellation.  
+* Required supporting documents are available.
 
 ## 6. Required Information
 
-* Applicant and represented customer/institution details. **Proposed**
-* Relevant property, title, mortgage, lease, contract or register reference. **Proposed**
-* Transaction-specific details, effective date and declarations. **Proposed**
-* Contact email for delivery where the source says the output is emailed. **Proposed**
+### Institution Information
+
+* Institution Legal Name  
+* Institution Relationship Manager Identifier
+
+### Contract Information
+
+* Contract Reference Number  
+* Parties to the Contract  
+* Reason for Cancellation
 
 ## 7. Required Documents
 
-> **Proposed** — row 45 says to submit or enter documents but does not enumerate them. This working list is analogous to the individual-user template and remains client data for confirmation.
+> **Proposed** — the source states only that "docs" are submitted to the employee, without enumerating them.
 
-* contract to be cancelled
-* cancellation authority or consent
-* title reference
-* party identity and authority evidence
-* supporting transaction documentation
+* Original Contract / Agreement Being Cancelled  
+* Cancellation Request / Board Resolution Authorizing Cancellation  
+* Evidence of Settlement of Any Outstanding Obligations Under the Contract  
+* Government-issued Identification (Authorized Representative)  
+* Other supporting documents required by RERAN
 
 ## 8. Service Fee
-
-> **Proposed** — fee amounts are unavailable client data.
 
 Applicable according to the RERAN fee schedule.
 
 ## 9. Payment Required
 
-**Yes.**
+**Yes**
 
-> **Proposed** — after approval, the fee is deducted from the institution’s standing pre-funded RERAN account, rather than through a pay-then-submit checkout. The source’s payment step remains applicable. An assisted operator records the same online transaction, not a separate offline payment flow.
+Paid by the customer, with an e-receipt issued — sourced (row 45: "Customer pays fees, gets e-receipt"). **Customer Payment at Counter** model; the output includes an e-receipt voucher (B9), not a settlement-account fee balance.
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor (Group A).** A configured internal certification is a maker-checker permission scope on the corporate account, not a fifth Group C role. **Proposed**
+**Compliance & Escrow Auditor** (Group A) — sourced: the Land Department employee "enters, audits and approves." Documented here as the RERA regulatory gate. No separate institutional maker-checker layer is described in source for this service.
 
 ## 11. Expected Processing Time
 
-**15 minutes.**
+**15 minutes.** Sourced from row 45.
 
 ## 12. Processing Workflow
 
-1. The applicant signs in, or an accredited operator opens the same service in assisted mode. **Proposed**
-2. The applicant selects **Contract Cancellation**, enters required data and submits documents.
-3. The platform validates completeness and relevant references. **Proposed**
-4. For a bank-originated filing, a delegated checker scope certifies or returns it before RERAN submission. **Proposed**
-5. The Compliance & Escrow Auditor reviews, approves, returns for correction or rejects.
-6. After approval, the standing account settles the fee. **Proposed**
-7. The platform issues the source-specified output and records the transaction; delivery is electronic where stated.
+Institution Relationship Manager
 
-**Source workflow detail:** Documents are submitted to the employee, who enters, audits and approves the transaction; fees are paid, an e-receipt is issued and service outputs are received online.
+Move Request to Customer Center at Land Department  
+↓  
+Submit Documents to Employee
+
+↓
+
+Land Department Employee (Compliance & Escrow Auditor)
+
+Enter Cancellation Data  
+↓  
+Audit Cancellation  
+↓  
+Approve, Return, or Reject
+
+↓
+
+Institution Relationship Manager
+
+Pay Fees  
+↓  
+Obtain e-Receipt
+
+↓
+
+RERA
+
+Generate Approved e-Certificate of Title / Title Deed  
+↓  
+Generate Approved e-Receipt Voucher  
+↓  
+Deliver Outputs Online
 
 ## 13. Application Status Flow
 
-> **Proposed** — the source gives no status vocabulary; this applies the agreed platform core and Group C extension.
+Draft  
+↓  
+Submitted  
+↓  
+Under Review  
+↓  
+Information Requested  
+↓  
+Returned for Correction  
+↓  
+Approved — Awaiting Payment  
+↓  
+Completed
 
-Draft → Pending Internal Certification → Returned by Certifier → Submitted → Under Review → Information Requested → Returned for Correction → Approved — Awaiting Payment → Completed
+### Additional Statuses
 
-Exception statuses: Rejected, Withdrawn, Payment Failed and Approval Expired. An approved but unsettled item expires after 30 calendar days. **Proposed**
+* Rejected  
+* Withdrawn
 
 ## 14. Possible Outcomes
 
-* Approved and completed, with output issued.
-* Returned for correction or additional information.
-* Rejected with documented reason.
-* Payment failure for insufficient standing balance. **Proposed**
-* Approval Expired after the 30-day settlement window. **Proposed**
+* Contract Successfully Cancelled  
+* Additional Information Requested  
+* Application Returned  
+* Application Rejected  
+* Payment Failed  
+* Application Withdrawn
 
 ## 15. Output
 
-The source specifies the following output(s):
+Upon successful completion, the system generates:
 
-* Approved e-Certificate of Title / Title deed
-* Approved e-receipt voucher
-
-A **fee balance** is the standing-account position after deduction; a payment receipt or e-receipt voucher proves a single settlement. They are distinct artefacts. **Proposed**
+* Approved e-Certificate of Title / Title Deed — sourced (row 45)  
+* Approved e-Receipt Voucher — sourced (row 45); a payment receipt (B9), not a fee balance
 
 ## 16. Related Services
 
-* [Group C services overview](../services-overview.md) and [payment model](../payments.md).
-
-* Application tracking, document management, corporate permission scopes and settlement account. **Proposed**
+* Service #1 — Approval / Renewal of Account Trustee & Auditing Company *(also owned by the Institution Relationship Manager)*  
+* Service #2 — Cancellation of Account Trustee & Auditing Company *(also owned by the Institution Relationship Manager)*
 
 ## 17. UI Screens
 
-> **Proposed** — derived from the source workflow and the individual-user template.
-
-* Service selection; application details; reference validation; document upload; review and submission.
-* Internal certification queue where maker-checker is enabled.
-* RERAN review, information request and decision view.
-* Settlement-account balance/payment result; output download and application timeline.
+* Services  
+* Contract Cancellation  
+* Institution Information  
+* Contract Information  
+* Document Upload  
+* Application Review  
+* Payment  
+* Payment Successful  
+* Application Submitted  
+* Application Details  
+* Cancellation Confirmation
 
 ## 18. API Requirements
 
-> **Proposed** — derived from the source workflow and the individual-user template.
-
-* Retrieve and validate relevant property, title, institution and transaction references.
-* Create, save, submit, return and resubmit applications; upload/retrieve documents.
-* Route internal certification and RERAN audit; record decision reasons.
-* Calculate fees, check and debit standing balance, issue output/receipt/balance entry and send notifications.
+* Retrieve Institution Profile  
+* Retrieve Contract Record  
+* Upload Documents  
+* Calculate Service Fee  
+* Initiate Payment  
+* Verify Payment  
+* Submit Contract Cancellation Application  
+* Retrieve Application Status  
+* Generate Approved e-Certificate  
+* Generate Approved e-Receipt Voucher  
+* Send Notifications
 
 ## 19. Database Entities
 
-> **Proposed** — derived from the source workflow and the individual-user template.
-
-* Corporate Account, Permission Scope, User, Customer/Institution and assisted Operator.
-* Property, Title Record and relevant Mortgage, Finance Lease or Contract record.
-* Application, Service Request, Document, Certification Action, Audit Decision and Audit Log.
-* Settlement Account, Fee Charge, Payment Receipt, Fee Balance Ledger Entry, Issued Document and Notification.
+* Institution  
+* Institution Staff  
+* Contract  
+* Application  
+* Service Request  
+* Document  
+* Payment  
+* Payment Transaction  
+* Notification  
+* Audit Log
 
 ## 20. Acceptance Criteria
 
-> **Proposed** — derived from the source workflow and the individual-user template.
-
-* An authorised applicant or assisted operator can start and save the service request.
-* Required information and documents validate before submission.
-* A maker-checker scope can certify or return a bank-originated request where configured.
-* RERAN can approve, return or reject with a reason.
-* An approved request debits the standing account before outputs release.
-* Source-specified outputs issue electronically and the full trail is auditable.
-* Fee balance and receipt remain distinct where both apply.
+* Institution Relationship Manager can initiate a contract cancellation application.  
+* Required information and documents are validated before submission.  
+* Application receives a unique application reference number.  
+* Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
+* Payment is completed with an e-receipt voucher issued before completion.  
+* Approved cancellations are recorded against the contract.  
+* Institution receives an approved e-certificate and e-receipt voucher on completion.  
+* All activities are recorded in the audit log.
 
 ## 21. Business Rules
 
-1. The workflow, channel, output and SLA are sourced from row 45.
-2. The source’s named Trustee Centre or Land Department is an assisted mode of the same online service. **Proposed**
-3. Internal certification is a permission scope, not a new role. **Proposed**
-4. Fees settle after approval from a standing pre-funded account; negative balances are prohibited. **Proposed**
-5. No amount is invented: the fee schedule remains client data.
-6. The detailed documents remain genuinely open because the source only says “submit documents”; Section 7 carries a marked working proposal instead of dropping that question.
-7. No statutory window or SLA beyond row 45 is asserted.
+1. Only the Institution Relationship Manager, or an authorized representative under a delegated permission scope, may submit this application.  
+2. The contract being cancelled must exist and be held by the institution.  
+3. Cancellation, return, and rejection decisions must carry documented reasoning.  
+4. Payment is required, with an e-receipt voucher issued as proof, before the cancellation is finalized.  
+5. Every application receives a unique application reference number.  
+6. All applications, approvals, payments, and notifications are permanently recorded in the audit trail.
+
+## Open Questions
+
+1. **Grounds for contract cancellation** (e.g., mutual termination, breach, expiry) and whether different grounds require different evidence. Not specified in source.  
+2. **What happens to any registered interest (e.g., mortgage) tied to the cancelled contract.** Not specified in source.  
+3. **Exact fee amount.** Client data — see `open-questions.md` B5.

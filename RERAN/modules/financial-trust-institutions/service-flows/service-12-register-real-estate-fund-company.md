@@ -3,170 +3,252 @@ project: RERAN
 module: financial-trust-institutions
 type: service-flow
 status: draft
-updated: 2026-08-11
 contains_proposals: true
+updated: 2026-08-10
 derived_from:
-  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md" (row 38)
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/modules/financial-trust-institutions/services-overview.md"
   - "RERAN/modules/financial-trust-institutions/open-questions.md"
 tags:
   - financial-trust-institutions
   - service-flow
+  - title-ownership
+  - real-estate-fund
 ---
 
-# Service #12 – Register Real Estate Fund Company
+# Service #12 – Registration of Real Estate Fund Companies in the Register of Privileges
 
 **Service Category:** Title & Ownership Transaction Services
 
+**Source row:** **38** of `RERAN_service_flows_v2.md`. Row order in the source is not file order — row 38 maps to this file (Service #12), not row 12. See the issue's row-to-file mapping table; rows 38 and 39 are transposed against file order.
+
 ## 1. Service Overview
 
-The **Register Real Estate Fund Company** service is a Group C service defined by row 38 of the master service table. This document carries forward the row’s workflow, channel, output and SLA, while marking design detail not enumerated by the source as proposed.
+The **Registration of Real Estate Fund Companies in the Register of Privileges** service records a real estate fund company's ownership interest in the register of privileges — a specific ownership register distinct from an ordinary property title — and issues an ownership certificate and registration record to the fund company.
 
 ## 2. Purpose
 
-Provide a controlled and auditable route to complete register real estate fund company and issue the source-specified output after regulatory review and settlement.
+Give a real estate fund company's ownership interest formal, searchable standing in RERA's register of privileges, distinct from and in addition to ordinary property title registration.
 
 ## 3. Description
 
-Customer visits a Trustee Centre; documents are submitted, the employee enters all transaction data and checks and approves it; fees are paid with an e-receipt; ownership certificate and privilege-register number are emailed.
+The fund company's representative visits a Real Estate Registration Trustee Centre and submits the required documents. A Trustee Centre operator enters the transaction data, checks it, and forwards it for approval. The customer pays the fee at the counter and receives an e-receipt. On completion, the customer receives an ownership certificate by email and a document confirming the registration number assigned in the privilege register.
 
 ## 4. Who Can Apply
 
-* **Mortgage Officer where bank-originated; otherwise a Trustee Centre operator acting for the customer** for the applicable transaction.
-* An accredited Trustee Centre or Land Department operator may act for the customer where the source names that counter. **Proposed** — this is assisted access to the same online service, not a separate offline channel.
-* The underlying institution or customer must be identified for the request. **Proposed**
+### Applicant
+
+* Mortgage Officer — where the transaction is bank-originated (A4's conditional)
+* Trustee Centre Operator (Group G) — otherwise, acting on the fund company's behalf in assisted mode
+
+> **Proposed** — the source assigns responsible role to the **Mortgage Officer**, but row 38's workflow shows no bank-employee or online-mortgage-system involvement: "Customer visits Real Estate Services Registration Trustees Centers. → Submit documents. → Employee enters all transaction data, checks and approves." `open-questions.md` A4's rule is conditional — "Mortgage Officer where bank-originated; otherwise executed by a Trustee Centre operator on the customer's behalf" — not an unconditional reassignment. This document keeps both branches: the Trustee Centre Operator path is what row 38 itself sources; the Mortgage Officer / bank-originated branch is preserved because A4 allows for it in principle, but **no row among the title & ownership transaction rows (38, 40–44) describes a bank-originated workflow**, so that branch is not sourced here and is carried forward as an open question rather than asserted as fact or silently dropped. **Confidence: Medium**, per the answers doc — the Trustee-Centre branch contradicts the source's responsible-role column, and that should be visible to the client.
+
+### Customer
+
+* The real estate fund company's authorized representative
 
 ## 5. Prerequisites
 
-* Active corporate or operator account with a filing permission scope. **Proposed**
-* Relevant property, institutional, mortgage, lease or contract reference.
-* Authority to act for the represented institution or customer. **Proposed**
-* Supporting documents ready for upload or operator-assisted capture. **Proposed**
-* Sufficient settlement-account balance before fee settlement. **Proposed**
+* The real estate fund company is validly constituted.  
+* The fund company's interest is capable of registration in the register of privileges.  
+* Required supporting documents are available.
 
 ## 6. Required Information
 
-* Applicant and represented customer/institution details. **Proposed**
-* Relevant property, title, mortgage, lease, contract or register reference. **Proposed**
-* Transaction-specific details, effective date and declarations. **Proposed**
-* Contact email for delivery where the source says the output is emailed. **Proposed**
+### Fund Company Information
+
+* Fund Company Legal Name  
+* Certificate of Incorporation Number  
+* Authorized Representative Details
+
+### Registration Information
+
+* Nature of the Privilege / Interest Being Registered  
+* Property or Asset Reference, Where Applicable
 
 ## 7. Required Documents
 
-> **Proposed** — row 38 says to submit or enter documents but does not enumerate them. This working list is analogous to the individual-user template and remains client data for confirmation.
+> **Proposed** — the source states only that "documents" are submitted, without enumerating them.
 
-* current title/property reference
-* transaction authority evidence
-* party identity evidence
-* supporting transaction documentation
+* Certificate of Incorporation of the Fund Company  
+* Trust Deed / Fund Constitution  
+* Register of Privileges Application Form  
+* List of Unit Holders / Beneficial Owners  
+* Government-issued Identification (Authorized Representative)  
+* Other supporting documents required by RERAN
 
 ## 8. Service Fee
-
-> **Proposed** — fee amounts are unavailable client data.
 
 Applicable according to the RERAN fee schedule.
 
 ## 9. Payment Required
 
-**Yes.**
+**Yes**
 
-> **Proposed** — after approval, the fee is deducted from the institution’s standing pre-funded RERAN account, rather than through a pay-then-submit checkout. The source’s payment step remains applicable. An assisted operator records the same online transaction, not a separate offline payment flow.
+Paid by the customer (the fund company) at the Trustee Centre counter, and an e-receipt is issued — sourced (row 38: "Customer pays fees and obtains e-receipt"). This is the **Customer Payment at Counter** model, distinct from the Institution Account Debit model used by the mortgage and finance-lease services (B1) — this row's output artefact is a receipt, not a fee balance, consistent with B9.
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor (Group A).** A configured internal certification is a maker-checker permission scope on the corporate account, not a fifth Group C role. **Proposed**
+**Compliance & Escrow Auditor** (Group A) — sourced directly from row 38's approver column, as it is for every Group C service.
+
+> **Proposed** — row 38's workflow text separately describes an "Employee [who] enters all transaction data, checks and approves." Whether that check-and-approve step *is* the Compliance & Escrow Auditor's regulatory review, or a preliminary Trustee Centre check distinct from a separate RERA audit step, is not stated in source — the two are bundled into one clause. This document treats the workflow's "checks and approves" as the Group A approval gate itself, since no institutional maker-checker layer applies here (no corporate account originates this transaction) — but that specific mapping is an inference, not a sourced fact, and is labeled as such rather than folded into the sourced claim above.
 
 ## 11. Expected Processing Time
 
-**25–30 minutes.**
+**25–30 minutes.** Sourced from row 38.
 
 ## 12. Processing Workflow
 
-1. The applicant signs in, or an accredited operator opens the same service in assisted mode. **Proposed**
-2. The applicant selects **Register Real Estate Fund Company**, enters required data and submits documents.
-3. The platform validates completeness and relevant references. **Proposed**
-4. For a bank-originated filing, a delegated checker scope certifies or returns it before RERAN submission. **Proposed**
-5. The Compliance & Escrow Auditor reviews, approves, returns for correction or rejects.
-6. After approval, the standing account settles the fee. **Proposed**
-7. The platform issues the source-specified output and records the transaction; delivery is electronic where stated.
+Customer (Fund Company Representative)
 
-**Source workflow detail:** Customer visits a Trustee Centre; documents are submitted, the employee enters all transaction data and checks and approves it; fees are paid with an e-receipt; ownership certificate and privilege-register number are emailed.
+Visit Real Estate Registration Trustee Centre *(C2: this is the sourced path for this service; Section 4 carries A4's Mortgage Officer / bank-originated branch as unconfirmed rather than asserting a direct online path here — see Open Questions)*  
+↓  
+Submit Required Documents
+
+↓
+
+Trustee Centre Operator
+
+Enter Transaction Data  
+↓  
+Check Transaction
+
+↓
+
+RERA (Compliance & Escrow Auditor)
+
+Approve, Return, or Reject
+
+↓
+
+Customer
+
+Pay Fees at Counter  
+↓  
+Obtain e-Receipt
+
+↓
+
+RERA
+
+Generate Ownership Certificate  
+↓  
+Deliver Ownership Certificate via Email  
+↓  
+Issue Register of Privileges Registration Number  
+↓  
+Deliver Registration Document via Email
 
 ## 13. Application Status Flow
 
-> **Proposed** — the source gives no status vocabulary; this applies the agreed platform core and Group C extension.
+Draft  
+↓  
+Submitted  
+↓  
+Under Review  
+↓  
+Information Requested  
+↓  
+Returned for Correction  
+↓  
+Approved — Awaiting Payment  
+↓  
+Completed
 
-Draft → Pending Internal Certification → Returned by Certifier → Submitted → Under Review → Information Requested → Returned for Correction → Approved — Awaiting Payment → Completed
+### Additional Statuses
 
-Exception statuses: Rejected, Withdrawn, Payment Failed and Approval Expired. An approved but unsettled item expires after 30 calendar days. **Proposed**
+* Rejected  
+* Withdrawn
+
+> Does not carry the Group C `Pending Internal Certification` / `Returned by Certifier` extension: this service is executed by a Trustee Centre operator on the customer's behalf, not by institutional staff under a maker-checker scope (A1/D2).
 
 ## 14. Possible Outcomes
 
-* Approved and completed, with output issued.
-* Returned for correction or additional information.
-* Rejected with documented reason.
-* Payment failure for insufficient standing balance. **Proposed**
-* Approval Expired after the 30-day settlement window. **Proposed**
+* Fund Company Successfully Registered in the Register of Privileges  
+* Additional Information Requested  
+* Application Returned  
+* Application Rejected  
+* Payment Failed  
+* Application Withdrawn
 
 ## 15. Output
 
-The source specifies the following output(s):
+Upon successful completion, the system generates:
 
-* E-ownership in name of real estate fund
-* Receipt for fees
-
-A **fee balance** is the standing-account position after deduction; a payment receipt or e-receipt voucher proves a single settlement. They are distinct artefacts. **Proposed**
+* E-Ownership Certificate in the Name of the Real Estate Fund — sourced (row 38)  
+* Receipt for Fees — sourced (row 38); a payment receipt (B9), not a fee balance  
+* Register of Privileges Registration Number Document — sourced (row 38)
 
 ## 16. Related Services
 
-* [Group C services overview](../services-overview.md) and [payment model](../payments.md).
-
-* Application tracking, document management, corporate permission scopes and settlement account. **Proposed**
+* Service #13 — Sale Procedure (Heirs)  
+* Service #14 — Company Shares Sale  
+* Service #17 — Issuance of Title Deed
 
 ## 17. UI Screens
 
-> **Proposed** — derived from the source workflow and the individual-user template.
-
-* Service selection; application details; reference validation; document upload; review and submission.
-* Internal certification queue where maker-checker is enabled.
-* RERAN review, information request and decision view.
-* Settlement-account balance/payment result; output download and application timeline.
+* Services  
+* Register Real Estate Fund Company  
+* Fund Company Information  
+* Document Upload  
+* Application Review  
+* Payment  
+* Payment Successful  
+* Application Submitted  
+* Application Details  
+* Ownership Certificate  
+* Registration Confirmation
 
 ## 18. API Requirements
 
-> **Proposed** — derived from the source workflow and the individual-user template.
-
-* Retrieve and validate relevant property, title, institution and transaction references.
-* Create, save, submit, return and resubmit applications; upload/retrieve documents.
-* Route internal certification and RERAN audit; record decision reasons.
-* Calculate fees, check and debit standing balance, issue output/receipt/balance entry and send notifications.
+* Validate Fund Company Constitution  
+* Upload Documents  
+* Calculate Service Fee  
+* Initiate Payment  
+* Verify Payment  
+* Submit Register of Privileges Application  
+* Retrieve Application Status  
+* Assign Register of Privileges Registration Number  
+* Generate Ownership Certificate  
+* Send Notifications
 
 ## 19. Database Entities
 
-> **Proposed** — derived from the source workflow and the individual-user template.
-
-* Corporate Account, Permission Scope, User, Customer/Institution and assisted Operator.
-* Property, Title Record and relevant Mortgage, Finance Lease or Contract record.
-* Application, Service Request, Document, Certification Action, Audit Decision and Audit Log.
-* Settlement Account, Fee Charge, Payment Receipt, Fee Balance Ledger Entry, Issued Document and Notification.
+* User  
+* Fund Company  
+* Application  
+* Service Request  
+* Document  
+* Payment  
+* Payment Transaction  
+* Register of Privileges Entry  
+* Notification  
+* Audit Log
 
 ## 20. Acceptance Criteria
 
-> **Proposed** — derived from the source workflow and the individual-user template.
-
-* An authorised applicant or assisted operator can start and save the service request.
-* Required information and documents validate before submission.
-* A maker-checker scope can certify or return a bank-originated request where configured.
-* RERAN can approve, return or reject with a reason.
-* An approved request debits the standing account before outputs release.
-* Source-specified outputs issue electronically and the full trail is auditable.
-* Fee balance and receipt remain distinct where both apply.
+* Fund company representative can initiate registration at a Trustee Centre.  
+* Required information and documents are validated before submission.  
+* Application receives a unique application reference number.  
+* Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
+* Payment is completed and an e-receipt issued before completion.  
+* Approved applications update the official register of privileges.  
+* Ownership certificate and registration number document are generated on completion.  
+* Customer receives completion notification.  
+* All activities are recorded in the audit log.
 
 ## 21. Business Rules
 
-1. The workflow, channel, output and SLA are sourced from row 38.
-2. The source’s named Trustee Centre or Land Department is an assisted mode of the same online service. **Proposed**
-3. Internal certification is a permission scope, not a new role. **Proposed**
-4. Fees settle after approval from a standing pre-funded account; negative balances are prohibited. **Proposed**
-5. No amount is invented: the fee schedule remains client data.
-6. The detailed documents remain genuinely open because the source only says “submit documents”; Section 7 carries a marked working proposal instead of dropping that question.
-7. No statutory window or SLA beyond row 38 is asserted.
+1. This application may be processed by a Mortgage Officer where bank-originated, or otherwise by a Trustee Centre operator acting on the fund company's behalf (A4's conditional). *(Proposed — no row sources a bank-originated variant for this service; only the Trustee-Centre path is confirmed by row 38.)*
+2. The fund company must be validly constituted before its interest can be registered.  
+3. Payment is required at the counter before the application is finalized, and an e-receipt is issued as proof.  
+4. Approved registrations update the official register of privileges.  
+5. Every application receives a unique application reference number.  
+6. All applications, approvals, payments, and notifications are permanently recorded in the audit trail.
+
+## Open Questions
+
+1. **Eligibility criteria for what qualifies as a "real estate fund company"** for register-of-privileges purposes. Not specified in source.  
+2. **Relationship between the register of privileges and the ordinary property title register** — whether registration here also requires or triggers a separate title registration. Not specified in source.  
+3. **Whether a bank-originated path (Mortgage Officer, per A4's conditional) exists for this service at all.** No row among 38, 40–44 describes bank-employee entry the way the mortgage rows (30–33, 39) do; this document sources only the Trustee-Centre-assisted path and treats the bank-originated branch as unconfirmed rather than absent.  
+4. **Exact fee amount.** Client data — see `open-questions.md` B5.
