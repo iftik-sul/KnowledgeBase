@@ -75,6 +75,8 @@ The action block on any screen where a user certifies, returns, approves or reje
 
 A reason is mandatory on every negative or returning action. This implements FR-04's requirement for documented reasoning and is enforced in [validation-rules.md](validation-rules.md).
 
+**Some contexts extend this with structured fields in place of the bare reason box** — [screens/escrow-request-details.md](screens/escrow-request-details.md)'s milestone certification is the example, per answer A3's requirement that certification be a structured assessment rather than a document upload. The base panel (actions, reason, attachment) still applies underneath; the extension adds domain-specific fields the decision depends on, not a different mechanism.
+
 ## Document Uploader
 
 Drag-and-drop plus file picker. Shows required versus optional documents for the current service, accepted formats, size limits and per-file validation state. Documents already held in the institution repository can be attached by reference rather than re-uploaded.

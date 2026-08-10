@@ -3,11 +3,12 @@ project: RERAN
 module: financial-trust-institutions
 type: user-group
 status: draft
-updated: 2026-08-09
+updated: 2026-08-11
 contains_proposals: true
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/modules/financial-trust-institutions/open-questions.md"
 tags:
   - financial-trust-institutions
   - roles
@@ -26,7 +27,7 @@ This document describes post-login responsibilities only. Account creation and o
 | Mortgage Officer | Bank lending desk | 17 | Online Mortgage System |
 | Institution Relationship Manager | Bank admin | 1 | Trust-Account Approval & Renewal |
 | Account Trustee | Approved escrow trustee | 0 — see below | Trust-Account Approval & Renewal |
-| Auditing Bureau Officer | Approved auditor | 0 — see below | Transaction Audit Queue |
+| Auditing Bureau Officer | Approved auditor | 0 — see below | Trust-Account Approval & Renewal |
 
 > **Source gap.** The master service table assigns 17 of 18 Group C services to the Mortgage Officer and 1 to the Institution Relationship Manager. Account Trustee and Auditing Bureau Officer own no numbered services, yet the user group structure describes substantial functions for both. Their post-login behaviour below is proposed, not sourced.
 
@@ -118,53 +119,62 @@ A developer submits a request to draw down against a completed construction mile
 
 ### Purpose
 
-Provides independent audit of developer escrow accounts and of the institution's own submitted transactions.
+Provides independent audit of developer escrow accounts under the institution's trusteeship, and submits independent compliance reports to RERA. This role does **not** perform the institution's own internal certification of Mortgage Officer filings — see the correction below.
 
-> **Proposed** — not in source material. Rationale: the user group structure states this role audits developer escrow accounts and submits independent compliance reports. Separately, the mortgage registration workflow includes a step where "the bank's internal auditor reviews and certifies the transaction" before it reaches RERA — an actor not mapped to any named role. This document proposes that step belongs to the Auditing Bureau Officer. Needs client confirmation.
+> **Corrected per `open-questions.md` A1.** Earlier versions of this document proposed that the mortgage registration workflow's "bank's internal auditor reviews and certifies the transaction" step belonged to this role. Answer A1 supersedes that: internal certification is a `certify` **permission scope**, held by any delegated staff member the Institution Relationship Manager provisions under registration Flow 5 — not a fifth capability bolted onto this role, and not a duty this role performs by virtue of its title. The user group structure's own description of this role — auditing developer escrow accounts and submitting independent compliance reports — was the accurate source all along; the certification duty below has been removed to match it. **Confidence: High**, per the answers doc. Screen-level detail for the corrected role is in [ui/screens/compliance-reports.md](ui/screens/compliance-reports.md) and [ui/screens/trust-accounts.md](ui/screens/trust-accounts.md).
 
 ### Responsibilities
 
-* Certify transactions submitted by the Mortgage Officer before they are routed to the RERA audit queue
-* Audit developer escrow accounts under the institution's trusteeship
-* Prepare and submit independent compliance reports to RERA
-* Flag irregularities in escrow movement for regulatory attention
-* Maintain an audit history for each account and transaction reviewed
+* Audit developer escrow accounts and trust accounts under the institution's trusteeship
+* Prepare and submit independent compliance reports to RERA, on a RERA-defined template (per answer A7)
+* Raise findings against trust accounts, escalating material findings for regulatory attention
+* Maintain an audit history for each trust account and compliance report reviewed
+* Open and close audit engagements against trust accounts under examination
 
 ### Practical Example
 
-A batch of mortgage registrations awaits internal certification. The Auditing Bureau Officer reviews each against the attached documentation, certifies those that are complete and returns one with a query for a missing valuation report. Certified transactions proceed automatically to the RERA Transaction Audit queue.
+A trust account's periodic statement shows a movement the Auditing Bureau Officer cannot reconcile against the certified milestones on file. The Officer opens an audit engagement against the account, raises a finding categorised as a balance discrepancy, and — because the discrepancy is material — escalates it for RERA's attention as part of the next compliance report. The finding sets the trust account to Flagged until resolved.
 
 ### To Confirm
 
-* Is the "bank's internal auditor" in the mortgage workflow the same person as the Auditing Bureau Officer, or a separate unnamed role?
-* Is transaction certification per-transaction or batch-level?
-* Do compliance reports follow a RERA-defined template?
+* **Resolved by A1** — whether the "bank's internal auditor" in the mortgage workflow is this role: no. It is the `certify` permission scope, held by whichever delegated staff member the institution assigns it to. This is no longer an open question about this role.
+* **Resolved by A1** — whether certification is per-transaction or batch-level: moot for this role, since certification is not this role's responsibility. The certify scope's own certification cadence is addressed in [ui/screens/internal-certification-queue.md](ui/screens/internal-certification-queue.md), which documents it as per-record, with no bulk action, for the same reasoning answer A3 applies to milestone certification.
+* Do compliance reports follow a RERA-defined template? **Proposed answered** by A7 (Medium confidence) — RERA-defined template, structured with a free-text findings narrative. The exact structure and reporting cycle remain undetermined; see [ui/screens/compliance-reports.md](ui/screens/compliance-reports.md#notes).
 
 ---
 
 ## How They Work Together
 
-| Stage | Role | Action |
+| Stage | Role / Scope | Action |
 | :---- | :---- | :---- |
 | 1 | Mortgage Officer | Enters the transaction and attaches documentation |
-| 2 | Auditing Bureau Officer | Certifies the transaction internally |
+| 2 | `certify` permission scope *(corrected — was "Auditing Bureau Officer")* | Certifies the transaction internally, where the institution has configured this gate for the service |
 | 3 | — | Routed to the RERA Transaction Audit queue |
 | 4 | Compliance & Escrow Auditor (Group A) | Approves, queries or rejects |
 | 5 | — | Fees settled; output document issued |
 | 6 | Institution Relationship Manager | Retains oversight of institution-wide outcomes |
 
+Stage 2 is corrected per answer A1: certification is held by any delegated staff member with the `certify` scope, which the Auditing Bureau Officer may or may not hold — it is not attached to that role by title. See the Auditing Bureau Officer section above for the full correction.
+
 For escrow work originating with developers, the Account Trustee replaces stages 1–2: the request arrives from Group B, the Trustee assesses and certifies, and it proceeds to the same RERA audit gate.
 
-**The two-gate pattern.** Every Group C action passes through an internal certification gate inside the institution and then an external audit gate at RERA. No Group C role can complete a regulated action unilaterally. This is the defining structural characteristic of the module and should be reflected in every service flow and screen.
+**The two-gate pattern — sourced for the mortgage and finance-lease lifecycle, not proven universal.** Services #3–#7 source an explicit internal "bank auditor" step before RERA review. The remaining Group C services do not carry the same explicit language in the master service table, and the module's service-flow documents (see `service-flows/`) do not assert a `certify` gate for them by default — each states, service by service, whether the gate is sourced, configurable, or simply not addressed. Treat "every Group C action passes through both gates" as the working design intent for services where the institution enables it, not as a sourced fact for all eighteen. This paragraph previously stated the pattern as unconditional; that overstated what rows 28–45 actually support, and the correction is carried into every screen this document informs — see [ui/README.md](ui/README.md#structural-characteristic).
 
 ---
 
 ## To Confirm — Summary
 
-1. Account Trustee interface: dedicated platform queue or external system with recorded outcome?
-2. Milestone certification: document upload or structured assessment?
-3. SLA for Trustee action on routed developer requests
-4. Is the bank's internal auditor the Auditing Bureau Officer?
-5. Transaction certification: per-transaction or batch?
-6. Compliance report template — RERA-defined or institution's own?
-7. Does the Institution Relationship Manager get an institution-wide oversight dashboard?
+Seven items originally listed here; four survive as genuinely open, three are resolved by the answers doc and kept below with pointers rather than dropped.
+
+**Still open:**
+
+1. Account Trustee interface: dedicated platform queue or external system with recorded outcome? **Resolved by A2** — dedicated platform queue, sourced from rows 8–12. See [ui/screens/escrow-request-queue.md](ui/screens/escrow-request-queue.md).
+2. Milestone certification: document upload or structured assessment? **Resolved by A3** — structured assessment. See [ui/screens/escrow-request-details.md](ui/screens/escrow-request-details.md#section-4--milestone-certification).
+3. **SLA for Trustee action on routed developer requests — still open.** Answer A6 proposes reading the source's split SLA figures as queue-time versus RERA-processing-time, which would supply this, but flags that reading as an inference needing explicit client confirmation. Not resolved.
+6. Compliance report template — RERA-defined or institution's own? **Proposed answered by A7** (Medium confidence) — RERA-defined. Structure and cycle remain open; see [ui/screens/compliance-reports.md](ui/screens/compliance-reports.md#notes).
+7. **Does the Institution Relationship Manager get an institution-wide oversight dashboard? — still open in the general sense**, though a proposed answer now exists in the form of a specific screen: [ui/screens/dashboard.md](ui/screens/dashboard.md#institution-relationship-manager) and [ui/screens/institution-profile.md](ui/screens/institution-profile.md) implement one. Whether this is the *right* dashboard remains for the client to confirm; that it should exist is answer A5's High-confidence position.
+
+**Resolved, kept for record:**
+
+4. ~~Is the bank's internal auditor the Auditing Bureau Officer?~~ **Resolved by A1** — no. It is the `certify` permission scope, held by any delegated staff member, not this or any other named role.
+5. ~~Transaction certification: per-transaction or batch?~~ **Moot per A1** — this was a question about the Auditing Bureau Officer's certification cadence; the role does not certify. The certify scope's own cadence is per-record, with no bulk action (see [ui/screens/internal-certification-queue.md](ui/screens/internal-certification-queue.md)).

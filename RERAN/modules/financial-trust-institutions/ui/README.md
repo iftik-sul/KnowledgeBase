@@ -32,20 +32,24 @@ This is the index that makes a missing screen visible. Every role must be able t
 | :---- | :---: | :---: | :---: | :---: | :---: |
 | [dashboard](screens/dashboard.md) | ● | ● | ● | ● | ● |
 | [service-request](screens/service-request.md) | ● | #1, #2, #18 | — | — | — |
-| [applications](screens/applications.md) | Own | Institution-wide | — | Read | Own |
+| [applications](screens/applications.md) | Own | Institution-wide | — | Read | Own† |
 | [application-details](screens/application-details.md) | ● | ● | — | Read | ● |
-| [internal-certification-queue](screens/internal-certification-queue.md) | — | Configure | — | — | ● |
+| [internal-certification-queue](screens/internal-certification-queue.md) | — | Configure + Read | — | — | ● |
 | [escrow-request-queue](screens/escrow-request-queue.md) | — | Read | ● | Read | — |
 | [escrow-request-details](screens/escrow-request-details.md) | — | Read | ● | Read | — |
 | [trust-accounts](screens/trust-accounts.md) | — | Read | ● | ● | — |
 | [compliance-reports](screens/compliance-reports.md) | — | Read | — | ● | — |
 | [settlement-account](screens/settlement-account.md) | Read | ● | — | Read | — |
 | [institution-profile](screens/institution-profile.md) | Read | ● | Read | Read | Read |
-| [documents](screens/documents.md) | ● | ● | ● | ● | ● |
+| [documents](screens/documents.md) | Own-linked | Institution-wide | Escrow-linked | Institution-wide (read) | — |
 | [notifications](screens/notifications.md) | ● | ● | ● | ● | ● |
 | [assisted-service-terminal](screens/assisted-service-terminal.md) | — | — | — | — | — |
 
 ● = operates the screen · Read = read-only · — = no access
+
+† A `certify`-scope holder's Applications visibility is not a separate scoping rule — it inherits whatever their underlying role already grants (Own for a Mortgage Officer who also certifies, Institution-wide for an IRM who also certifies). The certification-specific queue is [internal-certification-queue](screens/internal-certification-queue.md), not this screen.
+
+**Two cells corrected against the finished screens (issue #27 verification pass):** Internal Certification's IRM column was `Configure` alone; the finished screen distinguishes configuring the scope (Institution Profile) from a read-only institution-wide view of the queue itself (built here), so the cell now reads `Configure + Read`. Documents previously showed `●` for every role, which the finished screen does not do — visibility there follows what each role is linked to, matching the correction made in `navigation.md`.
 
 **Assisted Service Terminal** is operated by a Trustee Centre operator (Group G), not by a Group C role. It is documented here because it executes Group C services on a walk-in customer's behalf under answer C2. When Group G's interfaces are written, this screen moves there and is linked from here.
 
@@ -60,7 +64,7 @@ All eighteen services use one configurable form (`service-request.md`) rather th
 | #1–#2 institutional approval | Institution Relationship Manager | — | Optional | — |
 | #3–#7 mortgage lifecycle | Mortgage Officer | Where source names centre | Yes when configured | — |
 | #8–#11 finance lease lifecycle | Mortgage Officer | Yes | Yes when configured | — |
-| #12 fund company registration | Mortgage Officer | Yes | Yes when configured | — |
+| #12 fund company registration | Mortgage Officer, or Group G operator | Yes | Yes when configured | — |
 | #13–#17 title and ownership | Mortgage Officer, or Group G operator | Yes | Yes when configured | — |
 | #18 contract cancellation | Institution Relationship Manager | Yes | Yes when configured | — |
 | Group B escrow requests | Account Trustee (inbound) | — | — | Yes |
@@ -110,6 +114,8 @@ Where a section is identical for all roles, state it once at screen level. Where
 
 ## Structural Characteristic
 
-Every Group C action passes two gates: internal certification inside the institution, then external audit at RERAN. No Group C role completes a regulated action unilaterally. Every screen that submits, certifies or approves must show which gate the record currently sits at and who holds it.
+**Corrected in the issue #27 pass.** This section previously stated that every Group C action passes two gates. That overstates what the source supports: rows 28–45 source an explicit internal "bank auditor" step only for the mortgage and finance-lease lifecycle (#3–#7); the remaining services do not carry the same language, and several service-flow documents leave whether a `certify` gate applies to them as an open question rather than asserting one.
+
+Where it applies — sourced or configured — every Group C action passes two gates: internal certification inside the institution, then external audit at RERAN, and no Group C role completes that action unilaterally. Every screen that submits, certifies or approves must show which gate the record currently sits at and who holds it — see [screens/application-details.md](screens/application-details.md#section-1--header) for how that's surfaced. But the pattern is not asserted as universal, and no screen in this package should imply otherwise; [screens/internal-certification-queue.md](screens/internal-certification-queue.md) and the services it serves are explicit about which ones actually route through it.
 
 The internal gate is a **permission scope**, not a role (answer A1). Any delegated staff member may hold a certifier scope; the screen serving that gate is filtered by scope, not by job title.

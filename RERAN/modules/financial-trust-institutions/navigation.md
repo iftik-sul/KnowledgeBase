@@ -9,6 +9,7 @@ derived_from:
   - "RERAN/modules/financial-trust-institutions/roles-and-responsibilities.md"
   - "RERAN/modules/financial-trust-institutions/open-questions.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
+  - "RERAN/modules/financial-trust-institutions/ui/screens/"
 tags:
   - financial-trust-institutions
   - navigation
@@ -44,12 +45,12 @@ One sidebar serves the whole module. Items are filtered per user — a user neve
 | Dashboard | ● | ● | ● | ● | — |
 | Service Requests | ● | ● | — | — | `file` |
 | Applications | Own | Institution-wide | — | Read | `file` or `audit` |
-| Internal Certification | Scope | Configure | — | — | `certify` |
+| Internal Certification | Scope | Configure + Read | — | — | `certify` to act |
 | Escrow Requests | — | Read | ● | Read | `escrow` to act |
 | Trust Accounts | — | Read | ● | ● | `escrow` or `audit` |
 | Compliance Reports | — | Read | — | ● | `audit` |
 | Settlement Account | Read | ● | — | Read | `settlement` to act |
-| Documents | ● | ● | ● | ● | — |
+| Documents | Own-linked | Institution-wide | Escrow-linked | Institution-wide (read) | — |
 | Institution Profile | Read | ● | Read | Read | `admin` to edit |
 | Notifications | ● | ● | ● | ● | — |
 | Help & Support | ● | ● | ● | ● | — |
@@ -57,6 +58,8 @@ One sidebar serves the whole module. Items are filtered per user — a user neve
 ● = full access · Read = read-only · Scope = visible only where the user holds the scope · — = not shown
 
 **Count badges** appear on items carrying actionable work: Internal Certification, Escrow Requests, Applications and Notifications.
+
+> **Two rows corrected against the finished screens (issue #27 verification pass).** Documents previously showed `●` for all four roles, which reads as institution-wide visibility for everyone; the finished screen scopes visibility to what each role is linked to (own filings, institution-wide, escrow work, or institution-wide read), and this table now says so instead of the flatter `●`. Internal Certification's Institution Relationship Manager cell was `Configure` alone, which conflated two different things — configuring who holds `certify` (on Institution Profile) and seeing the queue itself (on Internal Certification, now built with a read-only institution-wide view for this case) — corrected to `Configure + Read`.
 
 ---
 
