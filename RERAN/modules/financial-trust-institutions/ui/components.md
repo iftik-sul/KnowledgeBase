@@ -22,24 +22,9 @@ tags:
 
 ## Institution Operations Sidebar
 
-The module's primary navigation. Menu items are filtered by role and permission scope — a user never sees a menu item they cannot open.
+The module's primary navigation. Its structure, the role × menu × scope matrix and the access rules governing it are defined in [navigation.md](../navigation.md) — navigation is a module-level concern, not a component-library one.
 
-| Menu item | Visible to |
-| :---- | :---- |
-| Dashboard | All |
-| Service Requests | Mortgage Officer, Institution Relationship Manager |
-| Applications | Mortgage Officer, IRM, Auditing Bureau Officer, certifier scope |
-| Internal Certification | Certifier scope only |
-| Escrow Requests | Account Trustee, IRM, Auditing Bureau Officer |
-| Trust Accounts | Account Trustee, Auditing Bureau Officer, IRM |
-| Compliance Reports | Auditing Bureau Officer, IRM |
-| Settlement Account | IRM, Mortgage Officer |
-| Documents | All |
-| Institution Profile | All |
-| Notifications | All |
-| Help & Support | All |
-
-The active item is highlighted. Items carrying actionable work display a count badge — Internal Certification, Escrow Requests, Applications and Notifications.
+As a component: fixed left rail, active item highlighted, count badges on items carrying actionable work (Internal Certification, Escrow Requests, Applications, Notifications).
 
 ## Top Bar
 
