@@ -29,19 +29,11 @@ Lodge  →  Validate  →  Audit  →  Pay  →  Issue  →  Record & Sync
 
 This ordering shapes the module's screens: there is no checkout at submission, and an approved-but-unpaid state must exist and be visible.
 
-## Two Payer Models
+## Standing Pre-Funded Account
 
-Group C is unusual in running both models across its 18 services.
+> **Proposed** — working position B1, supported by the fee-balance output in the mortgage and finance-lease rows.
 
-| Model | Who pays | Mechanism | Services |
-| :---- | :---- | :---- | :---- |
-| **Institution account debit** | The institution | Fees deducted directly from the bank's account with RERA | Mortgage registration, amendment, transfer, release; grant property mortgage |
-| **Customer payment at counter** | The end customer | Paid at a Real Estate Registration Trustee Centre, e-receipt issued | Finance lease services; fund company registration; heirs' sale; company share sale; title deed services; contract cancellation |
-| **Institution fee payment** | The institution | Paid on approval of trustee/auditor standing | Approval / renewal and cancellation of Account Trustee & Auditing company |
-
-> **Proposed** — the model names and this three-way split are not in the source. The underlying facts are: mortgage services state fees are deducted from the bank account, Trustee Centre services state the customer pays and receives a receipt, and the institutional approval services state payment of fees on approval. The categorisation is ours. Needs client confirmation.
-
-**Why it matters:** an institution-debit service needs no payment screen for the officer at all — it needs a balance, a statement, and a reconciliation view. A customer-payment service needs a counter payment flow. Building one pattern for both would be wrong.
+All Group C service fees settle after approval from the institution’s standing pre-funded RERAN account. Trustee Centre and Land Department operators act in assisted mode within that same service; they do not create a separate customer-counter payment model.
 
 ## Settlement Mechanisms
 
@@ -51,7 +43,7 @@ The source names three settlement routes across the platform:
 * **Escrow deduction** — against a project trust account
 * **Institution account debit** — against the bank's standing account with RERA
 
-Group C uses institution account debit and gateway payment. Escrow deduction appears in Group B's developer services, where the Account Trustee acts as an approval step.
+Group C uses standing institution-account debit. Escrow deduction appears in Group B's developer services, where the Account Trustee acts as an approval step.
 
 ## Fee Calculation
 
@@ -77,7 +69,7 @@ The source names these outputs across Group C services:
 | E-receipt voucher | Contract cancellation |
 | Tax invoice | Platform-wide requirement (PRD) |
 
-> **Proposed** — the source uses "fee balance", "payment receipt" and "e-receipt voucher" inconsistently across rows, likely describing the same artefact. This module treats them as one **payment receipt**, issued electronically on settlement, unless the client distinguishes them. Needs client confirmation.
+> **Proposed** — applying B9: payment receipt and e-receipt voucher are the same single-settlement artefact; fee balance is a separate standing-account balance/ledger artefact.
 
 ## Institution Account Management
 
@@ -93,7 +85,7 @@ An institution operating on account debit needs:
 
 ### To Confirm
 
-* Does RERA operate standing accounts for institutions, or is "deducted from bank account" a direct debit against a nominated account?
+* Standing account is the working position; client confirmation is needed only for implementation and funding rails.
 * Who tops up and how — bank transfer, gateway, or arrangement with RERA finance?
 * What happens when an approved transaction cannot be settled for insufficient funds? Does the approval expire?
 * Is there a credit arrangement, or is it strictly pre-funded?
@@ -103,7 +95,7 @@ An institution operating on account debit needs:
 > **Proposed** — not in source material. Rationale: no source document addresses payment failure for any user group, yet an approved-but-unsettled transaction is an unavoidable state in a pay-after-approval pipeline. Needs client confirmation.
 
 * A payment failure must not void the audit approval — the transaction should hold in an approved, unsettled state and be retryable.
-* A time limit on that state needs defining, or approvals accumulate indefinitely.
+* Approved-but-unsettled items lapse to **Approval Expired** after 30 calendar days. **Proposed**
 * Refunds exist as a platform service in the public services list (fee refund request, seven business days, subject to Ministry of Finance approval). Whether institutions access refunds through the same route is unstated.
 
 ## Additional Statuses

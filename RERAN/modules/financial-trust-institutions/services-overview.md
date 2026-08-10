@@ -88,12 +88,13 @@ Title-deed transactions executed through the institution rather than by the owne
 
 | Role | Services |
 | :---- | :---: |
-| Mortgage Officer | 17 |
-| Institution Relationship Manager | 1 (Service #18) |
-| Account Trustee | 0 — acts within Group B escrow services |
-| Auditing Bureau Officer | 0 — acts as internal certification gate |
+| Institution Relationship Manager | Services #1–#2 — institutional approval / cancellation |
+| Mortgage Officer | Services #3–#11 — mortgage and finance-lease lifecycle |
+| Mortgage Officer / Trustee Centre operator | Services #12–#18 — Mortgage Officer where bank-originated; otherwise a Trustee Centre operator acts for the customer |
+| Account Trustee | 0 — acts in Group B escrow services |
+| Auditing Bureau Officer | 0 — independent Group B escrow auditor, not an internal certification role |
 
-> The source assigns Services #1 and #2 to the Account Trustee as responsible role, but both concern the institution's own approval status, which the Institution Relationship Manager is described as maintaining. This is a source inconsistency, recorded here rather than resolved. See To Confirm.
+> **Proposed** — this ownership is re-derived per service under A4. It deliberately contradicts the source table’s broadly applied responsible-role column: that column assigns a Mortgage Officer to title/heirs/company-share transactions that are described as Trustee Centre transactions, while the role description assigns maintenance of institutional approvals to the Institution Relationship Manager.
 
 ## Shared Platform Features
 
@@ -106,11 +107,13 @@ Title-deed transactions executed through the institution rather than by the owne
 * Feature #3 — Respond to Information Request
 * Feature #4 — Resubmit Returned Application
 
-### Institution-Specific Features (3)
+### Institution-Specific Features (5)
 
-* Feature #5 — Internal Certification Queue — transactions awaiting the Auditing Bureau Officer's certification before routing to RERA
+* Feature #5 — Internal Certification Queue — maker-checker permission-scope view before routing to RERA
 * Feature #6 — Escrow Request Queue — developer-originated requests awaiting Account Trustee action
 * Feature #7 — Approval Expiry Tracking — trustee and auditor approval renewal windows
+* Feature #8 — Settlement Account — balance, top-up, ledger and statements
+* Feature #9 — Staff & Permission Scopes — roster, scope assignment and revocation
 
 ### General Platform Features (8)
 
@@ -128,24 +131,28 @@ Title-deed transactions executed through the institution rather than by the owne
 | Category | Features |
 | :---- | :---: |
 | Application Management | 4 |
-| Institution-Specific | 3 |
+| Institution-Specific | 5 |
 | General Platform | 8 |
-| **Total Shared Platform Features** | **15** |
+| **Total Shared Platform Features** | **17** |
 
 ## Application Status Vocabulary
 
-> **Proposed** — not in source material. Rationale: the source describes the audit stage as "approves, returns for correction, or rejects with reason" and references an audit queue, but never enumerates statuses for any group. Group C needs a status vocabulary for its two-gate flow. Needs client confirmation.
+> **Proposed** — platform-wide core vocabulary with the Group C maker-checker extension from D1.
 
 | Status | Meaning | Set by |
 | :---- | :---- | :---- |
-| Draft | Started, not submitted | Mortgage Officer |
-| Pending Internal Certification | Awaiting the institution's own auditor | Mortgage Officer |
-| Returned by Auditor | Sent back internally for correction | Auditing Bureau Officer |
-| Submitted to RERA | In the Transaction Audit queue | Auditing Bureau Officer |
+| Draft | Started, not submitted | Applicant / operator |
+| Pending Internal Certification | Awaiting the institution’s checker permission scope | Applicant / platform |
+| Returned by Certifier | Sent back internally for correction | Delegated certifier scope |
+| Submitted | Lodged and awaiting RERAN pickup | Platform |
+| Under Review | With the regulator | Compliance & Escrow Auditor |
 | Information Requested | RERA has raised a query | Compliance & Escrow Auditor |
-| Approved | Passed audit, awaiting fee settlement | Compliance & Escrow Auditor |
+| Returned for Correction | Sent back to the applicant | Compliance & Escrow Auditor |
+| Approved — Awaiting Payment | Passed audit; fee not yet settled | Compliance & Escrow Auditor |
 | Rejected | Refused with documented reason | Compliance & Escrow Auditor |
-| Completed | Fees settled, output document issued | Platform |
+| Completed | Settled and output document issued | Platform |
+| Withdrawn | Abandoned by applicant | Applicant |
+| Expired / Approval Expired | Lapsed against the configured settlement window | Platform |
 
 ## Channels
 
@@ -154,7 +161,7 @@ Group C services run through two channels, per the source:
 * **Online Mortgage System** — the institution's own portal access, used for mortgage and grant services
 * **Real Estate Registration Trustee Centres** — walk-in processing, used for finance lease services and several title transactions
 
-Several services list only the Trustee Centre channel in the source, implying no online path exists for them today. Whether the platform should add online equivalents is a scope question, not a documentation gap.
+Every service is online-capable. Where the source lists a Trustee Centre or Land Department counter, it is documented as an assisted mode of the same service, operated by an accredited operator on the customer’s behalf. **Proposed** — working position C2.
 
 ## To Confirm
 
