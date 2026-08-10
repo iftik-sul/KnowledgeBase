@@ -124,7 +124,7 @@ Every service file's frontmatter now carries a `source_type` field:
 | `sourced` | Traces to an explicit row in `RERAN_service_flows_v2.md`'s master Service Workflows table | 32 |
 | `extrapolated` | Derived from role descriptions in the source (e.g. "Property Buyer/Investor verifies developer/project") rather than an explicit workflow row, per the standing instruction to fill gaps in incomplete client material | 11 |
 
-The 11 extrapolated services: Verify Developer/Development Project/Property (\#1–\#3), Register Property Ownership (\#4), Manage Lease (\#25), Act on Behalf of Property Owner (\#30), Remote Identity Verification/Remote Property Transactions (\#36–\#37), Submit/Track Complaint (\#38–\#39).
+The 11 extrapolated services: Verify Developer/Development Project/Property (\#1–\#3), Register Property Ownership (\#4), Manage Lease (\#25), Register Power of Attorney (\#29), Act on Behalf of Property Owner (\#30), Remote Identity Verification/Remote Property Transactions (\#36–\#37), Submit/Track Complaint (\#38–\#39).
 
 The master table has 41 rows for Groups E+F (Owners & Landlords: 28; Tenants & Consumers: 13), not 43. The counts don't need to match: 10 tenant-dispute rows (distinct procedures — Dispute Case, Preliminary Suit, Appeal, Grievance, Petition to Reconsider, Order on a Petition, Offer and Deposit, Performance Order, Grievance Against Performance Order, Execution Case) were consolidated into one documented service, Submit Tenancy Dispute (\#26); one row (lease registration/renewal) was split into two documented services (\#23, \#24); two "amendment" rows were likely consolidated into one (\#7). The 4 services added 2026-08-10 (\#40–\#43) closed a genuine gap: explicit source rows that had no documented counterpart at all.
 
