@@ -3,105 +3,169 @@ project: RERAN
 module: financial-trust-institutions
 type: service-flow
 status: draft
-updated: 2026-08-10
-source_type: sourced
+updated: 2026-08-11
+contains_proposals: true
 derived_from:
-  - "RERAN/modules/financial-trust-institutions/services-overview.md"
-  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
-  - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md" (row 28)
+  - "RERAN/modules/financial-trust-institutions/open-questions.md"
 tags:
   - financial-trust-institutions
   - service-flow
-  - approval
-  - renewal
-  - account-trustee
-  - auditing-company
 ---
 
-# Service #1 — Approval / Renewal of Account Trustee & Auditing Company
+# Service #1 – Approval / Renewal of Account Trustee & Auditing Company
 
-## Purpose
+**Service Category:** Institutional Approval Services
 
-Provides for approval or renewal of an institution's standing as an approved Account Trustee or Auditing Company within RERAN.
+## 1. Service Overview
 
-## Service Classification
+The **Approval / Renewal of Account Trustee & Auditing Company** service is a Group C service defined by row 28 of the master service table. This document carries forward the row’s workflow, channel, output and SLA, while marking design detail not enumerated by the source as proposed.
 
-- **Module:** Financial & Trust Institutions (Group C)
-- **Service Category:** Institutional Approval Services
-- **Service Number:** 1
-- **Responsible Role:** Account Trustee is assigned in the source service table. The module documentation records a role-assignment inconsistency because the Institution Relationship Manager is described as maintaining registration and renewing trustee/auditor approvals.
-- **Regulator / Approver:** Compliance & Escrow Auditor (Group A)
-- **Channel:** Not specified in the available source material for this service.
-- **SLA:** Not specified in the available source material.
-- **Output:** Approval / renewal of the institution's approved standing. The exact output document is not specified in the available source material.
+## 2. Purpose
 
-## Eligibility
+Provide a controlled and auditable route to complete approval / renewal of account trustee & auditing company and issue the source-specified output after regulatory review and settlement.
 
-The service applies to an institution seeking approval or renewal of its standing as an approved trustee or auditor.
+## 3. Description
 
-The source material does not specify the detailed eligibility criteria.
+Apply via the LD website, escrow-account system or email; RERA studies and audits the application, approves or rejects it, coordinates attendance and agreement-signing for a newly approved trustee/auditing bureau, collects fees and updates partner systems.
 
-## Required Information and Documents
+## 4. Who Can Apply
 
-The source material does not enumerate the required information or supporting documents for this service.
+* **Institution Relationship Manager** for the applicable transaction.
+* An accredited Trustee Centre or Land Department operator may act for the customer where the source names that counter. **Proposed** — this is assisted access to the same online service, not a separate offline channel.
+* The underlying institution or customer must be identified for the request. **Proposed**
 
-**Do not infer these requirements until confirmed by the client.**
+## 5. Prerequisites
 
-## Fee / Payment
+* Active corporate or operator account with a filing permission scope. **Proposed**
+* Relevant property, institutional, mortgage, lease or contract reference.
+* Authority to act for the represented institution or customer. **Proposed**
+* Supporting documents ready for upload or operator-assisted capture. **Proposed**
+* Sufficient settlement-account balance before fee settlement. **Proposed**
 
-A fee/payment mechanism is not specified for this service in the available source material.
+## 6. Required Information
 
-The module-level documentation identifies fee settlement as an open Group C question and does not establish whether the proposed institution-account deduction model applies to all 18 services.
+* Applicant and represented customer/institution details. **Proposed**
+* Relevant property, title, mortgage, lease, contract or register reference. **Proposed**
+* Transaction-specific details, effective date and declarations. **Proposed**
+* Contact email for delivery where the source says the output is emailed. **Proposed**
 
-## Workflow
+## 7. Required Documents
 
-The available source material establishes the service purpose and approval relationship but does not provide a complete numbered workflow for Service #1.
+> **Proposed** — row 28 says to submit or enter documents but does not enumerate them. This working list is analogous to the individual-user template and remains client data for confirmation.
 
-Therefore, the workflow is intentionally not reconstructed here.
+* institution registration or renewal evidence
+* authorised-representative authority
+* current approval evidence where renewing
+* supporting compliance documentation
 
-### Confirmed Flow Elements
+## 8. Service Fee
 
-1. An institution seeks approval or renewal of its standing as an approved Account Trustee or Auditing Company.
-2. The application is subject to Group A regulatory review/approval by the **Compliance & Escrow Auditor**.
-3. On approval, the institution's approved standing is established or renewed.
+> **Proposed** — fee amounts are unavailable client data.
 
-### Unspecified Steps
+Applicable according to the RERAN fee schedule.
 
-The source does not specify:
+## 9. Payment Required
 
-- application initiation screen/channel;
-- required documents;
-- validation steps;
-- internal institutional certification steps;
-- payment timing and method;
-- approval/renewal decision criteria;
-- rejection or return flow;
-- notification mechanism;
-- exact issued document;
-- exact SLA.
+**Yes.**
 
-## Status Flow
+> **Proposed** — after approval, the fee is deducted from the institution’s standing pre-funded RERAN account, rather than through a pay-then-submit checkout. The source’s payment step remains applicable. An assisted operator records the same online transaction, not a separate offline payment flow.
 
-No service-specific status vocabulary is defined in the source material.
+## 10. Processing Authority
 
-The module's proposed Group C application status vocabulary is documented in `../services-overview.md`, but it is explicitly marked as proposed and awaiting client confirmation. It is therefore **not adopted as authoritative for this service**.
+**Compliance & Escrow Auditor (Group A).** A configured internal certification is a maker-checker permission scope on the corporate account, not a fifth Group C role. **Proposed**
 
-## Outcome
+## 11. Expected Processing Time
 
-The intended outcome is approval or renewal of the institution's standing as an approved Account Trustee or Auditing Company.
+**Waiting 29 business hours; delivery 28 business hours.**
 
-The exact certificate, licence, or electronic document issued is not specified in the source material.
+## 12. Processing Workflow
 
-## Open Questions
+1. The applicant signs in, or an accredited operator opens the same service in assisted mode. **Proposed**
+2. The applicant selects **Approval / Renewal of Account Trustee & Auditing Company**, enters required data and submits documents.
+3. The platform validates completeness and relevant references. **Proposed**
+4. For a bank-originated filing, a delegated checker scope certifies or returns it before RERAN submission. **Proposed**
+5. The Compliance & Escrow Auditor reviews, approves, returns for correction or rejects.
+6. After approval, the standing account settles the fee. **Proposed**
+7. The platform issues the source-specified output and records the transaction; delivery is electronic where stated.
 
-1. Should Service #1 be owned by the **Account Trustee** or the **Institution Relationship Manager**? The source assigns it to the Account Trustee, while the role description assigns maintenance and renewal of trustee/auditor approvals to the Institution Relationship Manager.
-2. What are the required eligibility criteria and supporting documents?
-3. Which channel is used for the application?
-4. What fee applies, and when/how is it paid?
-5. What are the approval, return, and rejection rules?
-6. What document or electronic record is issued after approval/renewal?
-7. What is the SLA?
+**Source workflow detail:** Apply via the LD website, escrow-account system or email; RERA studies and audits the application, approves or rejects it, coordinates attendance and agreement-signing for a newly approved trustee/auditing bureau, collects fees and updates partner systems.
 
-## Source Boundary
+## 13. Application Status Flow
 
-This document deliberately records only what is supported by the current RERAN source material. Missing workflow details are left unspecified rather than invented.
+> **Proposed** — the source gives no status vocabulary; this applies the agreed platform core and Group C extension.
+
+Draft → Pending Internal Certification → Returned by Certifier → Submitted → Under Review → Information Requested → Returned for Correction → Approved — Awaiting Payment → Completed
+
+Exception statuses: Rejected, Withdrawn, Payment Failed and Approval Expired. An approved but unsettled item expires after 30 calendar days. **Proposed**
+
+## 14. Possible Outcomes
+
+* Approved and completed, with output issued.
+* Returned for correction or additional information.
+* Rejected with documented reason.
+* Payment failure for insufficient standing balance. **Proposed**
+* Approval Expired after the 30-day settlement window. **Proposed**
+
+## 15. Output
+
+The source specifies the following output(s):
+
+* Approving a strategic partner – online
+
+A **fee balance** is the standing-account position after deduction; a payment receipt or e-receipt voucher proves a single settlement. They are distinct artefacts. **Proposed**
+
+## 16. Related Services
+
+* [Group C services overview](../services-overview.md) and [payment model](../payments.md).
+
+* Application tracking, document management, corporate permission scopes and settlement account. **Proposed**
+
+## 17. UI Screens
+
+> **Proposed** — derived from the source workflow and the individual-user template.
+
+* Service selection; application details; reference validation; document upload; review and submission.
+* Internal certification queue where maker-checker is enabled.
+* RERAN review, information request and decision view.
+* Settlement-account balance/payment result; output download and application timeline.
+
+## 18. API Requirements
+
+> **Proposed** — derived from the source workflow and the individual-user template.
+
+* Retrieve and validate relevant property, title, institution and transaction references.
+* Create, save, submit, return and resubmit applications; upload/retrieve documents.
+* Route internal certification and RERAN audit; record decision reasons.
+* Calculate fees, check and debit standing balance, issue output/receipt/balance entry and send notifications.
+
+## 19. Database Entities
+
+> **Proposed** — derived from the source workflow and the individual-user template.
+
+* Corporate Account, Permission Scope, User, Customer/Institution and assisted Operator.
+* Property, Title Record and relevant Mortgage, Finance Lease or Contract record.
+* Application, Service Request, Document, Certification Action, Audit Decision and Audit Log.
+* Settlement Account, Fee Charge, Payment Receipt, Fee Balance Ledger Entry, Issued Document and Notification.
+
+## 20. Acceptance Criteria
+
+> **Proposed** — derived from the source workflow and the individual-user template.
+
+* An authorised applicant or assisted operator can start and save the service request.
+* Required information and documents validate before submission.
+* A maker-checker scope can certify or return a bank-originated request where configured.
+* RERAN can approve, return or reject with a reason.
+* An approved request debits the standing account before outputs release.
+* Source-specified outputs issue electronically and the full trail is auditable.
+* Fee balance and receipt remain distinct where both apply.
+
+## 21. Business Rules
+
+1. The workflow, channel, output and SLA are sourced from row 28.
+2. The source’s named Trustee Centre or Land Department is an assisted mode of the same online service. **Proposed**
+3. Internal certification is a permission scope, not a new role. **Proposed**
+4. Fees settle after approval from a standing pre-funded account; negative balances are prohibited. **Proposed**
+5. No amount is invented: the fee schedule remains client data.
+6. The detailed documents remain genuinely open because the source only says “submit documents”; Section 7 carries a marked working proposal instead of dropping that question.
+7. No statutory window or SLA beyond row 28 is asserted.
