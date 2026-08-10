@@ -244,6 +244,8 @@ Upon successful completion, the system generates:
 * Service \#1 – Verify Developer  
 * Service \#2 – Verify Development Project  
 * Service \#3 – Verify Property
+* Financial & Trust Institutions Service \#6 – Mortgage Release *(cross-module: this is the source of the Mortgage Release Letter required at Section 7 above — the mortgage lender discharges the encumbrance through that service before this one can complete ownership transfer)*
+* Financial & Trust Institutions Service \#3 – Mortgage Registration *(cross-module: the service that originally registered the mortgage this service's sale must clear)*
 
 ## 17. UI Screens
 
