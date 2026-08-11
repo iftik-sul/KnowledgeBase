@@ -1,0 +1,176 @@
+---
+project: RERAN
+module: real-estate-developer
+type: service-flow
+status: draft
+contains_proposals: true
+source_type: sourced
+updated: 2026-08-10
+derived_from:
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/modules/real-estate-developer/ui/screens/fund-release-request.md"
+  - "RERAN/modules/real-estate-developer/ui/screens/fund-release-request-details.md"
+  - "RERAN/modules/financial-trust-institutions/ui/screens/escrow-request-queue.md"
+  - "RERAN/modules/financial-trust-institutions/ui/screens/escrow-request-details.md"
+tags:
+  - real-estate-developer
+  - service-flow
+  - real-estate-development-services
+  - escrow
+---
+
+# Service #10 – Project Profit Withdrawal
+
+**Service Category:** Real Estate Development Services
+
+## 1. Service Overview
+
+The **Project Profit Withdrawal** service allows a developer to request withdrawal of the developer's profit margin from a project's escrow account, distinct from a milestone-based construction fund release.
+
+> **UI mismatch — flagged, not resolved.** The nearest matching screen, `ui/screens/fund-release-request.md`, is shaped as a milestone/construction-draw request (engineer certification, Quantity Surveyor report, milestone percentage complete). Profit withdrawal is conceptually a post-completion or margin distribution, not a construction milestone draw, and the source row gives no field-level detail to confirm whether the existing form's milestone fields even apply. Documented against the closest existing screen with this distinction called out; not force-fit as identical.
+
+## 2. Purpose
+
+Allow a developer to draw down accumulated profit from a project's escrow account once entitled to do so, under Account Trustee and RERA oversight.
+
+## 3. Description
+
+The developer submits a profit withdrawal request against the project's escrow account. The request routes to the Account Trustee, who assesses project solvency and the basis for the withdrawal, uploads supporting assessment, and forwards to the RERA escrow department for audit. On approval, the withdrawal is released.
+
+## 4. Who Can Apply
+
+* Escrow Liaison
+
+## 5. Prerequisites
+
+* An existing active escrow account (Service #8) with available profit balance.
+* Basis for entitlement to withdraw (e.g. project completion percentage, contractual milestone).
+
+## 6. Required Information
+
+* Escrow Account Reference Number
+* Requested Withdrawal Amount
+* Basis for Entitlement
+
+## 7. Required Documents
+
+> **Proposed** — not itemized in the source. Following the general escrow-request document pattern (Trustee assessment, supporting financials). Needs client confirmation.
+
+* Project Financial Statement Supporting the Withdrawal
+* Account Trustee Assessment (uploaded by the Trustee)
+* Other supporting documents required by RERA
+
+## 8. Service Fee
+
+Applicable according to the RERAN fee schedule.
+
+## 9. Payment Required
+
+Not applicable — this service disburses funds to the developer rather than collecting a fee from them. **Proposed**: a processing fee may still apply per the standard fee schedule; needs client confirmation.
+
+## 10. Processing Authority
+
+**Account Trustee** (Financial & Trust Institutions module), escalating to the **RERA Escrow Department** for final audit.
+
+## 11. Expected Processing Time
+
+**Waiting time: 29 business hours; Service delivery: 33 business hours.**
+
+## 12. Processing Workflow
+
+Log in to Real Estate Developers Portal
+↓
+Select Escrow Account
+↓
+Select "Request Project Profit Withdrawal"
+↓
+Enter Requested Amount and Basis
+↓
+Submit Application
+↓
+Application Sent to Account Trustee
+↓
+Account Trustee Assesses Solvency, Uploads Assessment
+↓
+Escrow Account Department Audits: Approve or Reject
+↓
+If Approved, Funds Released
+
+## 13. Application Status Flow
+
+Draft
+↓
+Submitted
+↓
+Trustee Review
+↓
+RERA Escrow Audit
+↓
+Approved
+↓
+Released
+
+### Additional Statuses
+
+* Information Requested
+* Returned
+* Rejected
+
+## 14. Possible Outcomes
+
+* Profit Withdrawal Approved and Released
+* Additional Information Requested
+* Application Rejected
+
+## 15. Output
+
+Not specified in the source ("no doc" against this row). **Proposed**: an in-system Profit Withdrawal Confirmation and disbursement record; needs client confirmation.
+
+## 16. Related Services
+
+* Service #8 – Escrow Account Activation
+* Service #12 – Receive Payment from Escrow Account
+* Financial & Trust Institutions: [ui/screens/escrow-request-queue.md](../../financial-trust-institutions/ui/screens/escrow-request-queue.md) and [ui/screens/escrow-request-details.md](../../financial-trust-institutions/ui/screens/escrow-request-details.md) *(cross-module: the Account Trustee's side of this transaction)*
+
+## 17. UI Screens
+
+* Fund Release Request *(closest match — see the mismatch note in Section 1)*
+* Fund Release Request Details
+
+## 18. API Requirements
+
+* Validate Escrow Account Status and Balance
+* Submit Profit Withdrawal Request
+* Notify Account Trustee
+* Retrieve Trustee Assessment
+* Submit for RERA Escrow Audit
+* Retrieve Application Status
+* Disburse Funds
+* Send Notifications
+
+## 19. Database Entities
+
+* Developer Company
+* Project
+* Escrow Account
+* Account Trustee
+* Profit Withdrawal
+* Application
+* Document
+* Notification
+* Audit Log
+
+## 20. Acceptance Criteria
+
+* Developer can request a profit withdrawal against an active escrow account with available balance.
+* System validates requested amount against available balance.
+* Trustee assessment and RERA escrow audit both precede release.
+* Approved withdrawals disburse funds and update the escrow account balance.
+* All activities are recorded in the audit log.
+
+## 21. Business Rules
+
+1. Only an active escrow account with an available profit balance may be drawn against under this service.
+2. The Account Trustee's assessment must precede RERA's escrow audit.
+3. All submissions, Trustee assessments, audits, and disbursements must be permanently recorded in the audit trail.
+4. **Documented against the closest existing screen, not an exact match** — flagged for client confirmation of whether a dedicated profit-withdrawal form is needed.

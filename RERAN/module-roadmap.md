@@ -30,7 +30,7 @@ Services that the source material does not contain but the PRD or Nigerian law a
 | Group | Module | Services | Roles | Sub-systems | Documentation status |
 | :---- | :---- | :---: | :---: | :---: | :---- |
 | **A** | Regulatory Authority & Governance | **0** | 8 | 6 | Not started — see gap below |
-| **B** | Real Estate Developers | 27 | 4 | 3 | UI complete (19 screens); no service flows |
+| **B** | Real Estate Developers | 27 | 4 | 3 | UI complete (19 screens); 27/27 service flows drafted, unmerged (issue #33) |
 | **C** | Financial & Trust Institutions | 18 | 4 | 3 | 18 service-flow files written, 16 of them thin; no UI |
 | **D** | Real Estate Service Companies | 26 | 4 | 4 | Roles, services overview; no service flows |
 | **E+F** | Individual User | 41 | 6 | 4 | 43 service flows written; count reconciled; no UI |
@@ -40,7 +40,7 @@ Services that the source material does not contain but the PRD or Nigerian law a
 
 Service counts are verified row by row against the master service table and reconcile exactly with the source workbook's own summary. The individual-user module's count now reconciles too — see Known Issues for how.
 
-**Pattern worth naming:** every module that has moved past roles/overview has done so unevenly. Group B has full UI and no service flows. Individual User has full service flows and no UI. Group C now has a file per service but little inside them. No module has both stages complete yet.
+**Pattern worth naming:** every module that has moved past roles/overview has done so unevenly. Group B has full UI and, as of an unmerged PR against issue #33, drafted service flows underneath it. Individual User has full service flows and no UI. Group C now has a file per service, at full depth. No module has both stages complete and merged yet.
 
 ---
 
@@ -99,7 +99,7 @@ Roles are now documented (`modules/allied-professionals/roles-and-responsibiliti
 
 ### Group B — Real Estate Developers (27 services)
 
-The most heavily regulated external group, and the only one with UI documented before service flows — the reverse of the project's derivation chain.
+The most heavily regulated external group, and the only one with UI documented before service flows — the reverse of the project's derivation chain. Service flows have now been drafted underneath the existing UI (issue #33); this profile is updated in draft language since that work is not yet merged.
 
 | Source category | Services |
 | :---- | :---: |
@@ -109,7 +109,7 @@ The most heavily regulated external group, and the only one with UI documented b
 
 Escrow dominates: account activation, transfer, profit withdrawal, payment release, mortgage deposit, bank guarantee cancellation, expense cap amendment. Every one of these routes through a Group C Account Trustee, making B and C tightly coupled.
 
-**Status:** all 19 screens migrated to `modules/real-estate-developer/ui/screens/`, shared component/validation/status-badge docs consolidated, source UI file retired. No service-flow documents exist yet — the UI describes screens with nothing underneath specifying the business rules they implement.
+**Status:** all 19 screens migrated to `modules/real-estate-developer/ui/screens/`, shared component/validation/status-badge docs consolidated, source UI file retired. All 27 service-flow documents are now drafted in `modules/real-estate-developer/service-flows/` (unmerged — see issue #33 / its PR), written against the pre-existing UI and cross-checked for mismatches rather than force-fit to it. Several gaps surfaced in that process: no UI screen exists for fee transfer between properties (#7), expense-cap amendment (#11), or either licensing service (#22, #23); the escrow surface's two generic actions (Register Escrow Account, Request Fund Release) represent seven distinct source rows (#8–#12, #20–#21) with no per-service UI distinction; and the Title Deed Data rows (#24, #25) can't be confidently pinned to one screen over another. Full detail in the PR description.
 
 ### Group D — Real Estate Service Companies (26 services)
 
@@ -190,7 +190,7 @@ The proposed-services list runs alongside this sequence rather than inside it: i
 | Issue | Module | Status |
 | :---- | :---- | :---- |
 | 17 of 18 service flows are thin stubs that record source-available data as unspecified | Financial & Trust | Open — backfill from master table rows 28–45 |
-| UI documented before service flows | Real Estate Developer | Open — flows to be written underneath |
+| UI documented before service flows | Real Estate Developer | Drafted, unmerged — 27/27 service flows written underneath the existing UI (issue #33); merge pending review |
 | No UI documented at all | Individual User | Open — the mirror-image gap of Real Estate Developer's |
 | 23 client questions outstanding | Financial & Trust | Sent, awaiting answers |
 | No application status vocabulary exists platform-wide | All | Proposed for Group C; needs a platform decision |
