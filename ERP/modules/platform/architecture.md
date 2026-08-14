@@ -37,7 +37,7 @@ Always first-class, for every company — even a single-product company has one 
 
 The core `Order` entity holds: customer, dates, status, line items, delivery, billing. Industry-specific fields must not be fixed columns on this schema — they belong in a custom-fields/metadata layer attached to the core Order.
 
-**Status: the layer's mechanism (schema design, dynamic UI rendering) is not yet designed. Top open architectural item.**
+**Status: resolved.** See [custom-fields-layer.md](custom-fields-layer.md) for the full mechanism (a `field_definitions` config table driving a `custom_fields JSONB` column, seeded per company from its industry category's default template).
 
 ## Roles (definable per company, implementation deferred)
 
@@ -51,7 +51,7 @@ Super Admin, Admin/MD, Sales/Order Entry, Accountant, Production Manager, Invent
 
 ## Design system
 
-Built during the Woven Label Manufacturing reference build; treated as the reusable default theme, company-brandable. Color tokens (neutral scale, primary blue, five production status colors), spacing scale (4–48px), typography (Inter, 12–24px, tabular figures for numeric columns), full component library (Sidebar, Top Bar, Data Table, Cards, Buttons, Status Tags, Form Inputs, Modals, Drawers, Tabs, Pagination, Empty States, File/Attachment Chips, Alert/Banner).
+Built during the Woven Label category's reference build; treated as the reusable default theme, company-brandable. Color tokens (neutral scale, primary blue, five production status colors), spacing scale (4–48px), typography (Inter, 12–24px, tabular figures for numeric columns), full component library (Sidebar, Top Bar, Data Table, Cards, Buttons, Status Tags, Form Inputs, Modals, Drawers, Tabs, Pagination, Empty States, File/Attachment Chips, Alert/Banner).
 
 ## Navigation / IA pattern
 
