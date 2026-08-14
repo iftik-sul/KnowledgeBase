@@ -54,7 +54,7 @@ One sidebar, identical for every user of a verified institution account, regardl
 * Escrow Requests
 * Trust Accounts
 * Compliance Reports
-* Settlement Account
+* Payment History *(corrected 2026-08-14 — previously "Settlement Account"; no standing account exists to manage, see `open-questions.md` B1 and [payments.md](payments.md))*
 * Documents
 * Institution Profile
 * Notifications
@@ -82,7 +82,7 @@ Every role lands on Dashboard, with identical access to its content. Only the su
 | Role | Primary call to action |
 | :---- | :---- |
 | Mortgage Officer | New Service Request |
-| Institution Relationship Manager | Whichever of approval renewal or settlement shortfall is more urgent; otherwise institution overview |
+| Institution Relationship Manager | Approaching approval renewal, if any; otherwise institution overview. **Corrected 2026-08-14** — previously "whichever of approval renewal or settlement shortfall is more urgent"; there is no standing settlement account left to run short (`open-questions.md` B1), so that half of the comparison no longer has a referent. No replacement urgency trigger is proposed in its place — flagged as a gap, not silently filled. |
 | Account Trustee | Oldest escrow request awaiting assessment |
 | Auditing Bureau Officer | Nearest reporting obligation |
 

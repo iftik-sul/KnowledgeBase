@@ -33,7 +33,7 @@ Formally discharge a mortgage once it is no longer secured, so the property regi
 
 ## 3. Description
 
-The bank confirms settlement (or other release grounds) of the underlying loan. A Mortgage Officer enters the release into the Online Mortgage System against the existing mortgage record, attaching evidence of settlement. The transaction is certified internally, then audited by RERA using the same workflow structure as mortgage registration. On approval, the fee is deducted from the institution's settlement account, the mortgage is discharged on the registry, and the output documents — including the Mortgage Release Letter, where the mortgage was itself registered — are delivered to the customer by email. The service can alternatively be processed in assisted mode at a Real Estate Registration Trustee Centre.
+The bank confirms settlement (or other release grounds) of the underlying loan. A Mortgage Officer enters the release into the Online Mortgage System against the existing mortgage record, pays the fee upfront via the shared platform payment gateway, and attaches evidence of settlement. The transaction is certified internally, then audited by RERA using the same workflow structure as mortgage registration. On approval, the mortgage is discharged on the registry, and the output documents — including the Mortgage Release Letter, where the mortgage was itself registered — are delivered to the customer by email. The service can alternatively be processed in assisted mode at a Real Estate Registration Trustee Centre.
 
 ## 4. Who Can Apply
 
@@ -51,7 +51,7 @@ The bank confirms settlement (or other release grounds) of the underlying loan. 
 * Registered RERAN institution (Group C) account, with a Mortgage Officer provisioned.  
 * An existing, active registered mortgage against the property.  
 * The underlying loan has been settled, or other grounds for release apply.  
-* Institution's settlement account holds a sufficient prefunded balance to absorb the fee once approved (B1, B4).
+* Payment has been completed via the shared platform payment gateway before the application is lodged (B1).
 
 ## 6. Required Information
 
@@ -82,11 +82,11 @@ The bank confirms settlement (or other release grounds) of the underlying loan. 
 
 Applicable according to the RERAN fee schedule.
 
-> **Proposed** — ad valorem/banded basis per B6, or a flat discharge fee, given the service does not create a new secured amount to base a percentage on. Exact schedule is client data (B5). See Open Questions.
+> **Corrected 2026-08-14** — per the corrected `open-questions.md` B6, RERA sets this fee directly, per service code (the earlier ad-valorem-vs-flat-discharge-fee question is moot once the fee no longer scales off a secured amount at all). Exact fee is a configuration fact (B5), not client data awaiting collection.
 
 ## 9. Payment Required
 
-**Yes** — Institution Account Debit model (B1), same structure as Service #3. Deducted from the institution's settlement account after RERA approval.
+**Yes** — paid upfront by the institution via the shared platform payment gateway, before the application is lodged, same structure as Service #3. **Corrected 2026-08-14** — previously Institution Account Debit, deducted after RERA approval; that model is retired, see [payments.md](../payments.md) and `open-questions.md` B1.
 
 ## 10. Processing Authority
 
@@ -117,6 +117,8 @@ Enter Release Information
 ↓  
 Upload Settlement / Discharge Evidence  
 ↓  
+Pay via Shared Platform Gateway  
+↓  
 Submit for Internal Certification
 
 ↓
@@ -136,8 +138,6 @@ Receive in Transaction Audit Queue
 Audit Release  
 ↓  
 Approve, Return, or Reject  
-↓  
-Deduct Fee from Institution Settlement Account  
 ↓  
 Discharge Mortgage on Property Registry  
 ↓  
@@ -163,6 +163,10 @@ Receive Output via Email
 
 Draft  
 ↓  
+Payment Pending  
+↓  
+Payment Successful  
+↓  
 Pending Internal Certification  
 ↓  
 *(Returned by Certifier → back to Draft)*  
@@ -175,16 +179,18 @@ Information Requested
 ↓  
 Returned for Correction  
 ↓  
-Approved — Awaiting Payment  
+Approved  
 ↓  
 Completed
 
 ### Additional Statuses
 
+* Payment Failed *(retryable, pre-lodging — see [payments.md](../payments.md))*  
 * Returned by Certifier  
 * Rejected  
-* Withdrawn  
-* Expired *(B3)*
+* Withdrawn
+
+**Corrected 2026-08-14** — `Approved — Awaiting Payment` and `Expired` (B3) removed; see Service #3's Application Status Flow section for the reasoning, which applies identically here.
 
 ## 14. Possible Outcomes
 
@@ -192,8 +198,7 @@ Completed
 * Additional Information Requested  
 * Application Returned  
 * Application Rejected  
-* Insufficient Settlement Balance / Payment Failed  
-* Approval Expired  
+* Payment Failed  
 * Application Withdrawn
 
 ## 15. Output
@@ -202,7 +207,7 @@ Upon successful completion, the system generates:
 
 * Mortgage Release Letter *(where the mortgage was itself registered)* — sourced (row 33)  
 * The applicable one of: Certificate of Title / Title Deed / Usufruct Title Deed / Statement Certificate / Provisional Sale Registration Certificate, reissued free of the discharged encumbrance — sourced (row 33)  
-* Fee Balance — settlement-account statement line, not a receipt (B9)
+* Payment Receipt — proof the fee settled, issued at checkout before the application was lodged. **Corrected 2026-08-14** — previously "Fee Balance" (B9); see [payments.md](../payments.md).
 
 ## 16. Related Services
 
@@ -220,7 +225,7 @@ Upon successful completion, the system generates:
 * Document Upload  
 * Internal Certification Queue  
 * Application Review  
-* Settlement Account Confirmation  
+* Payment Confirmation
 * Application Submitted  
 * Application Details  
 * Release Confirmation
@@ -233,10 +238,10 @@ Upon successful completion, the system generates:
 * Submit for Internal Certification  
 * Retrieve Certification Status  
 * Calculate Service Fee  
-* Check Settlement Account Balance  
+* Verify Payment Status
 * Submit Mortgage Release Application  
 * Retrieve Application Status  
-* Deduct Settlement Account Fee  
+* Process Gateway Payment
 * Discharge Mortgage on Property Registry  
 * Generate Mortgage Release Letter  
 * Generate Updated Certificate / Statement Certificate  
@@ -253,8 +258,7 @@ Upon successful completion, the system generates:
 * Application  
 * Service Request  
 * Document  
-* Settlement Account  
-* Settlement Transaction  
+* Payment Transaction
 * Notification  
 * Audit Log
 
@@ -264,7 +268,7 @@ Upon successful completion, the system generates:
 * System validates the mortgage is active and registered before allowing release.  
 * Internal certifier — any of the four Group C roles, including the filer — can certify or return the release before it reaches RERA.  
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
-* Fee is deducted from the institution's settlement account only after approval.  
+* Fee is paid via the shared platform payment gateway before the application is lodged.  
 * Application receives a unique application reference number.  
 * Approved releases discharge the mortgage on the official property registry and issue a Mortgage Release Letter.  
 * Institution and customer receive completion notifications.  
@@ -275,12 +279,11 @@ Upon successful completion, the system generates:
 1. Only a Mortgage Officer, or a Trustee Centre operator acting on the institution's behalf, may initiate a release.  
 2. The mortgage being released must be active and registered.  
 3. The transaction must pass internal institutional certification before routing to RERA.  
-4. Payment is deducted from the institution's settlement account only after approval (B1).  
-5. Submission is blocked if the projected settlement balance after fees would go negative (B4).  
-6. An approved but unsettled transaction lapses to Expired after 30 calendar days (B3).  
-7. A Mortgage Release Letter is issued only where the mortgage was itself registered on the platform.  
-8. Every application receives a unique application reference number.  
-9. All applications, certifications, approvals, settlement deductions, discharges, and notifications are permanently recorded in the audit trail.
+4. Payment is made via the shared platform payment gateway, upfront, before the application can be lodged — not deducted from a settlement account (B1, corrected 2026-08-14).  
+5. **Corrected 2026-08-14** — the previous low-balance-warning and 30-day-expiry rules (B4, B3) are removed; see Service #3's Business Rules for the reasoning, which applies identically here.  
+6. A Mortgage Release Letter is issued only where the mortgage was itself registered on the platform.  
+7. Every application receives a unique application reference number.  
+8. All applications, certifications, approvals, payments, discharges, and notifications are permanently recorded in the audit trail.
 
 ## Open Questions
 

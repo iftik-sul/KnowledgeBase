@@ -33,9 +33,12 @@ View Dashboard
 ↓
 [ Any of the following, in any order, any number of times, by any role: ]
 
-   Service Request
+   Service Request (mortgage / finance-lease lifecycle, #3–#11)
    Start Service Request → Select Service & Property → Enter Transaction Particulars →
-     Attach Supporting Documents → Submit to Internal Certification
+     Attach Supporting Documents → Pay (shared platform gateway, upfront) →
+     Submit to Internal Certification
+   (Corrected 2026-08-14 — payment is now upfront, part of this branch, not a later separate
+   step; see `open-questions.md` B1.)
 
    Internal Certification
    Open Internal Certification Queue → Review Request & Attached Documents →
@@ -48,11 +51,9 @@ View Dashboard
      Upload Supporting Assessment → Certify, Return, or Request Information →
      Forward to RERAN Escrow Audit → Execute Approved Transfer
 
-   Institutional Standing
-   Review Approval Standing & Expiry → Submit Approval Renewal (#1) or Cancellation (#2, #18)
-
-   Settlement
-   Monitor Settlement Position → Fund Settlement Account → Settle Approved Transactions
+   Institutional Standing (#1, #2, #18)
+   Review Approval Standing & Expiry → Submit Approval Renewal (#1) or Cancellation (#2, #18) →
+     Pay, after RERA's decision (#1–#2 only — sourced, unaffected by the 2026-08-14 correction)
 
    Compliance Reporting
    Review Reporting Obligations → Examine Trust Accounts & Statements → Raise Findings →
@@ -67,10 +68,13 @@ View Dashboard
 ↓
 Track Application Status / Respond to RERAN Information Requests
 ↓
-Confirm Settlement & Retrieve Output Document (where applicable)
+Retrieve Output Document — pay first, then retrieve (#3–#11, #12–#18) or confirm settlement,
+  then retrieve (#1–#2, paid after approval)
 ↓
 Logout
 ```
+
+**Corrected 2026-08-14** — this closing step previously read "Confirm Settlement & Retrieve Output Document" uniformly, matching the old post-approval-payment model. Payment now happens upfront for most services (#3–#18), so there is no settlement left to confirm at this point in the journey for them; only #1–#2 still pay after approval, and only for those two does "confirm settlement" still describe a real step here.
 
 Every branch is reachable by every logged-in user of the institution account. Which branches a given person actually uses is a matter of their role in practice, described below — not a system restriction.
 
@@ -94,7 +98,7 @@ Typically maintains the institution's standing and its people, in practice.
 * Institutional approval and renewal (#1)
 * Approval cancellation (#2)
 * Contract cancellation (#18)
-* Settlement account funding and settlement
+* Payment of approval/renewal fees after RERA's decision (#1–#2 only — sourced, unaffected by the 2026-08-14 payment-model correction). **Corrected 2026-08-14** — previously "Settlement account funding and settlement"; there is no standing account left to fund (`open-questions.md` B1).
 * Staff records and institution-wide oversight — no longer "permission scopes" to provision, since scopes are retired; see the note below
 * Institution-wide oversight of outcomes
 

@@ -3,7 +3,7 @@ project: RERAN
 module: financial-trust-institutions
 type: decision
 status: draft
-updated: 2026-08-10
+updated: 2026-08-14
 contains_proposals: true
 derived_from:
   - "RERAN/modules/financial-trust-institutions/roles-and-responsibilities.md"
@@ -23,6 +23,8 @@ tags:
 
 Twenty-three questions arose from documenting the Financial & Trust Institutions module. Rather than hold the module until the client responds, each now carries a **proposed answer** we will build against unless told otherwise.
 
+**2026-08-14 update.** The payment questions (B1, B2, B4, B5, B6) were corrected following a client decision confirmed via discussion (not a written source document): Group C runs no standing account. Payment is per-transaction, upfront, via a shared platform-wide gateway, with RERA setting the fee per service directly. B9 and B10, both built entirely on the now-retired standing-account mechanism, are superseded rather than reworked. See each answer below for what changed and why the earlier reasoning is kept rather than deleted.
+
 **How to read this:** each answer states a recommendation, the reasoning behind it, how confident we are, and what breaks if it is wrong. Confidence is:
 
 | Level | Meaning |
@@ -32,7 +34,7 @@ Twenty-three questions arose from documenting the Financial & Trust Institutions
 | **Medium** | A reasonable design judgement; a different answer would also be defensible |
 | **Client data** | Cannot be reasoned to. Only RERA holds the answer |
 
-Only one question in twenty-three is client data.
+**All twenty-three questions are now answered; none require client data**, as of the 2026-08-14 payment-model correction resolving B5 (previously the sole client-data item).
 
 **Scope note:** post-login functionality only. Registration and onboarding are excluded.
 
@@ -135,21 +137,31 @@ Where a row gives only one number, propose 24 business hours with escalation to 
 
 ### B1. Standing account or direct debit?
 
-**Standing pre-funded account. The source settles this, in a detail we had treated as noise.**
+**Corrected 2026-08-14 (client decision, via discussion — not a written source document): direct, per-transaction payment via a shared platform-wide payment gateway. No standing account.**
 
-Nearly every Group C mortgage and finance-lease row lists **"Fee balance"** among the issued deliverables, alongside the certificate. A balance is not a receipt. A direct debit produces proof that one payment cleared; only a running account produces a balance worth issuing as an output document.
+Payment is required **upfront** — before the application can even be lodged, not after RERA approval. RERA sets the fee for each service directly; the amount is not derived from loan value, property value, or any other institution-side figure (see the corrected B6). This reverses the payment position in the platform-core pipeline for Group C specifically: **Pay** now comes first, ahead of Lodge/Validate/Audit, not after Audit.
 
-Supporting evidence: the SLAs on these services are 10–25 minutes end to end. Per-transaction gateway authorisation against an external bank account does not fit inside that envelope reliably; deduction from a held balance does.
+**What's superseded, and why it isn't silently dropped:** the reasoning below concluded a standing pre-funded account from the source's "Fee balance" deliverable wording, on the theory that only a running account produces a balance worth issuing as an output document. That evidentiary read of the source text isn't retracted — "Fee balance" genuinely appears on those rows. What's changed is that the client has now confirmed, outside the source documents, that Group C does not actually operate this way: no standing account, per-transaction, upfront. Preserved below for the record, the same way A1/D2 were kept rather than deleted when the access model was corrected.
 
-**Consequence, stated plainly:** the account-management subsystem is in scope. Balance display, top-up, transaction ledger, low-balance alerting and periodic statements are all real build work that appears in no source document and no estimate. That is the item to raise with the client — not the mechanism, which the source supports, but the cost of it.
+> **Superseded reasoning (pre-2026-08-14).** Nearly every Group C mortgage and finance-lease row lists "Fee balance" among the issued deliverables, alongside the certificate. A balance is not a receipt. A direct debit produces proof that one payment cleared; only a running account produces a balance worth issuing as an output document. Supporting evidence: the SLAs on these services are 10–25 minutes end to end. Per-transaction gateway authorisation against an external bank account does not fit inside that envelope reliably; deduction from a held balance does. **Confidence was High on the mechanism.**
 
-**Confidence:** High on the mechanism. The scope consequence needs sign-off.
+**Consequence, corrected.** The earlier "Consequence, stated plainly" paragraph — flagging the settlement-account subsystem (balance display, top-up, transaction ledger, low-balance alerting, periodic statements) as unscoped, unestimated build work — no longer applies. None of that subsystem exists under the corrected model. If anything, this **removes** scope from the earlier estimate concern rather than adding to it.
+
+**Confidence:** Confirmed (client decision, 2026-08-14).
+
+**Affects:** `payments.md` (near-total rewrite), the Institution Account Management section (removed), Section 8/9 of every mortgage and finance-lease service-flow file (#3–#11), Group C's use of the `Approved — Awaiting Payment` status, and B9/B10 (both superseded below).
 
 ### B2. If pre-funded, who tops up and how?
 
-The IRM authorises; two rails — bank transfer against a unique institution reference for large amounts, payment gateway for smaller ones. Recommend this uses the **same wallet primitive proposed for individuals** (`proposed-services.md` P-22) with two account types rather than two separate builds.
+**Corrected 2026-08-14 — the question dissolves along with B1.** There is no standing account to top up. Payment is per-transaction, via **one shared platform-wide payment gateway** — not two funding rails (bank transfer plus gateway), and not restricted to the Institution Relationship Manager. Any user at the institution can initiate and complete payment for a transaction they're working on.
 
-**Confidence:** Medium.
+**On the P-22 equivalence claim, checked rather than assumed.** The original answer below proposed reusing individual-user's wallet primitive (`proposed-services.md` P-22) for institutional top-ups. Re-checking P-22's actual description ("Wallet account — top-up, balance, statement, refund-to-wallet") shows it is itself a **balance-holding wallet** — top-up and balance are exactly the standing-account shape B1 has now ruled out for Group C. So the equivalence claim doesn't carry over cleanly: Group C's corrected payment model (no balance, no top-up, pay-per-transaction) is not the same primitive as P-22 as P-22 is actually documented. What likely *is* shared is the underlying **payment gateway integration** (the card/bank-transfer/USSD rails P-22 presumably sits on top of) — a narrower, lower-confidence claim than "same primitive," flagged here rather than asserted. Needs a decision on whether the shared gateway is genuinely one build artefact reused two ways (wallet-fronted for individuals, direct-charge for institutions) or two separate integrations against the same payment providers.
+
+> **Superseded reasoning (pre-2026-08-14).** The IRM authorises; two rails — bank transfer against a unique institution reference for large amounts, payment gateway for smaller ones. Recommend this uses the same wallet primitive proposed for individuals (`proposed-services.md` P-22) with two account types rather than two separate builds. **Confidence was Medium.**
+
+**Confidence:** Confirmed on "no standing account, one shared gateway, any user can pay" (client decision, 2026-08-14). Open on the P-22 build-sharing question — flagged above, not resolved.
+
+**Affects:** `payments.md`'s Institution Account Management section (removed).
 
 ### B3. What happens when an approved transaction cannot be settled?
 
@@ -161,21 +173,38 @@ An indefinite hold accumulates a register of half-registered mortgages — appro
 
 ### B4. Is there a credit arrangement?
 
-**No negative balance.** Regulatory fees are public revenue; extending credit makes RERA an unsecured creditor of a licensed institution it also regulates. Block submission when the projected balance after fees would go negative, and warn at a configurable threshold before that.
+**Corrected 2026-08-14 — moot.** There is no account to extend credit against, and nothing that could carry a negative balance. Payment is per-transaction and upfront; a transaction either pays successfully or it doesn't proceed. The original question assumed a standing balance that could run below zero, which no longer exists under the corrected B1.
 
-**Confidence:** High.
+> **Superseded reasoning (pre-2026-08-14).** No negative balance. Regulatory fees are public revenue; extending credit makes RERA an unsecured creditor of a licensed institution it also regulates. Block submission when the projected balance after fees would go negative, and warn at a configurable threshold before that. **Confidence was High.**
+
+**Confidence:** Confirmed — moot, not answered (client decision, 2026-08-14).
 
 ### B5. Published fee schedule
 
-**Client data — the only question here we cannot answer.**
+**Corrected 2026-08-14 — resolved, not client data.** There is no fee schedule document to obtain from the client. RERA sets a fee per service directly; the amount is configuration, populated through the fee-schedule engine (FR-16), the same way the corrected B6 (below) describes it — not missing source data to chase.
 
-It does not block build. FR-16 specifies a fee schedule engine, meaning fees are configuration rather than code. Treat the schedule as empty configuration to be populated at Phase 1 discovery, and build the engine against a representative test schedule. See `proposed-services.md` P-33 for who configures it.
+> **Superseded framing (pre-2026-08-14).** Client data — the only question here we cannot answer. It does not block build; FR-16 specifies a fee schedule engine, meaning fees are configuration rather than code. Treat the schedule as empty configuration to be populated at Phase 1 discovery.
+
+The FR-16 configuration-engine reasoning survives intact — it was correct — only the framing changes: from "waiting on the client for missing data" to "this is how the system is meant to work, and RERA populates its own configuration," since there was never a separate published document to request. Build the engine against a representative test schedule; see `proposed-services.md` P-33 for who configures it.
+
+**Confidence:** Confirmed (client decision, 2026-08-14). **This is now 23 of 23 questions answered, 0 needing client data** — see the corrected Summary below.
+
+**Affects:** `payments.md`'s Fee Calculation and To Confirm — Summary sections; `services-overview.md`'s To Confirm item on the payer-model split.
 
 ### B6. Fee basis for mortgage services
 
-**Ad valorem on the secured amount, banded, with a floor and a cap.** FR-16 computes fees from "application type, property value, and classification", which rules out flat-rate. Banding rather than a pure percentage keeps the calculation legible to applicants and matches how registration fees are normally struck.
+**Corrected 2026-08-14 — two separate things, previously conflated.**
 
-**Confidence:** Medium — and it is configuration, so a wrong guess is cheap.
+1. **The financial institution's own commercial relationship with its customer** — loan amount, interest rate, mortgage term, and any other lending economics — is entirely outside RERA's concern. It is never derived, referenced, or documented in any RERA-facing fee description in this module.
+2. **RERA's own per-service fee** is set by RERA directly, configured through the fee-schedule engine (FR-16), independent of loan value, property value, banding, floor, or cap. A flat, RERA-determined figure per service code — the same mechanism the corrected B5 describes.
+
+The earlier answer's "ad valorem on the secured amount" reasoning blurred this boundary, pricing RERA's fee off a figure that belongs to the FI-customer relationship, not to RERA.
+
+> **Superseded reasoning (pre-2026-08-14).** Ad valorem on the secured amount, banded, with a floor and a cap. FR-16 computes fees from "application type, property value, and classification", which rules out flat-rate. Banding rather than a pure percentage keeps the calculation legible to applicants and matches how registration fees are normally struck. **Confidence was Medium.**
+
+**Confidence:** Confirmed on the RERA-sets-it-directly principle (client decision, 2026-08-14). FR-16's "application type... classification" language may still describe how RERA itself varies the fee by service type — compatible with "RERA sets a fee per service" — but a per-loan ad valorem calculation is specifically ruled out.
+
+**Affects:** `payments.md`'s Fee Calculation section; Section 8 (Service Fee) of every mortgage and finance-lease service-flow file (#3–#11).
 
 ### B7. VAT applicability
 
@@ -193,24 +222,15 @@ Service #1 is "approval **/ renewal**", which is only meaningful if approvals ex
 
 ### B9. Are "fee balance", "payment receipt" and "e-receipt voucher" the same thing?
 
-**No — two things, and our earlier assumption that they were one was wrong.** This follows directly from B1.
+**Superseded by the corrected B1 — not reworked, retired.** B9's question was built entirely on the standing-account mechanism B1 established: it distinguished a "fee balance" (a standing-account statement line) from a "payment receipt" (proof a single transaction settled) precisely because both artefacts existed side-by-side under the old model. With no standing account, there is no fee balance to distinguish from anything — every payment is a single, per-transaction event, and **payment receipt** (the same artefact "e-receipt voucher" already named under a different name) is simply what every Group C service now issues. See `payments.md`'s reworked Payment Artefacts section.
 
-| Term | What it is |
-| :---- | :---- |
-| Payment receipt / e-receipt voucher | Proof that a single transaction settled. These two are the same artefact under different names. |
-| Fee balance | The standing account position after that deduction — a statement line, not a receipt. |
-
-**Confidence:** Medium-high, contingent on B1.
-
-**Affects:** `payments.md`, which treats all three as one electronic receipt.
+**Affects:** `payments.md`; every mortgage and finance-lease service-flow file's Output section (the "Fee Balance" bullet is removed, not renamed); `service-01`'s payment section.
 
 ### B10. Do institutions use the public refund service?
 
-**No.** Overpayment or a voided transaction credits back to the standing account automatically, same-day. Cash-out to a commercial account happens only on account closure, and that route can reuse the public refund workflow's Ministry of Finance approval.
+**Superseded by the corrected B1 — not reworked, retired.** B10's "same-day automatic credit-back" answer assumed a standing account to credit back into. With no standing account, there is nothing to credit back to automatically. A failed institutional payment is handled the same way any other per-transaction payment failure is (see `payments.md`'s reworked Failed and Reversed Payments section); a settled payment needing reversal now has no obvious reason to bypass the platform's public refund route the way the old answer argued — that argument rested on protecting a standing account's same-day reconciliation, which no longer exists. Whether Group C should still get an expedited refund path on other grounds is not addressed here and is not assumed either way.
 
-The public route requires bank attachments and a seven-business-day turnaround subject to Ministry approval. Applying that to a bank whose fee failed to settle on a 20-minute service is disproportionate.
-
-**Confidence:** Medium.
+**Affects:** `payments.md`'s Failed and Reversed Payments and Additional Statuses sections.
 
 ---
 
@@ -299,27 +319,31 @@ Build it once, configurable per corporate account, with the scope set at the poi
 
 ## Summary
 
+**Updated 2026-08-14** — B5 moved from "needs client data" to "answered," per the payment-model correction (B1).
+
 | Area | Questions | Answered | Needs client data |
 | :---- | :---: | :---: | :---: |
 | A. Roles | 7 | 7 | 0 |
-| B. Payments | 10 | 9 | 1 (B5, fee schedule) |
+| B. Payments | 10 | 10 | 0 |
 | C. Service structure | 4 | 4 | 0 |
 | D. Platform-wide | 2 | 2 | 0 |
-| **Total** | **23** | **22** | **1** |
+| **Total** | **23** | **23** | **0** |
 
-### The four answers that change existing documents
+### The answers that change existing documents
 
 | Answer | What it changes |
 | :---- | :---- |
 | **A4** — ownership re-derived per service | `services-overview.md` Service Ownership table |
-| **B1** — standing account confirmed | `payments.md`; adds a Settlement Account feature and an unscoped subsystem to the estimate |
-| **B9** — fee balance is not a receipt | `payments.md`, which currently merges all three terms |
+| **B1** — corrected 2026-08-14: no standing account, pay-per-transaction upfront via a shared gateway | `payments.md` (near-total rewrite); every mortgage/finance-lease service flow's Service Fee, Payment Required and Output sections; `services-overview.md`'s status vocabulary and features list; `navigation.md` and `role-workflows.md`'s settlement references; `module-roadmap.md`'s platform-wide payment-pipeline claim (see that file's own note on why) |
 | **C2** — counter is an assisted mode | Every Group C service flow's channel section; reverses a prior assumption |
 
-### The three to put in front of the client anyway
+B9 and B10 are not listed separately above — both are superseded by the corrected B1 rather than independently reworked; see their entries for what that means for `payments.md`.
 
-Not because we lack an answer, but because the answer costs money or contradicts the source:
+### The two to put in front of the client anyway
 
-1. **B1** — the settlement account subsystem is real build work that nobody has estimated.
-2. **A4** — our proposed ownership contradicts a column in the source workbook.
-3. **A6** — the waiting-time / delivery-time reading sets the SLA for every escrow service in Group B, not just Group C.
+Not because we lack an answer, but because the answer costs money, contradicts the source, or rests on an assumption worth surfacing:
+
+1. **A4** — our proposed ownership contradicts a column in the source workbook.
+2. **A6** — the waiting-time / delivery-time reading sets the SLA for every escrow service in Group B, not just Group C.
+
+**One more, downgraded from "put in front of the client" to "flagged for design":** B2's claim that the shared payment gateway reuses individual-user's wallet primitive (P-22) doesn't survive a check against P-22's actual description, which is itself balance-based — the opposite of Group C's now-confirmed no-standing-account model. Worth a decision on whether the gateway integration is genuinely shared build, but this is an internal design question, not something requiring the client's input the way A4 and A6 do.

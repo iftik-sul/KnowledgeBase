@@ -91,7 +91,7 @@ Applicable according to the RERAN fee schedule.
 
 Paid directly by the institution, after RERA's approval decision and (for a new approval) after the partner agreement is signed — not before submission. This follows the platform's Lodge → Validate → Audit → **Pay** → Issue pipeline described in `payments.md`, and matches source row 28's sequencing, where "Payment of fees" is listed after the approval decision.
 
-This service uses the **Institution Fee Payment** model (paid by the institution on approval of its own standing), which is distinct from the standing pre-funded **Institution Account Debit** model used by the mortgage and finance-lease services (B1). No settlement-account deduction applies here.
+This service uses the **Institution Fee Payment** model (paid by the institution on approval of its own standing) — sourced, and unaffected by the 2026-08-14 payment-model correction. That correction retired the standing-account **Institution Account Debit** model previously used by the mortgage and finance-lease services (`open-questions.md` B1); it never applied to this service, which was never described as debited from a settlement account.
 
 ## 10. Processing Authority
 
@@ -202,7 +202,7 @@ Upon successful completion, the system generates:
 * Updated Approval Expiry Date *(renewal)*  
 * Payment Receipt
 
-> **Proposed** — per B9, a payment receipt (proof a single transaction settled) is the correct artefact for an Institution Fee Payment service, not a "fee balance" (a standing-account statement line, used by the account-debit services in Section 9).
+> **Corrected 2026-08-14.** This note previously cited `open-questions.md` B9 for the conclusion that a payment receipt, not a "fee balance," is the correct artefact here. B9 is now superseded (see `open-questions.md`), and "fee balance" no longer describes any Group C artefact — there is no standing account left to produce one, for the mortgage and finance-lease services either. The conclusion for this service doesn't change: it was never account-debited and always issues a receipt. What's removed is the citation to a comparison ("not a fee balance, used by the account-debit services") that no longer describes anything real.
 
 ## 16. Related Services
 

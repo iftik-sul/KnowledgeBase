@@ -50,7 +50,7 @@ The customer (lessee) completes the finance lease arrangement with the instituti
 * Registered RERAN institution (Group C) account, with a Mortgage Officer provisioned.  
 * Property is registered with RERAN and its title is verified.  
 * Lessor and lessee have agreed finance lease terms before system entry.  
-* Institution's settlement account holds a sufficient prefunded balance to absorb the fee once approved (B1, B4).
+* Payment has been completed via the shared platform payment gateway before the application is lodged (B1).
 
 ## 6. Required Information
 
@@ -93,13 +93,15 @@ The customer (lessee) completes the finance lease arrangement with the instituti
 
 Applicable according to the RERAN fee schedule.
 
-> **Proposed** — ad valorem/banded basis per B6, applied to the leased asset's value. Exact schedule is client data (B5).
+> **Corrected 2026-08-14** — per the corrected `open-questions.md` B6, RERA sets this fee directly, per service code, independent of the leased asset's value. Previously proposed as ad valorem/banded; that basis is retired. The exact fee is a configuration fact (B5), not client data awaiting collection.
 
 ## 9. Payment Required
 
 **Yes**
 
-> **Proposed / flagged** — row 34 lists "Fee balance (all e-deliverables)" among the issued outputs, the same evidentiary basis `open-questions.md` B1 uses to establish the Institution Account Debit model for the mortgage services, and B1 explicitly cites "every Group C mortgage **and finance-lease** row" as support. This document follows B1 and treats the fee as deducted from the institution's settlement account after approval. However, row 34's workflow text itself reads as a counter transaction ("submit docs, enter system, **pay**, receive output via email"), which looks like a point-of-sale payment rather than an account debit. This tension is not resolved by source and is carried forward — see Open Questions.
+Paid upfront by the institution via the shared platform payment gateway, before the application is lodged.
+
+> **Corrected 2026-08-14 — the tension this section previously carried is resolved, from the other direction.** Row 34's workflow text reads as a counter transaction ("submit docs, enter system, **pay**, receive output via email") — a point-of-sale payment — which this document previously treated as being in tension with the account-debit model B1 assigned to it, on the strength of row 34 also listing "Fee balance" among outputs. With B1 corrected to a single upfront, per-transaction payment model for every Group C service, row 34's counter-transaction reading turns out to have been the more accurate one all along; the "Fee balance" wording is no longer read as implying a standing account (`open-questions.md` B9, superseded). No unresolved tension remains for this service.
 
 ## 10. Processing Authority
 
@@ -130,6 +132,8 @@ Submit Required Documents
 ↓  
 Enter Finance Lease Transaction into System  
 ↓  
+Pay via Shared Platform Gateway  
+↓  
 Submit for Internal Certification
 
 ↓
@@ -150,8 +154,6 @@ Audit Transaction
 ↓  
 Approve, Return, or Reject  
 ↓  
-Deduct Fee from Institution Settlement Account  
-↓  
 Generate Output Documents  
 ↓  
 Deliver Outputs to Customer via Email
@@ -159,6 +161,10 @@ Deliver Outputs to Customer via Email
 ## 13. Application Status Flow
 
 Draft  
+↓  
+Payment Pending  
+↓  
+Payment Successful  
 ↓  
 Pending Internal Certification  
 ↓  
@@ -172,15 +178,18 @@ Information Requested
 ↓  
 Returned for Correction  
 ↓  
-Approved — Awaiting Payment  
+Approved  
 ↓  
 Completed
 
 ### Additional Statuses
 
+* Payment Failed *(retryable, pre-lodging — see [payments.md](../payments.md))*  
 * Returned by Certifier  
 * Rejected  
 * Withdrawn  
+
+**Corrected 2026-08-14** — `Approved — Awaiting Payment` and `Expired` (B3) removed; see Service #3's Application Status Flow section for the reasoning, which applies identically here.
 * Expired *(B3)*
 
 ## 14. Possible Outcomes
@@ -189,8 +198,7 @@ Completed
 * Additional Information Requested  
 * Application Returned  
 * Application Rejected  
-* Insufficient Settlement Balance / Payment Failed  
-* Approval Expired  
+* Payment Failed  
 * Application Withdrawn
 
 ## 15. Output
@@ -199,7 +207,7 @@ Upon successful completion, the system generates:
 
 * Certificate of Title / Title Deed — sourced (row 34)  
 * Map — sourced (row 34); finance lease services list a Map among outputs where the mortgage services do not  
-* Fee Balance — settlement-account statement line, not a receipt (B9)
+* Payment Receipt — proof the fee settled, issued at checkout before the application was lodged. **Corrected 2026-08-14** — previously "Fee Balance" (B9); see [payments.md](../payments.md).
 
 ## 16. Related Services
 
@@ -218,7 +226,7 @@ Upon successful completion, the system generates:
 * Document Upload  
 * Internal Certification Queue  
 * Application Review  
-* Settlement Account Confirmation  
+* Payment Confirmation
 * Application Submitted  
 * Application Details  
 * Registration Confirmation
@@ -233,10 +241,10 @@ Upon successful completion, the system generates:
 * Submit for Internal Certification  
 * Retrieve Certification Status  
 * Calculate Service Fee  
-* Check Settlement Account Balance  
+* Verify Payment Status
 * Submit Finance Lease Registration Application  
 * Retrieve Application Status  
-* Deduct Settlement Account Fee  
+* Process Gateway Payment
 * Generate Certificate of Title  
 * Generate Map  
 * Update Finance Lease Registry  
@@ -253,8 +261,7 @@ Upon successful completion, the system generates:
 * Application  
 * Service Request  
 * Document  
-* Settlement Account  
-* Settlement Transaction  
+* Payment Transaction
 * Notification  
 * Audit Log
 
@@ -264,7 +271,7 @@ Upon successful completion, the system generates:
 * System validates the property is registered and its title is verified.  
 * Internal certifier — any of the four Group C roles, including the filer — can certify or return the transaction before it reaches RERA.  
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
-* Fee is deducted from the institution's settlement account only after approval.  
+* Fee is paid via the shared platform payment gateway before the application is lodged.  
 * Application receives a unique application reference number.  
 * Approved registrations update the official finance lease registry.  
 * Institution and lessee receive completion notifications.  
@@ -275,15 +282,14 @@ Upon successful completion, the system generates:
 1. Only a Mortgage Officer acting under the lessor institution's corporate account, or a Trustee Centre operator acting on its behalf, may initiate finance lease registration.  
 2. The property must be registered with RERAN and its title verified.  
 3. The transaction must pass internal institutional certification before routing to RERA. *(Proposed by extension — not explicit in row 34; see Open Questions.)*  
-4. Payment is deducted from the institution's settlement account only after RERA approval (B1, proposed for finance lease by extension).  
-5. Submission is blocked if the projected settlement balance after fees would go negative (B4).  
-6. An approved but unsettled transaction lapses to Expired after 30 calendar days (B3).  
-7. Every application receives a unique application reference number.  
-8. All applications, certifications, approvals, settlement deductions, and notifications are permanently recorded in the audit trail.
+4. Payment is made via the shared platform payment gateway, upfront, before the application can be lodged — not deducted from a settlement account (B1, corrected 2026-08-14).  
+5. **Corrected 2026-08-14** — the previous low-balance-warning and 30-day-expiry rules (B4, B3) are removed; see Service #3's Business Rules for the reasoning, which applies identically here.  
+6. Every application receives a unique application reference number.  
+7. All applications, certifications, approvals, payments, and notifications are permanently recorded in the audit trail.
 
 ## Open Questions
 
 1. **Does an internal bank-auditor certification step apply to finance lease services**, as it does to mortgage services? Row 34 does not state it explicitly, unlike rows 30–33 and 39.  
-2. **Is the "pay" step at the Trustee Centre a settlement-account deduction or a direct counter payment?** B1's account-debit reasoning is inferred from the "Fee balance" output, but the workflow text reads as a point-of-sale transaction. Not resolved by source.  
+2. ~~Is the "pay" step at the Trustee Centre a settlement-account deduction or a direct counter payment?~~ **Resolved by the 2026-08-14 correction** — there is no settlement account; it is a direct payment via the shared platform gateway, upfront, matching the workflow text's point-of-sale reading all along.  
 3. **Does an online (non-Trustee-Centre) channel exist for finance lease services**, comparable to the Online Mortgage System for mortgage services? Row 34 names only the Trustee Centre.  
-4. **Exact fee schedule.** Client data — see `open-questions.md` B5, B6.
+4. **Exact fee schedule.** Resolved by B5 — RERA sets it directly as configuration, not client data. See `open-questions.md` B5, B6.

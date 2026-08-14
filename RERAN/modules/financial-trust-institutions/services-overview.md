@@ -116,7 +116,7 @@ The #12–#17 count reflects only the sourced (Trustee Centre) branch of A4's co
 * Feature #5 — Internal Certification Queue — transactions awaiting certify-or-return by any of the institution's four Group C users before routing to RERA. **Corrected 2026-08-14**: previously described as gated by a "checker permission scope"; permission scopes are retired module-wide, and this is now an unrestricted action attributed by role in the audit trail, not a scope or a fifth role — see [navigation.md#audit-trail-principle](navigation.md#audit-trail-principle).
 * Feature #6 — Escrow Request Queue — developer-originated requests awaiting Account Trustee action, confirmed as a queue inside the platform (A2)
 * Feature #7 — Approval Expiry Tracking — trustee and auditor approval renewal windows, now driven by the two-year validity period proposed in B8
-* Feature #8 — Settlement Account — balance, top-up, transaction ledger, low-balance alerting, and periodic statements for the institution's standing pre-funded account (B1)
+* Feature #8 — Payment History — per-transaction payment records for the institution: receipts, amounts, service references, and status (successful / failed / refund-requested). **Corrected 2026-08-14** — previously "Settlement Account" (balance, top-up, transaction ledger, low-balance alerting, periodic statements) for a standing pre-funded account; that account is retired (`open-questions.md` B1). This feature is a per-transaction history/reporting view, not an account-management subsystem — see [payments.md](payments.md).
 * Feature #9 — Staff Records — roster and staff-record management for the institution's delegated staff (A1, A5). **Corrected 2026-08-14** — previously "Staff & Permission Scopes," with scope assignment and revocation; permission scopes are retired module-wide, and every staff member has identical system access from the moment they're added, so this feature is now purely about who is on the institution's staff list for audit-trail attribution — see [navigation.md#audit-trail-principle](navigation.md#audit-trail-principle).
 
 ### General Platform Features (8)
@@ -125,7 +125,7 @@ The #12–#17 count reflects only the sourced (Trustee Centre) branch of A4's co
 * Services Catalog
 * Applications
 * Documents
-* Payments — note: Group C runs three payer models rather than one (see `payments.md`): Institution Account Debit for Services #3–#11 (deducted from the institution's standing settlement account after approval, B1), Customer Payment at Counter for Services #12–#18 (paid by the customer, with a receipt or e-receipt voucher issued, B9), and Institution Fee Payment for Services #1–#2 (paid by the institution on approval of its own standing)
+* Payments — note: Group C runs three payer/timing models, not one (see `payments.md`, corrected 2026-08-14): **Upfront gateway payment** for Services #3–#11 (paid by the institution via the shared platform gateway, before the application is lodged — corrected from the retired Institution Account Debit model, B1), **Customer Payment at Counter** for Services #12–#18 (paid by the customer at the point of service, sourced, unaffected by this correction), and **Institution Fee Payment** for Services #1–#2 (paid by the institution after RERA's approval decision, sourced, unaffected by this correction)
 * Notifications
 * Institution Profile
 * Help & Support
@@ -152,13 +152,15 @@ The #12–#17 count reflects only the sourced (Trustee Centre) branch of A4's co
 | Under Review | With the regulator | Compliance & Escrow Auditor |
 | Information Requested | RERA has raised a query | Compliance & Escrow Auditor |
 | Returned for Correction | Sent back to the applicant | Compliance & Escrow Auditor |
-| Approved — Awaiting Payment | Passed audit; fee not yet settled | Compliance & Escrow Auditor |
+| Approved — Awaiting Payment *(Group C: Services #1–#2 only — see note below)* | Passed audit; fee not yet settled | Compliance & Escrow Auditor |
 | Rejected | Refused with documented reason | Compliance & Escrow Auditor |
 | Completed | Settled and output document issued | Platform |
 | Withdrawn | Abandoned by the applicant | Applicant |
-| Expired | Approved but left unpaid for 30 calendar days (B3) | Platform |
+| Expired *(Group C: unclear if this still applies to any service — see note below)* | Approved but left unpaid for 30 calendar days (B3) | Platform |
 
 `Pending Internal Certification` and `Returned by Certifier` apply only to services with a sourced two-gate pattern (Services #3–#11, the mortgage and finance-lease lifecycle). Services #1, #2, and #12–#18 do not carry them, since no internal institutional certification step is described in source for those rows — see each service flow's Application Status Flow section.
+
+**Corrected 2026-08-14.** `Approved — Awaiting Payment` now applies only to Services #1–#2 within Group C: the mortgage/finance-lease lifecycle (#3–#11) pays upfront, before lodging, so nothing is ever approved while still awaiting payment (`open-questions.md` B1); the title & ownership transactions (#12–#18) pay at the point of service, same effect. `Expired`, whose only sourced meaning here was B3's "approved but unregistered" reasoning — written for a registered-title context (mortgages) — does not extend naturally to Services #1–#2's institutional approval/renewal context either. **B3 itself was not revisited by this correction** and remains as written in `open-questions.md`. Whether Services #1–#2 need their own expiry concept for an approved-but-unpaid trustee/auditor status is left open, not resolved here.
 
 ## Channels
 
@@ -177,7 +179,7 @@ Fourteen items remain open across this module's two documents, one fewer than be
 1. Are the five proposed service categories acceptable, or should the source's Development / Transaction / Title-Deed Data grouping be retained? (C1 — proposed answer: adopt them, keep the reconciliation table.)
 2. Is the #12–#17 re-derivation to Trustee Centre Operator acceptable, given it contradicts the source's responsible-role column? (A4 — Medium confidence, flagged for the client explicitly.)
 3. Do the four Application Management features apply to Group C as they do to individual users? (C3 — proposed answer: yes, unchanged.)
-4. Are the five institution-specific features (including the two added by C4 — Settlement Account, Staff Records) correct, and is anything still missing?
+4. Are the five institution-specific features (including the two added by C4 — Payment History, Staff Records) correct, and is anything still missing?
 5. Is the proposed status vocabulary (platform core + Group C extension, D1) acceptable, and is the specific status list correct?
-6. Fee settlement: is the three-way payer-model split (Institution Account Debit / Customer Payment at Counter / Institution Fee Payment) correct for all 18 services, and is it right that finance lease services (#8–#11) sit in the account-debit group on "Fee balance" evidence alone, given their workflow text reads as a counter payment? (B1, flagged in Services #8–#11's Open Questions.)
+6. Fee settlement: is the corrected three-way payer/timing split (Upfront Gateway Payment / Customer Payment at Counter / Institution Fee Payment — see `payments.md`) correct for all 18 services? **Corrected 2026-08-14** — the old version of this question asked whether finance-lease services (#8–#11) belonged in the account-debit group despite reading like a counter payment; that tension is resolved by the correction itself, since the account-debit model no longer exists for any service (B1) and #8–#11's point-of-sale-reading workflow text turns out to have been the more accurate signal all along — see each service flow's Open Questions section.
 7. Published fee schedule for the 18 services — the one question of 23 with no proposed answer (B5, client data).
