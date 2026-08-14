@@ -14,13 +14,15 @@ tags:
 
 A unified, reusable ERP platform — designed to work for any company or industry, not hardcoded to one. The core (Financials, Procurement, Inventory, Manufacturing, HR, Sales & Billing, and cross-cutting Platform config) applies to any company. Industry-specific behavior is layered on as configuration and documented inline, per module, as an "Industry Variations" section — never as changes to the core schema.
 
+Industry categories (e.g., Woven Label, Packaging) are named at the **industry level**, not after any single client company, so the same profile serves any company operating in that industry — not just the specific company whose process informed the profile.
+
 Multi-tenant-ready from day one: every table carries `company_id`, so the same schema supports a single-company template deployment now and a true multi-tenant SaaS model later without a rewrite.
 
 ## Status
 
-Active design phase. Two industry templates are in progress as proof cases:
-- **Woven Label Manufacturing** — design substantially complete.
-- **Circle Packaging** — early design phase; the live test case for the generalized Item Master.
+Active design phase. Two industry categories are in progress as proof cases:
+- **Woven Label** — design substantially complete. Informed by an initial reference deployment (a Dhaka-based woven label manufacturer), but the profile itself applies to any woven-label producer.
+- **Packaging** — early design phase; the live test case for the generalized Item Master. Informed by an initial reference deployment spanning a broader multi-category portfolio (labels, stickers/tags, packaging materials, trims, add-ons), but the profile applies to any company in this category.
 
 This repository is the authoritative source of project knowledge, per [documentation-standards.md](/documentation-standards.md). Content is being migrated in from prior design conversations; treat anything not yet present here as not yet authoritative.
 
