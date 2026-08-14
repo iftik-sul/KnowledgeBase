@@ -31,13 +31,14 @@ Always first-class, for every company — even a single-product company has one 
 |---|---|
 | UOM | Per-item unit of measure |
 | Rate basis | Pricing logic can differ per item, not one global rule |
-| Source-type / category | Distinguishes item types; where needed, manufactured vs. traded |
+| Source-type / category | Distinguishes item types |
+| `is_manufacturable` | Boolean. `true` = the company can produce this item in-house (a BOM may exist for it); `false` = the item is always sourced from a vendor, no BOM exists. This is a default only — see modules/sales-and-billing/order-model.md for how an individual Order Line can still be fulfilled by sourcing even when the item is manufacturable (e.g., a capacity shortfall). |
 
 ## Order model layering
 
-The core `Order` entity holds: customer, dates, status, line items, delivery, billing. Industry-specific fields must not be fixed columns on this schema — they belong in a custom-fields/metadata layer attached to the core Order.
+The core `Order` entity holds only fields genuinely true regardless of what's in it: customer, dates, status, delivery, billing. Per-product data — including industry-specific custom fields — lives on the **Order Line**, not the Order itself, since a single Order can span multiple industry categories. See modules/sales-and-billing/order-model.md for the Order Line model and its Make/Buy fulfillment fork.
 
-**Status: resolved.** See [custom-fields-layer.md](custom-fields-layer.md) for the full mechanism (a `field_definitions` config table driving a `custom_fields JSONB` column, seeded per company from its industry category's default template).
+Industry-specific fields must not be fixed columns on any core schema — they belong in the custom-fields/metadata layer. See [custom-fields-layer.md](custom-fields-layer.md) for the full mechanism (a `field_definitions` config table driving a `custom_fields JSONB` column, scoped per Order Line by that line's item category, seeded per company from its industry category's default template).
 
 ## Roles (definable per company, implementation deferred)
 
