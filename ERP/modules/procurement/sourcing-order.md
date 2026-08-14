@@ -28,7 +28,7 @@ This is a deliberate trade-off: a small amount of duplication (an order-linked w
 
 ## Sourced qty is independent of the Order Line's need
 
-`qty_to_source` is **not** capped at the Order Line's remaining balance — a Sourcing Order can order more than the line currently needs (vendor minimum order quantities, bulk pricing, or intentional buffer). The system does not require these to match.
+`qty_to_source` is **not** capped at the Order Line's remaining need — a Sourcing Order can order more than the line currently needs (vendor minimum order quantities, bulk pricing, or intentional buffer), or, in practice, end up receiving less (partial vendor shipment, short supply). The system does not require these to match.
 
 ## Fields
 
@@ -36,22 +36,20 @@ This is a deliberate trade-off: a small amount of duplication (an order-linked w
 |---|---|
 | `order_line_id` | The Order Line being fulfilled |
 | `item_id` | The item being sourced |
-| `qty_to_source` | Qty being purchased — may exceed the Order Line's remaining need |
+| `qty_required` | The Order Line's qty needed from this Sourcing Order at the time it was created |
+| `qty_to_source` | Qty being purchased — may be more or less than `qty_required` |
 | `vendor_id` | Selected vendor |
 | `purchase_request_id` | Linked Purchase Request in Procurement |
 | `status` | Pending → Ordered from Vendor → Received |
-| `received_qty` | Total qty received against this Sourcing Order |
-| `qty_reserved_to_line` | `min(received_qty, order_line_remaining_need_at_receipt)` — the portion counted toward this Order Line's fulfillment |
-| `qty_surplus` | `received_qty − qty_reserved_to_line` — the portion that exceeded what this line needed |
+| `received_qty` | Total qty received against this Sourcing Order, fully linked to the Order Line — no split between "reserved" and "surplus" |
+| `sourcing_status` | Derived: **Complete** if `received_qty ≥ qty_required`; **Not Completed** if `received_qty < qty_required` |
 
-## Reservation and surplus
+## Received stock is fully linked to the order, whatever the quantity
 
-Received stock is reserved to its Order Line, but only up to what the line actually needs at the time of receipt. Reservation is what makes a Sourcing Order meaningfully different from a generic raw-material Purchase Request: it guarantees `qty_reserved_to_line` isn't consumed by a different order — a Sourcing Order exists specifically to fulfill one Order Line, and if its output weren't reserved to that line there would be nothing distinguishing it from ordinary restocking.
+All stock received against a Sourcing Order enters inventory linked to that Order Line — including any amount beyond `qty_required`. There is no automatic split into a "reserved" portion and an unreserved "surplus" portion; the entire received qty stays associated with the order. This is what makes `sourcing_status` a simple comparison rather than a computed reservation.
 
-Any qty sourced beyond that need (`qty_surplus`) enters general Finished Goods stock automatically on receipt, unreserved and available to any future order — no manual step, since it was never committed to a specific Order Line in the first place.
-
-**Contrast with cancellation:** if an Order (or Order Line) is cancelled or reduced after stock was already reserved against it, that previously-reserved stock becomes orphaned — releasing it back to general stock is an **explicit, manual action**, not automatic, since it's a real inventory-value decision that shouldn't happen silently the moment an order is amended.
+**If it's ever useful to release excess linked stock back to general inventory** (e.g., the order is later reduced or cancelled, or the business decides the extra qty should be available to other orders), that's an **explicit, manual action** — not automatic. Moving stock away from an order it's currently linked to is a real inventory-value decision that shouldn't happen silently.
 
 ## Status parity with Production Order
 
-An Order Line's Balance Qty is the Ordered Qty minus the sum of `qty_reserved_to_line` committed across every Production Order and Sourcing Order against it. This lets the In-Hand Report and Delivery Challan bundling logic treat a Sourcing Order's reserved qty the same way they treat a Production Order's produced qty — Delivery doesn't need to know which path supplied the stock.
+An Order Line's fulfillment is tracked across both Production Orders (produced qty) and Sourcing Orders (received qty). `sourcing_status` on a Sourcing Order plays the same role as a Production Order's produced-vs-balance tracking, so the In-Hand Report and Delivery Challan bundling logic can treat both fulfillment paths the same way — Delivery doesn't need to know which path supplied the stock, only whether it's complete.
