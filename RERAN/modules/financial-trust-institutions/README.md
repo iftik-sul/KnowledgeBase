@@ -29,7 +29,7 @@ RERAN user Group C — banks, mortgage institutions, account trustees and auditi
 
 * [roles-and-responsibilities.md](roles-and-responsibilities.md) — Mortgage Officer, Institution Relationship Manager, Account Trustee, Auditing Bureau Officer.
 * [services-overview.md](services-overview.md) — the 18 services, category breakdown, status vocabulary, and channels.
-* [payments.md](payments.md) — the three payer models, settlement account, and payment artefacts.
+* [payments.md](payments.md) — the three payer/timing models, payment artefacts, and the 2026-08-14 correction to a pay-upfront, no-standing-account model for the mortgage and finance-lease lifecycle. *(Corrected 2026-08-14 — previously "the three payer models, settlement account, and payment artefacts"; there is no standing account any more, see `open-questions.md` B1.)*
 * [open-questions.md](open-questions.md) — 22 of 23 questions raised while documenting this module now carry a proposed answer; 1 (the fee schedule) is client data.
 
 ## Service Flows
@@ -97,4 +97,4 @@ When an item is confirmed, remove its `> **Proposed**` block and bump `updated`.
 * **The status vocabulary is now platform-wide core plus a Group C extension** (D1), rather than undefined for every user group.
 * **Services #1 and #2's role-assignment inconsistency is resolved** — both now sit with the Institution Relationship Manager (A4), not the Account Trustee the source column names.
 * **Row 38 (Service #12) and row 39 (Service #7) are transposed against file order** in the source workbook; the service flows follow the row-to-file mapping, not row sequence.
-* **Row 39 (Grant Property Mortgage) names "Payment receipts" as output** where every other institution-account-debit mortgage row names "Fee balance" — preserved as sourced rather than normalized, and flagged in that service's Open Questions.
+* **Row 39 (Grant Property Mortgage) names "Payment receipts" as output**, which this document previously flagged as the one exception against every other mortgage row's "Fee balance" wording. **Corrected 2026-08-14** — under the corrected payment model (`open-questions.md` B1, B9), there is no standing account and no "fee balance" artefact for any Group C service; row 39's "Payment receipts" is the terminology every mortgage-service row now follows, not an anomaly. See [payments.md](payments.md).

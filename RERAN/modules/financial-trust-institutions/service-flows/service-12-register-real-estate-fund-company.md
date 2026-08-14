@@ -85,7 +85,7 @@ Applicable according to the RERAN fee schedule.
 
 **Yes**
 
-Paid by the customer (the fund company) at the Trustee Centre counter, and an e-receipt is issued — sourced (row 38: "Customer pays fees and obtains e-receipt"). This is the **Customer Payment at Counter** model, distinct from the Institution Account Debit model used by the mortgage and finance-lease services (B1) — this row's output artefact is a receipt, not a fee balance, consistent with B9.
+Paid by the customer (the fund company) at the Trustee Centre counter, and an e-receipt is issued — sourced (row 38: "Customer pays fees and obtains e-receipt"). This is the **Customer Payment at Counter** model, unaffected by the 2026-08-14 payment-model correction (`open-questions.md` B1) — this service was never account-debited, so it's a receipt here as it always was. **Corrected 2026-08-14** — previously cited `B9` for the receipt-vs-fee-balance distinction; B9 is now superseded, since no Group C service produces a "fee balance" any more.
 
 ## 10. Processing Authority
 
@@ -176,7 +176,7 @@ Completed
 Upon successful completion, the system generates:
 
 * E-Ownership Certificate in the Name of the Real Estate Fund — sourced (row 38)  
-* Receipt for Fees — sourced (row 38); a payment receipt (B9), not a fee balance  
+* Receipt for Fees — sourced (row 38), a payment receipt, the same artefact every Group C service now issues (see [payments.md](../payments.md))  
 * Register of Privileges Registration Number Document — sourced (row 38)
 
 ## 16. Related Services

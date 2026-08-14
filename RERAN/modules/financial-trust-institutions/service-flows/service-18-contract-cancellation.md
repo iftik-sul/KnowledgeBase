@@ -80,7 +80,7 @@ Applicable according to the RERAN fee schedule.
 
 **Yes**
 
-Paid by the customer, with an e-receipt issued — sourced (row 45: "Customer pays fees, gets e-receipt"). **Customer Payment at Counter** model; the output includes an e-receipt voucher (B9), not a settlement-account fee balance.
+Paid by the customer, with an e-receipt issued — sourced (row 45: "Customer pays fees, gets e-receipt"). **Customer Payment at Counter** model, unaffected by the 2026-08-14 payment-model correction (`open-questions.md` B1). **Corrected 2026-08-14** — previously cited `B9` for the receipt-vs-fee-balance distinction; B9 is now superseded, since no Group C service produces a "fee balance" any more.
 
 ## 10. Processing Authority
 
@@ -161,7 +161,7 @@ Completed
 Upon successful completion, the system generates:
 
 * Approved e-Certificate of Title / Title Deed — sourced (row 45)  
-* Approved e-Receipt Voucher — sourced (row 45); a payment receipt (B9), not a fee balance
+* Approved e-Receipt Voucher — sourced (row 45), the same artefact every Group C service now issues (see [payments.md](../payments.md))
 
 ## 16. Related Services
 

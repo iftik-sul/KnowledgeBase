@@ -4,7 +4,7 @@ module: financial-trust-institutions
 type: service-flow
 status: draft
 contains_proposals: true
-updated: 2026-08-10
+updated: 2026-08-14
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
@@ -92,7 +92,7 @@ Applicable according to the RERAN fee schedule.
 
 **Yes**
 
-Paid by the customer at the Trustee Centre — sourced (row 40: "Customer pays fees"). **Customer Payment at Counter** model; the output includes Payment Receipts (B9), not a settlement-account fee balance.
+Paid by the customer at the Trustee Centre — sourced (row 40: "Customer pays fees"). **Customer Payment at Counter** model, unaffected by the 2026-08-14 payment-model correction (`open-questions.md` B1). **Corrected 2026-08-14** — previously cited `B9` for the receipt-vs-fee-balance distinction; B9 is now superseded, since no Group C service produces a "fee balance" any more.
 
 ## 10. Processing Authority
 
@@ -181,7 +181,7 @@ Upon successful completion, the system generates:
 * Certificate of Title — sourced (row 40)  
 * Title Deed — sourced (row 40)  
 * Map — sourced (row 40)  
-* Payment Receipts — sourced (row 40); a payment receipt (B9), not a fee balance
+* Payment Receipts — sourced (row 40), the same artefact every Group C service now issues (see [payments.md](../payments.md))
 
 ## 16. Related Services
 

@@ -4,7 +4,7 @@ module: financial-trust-institutions
 type: service-flow
 status: draft
 contains_proposals: true
-updated: 2026-08-10
+updated: 2026-08-14
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
@@ -84,7 +84,7 @@ Applicable according to the RERAN fee schedule.
 
 **Yes**
 
-Paid by the customer at the Trustees Centre, with a receipt issued — sourced (row 42, Step 4: "Pay fees, get receipt"). **Customer Payment at Counter** model (B9).
+Paid by the customer at the Trustees Centre, with a receipt issued — sourced (row 42, Step 4: "Pay fees, get receipt"). **Customer Payment at Counter** model, unaffected by the 2026-08-14 payment-model correction (`open-questions.md` B1). *(Corrected 2026-08-14 — previously cited `B9`, now superseded.)*
 
 ## 10. Processing Authority
 
