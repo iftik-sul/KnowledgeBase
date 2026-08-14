@@ -41,21 +41,21 @@ One Production Order per product within a parent Order (full detail in modules/m
 
 ## Industry Variations
 
-### Woven Label Manufacturing
+### Woven Label
 
 - Custom Order fields: O/No, Card, File#, Pick/acc, Item Code, PO No, JH SO/NO, ref no, Color Code 1–8, Comments.
 - Line items: Label Description / Size / Qty / Rate / Amount / File Name / Repit.
 - Workflow: Order created → File# assigned (digital artwork file) → Card (physical Sample Card made from the artwork file, sent to customer for approval, supports revisions v1, v2, ...).
 - Material Requisition is called "Yarn Requisition Slip"; can be submitted before or after the Sample Card (parallel, not sequential).
-- **Rate-calculation rule:** `amount = (qty in pcs / 12) × dozen rate`. This is this template's convention, not a platform-wide rule.
-- Numbering: Order Number 5-digit numeric; Card No 4-digit numeric; File Name = letter + digits (e.g., "L5568"); Pick/Acc = two numbers separated by a slash (e.g., "1652/72").
-- Operates under two trade names for the same business (one on Orders, a different one on Bills/Requisitions), same address.
+- **Rate-calculation rule:** `amount = (qty in pcs / 12) × dozen rate`. This is a Woven Label industry convention, not a platform-wide rule — a different woven-label company could configure a different rate rule if their pricing convention differs.
+- Numbering: Order Number 5-digit numeric; Card No 4-digit numeric; File Name = letter + digits (e.g., "L5568"); Pick/Acc = two numbers separated by a slash (e.g., "1652/72"). These are one company's chosen config values in this category, not fixed for every Woven Label company.
+- The reference deployment operates under two trade names for the same business (one on Orders, a different one on Bills/Requisitions), same address — an example of the multi-letterhead capability (see modules/platform/architecture.md), not a Woven Label industry requirement.
 
-### Circle Packaging
+### Packaging
 
-- Broader 17-product portfolio (woven/printed labels, stickers/tags, packaging materials, trims, add-ons) — the case that proved the generic Item Master is needed (see modules/platform/architecture.md).
-- Trade-finance-heavy workflow: introduces Proforma Invoice (PI) and Letter of Credit (LC) as new pipeline concepts not present in the Woven Label template.
+- Multi-category product portfolio (woven/printed labels, stickers/tags, packaging materials, trims, add-ons) — the category that proved the generic Item Master is needed (see modules/platform/architecture.md).
+- Trade-finance-heavy workflow: introduces Proforma Invoice (PI) and Letter of Credit (LC) as new pipeline concepts not present in the Woven Label category.
   - **LC statuses:** Awaited, Received, Verified, Expiring Soon, Expired.
   - PI List screen designed; PI Create screen deferred (presentation-value sequencing).
-- **Open decisions specific to this template:** PI numbering format, PI revision handling, PI-to-Order cardinality (one PI → one Order? one PI → many Orders?).
-- Manufactured vs. traded item distinction (production vs. procurement) is currently out of scope for this template.
+- **Open decisions specific to this category:** PI numbering format, PI revision handling, PI-to-Order cardinality (one PI → one Order? one PI → many Orders?).
+- Manufactured vs. traded item distinction (production vs. procurement) is currently out of scope for this category.
