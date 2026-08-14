@@ -103,3 +103,15 @@ One `##` section per decision. Newest at the bottom. Superseded decisions are ma
 **Decision:** Sourcing Order is a thin, order-linked layer over the existing Procurement Purchase Request flow — same vendor-selection and approval/payment mechanics, plus a link back to the Order Line it fulfills and a status lifecycle mirroring Production Order.
 **Alternatives considered:** Build a fully independent purchasing flow for order-linked sourcing, separate from the raw-material Purchase Request flow.
 **Rationale:** The existing Procurement flow's approval/payment mechanics are already designed and don't need to be reinvented; what was missing was order-traceability, not a different approval process. A thin wrapper gets the traceability without duplicating the underlying purchasing system. Trade-off accepted: whether Sourcing Order purchases need their own approval category (distinct from raw material) is still open — see modules/procurement/README.md.
+
+## D17 — Sourcing Order stock is reserved to its Order Line, not general stock, up to what the line needs
+
+**Decision:** Received qty against a Sourcing Order is reserved to its Order Line (`qty_reserved_to_line`), preventing it from being consumed by a different order. Releasing previously-reserved stock (e.g., after an order is cancelled or reduced) is an explicit, manual action, not automatic.
+**Alternatives considered:** Let received stock enter general Finished Goods stock indistinguishable from other stock, with no reservation.
+**Rationale:** Reservation is what makes Sourcing Order meaningfully different from an ordinary raw-material Purchase Request — without it, "received against Sourcing Order #X" wouldn't reliably mean "Order Line #X is covered," and two orders needing the same item would race for it. Manual release on cancellation was chosen over automatic release because silently pulling reserved stock the moment an order is amended is a real inventory-value decision that shouldn't happen without a person confirming it.
+
+## D18 — Sourced qty is decoupled from the Order Line's actual need; surplus is unreserved automatically
+
+**Decision:** `qty_to_source` on a Sourcing Order is not capped at the Order Line's remaining need — a company can order more than a line currently requires (vendor MOQs, bulk pricing, intentional buffer). On receipt, only `min(received_qty, remaining_need)` is reserved to the line; the rest (`qty_surplus`) enters general Finished Goods stock automatically, unreserved.
+**Alternatives considered:** Require `qty_to_source` to exactly match the Order Line's need, rejecting or blocking any excess.
+**Rationale:** Real purchasing doesn't work in exact quantities — vendor minimums and bulk pricing are normal, not exceptional. Capping sourced qty at the line's need would force awkward workarounds (e.g., a separate unlinked Purchase Request for the excess) for something that's actually routine. Splitting reserved vs. surplus automatically avoids that without requiring a manual step for the common case, while D17's reservation still holds for the portion that matters.
