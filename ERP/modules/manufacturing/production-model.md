@@ -27,12 +27,12 @@ Daily production-planning view listing Orders with Balance Qty > 0 (Order Qty mi
 
 ## Industry Variations
 
-### Woven Label Manufacturing
+### Woven Label
 
 - Material Requisition is called the "Yarn Requisition Slip."
 - Artwork File# and Sample Card are shared at the Order level (not per Production Order/product).
-- In-Hand Report groups by color (White/Black in the original paper form).
+- In-Hand Report groups by color (White/Black in the reference deployment's paper form) — the grouping dimension itself is configurable per company, not fixed to color for every Woven Label company.
 
-### Circle Packaging
+### Packaging
 
-- Manufactured vs. traded item distinction (production vs. procurement) is currently out of scope for this template — all 17 products are treated uniformly for now.
+- Manufactured vs. traded item distinction (production vs. procurement) is currently out of scope for this category — all products in the reference deployment's portfolio are treated uniformly for now.
