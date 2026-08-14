@@ -23,13 +23,13 @@ One `##` section per decision. Newest at the bottom. Superseded decisions are ma
 
 **Decision:** Every company gets a real Item Master (UOM, rate basis, source-type/category), even a single-product company.
 **Alternatives considered:** Keep the single-product assumption from the original build; add an Item Master only when a multi-product company needs it.
-**Rationale:** Circle Packaging proved the single-product assumption doesn't generalize. Building it in from the start avoids a second migration.
+**Rationale:** The Packaging category's reference deployment proved the single-product assumption doesn't generalize. Building it in from the start avoids a second migration.
 
 ## D3 — Order model split into core entity + custom-fields/metadata layer
 
 **Decision:** The core Order entity holds only generic fields. Industry-specific fields attach via a separate metadata layer.
 **Alternatives considered:** Nullable columns per industry added to the core Order table as needed.
-**Rationale:** Nullable-columns-per-industry doesn't scale — every new industry template would widen and pollute the core table.
+**Rationale:** Nullable-columns-per-industry doesn't scale — every new industry category would widen and pollute the core table.
 **Status: mechanism not yet designed** — top open item.
 
 ## D4 — Trade name / letterhead is a company-level config, not a hardcoded constant
@@ -58,6 +58,12 @@ One `##` section per decision. Newest at the bottom. Superseded decisions are ma
 
 ## D9 — Industry variations documented inline per module, not as separate top-level modules
 
-**Decision:** Industry-specific behavior (Woven Label Manufacturing, Circle Packaging) is documented under an "Industry Variations" section inside the relevant functional module's document, not as its own top-level module.
+**Decision:** Industry-specific behavior is documented under an "Industry Variations" section inside the relevant functional module's document, not as its own top-level module.
 **Alternatives considered:** A dedicated `industry-templates/` module with one sub-module per industry.
 **Rationale:** Keeps a generic rule and its industry-specific deviation adjacent and easy to compare, rather than requiring a reader to cross-reference two separate module trees.
+
+## D10 — Industry variations are named at the industry-category level, never after a client company
+
+**Decision:** Industry Variations sections are named by industry category (e.g., "Woven Label," "Packaging," "Plastic"), not by the specific client company whose process informed the profile (previously "Woven Label Manufacturing" and "Circle Packaging," both actual client/company names).
+**Alternatives considered:** Keep naming variations after the reference client, since that's where the requirements actually came from.
+**Rationale:** The platform's premise is that any company in an industry can be configured onto the same profile — naming a variation after one client implies the profile is specific to that client, undermining the reusability the platform is built for. Company-specific facts (e.g., a particular company's address or exact letterhead names) stay out of the category-level documentation entirely; only industry-general patterns belong there.
