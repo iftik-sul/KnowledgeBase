@@ -111,7 +111,9 @@ The service table's responsible-role column looks like a group-level default rat
 
 ### A5. Does the IRM get an institution-wide view?
 
-**Yes.** Renewals and user provisioning are meaningless without visibility of expiry dates and the staff roster. Profile management (registration flows §4) assigns institutions exactly this: renew approvals, manage user provisioning, update credentials. Proposed view: approval status and expiry countdown, staff roster with permission scopes, transactions in flight by stage, settlement account balance.
+**Yes.** Renewals and user provisioning are meaningless without visibility of expiry dates and the staff roster. Profile management (registration flows §4) assigns institutions exactly this: renew approvals, manage user provisioning, update credentials. Proposed view: approval status and expiry countdown, staff roster, transactions in flight by stage, payment history.
+
+**Corrected 2026-08-14** — previously proposed "staff roster with permission scopes" and "settlement account balance"; permission scopes are retired module-wide and there is no standing account to hold a balance (see the corrected A1 mechanism and B1). Reworded to "staff roster" and "payment history," consistent with `services-overview.md`'s Feature #8 (Payment History) and Feature #9 (Staff Records).
 
 **Confidence:** High.
 
@@ -271,8 +273,10 @@ This is also the only reading compatible with the PRD. US-14 requires diaspora u
 | Internal Certification Queue | Keep — now understood as a maker-checker scope view (A1) |
 | Escrow Request Queue | Keep — confirmed sourced (A2) |
 | Approval Expiry Tracking | Keep — now driven by a defined validity period (B8) |
-| **Settlement Account** | **Add** — balance, top-up, ledger, statements (B1) |
-| **Staff & Permission Scopes** | **Add** — roster, scope assignment, revocation (A1, A5) |
+| **Payment History** | **Add** — per-transaction payment records: receipts, amounts, service references, status (B1) |
+| **Staff Records** | **Add** — roster and staff-record management (A1, A5) |
+
+**Corrected 2026-08-14** — this row previously read "Settlement Account | Add — balance, top-up, ledger, statements (B1)" and "Staff & Permission Scopes | Add — roster, scope assignment, revocation (A1, A5)". Both features survive, renamed: there is no standing account for the first (B1, corrected) and no scopes to assign or revoke for the second (A1, corrected) — see `services-overview.md`'s Feature #8 and Feature #9, which this table now matches.
 
 **Confidence:** Medium-high.
 
