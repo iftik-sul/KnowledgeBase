@@ -3,7 +3,7 @@ project: RERAN
 module: financial-trust-institutions
 type: user-group
 status: draft
-updated: 2026-08-11
+updated: 2026-08-14
 contains_proposals: true
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
@@ -19,6 +19,8 @@ tags:
 Group C covers banks, mortgage institutions, account trustees and auditing bureaux that finance, secure and audit real-estate transactions. Four roles operate under a single verified institution account.
 
 This document describes post-login responsibilities only. Account creation and onboarding are out of scope for this project.
+
+> **Confirmed 2026-08-14 — roles are attribution only.** Client decision: none of the four roles below gates access. Every role can see and act on every screen and action in this module; the descriptions in this document say what each role *typically* does and why it exists, not what it is *permitted* to do. Every action is logged with the acting user and the role they held at the time — that's the only thing role now controls. See [navigation.md](navigation.md#audit-trail-principle) for the access model and [role-workflows.md](role-workflows.md) for the shared journey this produces. This also supersedes part of answer A1 (below) — see the note under Auditing Bureau Officer.
 
 ## Role Summary
 
@@ -70,7 +72,7 @@ Maintains the institution's standing on the platform and manages the people who 
 
 * Maintain institutional registration details and banking credentials
 * Renew trustee and auditor approvals before expiry
-* Provision, scope and revoke staff access within the institution
+* Add and remove staff records within the institution *(reworded 2026-08-14 — previously "provision, scope and revoke staff access"; there are no permission scopes left to provision. Every staff member has identical system access from the moment they're added — this responsibility is now purely about who is on the institution's staff list, for audit-trail attribution, not about granting capability.)*
 * Submit contract cancellation applications (Service #18)
 * Monitor institution-wide transaction volume and audit outcomes
 
@@ -121,7 +123,9 @@ A developer submits a request to draw down against a completed construction mile
 
 Provides independent audit of developer escrow accounts under the institution's trusteeship, and submits independent compliance reports to RERA. This role does **not** perform the institution's own internal certification of Mortgage Officer filings — see the correction below.
 
-> **Corrected per `open-questions.md` A1.** Earlier versions of this document proposed that the mortgage registration workflow's "bank's internal auditor reviews and certifies the transaction" step belonged to this role. Answer A1 supersedes that: internal certification is a `certify` **permission scope**, held by any delegated staff member the Institution Relationship Manager provisions under registration Flow 5 — not a fifth capability bolted onto this role, and not a duty this role performs by virtue of its title. The user group structure's own description of this role — auditing developer escrow accounts and submitting independent compliance reports — was the accurate source all along; the certification duty below has been removed to match it. **Confidence: High**, per the answers doc. Screen-level detail for the corrected role is in [ui/screens/compliance-reports.md](ui/screens/compliance-reports.md) and [ui/screens/trust-accounts.md](ui/screens/trust-accounts.md).
+> **Corrected per `open-questions.md` A1, then superseded per the 2026-08-14 client decision.** Earlier versions of this document proposed that the mortgage registration workflow's "bank's internal auditor reviews and certifies the transaction" step belonged to this role. Answer A1 corrected that by modelling internal certification as a `certify` **permission scope**, held by any delegated staff member the Institution Relationship Manager provisions under registration Flow 5 — not a fifth capability bolted onto this role, and not a duty this role performs by virtue of its title. The user group structure's own description of this role — auditing developer escrow accounts and submitting independent compliance reports — was the accurate source all along; the certification duty was removed from this role's responsibilities to match it, and stays removed below.
+>
+> **What's superseded:** A1's *mechanism* — a `certify` permission scope, provisioned per staff member — no longer exists; permission scopes were retired module-wide on 2026-08-14 in favour of unified access with role-as-attribution-only (see [navigation.md](navigation.md#superseded-by-this-document)). **What's not superseded:** A1's conclusion that this role does not, by virtue of its title, perform internal certification of Mortgage Officer filings — that remains true, just for a different reason. Under the unified model, certification is an action any of the four roles may take (including this one, if it happens to be the acting user); it was never this role's assigned job, and now it's simply nobody's assigned job in particular. Screen-level detail for the role, not yet reconciled against the unified model, is in [ui/screens/compliance-reports.md](ui/screens/compliance-reports.md) and [ui/screens/trust-accounts.md](ui/screens/trust-accounts.md).
 
 ### Responsibilities
 
@@ -137,26 +141,26 @@ A trust account's periodic statement shows a movement the Auditing Bureau Office
 
 ### To Confirm
 
-* **Resolved by A1** — whether the "bank's internal auditor" in the mortgage workflow is this role: no. It is the `certify` permission scope, held by whichever delegated staff member the institution assigns it to. This is no longer an open question about this role.
-* **Resolved by A1** — whether certification is per-transaction or batch-level: moot for this role, since certification is not this role's responsibility. The certify scope's own certification cadence is addressed in [ui/screens/internal-certification-queue.md](ui/screens/internal-certification-queue.md), which documents it as per-record, with no bulk action, for the same reasoning answer A3 applies to milestone certification.
+* **Resolved by A1, mechanism superseded 2026-08-14** — whether the "bank's internal auditor" in the mortgage workflow is this role: no, and that conclusion still holds. A1's explanation (a `certify` permission scope, held by whichever delegated staff member the institution assigned it to) no longer applies now that scopes are retired — certification is simply an action any of the four roles may take, attributed by role in the audit trail. Not an open question about this role either way.
+* **Resolved by A1, mechanism superseded 2026-08-14** — whether certification is per-transaction or batch-level: still moot for this role in the sense that certification isn't this role's assigned responsibility, but "moot because the `certify` scope isn't held by this role" no longer applies, since there's no scope to hold. [ui/screens/internal-certification-queue.md](ui/screens/internal-certification-queue.md) documents certification as per-record, with no bulk action — that screen has not yet been reconciled against the unified model (out of scope for this edit; see navigation.md).
 * Do compliance reports follow a RERA-defined template? **Proposed answered** by A7 (Medium confidence) — RERA-defined template, structured with a free-text findings narrative. The exact structure and reporting cycle remain undetermined; see [ui/screens/compliance-reports.md](ui/screens/compliance-reports.md#notes).
 
 ---
 
 ## How They Work Together
 
-| Stage | Role / Scope | Action |
+| Stage | Role | Action |
 | :---- | :---- | :---- |
-| 1 | Mortgage Officer | Enters the transaction and attaches documentation |
-| 2 | `certify` permission scope *(corrected — was "Auditing Bureau Officer")* | Certifies the transaction internally, where the institution has configured this gate for the service |
+| 1 | Mortgage Officer *(typically — any role may do this)* | Enters the transaction and attaches documentation |
+| 2 | Any of the four roles, including the filer *(reworked 2026-08-14 — see below)* | Certifies the transaction internally, where the institution has configured this gate for the service |
 | 3 | — | Routed to the RERA Transaction Audit queue |
 | 4 | Compliance & Escrow Auditor (Group A) | Approves, queries or rejects |
 | 5 | — | Fees settled; output document issued |
-| 6 | Institution Relationship Manager | Retains oversight of institution-wide outcomes |
+| 6 | Institution Relationship Manager *(typically — any role may do this)* | Retains oversight of institution-wide outcomes |
 
-Stage 2 is corrected per answer A1: certification is held by any delegated staff member with the `certify` scope, which the Auditing Bureau Officer may or may not hold — it is not attached to that role by title. See the Auditing Bureau Officer section above for the full correction.
+**Stage 2, reworked 2026-08-14.** This row previously read `certify` permission scope (itself a correction of an earlier "Auditing Bureau Officer" version, per answer A1) — a gate only a delegated staff member holding that scope could pass, with maker ≠ checker enforced against the filer of stage 1. Per the client's 2026-08-14 decision, permission scopes are retired module-wide: certification is now an action any of the four roles may perform, including the same person who filed the transaction at stage 1, with the acting user and their role recorded in the audit trail. **A1's scope-based resolution of who may certify is superseded by this decision** — flagging the supersession here rather than rewriting A1 itself, since `open-questions.md` is out of scope for this edit. See [navigation.md](navigation.md#superseded-by-this-document) for the confirmed model.
 
-For escrow work originating with developers, the Account Trustee replaces stages 1–2: the request arrives from Group B, the Trustee assesses and certifies, and it proceeds to the same RERA audit gate.
+For escrow work originating with developers, the Account Trustee typically handles stages 1–2 in practice: the request arrives from Group B, the Trustee (or, under the unified model, any other Group C role acting on the queue) assesses and certifies, and it proceeds to the same RERA audit gate.
 
 **The two-gate pattern — sourced for the mortgage and finance-lease lifecycle, not proven universal.** Services #3–#7 source an explicit internal "bank auditor" step before RERA review. The remaining Group C services do not carry the same explicit language in the master service table, and the module's service-flow documents (see `service-flows/`) do not assert a `certify` gate for them by default — each states, service by service, whether the gate is sourced, configurable, or simply not addressed. Treat "every Group C action passes through both gates" as the working design intent for services where the institution enables it, not as a sourced fact for all eighteen. This paragraph previously stated the pattern as unconditional; that overstated what rows 28–45 actually support, and the correction is carried into every screen this document informs — see [ui/README.md](ui/README.md#structural-characteristic).
 
@@ -176,5 +180,5 @@ Seven items originally listed here; four survive as genuinely open, three are re
 
 **Resolved, kept for record:**
 
-4. ~~Is the bank's internal auditor the Auditing Bureau Officer?~~ **Resolved by A1** — no. It is the `certify` permission scope, held by any delegated staff member, not this or any other named role.
-5. ~~Transaction certification: per-transaction or batch?~~ **Moot per A1** — this was a question about the Auditing Bureau Officer's certification cadence; the role does not certify. The certify scope's own cadence is per-record, with no bulk action (see [ui/screens/internal-certification-queue.md](ui/screens/internal-certification-queue.md)).
+4. ~~Is the bank's internal auditor the Auditing Bureau Officer?~~ **Resolved by A1** — no. A1's mechanism (the `certify` permission scope, held by any delegated staff member) is **superseded 2026-08-14**: scopes are retired, and certification is now an unrestricted action any of the four roles may take. The "not this role by title" conclusion still stands, just for a different reason — see the Auditing Bureau Officer section above.
+5. ~~Transaction certification: per-transaction or batch?~~ **Moot per A1, mechanism superseded 2026-08-14** — this was a question about the Auditing Bureau Officer's certification cadence; the role does not certify, by practice rather than by scope restriction now. The per-record, no-bulk-action cadence in [ui/screens/internal-certification-queue.md](ui/screens/internal-certification-queue.md) has not yet been reconciled against the unified model.
