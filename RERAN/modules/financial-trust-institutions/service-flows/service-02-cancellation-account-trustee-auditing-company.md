@@ -42,7 +42,7 @@ The Institution Relationship Manager submits a cancellation application. RERA's 
 ### Applicant
 
 * Institution Relationship Manager  
-* Authorized Representative acting under a delegated permission scope
+* Any other authorized representative of the institution, acting on its behalf *(no delegated scope required — see Business Rule 1)*
 
 > **Proposed** — as with Service #1, the source assigns this application to the **Account Trustee** as responsible role. `open-questions.md` A4 re-derives ownership to the Institution Relationship Manager, on the same reasoning: giving up institutional standing is a company-level act, not a transaction the trustee performs on itself. **Confidence: High**, per the answers doc.
 
@@ -218,7 +218,7 @@ Upon successful completion, the system generates:
 
 ## 21. Business Rules
 
-1. Only the Institution Relationship Manager, or an authorized representative under a delegated permission scope, may submit this application. *(Proposed — A4 re-derivation; the source assigns this to the Account Trustee.)*
+1. Typically the Institution Relationship Manager submits this application, though any authorized representative of the institution may act on its behalf — the platform does not gate this by a provisioned scope; the acting user and their role are recorded in the audit trail. **Corrected 2026-08-14** — previously required "an authorized representative under a delegated permission scope"; permission scopes are retired module-wide, see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle). *(Proposed — A4 re-derivation; the source assigns this to the Account Trustee.)*
 2. The institution must hold an existing approved standing as Account Trustee or Auditing Company to cancel it.  
 3. Cancellation, return, and rejection decisions must carry documented reasoning.  
 4. The public register of approved trustees and auditors is updated on completion to remove the institution's active standing.  

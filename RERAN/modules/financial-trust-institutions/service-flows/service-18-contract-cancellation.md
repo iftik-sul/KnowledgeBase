@@ -222,7 +222,7 @@ Upon successful completion, the system generates:
 
 ## 21. Business Rules
 
-1. Only the Institution Relationship Manager, or an authorized representative under a delegated permission scope, may submit this application.  
+1. Typically the Institution Relationship Manager submits this application, though any authorized representative of the institution may act on its behalf — the platform does not gate this by a provisioned scope; the acting user and their role are recorded in the audit trail. **Corrected 2026-08-14** — previously required "an authorized representative under a delegated permission scope"; permission scopes are retired module-wide, see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle).  
 2. The contract being cancelled must exist and be held by the institution.  
 3. Cancellation, return, and rejection decisions must carry documented reasoning.  
 4. Payment is required, with an e-receipt voucher issued as proof, before the cancellation is finalized.  

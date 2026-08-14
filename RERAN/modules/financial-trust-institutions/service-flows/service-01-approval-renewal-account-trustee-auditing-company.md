@@ -41,7 +41,7 @@ The institution's Institution Relationship Manager applies for new approval or r
 ### Applicant
 
 * Institution Relationship Manager  
-* Authorized Representative acting under a delegated permission scope
+* Any other authorized representative of the institution, acting on its behalf *(no delegated scope required — see Business Rule 1)*
 
 > **Proposed** — the source assigns this application to the **Account Trustee** as responsible role. `open-questions.md` (A4) re-derives ownership: the Institution Relationship Manager "maintains registration, renews trustee/auditor approvals" — exactly what this service does — while the Account Trustee is the *subject* of the approval, not a plausible applicant for its own not-yet-existing (or expiring) status. This document follows the A4 re-derivation. **Confidence: High**, per the answers doc.
 
@@ -270,7 +270,7 @@ Upon successful completion, the system generates:
 
 ## 21. Business Rules
 
-1. Only the Institution Relationship Manager, or an authorized representative under a delegated permission scope, may submit this application. *(Proposed — A4 re-derivation; the source assigns this to the Account Trustee.)*
+1. Typically the Institution Relationship Manager submits this application, though any authorized representative of the institution may act on its behalf — the platform does not gate this by a provisioned scope; the acting user and their role are recorded in the audit trail. **Corrected 2026-08-14** — previously required "an authorized representative under a delegated permission scope"; permission scopes are retired module-wide, see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle). *(Proposed — A4 re-derivation; the source assigns this to the Account Trustee.)*
 2. The institution must hold, or be seeking, approved standing as an Account Trustee or Auditing Company.  
 3. A new-approval application requires attendance and execution of a partner agreement before completion; a renewal does not.  
 4. Payment is required before the approval or renewal is finalized, paid directly by the institution rather than deducted from a standing settlement account.  
