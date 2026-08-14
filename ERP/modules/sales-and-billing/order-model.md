@@ -12,7 +12,7 @@ derived_from:
 
 ## Core Order entity
 
-Holds: customer, dates, status, line items, delivery, billing. Industry-specific fields do not live here — see the custom-fields layer in modules/platform/architecture.md (mechanism not yet designed).
+Holds: customer, dates, status, line items, delivery, billing. Industry-specific fields do not live here — see [modules/platform/custom-fields-layer.md](/ERP/modules/platform/custom-fields-layer.md) for the mechanism.
 
 ## Delivery
 
@@ -43,7 +43,7 @@ One Production Order per product within a parent Order (full detail in modules/m
 
 ### Woven Label
 
-- Custom Order fields: O/No, Card, File#, Pick/acc, Item Code, PO No, JH SO/NO, ref no, Color Code 1–8, Comments.
+- Custom Order fields (via the custom-fields layer, not core columns): O/No, Card, File#, Pick/acc, Item Code, PO No, JH SO/NO, ref no, Color Code 1–8, Comments.
 - Line items: Label Description / Size / Qty / Rate / Amount / File Name / Repit.
 - Workflow: Order created → File# assigned (digital artwork file) → Card (physical Sample Card made from the artwork file, sent to customer for approval, supports revisions v1, v2, ...).
 - Material Requisition is called "Yarn Requisition Slip"; can be submitted before or after the Sample Card (parallel, not sequential).
