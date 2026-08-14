@@ -3,7 +3,7 @@ project: RERAN
 module: financial-trust-institutions
 type: overview
 status: draft
-updated: 2026-08-10
+updated: 2026-08-14
 contains_proposals: true
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
@@ -113,7 +113,7 @@ The #12–#17 count reflects only the sourced (Trustee Centre) branch of A4's co
 
 > **Proposed** — C4 finds the original three correct but incomplete. Two more are load-bearing consequences of B1 and A1/A5 and are added here.
 
-* Feature #5 — Internal Certification Queue — transactions awaiting the checker permission scope's certification before routing to RERA (A1/D2: a maker-checker permission scope on the corporate account, not a fifth role)
+* Feature #5 — Internal Certification Queue — transactions awaiting certify-or-return by any of the institution's four Group C users before routing to RERA. **Corrected 2026-08-14**: previously described as gated by a "checker permission scope"; permission scopes are retired module-wide, and this is now an unrestricted action attributed by role in the audit trail, not a scope or a fifth role — see [navigation.md#audit-trail-principle](navigation.md#audit-trail-principle).
 * Feature #6 — Escrow Request Queue — developer-originated requests awaiting Account Trustee action, confirmed as a queue inside the platform (A2)
 * Feature #7 — Approval Expiry Tracking — trustee and auditor approval renewal windows, now driven by the two-year validity period proposed in B8
 * Feature #8 — Settlement Account — balance, top-up, transaction ledger, low-balance alerting, and periodic statements for the institution's standing pre-funded account (B1)
@@ -146,8 +146,8 @@ The #12–#17 count reflects only the sourced (Trustee Centre) branch of A4's co
 | Status | Meaning | Set by |
 | :---- | :---- | :---- |
 | Draft | Started, not submitted | Mortgage Officer / Institution Relationship Manager / Trustee Centre Operator |
-| Pending Internal Certification *(Group C extension — services with an internal maker-checker gate only, see A1/D2)* | Awaiting the institution's own checker permission scope | Mortgage Officer |
-| Returned by Certifier *(Group C extension)* | Sent back internally for correction | Internal Certifier (checker permission scope) |
+| Pending Internal Certification *(Group C extension — services with an internal certification gate only)* | Awaiting certify-or-return by any of the institution's four Group C users *(corrected 2026-08-14 — not a "checker permission scope"; scopes are retired, see [navigation.md](navigation.md))* | Any Group C role, attributed in the audit trail |
+| Returned by Certifier *(Group C extension)* | Sent back internally for correction | Any Group C role, attributed in the audit trail *(corrected 2026-08-14 — not "Internal Certifier (checker permission scope)")* |
 | Submitted | In RERA's Transaction Audit queue | Internal Certifier, or the applicant directly where no internal gate applies |
 | Under Review | With the regulator | Compliance & Escrow Auditor |
 | Information Requested | RERA has raised a query | Compliance & Escrow Auditor |

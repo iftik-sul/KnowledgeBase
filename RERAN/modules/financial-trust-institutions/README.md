@@ -3,7 +3,7 @@ project: RERAN
 module: financial-trust-institutions
 type: overview
 status: draft
-updated: 2026-08-10
+updated: 2026-08-14
 contains_proposals: true
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
@@ -67,7 +67,7 @@ All 18 carry `status: draft` and `contains_proposals: true` — each has genuine
 
 Every Group C action passes through an internal certification gate inside the institution and then an external audit gate at RERA. No Group C role completes a regulated action unilaterally. This shapes every service flow, every status, and every screen in the module.
 
-The internal certification gate is modelled as a **maker-checker permission scope** on the corporate account (A1/D2), not a fifth role — and it is sourced only for the mortgage and finance-lease lifecycle (Services #3–#11). Services #1, #2, and #12–#18 do not carry it in their Application Status Flow, since no internal institutional certification step is described in source for those rows.
+The internal certification gate is an unrestricted action, not a scope or a fifth role: any of the institution's four Group C users may certify or return a filing, including the person who filed it, with the acting user and their role recorded in the audit trail. **Corrected 2026-08-14** — earlier versions of this document modelled certification as a "maker-checker permission scope" on the corporate account (A1/D2); permission scopes are retired module-wide per the client's unified-access decision. See [navigation.md#audit-trail-principle](navigation.md#audit-trail-principle) for the current model. The gate itself is sourced only for the mortgage and finance-lease lifecycle (Services #3–#11); Services #1, #2, and #12–#18 do not carry it in their Application Status Flow, since no internal institutional certification step is described in source for those rows.
 
 ## Platform Sub-systems
 

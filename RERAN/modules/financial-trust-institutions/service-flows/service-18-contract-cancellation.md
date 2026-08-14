@@ -4,7 +4,7 @@ module: financial-trust-institutions
 type: service-flow
 status: draft
 contains_proposals: true
-updated: 2026-08-10
+updated: 2026-08-14
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
@@ -84,7 +84,7 @@ Paid by the customer, with an e-receipt issued — sourced (row 45: "Customer pa
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (Group A) — sourced: the Land Department employee "enters, audits and approves." Documented here as the RERA regulatory gate. No separate institutional maker-checker layer is described in source for this service.
+**Compliance & Escrow Auditor** (Group A) — sourced: the Land Department employee "enters, audits and approves." Documented here as the RERA regulatory gate. No separate internal institutional certification step is described in source for this service. *(Wording corrected 2026-08-14 — previously "no separate institutional maker-checker layer"; permission scopes are retired module-wide, see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle).)*
 
 ## 11. Expected Processing Time
 

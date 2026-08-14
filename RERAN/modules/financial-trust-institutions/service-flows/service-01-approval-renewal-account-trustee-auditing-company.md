@@ -4,7 +4,7 @@ module: financial-trust-institutions
 type: service-flow
 status: draft
 contains_proposals: true
-updated: 2026-08-10
+updated: 2026-08-14
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
@@ -97,7 +97,7 @@ This service uses the **Institution Fee Payment** model (paid by the institution
 
 **Compliance & Escrow Auditor** (Group A) — sourced: RERA "studies and audits application, decides approval or rejection."
 
-> **Proposed** — unlike the mortgage and finance-lease workflows, source row 28 describes no internal institutional certification step for this service; RERA reviews the application directly. If the institution has configured internal maker-checker on its corporate account (A1/D2), it may route preparation and internal sign-off through that scope before submission, but this is not described in the source for this specific service and is not assumed here.
+> **Proposed** — unlike the mortgage and finance-lease workflows, source row 28 describes no internal institutional certification step for this service; RERA reviews the application directly. If the institution chooses to route preparation and internal sign-off through an internal certify-or-return step before submission — an unrestricted action any of its four Group C users may perform, not a scope — it may do so voluntarily, but this is not described in the source for this specific service and is not assumed here. **Corrected 2026-08-14** — previously described as "internal maker-checker on its corporate account (A1/D2)"; permission scopes are retired module-wide, see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle).
 
 ## 11. Expected Processing Time
 
@@ -181,7 +181,7 @@ Completed
 * Withdrawn  
 * Expired *(approved but unpaid for 30 calendar days — B3)*
 
-> **Proposed** — this service does not carry the Group C `Pending Internal Certification` / `Returned by Certifier` extension (D1), because source row 28 describes no internal institutional certification step. If the institution enables maker-checker on this workflow voluntarily (A1/D2), those two statuses would precede `Submitted`, per the platform-wide pattern in `services-overview.md`.
+> **Proposed** — this service does not carry the Group C `Pending Internal Certification` / `Returned by Certifier` extension (D1), because source row 28 describes no internal institutional certification step. If the institution enables an internal certify-or-return step on this workflow voluntarily, those two statuses would precede `Submitted`, per the platform-wide pattern in `services-overview.md`. **Corrected 2026-08-14** — previously described as enabling "maker-checker... voluntarily (A1/D2)"; permission scopes are retired module-wide, see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle).
 
 ## 14. Possible Outcomes
 

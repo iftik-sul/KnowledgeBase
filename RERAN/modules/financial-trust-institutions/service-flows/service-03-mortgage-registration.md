@@ -4,7 +4,7 @@ module: financial-trust-institutions
 type: service-flow
 status: draft
 contains_proposals: true
-updated: 2026-08-10
+updated: 2026-08-14
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
@@ -33,7 +33,7 @@ Register a mortgage against a verified title so the lending institution's securi
 
 ## 3. Description
 
-The customer (borrower) completes mortgage requirements directly with the bank — loan approval, valuation, executed mortgage deed. A Mortgage Officer then enters the transaction into the Online Mortgage System, attaching the required documents. The transaction is certified internally by the institution's own checker before it is sent to RERA's Transaction Audit queue. On approval, the fee is deducted from the institution's settlement account and the output documents are delivered to the customer by email. The same service can alternatively be processed in assisted mode at a Real Estate Registration Trustee Centre.
+The customer (borrower) completes mortgage requirements directly with the bank — loan approval, valuation, executed mortgage deed. A Mortgage Officer then enters the transaction into the Online Mortgage System, attaching the required documents. The transaction is certified internally by any of the institution's four Group C users, including the person who filed it, before it is sent to RERA's Transaction Audit queue. On approval, the fee is deducted from the institution's settlement account and the output documents are delivered to the customer by email. The same service can alternatively be processed in assisted mode at a Real Estate Registration Trustee Centre.
 
 ## 4. Who Can Apply
 
@@ -90,7 +90,7 @@ The customer (borrower) completes mortgage requirements directly with the bank �
 * Loan Offer Letter  
 * Property Valuation Report  
 * Government-issued Identification (Borrower / Property Owner)  
-* Internal Certification Record *(the institution's own maker-checker sign-off — see Section 10)*  
+* Internal Certification Record *(the institution's own internal certify-or-return record — see Section 10)*  
 * Other supporting documents required by RERAN
 
 ## 8. Service Fee
@@ -111,7 +111,7 @@ This differs from the individual-user pay-then-submit model: here, submission is
 
 **Two gates**, sourced from row 30 ("transaction audited by bank auditor" before it is "sent to Department for auditing"):
 
-1. **Internal Certifier** — a delegated staff member holding the institution's checker permission scope (A1/D2). The source's "bank auditor" step is modelled as this scope, not as a fifth platform role.  
+1. **Internal Certifier** — a functional label, not a role or scope: any of the institution's four Group C users may act as internal certifier for a given transaction, including the person who filed it, with the acting user and their role recorded in the audit trail. **Corrected 2026-08-14** — previously modelled as a `checker permission scope` (A1/D2); permission scopes are retired module-wide, see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle). The source's "bank auditor" step is this unrestricted internal certify-or-return action.  
 2. **Compliance & Escrow Auditor** (Group A) — the external regulatory gate. All 18 Group C services are approved here; no Group C service is self-approving.
 
 ## 11. Expected Processing Time
@@ -144,7 +144,7 @@ Submit for Internal Certification
 
 ↓
 
-Internal Certifier (checker permission scope)
+Internal Certifier (any Group C role, including the filer)
 
 Review Transaction  
 ↓  
@@ -291,7 +291,7 @@ Upon successful completion, the system generates:
 
 * Mortgage Officer can initiate mortgage registration against a registered title (or a Trustee Centre operator, in assisted mode).  
 * System validates the property is registered and its title is verified before registration.  
-* Internal certifier can certify or return the transaction before it reaches RERA.  
+* Internal certifier — any of the four Group C roles, including the filer — can certify or return the transaction before it reaches RERA.  
 * Required information and documents are validated before submission.  
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
 * Fee is deducted from the institution's settlement account only after approval.  
@@ -305,7 +305,7 @@ Upon successful completion, the system generates:
 
 1. Only a Mortgage Officer acting under the lending institution's corporate account, or a Trustee Centre operator acting on the institution's behalf in assisted mode, may initiate mortgage registration.  
 2. The property must be registered with RERAN and its title verified before a mortgage can be registered against it.  
-3. The transaction must pass internal institutional certification (maker-checker) before it is routed to RERA (A1/D2).  
+3. The transaction must pass internal institutional certification before it is routed to RERA. Certification is an unrestricted action any of the institution's four Group C users may perform, including the filer — not a maker-checker restriction and not gated by a permission scope.  
 4. Payment is deducted from the institution's standing settlement account only after RERA approval, never before submission (B1).  
 5. Submission is blocked if the projected settlement account balance after fees would go negative; a low-balance warning is shown at a configurable threshold (B4).  
 6. An approved but unsettled transaction lapses to Expired after 30 calendar days (B3).  

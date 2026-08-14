@@ -4,7 +4,7 @@ module: financial-trust-institutions
 type: service-flow
 status: draft
 contains_proposals: true
-updated: 2026-08-10
+updated: 2026-08-14
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
@@ -96,7 +96,7 @@ Applicable according to the RERAN fee schedule.
 
 **Two gates**, same structure as Service #3:
 
-1. **Internal Certifier** — checker permission scope (A1/D2), at the initiating institution.  
+1. **Internal Certifier** — a functional label, not a role or scope: any of the initiating institution's four Group C users may act as internal certifier, including the person who filed the transaction. **Corrected 2026-08-14** — previously `checker permission scope` (A1/D2), now retired; see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle).  
 2. **Compliance & Escrow Auditor** (Group A).
 
 ## 11. Expected Processing Time
@@ -266,7 +266,7 @@ Upon successful completion, the system generates:
 
 * Mortgage Officer can select an existing mortgage and submit transfer details naming a new mortgagee.  
 * System validates the mortgage is active and the receiving institution holds valid RERAN standing.  
-* Internal certifier can certify or return the transfer before it reaches RERA.  
+* Internal certifier — any of the four Group C roles, including the filer — can certify or return the transfer before it reaches RERA.  
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
 * Fee is deducted from the initiating institution's settlement account only after approval.  
 * Application receives a unique application reference number.  
