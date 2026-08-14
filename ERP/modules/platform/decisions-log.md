@@ -28,9 +28,9 @@ One `##` section per decision. Newest at the bottom. Superseded decisions are ma
 ## D3 — Order model split into core entity + custom-fields/metadata layer
 
 **Decision:** The core Order entity holds only generic fields. Industry-specific fields attach via a separate metadata layer.
-**Alternatives considered:** Nullable columns per industry added to the core Order table as needed.
+**Alternatives considered:** Nullable columns per industry added to the core Order table as needed; a per-industry table subclassing approach.
 **Rationale:** Nullable-columns-per-industry doesn't scale — every new industry category would widen and pollute the core table.
-**Status: mechanism not yet designed** — top open item.
+**Status: resolved.** Mechanism designed — see [custom-fields-layer.md](custom-fields-layer.md): a `field_definitions` config table (scoped by `company_id` and `document_type`) drives a `custom_fields JSONB` column on the entity record. A company's field set is seeded from its industry category's default template at setup and can be edited freely afterward. No schema changes are needed to add or remove a company's fields, and no core table gains columns per industry.
 
 ## D4 — Trade name / letterhead is a company-level config, not a hardcoded constant
 
@@ -67,3 +67,9 @@ One `##` section per decision. Newest at the bottom. Superseded decisions are ma
 **Decision:** Industry Variations sections are named by industry category (e.g., "Woven Label," "Packaging," "Plastic"), not by the specific client company whose process informed the profile (previously "Woven Label Manufacturing" and "Circle Packaging," both actual client/company names).
 **Alternatives considered:** Keep naming variations after the reference client, since that's where the requirements actually came from.
 **Rationale:** The platform's premise is that any company in an industry can be configured onto the same profile — naming a variation after one client implies the profile is specific to that client, undermining the reusability the platform is built for. Company-specific facts (e.g., a particular company's address or exact letterhead names) stay out of the category-level documentation entirely; only industry-general patterns belong there.
+
+## D11 — New industry categories are only documented from real discovery, never invented to test genericity
+
+**Decision:** A new `### <Category>` section only enters `modules/` once a real reference case (actual client requirements) exists for it. Genericity is validated by designing the underlying mechanism (e.g., the custom-fields layer, D3) to be provably config-driven, not by writing speculative examples for hypothetical industries.
+**Alternatives considered:** Add plausible categories (e.g., Plastic Bottle) proactively, based on general knowledge of those industries, to stress-test the platform ahead of real demand.
+**Rationale:** An invented business rule that reads plausibly is worse than a gap — it looks authoritative but isn't backed by anything real, and someone will build against it as if it were validated. The actual test of "any product should be addable" is whether onboarding a new category requires only configuration (field definitions, numbering, rate rules) with zero core schema changes — that's now verifiable directly from the custom-fields layer design, without needing to fabricate example industries.
