@@ -34,11 +34,13 @@ ERP is a platform serving one company at a time (multi-tenant-ready, not yet mul
 
 Unlike a per-industry top-level module, industry-specific behavior is documented **inline, inside the functional module it varies from**, under a `## Industry Variations` heading in the relevant document. This keeps a generic rule and its industry-specific deviations next to each other instead of split across the repository.
 
-Current industry templates (config profiles on top of the core platform, not separate schemas):
-- **Woven Label Manufacturing** — single-product-per-company legacy build; the original reference implementation.
-- **Circle Packaging** — 17-product portfolio; the live test case for the generic Item Master and a trade-finance-heavy (PI/LC) workflow.
+**Naming rule:** industry variations are named at the **industry-category level** (e.g., "Woven Label," "Packaging," "Plastic"), never after the specific client company whose process happened to inform the profile. A category name must describe a class of companies any prospective client could recognize themselves in, not one deployment. If a rule turns out to be true only of one specific company rather than the industry as a whole, it belongs in that company's own configuration data, not in an Industry Variations section.
 
-**Rule:** an Industry Variations section names the template explicitly (e.g., "Woven Label Manufacturing: adds Color Code 1–8 as a custom field on Order") rather than referring to it vaguely as "some companies." If a variation turns out to be common enough across templates that it stops looking like a variation, that's a signal to promote it into the core rule and remove the section — flag this rather than letting it linger.
+Current industry categories (config profiles on top of the core platform, not separate schemas):
+- **Woven Label** — single-product-per-company legacy build; informed by an initial reference deployment.
+- **Packaging** — multi-category product portfolio; the live test case for the generic Item Master and a trade-finance-heavy (PI/LC) workflow; informed by an initial reference deployment.
+
+**Rule:** an Industry Variations section names the category explicitly (e.g., "Woven Label: adds Color Code 1–8 as a custom field on Order") rather than referring to it vaguely as "some companies." If a variation turns out to be common enough across categories that it stops looking like a variation, that's a signal to promote it into the core rule and remove the section — flag this rather than letting it linger.
 
 ---
 
