@@ -16,9 +16,10 @@ Cross-cutting architecture that every other module depends on: multi-tenancy, co
 
 | Document | Status |
 |---|---|
-| [architecture.md](architecture.md) | Current — core rules defined, custom-fields layer mechanism open |
+| [architecture.md](architecture.md) | Current |
+| [custom-fields-layer.md](custom-fields-layer.md) | Current |
 | [decisions-log.md](decisions-log.md) | Current |
 
 ## Open work
 
-The custom-fields/metadata layer mechanism (how an industry-specific field attaches to the core Order without becoming a fixed column) is not yet designed. This blocks finalizing the Industry Variations sections in every other module until resolved.
+Custom field values are not yet reportable (filterable in list views, exportable) — the current mechanism covers capture and display only. See "Open sub-decisions" in [custom-fields-layer.md](custom-fields-layer.md).
