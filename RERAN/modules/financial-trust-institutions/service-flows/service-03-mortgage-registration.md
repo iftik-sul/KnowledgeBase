@@ -273,12 +273,11 @@ Upon successful completion, the system generates:
 
 * User  
 * Institution  
-* Institution Staff  
-* Permission Scope  
+* Institution Staff *(no scope field — every staff member has identical system access; role is recorded per-action, not per-account)*  
 * Property  
 * Property Ownership  
 * Mortgage  
-* Certification Record  
+* Certification Record *(now includes the acting user and their role at time of certification, per [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle) — not a scope reference)*  
 * Application  
 * Service Request  
 * Document  

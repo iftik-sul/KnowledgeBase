@@ -244,8 +244,7 @@ Upon successful completion, the system generates:
 ## 19. Database Entities
 
 * Institution  
-* Institution Staff  
-* Permission Scope  
+* Institution Staff *(no scope field — every staff member has identical system access; role is recorded per-action, not per-account, see Audit Log below)*  
 * Application  
 * Service Request  
 * Document  
@@ -254,7 +253,7 @@ Upon successful completion, the system generates:
 * Payment  
 * Payment Transaction  
 * Notification  
-* Audit Log
+* Audit Log *(captures the acting user and their role at time of action for every logged event, per [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle))*
 
 ## 20. Acceptance Criteria
 

@@ -4,7 +4,7 @@ module: financial-trust-institutions
 type: service-flow
 status: draft
 contains_proposals: true
-updated: 2026-08-10
+updated: 2026-08-14
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
@@ -197,14 +197,13 @@ Upon successful completion, the system generates:
 ## 19. Database Entities
 
 * Institution  
-* Institution Staff  
-* Permission Scope  
+* Institution Staff *(no scope field — every staff member has identical system access; role is recorded per-action, not per-account, see Audit Log below)*  
 * Application  
 * Service Request  
 * Document  
 * Approval Record  
 * Notification  
-* Audit Log
+* Audit Log *(captures the acting user and their role at time of action for every logged event, per [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle))*
 
 ## 20. Acceptance Criteria
 

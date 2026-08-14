@@ -94,7 +94,7 @@ Title-deed transactions executed through the institution rather than by the owne
 | Mortgage Officer | 9 (#3–#11), plus #12–#17 where bank-originated | Sourced for #3–#11 — the only rows whose workflow text shows bank-originated entry ("bank employee enters ... via online mortgage system"). A4's rule for #12–#17 is conditional, not absolute — "Mortgage Officer where bank-originated; otherwise executed by a Trustee Centre operator" — but no row among 38, 40–44 sources a bank-originated variant for those six, so this branch is carried as unconfirmed rather than counted. |
 | Trustee Centre Operator (Group G, assisted mode) | 6 (#12–#17) | A4's *otherwise* branch — title & ownership transaction rows show customer walk-in entry with no bank involvement, despite the source column naming the Mortgage Officer. This is the only branch of A4's conditional that rows 38, 40–44 actually source; see each service flow's Open Questions for the unconfirmed Mortgage Officer branch. |
 | Account Trustee | 0 | Acts within Group B escrow services (A2); owns no numbered Group C service. |
-| Auditing Bureau Officer | 0 | Acts as the internal certification gate on Mortgage Officer transactions (A1/D2), modelled as a permission scope rather than service ownership. |
+| Auditing Bureau Officer | 0 | Owns no numbered Group C service; audits developer escrow accounts and submits independent compliance reports to RERA — Group B-facing work, per the user group structure. **Corrected**: does **not** act as the internal certification gate on Mortgage Officer transactions. That claim was already wrong before 2026-08-14 — answer A1 established the internal certifier is not this role, by title, regardless of scopes — and is doubly wrong now: certification is an unrestricted action any of the four roles may perform, attributed by role in the audit trail, not a duty tied to this role or gated by a permission scope. See `roles-and-responsibilities.md`, Auditing Bureau Officer section, for the full correction. |
 
 The #12–#17 count reflects only the sourced (Trustee Centre) branch of A4's conditional — it is not a claim that these six services can *only* ever be bank-originated-excluded. This replaces the previous count (Mortgage Officer 17 / Institution Relationship Manager 1), which took the source's responsible-role column at face value.
 
@@ -117,7 +117,7 @@ The #12–#17 count reflects only the sourced (Trustee Centre) branch of A4's co
 * Feature #6 — Escrow Request Queue — developer-originated requests awaiting Account Trustee action, confirmed as a queue inside the platform (A2)
 * Feature #7 — Approval Expiry Tracking — trustee and auditor approval renewal windows, now driven by the two-year validity period proposed in B8
 * Feature #8 — Settlement Account — balance, top-up, transaction ledger, low-balance alerting, and periodic statements for the institution's standing pre-funded account (B1)
-* Feature #9 — Staff & Permission Scopes — roster, scope assignment, and revocation for delegated institution staff (A1, A5)
+* Feature #9 — Staff Records — roster and staff-record management for the institution's delegated staff (A1, A5). **Corrected 2026-08-14** — previously "Staff & Permission Scopes," with scope assignment and revocation; permission scopes are retired module-wide, and every staff member has identical system access from the moment they're added, so this feature is now purely about who is on the institution's staff list for audit-trail attribution — see [navigation.md#audit-trail-principle](navigation.md#audit-trail-principle).
 
 ### General Platform Features (8)
 
@@ -177,7 +177,7 @@ Fourteen items remain open across this module's two documents, one fewer than be
 1. Are the five proposed service categories acceptable, or should the source's Development / Transaction / Title-Deed Data grouping be retained? (C1 — proposed answer: adopt them, keep the reconciliation table.)
 2. Is the #12–#17 re-derivation to Trustee Centre Operator acceptable, given it contradicts the source's responsible-role column? (A4 — Medium confidence, flagged for the client explicitly.)
 3. Do the four Application Management features apply to Group C as they do to individual users? (C3 — proposed answer: yes, unchanged.)
-4. Are the five institution-specific features (including the two added by C4 — Settlement Account, Staff & Permission Scopes) correct, and is anything still missing?
+4. Are the five institution-specific features (including the two added by C4 — Settlement Account, Staff Records) correct, and is anything still missing?
 5. Is the proposed status vocabulary (platform core + Group C extension, D1) acceptable, and is the specific status list correct?
 6. Fee settlement: is the three-way payer-model split (Institution Account Debit / Customer Payment at Counter / Institution Fee Payment) correct for all 18 services, and is it right that finance lease services (#8–#11) sit in the account-debit group on "Fee balance" evidence alone, given their workflow text reads as a counter payment? (B1, flagged in Services #8–#11's Open Questions.)
 7. Published fee schedule for the 18 services — the one question of 23 with no proposed answer (B5, client data).
