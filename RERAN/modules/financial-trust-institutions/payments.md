@@ -3,11 +3,12 @@ project: RERAN
 module: financial-trust-institutions
 type: overview
 status: draft
-updated: 2026-08-10
+updated: 2026-08-14
 contains_proposals: true
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
+  - "RERAN/modules/financial-trust-institutions/open-questions.md"
 tags:
   - financial-trust-institutions
   - payments
@@ -15,35 +16,43 @@ tags:
 
 # Financial & Trust Institutions — Payments
 
-Every RERAN service is chargeable. Payment is a stage of each service flow, not an optional add-on, and no output document issues until fees are settled.
+Every RERAN service is chargeable. For most Group C services, payment is now the first stage of the service flow — but not all: institutional approval and renewal (#1–#2) remain paid **after** RERA's decision, on genuinely sourced grounds unrelated to this correction. See below.
+
+**Corrected 2026-08-14 (client decision, via discussion — not a written source document).** This document previously described a standing pre-funded settlement account, debited after RERA approval, for the mortgage and finance-lease lifecycle (#3–#11). That model is retired. See `open-questions.md` B1 for the full correction and why the earlier reasoning is preserved there rather than deleted. **This correction is narrower than "everyone pays upfront now"** — it retires the *Institution Account Debit* mechanism specifically. It does not touch the *Institution Fee Payment* model (#1–#2) or the *Customer Payment at Counter* model (#12–#18), both of which have their own, independent sourcing untouched by B1. Collapsing all three into one uniform "pay upfront" model would have been wrong; corrected below.
 
 ## Where Payment Sits in the Pipeline
 
-The source defines a six-stage pipeline for every regulated service:
+**Three different timings, by service group — not one pipeline:**
+
+| Group | Timing | Basis |
+| :---- | :---- | :---- |
+| Mortgage and finance-lease lifecycle (#3–#11) | **Upfront**, before Lodge/Validate/Audit | Corrected 2026-08-14 (client decision) — was previously inferred as post-approval from the now-retired B1 standing-account reading; no independent source ever placed it after approval |
+| Institutional approval / renewal, cancellation (#1–#2) | **After RERA's decision** (and, for a new approval, after the partner agreement is signed) | Sourced directly — row 28 sequences "Payment of fees" after the approval decision. Unaffected by this correction; B1 never applied to these two services in the first place |
+| Title and ownership transactions (#12–#18) | **At the point of service** — the customer pays at the Trustee Centre counter (or online, per C2) as part of the transaction | Sourced directly per row (e.g. row 38: "Customer pays fees and obtains e-receipt"). Unaffected by this correction; already point-of-sale, never dependent on B1's standing-account reading |
+
+For #3–#11, the corrected sequence is:
 
 ```
-Lodge  →  Validate  →  Audit  →  Pay  →  Issue  →  Record & Sync
+Draft  →  Pay  →  Lodge  →  Validate  →  Audit  →  Issue  →  Record & Sync
 ```
 
-**Payment comes after audit approval, not at submission.** An institution submits a transaction, RERA approves it, and only then are fees settled and the output document released. A rejected application never reaches the payment stage.
+An institution user drafts the application, pays via the shared platform-wide payment gateway, and only then is the application lodged for internal certification (where sourced, Services #3–#11) and RERA's audit. A rejected application has already paid — this document does not resolve what happens to that fee, since no source or client decision addresses it; see To Confirm — Summary.
 
-This ordering shapes the module's screens: there is no checkout at submission, and an approved-but-unpaid state must exist and be visible.
+For #1–#2, the sequence is unchanged from before this correction: **Lodge → Validate → Audit → Pay → Issue**. For #12–#18, payment and lodging happen together, at the counter or online checkout, which this correction doesn't reorder.
 
-## Two Payer Models
+**This also corrects a broader claim, for #3–#11 specifically.** `module-roadmap.md` previously stated, as a platform-wide cross-cutting observation, that "every fee-bearing service pays after audit approval, not at submission" — sourced from this document's old, now-retired pipeline description for #3–#11. Checking that claim against the individual-user and Real Estate Developer modules' actual service flows (both pay upfront: individual-user Service #8's `Payment must be completed before the application proceeds for regulatory review`, real-estate-developer Service #1's identical pattern) shows the platform-wide claim was never true even before this correction — Group C's old #3–#11 model was the outlier, not the rule, and #1–#2's genuinely-sourced post-approval timing was never representative of "every fee-bearing service" either. See `module-roadmap.md`'s own note on this.
 
-Group C is unusual in running both models across its 18 services.
+## Who Pays
 
-> **Superseded by `open-questions.md` B1.** Finance lease services (#8–#11) now sit in the **Institution Account Debit** group, not Customer Payment at Counter as this document previously stated. B1's evidence is that "Fee balance" — a standing-account statement line, not a receipt — is listed among the issued deliverables for nearly every Group C mortgage **and finance-lease** row, and a balance is only meaningful where a running account exists to report. Rows 34–37 (finance lease) carry that same "Fee balance" artefact, so B1's reasoning applies to them by the same logic as the mortgage rows, even though their workflow text reads like a counter transaction ("submit docs, enter system, pay, receive output via email"). That tension is not resolved by source and is flagged in each finance-lease service flow's Open Questions.
+Three payer/timing combinations, not a single uniform model — mechanism corrected only where B1 applied:
 
-| Model | Who pays | Mechanism | Services |
+| Model | Who pays | Timing | Services |
 | :---- | :---- | :---- | :---- |
-| **Institution account debit** | The institution | Deducted from the institution's standing, pre-funded settlement account with RERA, after RERA approval (B1) | Mortgage registration, amendment, transfer, release; grant property mortgage (#3–#7); finance lease registration, amendment, transfer, release (#8–#11) |
-| **Customer payment at counter** | The end customer | Paid at a Real Estate Registration Trustee Centre or Land Department counter, a payment receipt or e-receipt voucher issued (B9) | Fund company registration; heirs' sale; company share sale; title deed update; split ownership; title deed issuance; contract cancellation (#12–#18) |
-| **Institution fee payment** | The institution | Paid directly by the institution on approval of its own trustee/auditor standing, not deducted from the settlement account | Approval / renewal and cancellation of Account Trustee & Auditing company (#1–#2) |
+| **Upfront gateway payment** *(corrected 2026-08-14)* | The institution | Upfront, via the shared platform payment gateway, before lodging | Mortgage and finance-lease lifecycle (#3–#11) |
+| **Institution fee payment** *(unaffected — sourced)* | The institution | After RERA's approval decision | Institutional approval / renewal, cancellation (#1–#2) |
+| **Customer payment at counter** *(unaffected — sourced)* | The end customer | At the point of service (Trustee Centre counter or online, per C2) | Title and ownership transactions (#12–#18) |
 
-> **Proposed** — the model names and this three-way split are not themselves in the source; B1 supplies the mechanism (standing account vs. per-transaction payment), and the service-by-service assignment above follows each row's output artefact (Fee Balance vs. Payment Receipt / e-Receipt Voucher, per B9). **Confidence:** High on the account-debit mechanism (B1); Medium-high on the specific 9/7/2 split, since the finance-lease placement rests on inference rather than an explicit "deducted from bank account" statement like the mortgage rows carry. Needs client confirmation.
-
-**Why it matters:** an institution-debit service needs no payment screen for the officer at all — it needs a balance, a statement, and a reconciliation view. A customer-payment service needs a counter payment flow. Building one pattern for both would be wrong.
+**Why it matters:** #3–#11 now need a checkout step before the application can be lodged, where they previously needed a post-approval balance display. #1–#2 and #12–#18 are unchanged by this correction — their payment screens are whatever they already were.
 
 ## Settlement Mechanisms
 
@@ -51,81 +60,64 @@ The source names three settlement routes across the platform:
 
 * **Payment gateway** — card, bank transfer, and USSD (per the PRD's payment requirements)
 * **Escrow deduction** — against a project trust account
-* **Institution account debit** — against the bank's standing account with RERA
+* **Institution account debit** — against a bank's standing account with RERA
 
-Group C uses institution account debit and gateway payment. Escrow deduction appears in Group B's developer services, where the Account Trustee acts as an approval step.
+**Group C now uses payment gateway only.** Institution account debit is retired for this module — there is no standing account left to debit against (`open-questions.md` B1). Escrow deduction remains Group B's developer-services mechanism, where the Account Trustee acts as an approval step; unaffected by this correction and not a Group C payment route either before or after it.
 
 ## Fee Calculation
 
-Fees and VAT are computed automatically at the audit stage. The platform's fee schedule engine derives the amount from application type, property value, and classification.
+**RERA sets the fee for each service directly.** The amount is configuration, held in the platform's fee schedule engine (FR-16) and populated by RERA — not derived from loan value, property value, or any other figure belonging to the financial institution's relationship with its own customer (`open-questions.md` B6). This fee-setting principle applies module-wide, but *when* the fee is computed and charged still follows the three-way split above: at checkout before lodging for #3–#11 (corrected); at the point of service for #12–#18 (unaffected); and at the audit stage, ahead of the (unchanged) post-approval payment step, for #1–#2 (unaffected).
 
-> **Proposed** — not in source material for Group C specifically. Rationale: the source states that fees and VAT are computed automatically at stage 4 for every regulated service, and the PRD requires a fee schedule engine driven by application type, property value and classification. No Group C fee table exists in any source document. Needs client confirmation.
+> **Corrected 2026-08-14.** This section previously derived mortgage-service fees ad valorem from "application type, property value, and classification," treating RERA's fee as scaling with the secured loan amount. That conflated two things B6 now separates: the FI's own lending economics with its customer (never RERA's concern, never documented here) and RERA's own per-service fee (a flat, RERA-set figure per service code). FR-16's "application type... classification" language may still describe RERA varying its fee by service *type* — compatible with the corrected model — but a per-loan ad valorem calculation is specifically ruled out.
 
 ### To Confirm
 
-* Is there a published fee schedule for the 18 Group C services, and can it be supplied?
-* Do mortgage fees scale with loan value, property value, or are they flat?
-* Is VAT applied to all 18 services or only some?
-* Are institutional approval and renewal fees annual, or per application?
+* Is there a published fee schedule for the 18 Group C services, and can it be supplied? *(Resolved by B5 — there is no separate document; RERA populates the fee-schedule engine's configuration directly. Removed from this list; see below.)*
+* Is VAT applied to all 18 services or only some? *(Unaffected by this correction — B7's default-applies, configurable-per-service answer stands.)*
+* Are institutional approval and renewal fees annual, or per application? *(Unaffected by this correction — B8's per-approval-term, two-year-validity proposal stands.)*
 
 ## Payment Artefacts
 
-> **Superseded by `open-questions.md` B9.** This document previously treated "fee balance," "payment receipt," and "e-receipt voucher" as one artefact. That assumption was wrong: they are **two different things**. A payment receipt (or e-receipt voucher — the same artefact under a different name) is proof that a single transaction settled. A fee balance is the standing settlement-account position *after* that deduction — a statement line, not a receipt. This follows directly from B1: only a running account produces a balance worth issuing as an output document; a one-off gateway or counter payment produces a receipt.
+**Corrected 2026-08-14 — collapses to one artefact.** `open-questions.md` B9 (which previously distinguished a "fee balance" standing-account statement line from a "payment receipt") is superseded, not reworked: with no standing account, there is no fee balance to distinguish from anything. Every payment is a single, per-transaction event.
 
 | Artefact | What it is | Appears in |
 | :---- | :---- | :---- |
-| Fee balance (e-deliverable) | Settlement-account statement line, not proof of a single transaction | Mortgage services (#3–#7) and finance lease services (#8–#11) — the Institution Account Debit group |
-| Payment receipt | Proof that a single transaction settled | Fund company registration, heirs' sale, company share sale (#12–#14), and the other Customer Payment at Counter services (#15–#17) |
-| E-receipt voucher | Same artefact as a payment receipt, different name | Contract cancellation (#18) |
-| Tax invoice | Platform-wide requirement (PRD) | All fee-bearing services |
+| Payment Receipt (e-receipt) | Proof that a single transaction settled, issued at checkout before the application is lodged | Every fee-bearing Group C service (#1–#18) |
+| Tax Invoice | Platform-wide requirement (PRD) | All fee-bearing services |
 
-**Confidence:** Medium-high, contingent on B1's account-debit mechanism holding for the services it's applied to.
+"E-receipt voucher," used by name in source row 45 (#18), and "Payment Receipts," used by name in source row 39 (#7), are both the same artefact as Payment Receipt above under different names — row 39 in particular is now the naming pattern every other mortgage-service row should be read as matching, not the exception it was treated as under the old fee-balance framing.
 
-## Institution Account Management
-
-> **Resolved (mechanism) by `open-questions.md` B1, B2, B4.** The account is a **standing pre-funded account**, not a direct debit against a nominated bank account (B1, High confidence on the mechanism). The Institution Relationship Manager authorises top-ups over two rails — bank transfer against a unique institution reference for large amounts, payment gateway for smaller ones — proposed to reuse the same wallet primitive as the individual-user module's proposed P-22 rather than a second build (B2, Medium confidence). There is no credit arrangement: submission is blocked when the projected balance after fees would go negative, with a configurable warning threshold before that point (B4, High confidence). **The scope consequence is not yet estimated:** balance display, top-up, transaction ledger, low-balance alerting and periodic statements are all real build work that appears in no source document and no estimate — this is the item to raise with the client, not the mechanism itself.
-
-An institution operating on account debit needs:
-
-* **Account balance** — visible to the Institution Relationship Manager
-* **Top-up / funding** — bank transfer (large amounts) or payment gateway (smaller amounts), authorised by the Institution Relationship Manager (B2)
-* **Transaction ledger** — every debit tied to its originating service application
-* **Low-balance alerting** — before a transaction fails for insufficient funds, at a configurable threshold (B4)
-* **Periodic statement** — for the institution's own reconciliation
-
-### To Confirm
-
-* Sign-off on the standing pre-funded account mechanism and, separately, the unscoped Settlement Account subsystem it requires to build (B1).
-* Confirmation that the wallet primitive can be shared with individual-user P-22 rather than built twice (B2).
+**Confidence:** Confirmed on the collapse to one artefact (client decision via B1/B9). The exact receipt field set is not specified in source.
 
 ## Failed and Reversed Payments
 
-> **Resolved by `open-questions.md` B3, B4, B10.** A payment failure does not void the audit approval — the transaction holds in **Approved — Awaiting Payment** and is retryable. The approval lapses to **Expired** after **30 calendar days** unsettled (B3, Medium confidence on the specific duration; the principle that approvals must expire is the part to defend — an indefinite hold accumulates a register of approved-but-unregistered interests, invisible to a searcher, which is the fraud surface the platform exists to close). Resubmission is required on expiry; re-audit is not, unless the underlying title changed in the interim, in which case it is. Institutions do **not** use the public refund service (B10, Medium confidence): overpayment or a voided transaction credits back to the settlement account automatically, same-day; cash-out to a commercial account happens only on account closure and can reuse the public refund workflow's Ministry of Finance approval for that step alone. Applying the public route's seven-business-day, bank-attachment-based turnaround to a bank whose fee failed to settle on a 20-minute service would be disproportionate.
+**Corrected 2026-08-14.** The old model's failure handling (`open-questions.md` B3, B4, B10) assumed a standing account: an approved-but-unsettled transaction held for 30 days before expiring, and a failed settlement retried against a balance that could run low. None of that applies once payment happens before an application is even lodged.
 
-* A payment failure must not void the audit approval — the transaction holds in an approved, unsettled state and is retryable.
-* An approved but unsettled transaction expires after 30 calendar days (B3).
-* Overpayment or a voided transaction credits back to the institution's settlement account automatically, same-day (B10).
-* Cash-out to a commercial account happens only on account closure, reusing the public refund workflow's Ministry of Finance approval step (B10).
+* **Payment failure at checkout** is not an application-lifecycle event — the application hasn't been lodged yet. The user retries payment; nothing is submitted, certified, or audited until it succeeds. No audit approval is ever at stake, since none has happened yet.
+* **A rejected application has already paid.** What happens to that fee — refund, forfeiture, or something else — is not addressed by any source document or by the client decision behind this correction. Left genuinely open; see To Confirm — Summary.
+* **A settled payment needing reversal** (overpayment, a voided transaction) has no institution-specific route documented under the corrected model. `open-questions.md` B10's old argument for bypassing the platform's public refund route rested entirely on protecting a standing account's same-day reconciliation, which no longer exists — that argument doesn't carry over. Whether Group C should still get an expedited refund path on some other basis is not decided here.
+
+**What this replaces.** The old section here described `Approved — Awaiting Payment` as a real, visible state, a 30-calendar-day expiry to `Expired` (B3), and same-day automatic credit-back to a settlement account (B10). None of that is preserved as a weakened version — see below for what happens to those statuses.
 
 ## Additional Statuses
 
-These extend the platform core status vocabulary in [services-overview.md](services-overview.md), which now carries `Approved — Awaiting Payment` and `Expired` directly (D1). The Group C-specific refinements below still apply:
+The platform core status vocabulary in [services-overview.md](services-overview.md) (D1) still includes `Approved — Awaiting Payment` and `Expired` as proposed core statuses. **Neither applies to Group C under the corrected model:**
 
-| Status | Meaning |
-| :---- | :---- |
-| Approved — Awaiting Payment | Approved by RERA, fees not yet settled (platform core, D1) |
-| Payment Failed | Settlement attempted and declined; retryable without losing the approval |
-| Completed | Fees received, output document released (platform core, D1) |
-| Expired | Approved but unsettled for 30 calendar days; resubmission required (B3) |
-| Refund Requested | A settled fee is under refund review (institution-initiated only for account-closure cash-out, B10) |
+* **`Approved — Awaiting Payment` does not occur for Group C.** Payment happens before lodging, so nothing is ever approved while still awaiting payment. This is a genuine module-level non-use of a platform-core status, not a Group C extension needing its own row.
+* **`Expired`, as previously defined for Group C, does not occur either.** Its only sourced meaning here was `open-questions.md` B3's "approved but unsettled for 30 calendar days" — a scenario upfront payment makes impossible. **B3 itself was not in this correction's scope and remains as written in `open-questions.md`** — flagging the resulting tension rather than resolving it: B3 answers a question ("what happens when an approved transaction cannot be settled?") that no longer has a live scenario to answer, for Group C specifically, under the corrected payment model. Whether B3 needs its own follow-up correction is left for review.
+
+| Status | Meaning | Still applies to Group C? |
+| :---- | :---- | :---- |
+| Payment Failed | Checkout attempted and declined; retryable, nothing submitted yet | Yes — reframed as pre-lodging, not post-approval |
+| Refund Requested | A settled fee is under refund review | Open — see Failed and Reversed Payments above; not resolved which route applies |
 
 ## To Confirm — Summary
 
-Six of the original eleven items are resolved by the answers doc and are not repeated here (B1's mechanism, B2's top-up rails, B3's expiry principle, B4's no-credit rule, B9's artefact split, B10's refund route). What remains:
+**Corrected 2026-08-14.** B1, B2, B4, B5, B6, B9, and B10 are now resolved (B9 and B10 by supersession, not by independent rework — see `open-questions.md`). What remains:
 
-1. Published fee schedule for the 18 Group C services (B5 — client data; the one question of 23 with no proposed answer).
-2. Mortgage fee basis — the ad valorem/banded/floor/cap structure is proposed (B6), but the specific bands are not.
-3. VAT applicability across the 18 services — applied by default per B7, but service-code-level exemptions, if any, are unconfirmed.
-4. Institutional approval fees — proposed as per-approval-term with a two-year validity (B8), but the duration and amount are proposals, not sourced figures.
-5. **Sign-off that the Settlement Account subsystem is real, unscoped build work** (B1's scope consequence) — this is a cost question for the client, not a design question for us.
-6. The exact 30-calendar-day figure in B3 — the principle that approvals expire is defended; the specific number is a proposal.
+1. VAT applicability across the 18 services — applied by default per B7, but service-code-level exemptions, if any, are unconfirmed. *(Unaffected by this correction.)*
+2. Institutional approval fees — proposed as per-approval-term with a two-year validity (B8), but the duration and amount are proposals, not sourced figures. *(Unaffected by this correction.)*
+3. **What happens to the fee on a rejected application** (refund, forfeiture, or otherwise) — not addressed by any source document or by the payment-model correction itself. Genuinely new and open, not carried over from the pre-correction list.
+4. **Whether Group C should use the platform's public refund route, or some other route, for a settled payment needing reversal** — B10's old argument for a special route no longer holds; no replacement decision has been made.
+5. **The B3/`Expired` tension** flagged above under Additional Statuses — B3 wasn't in this correction's scope, but its sourced scenario can no longer occur for Group C.
+6. **Whether the shared payment gateway is genuinely the same build artefact as individual-user's wallet primitive (P-22), or a separate integration** — P-22 is documented as balance-based, which doesn't cleanly match Group C's no-standing-account model (`open-questions.md` B2).

@@ -2,7 +2,7 @@
 project: RERAN
 type: overview
 status: current
-updated: 2026-08-10
+updated: 2026-08-14
 contains_proposals: true
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
@@ -208,7 +208,7 @@ The proposed-services list runs alongside this sequence rather than inside it: i
 
 **The Trustee Centre channel is pervasive.** A large share of services across E, F and C list Real Estate Registration Trustee Centres as a channel, sometimes as the only channel. Whether those services gain online equivalents is a scope decision that affects several modules at once.
 
-**Every fee-bearing service pays after audit approval, not at submission.** This is stated once, in the pipeline definition, and has consequences for every module's screens and statuses. It belongs in a platform-level document, not repeated per module.
+**Corrected 2026-08-14 — this platform-wide claim was never actually true.** It was sourced from Group C's `payments.md` pipeline definition and generalized here without checking the other modules against it. Individual User's Service #8 (`Payment must be completed before the application proceeds for regulatory review`) and Real Estate Developer's Service #1 (identical pattern) both pay **upfront, before submission** — the opposite of what this observation claimed. Group C's own payment model has since been corrected (2026-08-14 client decision, see `modules/financial-trust-institutions/open-questions.md` B1): most of its 18 services now pay upfront too, matching the rest of the platform. The one genuine exception left anywhere on the platform is Group C Services #1–#2 (institutional approval/renewal, cancellation), which pay **after** RERA's decision — sourced directly from source row 28, unrelated to the payment-model correction. **The actual pattern, as far as verified:** most fee-bearing services pay upfront, before submission; Group C's institutional-approval services are a documented, sourced exception. This is the opposite of what was previously claimed here, not a refinement of it.
 
 **Three groups share the same four application-management features.** Submit, Track, Respond to Information Request, Resubmit. Documented for Individual User, proposed for Group C, and certainly needed by B and D. These should be defined once at platform level.
 

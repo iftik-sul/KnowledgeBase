@@ -4,7 +4,7 @@ module: financial-trust-institutions
 type: service-flow
 status: draft
 contains_proposals: true
-updated: 2026-08-10
+updated: 2026-08-14
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
@@ -33,7 +33,7 @@ Formally end a finance lease's effect on the property registry once the lease it
 
 ## 3. Description
 
-The lessor confirms the lease has ended (term completion, early termination, or exercised purchase option). The release is submitted at a Real Estate Registration Trustee Centre, following the same institution-to-RERA pipeline as Finance Lease Registration. On approval, the fee is deducted from the institution's settlement account, the lease is discharged on the registry, and outputs are delivered to the lessee by email.
+The lessor confirms the lease has ended (term completion, early termination, or exercised purchase option). The release is submitted at a Real Estate Registration Trustee Centre, following the same institution-to-RERA pipeline as Finance Lease Registration, with the fee paid upfront via the shared platform payment gateway. On approval, the lease is discharged on the registry, and outputs are delivered to the lessee by email.
 
 ## 4. Who Can Apply
 
@@ -51,7 +51,7 @@ The lessor confirms the lease has ended (term completion, early termination, or 
 * Registered RERAN institution (Group C) account, with a Mortgage Officer provisioned.  
 * An existing, active registered finance lease against the property.  
 * The lease has ended (term completion, early termination, or exercised purchase option).  
-* Institution's settlement account holds a sufficient prefunded balance to absorb the fee once approved (B1, B4).
+* Payment has been completed via the shared platform payment gateway before the application is lodged (B1).
 
 ## 6. Required Information
 
@@ -80,11 +80,11 @@ The lessor confirms the lease has ended (term completion, early termination, or 
 
 Applicable according to the RERAN fee schedule.
 
-> **Proposed** — flat discharge fee or ad valorem per B6. Exact schedule is client data (B5).
+> **Corrected 2026-08-14** — per the corrected `open-questions.md` B6, RERA sets this fee directly, per service code (the earlier flat-vs-ad-valorem question is moot once the fee no longer scales off any secured amount). Exact fee is a configuration fact (B5), not client data awaiting collection.
 
 ## 9. Payment Required
 
-**Yes** — Institution Account Debit model, by extension of B1 as applied in Service #8. Deducted from the institution's settlement account after RERA approval.
+**Yes** — paid upfront by the institution via the shared platform payment gateway, before the application is lodged, by extension of Service #8. **Corrected 2026-08-14** — previously Institution Account Debit, deducted after RERA approval; that model is retired, see [payments.md](../payments.md) and `open-questions.md` B1.
 
 ## 10. Processing Authority
 
@@ -110,7 +110,7 @@ Submit Release Documents
 ↓  
 Enter Release into System  
 ↓  
-Pay Fees
+Pay via Shared Platform Gateway
 
 ↓
 
@@ -122,8 +122,6 @@ Audit Release
 ↓  
 Approve, Return, or Reject  
 ↓  
-Deduct Fee from Institution Settlement Account  
-↓  
 Discharge Finance Lease on Property Registry  
 ↓  
 Generate Output Documents  
@@ -134,6 +132,10 @@ Deliver Outputs to Lessee via Email
 
 Draft  
 ↓  
+Payment Pending  
+↓  
+Payment Successful  
+↓  
 Submitted  
 ↓  
 Under Review  
@@ -142,15 +144,17 @@ Information Requested
 ↓  
 Returned for Correction  
 ↓  
-Approved — Awaiting Payment  
+Approved  
 ↓  
 Completed
 
 ### Additional Statuses
 
+* Payment Failed *(retryable, pre-lodging — see [payments.md](../payments.md))*  
 * Rejected  
-* Withdrawn  
-* Expired *(B3)*
+* Withdrawn
+
+**Corrected 2026-08-14** — `Approved — Awaiting Payment` and `Expired` (B3) removed; see Service #3's Application Status Flow section for the reasoning, which applies identically here.
 
 ## 14. Possible Outcomes
 
@@ -158,8 +162,7 @@ Completed
 * Additional Information Requested  
 * Application Returned  
 * Application Rejected  
-* Insufficient Settlement Balance / Payment Failed  
-* Approval Expired  
+* Payment Failed  
 * Application Withdrawn
 
 ## 15. Output
@@ -168,7 +171,7 @@ Upon successful completion, the system generates:
 
 * Certificate of Title / Title Deed, reissued free of the discharged lease — sourced (row 37)  
 * Map — sourced (row 37)  
-* Fee Balance — settlement-account statement line, not a receipt (B9)
+* Payment Receipt — proof the fee settled, issued at checkout before the application was lodged. **Corrected 2026-08-14** — previously "Fee Balance" (B9); see [payments.md](../payments.md).
 
 ## 16. Related Services
 
@@ -184,7 +187,7 @@ Upon successful completion, the system generates:
 * Release Information  
 * Document Upload  
 * Application Review  
-* Settlement Account Confirmation  
+* Payment Confirmation
 * Application Submitted  
 * Application Details  
 * Release Confirmation
@@ -195,10 +198,10 @@ Upon successful completion, the system generates:
 * Validate Lease Status  
 * Upload Documents  
 * Calculate Service Fee  
-* Check Settlement Account Balance  
+* Verify Payment Status
 * Submit Finance Lease Release Application  
 * Retrieve Application Status  
-* Deduct Settlement Account Fee  
+* Process Gateway Payment
 * Discharge Finance Lease on Property Registry  
 * Generate Updated Certificate of Title  
 * Send Notifications
@@ -213,8 +216,7 @@ Upon successful completion, the system generates:
 * Application  
 * Service Request  
 * Document  
-* Settlement Account  
-* Settlement Transaction  
+* Payment Transaction
 * Notification  
 * Audit Log
 
@@ -223,7 +225,7 @@ Upon successful completion, the system generates:
 * Mortgage Officer can select an existing finance lease and submit release information.  
 * System validates the lease is active and registered before allowing release.  
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
-* Fee is deducted from the institution's settlement account only after approval.  
+* Fee is paid via the shared platform payment gateway before the application is lodged.  
 * Application receives a unique application reference number.  
 * Approved releases discharge the lease on the official property registry.  
 * Institution and lessee receive completion notifications.  
@@ -233,11 +235,10 @@ Upon successful completion, the system generates:
 
 1. Only a Mortgage Officer, or a Trustee Centre operator acting on the institution's behalf, may initiate a release.  
 2. The finance lease being released must be active and registered.  
-3. Payment is deducted from the institution's settlement account only after approval (B1, by extension).  
-4. Submission is blocked if the projected settlement balance after fees would go negative (B4).  
-5. An approved but unsettled transaction lapses to Expired after 30 calendar days (B3).  
-6. Every application receives a unique application reference number.  
-7. All applications, approvals, settlement deductions, discharges, and notifications are permanently recorded in the audit trail.
+3. Payment is made via the shared platform payment gateway, upfront, before the application can be lodged — not deducted from a settlement account (B1, corrected 2026-08-14).  
+4. **Corrected 2026-08-14** — the previous low-balance-warning and 30-day-expiry rules (B4, B3) are removed; see Service #3's Business Rules for the reasoning, which applies identically here.  
+5. Every application receives a unique application reference number.  
+6. All applications, approvals, payments, discharges, and notifications are permanently recorded in the audit trail.
 
 ## Open Questions
 

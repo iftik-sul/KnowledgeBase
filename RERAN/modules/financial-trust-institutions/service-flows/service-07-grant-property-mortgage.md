@@ -32,7 +32,7 @@ Give legal and registry effect to a bank's grant of a property-secured loan, so 
 
 ## 3. Description
 
-The customer prepares the mortgage requirements with the bank. A Mortgage Officer enters the transaction documents through the Online Mortgage System; it is audited by the bank's internal auditor before being sent to RERA, where fees are deducted from the bank's settlement account. Outputs are delivered to the customer by email.
+The customer prepares the mortgage requirements with the bank. A Mortgage Officer enters the transaction documents through the Online Mortgage System and pays the fee upfront via the shared platform payment gateway; it is audited by the bank's internal auditor before being sent to RERA. Outputs are delivered to the customer by email.
 
 > **Proposed / flagged** — row 39's workflow text is nearly identical to Service #3 (Mortgage Registration, row 30): both describe a bank employee entering documents via the online mortgage system, internal bank-auditor certification, RERA audit, account-debited fees, and email delivery. The source does not state what functionally distinguishes "granting" a mortgage from "registering" one. One plausible reading is that Grant Property Mortgage is the bank's origination of a new loan secured by the property (the lending event itself), while Mortgage Registration records an already-arranged mortgage onto the RERAN registry. This distinction is not confirmed by source and is flagged for the client — see Open Questions and the PR's template-fit notes.
 
@@ -53,7 +53,7 @@ The customer prepares the mortgage requirements with the bank. A Mortgage Office
 * Registered RERAN institution (Group C) account, with a Mortgage Officer provisioned.  
 * Property is registered with RERAN and its title is verified.  
 * Customer has prepared mortgage requirements with the bank (loan approval, valuation) before system entry.  
-* Institution's settlement account holds a sufficient prefunded balance to absorb the fee once approved (B1, B4).
+* Payment has been completed via the shared platform payment gateway before the application is lodged (B1).
 
 ## 6. Required Information
 
@@ -91,15 +91,15 @@ The customer prepares the mortgage requirements with the bank. A Mortgage Office
 
 Applicable according to the RERAN fee schedule.
 
-> **Proposed** — ad valorem/banded basis per B6. Exact schedule is client data (B5).
+> **Corrected 2026-08-14** — per the corrected `open-questions.md` B6, RERA sets this fee directly, per service code. Previously proposed as ad valorem/banded; that basis is retired. The exact fee is a configuration fact (B5), not client data awaiting collection.
 
 ## 9. Payment Required
 
 **Yes**
 
-Deducted from the institution's settlement account after RERA approval — sourced (row 39: "fees deducted from bank account"), same Institution Account Debit mechanism as Service #3 (B1).
+Paid upfront by the institution via the shared platform payment gateway, before the application is lodged. Row 39's source text — "fees deducted from bank account" — is read as describing the payment *method* (a bank-transfer rail on the shared gateway), not a standing-account debit mechanism.
 
-> **Proposed / flagged** — row 39 names the output artefact "**Payment receipts**," not "Fee balance" as rows 30, 31, 32, 33, and 34–37 all do. B9 reasons that "fee balance" (a standing-account statement line) is the correct artefact wherever the account-debit mechanism applies, and every other institution-account-debit mortgage row uses that term. This row is the one exception in the source, and it is preserved as sourced rather than silently normalized to match the pattern — see Section 15 and Open Questions.
+> **Corrected 2026-08-14 — this row's terminology was right all along.** Row 39 names the output artefact "**Payment receipts**," which this document previously treated as the one exception against rows 30–37's "Fee balance" pattern (`open-questions.md` B9, now superseded). With B9 superseded and no standing account left to produce a "balance," row 39's "Payment receipts" is the terminology every mortgage-service row should be read as matching — not an anomaly to preserve as-sourced-but-different. See Section 15.
 
 ## 10. Processing Authority
 
@@ -128,6 +128,8 @@ Enter Borrower & Property/Mortgage Information
 ↓  
 Upload Required Documents  
 ↓  
+Pay via Shared Platform Gateway  
+↓  
 Submit for Internal Certification
 
 ↓
@@ -148,8 +150,6 @@ Audit Transaction
 ↓  
 Approve, Return, or Reject  
 ↓  
-Deduct Fee from Institution Settlement Account  
-↓  
 Generate Output Documents  
 ↓  
 Deliver Outputs to Customer via Email
@@ -157,6 +157,10 @@ Deliver Outputs to Customer via Email
 ## 13. Application Status Flow
 
 Draft  
+↓  
+Payment Pending  
+↓  
+Payment Successful  
 ↓  
 Pending Internal Certification  
 ↓  
@@ -170,16 +174,18 @@ Information Requested
 ↓  
 Returned for Correction  
 ↓  
-Approved — Awaiting Payment  
+Approved  
 ↓  
 Completed
 
 ### Additional Statuses
 
+* Payment Failed *(retryable, pre-lodging — see [payments.md](../payments.md))*  
 * Returned by Certifier  
 * Rejected  
-* Withdrawn  
-* Expired *(B3)*
+* Withdrawn
+
+**Corrected 2026-08-14** — `Approved — Awaiting Payment` and `Expired` (B3) removed; see Service #3's Application Status Flow section for the reasoning, which applies identically here.
 
 ## 14. Possible Outcomes
 
@@ -187,15 +193,14 @@ Completed
 * Additional Information Requested  
 * Application Returned  
 * Application Rejected  
-* Insufficient Settlement Balance / Payment Failed  
-* Approval Expired  
+* Payment Failed  
 * Application Withdrawn
 
 ## 15. Output
 
 Upon successful completion, the system generates:
 
-* Payment Receipts — sourced (row 39), the only mortgage-service row that uses this term instead of "Fee balance"
+* Payment Receipts — sourced (row 39). **Corrected 2026-08-14**: previously flagged as the only mortgage-service row using this term instead of "Fee balance"; now understood as the universal pattern every mortgage-service row follows, since "Fee balance" no longer describes anything (B9 superseded, see [payments.md](../payments.md))
 
 ## 16. Related Services
 
@@ -214,7 +219,7 @@ Upon successful completion, the system generates:
 * Document Upload  
 * Internal Certification Queue  
 * Application Review  
-* Settlement Account Confirmation  
+* Payment Confirmation
 * Application Submitted  
 * Application Details  
 * Grant Confirmation
@@ -228,10 +233,10 @@ Upon successful completion, the system generates:
 * Submit for Internal Certification  
 * Retrieve Certification Status  
 * Calculate Service Fee  
-* Check Settlement Account Balance  
+* Verify Payment Status
 * Submit Mortgage Grant Application  
 * Retrieve Application Status  
-* Deduct Settlement Account Fee  
+* Process Gateway Payment
 * Generate Payment Receipt  
 * Update Mortgage Registry  
 * Send Notifications
@@ -246,8 +251,6 @@ Upon successful completion, the system generates:
 * Application  
 * Service Request  
 * Document  
-* Settlement Account  
-* Settlement Transaction  
 * Payment Receipt  
 * Notification  
 * Audit Log
@@ -258,7 +261,7 @@ Upon successful completion, the system generates:
 * System validates the property is registered and its title is verified.  
 * Internal certifier — any of the four Group C roles, including the filer — can certify or return the transaction before it reaches RERA.  
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
-* Fee is deducted from the institution's settlement account only after approval.  
+* Fee is paid via the shared platform payment gateway before the application is lodged.  
 * Application receives a unique application reference number.  
 * Approved grants update the official mortgage registry.  
 * Institution and customer receive completion notifications, including a payment receipt.  
@@ -269,11 +272,10 @@ Upon successful completion, the system generates:
 1. Only a Mortgage Officer acting under the lending institution's corporate account may initiate a mortgage grant.  
 2. The property must be registered with RERAN and its title verified.  
 3. The transaction must pass internal institutional certification before routing to RERA.  
-4. Payment is deducted from the institution's settlement account only after RERA approval (B1).  
-5. Submission is blocked if the projected settlement balance after fees would go negative (B4).  
-6. An approved but unsettled transaction lapses to Expired after 30 calendar days (B3).  
-7. Every application receives a unique application reference number.  
-8. All applications, certifications, approvals, settlement deductions, and notifications are permanently recorded in the audit trail.
+4. Payment is made via the shared platform payment gateway, upfront, before the application can be lodged — not deducted from a settlement account (B1, corrected 2026-08-14).  
+5. **Corrected 2026-08-14** — the previous low-balance-warning and 30-day-expiry rules (B4, B3) are removed; see Service #3's Business Rules for the reasoning, which applies identically here.  
+6. Every application receives a unique application reference number.  
+7. All applications, certifications, approvals, payments, and notifications are permanently recorded in the audit trail.
 
 ## Open Questions
 

@@ -33,7 +33,7 @@ Register a mortgage against a verified title so the lending institution's securi
 
 ## 3. Description
 
-The customer (borrower) completes mortgage requirements directly with the bank — loan approval, valuation, executed mortgage deed. A Mortgage Officer then enters the transaction into the Online Mortgage System, attaching the required documents. The transaction is certified internally by any of the institution's four Group C users, including the person who filed it, before it is sent to RERA's Transaction Audit queue. On approval, the fee is deducted from the institution's settlement account and the output documents are delivered to the customer by email. The same service can alternatively be processed in assisted mode at a Real Estate Registration Trustee Centre.
+The customer (borrower) completes mortgage requirements directly with the bank — loan approval, valuation, executed mortgage deed. A Mortgage Officer then enters the transaction into the Online Mortgage System, pays the fee upfront via the shared platform payment gateway, and attaches the required documents. The transaction is certified internally by any of the institution's four Group C users, including the person who filed it, before it is sent to RERA's Transaction Audit queue. On approval, the output documents are delivered to the customer by email. The same service can alternatively be processed in assisted mode at a Real Estate Registration Trustee Centre.
 
 ## 4. Who Can Apply
 
@@ -51,7 +51,7 @@ The customer (borrower) completes mortgage requirements directly with the bank �
 * Registered RERAN institution (Group C) account, with a Mortgage Officer provisioned under the corporate account.  
 * Property is registered with RERAN and its title is verified.  
 * Customer has completed mortgage requirements with the bank (loan approval, valuation, executed mortgage deed) before system entry.  
-* Institution's settlement account holds a sufficient prefunded balance to absorb the fee once approved (B1, B4).
+* Payment has been completed via the shared platform payment gateway before the application is lodged (B1).
 
 ## 6. Required Information
 
@@ -97,13 +97,13 @@ The customer (borrower) completes mortgage requirements directly with the bank �
 
 Applicable according to the RERAN fee schedule.
 
-> **Proposed** — per `open-questions.md` B6, fees for mortgage services are proposed as **ad valorem on the secured amount, banded, with a floor and a cap**. The exact schedule is client data (B5).
+> **Corrected 2026-08-14** — per the corrected `open-questions.md` B6, RERA sets this fee directly, per service code, independent of the loan amount or any other figure from the institution's relationship with its customer. Previously proposed as ad valorem/banded on the secured amount; that basis is retired. The exact fee is a configuration fact (B5), not client data awaiting collection.
 
 ## 9. Payment Required
 
 **Yes**
 
-Deducted from the institution's standing, prefunded settlement account **after** RERA approval — not paid by the borrower, and not collected before submission. This is the **Institution Account Debit** model (B1): the source lists "Fee balance" among this service's issued deliverables, which is a standing-account statement line rather than a per-transaction receipt (B9), and is only meaningful if a running balance exists to report.
+Paid upfront by the institution via the shared platform payment gateway, before the application is lodged — not deducted from a standing account, and not paid by the borrower. **Corrected 2026-08-14** — this service was previously described as Institution Account Debit, deducted after RERA approval; that model is retired. See [payments.md](../payments.md) and `open-questions.md` B1 for the corrected pipeline.
 
 This differs from the individual-user pay-then-submit model: here, submission is free; the fee is settled only once RERA has approved the transaction, per the platform's Lodge → Validate → Audit → **Pay** → Issue pipeline.
 
@@ -140,6 +140,8 @@ Enter Borrower & Mortgage Information
 ↓  
 Upload Required Documents  
 ↓  
+Pay via Shared Platform Gateway  
+↓  
 Submit for Internal Certification
 
 ↓
@@ -160,8 +162,6 @@ Audit Transaction
 ↓  
 Approve, Return, or Reject  
 ↓  
-Deduct Fee from Institution Settlement Account  
-↓  
 Generate Output Documents  
 ↓  
 Deliver Outputs to Customer via Email
@@ -180,11 +180,15 @@ Pay Fees at Counter
 ↓  
 Receive Output via Email
 
-> **Proposed** — the source's "–V" variant reads only as "Visit trustee office, submit docs, enter system, pay fees, receive output via email," without stating whether the counter payment still draws from the institution's settlement account or is a separate at-counter mechanism. Documented as the same online service in assisted mode per C2, but the payment-source question is carried forward — see Open Questions.
+> **Proposed** — the source's "–V" variant reads only as "Visit trustee office, submit docs, enter system, pay fees, receive output via email." Documented as the same online service in assisted mode per C2, paying via the same shared gateway, upfront, as the primary channel (`open-questions.md` B1) — whether the terminal integration itself is identical to the primary channel's checkout is carried forward as a narrower open item; see Open Questions.
 
 ## 13. Application Status Flow
 
 Draft  
+↓  
+Payment Pending  
+↓  
+Payment Successful  
 ↓  
 Pending Internal Certification  
 ↓  
@@ -198,16 +202,18 @@ Information Requested
 ↓  
 Returned for Correction  
 ↓  
-Approved — Awaiting Payment  
+Approved  
 ↓  
 Completed
 
 ### Additional Statuses
 
+* Payment Failed *(retryable, pre-lodging — see [payments.md](../payments.md))*  
 * Returned by Certifier  
 * Rejected  
-* Withdrawn  
-* Expired *(approved but unsettled for 30 calendar days — B3)*
+* Withdrawn
+
+**Corrected 2026-08-14** — `Approved — Awaiting Payment` and `Expired` (previously "approved but unsettled for 30 calendar days — B3") are removed: payment now happens before lodging, so nothing is ever approved while still awaiting payment, and B3's unsettled-after-approval scenario can no longer occur. B3 itself was not corrected and remains as written in `open-questions.md` — see [payments.md](../payments.md)'s Additional Statuses section for that tension.
 
 Uses the platform core status vocabulary plus the Group C extension (D1): `Pending Internal Certification` and `Returned by Certifier` sit before `Submitted`, since this service's two-gate pattern is directly sourced (unlike Services #1/#2).
 
@@ -217,8 +223,7 @@ Uses the platform core status vocabulary plus the Group C extension (D1): `Pendi
 * Additional Information Requested  
 * Application Returned (internal certifier or RERA)  
 * Application Rejected  
-* Insufficient Settlement Balance / Payment Failed  
-* Approval Expired  
+* Payment Failed  
 * Application Withdrawn
 
 ## 15. Output
@@ -226,7 +231,7 @@ Uses the platform core status vocabulary plus the Group C extension (D1): `Pendi
 Upon successful completion, the system generates:
 
 * The applicable one of: Certificate of Title / Title Deed / Usufruct Title Deed / Statement Certificate / Provisional Sale Registration Certificate, depending on the property's existing registration type — sourced (row 30)  
-* Fee Balance — the institution's updated settlement-account statement line, **not** a payment receipt (B9)
+* Payment Receipt — proof the fee settled, issued at checkout before the application was lodged. **Corrected 2026-08-14** — previously "Fee Balance," a standing-account statement line (B9); that artefact no longer exists, see [payments.md](../payments.md).
 
 ## 16. Related Services
 
@@ -246,7 +251,7 @@ Upon successful completion, the system generates:
 * Document Upload  
 * Internal Certification Queue  
 * Application Review  
-* Settlement Account Confirmation  
+* Payment Confirmation
 * Application Submitted  
 * Application Details  
 * Registration Confirmation
@@ -261,10 +266,10 @@ Upon successful completion, the system generates:
 * Submit for Internal Certification  
 * Retrieve Certification Status  
 * Calculate Service Fee  
-* Check Settlement Account Balance  
+* Verify Payment Status
 * Submit Mortgage Registration Application  
 * Retrieve Application Status  
-* Deduct Settlement Account Fee  
+* Process Gateway Payment
 * Generate Certificate of Title / Statement Certificate  
 * Update Mortgage Registry  
 * Send Notifications
@@ -281,8 +286,7 @@ Upon successful completion, the system generates:
 * Application  
 * Service Request  
 * Document  
-* Settlement Account  
-* Settlement Transaction  
+* Payment Transaction
 * Notification  
 * Audit Log
 
@@ -293,8 +297,8 @@ Upon successful completion, the system generates:
 * Internal certifier — any of the four Group C roles, including the filer — can certify or return the transaction before it reaches RERA.  
 * Required information and documents are validated before submission.  
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
-* Fee is deducted from the institution's settlement account only after approval.  
-* Submission is blocked if the projected settlement balance after fees would go negative.  
+* Fee is paid via the shared platform payment gateway before the application is lodged.  
+* An application cannot be lodged, certified, or submitted for audit until payment succeeds.  
 * Application receives a unique application reference number.  
 * Approved registrations update the official mortgage and property registry.  
 * Institution and customer receive completion notifications.  
@@ -305,16 +309,15 @@ Upon successful completion, the system generates:
 1. Only a Mortgage Officer acting under the lending institution's corporate account, or a Trustee Centre operator acting on the institution's behalf in assisted mode, may initiate mortgage registration.  
 2. The property must be registered with RERAN and its title verified before a mortgage can be registered against it.  
 3. The transaction must pass internal institutional certification before it is routed to RERA. Certification is an unrestricted action any of the institution's four Group C users may perform, including the filer — not a maker-checker restriction and not gated by a permission scope.  
-4. Payment is deducted from the institution's standing settlement account only after RERA approval, never before submission (B1).  
-5. Submission is blocked if the projected settlement account balance after fees would go negative; a low-balance warning is shown at a configurable threshold (B4).  
-6. An approved but unsettled transaction lapses to Expired after 30 calendar days (B3).  
-7. Every application receives a unique application reference number.  
-8. All applications, certifications, approvals, settlement deductions, and notifications are permanently recorded in the audit trail.
+4. Payment is made via the shared platform payment gateway, upfront, before the application can be lodged — not deducted from a settlement account, and not collected after approval (B1, corrected 2026-08-14).  
+5. **Corrected 2026-08-14** — the previous rule 5 (low-balance warning against a projected settlement balance, B4) and rule 6 (approved-but-unsettled lapsing to Expired after 30 days, B3) are removed: there is no balance to project and no post-approval unsettled state to lapse from, once payment happens before lodging. B3 itself was not revisited by this correction and remains as written in `open-questions.md`; see `payments.md`'s Additional Statuses section for that tension.  
+6. Every application receives a unique application reference number.  
+7. All applications, certifications, approvals, payments, and notifications are permanently recorded in the audit trail.
 
 ## Open Questions
 
 The following could not be closed by row 30 or by the answers doc, and are carried forward rather than dropped:
 
-1. **Does the Trustee-Centre-assisted variant draw from the institution's settlement account, or use a separate at-counter payment?** The source's "pay fees" at the counter is ambiguous against the account-debit model established for the primary channel.  
+1. ~~Does the Trustee-Centre-assisted variant draw from the institution's settlement account, or use a separate at-counter payment?~~ **Resolved by the 2026-08-14 correction** — there is no settlement account for either channel; both pay via the shared platform gateway, upfront. What remains genuinely open: whether the assisted-mode "pay fees at counter" step (Section 12) uses the identical gateway flow or a variant terminal integration — not addressed by source or by this correction.  
 2. **Which of the five possible output documents applies to a given mortgage** (Certificate of Title vs. Title Deed vs. Usufruct Title Deed vs. Statement Certificate vs. Provisional Sale Registration Certificate)? The source lists all five as possibilities without stating the selection criteria.  
 3. **Exact fee schedule** (bands, floor, cap). Client data — see `open-questions.md` B5, B6.
