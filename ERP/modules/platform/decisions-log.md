@@ -30,7 +30,7 @@ One `##` section per decision. Newest at the bottom. Superseded decisions are ma
 **Decision:** The core Order entity holds only generic fields. Industry-specific fields attach via a separate metadata layer.
 **Alternatives considered:** Nullable columns per industry added to the core Order table as needed; a per-industry table subclassing approach.
 **Rationale:** Nullable-columns-per-industry doesn't scale — every new industry category would widen and pollute the core table.
-**Status: resolved.** Mechanism designed — see [custom-fields-layer.md](custom-fields-layer.md): a `field_definitions` config table (scoped by `company_id` and `document_type`) drives a `custom_fields JSONB` column on the entity record. A company's field set is seeded from its industry category's default template at setup and can be edited freely afterward. No schema changes are needed to add or remove a company's fields, and no core table gains columns per industry.
+**Status: resolved, then refined.** Mechanism designed — see [custom-fields-layer.md](custom-fields-layer.md). Originally scoped fields to the whole Order; **superseded by D15** once it became clear an Order can span multiple industry categories in a single Order.
 
 ## D4 — Trade name / letterhead is a company-level config, not a hardcoded constant
 
@@ -73,3 +73,33 @@ One `##` section per decision. Newest at the bottom. Superseded decisions are ma
 **Decision:** A new `### <Category>` section only enters `modules/` once a real reference case (actual client requirements) exists for it. Genericity is validated by designing the underlying mechanism (e.g., the custom-fields layer, D3) to be provably config-driven, not by writing speculative examples for hypothetical industries.
 **Alternatives considered:** Add plausible categories (e.g., Plastic Bottle) proactively, based on general knowledge of those industries, to stress-test the platform ahead of real demand.
 **Rationale:** An invented business rule that reads plausibly is worse than a gap — it looks authoritative but isn't backed by anything real, and someone will build against it as if it were validated. The actual test of "any product should be addable" is whether onboarding a new category requires only configuration (field definitions, numbering, rate rules) with zero core schema changes — that's now verifiable directly from the custom-fields layer design, without needing to fabricate example industries.
+
+## D12 — Order Line introduced as the atomic fulfillment unit, not the Order
+
+**Decision:** Per-product data (custom fields, fulfillment tracking) attaches to a new **Order Line** entity, one per item within an Order — not to the Order as a whole.
+**Alternatives considered:** Keep per-product data implicitly folded into "Production Order," one per product, as originally modeled.
+**Rationale:** A single Order can contain items from multiple industry categories (e.g., a Woven Label item and a Plastic Bag item in the same Order). Category-specific fields and fulfillment logic cannot be scoped to the whole Order once that's true — they need a line-level home. Order Line is that home; Production Order becomes one possible fulfillment path for a line, not a synonym for it.
+
+## D13 — Item Master gains `is_manufacturable`; determines default (not fixed) fulfillment path
+
+**Decision:** Add `is_manufacturable` to the Item Master. Items not flagged this way are always sourced (no BOM exists for them). Items flagged `true` default to Production Order fulfillment but are not locked to it.
+**Alternatives considered:** Fix the manufactured/outsourced choice permanently per item; decide it fresh with no default every time an Order Line is created.
+**Rationale:** In practice, the company has a defined list of items it manufactures — that's a real default worth capturing. But a manufacturable item can still need to be sourced for a specific order (e.g., a capacity issue) without that becoming a permanent reclassification of the item itself. A default that's overridable per Order Line matches how the business actually operates, better than either a hard rule or no default at all.
+
+## D14 — An Order Line can be split across Production Order(s) and Sourcing Order(s), including mid-course conversion
+
+**Decision:** An Order Line's Balance Qty is computed across the combined qty committed to all its Production Orders and Sourcing Orders. A line does not have to resolve to exactly one fulfillment path; it can be partially manufactured and partially sourced, and a Production Order's remaining balance can be converted to a Sourcing Order after production has already started.
+**Alternatives considered:** Require each Order Line to pick exactly one fulfillment path (Make or Buy) at creation, with no later change.
+**Rationale:** A single up-front choice doesn't survive real production issues — a shortfall partway through a manufacturing run is a normal operational event, not an edge case, and the model needs to absorb it without cancelling or recreating the Order Line.
+
+## D15 — Custom fields rescoped from Order to Order Line (supersedes the original D3 scoping)
+
+**Decision:** Category-specific custom fields (`field_definitions`) are scoped `document_type: 'order_line'`, keyed to that line's item category — not `document_type: 'order'`.
+**Alternatives considered:** Keep fields scoped to the whole Order (the original D3 design), and require a company to run a single-category Order.
+**Rationale:** Once an Order can mix categories, whole-Order scoping is simply wrong — it would either force every line in an Order to share one category's fields, or force single-category Orders as an artificial constraint. Line-level scoping is what actually lets categories mix freely within one Order, which is the real requirement.
+
+## D16 — Sourcing Order wraps a Procurement Purchase Request rather than a fully separate purchasing system
+
+**Decision:** Sourcing Order is a thin, order-linked layer over the existing Procurement Purchase Request flow — same vendor-selection and approval/payment mechanics, plus a link back to the Order Line it fulfills and a status lifecycle mirroring Production Order.
+**Alternatives considered:** Build a fully independent purchasing flow for order-linked sourcing, separate from the raw-material Purchase Request flow.
+**Rationale:** The existing Procurement flow's approval/payment mechanics are already designed and don't need to be reinvented; what was missing was order-traceability, not a different approval process. A thin wrapper gets the traceability without duplicating the underlying purchasing system. Trade-off accepted: whether Sourcing Order purchases need their own approval category (distinct from raw material) is still open — see modules/procurement/README.md.
