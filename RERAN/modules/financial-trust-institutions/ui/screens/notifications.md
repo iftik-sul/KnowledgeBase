@@ -3,7 +3,7 @@ project: RERAN
 module: financial-trust-institutions
 type: ui-spec
 status: draft
-updated: 2026-08-11
+updated: 2026-08-15
 contains_proposals: true
 derived_from:
   - "RERAN/modules/financial-trust-institutions/open-questions.md"
@@ -16,11 +16,13 @@ tags:
 
 # Screen: Notifications
 
-**Roles:** all Group C roles — categories received differ; see [Role Variations](#role-variations)
+**Access:** Any of the institution's four Group C roles — unified access, not role-gated (`navigation.md`, confirmed 2026-08-14). Categories differ by typical relevance, not by access restriction — see [Categories](#section-2--categories).
 
 ## Purpose
 
-Surface the module's deadline- and gate-driven alerts in one place. Group C has more of these than a typical module — two expiry windows (institutional approval, settlement) and an internal gate that can silently wait for someone — so this screen exists to make sure nothing that requires action ages quietly.
+Surface the module's deadline- and gate-driven alerts in one place. This screen exists so nothing that requires action ages quietly.
+
+> **Corrected 2026-08-15.** This screen previously had a Settlement Expiry Warning category (an approved transaction inside its 30-day settlement window) and a Low Balance category (the settlement account falling below a configured threshold). Neither applies any more: no Group C transaction is ever approved while still awaiting payment (`open-questions.md` B1, B11), and there is no standing account to run low. Both categories are removed. The Certification Waiting category's `certify`-scope restriction is also removed — every institution user can now receive it.
 
 ## Layout
 
@@ -40,20 +42,24 @@ Preferences
 
 ### Section 1 — Priority Alerts
 
-A banner strip above the main list for the categories that block work if missed: Approval Expiring/Expired, Settlement Expiring/Expired, Low Balance. Shown only when at least one is active; the strip does not render empty.
+A banner strip above the main list for the categories that block work if missed: Approval Expiring/Expired. Shown only when at least one is active; the strip does not render empty.
+
+**Corrected 2026-08-15** — previously also included Settlement Expiring/Expired and Low Balance. Both are removed; Approval Expiring/Expired (institutional approval, B8) is the only remaining category that blocks work.
 
 ### Section 2 — Categories
 
-| Category | Trigger | Roles who receive it |
+| Category | Trigger | Typically relevant to |
 | :---- | :---- | :---- |
-| Approval Outcomes | RERAN approves, returns for correction, or rejects a submitted application | Mortgage Officer (own), Institution Relationship Manager (institution-wide) |
-| Information Requested | RERAN raises a query on a submitted application | Mortgage Officer (own), Institution Relationship Manager (institution-wide) |
-| Approval Expiry Warning | Institutional approval inside 60 / 14 days of expiry (answer B8) | Institution Relationship Manager |
-| Settlement Expiry Warning | An approved transaction is inside 7 days / 24 hours of the 30-day settlement window (answer B3) | Mortgage Officer (own transaction), Institution Relationship Manager (institution-wide) |
-| Low Balance | Settlement account falls below the configured threshold (see [institution-profile.md](institution-profile.md#section-3--settlement-preferences-tab)) | Institution Relationship Manager |
+| Approval Outcomes | RERAN approves, returns for correction, or rejects a submitted application | Filer, and institution-wide for the Institution Relationship Manager |
+| Information Requested | RERAN raises a query on a submitted application | Filer, and institution-wide for the Institution Relationship Manager |
+| Approval Expiry Warning | Institutional approval inside 60 / 14 days of expiry (answer B8, confirmed 2026-08-15) | Institution Relationship Manager |
 | Escrow Routing | A new developer escrow request arrives, or one approaches its SLA | Account Trustee |
 | Reporting Obligation | A compliance report or trust account statement approaches or passes its filing date | Auditing Bureau Officer |
-| Certification Waiting | A record has waited in the internal certification queue past a configurable age | Any user holding `certify` |
+| Certification Waiting | A record has waited in the internal certification queue past a configurable age | Any institution user |
+
+**Removed 2026-08-15:** Settlement Expiry Warning and Low Balance. Neither scenario can occur under the corrected payment model — see the banner note above.
+
+**Corrected 2026-08-15** — the "Roles who receive it" column is renamed "Typically relevant to" and no longer describes an access restriction. Any institution user can receive any category; the table describes practical routing, not a permission boundary.
 
 ### Section 3 — Notification List
 
@@ -72,15 +78,13 @@ A banner strip above the main list for the categories that block work if missed:
 
 ### Section 4 — Preferences
 
-In-app toggle is always on for Priority Alert categories (approval, settlement, low balance) and cannot be disabled — these block work. Every other category can be toggled off in-app and independently for email. **Proposed** — no source addresses notification preferences for any module; this section exists because Group C's deadline density makes "cannot be silenced" a deliberate design choice for the three that matter, not an oversight for the rest.
+In-app toggle is always on for the Priority Alert category (approval expiry) and cannot be disabled — it blocks work. Every other category can be toggled off in-app and independently for email. **Proposed** — no source addresses notification preferences for any module; this section exists because Group C's deadline density makes "cannot be silenced" a deliberate design choice for the one category that matters, not an oversight for the rest.
 
 ## Empty State
 
 **Message**
 
 > No notifications. You'll be alerted here about approval outcomes, information requests, expiry warnings and — where applicable — escrow routing and reporting obligations.
-
-The message lists only the categories the signed-in role actually receives — see Role Variations.
 
 ## Reused Components
 
@@ -91,30 +95,12 @@ See [components.md](../components.md). Uses Institution Operations Sidebar, Top 
 See [validation-rules.md](../validation-rules.md). Specific to this screen:
 
 1. A notification links to the record it concerns; opening it does not mark related work as actioned — only the explicit action on the destination screen does that.
-2. Priority Alert categories cannot be muted, per Section 4.
-3. Escrow Routing and Reporting Obligation notifications are never shown to a role that cannot act on them (Mortgage Officer never sees escrow routing; Account Trustee never sees reporting obligations) — categories are additive per role, not a shared list with irrelevant rows filtered client-side.
+2. The Approval Expiry Warning Priority Alert category cannot be muted, per Section 4.
+3. **Corrected 2026-08-15** — category delivery is no longer role-restricted; every institution user can receive every category. The typical-relevance table in Section 2 describes practical defaults, which an institution may configure, not an access rule this screen enforces.
 
 ## Role Variations
 
-### Mortgage Officer
-
-Receives Approval Outcomes, Information Requested and Settlement Expiry Warning, all scoped to their own filings. No institution-wide, approval-standing, or escrow categories.
-
-### Institution Relationship Manager
-
-Receives every category except Escrow Routing, Reporting Obligation and Certification Waiting (unless they personally hold `certify`) — institution-wide. This is the largest set of any role, matching the role being the one whose journey `role-workflows.md` describes as "driven by deadlines rather than inbound work."
-
-### Account Trustee
-
-Receives only Escrow Routing. No approval, settlement or reporting categories — this role owns none of the eighteen services and has no institutional-standing responsibility.
-
-### Auditing Bureau Officer
-
-Receives only Reporting Obligation. Does not receive Approval Outcomes or Information Requested even institution-wide, since those concern work the role has no action on — the role's read access to Applications does not extend to being notified about them.
-
-### Any role holding `certify`
-
-Additionally receives Certification Waiting, on top of whatever their base role's categories are.
+**Corrected 2026-08-15 — this section is removed.** Category relevance by role is described once, in Section 2's table, rather than repeated as four separate access-restricted blocks. Every institution user can, in principle, receive every category.
 
 ## User Flow
 
@@ -123,7 +109,7 @@ Dashboard (unread count)
 ↓
 Notifications
 ├─ Open (Approval Outcome / Info Request) → Application Details
-├─ Open (Expiry Warning) → Institution Profile / Settlement Account
+├─ Open (Expiry Warning) → Institution Profile
 ├─ Open (Escrow Routing) → Escrow Request Queue
 ├─ Open (Reporting Obligation) → Compliance Reports
 ├─ Open (Certification Waiting) → Internal Certification Queue
@@ -132,6 +118,6 @@ Notifications
 
 ## Notes
 
-* **Categories are additive per role**, not one list with client-side filtering — see Validation point 3. This keeps a role's notification set aligned with what role-workflows.md says that role's journey actually contains.
-* Settlement Expiry Warning reaching the Mortgage Officer (not just the IRM) reflects answer B1's point that the officer "sees whether their own approved transaction can clear" — the notification is where that visibility becomes proactive rather than something the officer has to go looking for on Settlement Account.
+* **Categories are now typical-relevance defaults, not an access-restricted list.** The previous "additive per role" framing implied a role determined what a user *could* receive; under the unified model it only describes what's practically useful to route to whom by default.
+* **Settlement Expiry Warning and Low Balance are gone, not weakened.** Both described scenarios that cannot occur under the corrected payment model (`open-questions.md` B1, B11) — no Group C service is ever approved while payment is pending, and there is no standing account to run low.
 * The Certification Waiting age threshold is unset — no SLA is sourced for the internal certification step (see [internal-certification-queue.md](internal-certification-queue.md#notes)), so this category's trigger point is a placeholder pending that figure.
