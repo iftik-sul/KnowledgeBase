@@ -27,11 +27,11 @@ tags:
 
 The status vocabulary for this module.
 
-**No colour coding survived migration.** The source material never specifies actual colours or hex values for any status badge — every screen only says something like "use the shared status badge component," "badge colours follow the existing RERA design system," or "use the platform's standard status badges." The one exception ([property-registrations.md](screens/property-registrations.md), Principal's version) says "Badge colors follow the existing RERA design system" — a pointer to a design system that isn't itself documented in this source. There is nothing to consolidate on the colour side; only the state *labels* are consolidated below.
+**No colour coding survived migration.** The source material never specifies actual colours or hex values for any status badge — every screen only says something like "use the shared status badge component," "badge colours follow the existing RERA design system," or "use the platform's standard status badges." There is nothing to consolidate on the colour side; only the state *labels* are consolidated below.
 
-**Conflicts are reported, not resolved**, per this batch's instructions. **Note 2026-08-15:** where this file contrasts "role variants" of a screen, that names the heading the source defined a list under — not who may see it. All four roles reach every screen and every status (see [../navigation.md](../navigation.md)); the disagreements below are unreconciled source variance awaiting the merge decision flagged in [README.md](README.md#per-role-content-variants-flagged-for-review). Where two screens (or two role variants of the same screen) list different states for what is nominally the same status, both lists are shown in full and the difference is called out — no state has been silently added, dropped, or renamed to make the lists agree.
+**Status badges vs. workflow stages.** This file covers the *status badge* shown on a record in a table or header (e.g. "Approved," "Rejected"). It does **not** cover the stage names used by the horizontal Progress Tracker component on form/detail screens, which describe a fixed pipeline of steps rather than a badge vocabulary.
 
-**Status badges vs. workflow stages.** This file covers the *status badge* shown on a record in a table or header (e.g. "Approved," "Rejected"). It does **not** cover the stage names used by the horizontal Progress Tracker component on form/detail screens (e.g. "Initial Validation → Technical Review → Compliance Review → Final Approval"), which describe a fixed pipeline of steps rather than a badge vocabulary. Those stage lists are screen-specific and remain in each screen's own Layout/Sections content.
+> **Corrected 2026-08-15, second pass.** This file previously reported six of eight categories below as unresolved "⚠ Conflict" between role variants, carried over unchanged from before the screen rebuild — even though every screen this file is `derived_from` had already been rebuilt into a single unified screen, several of which (`sales-and-disclosures.md`, `escrow-management.md`) explicitly link back here as the authoritative source for a resolved vocabulary this file wasn't actually providing. Only Project Status and Property Registration Status had been properly resolved. The other six are resolved below, using the rebuilt screens' own filter lists and row-action vocabularies where a screen stated one directly, and the same union-and-reconcile method used for Project Status where it didn't. Document Status remains genuinely unresolved — see that section — because the rebuilt `documents.md` explicitly says so, not because it was missed.
 
 ## Project Status
 
@@ -41,18 +41,7 @@ Used on [projects.md](screens/projects.md).
 
 `Draft` · `Submitted` · `Under Review` · `Information Requested` · `Returned` · `Approved` · `Rejected` · `Suspended` · `Completed`
 
-> **How this was resolved.** Until the screens were unified, this section recorded an unresolved conflict between two role variants of `projects.md`:
->
-> - **Developer Principal / Director:** Draft, Pending Review, Approved, Rejected, Suspended, Completed (6 states)
-> - **Project Registration Officer:** Draft, Submitted, Under Review, Information Requested, Returned, Approved, Rejected, Completed (8 states)
->
-> It was flagged as not reconcilable by subsetting, correctly: "Pending Review" and "Suspended" appeared nowhere in the Registration Officer's list, and "Suspended" described a state — a project put on hold — unrepresentable in the other vocabulary. That flag stood while two screens existed. With `projects.md` rebuilt as a single screen, two vocabularies is no longer an option, so:
->
-> * **Union of both lists.** Every state either variant defined describes real project positions.
-> * **"Pending Review" dropped as a duplicate label, not as a state.** It and "Under Review" name the same regulatory position; "Under Review" is what the service flows and the rest of the module use.
-> * **"Suspended" kept.** This was the substantive call: only one variant listed it, but dropping a state for being single-sourced would have lost the only way to represent a project on hold.
->
-> No state was silently added, dropped or renamed beyond the "Pending Review" → "Under Review" merge recorded here.
+> **How this was resolved.** Two former role variants of `projects.md` disagreed: Developer Principal / Director (6 states, including "Pending Review" and "Suspended") vs. Project Registration Officer (8 states, including "Submitted," "Under Review," "Information Requested," "Returned"). Union of both lists; "Pending Review" merged into "Under Review" as a duplicate label; "Suspended" kept though single-sourced, since it was the only way to represent a project on hold.
 
 ## Property Registration Status
 
@@ -62,12 +51,17 @@ Used on [property-registrations.md](screens/property-registrations.md) and refer
 
 `Draft` · `Submitted` · `Under Review` · `Information Requested` · `Returned` · `Approved` · `Rejected`
 
-> **How this was resolved.** This section previously recorded a conflict between two role variants of `property-registrations.md`:
->
-> - **Developer Principal / Director:** Draft, Submitted, Under Review, Information Requested, Approved, Rejected (6 states)
-> - **Project Registration Officer:** the same 6 plus **Returned** (7 states)
->
-> Unlike the project-status conflict above, this one is a clean subset — the shorter list adds nothing the longer one lacks. Resolved to the **7-state union**, keeping "Returned," now that `property-registrations.md` is a single screen. Badge colours follow the existing RERA design system, per the note above.
+> **How this was resolved.** A clean subset case: the Project Registration Officer variant's 7 states included everything the Principal variant's 6 had, plus "Returned." Resolved to the 7-state union.
+
+## Application Status
+
+Used on [applications.md](screens/applications.md).
+
+**Resolved 2026-08-15, second pass — eight states:**
+
+`Draft` · `Submitted` · `Under Review` · `Information Requested` · `Returned` · `Approved` · `Rejected` · `Withdrawn`
+
+> **How this was resolved.** The former Developer Principal / Director variant (7 states) had a single "Pending Additional Information" state where the three operational variants (8 states, identical across all three) split this into "Information Requested" and "Returned" — two genuinely different situations (RERA has a question, vs. RERA sent the application back for correction) that the Principal's single state collapsed. Resolved to the fuller 8-state operational list, which `applications.md`'s own rebuilt Row Actions table confirms directly (Draft · Submitted/Under Review · Information Requested · Returned · Approved · Rejected). "Withdrawn" was present, unchanged, in every former variant and is retained even though the rebuilt screen's own Row Actions table doesn't give it a distinct action row — an application the developer withdrew has nothing further to action, which is why it has no listed action, not evidence the state was dropped.
 
 ## Sales & Disclosure Status
 
@@ -75,95 +69,82 @@ Used on [sales-and-disclosures.md](screens/sales-and-disclosures.md) and referen
 
 ### Sales Status
 
-**⚠ Conflict:**
+**Resolved 2026-08-15, second pass — five states:**
 
-- **Developer Principal / Director:** Reserved, Sold, Completed, Cancelled (4 states)
-- **Sales & Disclosure Officer:** Draft, Reserved, Sold, Completed, Cancelled (5 states — adds "Draft")
+`Draft` · `Reserved` · `Sold` · `Completed` · `Cancelled`
+
+> **How this was resolved.** Clean subset: the former Sales & Disclosure Officer variant (5 states) added only "Draft" to the Developer Principal / Director variant's 4. The rebuilt `sales-and-disclosures.md` confirms "Draft Sale" is a real, actionable state in its own Row Actions table (Continue Sale Entry · Edit · Delete), so it is kept.
 
 ### Disclosure Status
 
-**⚠ Conflict — the two lists barely overlap in vocabulary:**
+**Resolved 2026-08-15, second pass — seven states:**
 
-- **Developer Principal / Director:** Not Submitted, Submitted, Under Review, Approved, Returned, Rejected (6 states)
-- **Sales & Disclosure Officer:** Not Started, Draft, Submitted, Under Review, Information Requested, Returned, Approved, Rejected (8 states)
+`Disclosure Pending` · `Draft` · `Submitted` · `Under Review` · `Information Requested` · `Returned` · `Approved` · `Rejected`
 
-The Principal's "Not Submitted" and the Officer's "Not Started" appear to describe the same initial state under different names — that's a naming conflict, not a state the other list lacks. The Officer's list additionally has "Draft" and "Information Requested," which the Principal's list has no equivalent for at all.
+> **How this was resolved.** The former variants disagreed more sharply here than on any other category: Developer Principal / Director had 6 states including "Not Submitted"; Sales & Disclosure Officer had 8 including "Not Started," "Draft," and "Information Requested" as a state the Principal's variant had no equivalent for at all. `sales-and-disclosures.md`'s own rebuilt Row Actions table uses **"Disclosure Pending"** as the label for a sale with no disclosure yet started — this becomes the resolved name for the initial state, replacing both "Not Submitted" and "Not Started" rather than picking one of the two old labels. Every other state from the fuller 8-state variant is kept, since the rebuild's Row Actions table shows distinct handling for Draft, Submitted/Under Review, and Information Requested/Returned as separate real situations.
 
 ## Escrow Status
 
 Used on [escrow-management.md](screens/escrow-management.md).
 
-**⚠ Conflict:**
+**Resolved 2026-08-15, second pass — four states:**
 
-- **Developer Principal / Director:** Active, Pending, Milestone Under Review, Funds Released, Suspended, Closed (6 states)
-- **Escrow Liaison:** Pending Registration, Active, Suspended, Closed (4 states)
+`Pending Registration` · `Active` · `Suspended` · `Closed`
 
-The Escrow Liaison's list is shorter and uses "Pending Registration" where the Principal's uses plain "Pending"; the Principal's "Milestone Under Review" and "Funds Released" states have no equivalent in the Escrow Liaison's list at all — those two appear to describe escrow-level rollups of fund-release activity that the Escrow Liaison's screen tracks separately (see Fund Release Status below) rather than as an escrow-account-level state.
-
-### Milestone Verification Status (additional vocabulary found during consolidation)
-
-[escrow-details.md](screens/escrow-details.md) (Escrow Liaison's Tab 3 — Milestones) uses a **third, distinct** status vocabulary for the construction milestone itself, separate from both Escrow Status and Fund Release Status above: Pending, In Progress, Submitted, Verified, Returned (5 states). This wasn't in the original 7-category scaffold for this file; it's included here because it's a real, independently-tracked status axis (a milestone can be "Verified" while its associated fund release is still "Under Review"), not a duplicate of either status above.
+> **How this was resolved.** `escrow-management.md`'s own rebuilt Filters section states this list directly: "Escrow Status — All · Pending Registration · Active · Suspended · Closed." This confirms the reading this file's first pass had already proposed but left unresolved pending the rebuild: the former Developer Principal / Director variant's "Milestone Under Review" and "Funds Released" states were an escrow-account-level conflation of fund-release activity that the operational variant correctly tracked as a separate status axis — see Fund Release Status below, not this one.
 
 ## Fund Release Status
 
-Used on [escrow-management.md](screens/escrow-management.md) and [escrow-details.md](screens/escrow-details.md) (Tab 2 — Fund Releases).
+Used on [escrow-management.md](screens/escrow-management.md) and [escrow-details.md](screens/escrow-details.md).
 
-**⚠ Conflict:**
+**Resolved 2026-08-15, second pass — seven states:**
 
-- **Developer Principal / Director** (escrow-management.md): Not Requested, Requested, Under Review, Approved, Released, Rejected (6 states)
-- **Escrow Liaison** (escrow-management.md): No Request, Pending Approval, Under Review, Approved, Released, Returned, Rejected (7 states)
-- **Escrow Liaison** (escrow-details.md, Tab 2 table): Draft, Submitted, Under Review, Approved, Released, Returned, Rejected (7 states)
+`No Request` · `Pending Approval` · `Under Review` · `Approved` · `Released` · `Returned` · `Rejected`
 
-All three describe the same concept but disagree on the initial-state name ("Not Requested" / "No Request" / "Draft" — three different labels for what appears to be the same starting point) and on whether "Returned" exists as a distinct state (present in both Escrow Liaison lists, absent from the Principal's). The Escrow Liaison's own two lists (escrow-management.md vs. escrow-details.md) also disagree with each other on the initial-state label ("No Request" vs. "Draft"), which suggests this wasn't just a Principal-vs-Liaison gap but an inconsistency within the same role's screens.
+> **How this was resolved.** `escrow-management.md`'s own rebuilt Filters section states this list directly: "Fund Release Status — All · No Request · Pending Approval · Under Review · Approved · Released · Returned · Rejected." This resolves the three-way disagreement this file's first pass recorded (Principal's 6 states with "Not Requested"; Escrow Liaison's 6-management-screen states with "No Request"; Escrow Liaison's 7-details-screen states with "Draft") in favour of the management screen's own filter list, which is now the single canonical source both screens link to. "Draft" (from the details-screen variant) is treated as a wording variant of "No Request" — a fund release that hasn't been requested yet — not a distinct state; if a genuine draft-in-progress state (a release request being prepared but not yet submitted) is needed, that is a new state to propose, not a merge of the old label.
 
-## Application Status
+### Milestone Verification Status
 
-Used on [applications.md](screens/applications.md).
+Used on [escrow-details.md](screens/escrow-details.md) (Milestones tab). A third, distinct status axis from both of the above — a construction milestone can be "Verified" while its associated fund release is still "Under Review."
 
-**⚠ Conflict:**
+**Unaffected by this pass — five states:**
 
-- **Developer Principal / Director:** Draft, Submitted, Under Review, Pending Additional Information, Approved, Rejected, Withdrawn (7 states)
-- **Registration Officer / Sales & Disclosure Officer / Escrow Liaison** (identical across all three): Draft, Submitted, Under Review, Information Requested, Returned, Approved, Rejected, Withdrawn (8 states)
+`Pending` · `In Progress` · `Submitted` · `Verified` · `Returned`
 
-The three operational roles agree with each other exactly. Only the Principal's list differs, and only by one state: "Pending Additional Information" (Principal) vs. "Information Requested" + "Returned" (operational roles) — the Principal's single state maps to what the operational roles track as two separate states.
+No conflict was ever recorded for this vocabulary; it was found as a single, consistent list during the original consolidation and needs no resolution.
 
 ## Document Status
 
-Used on [documents.md](screens/documents.md) and [document-details.md](screens/document-details.md). The source uses **three different vocabularies** for what is arguably the same underlying concept (a document's verification state), and they don't reduce to one list without dropping information:
+Used on [documents.md](screens/documents.md) and [document-details.md](screens/document-details.md).
 
-**Documents list screen — "Verification Status":**
+**Still genuinely unresolved — not a gap in this pass.** The rebuilt `documents.md` states directly: *"The source uses three different, unreconciled vocabularies for document status; that conflict is recorded there and is not resolved by this rebuild — it predates the role variants and survives the merge unchanged."* This is the one category where the screen rebuild deliberately left the underlying conflict in place, correctly, because it isn't a role-variant artifact the unification could resolve — it needs source clarification.
 
-- **Developer Principal / Director:** Verified, Pending Review, Returned, Rejected, Expired (5 states)
-- **Registration Officer / Escrow Liaison** (identical): Draft, Pending Verification, Verified, Information Requested, Returned, Rejected, Expired (7 states)
+**Documents list screen — "Verification Status":** `Draft` · `Pending Verification` · `Verified` · `Information Requested` · `Returned` · `Rejected` · `Expired` (7 states, the fuller of two former variants — the shorter 5-state variant is a subset missing "Draft" and "Information Requested").
 
-**Documents list screen — "Expiry Status"** (Principal's version only; a separate, smaller vocabulary for how close a document is to expiring, not its verification state): Valid, Expiring Soon, Expired (3 states).
+**Documents list screen — "Expiry Status"** (a separate, smaller vocabulary for proximity to expiry, not verification state): `Valid` · `Expiring Soon` · `Expired` (3 states).
 
-**Document Details screen — "Regulatory Verification"** (Registration Officer / Sales & Disclosure Officer / Escrow Liaison, identical across all three): Pending Review, Information Requested, Verified, Rejected (4 states).
+**Document Details screen — "Regulatory Verification"** (a narrower, review-outcome-only vocabulary — no "Draft," "Expired," or "Returned"): `Pending Review` · `Information Requested` · `Verified` · `Rejected` (4 states).
 
-The Document Details variant is shorter than either Documents-list variant and uses "Regulatory Verification" as its heading rather than "Verification Status" — it isn't clearly the same list with items dropped; it reads as a narrower, review-outcome-only vocabulary (no "Draft," "Expired," or "Returned"). Reported as three separate, unreconciled lists rather than merged into one.
+Reported as three separate, unreconciled lists. Resolving this needs a client decision on which vocabulary — or whether a genuinely reconciled fourth one — is correct; it is not something this file can resolve on its own reasoning the way the other six categories were.
 
 ## Generic (not tied to a specific business entity)
 
-These appeared in the source under a "Status" or similarly generic heading, scoped to a UI mechanism rather than a regulatory entity. Included for completeness since the issue asked for every legend found, not just the 7 named categories.
-
 ### Ticket Status (Help & Support)
 
-**⚠ Conflict — no two of the four role versions agree exactly:**
+**Resolved 2026-08-15, second pass — seven states:**
 
-- **Developer Principal / Director:** Open, In Progress, Waiting for Customer, Escalated, Resolved, Closed (6 states)
-- **Registration Officer / Sales & Disclosure Officer** (identical): Draft, Open, In Progress, Waiting for Customer, Escalated, Resolved, Closed (7 states — adds "Draft")
-- **Escrow Liaison:** Open, In Progress, Waiting for User, Resolved, Closed (5 states)
+`Draft` · `Open` · `In Progress` · `Waiting for Customer` · `Escalated` · `Resolved` · `Closed`
 
-The Escrow Liaison's list is the odd one out twice over: it has no "Draft" or "Escalated" state, and uses "Waiting for User" where the other three roles all say "Waiting for Customer."
+> **How this was resolved.** Three former variants disagreed: Developer Principal / Director (6 states, no "Draft"); Project Registration Officer / Sales & Disclosure Officer (7 states, identical, adds "Draft"); Escrow Liaison (5 states, no "Draft," no "Escalated," and "Waiting for User" instead of "Waiting for Customer"). `help-and-support.md`'s own rebuild does not enumerate ticket states explicitly, so this follows the same union method used for Project Status: "Waiting for User" merged into "Waiting for Customer" as a naming variant (3-of-3 role groups used the latter); "Draft" kept, since a ticket being drafted before creation is a real, distinct state the fuller two variants agree on; "Escalated" kept — its absence from only the Escrow Liaison variant matches this same screen's own documented pattern elsewhere ("the Escrow Liaison variant's omission reads as a gap, not a restriction," stated three separate times in `help-and-support.md`'s own Notes for other sections), not a considered exclusion.
 
 ### Notification Status
 
-[notifications.md](screens/notifications.md) — a per-notification read state, consistent across all roles (only documented once, under the Principal's version, but nothing in any other role's block contradicts it): Unread, Read, Archived (3 states). No conflict.
+[notifications.md](screens/notifications.md) — a per-notification read state, consistent across all roles: `Unread` · `Read` · `Archived` (3 states). No conflict, unaffected by this pass.
 
 ### Company / RERA License Status
 
-[company-profile.md](screens/company-profile.md) (a single variant, reachable by all four roles — the source defined no second version to compare against, so no conflict is possible): Active, Pending Renewal, Expiring Soon, Suspended, Expired (5 states), covering the developer organization's own RERA license, distinct from any project's or application's status. Found under a plain "Status badges:" prose lead-in rather than a heading, easy to miss on a first pass of the source — added here for completeness.
+[company-profile.md](screens/company-profile.md) — the developer organization's own RERA license status, distinct from any project's or application's status: `Active` · `Pending Renewal` · `Expiring Soon` · `Suspended` · `Expired` (5 states). No conflict, unaffected by this pass.
 
 ### Report Generation Status
 
-[reports.md](screens/reports.md) — the processing state of a generated report file. **Identical across all four roles** — the one legend in this whole file with no conflict at all: Processing, Completed, Failed, Expired (4 states).
+[reports.md](screens/reports.md) — the processing state of a generated report file: `Processing` · `Completed` · `Failed` · `Expired` (4 states). No conflict, unaffected by this pass.
