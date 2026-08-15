@@ -92,7 +92,7 @@ Applicable according to the RERAN fee schedule.
 
 **Yes**
 
-Paid by the customer at the Trustee Centre — sourced (row 40: "Customer pays fees"). **Customer Payment at Counter** model, unaffected by the 2026-08-14 payment-model correction (`open-questions.md` B1). **Corrected 2026-08-14** — previously cited `B9` for the receipt-vs-fee-balance distinction; B9 is now superseded, since no Group C service produces a "fee balance" any more.
+Paid by the customer at the Trustee Centre, **before** RERA's audit and approval — sourced (row 40's own sequence: initial audit at the Trustee Centre, then payment, then RERA's audit). **Customer Payment at Counter** model, unaffected by the 2026-08-14 payment-model correction (`open-questions.md` B1). **Corrected 2026-08-14** — previously cited `B9` for the receipt-vs-fee-balance distinction; B9 is now superseded, since no Group C service produces a "fee balance" any more.
 
 ## 10. Processing Authority
 
@@ -156,7 +156,7 @@ Information Requested
 ↓  
 Returned for Correction  
 ↓  
-Approved — Awaiting Payment  
+Approved  
 ↓  
 Completed
 
@@ -164,6 +164,8 @@ Completed
 
 * Rejected  
 * Withdrawn
+
+**Corrected 2026-08-15 — `Approved — Awaiting Payment` removed.** This status previously sat between `Returned for Correction` and `Completed`, but contradicts this service's own sourced workflow (Section 12, Section 9): the heir pays at the Trustee Centre counter *before* RERA's audit and approval, not after. By the time a decision is reached, payment has already happened — there is no approved-but-unpaid state for this service to pass through. This is a genuine per-service finding, not a module-wide claim: compare Services #12 and #18, where RERA's row-sourced sequence has approval *before* payment, and where this status is therefore kept as accurate — see those files' own Section 13.
 
 ## 14. Possible Outcomes
 
@@ -242,7 +244,7 @@ Upon successful completion, the system generates:
 * Required information and documents are validated before submission.  
 * Application receives a unique application reference number.  
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
-* Payment is completed at the counter with a payment receipt issued.  
+* Payment is completed at the counter with a payment receipt issued, before RERA's audit.  
 * Each heir's share is transferred to their nominated bank account upon approval.  
 * Certificate of Title, Title Deed, and Map are generated upon completion.  
 * All heirs receive completion notifications.  
@@ -252,7 +254,7 @@ Upon successful completion, the system generates:
 
 1. This application may be processed by any of the institution's four Group C roles where bank-originated, or otherwise by a Trustee Centre operator acting on the heirs' behalf. **Confirmed 2026-08-15** — previously conditioned on the Mortgage Officer specifically; `open-questions.md` A4 confirms no service is role-specific. *(Whether a bank-originated variant exists for this service at all remains unconfirmed by source — only the Trustee-Centre path is confirmed by row 40.)*
 2. Heirship must be established by valid probate or administration documentation before the sale can proceed.  
-3. Payment is required at the counter before the application is finalized.  
+3. Payment is required at the counter, before RERA's audit and approval.  
 4. Each heir's share of proceeds is distributed to their nominated bank account as part of completion.  
 5. Approved applications update the official property ownership registry.  
 6. Every application receives a unique application reference number.  
