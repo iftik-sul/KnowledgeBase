@@ -3,7 +3,7 @@ project: RERAN
 module: financial-trust-institutions
 type: workflow
 status: draft
-updated: 2026-08-14
+updated: 2026-08-15
 contains_proposals: true
 derived_from:
   - "RERAN/modules/financial-trust-institutions/roles-and-responsibilities.md"
@@ -21,6 +21,8 @@ The path any user of a Group C institution account takes through the system, fro
 **Proposed.** Group C's roles are described in the source; the post-login journey below is not — it is reconstructed from the services and screens this module documents.
 
 **Confirmed 2026-08-14: access is unified, not role-gated.** Any of the four roles can perform any action in this module — service requests, internal certification, escrow requests, compliance reporting, settlement, staff records. Because of that, this document no longer describes four separate role-bound journeys. What follows is **one shared journey** covering the full range of actions available in the module. The per-role notes after it describe what each role *typically* does in practice — useful for context and for reading the audit trail — but they are **descriptive, not access-restrictive**: nothing stops a Mortgage Officer from certifying a record, or an Auditing Bureau Officer from filing a service request.
+
+**Extended 2026-08-15.** `open-questions.md` A4 confirms the same principle for service ownership specifically, not just screen access: no service in the module is role-specific, for any of the 18 services. This was a client decision, not a re-derivation — an earlier position that assigned title & ownership transactions to the Mortgage Officer by default is superseded, and the per-role notes below have been corrected accordingly (see the Mortgage Officer section).
 
 ---
 
@@ -88,8 +90,8 @@ The highest-volume role in the module, in practice.
 
 * Mortgage lifecycle — registration, amendment, transfer, release (#3–#7)
 * Finance lease lifecycle — registration, amendment, transfer, release (#8–#11)
-* Fund company registration (#12)
-* Title and ownership transactions where bank-originated (#13–#17)
+
+**Corrected 2026-08-15** — this section previously also listed "Fund company registration (#12)" and "Title and ownership transactions where bank-originated (#13–#17)" as typical Mortgage Officer work. That attribution came from A4's earlier per-service re-derivation, which the client has since rejected outright (`open-questions.md` A4, confirmed 2026-08-15) — no service is role-specific, and the source never actually supported Mortgage Officer as the typical actor for #12–#17 either; that re-derivation was itself flagged as contested before the client's decision resolved it. The two bullets are removed rather than reworded, since there's no sourced or confirmed basis for attributing #12–#17 to this role even as a "typical practice" description — see each of `service-12` through `service-17`'s own Open Questions section for what, if anything, remains genuinely unresolved about who originates those transactions in practice.
 
 ### Institution Relationship Manager
 
@@ -110,7 +112,7 @@ Typically works inbound escrow requests from the developer module.
 * Milestone certification
 * Trust account register maintenance and periodic audited statements
 
-Answer A2 confirms from source rows 8–12 that this work happens inside the platform — the Trustee studies capability, uploads documents and sends them on — not externally with an outcome recorded afterwards. The SLA governing the assessment step remains open (answer A6). This is descriptive of typical practice, not an access restriction: under the unified model, any of the four roles can act on an escrow request.
+Answer A2 confirms from source rows 8–12 that this work happens inside the platform — the Trustee studies capability, uploads documents and sends them on — not externally with an outcome recorded afterwards. The SLA governing the assessment step is confirmed by answer A6 (client decision, 2026-08-15): the source's two-number reading (waiting time vs. delivery time) is correct, and no new SLA figure is needed. *(Corrected 2026-08-15 — previously "remains open"; A6 was confirmed, not left open.)* This is descriptive of typical practice, not an access restriction: under the unified model, any of the four roles can act on an escrow request.
 
 ### Auditing Bureau Officer
 
