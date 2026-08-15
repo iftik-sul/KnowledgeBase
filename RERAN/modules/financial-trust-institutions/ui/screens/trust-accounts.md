@@ -3,7 +3,7 @@ project: RERAN
 module: financial-trust-institutions
 type: ui-spec
 status: draft
-updated: 2026-08-11
+updated: 2026-08-15
 contains_proposals: true
 derived_from:
   - "RERAN/modules/financial-trust-institutions/roles-and-responsibilities.md"
@@ -16,13 +16,15 @@ tags:
 
 # Screen: Trust Accounts
 
-**Roles:** Account Trustee (`escrow`) · Auditing Bureau Officer (`audit`) · Institution Relationship Manager (read)
+**Access:** Any of the institution's four Group C roles — unified access, not scope-gated (`navigation.md`, confirmed 2026-08-14).
 
-**This screen did not previously exist.** Referenced by [escrow-request-queue.md](escrow-request-queue.md) (Trust Accounts Managed KPI, View Trust Account row action) and [compliance-reports.md](compliance-reports.md) (View Covered Accounts), both of which had nowhere to route to.
+The register of trust accounts under the institution's trusteeship: what exists, whether its periodic statement is current, and whether it carries an audit flag. Referenced by [escrow-request-queue.md](escrow-request-queue.md) (Trust Accounts Managed KPI, View Trust Account row action) and [compliance-reports.md](compliance-reports.md) (View Covered Accounts).
+
+> **Corrected 2026-08-15.** This screen previously gated File Statement behind the `escrow` scope and Mark Under Audit behind the `audit` scope. Both scopes are retired; any of the institution's four Group C roles may file a statement or open/close an audit engagement.
 
 ## Purpose
 
-The register of trust accounts under the institution's trusteeship: what exists, whether its periodic statement is current, and whether it carries an audit flag. This is the object escrow requests draw against and compliance reports cover — the other two screens reference accounts; this screen is where an account itself lives.
+The register of trust accounts, the object escrow requests draw against and compliance reports cover — the other two screens reference accounts; this screen is where an account itself lives.
 
 ## Layout
 
@@ -40,7 +42,7 @@ Trust Accounts Table
 Pagination
 ```
 
-Selecting a row opens the **Account Detail Panel** (Section 4) rather than navigating to a separate screen — trust accounts do not have enough independent structure to warrant a fourth new file, and their detail is better read alongside the register than apart from it.
+Selecting a row opens the **Account Detail Panel** (Section 4) rather than navigating to a separate screen.
 
 ## Sections
 
@@ -85,7 +87,9 @@ Default sort is statement due date, not recency — the register's failure mode 
 | Open Findings | Count, links to [compliance-reports.md](compliance-reports.md#section-4--findings-table) filtered to this account |
 | Action | View |
 
-**Row actions:** View · File Statement (Account Trustee only) · Mark Under Audit (Auditing Bureau Officer only) · View Escrow Requests · Download Statement History
+**Row actions:** View · File Statement · Mark Under Audit · View Escrow Requests · Download Statement History
+
+**Corrected 2026-08-15** — File Statement and Mark Under Audit are no longer restricted to a specific role; any institution user can take either action.
 
 **Bulk actions:** Export Selected
 
@@ -115,24 +119,14 @@ See [components.md](../components.md). Uses Institution Operations Sidebar, Top 
 
 See [validation-rules.md](../validation-rules.md). Specific to this screen:
 
-1. Only the `escrow` scope may file a periodic statement; only the `audit` scope may open or close an audit engagement (Mark Under Audit / its closing counterpart in the detail panel).
+1. **Corrected 2026-08-15** — previously restricted File Statement to `escrow` and Mark Under Audit to `audit`. Both scopes are retired; any institution user may take either action.
 2. **An account reaches Flagged only through a Material finding raised on [compliance-reports.md](compliance-reports.md#section-4--findings-table)** — there is no manual "Flag" action on this screen. This keeps the flag traceable to a specific finding rather than becoming a status anyone with access can set at will.
 3. A Suspended account blocks new escrow requests being certified against it (enforced on [escrow-request-details.md](escrow-request-details.md#validation), not duplicated here) but remains visible and filterable in the register.
 4. Statement filing does not require the account to be Active — a Statement Overdue account can still have its statement filed, which is the action that clears the overdue state.
 
 ## Role Variations
 
-### Account Trustee
-
-Full register maintenance: file statements, view every account under this institution's trusteeship. No audit-engagement action.
-
-### Auditing Bureau Officer
-
-Can open and close an audit engagement (Mark Under Audit) and see full statement and finding history. Cannot file a statement — that remains the Trustee's responsibility, consistent with the auditor examining records the Trustee produces rather than producing them.
-
-### Institution Relationship Manager
-
-Read-only. Sees the register and detail panel, useful for the same reason overdue compliance reporting bears on institutional standing — an overdue trust account statement is exactly that kind of exposure.
+**Corrected 2026-08-15 — collapsed to typical-practice framing.** Every institution user can file a statement, view every account, and open or close an audit engagement. In practice: the Account Trustee typically maintains the register and files statements; the Auditing Bureau Officer typically opens and closes audit engagements; the Institution Relationship Manager typically uses this screen for oversight. None of this is an access restriction — any user can take any action described above.
 
 ## User Flow
 
@@ -148,7 +142,7 @@ Trust Accounts
 
 ## Notes
 
-* **Account Detail Panel, not a fourth new screen file.** The issue names two screens to create; a trust account's detail did not need independent structure once statements, findings and escrow requests each already have their own home elsewhere. This keeps the file count matched to what genuinely needs its own screen.
-* **How an account becomes Flagged is now explicit** (Validation point 2) — this was implicit in [compliance-reports.md](compliance-reports.md)'s Notes ("A Material finding... sets that account to Flagged") but had no screen-side statement of the rule until this one.
+* **Account Detail Panel, not a fourth new screen file.** A trust account's detail did not need independent structure once statements, findings and escrow requests each already have their own home elsewhere.
+* **How an account becomes Flagged is explicit** (Validation point 2) — this was implicit in [compliance-reports.md](compliance-reports.md)'s Notes and had no screen-side statement of the rule before.
 * Account activation (Pending Activation → Active) is not specified anywhere in source — this document does not propose who triggers it or what evidence it requires.
 * Statement filing frequency ("periodic") is not given a concrete cycle by any answer, matching the same gap [compliance-reports.md](compliance-reports.md#notes) flags for reporting cycle generally.
