@@ -6,10 +6,11 @@ status: draft
 contains_proposals: true
 updated: 2026-08-16
 derived_from:
-  - "RERAN/modules/individual-user/shared-platform-features.md"
+  - "RERAN/modules/real-estate-developer/ui/README.md"
   - "RERAN/modules/real-estate-developer/README.md"
   - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/modules/real-estate-developer/service-flows/service-01-register-initial-sale.md"
+  - "RERAN/modules/real-estate-developer/service-flows/service-10-withdraw-project-profit.md"
   - "RERAN/modules/real-estate-developer/service-flows/service-13-register-real-estate-project.md"
 tags:
   - real-estate-developer
@@ -17,88 +18,50 @@ tags:
   - application-management
 ---
 
-# Shared Platform Features – Application Management
+# Shared Platform Features
 
-> **Proposed** — this document and the four feature files it indexes are not sourced. `RERAN_service_flows_v2.md` describes each of the 27 Group B services as its own row; it does not name a shared application-management layer. This module is documented by the same six-stage pipeline (lodge → validate → audit → pay → issue → record) that the individual-user and financial-trust-institutions modules already carry, and the same generic submit/track/respond/resubmit shape recurs across all 27 service-flow files' own Section 12/13 (Processing Workflow / Application Status Flow) — most visibly the shared `Information Requested` and `Returned` statuses that appear as Additional Statuses in nearly every service. This document names that recurring shape once, following the pattern already established in [individual-user/shared-platform-features.md](../individual-user/shared-platform-features.md) and already proposed (not yet written) for financial-trust-institutions in `services-overview.md`. Needs client confirmation.
+> **Rebuilt 2026-08-16, bottom-up, from the module's actual 19 built screens** (`ui/screens/`), mirroring the same method applied to financial-trust-institutions the same day. The first version of this document (2026-08-15) proposed a generic four-feature Submit/Track/Respond/Resubmit split, copied from individual-user's framing without checking it against this module's own screens. That framing doesn't hold: **unlike individual-user and financial-trust-institutions, this module has no single canonical submission form.** Its derivation chain ran backwards — the 19 UI screens existed before any service flow was written (see [README.md](README.md)) — and what was actually built is five separate **domain workspaces**, each serving a cluster of the 27 numbered services, plus one cross-cutting **Applications** tracker and a set of general platform screens. Still `contains_proposals: true` throughout: none of this is sourced from `RERAN_service_flows_v2.md` as a named concept, only checked against what's built. Needs client confirmation.
 
-**Unlike individual-user, payment timing is not uniform across Group B.** Sampling this module's service-flow files found genuine variance: Service #1 (Register Initial Sale) pays before RERA's decision; Service #13 (Register Real Estate Project) pays after RERA's audit/accept step; Service #8 (Escrow Account Activation) carries no RERA fee at all. Feature #1 below documents the *mechanics* of submission — form, documents, payment where applicable — without asserting a single timing order; each service's own Section 8/9 remains the authority on its fee and payment timing.
+## Application Lifecycle (1 written, 5 domain workspaces named)
 
-## Feature #1 – Submit Application
+**Feature #1 — Applications**, [written](service-flows/feature-01-applications.md) 2026-08-16, replacing what were three separate docs (Track Application Status / Respond to Information Request / Resubmit Returned Application). `applications.md` + `application-details.md` are the only screens covering anything post-submission — there was never a dedicated screen for any of the three as a separate thing.
 
-Used by every service that requires an official submission to RERA.
+The five **domain workspaces** below are where applications actually originate — there is no generic "Submit Application" screen sitting above them. Each is confirmed (or reasonably inferred) to serve a specific cluster of the 27 services, checked against individual service files' own `derived_from` frontmatter rather than assumed:
 
-Examples:
+* **Projects** (`projects.md` / `project-details.md`) — Services #13–19 (project registration, cancellation, subdivision, rename, re-registration, settlements, termination). Confirmed via service-13's `derived_from`.
+* **Property Registrations** (`property-registrations.md` / `property-registration-details.md`) — Services #1–7 (initial sale, rent-to-own, usufruct, amendments, mortgage-linked sale, fee transfers). Confirmed via service-01's `derived_from`.
+* **Escrow Management** (`escrow-management.md` / `escrow-details.md`) — Services #8–9, #20–21 (escrow activation, transfer, mortgage deposit, bank guarantee cancellation). Confirmed via service-08's `derived_from`; the module's own README flags cardinality mismatches for #9, #20, #21 against this screen — the mapping is directionally right but not field-exact.
+* **Fund Release Request** (`fund-release-request.md` / `fund-release-request-details.md`) — Services #10, #12 (project profit withdrawal, receive escrow payment). Confirmed via service-10's `derived_from`. Service-10 itself flags an unresolved **UI mismatch**: the screen is shaped as a milestone/construction-draw request, and profit withdrawal (a margin distribution, not a milestone draw) is documented against it as the closest match, not a confirmed fit.
+* **Sales & Disclosures** (`sales-and-disclosures.md` / `sales-and-disclosure-details.md`) — **not yet confirmed against a specific service number.** The screen's own primary actions ("Record Property Sale," "Create Sales Disclosure") suggest overlap with Service #1 (Register Initial Sale), but service-01's own `derived_from` points to Property Registrations, not this screen — so the exact relationship between the two screens for the same likely service is unresolved, not assumed. Worth a direct question to the client rather than a guess.
 
-* Register Initial Sale
-* Register Initial Rent-to-Own
-* Register Real Estate Project
-* Amend Initial Procedures Data
-* Register Sale Associated with an Initial Mortgage
-* Escrow Account Activation
-* Real Estate Licensing Application
-* Real Estate Project Sub-division
-* Requesting a Technical Report for the Project
+None of the five domain-workspace features has a standalone 21-section document yet — named and scoped here, same treatment as financial-trust-institutions' Trust Accounts / Compliance Reports / Internal Certification Queue at this stage. Writing them is the natural next step once this structure is confirmed.
 
-See [feature-01-submit-application.md](service-flows/feature-01-submit-application.md) for full detail.
+## General Platform Features (named, not yet written)
 
-## Feature #2 – Track Application Status
+Screens exist for all of the following; none has a standalone shared-feature document yet:
 
-Allows users to monitor every submitted application from one place — the module's **Applications** sidebar item.
+* **Dashboard** (`dashboard.md`) — unified, no per-role variant (2026-08-15 correction, see [navigation.md](navigation.md#dashboard))
+* **Documents** (`documents.md` / `document-details.md`)
+* **Company Profile** (`company-profile.md`)
+* **Reports** (`reports.md`)
+* **Notifications** (`notifications.md`)
+* **Help & Support** (`help-and-support.md`)
 
-Examples:
+## Platform Features Summary
 
-* Project Registration
-* Property (Unit) Sale Registration
-* Escrow Account Activation / Transfer
-* Real Estate Licensing Application
-* Technical Report Request
+| Category | Count |
+| :---- | :---: |
+| Application Lifecycle — Applications (written) | 1 |
+| Application Lifecycle — Domain Workspaces (named, not written) | 5 |
+| General Platform (named, not written) | 6 |
+| **Total** | **12** |
 
-See [feature-02-track-application-status.md](service-flows/feature-02-track-application-status.md) for full detail.
+## Superseded
 
-## Feature #3 – Respond to Information Request
+The original 2026-08-15 version of this document proposed four features (Submit Application, Track Application Status, Respond to Information Request, Resubmit Returned Application) modeled directly on individual-user's shared-platform-features.md, without checking this module's own screens first. That framing is retired, not extended — see the rebuild note at the top of this document. The lifecycle diagram it included (Choose Service → Complete Form → Submit → Track → Respond/Resubmit → Approved/Rejected) is still directionally accurate for any one domain workspace's own flow, but the "Submit Application" step was never a real, separate screen — it happens inside whichever domain workspace the service belongs to.
 
-Allows users to respond when RERA requests additional information, documents, or corrections.
+## Open Questions
 
-Examples:
-
-* Upload missing project or unit documents
-* Correct sale or purchaser details
-* Provide additional survey or licensing evidence
-* Submit revised escrow assessment documents
-
-See [feature-03-respond-to-information-request.md](service-flows/feature-03-respond-to-information-request.md) for full detail.
-
-## Feature #4 – Resubmit Returned Application
-
-Allows users to correct returned applications and resubmit them without creating a new application.
-
-Examples:
-
-* Incorrect project or unit details
-* Missing documents
-* Invalid survey data
-* Incorrect payment evidence (where the service requires payment)
-
-See [feature-04-resubmit-returned-application.md](service-flows/feature-04-resubmit-returned-application.md) for full detail.
-
-## This order mirrors the lifecycle most Group B services follow:
-
-Choose Service
-        ↓
-Complete Form
-        ↓
-Submit Application
-        ↓
-Track Application Status
-        ↓
-Information Requested? ── Yes ──► Respond to Information Request
-        │
-        No
-        │
-Returned? ─────────────── Yes ──► Resubmit Returned Application
-        │
-        No
-        │
-Approved / Registered / Rejected
-
-**Not every service follows this exact shape.** Service #13 (Register Real Estate Project) runs a longer chain — License → Apply → Audit (accept/reject) → Upload Units → Registrar Account → Pay → Certificate — with payment gated behind an intermediate accept step rather than at the front. This diagram documents the common case, not every service's Section 12; consult each service-flow file directly where its own workflow diverges.
+1. Do the six domain/general-platform features named above (not yet written) correctly represent the module's shared layer, or does grouping by "domain workspace" miss something a service-by-service reading would catch? Needs client confirmation before writing the remaining docs.
+2. What does Sales & Disclosures actually serve, precisely? Flagged above — worth resolving before writing its standalone doc, since documenting it against a guessed service number would repeat the mistake this rebuild was meant to fix.
+3. Should individual service-flow files (Services #1–27) be updated to cross-reference whichever domain-workspace or Applications feature they belong to?
