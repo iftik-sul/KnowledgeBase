@@ -103,6 +103,8 @@ Registered
 
 * Email confirming registration, including the company's reference number
 
+**Checked 2026-08-15, flagged rather than changed** — every other fee-bearing service in this module lists a separate Payment Receipt as an output artefact (see `payments.md`'s Payment Artefacts section), and this service is fee-bearing (Section 9, "Yes"). Unlike #43, where a missing Payment Receipt was corrected as a clear omission against closely comparable sibling services, this file's source description is specific and minimal — "receives an email confirming successful registration along with the company's reference number," nothing more. Whether that email *is* effectively the receipt, or whether a separate receipt is also issued but simply unmentioned in the source's terse description of this Trustee-Centre-only service, isn't something the source settles either way. Left as-is rather than asserted; if the client's answer to this file's existing Open Question (Section 3, the corporate-registration relationship) comes with more process detail, worth revisiting this alongside it.
+
 ## 16. Related Services
 
 * Service #4 – Register Property Ownership
