@@ -3,7 +3,7 @@ project: RERAN
 module: financial-trust-institutions
 type: ui-spec
 status: draft
-updated: 2026-08-11
+updated: 2026-08-15
 contains_proposals: true
 derived_from:
   - "RERAN/modules/financial-trust-institutions/open-questions.md"
@@ -15,13 +15,15 @@ tags:
 
 # Screen: Documents
 
-**Roles:** Mortgage Officer (own-linked) · Institution Relationship Manager (institution-wide) · Account Trustee (escrow-linked) · Auditing Bureau Officer (institution-wide, read)
+**Access:** Any of the institution's four Group C roles — unified access, not role-gated (`navigation.md`, confirmed 2026-08-14).
 
 The institution's document repository. Every file attached anywhere in the module — service requests, escrow assessments, compliance reports — lives here once, and is attached to further records by reference rather than re-uploaded.
 
+> **Corrected 2026-08-15.** This screen previously scoped visibility by role: Mortgage Officer saw only documents linked to their own filings, Institution Relationship Manager saw everything, Account Trustee saw only escrow-linked documents, Auditing Bureau Officer had institution-wide read. Per the unified-access model, every user sees every document at the institution.
+
 ## Purpose
 
-Let a user find a document by what it's linked to, preview it without leaving the module, and — where their scope permits — attach an existing document to a new request instead of uploading a duplicate.
+Let any institution user find a document by what it's linked to, preview it without leaving the module, and attach an existing document to a new request instead of uploading a duplicate.
 
 ## Layout
 
@@ -50,7 +52,7 @@ Selecting a row opens a preview panel alongside the table rather than navigating
 * **Document Type** — Certificate of Title, Mortgage/Lease Agreement, Valuation Report, Identification, Board Resolution, Trust Account Statement, and the other types named across the eighteen services' Required Documents sections
 * **Linked To** — Service Request · Escrow Request · Compliance Report · Institution Profile (standing documents)
 * **Status** — Uploaded · Referenced Elsewhere · Superseded (older version)
-* **Uploaded By** — dropdown
+* **Uploaded By** — dropdown, added 2026-08-15 to preserve the "my documents" narrowing role-scoping used to provide, now available as an explicit filter rather than a visibility boundary
 * **Date Range** — upload date
 * **Sort By** — Most recent (default) · Name · Linked application
 
@@ -95,27 +97,13 @@ See [components.md](../components.md). Uses Institution Operations Sidebar, Top 
 
 See [validation-rules.md](../validation-rules.md#documents). Specific to this screen:
 
-1. Visibility follows the linked record's own visibility rules, not a separate document-level permission — see Role Variations. A user who cannot open an application cannot see its documents here either, even if the search matches.
+1. **Corrected 2026-08-15** — previously scoped visibility to the linked record's own role-based visibility rule. Every document at the institution is visible to every user, since the underlying records (Applications, Escrow Requests, Compliance Reports) are themselves institution-wide now, not role-scoped.
 2. Replace does not require re-confirmation from records that referenced the prior version; those records' filers see a **Newer Version Available** indicator on their own screen and choose whether to re-attach.
-3. Preview and Download are available to any role that can see the row; only Replace requires the same scope that would let the user edit the linked record.
+3. Preview, Download and Replace are available to any institution user on any visible row. **Corrected 2026-08-15** — Replace previously required the same scope that would let the user edit the linked record; that scope no longer exists.
 
 ## Role Variations
 
-### Mortgage Officer
-
-Sees documents linked to applications they filed, plus anything they've uploaded that is not yet linked to a submitted record.
-
-### Institution Relationship Manager
-
-Sees every document at the institution, matching their institution-wide visibility elsewhere in the module.
-
-### Account Trustee
-
-Sees documents linked to escrow requests and trust account records they have worked, not the institution's Group C service-request documents — the same boundary [escrow-request-queue.md](escrow-request-queue.md) draws around this role's work.
-
-### Auditing Bureau Officer
-
-Institution-wide, read-only — consistent with the read access this role has to Applications and Trust Accounts for the same audit reason.
+**Corrected 2026-08-15 — this section is removed.** Every institution user sees every document at the institution, institution-wide, with no role-based partitioning left to describe.
 
 ## User Flow
 
@@ -130,6 +118,6 @@ Documents
 
 ## Notes
 
-* **Visibility here is scoped, not uniform.** `navigation.md`'s sidebar matrix currently shows this row as full access (`●`) for all four roles with no required scope, which reads as institution-wide visibility for everyone. That's wrong once a document-linked view exists to compare it against — a Mortgage Officer should not browse another officer's mortgage documents, or the Account Trustee's escrow assessments, freely. `navigation.md` has been corrected in this pass; see the PR description.
+* **Visibility here now matches every other list screen in the module** — institution-wide, not role-partitioned. The previous version's role-scoped visibility model is superseded by the same 2026-08-14 unified-access decision that corrected `applications.md`.
 * Document *types* are drawn from each service's own Required Documents section in `service-flows/`, and every one of those is itself marked Proposed at source — this screen inherits that status rather than asserting a document is definitely required.
 * Redaction, watermarking or download restriction on sensitive documents (e.g. financial statements) is not addressed by any answer and is not proposed here.

@@ -3,7 +3,7 @@ project: RERAN
 module: financial-trust-institutions
 type: ui-spec
 status: draft
-updated: 2026-08-11
+updated: 2026-08-15
 contains_proposals: true
 derived_from:
   - "RERAN/modules/financial-trust-institutions/roles-and-responsibilities.md"
@@ -17,13 +17,15 @@ tags:
 
 # Screen: Escrow Request Details
 
-**Roles:** Account Trustee (`escrow`) · Institution Relationship Manager (read) · Auditing Bureau Officer (read)
+**Access:** Any of the institution's four Group C roles — unified access, not scope-gated (`navigation.md`, confirmed 2026-08-14). Typically worked by the Account Trustee in practice.
 
-**This screen did not previously exist.** Referenced by [escrow-request-queue.md](escrow-request-queue.md)'s Assess action, which had nowhere to route to.
+Referenced by [escrow-request-queue.md](escrow-request-queue.md)'s Assess action.
+
+> **Corrected 2026-08-15.** This screen previously gated the Decision Panel and Execute Transfer behind an `escrow` permission scope. That scope is retired; any of the institution's four Group C roles may assess, certify, and execute a transfer.
 
 ## Purpose
 
-Give the Account Trustee everything needed to reach a certification decision on one developer escrow request: the request's own context, a solvency assessment, and — per answer A3 — a structured milestone certification rather than a document upload standing in for one.
+Give whoever is working an escrow request everything needed to reach a certification decision: the request's own context, a solvency assessment, and — per answer A3, confirmed 2026-08-15 — a structured milestone certification rather than a document upload standing in for one.
 
 ## Layout
 
@@ -53,7 +55,7 @@ Request ID, request type (one of the six inbound types), project, developer, tru
 
 ### Section 2 — Request Context
 
-Everything routed from the developer module: the milestone or event cited, the developer's own supporting materials, and prior requests against the same trust account for comparison. Read-only — this is what the Trustee is assessing, not editing.
+Everything routed from the developer module: the milestone or event cited, the developer's own supporting materials, and prior requests against the same trust account for comparison. Read-only — this is what is being assessed, not edited.
 
 ### Section 3 — Solvency Assessment
 
@@ -65,19 +67,17 @@ The judgement answer A2 says happens *inside* the platform, not externally with 
 
 ### Section 4 — Milestone Certification
 
-Structured, per answer A3 — a free-form certification letter can be neither validated against KPI 8's data-integrity target nor aggregated for FR-19 reporting:
+Structured, per answer A3 (confirmed 2026-08-15) — a free-form certification letter can be neither validated against KPI 8's data-integrity target nor aggregated for FR-19 reporting:
 
 | Field | Description |
 | :---- | :---- |
 | Milestone Reference | Which construction milestone this certifies |
-| Percentage Complete | Trustee's assessed completion |
+| Percentage Complete | Assessed completion |
 | Valuation of Works Executed | Assessed value of work completed to date |
-| Amount Certified | What the Trustee is certifying for release — validated against Available Balance, see Validation |
+| Amount Certified | What is being certified for release — validated against Available Balance, see Validation |
 | Variance Against Previous Certificate | Difference from the last certification on this trust account, computed and shown, not entered |
-| Certifier Declaration | A standard attestation the Trustee affirms before the record can be certified |
+| Certifier Declaration | A standard attestation affirmed before the record can be certified |
 | Attachments | Supporting evidence for the assessment — a supplement to the structured fields above, not a replacement for them |
-
-This is the mechanism behind the Account Trustee's stated responsibility to "certify that construction milestones justify the requested drawdown."
 
 ### Section 5 — Documents
 
@@ -93,7 +93,7 @@ See [components.md](../components.md#decision-panel), extended for this screen w
 
 ### Section 6a — Execute Transfer
 
-Appears in place of the Decision Panel once status reaches **RERAN Approved** — the request has passed both gates and the only step left is the Trustee moving the funds. This is a distinct action from Certify: certifying forwards a recommendation to RERAN's escrow audit; executing moves money, only after RERAN's own approval is on record.
+Appears in place of the Decision Panel once status reaches **RERAN Approved** — the request has passed both gates and the only step left is moving the funds. This is a distinct action from Certify: certifying forwards a recommendation to RERAN's escrow audit; executing moves money, only after RERAN's own approval is on record.
 
 * **Execute Transfer** — confirms the transfer has been made against the trust account. Requires a settlement/transfer reference. Moves status to **Executed** (see [status-badges.md](../status-badges.md#escrow-request-status)) and notifies the developer.
 * Not available before RERAN Approved, and not reversible from this screen — a correction after execution is a new request, not an edit to this one.
@@ -122,22 +122,12 @@ See [validation-rules.md](../validation-rules.md). Specific to this screen:
 
 1. **Amount Certified cannot exceed the trust account's Available Balance.** This is the concrete form of the "requested amount against available balance" visibility the queue screen already surfaces — here it is enforced, not just shown.
 2. Certify is not available where the trust account is Suspended or Flagged (mirrors [escrow-request-queue.md](escrow-request-queue.md#validation) rule 2) — the panel shows the account's status in place of the action.
-3. A request cannot be certified by the user who last returned it to the developer on this same request (mirrors that screen's rule 3) — enforced here, where the decision actually happens.
+3. A request cannot be certified by the user who last returned it to the developer on this same request (mirrors that screen's rule 3) — enforced here, where the decision actually happens. Unaffected by the 2026-08-15 unified-access correction; this is a return-cycle rule, not a role/scope restriction.
 4. All four Milestone Certification fields excluding Variance (which is computed) are required before Certify is enabled; Return and Request Information do not require them.
 
 ## Role Variations
 
-### Account Trustee
-
-Full operation, as described.
-
-### Institution Relationship Manager
-
-Read-only. Sees the full assessment and certification once made, but not a Decision Panel — matching this role's oversight-not-participation position on the queue screen.
-
-### Auditing Bureau Officer
-
-Read-only, with an **Audit Flag** indicator if this specific certification was later queried by RERAN — the same signal that populates the Audit Flags filter on the queue screen. No Decision Panel, for the same reason: this role audits certifications, and does not make them.
+**Corrected 2026-08-15 — collapsed from a three-tier scope/role split.** Any institution user can reach the full Decision Panel and Execute Transfer. Typically the Account Trustee does this work in practice; the Institution Relationship Manager and Auditing Bureau Officer more typically use this screen to review an assessment already made, but hold the same access if a specific situation calls for it.
 
 ## User Flow
 
@@ -156,6 +146,5 @@ Assess (Escrow Request Details)
 
 * **Structured fields, not a free-form certificate**, is the one thing this screen exists to get right — answer A3 is explicit that a document-upload certification cannot be validated or aggregated, and Section 4 is built as data entry, not attachment.
 * **Minimum content for the Project Financial Position field is undefined.** Answer A3 settles the *shape* of milestone certification; it does not settle what counts as an adequate solvency narrative. This document does not propose a minimum-length or structured-subfield answer, since nothing in source addresses it.
-* **The SLA for this screen's own turnaround is the same open question as the queue's** — see [escrow-request-queue.md](escrow-request-queue.md#notes). Nothing here resolves it independently.
+* **The SLA for this screen's own turnaround is confirmed** — see [escrow-request-queue.md](escrow-request-queue.md#notes), answer A6 (confirmed 2026-08-15).
 * Certified requests still complete an external RERAN audit gate; this screen's Certify action is the internal half of the same two-gate pattern that governs the eighteen Group C services, applied here to Group B-originated escrow work instead.
-* **Execute Transfer closes a gap found while checking this screen against `role-workflows.md`.** The Account Trustee's journey there names "Execute Approved Transfer" as a step, and the Escrow Request Status vocabulary already includes `Executed`, but no action anywhere produced that transition until this pass. See the PR description for the full navigation/role-workflows cross-check.
