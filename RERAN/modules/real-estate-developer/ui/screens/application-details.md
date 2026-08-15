@@ -15,1156 +15,141 @@ tags:
 
 # Screen: Application Details
 
-**Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
+**Access:** Any of the developer's four Group B roles — identical screen for every user, no role-based variant.
 
-The detail view of a single application, opened from [Applications](applications.md). The source defines four variants: an overview variant (under the Principal / Director heading) without editing controls, and three operational workspace variants (under the Registration Officer, Sales & Disclosure Officer and Escrow Liaison headings) each oriented to a different application type. All four variants are reachable and actionable by all four roles.
-
-> **Migration note:** in the source material, the Sales & Disclosure Officer's Application Details section (lines 8881–9475) appears far larger than the other three roles' (~275–315 lines each). Once fully read, most of that size is a separate **Documents** (list) screen that is nested under this section at the wrong heading level (`## Screen: Documents` instead of a new `# Screen:` heading) rather than genuine Application Details content. Excluding that misplaced screen, the Sales & Disclosure Officer's actual Application Details content is ~335 lines — comparable to the other three roles. See the report for details; the misplaced Documents content is out of scope for this batch and untouched.
+> **Rebuilt 2026-08-15.** This screen previously described four designs: an overview (Developer Principal / Director) and three operational workspaces (Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison) scoped to different application types, each with its own Validation Summary check set. All four are **retired**; this is one screen absorbing the load-bearing content of each.
 
 ## Purpose
 
-Purpose differs between variants — see [Role Variations](#role-variations).
+The detail view of a single regulatory application, opened from [Applications](applications.md). Covers the application record, its related project, property or escrow account, its documents, its approval workflow and regulatory correspondence — with the controls to edit, validate, respond, correct and resubmit. Any user may do any of it, for any application type.
 
 ## Layout
 
-* **Visible Sidebar:** Developer Operational Sidebar
-* **Active Menu:** **Applications**
-* **Selected Item:** Application Details *(opened from Applications list)*
-* **Top Bar Title:** Application Details
-* **Search Bar:** Search anything...
-
-The page uses the shared **Background \+ HorizontalBorder** component.
-
-Which sidebar menu items are visible, the subtitle, top-bar page actions, and the layout diagram differ by role — see [Role Variations](#role-variations). The Escrow Liaison's layout is structurally different from the other three: it organizes the body into **tabs** (Overview, Escrow Information, Supporting Documents, Validation Summary, RERA / Bank Queries, Communication History, Activity Timeline) rather than the stacked numbered sections used by the Principal, Registration Officer, and Sales & Disclosure Officer.
+```
+Top Bar
+↓
+Application Header
+↓
+Application Summary Cards
+↓
+Approval Progress
+↓
+Application Information
+↓
+Related Records (Project · Property · Buyer · Escrow — by application type)
+↓
+Supporting Documents
+↓
+Validation Summary
+↓
+RERA Queries & Review History
+↓
+Activity Timeline
+```
 
 ## Sections
 
-Every section (Application Header, the information cards, Related Project & Property, role-specific detail blocks, Supporting/Submitted Documents, review or query tables, Communication History, and the Activity Timeline) differs between variants — see [Role Variations](#role-variations).
-
-## Empty State
-
-Differs by role — and not just in wording. For the Principal, Registration Officer, and Sales & Disclosure Officer, the "Empty State" describes an application still in **Draft** that has not yet been submitted. For the Escrow Liaison, it describes a **record-not-found** error state when the application cannot be located — a different concept entirely, not a reworded version of the same one. See [Role Variations](#role-variations).
-
-## Reused Components
-
-Differs between variants — see [Role Variations](#role-variations).
-
-## Validation
-
-Three of the four variants (those under the Registration Officer, Sales & Disclosure Officer and Escrow Liaison headings) have a Validation Summary section; the overview variant under the Principal / Director heading has none. This is a difference between variants, not a permission — any role may use any variant. See each role's "Validation Summary" block under [Role Variations](#role-variations). Across all three, the pattern is the same in substance (automatic pre-submission checks, displayed as Passed / Warning / Error, with the primary submit button disabled until all mandatory checks pass) but the specific checks listed differ by role and are preserved verbatim per role rather than merged, since the checks are the actual business rule.
-
-## Role Variations
-
-> **Reframed 2026-08-15 — these are content variants, not access restrictions.** Every variant
-> below is reachable and actionable by all four roles; none of them is withheld from anyone. What
-> the blocks record is that the source material defined this screen more than once, with different
-> KPI sets, filters, columns, actions or empty states each time — differences of *content*, not of
-> permission. Those are preserved verbatim rather than merged, because collapsing them into one
-> screen is a design decision about which variant (or which union of them) is correct, and that is
-> the client's call, not a documentation cleanup. **Flagged for review — see
-> [../README.md](../README.md#per-role-content-variants-flagged-for-review).**
->
-> The role headings below should now be read as *"the variant the source defined under this role's
-> heading"*, not *"what this role is allowed to see"*.
-
-### Developer Principal / Director
-
-### Sidebar Status
-
-* **Visible Sidebar:** Developer Operational Sidebar  
-* **Active Menu:** **Applications**  
-* **Selected Item:** Application Details *(opened from Applications list)*  
-* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
-
-### Top Bar Status
-
-**Title:** Application Details
-
-**Subtitle:** Review the complete lifecycle, approval progress, and regulatory history of this application.
-
-**Search Bar:** Search anything...
-
-**Page Actions (Right Side):**
-
-* Download Application Summary  
-* View Related Project  
-* View Related Property
-
-The page uses the shared **Background \+ HorizontalBorder** component.
-
-### Purpose
-
-Provide the Developer Principal / Director with a comprehensive, read-only view of a regulatory application, including submission details, supporting documents, approval workflow, review history, and related records.
-
-### Layout
-
-Top Bar  
-↓  
-Application Header  
-↓  
-Application Summary Cards  
-↓  
-Application Information  
-↓  
-Related Project & Property  
-↓  
-Applicant Information  
-↓  
-Approval Workflow  
-↓  
-Submitted Documents  
-↓  
-RERA Review History  
-↓  
-Related Records  
-↓  
-Activity Timeline
-
 ### Section 1 — Application Header
 
-Displays high-level application information.
+Application ID, application type, current status badge, submission date, assigned RERA unit.
 
-#### **Left**
+**Actions:** **Edit** · **Validate** · **Submit** · **Respond to Query** · **Resubmit** · **Download Approval**
 
-* Application ID  
-* Application Type  
-* Current Status Badge
-
-#### **Right**
-
-* Submission Date  
-* Last Updated  
-* Submitted By
+Governed by application status. **Reconciled 2026-08-15:** the overview variant's header carried view actions only — an access restriction, now retired.
 
 ### Section 2 — Application Summary Cards
 
-Display six KPI cards.
+Absorbed from the overview variant, the only one to define them: days in review, documents submitted versus required, open queries, and elapsed time against the service SLA.
 
-| KPI | Description |
-| ----- | ----- |
-| Current Status | Overall application status |
-| Approval Progress | Percentage completed |
-| Priority | High / Medium / Low |
-| Review Cycle | Current review round |
-| Days in Process | Number of days since submission |
-| Compliance Status | Compliant / Action Required |
+### Section 3 — Approval Progress
 
-### Section 3 — Application Information
+Stage tracker for the application's regulatory journey.
 
-Two-column information card.
+**Reconciled 2026-08-15:** the overview variant called this *Approval Workflow* and rendered it as a read-only record of stages passed; the three operational variants called it *Approval Progress* and rendered it as a live tracker. Same content, one of them static because that variant could not act. Kept as the live tracker.
 
-#### **Basic Details**
+### Section 4 — Application Information
 
-* Application ID  
-* Application Type  
-* Submission Date  
-* Submission Channel  
-* Current Stage  
-* Reference Number
+The application's own fields — reference, service, submission channel, fee status and payment reference where the service charges one, SLA and expected decision date.
 
-#### **Processing Information**
+**Payment reference note:** where the application's service carries a RERA fee, that fee is paid per transaction through the shared platform payment gateway. Payment timing differs by service — some before RERA's decision, some after, and one service in two stages. See the relevant [service flow](../../service-flows/) for the specific service rather than assuming a uniform order.
 
-* Assigned Department  
-* Assigned Officer  
-* Expected Completion Date  
-* Current Processing Queue  
-* Last Status Update
+### Section 5 — Related Records
 
-### Section 4 — Related Project & Property
+**Absorbed 2026-08-15** by unioning what the four variants each showed for their own domain:
 
-Information card.
+* **Related Project & Property** — from the overview and Registration Officer variants.
+* **Property & Buyer Information** — from the Sales & Disclosure Officer variant, including buyer classification and additional purchasers.
+* **Related Escrow Account** — from the Escrow Liaison variant, including the account, milestone and release the application concerns. *(Project escrow account — not RERA fees.)*
+* **Applicant Information** — from the overview variant: who filed, and the role they held at the time.
+* **Related Records** — from the overview variant: other applications and records linked to this one.
 
-#### **Project Information**
+Groups render according to **application type**, not according to who is looking. An escrow application shows the escrow group; a sales disclosure shows buyer information. This is the same conditional-rendering principle as [applications.md](applications.md)'s domain columns.
 
-* Project Name  
-* Project ID  
-* Development Phase
+### Section 6 — Supporting Documents
 
-#### **Property Information *(when applicable)***
+Required-document checklist and table, with Upload / Replace / Preview / Resubmit actions governed by document status.
 
-* Property Name  
-* Unit Number  
-* Registration Number
+**Reconciled 2026-08-15:** the overview variant's *Submitted Documents* listed filed documents with view/download only; the three operational variants' *Supporting Documents* added the checklist and upload controls. The operational version is the superset and is kept.
 
-Buttons
+### Section 7 — Validation Summary
 
-* View Project  
-* View Property Registration
+Automatic pre-submission checks, displayed as Passed / Warning / Error, with the submit action disabled until all mandatory checks pass.
 
-### Section 5 — Applicant Information
+**This section now applies to every user.** It existed in the three operational variants only; the overview variant had none, because it could not submit. That was an access restriction, not a property of the screen.
 
-Display the submitting organization's information.
+**Reconciliation — the three operational variants' check lists differed and are now merged by application type.** [validation-rules.md](../validation-rules.md) recorded that all three shared the same mechanism and the same first checks, but diverged in their specific items. Those checks are the actual business rule, so none was dropped: the shared checks apply to every application, and the domain-specific checks apply to the application types that need them. See [validation-rules.md](../validation-rules.md) for the consolidated set.
 
-#### **Details**
+### Section 8 — RERA Queries & Review History
 
-* Developer Company  
-* Submitted By  
-* Department  
-* Position  
-* Contact Information
+**Absorbed 2026-08-15** by combining two sections the variants held apart:
 
-This section is read-only.
+* **RERA Queries** *(three operational variants)* — open queries with Respond and Upload actions.
+* **RERA Review History** *(overview variant)* — the closed record of review rounds, reviewers, decisions and remarks.
 
-### Section 6 — Approval Workflow
-
-Horizontal workflow timeline.
-
-#### **Stages**
-
-* Draft  
-* Submitted  
-* Initial Validation  
-* Technical Review  
-* Compliance Review  
-* Final Approval  
-* Completed
-
-Each stage displays:
-
-* Stage Name  
-* Responsible Department  
-* Completion Date  
-* Current Status
-
-Completed stages use the standard success indicator.
-
-The active stage is highlighted.
-
-### Section 7 — Submitted Documents
-
-Table.
-
-#### **Columns**
-
-* Document Name  
-* Category  
-* Uploaded By  
-* Upload Date  
-* Verification Status  
-* Action
-
-#### **Actions**
-
-* View Document
-
-### Section 8 — RERA Review History
-
-Table.
-
-#### **Columns**
-
-* Review Date  
-* Reviewing Officer  
-* Review Stage  
-* Outcome  
-* Remarks  
-* Status
-
-Examples
-
-* Initial Validation Passed  
-* Technical Review Completed  
-* Additional Information Requested  
-* Compliance Approved  
-* Final Approval Granted
-
-### Section 9 — Related Records
-
-Shows every record associated with this application.
-
-Depending on the application type, display:
-
-* Linked Project  
-* Property Registration  
-* Sales Disclosure  
-* Escrow Account  
-* Payment Record  
-* Approval Certificate
-
-Each record includes:
-
-* Record Type  
-* Reference Number  
-* Current Status  
-* Action (View)
-
-### Section 10 — Activity Timeline
-
-Chronological activity log.
-
-Examples
-
-* Draft created  
-* Documents uploaded  
-* Application submitted  
-* Validation completed  
-* Additional documents requested  
-* Documents resubmitted  
-* Technical review completed  
-* Final approval granted  
-* Certificate issued
-
-Latest activities appear first.
-
-### Empty State
-
-If the application is still in Draft:
-
-**Message**
-
-> This application is currently being prepared and has not yet been submitted to RERA.
-
-Primary Button
-
-* Return to Applications
-
-### Reused Components
-
-See [components.md](../components.md) for definitions of every component used on this screen.
-
-### User Flow
-
-Dashboard  
-↓  
-Applications  
-↓  
-Application Details
-
-├── View Project
-
-├── View Property Registration
-
-├── View Documents
-
-├── View Related Records
-
-└── Download Application Summary
-
-### Notes
-
-* This is the **master detail page** for all application types within the Developer Principal portal.  
-* The layout is dynamic. Certain sections (such as Property Information or Escrow Records) appear only when relevant to the selected application type.  
-* The page provides executives with complete visibility into the application's lifecycle without allowing edits or submissions.  
-* All operational actions remain the responsibility of the relevant functional teams.
-
-### Project Registration Officer
-
-### Sidebar Status
-
-* **Visible Sidebar:** Developer Operational Sidebar  
-* **Active Menu:** **Applications**  
-* **Selected Item:** Application Details *(opened from Applications list)*  
-* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
-
-### Top Bar Status
-
-**Title:** Application Details
-
-**Subtitle:** Review, update, and manage this regulatory application throughout the approval process.
-
-**Search Bar:** Search anything...
-
-The page uses the shared **Background \+ HorizontalBorder** component.
-
-**Page Actions (Right Side):**
-
-* Save Draft *(Draft only)*  
-* Submit to RERA *(Draft only)*  
-* More Actions
-
-### Purpose
-
-Provide the Project Registration Officer with a complete operational workspace for managing a regulatory application from creation through approval. The officer can update application details, upload supporting documents, respond to RERA requests, correct returned submissions, and monitor the approval workflow.
-
-Unlike the Developer Principal's version, this page supports full operational interaction.
-
-### Layout
-
-Top Bar  
-↓  
-Application Header  
-↓  
-Approval Progress  
-↓  
-Application Information  
-↓  
-Related Project & Property  
-↓  
-Supporting Documents  
-↓  
-Validation Summary  
-↓  
-RERA Queries (If Applicable)  
-↓  
-Communication History  
-↓  
-Activity Timeline
-
-### Section 1 — Application Header
-
-Displays application overview.
-
-#### **Left**
-
-* Application ID  
-* Application Type  
-* Current Status Badge  
-* Related Project
-
-#### **Right**
-
-* Created Date  
-* Last Updated  
-* Submitted By  
-* Save Status
-
-### Section 2 — Approval Progress
-
-Display a horizontal workflow.
-
-#### **Stages**
-
-* Draft  
-* Submitted  
-* Initial Validation  
-* Technical Review  
-* Compliance Review  
-* Final Approval  
-* Completed
-
-Completed stages use the existing progress indicator.
-
-Current stage is highlighted.
-
-Selecting a completed stage scrolls to the relevant information.
-
-### Section 3 — Application Information
-
-Editable while the application is in **Draft** or **Returned** status.
-
-### **Basic Information**
-
-* Application Type  
-* Related Project  
-* Related Property *(when applicable)*  
-* Application Reference  
-* Submission Category  
-* Description
-
-### **Processing Information**
-
-* Responsible Officer  
-* Department  
-* Submission Date  
-* Expected Processing Time
-
-Fields become read-only after submission unless RERA returns the application.
-
-### Section 4 — Related Project & Property
-
-Display linked information.
-
-#### **Project**
-
-* Project Name  
-* Project ID  
-* Development Status
-
-Button
-
-* View Project Details
-
-#### **Property *(If Applicable)***
-
-* Property Name  
-* Registration Number  
-* Property Type
-
-Button
-
-* View Property Registration
-
-### Section 5 — Supporting Documents
-
-Upload and manage application documents.
-
-#### **Table**
-
-| Document | Status | Uploaded On | Version | Action |
-| :---: | :---: | :---: | :---: | :---: |
-
-#### **Actions**
-
-* Upload  
-* Replace  
-* Preview  
-* Download  
-* Delete *(Draft only)*
-
-Example documents include:
-
-* Application Form  
-* Supporting Certificates  
-* Project Documents  
-* Property Documents  
-* Technical Reports  
-* Additional Supporting Files
-
-### Section 6 — Validation Summary
-
-See [validation-rules.md](../validation-rules.md) for the shared automatic-validation mechanism and the common field-level checks (required fields, required documents, file verification). This screen's own additional checks: Related project eligibility, Related property validation, Duplicate submission check.
-
-### Section 7 — RERA Queries
-
-Visible only when RERA requests additional information.
-
-#### **Table**
-
-| Date | Request | Due Date | Status | Action |
-| :---: | :---: | :---: | :---: | :---: |
-
-#### **Actions**
-
-* Respond  
-* Upload Documents  
-* Submit Response  
-* View Previous Response
-
-Unresolved requests are highlighted.
-
-### Section 8 — Communication History
-
-Display all communication with RERA.
-
-Each message includes:
-
-* Sender  
-* Date & Time  
-* Message  
-* Attachments  
-* Status
-
-Actions
-
-* Reply *(when permitted)*  
-* View Attachment
-
-Messages are displayed in chronological conversation format.
+The same correspondence at two points in its life, split only because one variant could act on it and the others could only read it. Open queries first, resolved history below.
 
 ### Section 9 — Activity Timeline
 
-Chronological audit trail.
+Chronological record of everything that has happened to this application, including every status change, document action and payment event. Each entry shows who acted and what role they held at the time ([navigation.md](../../navigation.md#audit-trail-principle)).
 
-Examples
+**Reconciled 2026-08-15:** the three operational variants had both a *Communication History* and an *Activity Timeline*; the overview variant had only the timeline. Communication entries are a subset of activity, so they are merged into one timeline with a correspondence filter rather than kept as two lists that partly restate each other.
 
-* Draft created  
-* Information updated  
-* Documents uploaded  
-* Validation completed  
-* Submitted to RERA  
-* Review started  
-* Information requested  
-* Response submitted  
-* Application resubmitted  
-* Approved  
-* Certificate issued
+## Empty State
 
-Latest activities appear first.
+> This application has no submitted documents yet. Upload the required documents to move it forward.
 
-### Empty State
+**Primary Button** — Upload Documents
 
-If the application is newly created:
-
-**Message**
-
-> Complete the application information and upload all required supporting documents before submitting it to RERA.
-
-Primary Button
-
-* Complete Application
-
-Secondary Button
-
-* Upload Documents
-
-### Reused Components
+## Reused Components
 
 See [components.md](../components.md) for definitions of every component used on this screen.
 
-### User Flow
-
-Dashboard  
-↓  
-Applications  
-↓  
-Application Details
-
-├── Edit Application
-
-├── Upload Documents
-
-├── Save Draft
-
-├── Validate
-
-├── Submit to RERA
-
-├── Respond to RERA Query
-
-├── Resubmit Application
-
-└── Download Approval Certificate (After Approval)
-
-### Notes
-
-* This is the **primary operational workspace** for the **Project Registration Officer**.  
-* Applications remain fully editable while in **Draft** status.  
-* After submission, editing is locked unless RERA returns the application or requests additional information.  
-* Every submission, document upload, correction, response, and status change is automatically recorded in the activity timeline.  
-* The page should prominently display outstanding RERA requests to help officers respond before regulatory deadlines.
-
-### Sales & Disclosure Officer
-
-### Sidebar Status
-
-* **Visible Sidebar:** Developer Operational Sidebar  
-* **Active Menu:** **Applications**  
-* **Selected Item:** Application Details *(opened from Applications list)*  
-* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
-
-### Top Bar Status
-
-**Title:** Application Details
-
-**Subtitle:** Review, update, and manage this sales disclosure application throughout the regulatory approval process.
-
-**Search Bar:** Search anything...
-
-The page uses the shared **Background \+ HorizontalBorder** component.
-
-**Page Actions (Right Side):**
-
-* Save Draft *(Draft only)*  
-* Submit to RERA *(Draft only)*  
-* More Actions
-
-### Purpose
-
-Provide the Sales & Disclosure Officer with a complete operational workspace for managing a sales disclosure application from creation through approval. The officer can update application details, manage buyer information, upload supporting documents, respond to RERA requests, correct returned submissions, and monitor the approval workflow.
-
-Unlike the Developer Principal's version, this page supports full operational interaction.
-
-### Layout
-
-Top Bar  
-↓  
-Application Header  
-↓  
-Approval Progress  
-↓  
-Application Information  
-↓  
-Property & Buyer Information  
-↓  
-Supporting Documents  
-↓  
-Validation Summary  
-↓  
-RERA Queries (If Applicable)  
-↓  
-Communication History  
-↓  
-Activity Timeline
-
-### Section 1 — Application Header
-
-Displays application overview.
-
-#### **Left**
-
-* Application ID  
-* Application Type  
-* Current Status Badge  
-* Related Property
-
-#### **Right**
-
-* Created Date  
-* Last Updated  
-* Submitted By  
-* Save Status
-
-### Section 2 — Approval Progress
-
-Display a horizontal workflow.
-
-#### **Stages**
-
-* Draft  
-* Submitted  
-* Initial Validation  
-* Compliance Review  
-* Additional Information *(If Required)*  
-* Final Approval  
-* Completed
-
-Completed stages use the existing progress indicator.
-
-The current stage is highlighted.
-
-Selecting a completed stage scrolls to the relevant section.
-
-### Section 3 — Application Information
-
-Editable while the application is in **Draft**, **Returned**, or **Information Requested** status.
-
-### **Basic Information**
-
-* Application Type  
-* Sales Disclosure Reference  
-* Related Project  
-* Related Property  
-* Sale Reference  
-* Submission Category  
-* Description
-
-### **Processing Information**
-
-* Responsible Officer  
-* Department  
-* Submission Date  
-* Expected Processing Time  
-* Current Review Stage
-
-Fields become read-only after submission unless RERA returns the application.
-
-### Section 4 — Property & Buyer Information
-
-### **Property Information**
-
-Display linked property information.
-
-* Project Name  
-* Property Name  
-* Unit Number  
-* Property Registration Number  
-* Property Type  
-* Current Registration Status
-
-**Button**
-
-* View Property Registration
-
-### **Buyer Information**
-
-Editable while permitted.
-
-#### **Primary Buyer**
-
-* Full Name  
-* National ID / Passport Number  
-* Nationality  
-* Phone Number  
-* Email Address  
-* Residential Address
-
-#### **Buyer Classification**
-
-* Individual  
-* Corporate  
-* Joint Purchase  
-* Government Institution
-
-#### **Additional Buyers**
-
-Allow multiple buyers where applicable.
-
-Each includes:
-
-* Name  
-* Ownership Percentage  
-* Contact Information
-
-### Section 5 — Supporting Documents
-
-Upload and manage application documents.
-
-#### **Required Documents**
-
-Examples
-
-* Sales Agreement  
-* Buyer Identification  
-* Proof of Payment  
-* Mortgage Approval *(if applicable)*  
-* Corporate Registration Documents *(Corporate Buyer)*  
-* Power of Attorney *(if applicable)*  
-* Other Supporting Documents
-
-#### **Table**
-
-| Document | Status | Uploaded On | Version | Action |
-| :---: | :---: | :---: | :---: | :---: |
-
-#### **Actions**
-
-* Upload  
-* Replace  
-* Preview  
-* Download  
-* Delete *(Draft only)*
-
-### Section 6 — Validation Summary
-
-See [validation-rules.md](../validation-rules.md) for the shared automatic-validation mechanism and the common field-level checks (required fields, required documents, file verification). This screen's own additional checks: Buyer information completed, Property registration verified, Duplicate application check, Sale amount validation, Buyer identity validation.
-
-### Section 7 — RERA Queries
-
-Visible only when RERA requests additional information.
-
-#### **Table**
-
-| Date | Request | Due Date | Status | Action |
-| :---: | :---: | :---: | :---: | :---: |
-
-#### **Actions**
-
-* Respond  
-* Upload Documents  
-* Update Buyer Information  
-* Submit Response  
-* View Previous Response
-
-Outstanding requests are highlighted.
-
-### Section 8 — Communication History
-
-Display all communication with RERA.
-
-Each message includes:
-
-* Sender  
-* Date & Time  
-* Message  
-* Attachments  
-* Status
-
-#### **Actions**
-
-* Reply *(when permitted)*  
-* View Attachment
-
-Messages are displayed in chronological conversation format.
-
-### Section 9 — Activity Timeline
-
-Chronological audit trail.
-
-Examples
-
-* Draft created  
-* Buyer information updated  
-* Documents uploaded  
-* Validation completed  
-* Submitted to RERA  
-* Compliance review started  
-* Additional information requested  
-* Buyer information updated  
-* Documents replaced  
-* Resubmitted  
-* Approved  
-* Disclosure certificate issued
-
-Latest activities appear first.
-
-### Empty State
-
-If the application is newly created:
-
-**Message**
-
-> Complete the application information, buyer information, and upload all required supporting documents before submitting the application to RERA.
-
-Primary Button
-
-* Complete Application
-
-Secondary Button
-
-* Upload Documents
-
-### Reused Components
-
-See [components.md](../components.md) for definitions of every component used on this screen.
-
-### User Flow
-
-Dashboard  
-↓  
-Applications  
-↓  
-Application Details  
-├── Edit Application  
-├── Manage Buyer Information  
-├── Upload Documents  
-├── Save Draft  
-├── Validate  
-├── Submit to RERA  
-├── Respond to RERA Query  
-├── Resubmit Application  
-└── Download Approval Summary (After Approval)
-
-### Notes
-
-* This is the **primary operational workspace** for the **Sales & Disclosure Officer**.  
-* Applications remain fully editable while in **Draft**, **Returned**, or **Information Requested** status.  
-* After submission, editing is locked unless RERA returns the application or requests additional information.  
-* Buyer identity and supporting documents should be validated before submission to reduce regulatory rejection.  
-* Every submission, correction, buyer information update, document upload, response, and approval is automatically recorded in the activity timeline for regulatory compliance and audit purposes.
-
-### Escrow Liaison
-
-### Sidebar Status
-
-* **Visible Sidebar:** Developer Operational Sidebar  
-* **Active Menu:** **Applications**  
-* **Selected Item:** Application Details *(opened from Applications list)*  
-* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
-
-### Top Bar Status
-
-**Title:** Application Details
-
-**Subtitle:** Review, update, and manage this escrow-related application throughout the approval process.
-
-**Search Bar:** Search anything...
-
-The page uses the shared **Background \+ HorizontalBorder** component.
-
-**Page Actions (Right Side):**
-
-* Save Draft *(Draft only)*  
-* Submit to RERA / Financial Institution *(Draft only)*  
-* More Actions
-
-### Purpose
-
-Provide the Escrow Liaison with a complete operational workspace for managing an escrow-related application from creation through approval. The liaison can update application information, upload supporting documents, respond to requests from RERA or financial institutions, correct returned submissions, and monitor the approval workflow.
-
-Unlike the Developer Principal's version, this page supports full operational interaction.
-
-### Layout
-
-Top Bar  
-↓  
-Application Header  
-↓  
-Information Tabs  
-    ├─ Overview  
-    ├─ Escrow Information  
-    ├─ Supporting Documents  
-    ├─ Validation Summary  
-    ├─ RERA / Bank Queries  
-    ├─ Communication History  
-    └─ Activity Timeline
-
-### Section 1 — Application Header
-
-Displays the application overview.
-
-#### **Left**
-
-* Application ID  
-* Application Type  
-* Current Status Badge  
-* Related Project
-
-#### **Right**
-
-* Created Date  
-* Last Updated  
-* Submitted By  
-* Save Status
-
-### Tab 1 — Overview
-
-Displays the primary application information.
-
-#### **Basic Information**
-
-* Application ID  
-* Application Type  
-* Related Project  
-* Escrow Account  
-* Financial Institution  
-* Submission Date  
-* Current Status  
-* Priority  
-* Description
-
-#### **Processing Information**
-
-* Responsible Officer  
-* Reviewing Authority  
-* Current Review Stage  
-* Expected Completion Date
-
-Fields remain editable only while the application is in **Draft**, **Returned**, or **Information Requested** status.
-
-### Tab 2 — Escrow Information
-
-Displays information related to the linked escrow account.
-
-#### **Escrow Details**
-
-* Escrow Account Number  
-* Project Name  
-* Project Registration Number  
-* Financial Institution  
-* Current Escrow Balance  
-* Current Construction Milestone  
-* Fund Release Status
-
-#### **Linked Records**
-
-* View Escrow Details  
-* View Fund Release Request
-
-### Tab 3 — Supporting Documents
-
-Manage all documents associated with the application.
-
-#### **Required Documents**
-
-Examples
-
-* Escrow Agreement  
-* Bank Confirmation Letter  
-* Engineer Progress Certificate  
-* Quantity Surveyor Report  
-* Construction Progress Report  
-* Site Inspection Report  
-* Other Supporting Documents
-
-#### **Table**
-
-| Document | Status | Uploaded On | Version | Action |
-| :---: | :---: | :---: | :---: | :---: |
-
-#### **Actions**
-
-* Upload  
-* Replace  
-* Preview  
-* Download  
-* Delete *(Draft only)*
-
-### Tab 4 — Validation Summary
-
-See [validation-rules.md](../validation-rules.md) for the shared automatic-validation mechanism and the common field-level checks (required fields, required documents, file verification). This screen's own additional checks: Escrow account verified, Financial institution selected, Related project eligibility verified, Duplicate application check.
-
-### Tab 5 — RERA / Bank Queries
-
-Visible only when additional information is requested.
-
-#### **Table**
-
-| Date | Request | Requested By | Due Date | Status | Action |
-| :---: | :---: | :---: | :---: | :---: | :---: |
-
-#### **Actions**
-
-* Respond  
-* Upload Documents  
-* Update Application  
-* Submit Response  
-* View Previous Response
-
-Outstanding requests are highlighted.
-
-### Tab 6 — Communication History
-
-Displays all communication between the Developer, Financial Institution, and RERA.
-
-Each message includes:
-
-* Sender  
-* Organization  
-* Date & Time  
-* Message  
-* Attachments  
-* Status
-
-#### **Actions**
-
-* Reply *(when permitted)*  
-* View Attachments  
-* Download Attachments
-
-Messages are displayed in chronological order.
-
-### Tab 7 — Activity Timeline
-
-Displays every operational event related to the application.
-
-#### **Examples**
-
-* Application created  
-* Draft saved  
-* Documents uploaded  
-* Validation completed  
-* Application submitted  
-* Bank review started  
-* Additional information requested  
-* Response submitted  
-* RERA review completed  
-* Application approved  
-* Application rejected
-
-Each activity displays:
-
-* Date & Time  
-* User  
-* Description  
-* Status
-
-### Empty State
-
-This screen is only accessible after selecting an application. If the record cannot be found, display:
-
-> The requested application could not be found or is no longer available.
-
-**Primary Button**
-
-* Back to Applications
-
-### Reused Components
-
-See [components.md](../components.md) for definitions of every component used on this screen.
-
-### User Flow
-
-1. Open **Applications**.  
-2. Select an escrow-related application.  
-3. Review the application overview and escrow information.  
-4. Upload or replace supporting documents if required.  
-5. Review validation results.  
-6. Respond to RERA or financial institution queries when requested.  
-7. Update the application where permitted.  
-8. Resubmit the application if corrections are required.  
-9. Track the application until the approval process is completed.
-
-### Notes
-
-* Operational actions are available only while the application is editable.  
-* Once approved, the application becomes read-only.  
-* Communication history maintains a complete audit trail between the Developer, Financial Institution, and RERA.  
-* The tabbed layout follows the standardized Details-page pattern used across the platform.
+## Validation
+
+1. No section, field, action or card on this screen is role-gated. What a user can do depends on the application's status, never on who they are.
+2. Fields become read-only after submission unless RERA returns the application — a lifecycle rule applying to every user equally.
+3. Once approved, the application becomes read-only. Also a lifecycle rule.
+4. Validation Summary checks are defined in [validation-rules.md](../validation-rules.md) and are not restated here.
+5. Related Records groups render by application type, never by role.
 
 ## User Flow
 
-Differs between variants — see the "User Flow" heading within each role's block under [Role Variations](#role-variations). The Escrow Liaison's is written as a numbered procedural walkthrough rather than the arrow/tree diagrams used by the other three roles.
+```
+Applications
+↓
+Application Details
+├─ Edit / Validate / Submit → the service flow
+├─ Respond to Query → response flow
+├─ Document row → Document Details
+└─ Related Record link → Project / Property / Escrow Details
+```
 
 ## Notes
 
-Differs between variants — see the "Notes" heading within each role's block under [Role Variations](#role-variations).
+* **This absorbs, rather than references, all four retired variants.**
+
+* **The three operational variants were one design scoped three ways**, exactly as on [applications.md](applications.md) — same section order, same Validation Summary mechanism, same query and communication sections, differing in their Related Records group and their specific validation checks. Both of those differences are now driven by application type rather than by role.
+
+* **The Validation Summary was the substantive merge decision, twice over.** First, it applies to everyone now, since every user can submit. Second, the three variants' check lists genuinely differed, and [validation-rules.md](../validation-rules.md) had explicitly warned against normalizing them because "the checks are the actual business rule." They are therefore merged **by application type**, not flattened — every check survives, attached to the applications it governs.
+
+* **What was dropped, and why.** Only the view-only header actions, the static rendering of Approval Progress, the per-domain scoping, and the duplicate Communication History list. Nothing representing distinct work was discarded — the overview variant's Application Summary Cards, Applicant Information, Related Records and RERA Review History all survive, as do each operational variant's domain groups, validation checks and query controls.

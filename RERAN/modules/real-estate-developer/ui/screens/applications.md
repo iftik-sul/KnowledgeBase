@@ -15,1004 +15,177 @@ tags:
 
 # Screen: Applications
 
-**Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
+**Access:** Any of the developer's four Group B roles — identical screen for every user, no role-based variant.
 
-A list of regulatory applications. The source defines four variants: an organization-wide monitoring variant (under the Principal / Director heading) and three operational workspace variants oriented to different application types, with controls to continue, edit, respond to and resubmit. All four variants are reachable and actionable by all four roles, and every user sees the organization's full application set.
+> **Rebuilt 2026-08-15.** This screen previously described four designs: an organization-wide monitoring view (Developer Principal / Director) and three near-identical operational workspaces (Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison), each scoped to its own application types. All four are **retired**. This is one screen covering every application type, absorbing the monitoring view's analytics and the operational views' work controls.
 
 ## Purpose
 
-Purpose differs between variants — see [Role Variations](#role-variations).
+List every regulatory application the organization has submitted to RERA — registration, sales disclosure, escrow, licensing and title-deed alike — with the controls to continue drafts, respond to queries, correct returns and resubmit, plus the analytics to monitor approval performance. Any user may do any of it.
 
 ## Layout
 
-* **Visible Sidebar:** Developer Operational Sidebar
-* **Active Menu:** **Applications**
-* **Top Bar Title:** Applications
-* **Search Bar:** Search anything...
+```
+Top Bar
+↓
+Application Summary Cards
+↓
+Filters & Search
+↓
+Applications Table
+↓
+Pending Actions
+↓
+Application Analytics
+↓
+Recent Regulatory Activities
+↓
+Pagination
+```
 
-The page uses the shared **Background \+ HorizontalBorder** component.
+**Top Bar**
 
-Which sidebar menu items are visible, the subtitle, top-bar page actions, and the layout diagram differ by role — see [Role Variations](#role-variations). The layout diagram is identical for the Registration Officer, Sales & Disclosure Officer, and Escrow Liaison (Application Summary Cards → Filters & Search → Applications Table → **Pending Actions** → Recent Regulatory Activities → Pagination); the variant under the Principal / Director heading differs by substituting **Application Analytics** for Pending Actions, reflecting its monitoring orientation rather than any access limit.
+* Title: Applications
+* Subtitle: Track, manage and respond to every regulatory application your organization has submitted to RERA.
+* Search Bar: Search anything...
+* Page Actions: **Submit New Application**
 
 ## Sections
 
-Every numbered section (Application Summary Cards, Filters, the Applications Table and its Row Actions, Pending Actions / Application Analytics, and Recent Regulatory Activities) differs between variants — see [Role Variations](#role-variations).
-
-## Empty State
-
-Message and actions differ between variants — see [Role Variations](#role-variations).
-
-## Reused Components
-
-Differs between variants — see [Role Variations](#role-variations).
-
-## Role Variations
-
-> **Reframed 2026-08-15 — these are content variants, not access restrictions.** Every variant
-> below is reachable and actionable by all four roles; none of them is withheld from anyone. What
-> the blocks record is that the source material defined this screen more than once, with different
-> KPI sets, filters, columns, actions or empty states each time — differences of *content*, not of
-> permission. Those are preserved verbatim rather than merged, because collapsing them into one
-> screen is a design decision about which variant (or which union of them) is correct, and that is
-> the client's call, not a documentation cleanup. **Flagged for review — see
-> [../README.md](../README.md#per-role-content-variants-flagged-for-review).**
->
-> The role headings below should now be read as *"the variant the source defined under this role's
-> heading"*, not *"what this role is allowed to see"*.
-
-### Developer Principal / Director
-
-### Sidebar Status
-
-* **Visible Sidebar:** Developer Operational Sidebar  
-* **Active Menu:** **Applications**  
-* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
-
-### Top Bar Status
-
-**Title:** Applications
-
-**Subtitle:** Monitor all regulatory applications submitted by your organization to RERA.
-
-**Search Bar:** Search anything...
-
-The page uses the shared **Background \+ HorizontalBorder** component.
-
-### Purpose
-
-Provide the Developer Principal / Director with a centralized, organization-wide view of every application submitted to RERA. This screen enables executives to monitor processing status, approval progress, pending actions, and regulatory turnaround times without participating in operational processing.
-
-### Layout
-
-Top Bar  
-↓  
-Application Summary Cards  
-↓  
-Filters & Search  
-↓  
-Applications Table  
-↓  
-Application Analytics  
-↓  
-Recent Regulatory Activities  
-↓  
-Pagination
-
 ### Section 1 — Application Summary Cards
 
-Display eight KPI cards.
+| KPI | Description | Absorbed from |
+| :---- | :---- | :---- |
+| Total Applications | All applications, every type, organization-wide | All four *(reconciled — see Notes)* |
+| Draft Applications | Not yet submitted | All four |
+| Submitted | Successfully submitted, awaiting review | All four |
+| Under Review | Currently being processed | All four |
+| Information Requested | Awaiting developer response | All four *(reconciled — label)* |
+| Returned | Returned for correction | The three operational variants |
+| Approved | Successfully approved | All four |
+| Rejected | Rejected applications | Principal |
+| Due This Week | Applications requiring action this week | The three operational variants |
+| Average Approval Time | Average processing duration | Principal |
 
-| KPI | Description |
-| ----- | ----- |
-| Total Applications | All submitted applications |
-| Draft Applications | Not yet submitted |
-| Submitted | Awaiting review |
-| Under Review | Currently being processed |
-| Additional Information Requested | Waiting for developer response |
-| Approved | Successfully approved |
-| Rejected | Rejected applications |
-| Average Approval Time | Average processing duration |
-
-Selecting any KPI automatically filters the table.
+Selecting a card filters the table.
 
 ### Section 2 — Filters
 
-Located above the table.
-
-#### **Components**
-
-* Search Application ID  
-* Application Type Filter  
-* Project Filter  
-* Status Filter  
-* Submitted By Filter  
-* Date Range Filter  
-* Priority Filter  
+* Search Application
+* **Application Type Filter** — registration · property · sales disclosure · escrow · licensing · title deed
+* Project Filter
+* Property Filter
+* Status Filter
+* Assigned RERA Unit Filter
+* Date Range Filter
 * Reset Filters
 
-### Application Types
-
-* Project Registration  
-* Property Registration  
-* Sales Disclosure  
-* Escrow Application  
-* Project Amendment  
-* License Application  
-* Compliance Submission  
-* Other Regulatory Service
-
-### Status Badges
-
-See [status-badges.md](../status-badges.md#application-status) for the status vocabulary — including a conflict between the Principal's and the operational roles' lists.
-
-### Priority Indicators
-
-* High  
-* Medium  
-* Low
+**Absorbed 2026-08-15:** the union of all four variants' filters. The **Application Type Filter** now does the work that the three operational variants did by having three separate screens — a user narrowing to escrow applications selects the type rather than switching screens.
 
 ### Section 3 — Applications Table
 
-#### **Columns**
-
 | Column | Description |
-| ----- | ----- |
-| Application ID | Unique application number |
-| Application Type | Type of submission |
-| Project | Related project |
-| Submitted By | Responsible employee |
-| Submission Date | Date submitted |
-| Current Status | Processing stage |
-| Last Updated | Latest activity |
-| Action | View Details |
-
-### Row Actions
-
-Each row includes:
-
-* View Details
-
-The Developer Principal cannot modify or resubmit applications from this page.
-
-### Section 4 — Application Analytics
-
-Display two analytics cards.
-
-### **Processing Performance**
-
-* Submitted This Month  
-* Approved This Month  
-* Rejected This Month  
-* Average Processing Time
-
-### **Regulatory Compliance**
-
-* Approval Rate  
-* Pending Responses  
-* Overdue Applications  
-* Compliance Score
-
-### Section 5 — Recent Regulatory Activities
-
-Timeline widget displaying the latest organization-wide activities.
-
-Examples
-
-* Project Registration Approved  
-* Property Registration Submitted  
-* Additional Documents Requested  
-* Sales Disclosure Approved  
-* Escrow Application Reviewed  
-* Compliance Certificate Issued
-
-Each item displays:
-
-* Activity  
-* Application ID  
-* Date & Time  
-* Current Status
-
-Selecting an activity opens the related application.
-
-### Empty State
-
-#### **Message**
-
-> No regulatory applications have been submitted yet.
-
-Primary Button
-
-* View Projects
-
-Secondary Button
-
-* View Property Registrations
-
-### Pagination
-
-Bottom of the table.
-
-Components
-
-* Rows per page  
-* Previous  
-* Next  
-* Page Number  
-* Total Records
-
-### Reused Components
-
-See [components.md](../components.md) for definitions of every component used on this screen.
-
-### User Flow
-
-Dashboard  
-↓  
-Applications  
-↓  
-Search / Filter Applications  
-↓  
-Select Application  
-↓  
-Application Details
-
-### Notes
-
-* This is an **executive monitoring screen** for the **Developer Principal / Director**.  
-* It serves as the single source of truth for every regulatory application submitted by the organization.  
-* Executives can quickly identify bottlenecks, delayed approvals, rejected submissions, and applications requiring additional information.  
-* All submission, editing, and response activities remain the responsibility of the relevant operational roles (Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison, etc.).
-
-### Project Registration Officer
-
-### Sidebar Status
-
-* **Visible Sidebar:** Developer Operational Sidebar  
-* **Active Menu:** **Applications**  
-* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
-
-### Top Bar Status
-
-**Title:** Applications
-
-**Subtitle:** Track, manage, and respond to all regulatory applications submitted to RERA.
-
-**Search Bar:** Search anything...
-
-The page uses the shared **Background \+ HorizontalBorder** component.
-
-**Page Actions (Right Side):**
-
-* Submit New Application *(Available when applicable)*
-
-### Purpose
-
-Provide the Project Registration Officer with an operational workspace to monitor every application submitted to RERA, respond to information requests, manage returned applications, track approval progress, and maintain full visibility over the registration lifecycle.
-
-Unlike the Developer Principal's version, this screen supports operational follow-up and corrective actions.
-
-### Layout
-
-Top Bar  
-↓  
-Application Summary Cards  
-↓  
-Filters & Search  
-↓  
-Applications Table  
-↓  
-Pending Actions  
-↓  
-Recent Regulatory Activities  
-↓  
-Pagination
-
-### Section 1 — Application Summary Cards
-
-Display **8 KPI cards**.
-
-| KPI | Description |
-| ----- | ----- |
-| Total Applications | All submitted applications |
-| Draft Applications | Not yet submitted |
-| Submitted | Successfully submitted |
-| Under Review | Currently being processed |
-| Information Requested | Awaiting developer response |
-| Returned | Returned for correction |
-| Approved | Successfully approved |
-| Due This Week | Applications requiring action this week |
-
-Selecting a KPI filters the application list.
-
-### Section 2 — Filters
-
-Located above the table.
-
-#### **Components**
-
-* Search Application  
-* Application Type  
-* Project Filter  
-* Property Filter  
-* Status Filter  
-* Priority Filter  
-* Date Range  
-* Reset Filters
-
-### Application Types
-
-* Project Registration  
-* Property Registration  
-* Project Amendment  
-* Compliance Submission  
-* Additional Information Submission  
-* Other RERA Services
-
-### Status Badges
-
-See [status-badges.md](../status-badges.md#application-status) for the status vocabulary — including a conflict between the Principal's and the operational roles' lists.
-
-### Priority
-
-* High  
-* Medium  
-* Low
-
-### Section 3 — Applications Table
-
-#### **Columns**
-
-| Column | Description |
-| ----- | ----- |
-| Application ID | Unique reference |
+| :---- | :---- |
+| Application ID | Unique application reference |
 | Application Type | Service submitted |
-| Related Project | Associated project |
-| Related Property | Associated property (if applicable) |
+| Related Project | Associated development project |
+| Related Property | Associated property or unit *(where applicable)* |
+| Buyer | Buyer name *(sales disclosure applications only)* |
+| Submitted By | Employee who submitted, and their role at the time |
 | Submitted Date | Date submitted |
 | Current Status | Processing stage |
 | Assigned RERA Unit | Reviewing department |
 | Last Updated | Latest activity |
 | Action | Available actions |
 
+**Absorbed 2026-08-15:** the union of all four variants' columns. Domain-specific columns that appeared in only one operational variant — *Buyer* (sales disclosure), *Related Property* (registration) — are retained and render only where meaningful for that application type, rather than forcing three separate tables.
+
+**Submitted By** was the Principal's column alone. Kept and extended: it now records the role held at the time of submission, matching the audit-trail model ([navigation.md](../../navigation.md#audit-trail-principle)). This is the screen where role-as-attribution is most visible, and it is the one place role still legitimately appears.
+
 ### Row Actions
 
-#### **Draft**
+Available actions depend on **application status**, not on who is looking.
 
-* Continue  
-* Edit  
-* Delete
+| Status | Actions |
+| :---- | :---- |
+| Draft | Continue · Edit · Delete |
+| Submitted / Under Review | View Details |
+| Information Requested | Respond · Upload Documents · Resubmit |
+| Returned | Edit · Correct Issues · Resubmit |
+| Approved | View Details · Download Approval |
+| Rejected | View Details |
 
-#### **Submitted / Under Review**
-
-* View Details
-
-#### **Information Requested**
-
-* Respond  
-* Upload Documents  
-* Resubmit
-
-#### **Returned**
-
-* Edit  
-* Correct Issues  
-* Resubmit
-
-#### **Approved**
-
-* View Details  
-* Download Approval
-
-#### **Rejected**
-
-* View Details
+**Reconciled 2026-08-15:** the monitoring variant offered only *View Details* on every row. Retired as an access restriction. The three operational variants defined the identical status-to-action mapping above, so no reconciliation was needed between them.
 
 ### Section 4 — Pending Actions
 
-Highlight applications requiring immediate attention.
-
-#### **Examples**
-
-* Additional information requested  
-* Missing documents  
-* Application returned  
-* Submission deadline approaching  
-* Supporting documents rejected
-
-#### **Columns**
+A prioritized table of applications where something is waiting on a developer user.
 
 | Application | Required Action | Due Date | Priority | Action |
 | :---: | :---: | :---: | :---: | :---: |
 
-Actions
+Applications with **Information Requested** or **Returned** status appear at the top. Items nearing their deadline sort first.
 
-* Respond  
-* Upload  
-* Continue
+**Absorbed 2026-08-15** from the three operational variants, which each defined this section identically over their own application subset. Now one table across all types.
 
-High-priority items appear first.
+### Section 5 — Application Analytics
 
-### Section 5 — Recent Regulatory Activities
+**Absorbed 2026-08-15** from the monitoring variant, the only one to carry analytics. Retained in full — approval rates, average processing duration by application type, volume by status and by RERA unit.
 
-Display a timeline.
+> **This is the section the merge most easily could have lost.** The three operational variants explicitly framed themselves as emphasizing "actionable work rather than analytics." Picking any of them as the base would have discarded this section entirely.
 
-Examples
+### Section 6 — Recent Regulatory Activities
 
-* Application submitted  
-* Validation completed  
-* RERA review started  
-* Additional information requested  
-* Documents uploaded  
-* Application resubmitted  
-* Technical review completed  
-* Approval granted
+Activity feed of submissions, RERA decisions, information requests and resubmissions across the organization, most recent first. Present in all four variants with the same definition.
 
-Selecting an activity opens the related application.
-
-### Empty State
-
-#### **Message**
-
-> No applications have been submitted yet.
-
-Primary Button
-
-* View Projects
-
-Secondary Button
-
-* Register Property
-
-### Pagination
-
-Bottom of the table.
-
-Components
-
-* Rows per page  
-* Previous  
-* Next  
-* Page Number  
-* Total Records
-
-### Reused Components
-
-See [components.md](../components.md) for definitions of every component used on this screen.
-
-### User Flow
-
-Dashboard  
-↓  
-Applications
-
-├── Continue Draft
-
-├── Edit Application
-
-├── Submit Application
-
-├── Respond to RERA
-
-├── Upload Documents
-
-├── Resubmit
-
-└── View Application Details
-
-### Notes
-
-* This is the **primary operational application management screen** for the **Project Registration Officer**.  
-* Returned and **Information Requested** applications should automatically appear at the top of the list to ensure timely action.  
-* Users should be able to continue unfinished draft applications directly from this screen.  
-* All operational actions are recorded in the application's audit trail.  
-* The page should emphasize actionable work rather than analytics, helping officers quickly identify what requires attention.
-
-### Next Screen
-
-**Application Details**
-
-This will be the operational workspace where the Project Registration Officer can:
-
-* Review complete application information  
-* Edit draft applications  
-* Upload or replace supporting documents  
-* Respond to RERA information requests  
-* Submit corrections  
-* Resubmit returned applications  
-* Track the approval workflow  
-* View the complete communication history with RERA
-
-### Sales & Disclosure Officer
-
-### Sidebar Status
-
-* **Visible Sidebar:** Developer Operational Sidebar  
-* **Active Menu:** **Applications**  
-* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
-
-### Top Bar Status
-
-**Title:** Applications
-
-**Subtitle:** Track, manage, and respond to all sales disclosure applications submitted to RERA.
-
-**Search Bar:** Search anything...
-
-The page uses the shared **Background \+ HorizontalBorder** component.
-
-**Page Actions (Right Side):**
-
-* Submit New Application *(Available when applicable)*
-
-### Purpose
-
-Provide the Sales & Disclosure Officer with an operational workspace to monitor all sales disclosure applications submitted to RERA, respond to regulatory requests, manage returned disclosures, track approval progress, and maintain full visibility over the disclosure lifecycle.
-
-Unlike the Developer Principal's version, this screen supports operational follow-up, corrections, and resubmissions.
-
-### Layout
-
-Top Bar  
-↓  
-Application Summary Cards  
-↓  
-Filters & Search  
-↓  
-Applications Table  
-↓  
-Pending Actions  
-↓  
-Recent Regulatory Activities  
-↓  
-Pagination
-
-### Section 1 — Application Summary Cards
-
-Display **8 KPI cards**.
-
-| KPI | Description |
-| ----- | ----- |
-| Total Applications | All sales disclosure applications |
-| Draft Applications | Applications not yet submitted |
-| Submitted | Successfully submitted to RERA |
-| Under Review | Currently being reviewed |
-| Information Requested | Awaiting additional information |
-| Returned | Returned for correction |
-| Approved | Successfully approved |
-| Due This Week | Applications requiring action this week |
-
-Selecting a KPI filters the application list.
-
-### Section 2 — Filters
-
-Located above the table.
-
-#### **Components**
-
-* Search Application  
-* Application Type  
-* Project Filter  
-* Property Filter  
-* Buyer Filter  
-* Status Filter  
-* Priority Filter  
-* Date Range  
-* Reset Filters
-
-#### **Application Types**
-
-* Sales Disclosure  
-* Disclosure Amendment  
-* Additional Buyer Information  
-* Compliance Submission  
-* Supporting Document Submission  
-* Other RERA Sales Services
-
-#### **Status Badges**
-
-See [status-badges.md](../status-badges.md#application-status) for the status vocabulary — including a conflict between the Principal's and the operational roles' lists.
-
-#### **Priority**
-
-* High  
-* Medium  
-* Low
-
-### Section 3 — Applications Table
-
-#### **Columns**
-
-| Column | Description |
-| ----- | ----- |
-| Application ID | Unique application reference |
-| Application Type | Type of submission |
-| Property | Property / Unit |
-| Buyer | Buyer Name |
-| Submitted Date | Submission date |
-| Current Status | Processing stage |
-| Assigned RERA Unit | Reviewing department |
-| Last Updated | Latest activity |
-| Action | Available actions |
-
-### Row Actions
-
-#### **Draft**
-
-* Continue  
-* Edit  
-* Delete
-
-#### **Submitted / Under Review**
-
-* View Details
-
-#### **Information Requested**
-
-* Respond  
-* Update Buyer Information  
-* Upload Documents  
-* Resubmit
-
-#### **Returned**
-
-* Correct Disclosure  
-* Upload Documents  
-* Resubmit
-
-#### **Approved**
-
-* View Details  
-* Download Approval Summary
-
-#### **Rejected**
-
-* View Details
-
-### Section 4 — Pending Actions
-
-Highlight applications requiring immediate attention.
-
-#### **Examples**
-
-* Buyer information requested  
-* Missing supporting documents  
-* Returned disclosure  
-* Submission deadline approaching  
-* Identity verification pending  
-* Proof of payment missing
-
-#### **Columns**
-
-| Application | Required Action | Due Date | Priority | Action |
-| :---: | :---: | :---: | :---: | :---: |
-
-#### **Actions**
-
-* Respond  
-* Upload  
-* Continue
-
-Critical items appear first.
-
-### Section 5 — Recent Regulatory Activities
-
-Display a timeline of the latest regulatory events.
-
-Examples
-
-* Sales disclosure submitted  
-* Validation completed  
-* RERA review started  
-* Additional buyer information requested  
-* Buyer documents uploaded  
-* Disclosure resubmitted  
-* Compliance review completed  
-* Disclosure approved
-
-Selecting an activity opens the related application.
-
-### Empty State
+## Empty State
 
 **Message**
 
-> No sales disclosure applications have been submitted yet.
+> No applications yet. Submit an application to RERA to begin, or continue a draft.
 
-Primary Button
+**Primary Button** — Submit New Application
 
-* Record Property Sale
+**Reconciled 2026-08-15:** the four variants each had an empty state addressed to their own scope ("No escrow applications yet", "No sales disclosure applications yet", and so on). One organization-wide message replaces them, since the screen is no longer scoped to a domain or a role.
 
-Secondary Button
+## Pagination
 
-* Create Sales Disclosure
+Rows per page · Previous · Next · Page Number · Total Records
 
-### Pagination
-
-Bottom of the table.
-
-#### **Components**
-
-* Rows per page  
-* Previous  
-* Next  
-* Page Number  
-* Total Records
-
-### Reused Components
+## Reused Components
 
 See [components.md](../components.md) for definitions of every component used on this screen.
 
-### User Flow
-
-Dashboard  
-↓  
-Applications  
-├── Continue Draft  
-├── Edit Application  
-├── Submit Application  
-├── Respond to RERA  
-├── Update Buyer Information  
-├── Upload Documents  
-├── Resubmit  
-└── View Application Details
-
-### Notes
-
-* This is the **primary operational application management screen** for the **Sales & Disclosure Officer**.  
-* Applications with **Information Requested** or **Returned** status should automatically appear at the top of the list to ensure timely regulatory responses.  
-* Users should be able to continue unfinished draft applications directly from this screen.  
-* Every submission, buyer information update, document upload, correction, and regulatory response must be recorded in the application's audit trail.  
-* The page emphasizes actionable work rather than analytics, enabling officers to quickly identify pending disclosure tasks and compliance deadlines.
-
-### Escrow Liaison
-
-### Sidebar Status
-
-* **Visible Sidebar:** Developer Operational Sidebar  
-* **Active Menu:** **Applications**  
-* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
-
-### Top Bar Status
-
-**Title:** Applications
-
-**Subtitle:** Track, manage, and respond to all escrow-related applications submitted to RERA and financial institutions.
-
-**Search Bar:** Search anything...
-
-The page uses the shared **Background \+ HorizontalBorder** component.
-
-**Page Actions (Right Side):**
-
-* Submit New Application *(Available when applicable)*
-
-### Purpose
-
-Provide the Escrow Liaison with an operational workspace to manage all escrow-related applications, including escrow account registrations, fund release submissions, compliance updates, and responses to requests from RERA or financial institutions. The screen supports operational follow-up, corrections, document resubmission, and approval tracking.
-
-### Layout
-
-Top Bar  
-↓  
-Application Summary Cards  
-↓  
-Filters & Search  
-↓  
-Applications Table  
-↓  
-Pending Actions  
-↓  
-Recent Regulatory Activities  
-↓  
-Pagination
-
-### Section 1 — Application Summary Cards
-
-Display **8 KPI cards**.
-
-| KPI | Description |
-| ----- | ----- |
-| Total Applications | All escrow-related applications |
-| Draft Applications | Applications not yet submitted |
-| Submitted | Successfully submitted |
-| Under Review | Currently under review |
-| Information Requested | Awaiting additional information |
-| Returned | Returned for correction |
-| Approved | Successfully approved |
-| Due This Week | Applications requiring action this week |
-
-Selecting a KPI filters the application list.
-
-### Section 2 — Filters
-
-Located above the table.
-
-#### **Components**
-
-* Search Application  
-* Application Type Filter  
-* Project Filter  
-* Escrow Account Filter  
-* Financial Institution Filter  
-* Status Filter  
-* Priority Filter  
-* Date Range Filter  
-* Reset Filters
-
-#### **Application Types**
-
-* Escrow Account Registration  
-* Fund Release Request  
-* Escrow Amendment  
-* Additional Information Submission  
-* Compliance Submission  
-* Other Escrow Services
-
-#### **Status Badges**
-
-See [status-badges.md](../status-badges.md#application-status) for the status vocabulary — including a conflict between the Principal's and the operational roles' lists.
-
-#### **Priority**
-
-* High  
-* Medium  
-* Low
-
-### Section 3 — Applications Table
-
-#### **Columns**
-
-| Column | Description |
-| ----- | ----- |
-| Application ID | Unique application reference |
-| Application Type | Type of escrow service |
-| Project | Related development project |
-| Escrow Account | Escrow reference |
-| Financial Institution | Associated bank |
-| Submitted Date | Submission date |
-| Current Status | Processing stage |
-| Last Updated | Latest activity |
-| Action | Available actions |
-
-### Row Actions
-
-#### **Draft**
-
-* Continue  
-* Edit  
-* Delete
-
-#### **Submitted / Under Review**
-
-* View Details
-
-#### **Information Requested**
-
-* Respond  
-* Upload Documents  
-* Update Application  
-* Resubmit
-
-#### **Returned**
-
-* Correct Application  
-* Upload Revised Documents  
-* Resubmit
-
-#### **Approved**
-
-* View Details  
-* Download Approval
-
-#### **Rejected**
-
-* View Details
-
-### Section 4 — Pending Actions
-
-Highlight applications requiring immediate attention.
-
-#### **Examples**
-
-* Additional documents requested  
-* Fund release application returned  
-* Escrow registration pending correction  
-* Bank clarification required  
-* Compliance submission due  
-* Milestone verification pending
-
-#### **Columns**
-
-| Application | Required Action | Due Date | Priority | Action |
-| ----- | ----- | ----- | ----- | ----- |
-| Fund Release Request | Upload Engineer Certificate | 05 Aug 2026 | High | Continue |
-| Escrow Registration | Respond to Bank Query | 06 Aug 2026 | Medium | Respond |
-
-#### **Actions**
-
-* Respond  
-* Upload  
-* Continue
-
-Critical items appear first.
-
-### Section 5 — Recent Regulatory Activities
-
-Display a timeline of the latest escrow-related activities.
-
-#### **Examples**
-
-* Escrow account registered  
-* Fund release request submitted  
-* Bank review started  
-* Additional information requested  
-* Supporting documents uploaded  
-* Application resubmitted  
-* RERA approval granted  
-* Funds released
-
-Selecting an activity opens the related application.
-
-### Empty State
-
-#### **Message**
-
-> No escrow-related applications have been submitted yet.
-
-**Primary Button**
-
-* Register Escrow Account
-
-**Secondary Button**
-
-* Open Escrow Management
-
-### Pagination
-
-Bottom of the table.
-
-#### **Components**
-
-* Rows per page  
-* Previous  
-* Next  
-* Page Number  
-* Total Records
-
-### Reused Components
-
-See [components.md](../components.md) for definitions of every component used on this screen.
-
-### User Flow
-
-Open Applications  
-↓  
-Review application summary cards  
-↓  
-Search or filter escrow-related applications  
-↓  
-Select an application from the list  
-↓  
-Review the current status and required actions  
-↓  
-Respond to RERA or Financial Institution requests (if needed)  
-↓  
-Upload revised documents or update the application (when permitted)  
-↓  
-Resubmit the application (if required)  
-↓  
-Track the approval process until the application is completed
-
-### Notes
-
-* This screen includes only **escrow-related applications**.  
-* Applications are grouped by project and escrow account for easier tracking.  
-* Operational actions are available only while the application is editable.  
-* Status badges and workflow behavior follow the platform's shared design system.
+## Validation
+
+1. No card, column, filter, row action or section on this screen is role-gated. What a user can do depends on the application's status, never on who they are.
+2. Summary card figures must match the table's own filtered counts exactly.
+3. Domain-specific columns render only for application types where they carry a value; they are never role-conditional.
+4. Status vocabulary comes from [status-badges.md](../status-badges.md) and is not redefined here.
 
 ## User Flow
 
-Differs between variants — see the "User Flow" heading within each role's block under [Role Variations](#role-variations).
+```
+Dashboard
+↓
+Applications
+├─ Submit New Application → the relevant service flow
+├─ Summary Card / Type Filter → filtered table
+├─ Row → Application Details
+├─ Pending Actions row → the response flow
+└─ Application Analytics → Reports
+```
 
 ## Notes
 
-Differs between variants — see the "Notes" heading within each role's block under [Role Variations](#role-variations). Only the Project Registration Officer's version includes a "Next Screen" preview of the Application Details screen; this is preserved verbatim in its block above.
+* **This absorbs, rather than references, all four retired variants.**
+
+* **The three operational variants were the same design three times.** Project Registration Officer, Sales & Disclosure Officer and Escrow Liaison each defined the same KPI set (including the same *Due This Week* card), the same six-status row-action mapping, the same Pending Actions table and the same activity feed — differing only in which application types they listed and one or two domain columns. Merging them cost nothing; what were three screens is now one screen plus an **Application Type Filter**.
+
+* **Reconciliation — "Additional Information Requested" vs "Information Requested."** The monitoring variant used the longer label; all three operational variants used the shorter. Same status. Kept as **Information Requested**, matching [status-badges.md](../status-badges.md) and the service flows.
+
+* **Reconciliation — "Total Applications" was scoped four ways.** The monitoring variant counted all submitted applications organization-wide; each operational variant counted only its own domain ("all escrow-related applications", "all sales disclosure applications"). Resolved to organization-wide across every type, consistent with the removal of domain and per-user scoping.
+
+* **Reconciliation — the monitoring variant had no *Returned* or *Due This Week* card; the operational variants had no *Rejected* or *Average Approval Time*.** All four are kept. Each was absent from a variant because that variant either could not act on the state or did not report on it — neither is a reason to drop a real metric.
+
+* **What was dropped, and why.** Only the view-only row-action list, the per-domain scoping of the KPI and empty-state text, and the operational variants' Notes paragraphs naming themselves "the primary operational application management screen for the {role}". Nothing representing distinct work was discarded — the monitoring variant's Application Analytics, Rejected and Average Approval Time survive, as do the operational variants' Pending Actions, Due This Week, Returned and full row-action mapping.
