@@ -15,515 +15,148 @@ tags:
 
 # Screen: Project Details
 
-**Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
+**Access:** Any of the developer's four Group B roles — identical screen for every user, no role-based variant.
 
-The detail view of a single project, opened from [Projects](projects.md). The Developer Principal / Director sees a read-only executive view consolidating sales, escrow, documents, and compliance status; the Registration Officer sees an editable operational workspace for preparing, validating, and submitting the project registration.
+> **Rebuilt 2026-08-15.** This screen previously described two designs — an executive project overview (Developer Principal / Director) and an operational registration workspace (Project Registration Officer) — with different sections, different information groupings and, critically, a Validation Summary present in only one of them. Both are **retired**; this is one screen absorbing the load-bearing content of each.
 
 ## Purpose
 
-Purpose differs between variants — see [Role Variations](#role-variations).
+The detail view of a single development project, opened from [Projects](projects.md). Covers the project's registration progress, its full information record, its documents, its regulatory correspondence, and the sales, escrow and compliance position that sits against it — with the controls to edit, validate, submit and correct the registration. Any user may do any of it.
 
 ## Layout
 
-* **Visible Sidebar:** Developer Operational Sidebar
-* **Active Menu:** **Projects**
-* **Top Bar Title:** Project Details
-* **Search Bar:** Search anything...
-
-Both roles reuse the shared Background + HorizontalBorder component, worded slightly differently in each ("The shared Background + HorizontalBorder component is reused" vs "The page uses the shared Background + HorizontalBorder component"), so the exact sentence is kept per role rather than merged. The two layout diagrams are entirely different in shape and content — see [Role Variations](#role-variations).
+```
+Top Bar
+↓
+Project Header
+↓
+Project Summary Cards
+↓
+Registration Progress
+↓
+Project Information
+↓
+Required Documents
+↓
+Validation Summary
+↓
+RERA Queries
+↓
+Linked Position (Sales · Escrow · Compliance)
+↓
+Activity Timeline
+```
 
 ## Sections
 
-Every section differs between variants — see [Role Variations](#role-variations). The Principal's version is organized around consolidated summary/overview cards (Sales Overview, Escrow Overview, Documents, Compliance); the Registration Officer's is organized around the registration workflow itself (Required Documents, Validation Summary, RERA Queries).
-
-## Empty State
-
-Message and actions differ between variants — see [Role Variations](#role-variations).
-
-## Reused Components
-
-Differs between variants — see [Role Variations](#role-variations).
-
-## Validation
-
-The variant under the Registration Officer heading has a Validation Summary; the one under the Principal / Director heading has none. A difference between variants, not a permission. See that role's "Validation Summary" block under [Role Variations](#role-variations).
-
-## Role Variations
-
-> **Reframed 2026-08-15 — these are content variants, not access restrictions.** Every variant
-> below is reachable and actionable by all four roles; none of them is withheld from anyone. What
-> the blocks record is that the source material defined this screen more than once, with different
-> KPI sets, filters, columns, actions or empty states each time — differences of *content*, not of
-> permission. Those are preserved verbatim rather than merged, because collapsing them into one
-> screen is a design decision about which variant (or which union of them) is correct, and that is
-> the client's call, not a documentation cleanup. **Flagged for review — see
-> [../README.md](../README.md#per-role-content-variants-flagged-for-review).**
->
-> The role headings below should now be read as *"the variant the source defined under this role's
-> heading"*, not *"what this role is allowed to see"*.
-
-### Developer Principal / Director
-
-### Sidebar Status
-
-* **Visible Sidebar:** Developer Operational Sidebar  
-* **Active Menu:** **Projects**  
-* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
-
-### Top Bar Status
-
-**Title:** Project Details
-
-**Subtitle:** View the complete status and regulatory information for this development project.
-
-**Search Bar:** Search anything...
-
-The shared **Background \+ HorizontalBorder** component is reused.
-
-### Purpose
-
-Provide the Developer Principal / Director with a comprehensive executive view of a single development project, including project information, registration progress, compliance, sales, escrow, and recent activities.
-
-### Layout
-
-Top Bar  
-↓  
-Project Header  
-↓  
-Project Summary Cards  
-↓  
-Project Information  
-↓  
-Registration Progress  
-↓  
-Sales Overview          Escrow Overview  
-↓  
-Documents              Compliance  
-↓  
-Recent Activity Timeline
-
 ### Section 1 — Project Header
 
-Displays key project information.
+**Left**
 
-#### **Left**
+* Project Name
+* Project ID / Registration Number
+* Location
+* Current Status badge
+* Development Stage
 
-* Project Name  
-* Project ID  
-* Project Status Badge  
-* Project Location
+**Right**
 
-#### **Right**
+* **Edit Project** · **Submit to RERA** · **Register Properties** · **Download Summary**
 
-* Registration Date  
-* Last Updated  
-* View Reports (Button)
+**Reconciled 2026-08-15:** the overview variant's header carried navigation actions only; the workspace variant's carried the edit/submit set. The full action set now applies to every user, subject to project status — a submitted project still cannot be edited by anyone.
 
 ### Section 2 — Project Summary Cards
 
-Display six KPI cards.
+Absorbed from the overview variant, which was the only one to define them: unit counts, registered properties, sales position, escrow position and outstanding compliance items for this project.
 
-| KPI | Description |
-| ----- | ----- |
-| Total Units | Number of units in the project |
-| Registered Units | Units registered with RERA |
-| Units Sold | Sold properties |
-| Active Escrow Cases | Ongoing escrow processes |
-| Pending Applications | Applications awaiting approval |
-| Compliance Issues | Outstanding issues |
+### Section 3 — Registration Progress
 
-### Section 3 — Project Information
+Stage tracker for the project's regulatory journey — present in **both** variants, and the one section they broadly agreed on. The workspace variant's stage list is the more granular of the two and is the one kept; the overview variant's stages map onto it without loss.
 
-Display information in a two-column information card.
+### Section 4 — Project Information
 
-#### **General Information**
+**General / Basic Information**
 
-* Project Name  
-* Project ID  
-* Development Type  
-* Location  
-* Land Size  
-* Number of Phases  
-* Estimated Completion Date
+Project name, reference, type, location, land details, plot size, approvals, registration date.
 
-#### **Responsible Personnel**
+**Development Information** *(workspace variant only)*
 
-* Project Registration Officer  
-* Sales & Disclosure Officer  
-* Escrow Liaison
+Number of phases, unit counts by type, construction start and expected completion, survey company.
 
-### Section 4 — Registration Progress
+**Responsible Personnel / Contacts**
 
-Visual progress tracker showing project registration stages.
+Named contacts against the project.
 
-#### **Stages**
+**Reconciled 2026-08-15:** the overview variant grouped this as *General Information* + *Responsible Personnel*; the workspace variant as *Basic Information* + *Development Information* + *Responsible Contacts*. The three-group structure is kept, since *Development Information* is real content the overview variant simply omitted. The role labels inside Responsible Personnel are **descriptive attribution** — who is named against the project — not access assignments.
 
-* Project Submitted  
-* Under Review  
-* Additional Information Requested  
-* Approved  
-* Active Development
+### Section 5 — Required Documents
 
-Completed stages use the existing success indicator.
+Document checklist and table, with Upload / Replace / Preview / Resubmit actions per row, governed by document status.
 
-Current stage is highlighted.
+**Reconciled 2026-08-15:** the overview variant had a *Documents* section listing submitted documents with view-only actions; the workspace variant had *Required Documents* with a checklist of what is mandatory plus upload controls. The workspace version is the superset — it shows the same submitted documents *and* what is still missing — so it is the one kept, with the overview variant's columns folded in.
 
-### Section 5 — Sales Overview
+### Section 6 — Validation Summary
 
-Summary card.
+Automatic pre-submission checks, displayed as Passed / Warning / Error, with the primary submit action disabled until all mandatory checks pass.
 
-Display:
+**Reconciled 2026-08-15 — this section now applies to every user.** It existed only in the workspace variant; the overview variant had none, because that variant could not submit. That was an access restriction, not a property of the screen. See [validation-rules.md](../validation-rules.md).
 
-* Total Properties Listed  
-* Properties Sold  
-* Pending Sales Disclosures  
-* Latest Disclosure Date
+### Section 7 — RERA Queries
 
-Button
+Table of regulatory queries against this project — query, raised date, due date, status, response — with Respond and Upload actions.
 
-* View Sales & Disclosures
+Absorbed from the workspace variant. The overview variant carried the same information as read-only *Compliance* content; consolidated here.
 
-### Section 6 — Escrow Overview
+### Section 8 — Linked Position
 
-Summary card.
+**Absorbed 2026-08-15** from the overview variant's *Sales Overview*, *Escrow Overview* and *Compliance* sections — the monitoring content the workspace variant lacked entirely. Retained as condensed summary cards, each linking out rather than duplicating detail.
 
-Display:
+* **Sales** — units sold, active listings, pending disclosures against this project. Links to [sales-and-disclosures.md](sales-and-disclosures.md).
+* **Escrow** — the project's escrow account, balance, current milestone and pending releases. Links to [escrow-management.md](escrow-management.md). *(Project escrow account figures — not RERA fees.)*
+* **Compliance** — outstanding regulatory items and their severity.
 
-* Escrow Institution  
-* Active Escrow Account  
-* Current Milestone  
-* Funds Released  
-* Pending Releases
+### Section 9 — Activity Timeline
 
-Button
+Chronological record of everything that has happened to this project. Organization-wide, not filtered to the viewer — each entry shows who acted and what role they held at the time ([navigation.md](../../navigation.md#audit-trail-principle)).
 
-* View Escrow Details
+**Reconciled 2026-08-15:** the overview variant called this *Recent Activity* and showed the latest few; the workspace variant called it *Activity Timeline* and showed the full history. Kept as the full timeline, which contains the other.
 
-### Section 7 — Documents
+## Empty State
 
-Table showing project-related documents.
+Applies to a newly created project with no documents, queries or linked records yet.
 
-#### **Columns**
+> This project has no submitted documents yet. Upload the required documents to move the registration forward.
 
-* Document Name  
-* Category  
-* Uploaded By  
-* Upload Date  
-* Status  
-* Action
+**Primary Button** — Upload Documents
 
-Actions
-
-* View
-
-### Section 8 — Compliance
-
-Display compliance status cards.
-
-Examples
-
-* Environmental Clearance  
-* Development Permit  
-* Building Approval  
-* RERA Compliance  
-* Sales Disclosure Compliance
-
-Each item shows:
-
-* Status Badge  
-* Last Review Date
-
-### Section 9 — Recent Activity
-
-Timeline of project events.
-
-Examples
-
-* Project registered  
-* Additional documents uploaded  
-* Registration approved  
-* Sales disclosure submitted  
-* Escrow milestone completed  
-* Inspection scheduled
-
-Display the latest 10 activities.
-
-### Empty State
-
-If the project has just been created and has limited information:
-
-**Message**
-
-> This project has been registered, but operational information is not yet available.
-
-Primary Button
-
-* View Applications
-
-### Reused Components
+## Reused Components
 
 See [components.md](../components.md) for definitions of every component used on this screen.
 
-### User Flow
-
-Dashboard  
-↓  
-Projects  
-↓  
-Project Details  
-├── View Sales & Disclosures  
-├── View Escrow Details  
-├── View Applications  
-├── View Documents  
-└── View Reports
-
-### Notes
-
-* This is a **read-oriented executive screen** designed for the **Developer Principal / Director**.  
-* The page consolidates information from multiple modules into a single project view, allowing executives to monitor progress without navigating through operational screens.  
-* All editing and submission actions remain with the operational roles (Project Registration Officer, Sales & Disclosure Officer, and Escrow Liaison), while the Principal / Director has oversight and review capabilities.
-
-### Project Registration Officer
-
-### Sidebar Status
-
-* **Visible Sidebar:** Developer Operational Sidebar  
-* **Active Menu:** **Projects**  
-* **Selected Item:** Project Details *(opened from Projects list)*  
-* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
-
-### Top Bar Status
-
-**Title:** Project Details
-
-**Subtitle:** Complete and manage the development project registration before submission to RERA.
-
-**Search Bar:** Search anything...
-
-The page uses the shared **Background \+ HorizontalBorder** component.
-
-**Page Actions (Right Side):**
-
-* Save Draft  
-* Submit to RERA *(Enabled only when validation passes)*  
-* More Actions
-
-### Purpose
-
-Provide the Project Registration Officer with a complete operational workspace to prepare, validate, submit, update, and track a development project throughout the registration lifecycle. Unlike the Developer Principal's read-only project page, this screen is fully interactive and supports editing, document submission, and responding to RERA requests.
-
-### Layout
-
-Top Bar  
-↓  
-Project Header  
-↓  
-Registration Progress  
-↓  
-Project Information  
-↓  
-Development Information  
-↓  
-Required Documents  
-↓  
-Validation Summary  
-↓  
-RERA Queries (if applicable)  
-↓  
-Activity Timeline
-
-### Section 1 — Project Header
-
-Displays the project's key information.
-
-#### **Left**
-
-* Project Name  
-* Project ID  
-* Registration Status Badge  
-* Development Type
-
-#### **Right**
-
-* Created Date  
-* Last Updated  
-* Assigned Officer  
-* Save Status
-
-### Section 2 — Registration Progress
-
-A horizontal progress tracker.
-
-#### **Stages**
-
-* Draft  
-* Project Information Completed  
-* Documents Uploaded  
-* Validation Passed  
-* Submitted  
-* Under Review  
-* Approved
-
-Completed stages use the platform's standard success indicator.
-
-The current stage is highlighted.
-
-Clicking completed stages navigates directly to that section.
-
-### Section 3 — Project Information
-
-Editable form.
-
-#### **Basic Information**
-
-* Project Name  
-* Development Type  
-* Project Description  
-* Project Address  
-* State  
-* Local Government Area  
-* Coordinates *(optional)*  
-* Expected Start Date  
-* Expected Completion Date
-
-#### **Development Information**
-
-* Number of Phases  
-* Total Land Area  
-* Number of Units  
-* Residential Units  
-* Commercial Units  
-* Mixed Use Details *(if applicable)*
-
-#### **Responsible Contacts**
-
-* Project Manager  
-* Registration Officer  
-* Contact Email  
-* Contact Phone
-
-### Section 4 — Required Documents
-
-Document upload section.
-
-Display required documents with completion status.
-
-#### **Example Documents**
-
-* Land Ownership Documents  
-* Development Approval  
-* Survey Plan  
-* Architectural Drawings  
-* Environmental Clearance  
-* Building Permit  
-* Company Authorization Letter  
-* Other Supporting Documents
-
-#### **Columns**
-
-| Document | Status | Uploaded On | Version | Action |
-| :---: | :---: | :---: | :---: | :---: |
-
-Actions
-
-* Upload  
-* Replace  
-* Preview  
-* Delete *(Draft only)*
-
-### Section 5 — Validation Summary
-
-See [validation-rules.md](../validation-rules.md) for the shared automatic-validation mechanism and the common field-level checks (required fields, required documents, file verification). This screen's own additional checks: Duplicate project check, Date validation, Location validation.
-
-### Section 6 — RERA Queries
-
-Visible only if RERA requests additional information.
-
-#### **Table**
-
-| Date | Request | Due Date | Status | Action |
-| :---: | :---: | :---: | :---: | :---: |
-
-Actions
-
-* Respond  
-* Upload Additional Documents  
-* View Previous Response
-
-Outstanding queries are highlighted.
-
-### Section 7 — Activity Timeline
-
-Displays every operational event.
-
-Examples
-
-* Project created  
-* Information updated  
-* Documents uploaded  
-* Validation completed  
-* Submitted to RERA  
-* Returned for correction  
-* Additional documents uploaded  
-* Resubmitted  
-* Approved
-
-Latest activities appear first.
-
-### Empty State
-
-If this is a newly created project:
-
-**Message**
-
-> Start by completing the project information and uploading the required supporting documents before submitting the project for registration.
-
-Primary Button
-
-* Complete Project Information
-
-Secondary Button
-
-* Upload Documents
-
-### Reused Components
-
-See [components.md](../components.md) for definitions of every component used on this screen.
-
-### User Flow
-
-Dashboard  
-↓  
-Projects  
-↓  
-Project Details
-
-├── Edit Project Information
-
-├── Upload Documents
-
-├── Save Draft
-
-├── Validate Project
-
-├── Submit to RERA
-
-├── Respond to RERA Query
-
-└── Register Properties
-
-### Notes
-
-* This is the **primary operational screen** for the **Project Registration Officer**.  
-* The officer can continuously edit the project until it is submitted.  
-* After submission, editable fields become read-only unless RERA returns the application for correction.  
-* The **Submit to RERA** button remains disabled until all mandatory validations pass.  
-* Once the project reaches the **Approved** status, the officer can proceed to **Property Registrations**, allowing individual units or properties under the project to be registered. This workflow aligns with the Project Registration Officer's responsibility for project registration, document submission, application tracking, and responding to RERA requests.
+## Validation
+
+1. No section, field, action or card on this screen is role-gated. What a user can do depends on the project's status, never on who they are.
+2. Fields become read-only after submission unless RERA returns the project — a lifecycle rule that applies to every user equally.
+3. Validation Summary checks are defined in [validation-rules.md](../validation-rules.md) and are not restated here.
+4. Linked Position figures must match their source screens exactly; this screen computes nothing independently.
 
 ## User Flow
 
-Differs between variants — see the "User Flow" heading within each role's block under [Role Variations](#role-variations).
+```
+Projects
+↓
+Project Details
+├─ Edit / Submit → registration flow
+├─ Register Properties → Property Registrations
+├─ Document row → Document Details
+├─ RERA Query → response flow
+└─ Linked Position link → Sales / Escrow / Reports
+```
 
 ## Notes
 
-Differs between variants — see the "Notes" heading within each role's block under [Role Variations](#role-variations).
+* **This absorbs, rather than references, both retired variants.** Their headers, progress trackers, information groupings, document tables, query tables, monitoring summaries and timelines are now one screen.
+
+* **The Validation Summary asymmetry was the substantive merge decision.** [validation-rules.md](../validation-rules.md) recorded that the overview variant had no Validation Summary "because those screens are read-only for that role." That reasoning does not survive unified access — the section is a property of submitting a project, and every user can now submit. It applies to everyone.
+
+* **What was dropped, and why.** Only the navigation-only header actions and the read-only framing. Nothing representing distinct work was discarded — the overview variant's Project Summary Cards, Sales Overview, Escrow Overview and Compliance sections are all carried forward as Sections 2 and 8, and the workspace variant's Development Information, Required Documents checklist, Validation Summary and RERA Queries are all kept.

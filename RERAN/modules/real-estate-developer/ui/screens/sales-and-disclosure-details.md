@@ -15,583 +15,154 @@ tags:
 
 # Screen: Sales & Disclosure Details
 
-**Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
+**Access:** Any of the developer's four Group B roles — identical screen for every user, no role-based variant.
 
-The detail view of a single property sale, opened from [Sales & Disclosures](sales-and-disclosures.md). The Developer Principal / Director sees a read-only view; the Sales & Disclosure Officer sees an editable operational workspace covering the sale from recording through disclosure approval.
+> **Rebuilt 2026-08-15.** This screen previously described two designs — a sales monitoring view (Developer Principal / Director) and a disclosure preparation workspace (Sales & Disclosure Officer) — with different information groupings and a Validation Summary present in only one. Both are **retired**; this is one screen absorbing the load-bearing content of each.
 
 ## Purpose
 
-Purpose differs between variants — see [Role Variations](#role-variations).
+The detail view of a single property sale and its regulatory disclosure, opened from [Sales & Disclosures](sales-and-disclosures.md). Covers the sale record, the buyer record, the property, the disclosure's progress with RERA, supporting documents and regulatory correspondence — with the controls to edit, validate, submit and correct the disclosure. Any user may do any of it.
 
 ## Layout
 
-* **Visible Sidebar:** Developer Operational Sidebar
-* **Active Menu:** **Sales & Disclosures**
-* **Top Bar Title:** Sales & Disclosure Details
-* **Search Bar:** Search anything...
-
-Both roles reuse the shared Background + HorizontalBorder component, worded slightly differently in each ("The page continues using the shared..." vs "The page uses the shared..."), so the exact sentence is kept per role rather than merged. The two Layout diagrams differ in both content and length — see [Role Variations](#role-variations).
+```
+Top Bar
+↓
+Sale Header
+↓
+Sales Summary Cards
+↓
+Disclosure Progress
+↓
+Sale Information
+↓
+Buyer Information
+↓
+Property Information
+↓
+Supporting Documents
+↓
+Validation Summary
+↓
+RERA Queries & Review History
+↓
+Communication History / Activity Timeline
+```
 
 ## Sections
 
-Every section differs between variants — see [Role Variations](#role-variations). The Principal's version is organized around read-only summary cards and history tables; the Sales & Disclosure Officer's is organized around the disclosure workflow itself (editable Sale/Buyer Information, Validation Summary, RERA Queries, Communication History).
+### Section 1 — Sale Header
 
-## Empty State
+**Left**
 
-Message and actions differ between variants — see [Role Variations](#role-variations).
+* Sale Reference
+* Property / Unit and Project
+* Buyer Name
+* Sale Status badge · Disclosure Status badge
 
-## Reused Components
+**Right**
 
-Differs between variants — see [Role Variations](#role-variations).
+* **Edit Sale** · **Create / Continue Disclosure** · **Submit to RERA** · **Download Record**
 
-## Validation
+**Reconciled 2026-08-15:** the monitoring variant's header carried view actions only; the workspace variant's carried the edit/submit set. The full set now applies to every user, subject to sale and disclosure status.
 
-The variant under the Sales & Disclosure Officer heading has a Validation Summary; the one under the Principal / Director heading has none. A difference between variants, not a permission. See that role's "Validation Summary" block under [Role Variations](#role-variations).
-
-## Role Variations
-
-> **Reframed 2026-08-15 — these are content variants, not access restrictions.** Every variant
-> below is reachable and actionable by all four roles; none of them is withheld from anyone. What
-> the blocks record is that the source material defined this screen more than once, with different
-> KPI sets, filters, columns, actions or empty states each time — differences of *content*, not of
-> permission. Those are preserved verbatim rather than merged, because collapsing them into one
-> screen is a design decision about which variant (or which union of them) is correct, and that is
-> the client's call, not a documentation cleanup. **Flagged for review — see
-> [../README.md](../README.md#per-role-content-variants-flagged-for-review).**
->
-> The role headings below should now be read as *"the variant the source defined under this role's
-> heading"*, not *"what this role is allowed to see"*.
-
-### Developer Principal / Director
-
-### Sidebar Status
-
-* **Visible Sidebar:** Developer Operational Sidebar  
-* **Active Menu:** **Sales & Disclosures**  
-* **Selected Item:** Sales & Disclosure Details *(opened from Sales & Disclosures list)*  
-* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
-
-### Top Bar Status
-
-**Title:** Sales & Disclosure Details
-
-**Subtitle:** Review the complete sales transaction and disclosure record for this property.
-
-**Search Bar:** Search anything...
-
-**Page Actions (Right Side):**
-
-* Download Disclosure Report  
-* View Property Registration  
-* View Project
-
-The page continues using the shared **Background \+ HorizontalBorder** component.
-
-### Purpose
-
-Provide the Developer Principal / Director with a comprehensive, read-only view of a completed property sale, including buyer information, disclosure status, supporting documents, RERA review history, and compliance progress.
-
-### Layout
-
-Top Bar  
-↓  
-Sales Header  
-↓  
-Sales Summary Cards  
-↓  
-Property Information  
-↓  
-Buyer Information  
-↓  
-Sales Information  
-↓  
-Disclosure Progress  
-↓  
-Submitted Documents  
-↓  
-RERA Review History  
-↓  
-Activity Timeline
-
-### Section 1 — Sales Header
-
-Display key transaction information.
-
-#### **Left**
-
-* Sale Reference Number  
-* Property Name / Unit  
-* Sale Status Badge
-
-#### **Right**
-
-* Sale Date  
-* Last Updated  
-* Managed By (Sales & Disclosure Officer)
+**Both status badges appear here.** A sale and its disclosure have separate lifecycles — see [status-badges.md](../status-badges.md#sales--disclosure-status).
 
 ### Section 2 — Sales Summary Cards
 
-Display six KPI cards.
+Absorbed from the monitoring variant, the only one to define them: sale value, disclosure position, document completeness and days since sale.
 
-| KPI | Description |
-| ----- | ----- |
-| Sale Status | Current transaction status |
-| Disclosure Status | Current RERA disclosure stage |
-| Sale Value | Total sale amount |
-| Buyer Verification | Verified / Pending |
-| Escrow Status | Linked escrow progress |
-| Compliance Status | Compliant / Pending |
+### Section 3 — Disclosure Progress
 
-### Section 3 — Property Information
+Stage tracker for the disclosure's regulatory journey. Present in **both** variants; the workspace variant's stage list is more granular and is the one kept.
 
-Information card.
+### Section 4 — Sale Information
 
-#### **Property Details**
+**Sale Details** — sale reference, sale date, agreed value, payment plan, sale type.
 
-* Property Name  
-* Unit Number  
-* Property Type  
-* Project Name  
-* Registration Number  
-* Property Address
+**Transaction Details** *(workspace variant only)* — payment schedule, amounts received, outstanding balance, instrument details.
 
-Button
+**Reconciled 2026-08-15:** the monitoring variant had a single *Sales Information* group; the workspace variant split it into *Sale Details* and *Transaction Details*. The two-group structure is kept — Transaction Details is real content the monitoring variant omitted.
 
-* View Property Registration
+### Section 5 — Buyer Information
 
-### Section 4 — Buyer Information
+**Primary Buyer** — name, identification, contact details, nationality.
 
-Information card.
+**Buyer Classification** *(workspace variant only)* — individual / corporate / joint, and the documentation each implies.
 
-#### **Buyer Details**
+**Additional Purchasers** *(workspace variant only, "when applicable")* — for joint purchases.
 
-* Buyer Name  
-* Buyer Type (Individual / Business)  
-* Identification Number  
-* Contact Information  
-* Verification Status
+**Reconciled 2026-08-15:** the monitoring variant defined only *Buyer Details*, a flat field list covering the primary buyer. The workspace variant's three-group structure is the superset and is kept. Joint-purchase handling exists only there and would have been lost by picking the monitoring variant.
 
-This information is displayed according to the user's access permissions and applicable privacy controls.
+### Section 6 — Property Information
 
-### Section 5 — Sales Information
+Property details — unit, type, size, project, registration reference.
 
-Display transaction details.
+**Reconciled 2026-08-15:** the workspace variant marked this group *(Read-only)*. That marking is **kept**, because it is a data-integrity rule rather than a permission: property attributes are owned by the property registration record and are edited there, not on the sale. It applies to every user, and always did.
 
-#### **Details**
+### Section 7 — Supporting Documents
 
-* Sale Reference  
-* Sale Date  
-* Sale Price  
-* Payment Method  
-* Sales Officer  
-* Transaction Status
+Required-document checklist and table, with Upload / Replace / Preview / Resubmit actions governed by document status.
 
-### Section 6 — Disclosure Progress
+**Reconciled 2026-08-15:** the monitoring variant's *Submitted Documents* section listed what had been filed with view/download actions; the workspace variant's *Supporting Documents* added the required-document checklist and upload controls. The workspace version is the superset and is kept.
 
-Horizontal progress tracker.
+### Section 8 — Validation Summary
 
-#### **Stages**
+Automatic pre-submission checks, displayed as Passed / Warning / Error, with the submit action disabled until all mandatory checks pass.
 
-* Sale Recorded  
-* Disclosure Prepared  
-* Submitted to RERA  
-* Under Review  
-* Approved  
-* Disclosure Completed
+**Reconciled 2026-08-15 — this section now applies to every user.** It existed only in the workspace variant; the monitoring variant had none, because that variant could not submit. That was an access restriction, not a property of the screen. See [validation-rules.md](../validation-rules.md).
 
-Current stage is highlighted.
+### Section 9 — RERA Queries & Review History
 
-Completed stages display the standard success indicator.
+**Absorbed 2026-08-15** by combining two sections the variants held separately:
 
-### Section 7 — Submitted Documents
+* **RERA Queries** *(workspace variant)* — open queries with Respond and Upload actions.
+* **RERA Review History** *(monitoring variant)* — the closed record of review rounds, decisions, reviewers and dates.
 
-Table.
+These are the same correspondence at two points in its life, and were split only because one variant could act on it and the other could only read it. Presented as one section: open queries first, resolved history below.
 
-#### **Columns**
+### Section 10 — Communication History / Activity Timeline
 
-* Document Name  
-* Category  
-* Uploaded By  
-* Upload Date  
-* Verification Status  
-* Action
+Chronological record of everything that has happened to this sale and disclosure. Each entry shows who acted and what role they held at the time ([navigation.md](../../navigation.md#audit-trail-principle)).
 
-#### **Actions**
+**Reconciled 2026-08-15:** the monitoring variant called this *Activity Timeline*; the workspace variant called it *Communication History* and scoped it to correspondence. Kept as the full activity timeline, which contains the correspondence entries as a subset.
 
-* View Document
+## Empty State
 
-### Section 8 — RERA Review History
+> No disclosure has been prepared for this sale yet. Create the disclosure to begin.
 
-Table.
+**Primary Button** — Create Sales Disclosure
 
-#### **Columns**
-
-* Review Date  
-* Reviewing Officer  
-* Action Taken  
-* Remarks  
-* Status
-
-Examples
-
-* Disclosure Submitted  
-* Additional Information Requested  
-* Compliance Verified  
-* Disclosure Approved
-
-### Section 9 — Activity Timeline
-
-Chronological history.
-
-Examples
-
-* Property reserved  
-* Buyer verified  
-* Sale completed  
-* Disclosure submitted  
-* Documents uploaded  
-* RERA review completed  
-* Disclosure approved
-
-Latest activities appear first.
-
-### Empty State
-
-If the disclosure has not yet been submitted:
-
-**Message**
-
-> The sales transaction has been recorded, but the disclosure has not yet been submitted to RERA.
-
-Primary Button
-
-* View Sales & Disclosures
-
-### Reused Components
+## Reused Components
 
 See [components.md](../components.md) for definitions of every component used on this screen.
 
-### User Flow
-
-Dashboard  
-↓  
-Sales & Disclosures  
-↓  
-Sales & Disclosure Details
-
-├── View Property Registration
-
-├── View Project
-
-├── View Submitted Documents
-
-└── Download Disclosure Report
-
-### Sales & Disclosure Officer
-
-### Sidebar Status
-
-* **Visible Sidebar:** Developer Operational Sidebar  
-* **Active Menu:** **Sales & Disclosures**  
-* **Selected Item:** Sales & Disclosure Details *(opened from Sales & Disclosures list)*  
-* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
-
-### Top Bar Status
-
-**Title:** Sales & Disclosure Details
-
-**Subtitle:** Record, validate, and manage this property sale and its regulatory disclosure.
-
-**Search Bar:** Search anything...
-
-The page uses the shared **Background \+ HorizontalBorder** component.
-
-**Page Actions (Right Side):**
-
-* Save Draft  
-* Submit to RERA *(Enabled only after validation passes)*  
-* More Actions
-
-### Purpose
-
-Provide the Sales & Disclosure Officer with a complete operational workspace to manage a property sale from initial recording through regulatory disclosure approval. The officer can enter sale details, manage buyer information, upload supporting documents, prepare disclosure information, respond to RERA requests, and monitor the approval lifecycle.
-
-Unlike the Developer Principal's version, this page is fully interactive and supports editing, validation, submission, and resubmission.
-
-### Layout
-
-Top Bar  
-↓  
-Sale Header  
-↓  
-Disclosure Progress  
-↓  
-Sale Information  
-↓  
-Buyer Information  
-↓  
-Property Information  
-↓  
-Supporting Documents  
-↓  
-Validation Summary  
-↓  
-RERA Queries (If Applicable)  
-↓  
-Communication History  
-↓  
-Activity Timeline
-
-### Section 1 — Sale Header
-
-Displays the overall sale information.
-
-#### **Left**
-
-* Sale Reference Number  
-* Property / Unit Name  
-* Disclosure Status Badge  
-* Linked Project
-
-#### **Right**
-
-* Sale Date  
-* Last Updated  
-* Sales Officer  
-* Save Status
-
-### Section 2 — Disclosure Progress
-
-Display a horizontal workflow tracker.
-
-#### **Stages**
-
-* Sale Recorded  
-* Buyer Information Completed  
-* Supporting Documents Uploaded  
-* Validation Passed  
-* Disclosure Submitted  
-* Under Review  
-* Approved
-
-Completed stages use the platform's standard success indicator.
-
-The current stage is highlighted.
-
-Completed stages are clickable for quick navigation.
-
-### Section 3 — Sale Information
-
-Editable while the disclosure is in **Draft**, **Returned**, or **Information Requested** status.
-
-#### **Sale Details**
-
-* Sale Reference  
-* Sale Date  
-* Property  
-* Project  
-* Sale Type  
-* Sale Value  
-* Payment Method  
-* Payment Status  
-* Reservation Date *(if applicable)*  
-* Completion Date *(if applicable)*
-
-#### **Transaction Details**
-
-* Sales Agreement Number  
-* Sales Agent *(if applicable)*  
-* Financing Type  
-* Mortgage Provider *(if applicable)*  
-* Remarks
-
-### Section 4 — Buyer Information
-
-Capture buyer details required for regulatory disclosure.
-
-#### **Primary Buyer**
-
-* Full Name  
-* National ID / Passport Number  
-* Date of Birth  
-* Nationality  
-* Phone Number  
-* Email Address  
-* Residential Address
-
-#### **Buyer Classification**
-
-* Individual  
-* Corporate Entity  
-* Joint Purchase  
-* Government Institution
-
-#### **Additional Purchasers *(When Applicable)***
-
-Allow multiple buyers to be added.
-
-Each additional buyer includes:
-
-* Name  
-* Ownership Percentage  
-* Contact Information
-
-### Section 5 — Property Information
-
-Display linked property information.
-
-#### **Property Details *(Read-only)***
-
-* Property Name  
-* Unit Number  
-* Property Registration Number  
-* Project Name  
-* Property Type  
-* Floor  
-* Size  
-* Current Registration Status
-
-Button
-
-* View Property Registration
-
-### Section 6 — Supporting Documents
-
-Document management section.
-
-#### **Required Documents**
-
-Examples
-
-* Sales Agreement  
-* Buyer Identification  
-* Proof of Payment  
-* Mortgage Approval *(if applicable)*  
-* Power of Attorney *(if applicable)*  
-* Corporate Resolution *(Corporate Buyers)*  
-* Other Supporting Documents
-
-#### **Table**
-
-| Document | Status | Uploaded On | Version | Action |
-| :---: | :---: | :---: | :---: | :---: |
-
-#### **Actions**
-
-* Upload  
-* Replace  
-* Preview  
-* Delete *(Draft only)*
-
-### Section 7 — Validation Summary
-
-See [validation-rules.md](../validation-rules.md) for the shared automatic-validation mechanism and the common field-level checks (required fields, required documents, file verification). This screen's own additional checks: Buyer information completed, Property eligibility verified, Duplicate disclosure check, Sale value validation, Buyer identity validation.
-
-### Section 8 — RERA Queries
-
-Visible only when RERA requests additional information.
-
-#### **Table**
-
-| Date | Request | Due Date | Status | Action |
-| :---: | :---: | :---: | :---: | :---: |
-
-#### **Actions**
-
-* Respond  
-* Upload Additional Documents  
-* Update Buyer Information  
-* Submit Response  
-* View Previous Response
-
-Outstanding requests are visually highlighted.
-
-### Section 9 — Communication History
-
-Conversation thread with RERA.
-
-Each message displays:
-
-* Sender  
-* Date & Time  
-* Message  
-* Attachments  
-* Status
-
-#### **Actions**
-
-* Reply *(when permitted)*  
-* View Attachment
-
-Messages are displayed chronologically.
-
-### Section 10 — Activity Timeline
-
-Displays every activity performed on this disclosure.
-
-Examples
-
-* Sale recorded  
-* Buyer information updated  
-* Documents uploaded  
-* Validation completed  
-* Disclosure submitted  
-* RERA review started  
-* Additional information requested  
-* Documents replaced  
-* Resubmitted  
-* Disclosure approved
-
-Latest activities appear first.
-
-### Empty State
-
-If the disclosure has just been created:
-
-**Message**
-
-> Complete the sale information, buyer information, and upload all required documents before submitting the disclosure to RERA.
-
-Primary Button
-
-* Complete Sale Information
-
-Secondary Button
-
-* Upload Documents
-
-### Reused Components
-
-See [components.md](../components.md) for definitions of every component used on this screen.
-
-### User Flow
-
-Dashboard  
-↓  
-Sales & Disclosures  
-↓  
-Sales & Disclosure Details  
-├── Edit Sale Information  
-├── Manage Buyer Information  
-├── Upload Documents  
-├── Save Draft  
-├── Validate Disclosure  
-├── Submit to RERA  
-├── Respond to RERA Query  
-└── Download Disclosure Summary (After Approval)
-
-### Notes
-
-* This is the **primary operational workspace** for the **Sales & Disclosure Officer**.  
-* The page supports the complete lifecycle of a property sale and regulatory disclosure, from initial sale recording to final RERA approval.  
-* Buyer information should be validated before submission to reduce regulatory rejection.  
-* The disclosure becomes read-only after submission unless RERA returns it or requests additional information.  
-* Every modification, document upload, buyer update, regulatory response, and approval must be recorded in the activity timeline to maintain a complete audit trail and regulatory compliance.
+## Validation
+
+1. No section, field, action or card on this screen is role-gated. What a user can do depends on the sale's and disclosure's status, never on who they are.
+2. Property Information is read-only for everyone — it is owned by the property registration record.
+3. Fields become read-only after submission unless RERA returns the disclosure.
+4. Validation Summary checks are defined in [validation-rules.md](../validation-rules.md).
+5. The sale's status and the disclosure's status are separate values and must not be conflated.
 
 ## User Flow
 
-Differs between variants — see the "User Flow" heading within each role's block under [Role Variations](#role-variations).
+```
+Sales & Disclosures
+↓
+Sales & Disclosure Details
+├─ Edit / Create Disclosure / Submit → disclosure flow
+├─ Document row → Document Details
+├─ RERA Query → response flow
+└─ Property link → Property Registration Details
+```
 
 ## Notes
 
-Only the variant under the Sales & Disclosure Officer heading has a Notes section — see that role's block under [Role Variations](#role-variations). The Principal's version has no Notes section; its content ends at User Flow.
+* **This absorbs, rather than references, both retired variants.** Their headers, progress trackers, information groupings, document tables, correspondence and timelines are now one screen.
+
+* **The Validation Summary asymmetry** was resolved the same way as on [project-details.md](project-details.md): it is a property of submitting, and every user can now submit.
+
+* **A read-only marking was kept, deliberately.** Property Information stays read-only for everyone. Distinguishing this from the role-based read-only claims that were removed is the point: this one is about which record owns the data, not about who is looking.
+
+* **What was dropped, and why.** Only the view-only header actions and the monitoring framing. Nothing representing distinct work was discarded — the monitoring variant's Sales Summary Cards and RERA Review History are carried forward, and the workspace variant's Transaction Details, Buyer Classification, Additional Purchasers, required-document checklist and Validation Summary are all kept.
