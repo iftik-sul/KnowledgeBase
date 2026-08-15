@@ -32,7 +32,8 @@ The vocabulary most service-flow files' own Application Status Flow sections alr
 | Under Review | With RERAN | Info / blue |
 | Information Requested | RERAN needs more from the applicant | Warning / amber |
 | Resubmitted | Applicant has responded, back with RERAN | Info / blue |
-| **Approved — Awaiting Payment** | Decision made, payment still outstanding — applies only where sourced: #28, and the counter-channel path of #9–#16, #23, #24, #26, #27 (see `payments.md`) | Warning / amber |
+| **Audited — Awaiting Payment** | The Trustee Centre / Service Center channel has audited the transaction but not yet approved it; payment is the next step, before approval — applies only to the counter-channel path of #9–#16, #23, #24, #26 (see `payments.md` Category 3, and each file's own Section 13, corrected in a later audit pass) | Warning / amber |
+| **Approved — Awaiting Payment** | RERAN has fully decided the application; payment is the last step before the output is released — applies only to #28, whose single (online) workflow sources payment strictly after approval (see `payments.md` Category 2) | Warning / amber |
 | Approved | Decision made, fully settled where a fee applies | Success / green |
 | Completed | Output document issued | Success / green |
 | Returned | Sent back for correction | Warning / amber |
@@ -40,7 +41,9 @@ The vocabulary most service-flow files' own Application Status Flow sections alr
 | Withdrawn | Applicant cancelled | Neutral / grey |
 | Cancelled | System or applicant cancelled before submission | Neutral / grey |
 
-**`Approved — Awaiting Payment` is genuinely conditional, not universal** — the same lesson Group C's `payments.md` learned about its own #12/#18. It appears only on the specific services where the source or the client-confirmed correction places payment after RERAN's decision. Every other service either pays upfront (this status never appears) or carries no fee at all (this status is meaningless for it).
+**These are two distinct statuses, not one — corrected 2026-08-15 in a later audit pass.** This section previously collapsed both into a single "Approved — Awaiting Payment" label and applied it uniformly to #28 and the counter-channel path of #9–#16, #23, #24, #26, #27. That was wrong on inspection against the actual files: #28's own Section 13 genuinely says "Approved — Awaiting Payment" (RERAN's full decision precedes payment), but #9–#16, #23, #24, and #26 use "Audited — Awaiting Payment" instead, because their counter-channel sequence pays *before* formal approval, right after the audit step — audit and approval are not the same checkpoint in those files, and using "Approved" for a state that precedes approval would misrepresent what the file itself documents. **#27 needs neither status** — its own Section 13 just repositions the standard Payment Pending / Payment Successful pair after Information Requested rather than introducing a distinct named intermediate state, and that's already correct as written; nothing further should be added there.
+
+**Both statuses are genuinely conditional, not universal** — the same lesson Group C's `payments.md` learned about its own #12/#18. They appear only on the specific services and channels where the source or the client-confirmed correction places payment after some or all of RERAN's decision. Every other service either pays upfront (neither status ever appears) or carries no fee at all (both are meaningless for it).
 
 ## Complaint / Dispute Status (Patterns G, K)
 
@@ -49,7 +52,7 @@ Distinct vocabulary — a complaint or dispute is not an "application" in the re
 | Status | Meaning |
 | :---- | :---- |
 | Draft | Started, not submitted |
-| Payment Pending / Successful | #38 only (fee confirmed by client, `open-questions.md` A7); #26's counter-channel timing is handled the same way as Application Status above |
+| Payment Pending / Successful | #38 only (fee confirmed by client, `open-questions.md` A7); #26's counter-channel timing is handled the same way as Application Status above (its own "Audited — Awaiting Payment" state, not a Complaint/Dispute-specific one) |
 | Submitted | Lodged |
 | Assigned | Routed to the correct dispute category / department (#26) or investigation queue (#38) |
 | Under Review / Investigation | Being worked |
