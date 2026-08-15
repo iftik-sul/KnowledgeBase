@@ -27,7 +27,7 @@ Enable an individual to register a company with RERAN as part of managing proper
 
 ## 3. Description
 
-The applicant visits a Real Estate Registration Trustee Centre, submits the required documents, and RERA staff enter and audit the transaction in-system. After payment, the applicant receives an email confirming successful registration along with the company's reference number.
+The applicant visits a Real Estate Registration Trustee Centre, submits the required documents, and RERA staff enter and audit the transaction in-system. After payment, the applicant receives an email confirming successful registration along with the company's reference number and a digital payment receipt, issued by the Trustee Centre.
 
 **Open question:** the source does not explain the relationship between this service and a company's general corporate registration (with whatever body handles that in Nigeria) — whether this is RERA registering a company from scratch, or recording an already-incorporated company's details for property-transaction purposes. Documented as-is from the source; needs client clarification before implementation.
 
@@ -76,9 +76,9 @@ RERA Staff Audit
 ↓
 Pay Fees
 ↓
-Receive Email with Company Reference Number
+Receive Email with Company Reference Number and Digital Payment Receipt
 
-**Note:** the source specifies this as a Trustee Centre (in-person) service only — no online/self-service channel is described, unlike most other services in this category.
+**Note:** the source specifies this as a Trustee Centre (in-person) service only — no online/self-service channel is described, unlike most other services in this category. Payment is taken and receipted at the Trustee Centre counter itself, not through any financial-institution channel — this remains a RERAN service point throughout, matching every other Trustee-Centre service in this module.
 
 ## 13. Application Status Flow
 
@@ -102,8 +102,9 @@ Registered
 ## 15. Output
 
 * Email confirming registration, including the company's reference number
+* Payment Receipt (digital, issued by the Trustee Centre)
 
-**Checked 2026-08-15, flagged rather than changed** — every other fee-bearing service in this module lists a separate Payment Receipt as an output artefact (see `payments.md`'s Payment Artefacts section), and this service is fee-bearing (Section 9, "Yes"). Unlike #43, where a missing Payment Receipt was corrected as a clear omission against closely comparable sibling services, this file's source description is specific and minimal — "receives an email confirming successful registration along with the company's reference number," nothing more. Whether that email *is* effectively the receipt, or whether a separate receipt is also issued but simply unmentioned in the source's terse description of this Trustee-Centre-only service, isn't something the source settles either way. Left as-is rather than asserted; if the client's answer to this file's existing Open Question (Section 3, the corporate-registration relationship) comes with more process detail, worth revisiting this alongside it.
+**Confirmed 2026-08-15.** This section previously flagged the missing Payment Receipt as a genuine ambiguity rather than asserting it, since the source's own description was terse ("receives an email confirming successful registration") and #41 lacked the close sibling comparables that made #43's equivalent gap a clear fix. Confirmed directly: the Trustee Centre counter issues the digital receipt as part of that same email — the applicant never leaves without one, matching the standard shared payment-gateway/receipt pattern used across the rest of the module (`payments.md`'s Payment Artefacts section). No separate Fee Balance or other payment artefact exists here, consistent with `open-questions.md` C2.
 
 ## 16. Related Services
 
@@ -123,14 +124,18 @@ Not specified in the source material.
 * Property Owner
 * Company
 * Company Registration
+* Payment
+* Payment Transaction
 
 ## 20. Acceptance Criteria
 
 * Applicant can submit a company registration request at a Trustee Centre.
 * RERA staff can enter, audit, and approve or reject the submission.
 * Approved registrations generate a unique company reference number delivered by email.
+* A digital payment receipt is issued by the Trustee Centre alongside the registration confirmation. *(Confirmed 2026-08-15 — see Section 15.)*
 
 ## 21. Business Rules
 
 1. This service is documented in the source as Trustee-Centre-only; no in-app self-service path is described. **Flagged**, not resolved — whether an online path should be added is a scope decision.
 2. The relationship between this RERA company registration and any broader corporate/business registration process is unclear from the source and needs client clarification.
+3. Payment is taken and receipted at the Trustee Centre, not by any financial institution — the applicant receives a digital Payment Receipt from the RERAN counter itself. *(Confirmed 2026-08-15 — see Section 3/15.)*
