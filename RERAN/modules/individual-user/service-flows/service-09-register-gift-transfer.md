@@ -4,7 +4,7 @@ module: individual-user
 type: service-flow
 status: current
 source_type: sourced
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -102,7 +102,13 @@ Applicable according to the RERAN fee schedule.
 
 **Yes**
 
-Payment must be completed before the application is submitted.
+Payment timing differs by channel — see Processing Workflow.
+
+**Real Estate Registration Trustee Centre (the channel row 88 sources directly):** documents are submitted and the transaction is entered and audited first; payment is completed at that point, immediately before the output is issued.
+
+**Online:** payment is completed before the application is submitted.
+
+*(Corrected 2026-08-15 — this file previously documented only the online path, with no Trustee Centre channel at all, even though row 88's own sourced workflow describes the Trustee Centre channel and no other. See `payments.md` Category 3.)*
 
 ## 10. Processing Authority
 
@@ -113,6 +119,24 @@ Payment must be completed before the application is submitted.
 **25–30 minutes**.
 
 ## 12. Processing Workflow
+
+Option 1 – Real Estate Registration Trustee Centre
+
+Visit Real Estate Registration Trustee Centre  
+↓  
+Submit Required Documents  
+↓  
+Officer Enters Gift Transfer into System  
+↓  
+Transaction Audited  
+↓  
+Pay Service Fee  
+↓  
+Receive Electronic Title Documents via Email
+
+──────────────────────────
+
+Option 2 – Online
 
 Donor
 
@@ -176,7 +200,7 @@ Payment Successful
 ↓  
 Submitted  
 ↓  
-Recipient Confirmation Pending  
+Recipient Confirmation Pending *(Online only)*  
 ↓  
 Under Review  
 ↓  
@@ -194,18 +218,18 @@ Completed
 * Rejected  
 * Cancelled  
 * Withdrawn  
-* Recipient Declined
+* Recipient Declined *(Online only)*
 
 ## 14. Possible Outcomes
 
 * Gift Transfer Successfully Registered  
 * Ownership Successfully Transferred  
-* Recipient Accepted Gift  
+* Recipient Accepted Gift *(Online only)*  
 * Additional Information Requested  
 * Application Returned  
 * Application Rejected  
 * Payment Failed  
-* Recipient Declined Gift
+* Recipient Declined Gift *(Online only)*
 
 ## 15. Output
 
@@ -274,10 +298,10 @@ Upon successful completion, the system generates:
 
 * Donor can initiate a gift transfer for an eligible property.  
 * System validates that the donor is authorized to transfer the property.  
-* Recipient successfully confirms participation.  
+* Recipient successfully confirms participation *(Online channel)*.  
 * Required information is validated before submission.  
 * Required documents are uploaded successfully.  
-* Payment is completed before regulatory review.  
+* Payment is completed at the point required by the selected channel.  
 * Application receives a unique application reference number.  
 * Approved applications update the official property registry.  
 * Electronic title documents are generated upon successful completion.  
@@ -289,8 +313,8 @@ Upon successful completion, the system generates:
 1. Only the registered property owner or an authorized representative may initiate a gift transfer.  
 2. The property must be registered in the official RERAN property registry.  
 3. Gift transfers do not involve the exchange of a purchase price between the donor and recipient.  
-4. Payment of the applicable service fee must be completed before the application proceeds for review.  
-5. The recipient must confirm acceptance of the gift transfer before ownership is transferred.  
+4. Payment must be completed at the point required by the selected channel — before submission online, or after the Trustee Centre audits the transaction. *(Corrected 2026-08-15 — see Section 9.)*  
+5. The recipient must confirm acceptance of the gift transfer before ownership is transferred, where applicable to the selected channel.  
 6. Ownership transfer becomes legally effective only after approval by RERAN and the official property registry is updated.  
 7. A new Electronic Certificate of Title is issued to the recipient upon successful registration.  
 8. Every gift transfer application receives a unique application reference number.  
