@@ -90,7 +90,7 @@ Applicable according to the RERAN fee schedule.
 
 **Yes**
 
-Paid by the customer at the Trustee Centre — sourced (row 41: "pay ... receive output via email"). **Customer Payment at Counter** model, unaffected by the 2026-08-14 payment-model correction (`open-questions.md` B1). **Corrected 2026-08-14** — previously cited `B9` for the receipt-vs-fee-balance distinction; B9 is now superseded, since no Group C service produces a "fee balance" any more.
+Paid by the customer at the Trustee Centre, **before** RERA's review and approval — sourced (row 41's own sequence: transaction entered, then "pay... receive output via email," with RERA's review sitting between payment and output). **Customer Payment at Counter** model, unaffected by the 2026-08-14 payment-model correction (`open-questions.md` B1). **Corrected 2026-08-14** — previously cited `B9` for the receipt-vs-fee-balance distinction; B9 is now superseded, since no Group C service produces a "fee balance" any more.
 
 ## 10. Processing Authority
 
@@ -146,7 +146,7 @@ Information Requested
 ↓  
 Returned for Correction  
 ↓  
-Approved — Awaiting Payment  
+Approved  
 ↓  
 Completed
 
@@ -154,6 +154,8 @@ Completed
 
 * Rejected  
 * Withdrawn
+
+**Corrected 2026-08-15 — `Approved — Awaiting Payment` removed.** This status previously sat between `Returned for Correction` and `Completed`, but contradicts this service's own sourced workflow (Section 12, Section 9): the customer pays at the Trustee Centre counter *before* RERA's review and approval, not after. By the time a decision is reached, payment has already happened. Compare Services #12 and #18, where RERA's row-sourced sequence has approval *before* payment, and where this status is kept as accurate.
 
 ## 14. Possible Outcomes
 
@@ -228,7 +230,7 @@ Upon successful completion, the system generates:
 * Required information and documents are validated before submission.  
 * Application receives a unique application reference number.  
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
-* Payment is completed at the counter with a payment receipt issued.  
+* Payment is completed at the counter with a payment receipt issued, before RERA's review.  
 * Approved applications update the official beneficial-ownership record.  
 * Parties receive completion notifications.  
 * All activities are recorded in the audit log.
@@ -237,7 +239,7 @@ Upon successful completion, the system generates:
 
 1. This application may be processed by any of the institution's four Group C roles where bank-originated, or otherwise by a Trustee Centre operator acting on the parties' behalf. **Confirmed 2026-08-15** — previously conditioned on the Mortgage Officer specifically; `open-questions.md` A4 confirms no service is role-specific. *(Whether a bank-originated variant exists for this service at all remains unconfirmed by source — only the Trustee-Centre path is confirmed by row 41.)*
 2. The company must hold registered real estate with RERAN for the sale to be within scope of this service.  
-3. Payment is required at the counter before the application is finalized.  
+3. Payment is required at the counter, before RERA's review and approval.  
 4. Approved applications update the official ownership registry to reflect the new shareholding.  
 5. Every application receives a unique application reference number.  
 6. All applications, approvals, payments, and notifications are permanently recorded in the audit trail.
