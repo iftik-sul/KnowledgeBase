@@ -4,7 +4,7 @@ module: real-estate-developer
 type: overview
 status: draft
 contains_proposals: true
-updated: 2026-08-15
+updated: 2026-08-16
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
@@ -66,6 +66,10 @@ The module enables registered real estate development companies to participate i
 | 27 | [Requesting a Technical Report for the Project](service-flows/service-27-request-technical-report.md) | Title Deed Data *(UI mismatch — flagged)* |
 
 All 27 carry `status: draft` and `contains_proposals: true` — each has genuinely sourced sections (workflow, channel, output, SLA, all traceable to `RERAN_service_flows_v2.md` rows 1–27) alongside proposed sections (required documents, in particular — the source never itemizes these for Group B any more than it did for Group C) marked inline. Escrow services (#8–#12, #20–#21) cross-link to Financial & Trust Institutions' `escrow-request-queue.md` and `escrow-request-details.md` — the Account Trustee's side of the same transaction.
+
+## Shared Platform Features
+
+* [shared-platform-features.md](shared-platform-features.md) — the four Application Management features (Submit Application, Track Application Status, Respond to Information Request, Resubmit Returned Application) shared across most of the 27 services, following the pattern already established in [individual-user](../individual-user/shared-platform-features.md) and already proposed (not yet written) for [financial-trust-institutions](../financial-trust-institutions/services-overview.md#shared-platform-features). **Proposed — not sourced, needs client confirmation**; see the document itself for what it deliberately does not assert (a single payment-timing order, since this module's own services vary).
 
 ## UI Specifications
 
