@@ -19,7 +19,7 @@ tags:
 
 The institution's document repository. Every file attached anywhere in the module — service requests, escrow assessments, compliance reports — lives here once, and is attached to further records by reference rather than re-uploaded.
 
-> **Corrected 2026-08-15.** This screen previously scoped visibility by role: Mortgage Officer saw only documents linked to their own filings, Institution Relationship Manager saw everything, Account Trustee saw only escrow-linked documents, Auditing Bureau Officer had institution-wide read. Per the unified-access model, every user sees every document at the institution.
+> **Corrected 2026-08-15, twice.** First pass: this screen previously scoped visibility by role. Per the unified-access model, every user sees every document at the institution. Second pass: the "Linked To" filter still named "Service Request" as a value, matching the screen deleted in favour of Submit Application — fixed below.
 
 ## Purpose
 
@@ -50,7 +50,7 @@ Selecting a row opens a preview panel alongside the table rather than navigating
 **Filters**
 
 * **Document Type** — Certificate of Title, Mortgage/Lease Agreement, Valuation Report, Identification, Board Resolution, Trust Account Statement, and the other types named across the eighteen services' Required Documents sections
-* **Linked To** — Service Request · Escrow Request · Compliance Report · Institution Profile (standing documents)
+* **Linked To** — Submit Application · Escrow Request · Compliance Report · Institution Profile (standing documents) *(corrected 2026-08-15, second pass — previously "Service Request," the deleted screen's name)*
 * **Status** — Uploaded · Referenced Elsewhere · Superseded (older version)
 * **Uploaded By** — dropdown, added 2026-08-15 to preserve the "my documents" narrowing role-scoping used to provide, now available as an explicit filter rather than a visibility boundary
 * **Date Range** — upload date
@@ -79,13 +79,13 @@ Read-only, audit-safe preview — no redistribution controls beyond what the pla
 
 ### Section 4 — Upload
 
-Available only from within a service request, escrow assessment or compliance report at an editable stage — not as a standalone action on this screen. Documents.md is where uploaded files are *found* afterward, not where a new one is first added; see [components.md](../components.md#document-uploader) for the upload control itself, embedded in those other screens.
+Available only from within Submit Application, an escrow assessment, or a compliance report at an editable stage — not as a standalone action on this screen. Documents.md is where uploaded files are *found* afterward, not where a new one is first added; see [components.md](../components.md#document-uploader) for the upload control itself, embedded in those other screens. *(Corrected 2026-08-15, second pass — previously "a service request," the deleted screen's name.)*
 
 ## Empty State
 
 **Message**
 
-> No documents match these filters. Documents are added from within a service request, escrow assessment or compliance report — this repository shows them afterward.
+> No documents match these filters. Documents are added from within Submit Application, an escrow assessment or a compliance report — this repository shows them afterward.
 
 **Primary Button:** Clear Filters
 
