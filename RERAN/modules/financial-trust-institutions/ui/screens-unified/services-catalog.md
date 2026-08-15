@@ -19,7 +19,7 @@ tags:
 
 **Access:** Any of the institution's four Group C roles — identical screen for every user.
 
-> **Regenerated 2026-08-15**, written fresh against the current corrected model.
+> **Regenerated 2026-08-15**, written fresh against the current corrected model. **Corrected again same day** — the Fee Timing field (Section 2) described a two-way split that no longer matches `payments.md`'s corrected three-way timing split (upfront / pay-before-decision at counter / pay-after-decision at counter). See below.
 
 ## Purpose
 
@@ -63,9 +63,11 @@ Every service, as a card or row (implementation detail, not specified here): nam
 | :---- | :---- |
 | Service Name | e.g. "Mortgage Registration" |
 | Description | One line, drawn from the service's own Service Overview section |
-| Fee Timing | "Pay upfront" (#1, #3–#11) · "Pay at point of service" (#12–#18) · "No fee" (#2 only) |
+| Fee Timing | "Pay upfront" (#1, #3–#11) · "Pay at counter, before decision" (#13–#17) · "Pay at counter, after decision" (#12, #18) · "No fee" (#2 only) |
 | SLA | Sourced figure where one exists, otherwise omitted rather than guessed |
 | Assisted Mode Available | Badge where the service has a Trustee Centre / Land Department assisted path (C2) |
+
+**Corrected 2026-08-15 (second pass) — Fee Timing now has four values, not three.** This field previously read "Pay upfront" / "Pay at point of service" (#12–#18 as one group) / "No fee," which was accurate at the payer/channel level but not at the timing level. A fuller per-service audit of `payments.md` found #12 and #18 source payment *after* RERA's decision, while #13–#17 source it *before* — a genuine difference an applicant browsing the catalogue would want to know (whether they pay when they submit, or only once approved). Both remain "pay at the counter," so the payer and channel are unchanged; only the timing badge needed splitting.
 
 **Filters:** Category · Fee Timing · Assisted Mode Available
 
@@ -92,7 +94,7 @@ Institution Operations Sidebar, Top Bar, Filter Bar, Buttons.
 ## Validation
 
 1. Every one of the eighteen services is reachable by every institution user — there is no category or individual service hidden from any role, consistent with `open-questions.md` A4.
-2. Fee Timing badges must match `payments.md`'s two-model split exactly: Upfront Gateway Payment for #1 and #3–#11, Customer Payment at Counter for #12–#18, No Fee for #2 only. A service showing the wrong badge is a factual error, not a display preference.
+2. Fee Timing badges must match `payments.md`'s current timing split exactly — four values, not the two/three this screen described before the second-pass correction above. A service showing the wrong badge is a factual error, not a display preference.
 
 ## Access
 
@@ -113,4 +115,5 @@ Services Catalog
 
 * **The five-category grouping is a proposed regrouping, not sourced structure** — see `services-overview.md`'s own note on this. If the client rejects the five-category framing (C1), this screen's Category Cards section needs rework, but the underlying eighteen-service list and Service Details linkage do not.
 * **Service #2 needs a visibly distinct treatment from the other seventeen** — it's the only service in the catalogue with no fee at all (`open-questions.md` B11). A "Free" badge or equivalent should be unmistakable, not just the absence of a price.
+* **#12 and #18's "pay after decision" timing is itself flagged as worth confirming with the client** — `payments.md`'s To Confirm section asks whether this is intentional design or an artefact of the source's counter-based process that should be normalized once digitized. This screen documents the badge as currently sourced, not as a settled final design.
 * Assisted-mode availability is sourced per-service, not uniform — see each service's own Section 4 (Who Can Apply) and Section 12 (Processing Workflow) in `service-flows/` for which services actually carry a Trustee Centre or Land Department path.
