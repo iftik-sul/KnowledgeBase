@@ -80,7 +80,9 @@ Applicable according to the RERAN fee schedule.
 
 **Yes**
 
-Paid by the customer, with an e-receipt issued — sourced (row 45: "Customer pays fees, gets e-receipt"). **Customer Payment at Counter** model, unaffected by the 2026-08-14 payment-model correction (`open-questions.md` B1). **Corrected 2026-08-14** — previously cited `B9` for the receipt-vs-fee-balance distinction; B9 is now superseded, since no Group C service produces a "fee balance" any more.
+Paid by the customer, **after** RERA's audit and approval, with an e-receipt issued — sourced (row 45's own sequence: the employee "enters, audits and approves," and only then does "Customer pay fees, gets e-receipt"). **Customer Payment at Counter** model, unaffected by the 2026-08-14 payment-model correction (`open-questions.md` B1). **Corrected 2026-08-14** — previously cited `B9` for the receipt-vs-fee-balance distinction; B9 is now superseded, since no Group C service produces a "fee balance" any more.
+
+**This service is one of two exceptions to the general Customer-Payment-at-Counter pattern, confirmed 2026-08-15.** Most services in this category (#13–#17) have the applicant pay *before* RERA's review, per their own sourced workflows. This one, along with Service #12, sources payment *after* RERA's decision — see Section 13 for what that means for this service's status flow.
 
 ## 10. Processing Authority
 
@@ -146,6 +148,8 @@ Completed
 
 * Rejected  
 * Withdrawn
+
+**Confirmed 2026-08-15 — `Approved — Awaiting Payment` is kept, and is genuinely sourced for this service, not a leftover from an earlier model.** Row 45's own sequence has the Land Department employee audit and approve, return, or reject *before* the institution pays fees (Section 12, Section 9) — the opposite order from most of Services #13–#17, where payment happens first. This is one of exactly two Group C services (the other being Service #12) where an approved-but-unpaid state genuinely exists in the sourced workflow. `services-overview.md`'s Application Status Vocabulary section is corrected to note this exception rather than claim the status "does not occur for any Group C service" without qualification.
 
 ## 14. Possible Outcomes
 
@@ -217,7 +221,7 @@ Upon successful completion, the system generates:
 * Required information and documents are validated before submission.  
 * Application receives a unique application reference number.  
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
-* Payment is completed with an e-receipt voucher issued before completion.  
+* Payment is completed with an e-receipt voucher issued after RERA's approval, before completion.  
 * Approved cancellations are recorded against the contract.  
 * Institution receives an approved e-certificate and e-receipt voucher on completion.  
 * All activities are recorded in the audit log.
@@ -227,7 +231,7 @@ Upon successful completion, the system generates:
 1. Typically the Institution Relationship Manager submits this application, though any of the institution's four Group C roles may act on its behalf — the platform does not gate this by role or a provisioned scope; the acting user and their role are recorded in the audit trail. **Corrected 2026-08-14** — previously required "an authorized representative under a delegated permission scope"; permission scopes are retired module-wide, see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle). **Confirmed 2026-08-15** — `open-questions.md` A4 confirms this was never an A4 re-derivation contest; the rule already matched the unrestricted model.  
 2. The contract being cancelled must exist and be held by the institution.  
 3. Cancellation, return, and rejection decisions must carry documented reasoning.  
-4. Payment is required, with an e-receipt voucher issued as proof, before the cancellation is finalized.  
+4. Payment is required, with an e-receipt voucher issued as proof, after RERA's approval and before the cancellation is finalized.  
 5. Every application receives a unique application reference number.  
 6. All applications, approvals, payments, and notifications are permanently recorded in the audit trail.
 
