@@ -31,7 +31,7 @@ Services that the source material does not contain but the PRD or Nigerian law a
 | :---- | :---- | :---: | :---: | :---: | :---- |
 | **A** | Regulatory Authority & Governance | **0** | 8 | 6 | Not started — see gap below |
 | **B** | Real Estate Developers | 27 | 4 | 3 | UI complete (19 screens); 27/27 service flows drafted, unmerged (issue #33) |
-| **C** | Financial & Trust Institutions | 18 | 4 | 3 | 18 service-flow files written, 16 of them thin; no UI |
+| **C** | Financial & Trust Institutions | 18 | 4 | 3 | 18 service-flow files at full depth; 18 UI screens documented (13 in `ui/screens/`, 5 in `ui/screens-unified/`); the only fully round-tripped module so far — source → flows → UI, merged |
 | **D** | Real Estate Service Companies | 26 | 4 | 4 | Roles, services overview; no service flows |
 | **E+F** | Individual User | 41 | 6 | 4 | 43 service flows written; count reconciled; no UI |
 | **G** | Allied Professionals & Service Trustees | **0** | 4 | 3 | Roles documented; interfaces not written — see note below |
@@ -40,7 +40,7 @@ Services that the source material does not contain but the PRD or Nigerian law a
 
 Service counts are verified row by row against the master service table and reconcile exactly with the source workbook's own summary. The individual-user module's count now reconciles too — see Known Issues for how.
 
-**Pattern worth naming:** every module that has moved past roles/overview has done so unevenly. Group B has full UI and, as of an unmerged PR against issue #33, drafted service flows underneath it. Individual User has full service flows and no UI. Group C now has a file per service, at full depth. No module has both stages complete and merged yet.
+**Pattern worth naming, corrected 2026-08-15.** This section previously said "no module has both stages complete and merged yet." That's no longer true: **Group C is now the first module with both service flows and UI complete and merged** — 18 service-flow files at full depth, 18 UI screens, both reconciled against the unified-access and corrected-payment-model decisions. Group B still has full UI with drafted-but-unmerged flows underneath it; Individual User still has full flows and no UI at all. Group C is the house-style example the other modules should follow, not a third variant of "uneven progress."
 
 ---
 
@@ -149,13 +149,13 @@ The 41-to-43 relationship reconciles: ten tenant-dispute source rows are legitim
 
 ### Group C — Financial & Trust Institutions (18 services)
 
-Roles, services overview, and a payments document are complete. 23 open questions sent to the client are recorded in `modules/financial-trust-institutions/open-questions.md`; all 23 are now answered, with 0 requiring client data (see that document's Summary).
+Roles, services overview, payments, and the full UI package are complete. 24 open questions sent to the client are recorded in `modules/financial-trust-institutions/open-questions.md`; all 24 are now answered, with 0 requiring client data (see that document's Summary).
 
-**Status:** all 18 service-flow files now exist under `service-flows/`, but only Service #1 has substantive depth. The other seventeen average around 1 KB and record workflow, documents, fees, channel, output and SLA as "not specified in the available source material."
+**Status, fully corrected 2026-08-15.** All 18 service-flow files exist under `service-flows/`, **at full depth, not thin stubs.** This section previously claimed "only Service #1 has substantive depth... the other seventeen average around 1 KB and record workflow, documents, fees, channel, output and SLA as 'not specified in the available source material'" — that description is stale and was left uncorrected here even after the backfill it called for had actually happened. Every one of the 18 files carries genuinely sourced workflow, channel, output and SLA content traced to `RERAN_service_flows_v2.md` rows 28–45, alongside clearly marked proposed sections (required documents, business-rule inferences). The "Proposed Sequence" item below that once called this out as the top-priority next task is marked done, not pending.
 
-That characterisation is wrong for most of them. Rows 28–45 of the master service table carry a workflow sequence, channel, issued document and SLA for every one of the 18. Mortgage registration (row 30) alone specifies the four-step bank-to-department sequence, both channels, five possible output documents and a 20–25 minute SLA — none of which reached `service-03-mortgage-registration.md`.
+Beyond the flow-depth backfill, Group C has also had its access model (no role restricts who may act on a service, A4) and payment model (two payer/timing models, not a standing account, B1/B11) corrected throughout every service flow, `services-overview.md`, `payments.md`, `roles-and-responsibilities.md`, `navigation.md`, and the full 18-screen UI package. It is, as of 2026-08-15, the only module with both service flows and UI complete, merged, and internally consistent with each other — see "The Landscape" table above.
 
-**Corrected 2026-08-15** — this section previously listed "the Service #1/#2 role inconsistency" alongside fee settlement model and status vocabulary as a genuine open question still awaiting resolution. That's now stale: `open-questions.md` A4 resolves it directly, and more broadly than the #1/#2 framing implied — no service across all 18 is role-specific, not just #1 and #2. The genuine open questions remaining are narrower: SLA reading (A6) and the handful of service-specific items each service-flow file's own Open Questions section still carries (fee schedule amounts, which remain client data throughout). See Known Issues.
+**What's genuinely still open:** each service-flow file's own Open Questions section (mostly exact fee amounts, still client data) and #14/#18's field-layout classification in `ui/screens-unified/submit-application.md`, resolved by design judgement rather than sourced fact — see that document for the reasoning. Nothing module-wide remains open.
 
 ### Group G — Allied Professionals & Service Trustees (0 services)
 
@@ -169,13 +169,13 @@ Roles documented. See "The Group G Note" above for why this module has no servic
 
 > **Proposed** — sequencing is our recommendation, not a client requirement. Needs confirmation.
 
-**1. Group C flow backfill.** Smallest job on the list and it corrects a live inaccuracy: eighteen files currently assert the source is silent where it is not. Backfilling from rows 28–45 costs little and removes a misleading artefact from the repo.
+**1. ~~Group C flow backfill.~~ Done, as of 2026-08-15.** *(Previously: "Smallest job on the list and it corrects a live inaccuracy: eighteen files currently assert the source is silent where it is not." This has been completed — see the Group C profile above. Retained here, struck through, rather than deleted, so the sequence's original numbering and reasoning stay legible.)*
 
 **2. Group A.** Everything else terminates here, and its absence blocks every other module's flows from describing what happens after submission. Also the largest unknown, so learning its shape early de-risks the rest.
 
 **3. Group B service flows.** UI already exists; writing the flows underneath completes the module and corrects the inverted derivation chain. Also unblocks the B↔C escrow coupling.
 
-**4. Individual User UI.** The mirror image of #3 — flows exist, screens don't. Closing this and #3 leaves the project with two fully round-tripped modules (source → flows → UI) to use as the house style for everything after.
+**4. Individual User UI.** The mirror image of #3 — flows exist, screens don't. Closing this and #3 leaves the project with two fully round-tripped modules (source → flows → UI) to use as the house style for everything after. **Group C now already is one** (see the Landscape table) — Individual User closing this gap would make it the second, not the first.
 
 **5. Group H.** Cheap, high volume, mostly one repeated pattern. Good candidate for batch work once the patterns from A and B are established.
 
@@ -191,16 +191,16 @@ The proposed-services list runs alongside this sequence rather than inside it: i
 
 | Issue | Module | Status |
 | :---- | :---- | :---- |
-| 17 of 18 service flows are thin stubs that record source-available data as unspecified | Financial & Trust | Open — backfill from master table rows 28–45 |
+| ~~17 of 18 service flows are thin stubs that record source-available data as unspecified~~ | Financial & Trust | **Resolved.** Backfilled from master table rows 28–45; all 18 files are at full depth. See the Group C profile above. |
 | UI documented before service flows | Real Estate Developer | Drafted, unmerged — 27/27 service flows written underneath the existing UI (issue #33); merge pending review |
 | No UI documented at all | Individual User | Open — the mirror-image gap of Real Estate Developer's |
-| 23 client questions outstanding | Financial & Trust | Sent; all 23 now answered per `open-questions.md`, though this table row has not been individually re-verified as part of this edit — flagged rather than fixed, see the Group C profile above for the up-to-date status |
+| ~~23 client questions outstanding~~ | Financial & Trust | **Resolved.** All 24 (23 original + B11, added 2026-08-15) are answered, 0 needing client data — see `open-questions.md`'s Summary directly rather than this table row. |
 | No application status vocabulary exists platform-wide | All | Proposed for Group C; needs a platform decision |
 | Root `KnowledgeBase/README.md` lists seven projects; only RERAN is active | Project | Open |
 | `RERAN/README.md` has four stub sections ("Modules", "Tech Stack", "Stakeholders", "Entry Points" all say "To be completed") despite this roadmap holding most of that detail already | Project | Open |
 | The service catalogue carries instruments from its source jurisdiction that have no Nigerian equivalent (usufruct, Taqeemi certificate) while omitting ones that are mandatory here (Governor's Consent, C-of-O) | Project | Open — see proposed-services.md |
 
-**Resolved since this roadmap was first written:** the 43 individual-user service/feature docs have been moved into `service-flows/`; the 295 KB Group B UI source file has been fully split into 19 screen files plus consolidated component/validation/status-badge docs and retired; the individual-user 39-vs-41 count discrepancy has been audited and closed, with four genuinely undocumented services added and a `source_type` field introduced to distinguish sourced from extrapolated services; all 18 Group C service-flow files created; Group C's 23 open questions fully answered (0 needing client data); Group C's payment model and role-specific ownership both corrected per client decision.
+**Resolved since this roadmap was first written:** the 43 individual-user service/feature docs have been moved into `service-flows/`; the 295 KB Group B UI source file has been fully split into 19 screen files plus consolidated component/validation/status-badge docs and retired; the individual-user 39-vs-41 count discrepancy has been audited and closed, with four genuinely undocumented services added and a `source_type` field introduced to distinguish sourced from extrapolated services; all 18 Group C service-flow files created *and backfilled to full depth*; Group C's 24 open questions fully answered (0 needing client data); Group C's payment model and role-specific ownership both corrected per client decision; **Group C's full 18-screen UI package written, reconciled against both corrections, and merged (2026-08-15)** — the first module with service flows and UI both complete.
 
 ---
 
@@ -210,7 +210,7 @@ The proposed-services list runs alongside this sequence rather than inside it: i
 
 **The Trustee Centre channel is pervasive.** A large share of services across E, F and C list Real Estate Registration Trustee Centres as a channel, sometimes as the only channel. Whether those services gain online equivalents is a scope decision that affects several modules at once.
 
-**Corrected 2026-08-14 — this platform-wide claim was never actually true.** It was sourced from Group C's `payments.md` pipeline definition and generalized here without checking the other modules against it. Individual User's Service #8 (`Payment must be completed before the application proceeds for regulatory review`) and Real Estate Developer's Service #1 (identical pattern) both pay **upfront, before submission** — the opposite of what this observation claimed. Group C's own payment model has since been corrected (2026-08-14 client decision, see `modules/financial-trust-institutions/open-questions.md` B1): most of its 18 services now pay upfront too, matching the rest of the platform. The one genuine exception left anywhere on the platform is Group C Services #1–#2 (institutional approval/renewal, cancellation), which pay **after** RERA's decision — sourced directly from source row 28, unrelated to the payment-model correction. **The actual pattern, as far as verified:** most fee-bearing services pay upfront, before submission; Group C's institutional-approval services are a documented, sourced exception. This is the opposite of what was previously claimed here, not a refinement of it.
+**Corrected 2026-08-14 — this platform-wide claim was never actually true.** It was sourced from Group C's `payments.md` pipeline definition and generalized here without checking the other modules against it. Individual User's Service #8 (`Payment must be completed before the application proceeds for regulatory review`) and Real Estate Developer's Service #1 (identical pattern) both pay **upfront, before submission** — the opposite of what this observation claimed. Group C's own payment model has since been corrected (2026-08-14 client decision, see `modules/financial-trust-institutions/open-questions.md` B1): most of its 18 services now pay upfront too, matching the rest of the platform. **Corrected further 2026-08-15** — this passage previously named Group C Services #1–#2 as the platform's one remaining post-approval-payment exception. That's no longer accurate either: `open-questions.md` B11 (confirmed 2026-08-15) moved Service #1 to upfront payment as well, and confirmed Service #2 carries no fee at all. **The actual pattern, fully verified as of 2026-08-15: every fee-bearing service checked across the platform pays upfront, before submission or at the point of service. No documented exception remains anywhere.**
 
 **Three groups share the same four application-management features.** Submit, Track, Respond to Information Request, Resubmit. Documented for Individual User, proposed for Group C, and certainly needed by B and D. These should be defined once at platform level.
 
