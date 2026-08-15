@@ -19,9 +19,11 @@ tags:
 
 The detail view of a single, already-submitted fund release request, opened from Escrow Details' Fund Releases tab or directly from Escrow Management. The source documents a single variant, under the Escrow Liaison heading, with no second variant to reconcile. It is reachable and actionable by all four roles.
 
+> **Corrected 2026-08-15, second pass.** Same pattern as [company-profile.md](company-profile.md) and [fund-release-request.md](fund-release-request.md): this screen's Access line already said "all four roles," but Purpose still described the workspace as provided "for the Escrow Liaison," and several actions were qualified with an unspecified "when permitted." Fixed below.
+
 ## Purpose
 
-Provide the Escrow Liaison with a complete operational workspace to review and manage an existing fund release request throughout its approval lifecycle. The liaison can monitor review progress, update eligible information when permitted, upload revised documents, respond to queries from the Financial Institution or RERA, review communication history, and track every activity related to the request.
+Give any developer user a complete operational workspace to review and manage an existing fund release request throughout its approval lifecycle. Any user can monitor review progress, update eligible information while the request is editable, upload revised documents, respond to queries from the Financial Institution or RERA, review communication history, and track every activity related to the request — typically the Escrow Liaison in practice, but not exclusively.
 
 ## Layout
 
@@ -200,7 +202,7 @@ Displays every document submitted with the release request.
 
 * View  
 * Download  
-* Upload Revised Version *(when permitted)*
+* Upload Revised Version *(while the request is in an editable status — see Notes)*
 
 ### Tab 5 — RERA / Bank Queries
 
@@ -242,8 +244,10 @@ Each message includes:
 
 #### **Actions**
 
-* Reply *(when permitted)*  
+* Reply
 * View Attachment
+
+**Corrected 2026-08-15, second pass** — Reply previously read "Reply (when permitted)." Available to any user on any message where a reply is the applicable next action, governed by the message's own state, not by who is viewing.
 
 Messages are displayed in chronological conversation format.
 
@@ -287,7 +291,7 @@ See [components.md](../components.md) for definitions of every component used on
 
 ## Validation
 
-The source material has no explicit Validation Summary section for this screen, unlike [fund-release-request.md](fund-release-request.md) (the creation form). Edits remain governed by status: "A user may update request information and upload revised documents only while the request is in an editable status (such as Draft, Returned, or Information Requested). Once the request reaches Approved or Funds Released, it becomes read-only." — see Notes below.
+The source material has no explicit Validation Summary section for this screen, unlike [fund-release-request.md](fund-release-request.md) (the creation form). Edits remain governed by status: any user may update request information and upload revised documents only while the request is in an editable status (Draft, Returned, or Information Requested). Once the request reaches Approved or Funds Released, it becomes read-only — a lifecycle rule, not a permission distinction between users.
 
 ## User Flow
 
@@ -307,7 +311,7 @@ Review approval progress and current status
 ↓  
 Respond to RERA or Financial Institution queries (if requested)  
 ↓  
-Upload revised supporting documents or update request information (when permitted)  
+Upload revised supporting documents or update request information (while editable)  
 ↓  
 Resubmit the response (if required)  
 ↓  
@@ -315,8 +319,8 @@ Track the approval workflow until the funds are released
 
 ## Notes
 
-* This screen serves as the **operational detail page** for a single fund release request and is accessed from the **Fund Releases** tab within **Escrow Details** or directly from **Escrow Management**.  
-* Any user may update request information and upload revised documents **only while the request is in an editable status** (such as **Draft**, **Returned**, or **Information Requested**). Once the request reaches **Approved** or **Funds Released**, it becomes **read-only**.  
+* This screen serves as the **operational detail page** for a single fund release request and is accessed from the **Fund Releases** tab within **Escrow Details** or directly from **Escrow Management**. Reachable and actionable by any developer user.
+* Any user may update request information and upload revised documents **only while the request is in an editable status** (such as **Draft**, **Returned**, or **Information Requested**). Once the request reaches **Approved** or **Funds Released**, it becomes **read-only** — a status/lifecycle rule that applies identically to every user, not a permission tier. **Corrected 2026-08-15, second pass** — clarified after the "(when permitted)" language elsewhere on this screen was found to imply an access gate that doesn't exist in this module.
 * All approval decisions by the **Financial Institution** and **RERA** are displayed as status updates and cannot be modified by the developer.  
 * Every response to queries, document upload, status change, and review action is automatically recorded in the **Activity Timeline** to maintain a complete audit trail for regulatory compliance.  
 * The system validates that any revised request continues to comply with the approved milestone, eligible release amount, and supporting document requirements before allowing a response or resubmission.  
