@@ -119,7 +119,7 @@ The source's responsible-role column (naming the Mortgage Officer for 15 of the 
 * Services Catalog
 * Applications
 * Documents
-* Payments — note: Group C runs three payer/timing models, not one (see `payments.md`, corrected 2026-08-14): **Upfront gateway payment** for Services #3–#11 (paid by the institution via the shared platform gateway, before the application is lodged — corrected from the retired Institution Account Debit model, B1), **Customer Payment at Counter** for Services #12–#18 (paid by the customer at the point of service, sourced, unaffected by this correction), and **Institution Fee Payment** for Services #1–#2 (paid by the institution after RERA's approval decision, sourced, unaffected by this correction)
+* Payments — note: Group C runs two payer/timing models, not one (see `payments.md`, corrected 2026-08-15): **Upfront gateway payment** for Services #1 and #3–#11 (paid by the institution via the shared platform gateway, before the application is lodged — #3–#11 corrected 2026-08-14, #1 corrected 2026-08-15, both retiring earlier post-approval models) and **Customer Payment at Counter** for Services #12–#18 (paid by the customer at the point of service, sourced, unaffected by either correction). **Service #2 carries no fee at all** (confirmed 2026-08-15, `open-questions.md` B11) — it is not a third model, simply the absence of a payment step. *(Corrected 2026-08-15 — previously listed three models, including "Institution Fee Payment" for Services #1–#2, paid after RERA's decision; that model is retired, see `payments.md`.)*
 * Notifications
 * Institution Profile
 * Help & Support
@@ -146,17 +146,17 @@ The source's responsible-role column (naming the Mortgage Officer for 15 of the 
 | Under Review | With the regulator | Compliance & Escrow Auditor |
 | Information Requested | RERA has raised a query | Compliance & Escrow Auditor |
 | Returned for Correction | Sent back to the applicant | Compliance & Escrow Auditor |
-| Approved — Awaiting Payment *(Group C: Services #1–#2 only — see note below)* | Passed audit; fee not yet settled | Compliance & Escrow Auditor |
+| Approved — Awaiting Payment *(does not occur for any Group C service — see note below)* | Passed audit; fee not yet settled | Compliance & Escrow Auditor |
 | Rejected | Refused with documented reason | Compliance & Escrow Auditor |
 | Completed | Settled and output document issued | Platform |
 | Withdrawn | Abandoned by the applicant | Applicant |
-| Expired *(Group C: unclear if this still applies to any service — see note below)* | Approved but left unpaid for 30 calendar days (B3) | Platform |
+| Expired *(does not occur for any Group C service — see note below)* | Approved but left unpaid for 30 calendar days (B3) | Platform |
 
 **Corrected 2026-08-15** — the "Set by" column for `Draft` previously read "Mortgage Officer / Institution Relationship Manager / Trustee Centre Operator," naming specific roles as if only they could start an application. Per the corrected A4, any of the institution's four Group C roles may do this; Trustee Centre Operator remains correct as the assisted-mode channel actor, unrelated to this correction.
 
 `Pending Internal Certification` and `Returned by Certifier` apply only to services with a sourced two-gate pattern (Services #3–#11, the mortgage and finance-lease lifecycle). Services #1, #2, and #12–#18 do not carry them, since no internal institutional certification step is described in source for those rows — see each service flow's Application Status Flow section.
 
-**Corrected 2026-08-14.** `Approved — Awaiting Payment` now applies only to Services #1–#2 within Group C: the mortgage/finance-lease lifecycle (#3–#11) pays upfront, before lodging, so nothing is ever approved while still awaiting payment (`open-questions.md` B1); the title & ownership transactions (#12–#18) pay at the point of service, same effect. `Expired`, whose only sourced meaning here was B3's "approved but unregistered" reasoning — written for a registered-title context (mortgages) — does not extend naturally to Services #1–#2's institutional approval/renewal context either. **B3 itself was not revisited by this correction** and remains as written in `open-questions.md`. Whether Services #1–#2 need their own expiry concept for an approved-but-unpaid trustee/auditor status is left open, not resolved here.
+**Corrected 2026-08-15 — `Approved — Awaiting Payment` and `Expired` no longer apply to any Group C service, including #1–#2.** This section previously scoped `Approved — Awaiting Payment` to "Services #1–#2 only," on the reasoning that #3–#11 paid upfront (2026-08-14 correction) while #1–#2 still paid after RERA's decision — the last remaining case where an approval could sit awaiting payment. `open-questions.md` B11 (confirmed 2026-08-15) closes that last case: Service #1 now pays upfront too, and Service #2 carries no fee at all, so no Group C service can ever be approved while payment is still pending. `Expired`, whose only sourced meaning here was B3's "approved but unregistered" reasoning, was already noted as not extending naturally to #1–#2's institutional context even under the old model; it now has no live scenario anywhere in Group C. **B3 itself was not revisited by either correction** and remains as written in `open-questions.md`.
 
 ## Channels
 
@@ -176,4 +176,4 @@ Five items remain open in this section, down from seven — A4 (service ownershi
 2. Do the four Application Management features apply to Group C as they do to individual users? (C3 — proposed answer: yes, unchanged.)
 3. Are the five institution-specific features (including the two added by C4 — Payment History, Staff Records) correct, and is anything still missing?
 4. Is the proposed status vocabulary (platform core + Group C extension, D1) acceptable, and is the specific status list correct?
-5. Fee settlement: is the corrected three-way payer/timing split (Upfront Gateway Payment / Customer Payment at Counter / Institution Fee Payment — see `payments.md`) correct for all 18 services? **Corrected 2026-08-14** — the old version of this question asked whether finance-lease services (#8–#11) belonged in the account-debit group despite reading like a counter payment; that tension is resolved by the correction itself, since the account-debit model no longer exists for any service (B1) and #8–#11's point-of-sale-reading workflow text turns out to have been the more accurate signal all along — see each service flow's Open Questions section.
+5. Fee settlement: is the corrected two-way payer/timing split (Upfront Gateway Payment / Customer Payment at Counter, with Service #2 fee-free — see `payments.md`) correct for all 18 services? **Corrected 2026-08-15** — this item previously described a three-way split, including Institution Fee Payment for Services #1–#2; that model is retired per `open-questions.md` B11.
