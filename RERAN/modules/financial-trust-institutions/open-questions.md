@@ -3,7 +3,7 @@ project: RERAN
 module: financial-trust-institutions
 type: decision
 status: draft
-updated: 2026-08-14
+updated: 2026-08-15
 contains_proposals: true
 derived_from:
   - "RERAN/modules/financial-trust-institutions/roles-and-responsibilities.md"
@@ -24,6 +24,8 @@ tags:
 Twenty-three questions arose from documenting the Financial & Trust Institutions module. Rather than hold the module until the client responds, each now carries a **proposed answer** we will build against unless told otherwise.
 
 **2026-08-14 update.** The payment questions (B1, B2, B4, B5, B6) were corrected following a client decision confirmed via discussion (not a written source document): Group C runs no standing account. Payment is per-transaction, upfront, via a shared platform-wide gateway, with RERA setting the fee per service directly. B9 and B10, both built entirely on the now-retired standing-account mechanism, are superseded rather than reworked. See each answer below for what changed and why the earlier reasoning is kept rather than deleted.
+
+**2026-08-15 update.** A4 is corrected: ownership is not role-specific at all, for any of the 18 services — a client decision, not a re-derivation. A3, B7, and B8 are confirmed by the client, matching their existing proposed answers. See each answer below.
 
 **How to read this:** each answer states a recommendation, the reasoning behind it, how confident we are, and what breaks if it is wrong. Confidence is:
 
@@ -49,6 +51,8 @@ A1 and D2 dissolve into a single mechanism, so it is stated once here.
 Registration Flow 5 already establishes the machinery: delegated staff are invited by the company's authorised representative, who "confirms the staff member's permission scope (e.g. escrow filing only)" before activation. A maker-checker gate is that same mechanism with a second scope — *certify* alongside *file*.
 
 This means the platform needs no fifth Group C role, and no separate two-gate model per group. It needs one corporate-account capability — configurable maker-checker — that Groups B, C and D all switch on according to their own governance.
+
+> **Superseded 2026-08-14.** The permission-scope mechanism described in this section is retired module-wide. Certification is now an unrestricted action any of the institution's four Group C roles may perform, attributed by role in the audit trail — see [navigation.md#audit-trail-principle](navigation.md#audit-trail-principle). Kept here for the record, per A1 and D2 below.
 
 Everything below follows from that.
 
@@ -82,32 +86,38 @@ So: an Escrow Request Queue with request detail, document upload, and certify/re
 
 ### A3. Is milestone certification an upload or a structured assessment?
 
-**Structured assessment, with supporting documents attached.**
+**Confirmed 2026-08-15 (client decision) — structured assessment, with supporting documents attached.**
 
 FR-04 requires "mandatory documented reasoning" on regulatory decisions, and KPI 8 sets a 95% data-integrity target measured by automated validation. A free-form certification letter can be neither validated nor aggregated. Proposed fields: milestone reference, percentage complete, valuation of works executed, amount certified, variance against the previous certificate, certifier declaration, attachments.
 
-**Confidence:** Medium — a design judgement, not an inference.
+**Confidence:** Confirmed (client decision, 2026-08-15). Originally a Medium-confidence design judgement, now confirmed directly rather than left as an inference.
 
-### A4. Who owns Services #1 and #2?
+### A4. Who owns Services #1–#18?
 
-**The Institution Relationship Manager. And the ownership problem is wider than these two services.**
+**Confirmed 2026-08-15 (client decision) — no service is role-specific at all. Any of the institution's four Group C roles (Mortgage Officer, Institution Relationship Manager, Account Trustee, Auditing Bureau Officer) may act on any of the 18 services.**
 
-The role descriptions are the more considered source: the IRM "maintains registration, renews trustee/auditor approvals, provisions users." That is exactly what Services #1 and #2 do. Registration Flow 4 reinforces it — the IRM is the company-level representative, and approval of the institution's own standing is a company-level act.
+This resolves, rather than re-derives, the ownership question the source table raised. The source's responsible-role column is still unreliable as a per-service assignment — it names the Mortgage Officer for 15 of the 18 rows (30–44), including heirs' sale, company share sales, split ownership, and title-deed issuance, transactions with no lending component that a bank's mortgage desk would not plausibly run alone. That observation, which motivated the per-service re-derivation below, remains accurate as a critique of the source. What's changed is the conclusion: rather than building a corrected per-role assignment table, the client has confirmed that Group C simply does not assign services to roles at all. Role is retained solely for audit-trail attribution — who performed which action — consistent with the access-model correction ([navigation.md#audit-trail-principle](navigation.md#audit-trail-principle)), not for gating who may initiate, own, or act on a service.
 
-The service table's responsible-role column looks like a group-level default rather than a per-service assignment: it gives the Mortgage Officer seventeen of eighteen services, including heirs' sale procedures, company share sales, title-deed issuance and split ownership. Those are Trustee Centre counter transactions with no lending component. A mortgage desk does not run them.
+**Trustee Centre Operator (Group G) is not part of this answer.** It is a channel/assisted-mode role, not a Group C role — a Trustee Centre operator may still act on an institution's or customer's behalf in assisted mode, exactly as C2 describes, but that is a channel question, not an ownership one, and it is unaffected by this correction.
 
-**Recommendation:** re-derive ownership per service rather than accepting the column. Proposed:
+> **Superseded reasoning (pre-2026-08-15).** The role descriptions were the more considered source: the IRM "maintains registration, renews trustee/auditor approvals, provisions users." That is exactly what Services #1 and #2 do. Registration Flow 4 reinforces it — the IRM is the company-level representative, and approval of the institution's own standing is a company-level act.
+>
+> The service table's responsible-role column looked like a group-level default rather than a per-service assignment: it gives the Mortgage Officer seventeen of eighteen services, including heirs' sale procedures, company share sales, title-deed issuance and split ownership. Those are Trustee Centre counter transactions with no lending component. A mortgage desk does not run them.
+>
+> **Recommendation was:** re-derive ownership per service rather than accepting the column. Proposed:
+>
+> | Services | Proposed owner |
+> | :---- | :---- |
+> | #1, #2 — institutional approval | Institution Relationship Manager |
+> | #3–#7 — mortgage lifecycle | Mortgage Officer |
+> | #8–#11 — finance lease lifecycle | Mortgage Officer |
+> | #12–#18 — title and ownership transactions | Mortgage Officer where bank-originated; otherwise executed by a Trustee Centre operator on the customer's behalf (Group G) |
+>
+> **Confidence was High for #1/#2. Medium for the wider re-derivation** — it contradicted a source column, and that was flagged to be put in front of the client, which is how this question reached the 2026-08-15 decision above.
 
-| Services | Proposed owner |
-| :---- | :---- |
-| #1, #2 — institutional approval | Institution Relationship Manager |
-| #3–#7 — mortgage lifecycle | Mortgage Officer |
-| #8–#11 — finance lease lifecycle | Mortgage Officer |
-| #12–#18 — title and ownership transactions | Mortgage Officer where bank-originated; otherwise executed by a Trustee Centre operator on the customer's behalf (Group G) |
+**Confidence:** Confirmed (client decision, 2026-08-15).
 
-**Confidence:** High for #1/#2. Medium for the wider re-derivation — it contradicts a source column, and that should be visible to the client.
-
-**Affects:** the Service Ownership table in `services-overview.md`, which currently reports Mortgage Officer 17 / IRM 1.
+**Affects:** `services-overview.md`'s Service Ownership section (removed entirely, not reworked); Section 4 (Who Can Apply) and Business Rule 1 of Services #3–#11 and #12–#18; `service-01` and `service-02`'s ownership framing; `roles-and-responsibilities.md`'s Role Summary table.
 
 ### A5. Does the IRM get an institution-wide view?
 
@@ -125,7 +135,7 @@ The escrow service rows carry two numbers — "waiting time 20 business hours; s
 
 Where a row gives only one number, propose 24 business hours with escalation to the Compliance & Escrow Auditor on breach.
 
-**Confidence:** Medium — the two-number interpretation is an inference and should be put to the client explicitly, because every escrow SLA in Group B depends on it.
+**Confidence:** Medium — the two-number interpretation is an inference and should be put to the client explicitly, because every escrow SLA in Group B depends on it. **Still open** — a 2026-08-15 client clarification confirmed that Account Trustee access is not role-restricted (consistent with A4), but did not resolve this specific SLA-reading question, which remains genuinely open pending client confirmation.
 
 ### A7. Does the compliance report follow a RERA template?
 
@@ -210,17 +220,19 @@ The earlier answer's "ad valorem on the secured amount" reasoning blurred this b
 
 ### B7. VAT applicability
 
-**Applied by default to all fee-bearing services, configurable per service code.** The off-plan workflow states that "seller and purchaser fees plus VAT are computed automatically", and row 11 concerns a cap on "administrative, marketing and VAT expenses". VAT is clearly in the model; exemptions, if any, are exceptions to be configured.
+**Confirmed 2026-08-15 (client decision) — VAT applies to all 18 services. No exemptions.**
 
-**Confidence:** Medium-high.
+The off-plan workflow states that "seller and purchaser fees plus VAT are computed automatically", and row 11 concerns a cap on "administrative, marketing and VAT expenses". VAT is clearly in the model, and the client has now confirmed it applies universally across the service catalogue rather than being configurable per service or subject to exemption.
+
+**Confidence:** Confirmed (client decision, 2026-08-15). Previously Medium-high, proposed as "applied by default, configurable per service code, with exemptions as exceptions" — the exemption possibility is now ruled out rather than left configurable.
 
 ### B8. Institutional approval fees — annual or per application?
 
-**Per approval term, with a two-year validity and a renewal fee at renewal.**
+**Confirmed 2026-08-15 (client decision) — per approval term, renewing, matching the existing proposal.**
 
-Service #1 is "approval **/ renewal**", which is only meaningful if approvals expire. So a validity period exists and must be stated. Two years is proposed; the platform should hold it as configuration and drive the Approval Expiry Tracking feature from it.
+Service #1 is "approval **/ renewal**", which is only meaningful if approvals expire. The client has confirmed the renewing structure directly. The two-year validity period itself remains a proposal, not a sourced or separately confirmed figure — the platform should hold it as configuration and drive the Approval Expiry Tracking feature from it.
 
-**Confidence:** Medium-high on the structure, proposal on the duration.
+**Confidence:** Confirmed on the renewing structure (client decision, 2026-08-15). The two-year duration specifically remains a proposal.
 
 ### B9. Are "fee balance", "payment receipt" and "e-receipt voucher" the same thing?
 
@@ -270,7 +282,7 @@ This is also the only reading compatible with the PRD. US-14 requires diaspora u
 
 | Feature | Status |
 | :---- | :---- |
-| Internal Certification Queue | Keep — now understood as a maker-checker scope view (A1) |
+| Internal Certification Queue | Keep — now understood as an unrestricted action any of the institution's four roles may perform (A1), not a maker-checker scope view |
 | Escrow Request Queue | Keep — confirmed sourced (A2) |
 | Approval Expiry Tracking | Keep — now driven by a defined validity period (B8) |
 | **Payment History** | **Add** — per-transaction payment records: receipts, amounts, service references, status (B1) |
@@ -323,7 +335,7 @@ Build it once, configurable per corporate account, with the scope set at the poi
 
 ## Summary
 
-**Updated 2026-08-14** — B5 moved from "needs client data" to "answered," per the payment-model correction (B1).
+**Updated 2026-08-15** — A4 moved from "Medium confidence, contradicts source, flagged for client" to "confirmed, no service is role-specific"; A3, B7, B8 moved from proposed to confirmed. B5 moved from "needs client data" to "answered" on 2026-08-14, per the payment-model correction (B1).
 
 | Area | Questions | Answered | Needs client data |
 | :---- | :---: | :---: | :---: |
@@ -337,17 +349,18 @@ Build it once, configurable per corporate account, with the scope set at the poi
 
 | Answer | What it changes |
 | :---- | :---- |
-| **A4** — ownership re-derived per service | `services-overview.md` Service Ownership table |
+| **A4** — confirmed 2026-08-15: no service is role-specific | `services-overview.md`'s Service Ownership section (removed entirely); Section 4 and Business Rule 1 of Services #3–#18; `roles-and-responsibilities.md`'s Role Summary table |
 | **B1** — corrected 2026-08-14: no standing account, pay-per-transaction upfront via a shared gateway | `payments.md` (near-total rewrite); every mortgage/finance-lease service flow's Service Fee, Payment Required and Output sections; `services-overview.md`'s status vocabulary and features list; `navigation.md` and `role-workflows.md`'s settlement references; `module-roadmap.md`'s platform-wide payment-pipeline claim (see that file's own note on why) |
 | **C2** — counter is an assisted mode | Every Group C service flow's channel section; reverses a prior assumption |
 
 B9 and B10 are not listed separately above — both are superseded by the corrected B1 rather than independently reworked; see their entries for what that means for `payments.md`.
 
-### The two to put in front of the client anyway
+### The one to put in front of the client anyway
 
 Not because we lack an answer, but because the answer costs money, contradicts the source, or rests on an assumption worth surfacing:
 
-1. **A4** — our proposed ownership contradicts a column in the source workbook.
-2. **A6** — the waiting-time / delivery-time reading sets the SLA for every escrow service in Group B, not just Group C.
+1. **A6** — the waiting-time / delivery-time reading sets the SLA for every escrow service in Group B, not just Group C. Still genuinely open as of 2026-08-15 — a related clarification confirmed Account Trustee access is unrestricted (A4), but did not resolve this specific SLA-reading question.
+
+**A4 is no longer on this list** — resolved by client decision 2026-08-15, not merely re-derived; see above.
 
 **One more, downgraded from "put in front of the client" to "flagged for design":** B2's claim that the shared payment gateway reuses individual-user's wallet primitive (P-22) doesn't survive a check against P-22's actual description, which is itself balance-based — the opposite of Group C's now-confirmed no-standing-account model. Worth a decision on whether the gateway integration is genuinely shared build, but this is an internal design question, not something requiring the client's input the way A4 and A6 do.
