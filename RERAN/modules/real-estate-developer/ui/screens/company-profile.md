@@ -17,11 +17,13 @@ tags:
 
 **Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
 
-The organization's master profile: corporate information, RERA registration, authorized representatives, office locations, banking/escrow information, company documents, and settings. Documented for the Developer Principal / Director only — no other role has a version of this screen in the source material.
+The organization's master profile: corporate information, RERA registration, authorized representatives, office locations, banking/escrow information, company documents, and settings. Only one design of this screen exists in the source material — unlike the fifteen multi-variant screens elsewhere in this module, there was never a second version to merge, so this file needed no rebuild.
+
+> **Corrected 2026-08-15, second pass.** This file's own Access line already said "all four roles," but its Purpose, Notes, and Section 10 still described the screen as though it belonged to the Developer Principal / Director specifically, including a literal leftover permission gate ("Only users with appropriate permissions can modify these settings") that the earlier access-model correction pass evidently missed — likely because this screen had no role variant to merge, and so wasn't touched by the same pass that removed gating language from the fifteen screens that did. Fixed throughout below.
 
 ## Purpose
 
-Provide the Developer Principal / Director with a centralized view of the organization's corporate information, regulatory registrations, licenses, office locations, authorized representatives, banking information, and company documents. This page acts as the master profile for the developer organization.
+Give any developer user a centralized view of the organization's corporate information, regulatory registrations, licenses, office locations, authorized representatives, banking information, and company documents. This page is the master profile for the developer organization, and any user may view or edit it.
 
 ## Layout
 
@@ -250,7 +252,9 @@ Displays organization configuration.
 * Report Delivery Preference  
 * Default Currency
 
-Only users with appropriate permissions can modify these settings.
+Any of the four roles may modify these settings — there is no permission gate on this section, the same as every other section on this screen.
+
+**Corrected 2026-08-15, second pass** — previously read "Only users with appropriate permissions can modify these settings," a leftover permission-scope statement inconsistent with this screen's own Access line and with the module's unified-access model. Removed rather than reworded, since there is no permission concept left for it to refer to.
 
 ### Section 11 — Audit Information
 
@@ -286,7 +290,7 @@ See [components.md](../components.md) for definitions of every component used on
 
 ## Validation
 
-The source material has no explicit Validation Summary section for this screen. Section 10 — Organization Settings notes that "Only users with appropriate permissions can modify these settings," but no automated pre-submission validation panel is described, unlike the form screens elsewhere in this module.
+The source material has no explicit Validation Summary section for this screen — no automated pre-submission validation panel is described, unlike the form screens elsewhere in this module.
 
 ## User Flow
 
@@ -308,8 +312,8 @@ Company Profile
 
 ## Notes
 
-* This is the **administrative profile page** for the **Developer Principal / Director**.  
-* It consolidates all corporate, regulatory, financial, and organizational information into a single interface.  
-* Sensitive financial information (such as bank account numbers) is partially masked and displayed only to authorized users.  
-* Changes to company information should be captured in the audit trail to maintain regulatory accountability.  
+* This is the organization's **master profile page**, reachable and editable by any developer user — not a Principal-only screen. **Corrected 2026-08-15, second pass** — previously described as "the administrative profile page for the Developer Principal / Director," which contradicted this file's own Access line.
+* It consolidates all corporate, regulatory, financial, and organizational information into a single interface.
+* Sensitive financial information (such as bank account numbers) is partially masked for every user — this is a display convention protecting the data itself, not a permission distinction between users. **Corrected 2026-08-15, second pass** — previously "displayed only to authorized users," language that implied a permission tier that doesn't exist in this module.
+* Changes to company information are captured in the audit trail, recording the acting user and the role they held at the time, to maintain regulatory accountability.
 * This page serves as the authoritative source of organization-level information used throughout the RERA platform.
