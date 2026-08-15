@@ -4,7 +4,7 @@ module: individual-user
 type: service-flow
 status: current
 source_type: extrapolated
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -30,7 +30,7 @@ Enable an authorized representative to carry out approved property-related servi
 
 ## 3. Description
 
-The service allows an authorized representative to select a registered property owner they represent and perform eligible property-related transactions within the permissions granted by the registered Power of Attorney. Before any transaction is initiated, the system validates the authorization, confirms that the Power of Attorney is active, and verifies that the requested service falls within the approved scope of authority.
+The service allows an authorized representative to select a registered property owner they represent and perform eligible property-related transactions within the permissions granted by the registered Power of Attorney. Before any transaction is initiated, the system validates the authorization, confirms that the Power of Attorney is active, and verifies that the requested service falls within the approved scope of authority. **This is a routing service, not an independent transaction type** — corrected 2026-08-15. Once authorization and scope are validated, the representative performs whichever underlying service they've selected (#4–#35), and that service's own fields, documents, fee status, and payment timing apply exactly as they would for the property owner acting directly. #30 doesn't have its own fee schedule or payment rule; it inherits the selected service's.
 
 ## 4. Who Can Apply
 
@@ -68,34 +68,37 @@ The service allows an authorized representative to select a registered property 
 * Purpose of Request  
 * Additional Remarks (Optional)
 
+**The fields above cover only the routing step** (which owner, which property, which service). Once a service is selected, its own Required Information section applies in full — this section does not duplicate all 41 possible field sets.
+
 ## 7. Required Documents
 
-Depending on the requested service:
-
-* Registered Power of Attorney  
-* Government-issued Identification  
-* Supporting Legal Documents  
-* Other supporting documents required for the selected service
+* Registered Power of Attorney (required for every use of this service, regardless of which underlying service is selected)
+* Government-issued Identification
+* **Plus the selected service's own Required Documents list in full** — this section previously said only "supporting legal documents... depending on the requested service," which understated how directly the underlying service's own document list applies.
 
 ## 8. Service Fee
 
-Applicable according to the RERAN fee schedule for the selected service.
+**Determined entirely by the selected service — #30 itself has no independent fee.** Corrected 2026-08-15: this section previously said "applicable according to the RERAN fee schedule for the selected service," which was directionally right but not reflected anywhere else in this file. See `payments.md` for the full per-service fee and timing table; #30 must show whichever entry applies to the service actually selected, including the five confirmed no-fee services (#17, #18, #33, #7's Owner/Entity-Amendment path) and #40/#42's unspecified status.
 
 ## 9. Payment Required
 
-**Yes**
+**Depends entirely on the selected service — not a fixed "yes."**
 
-Payment must be completed before the requested service is submitted, where applicable.
+Corrected 2026-08-15 — this section, along with Sections 12 and 13 below, previously described a single fixed sequence ("Review Service Fee → Complete Payment → Submit Application," always present) that didn't actually match this file's own Section 8 or Business Rule 6, both of which already hedged with "where applicable" / "where the selected service requires payment." The diagram and status flow are now brought into line with the qualifier the text already had:
+
+* If the selected service is upfront-paying (most of #4–#35), payment happens before submission, same as it would for the property owner acting directly.
+* If the selected service pays after some or all of RERAN's decision (#28, and the counter-channel path of #9–#16/#23/#24/#26), the wizard shows no payment step at all here either — the representative sees "Pay Now" on Application Details once the same status the property owner would see is reached.
+* If the selected service carries no fee (#17, #18, #33, #7's Owner/Entity-Amendment path), no payment step appears anywhere in this flow.
 
 ## 10. Processing Authority
 
 **RERAN**
 
-The requested service is processed by the appropriate RERAN department according to the applicable business process.
+The requested service is processed by the appropriate RERAN department according to the applicable business process — the same department that would process it if the property owner submitted it directly.
 
 ## 11. Expected Processing Time
 
-Depends on the selected service and RERAN's regulatory service standards.
+Depends on the selected service and RERAN's regulatory service standards — the same processing time the selected service's own file states, not a #30-specific figure.
 
 ## 12. Processing Workflow
 
@@ -113,27 +116,11 @@ Select Property
 ↓  
 Select Authorized Service  
 ↓  
-Enter Required Information  
-↓  
-Upload Supporting Documents (if required)  
-↓  
-Review Application  
-↓  
-Review Service Fee  
-↓  
-Complete Payment  
-↓  
-Submit Application  
-↓  
-Application Validation  
-↓  
-RERAN Review  
-↓  
-Application Approved  
-↓  
-Requested Service Completed  
+**[Wizard re-opens at the selected service's own field pattern and payment rule — see that service's own Processing Workflow section]**  
 ↓  
 Download Confirmation
+
+*(Corrected 2026-08-15 — this previously continued with a single fixed "Enter Required Information → Upload Documents → Review Application → Review Service Fee → Complete Payment → Submit Application" sequence applied uniformly regardless of which service was selected in the step above. That's inconsistent with treating "Select Authorized Service" as a genuine branch point: a representative acting on #17 (Grant Registration, no fee) should never see a "Review Service Fee" step, and one acting on #28 (Request Rental Valuation) should see payment appear only after RERAN's approval, not here at all. The fixed downstream sequence has been replaced with an explicit hand-off to the selected service's own pattern.)*
 
 ## 13. Application Status Flow
 
@@ -141,52 +128,25 @@ Draft
 ↓  
 Authorization Validation  
 ↓  
-Payment Pending  
-↓  
-Payment Successful  
-↓  
-Submitted  
-↓  
-Validation  
-↓  
-Under Review  
-↓  
-Information Requested  
-↓  
-Resubmitted  
-↓  
-Approved  
-↓  
-Completed
+**[Status flow from this point follows the selected service's own Application Status Flow exactly — see that service's own Section 13]**
 
-### Additional Statuses
+### Statuses Specific to This Routing Step
 
-* Authorization Failed  
-* Returned  
-* Rejected  
-* Withdrawn  
-* Cancelled
+* Authorization Failed
+* Authorization Validated
+
+*(Corrected 2026-08-15 — this previously listed one fixed status sequence, including "Payment Pending → Payment Successful" unconditionally positioned right after Authorization Validation, which assumes every selected service pays upfront. It doesn't: see Section 9 above. Only the two authorization-specific statuses genuinely belong to #30 itself; everything after Authorization Validation belongs to whichever service was selected.)*
 
 ## 14. Possible Outcomes
 
-* Service Successfully Completed  
-* Authorization Validated  
-* Authorization Rejected  
-* Additional Information Requested  
-* Application Returned  
-* Application Rejected  
-* Payment Failed  
-* Application Withdrawn
+* Authorization Validated
+* Authorization Rejected
+* **Whatever outcome the selected service itself defines** — see that service's own Possible Outcomes section.
 
 ## 15. Output
 
-Upon successful completion, the system generates:
-
-* Service Confirmation  
-* Updated Property Record (where applicable)  
-* Application Reference Number  
-* Transaction Receipt  
-* Payment Receipt
+* Authorization confirmation (from this routing step)
+* **The selected service's own Output** — see that service's own Output section. #30 does not generate its own separate output document beyond what the underlying service produces.
 
 ## 16. Related Services
 
@@ -206,14 +166,7 @@ Upon successful completion, the system generates:
 * Authorization Validation  
 * Select Property  
 * Select Service  
-* Service Details  
-* Document Upload  
-* Application Review  
-* Payment  
-* Payment Successful  
-* Application Submitted  
-* Application Details  
-* Service Confirmation
+* *(from here, the selected service's own UI screens — see that service's own file)*
 
 ## 18. API Requirements
 
@@ -222,13 +175,7 @@ Upon successful completion, the system generates:
 * Retrieve Authorized Properties  
 * Retrieve Available Services  
 * Validate Service Permission  
-* Upload Documents  
-* Calculate Service Fee  
-* Initiate Payment  
-* Verify Payment  
-* Submit Service Application  
-* Retrieve Application Status  
-* Generate Service Confirmation
+* *(plus whichever API calls the selected service itself requires — see that service's own file)*
 
 ## 19. Database Entities
 
@@ -239,24 +186,19 @@ Upon successful completion, the system generates:
 * Authorized Representative  
 * Service Request  
 * Application  
-* Document  
-* Payment  
-* Payment Transaction  
 * Audit Log  
-* Notification
+* Notification  
+* *(plus whichever entities the selected service itself requires)*
 
 ## 20. Acceptance Criteria
 
 * System validates the representative's authorization before allowing access.  
 * Representative can only access properties covered by the registered Power of Attorney.  
 * Representative can perform only services permitted by the registered authorization.  
-* Required information is validated before submission.  
-* Supporting documents are uploaded successfully.  
-* Payment is completed where applicable.  
+* Once authorization is validated, the selected service's own acceptance criteria apply in full — including its own fee, payment timing, and required-field rules. *(Corrected 2026-08-15 — this previously said "payment is completed where applicable" as a standalone criterion, which is now folded into "the selected service's own... rules apply" rather than stated as a separate, potentially-conflicting rule.)*
 * Application receives a unique reference number.  
 * User can monitor the application status.  
 * Approved requests complete the selected service.  
-* Payment receipt is generated after successful payment.  
 * All activities are recorded in the audit log.
 
 ## 21. Business Rules
@@ -266,7 +208,7 @@ Upon successful completion, the system generates:
 3. The system must validate the authorization before allowing any transaction.  
 4. Representatives cannot perform services outside the approved scope of authority.  
 5. Expired, revoked, or suspended Powers of Attorney cannot be used to access services.  
-6. Payment must be completed before submission where the selected service requires payment.  
+6. **Once authorization is validated, the selected service's own business rules govern the transaction in full — including its own fee status and payment timing.** #30 imposes no independent payment rule of its own. *(Corrected 2026-08-15 — this previously said "payment must be completed before submission where the selected service requires payment," which still implied an upfront-only default; the selected service's own rule, whatever it is, now governs without a #30-specific default layered on top.)*
 7. Every transaction performed by a representative must be linked to both the property owner and the authorized representative.  
 8. All activities performed under a Power of Attorney must be permanently recorded in the audit trail, including the representative's identity, the property owner, the service performed, and the date and time of the transaction.  
 9. Any service completed by an authorized representative has the same legal effect as if it were performed directly by the property owner, provided it is within the registered scope of authority.
