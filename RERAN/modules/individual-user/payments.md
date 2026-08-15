@@ -139,11 +139,13 @@ Consistent with Group C's confirmed principle (`financial-trust-institutions/ope
 
 ## Payment Artefacts
 
-Every fee-bearing service in this module issues a **Payment Receipt**, generated at checkout. Where the transaction produces a title-adjacent document, source additionally names a **"Fee Balance"** line (e.g. rows 86–95's "Fee balance (all e-deliverables)") — the same artefact name Group C's `payments.md` (B9) found attached to its now-retired standing-account model. Individual User has no standing account of any kind (there is no institution-level account structure for natural persons), so this module's "Fee Balance" cannot mean the same thing it meant in Group C's superseded model. It most plausibly means a running total or balance-due line on a single transaction receipt, not a multi-transaction account balance — but this is an inference, not confirmed by source. See `open-questions.md`.
+**Every fee-bearing service in this module issues exactly one payment artefact: a Payment Receipt, generated at checkout.** There is no Fee Balance concept anywhere in this module — confirmed by client, `open-questions.md` C2 (2026-08-15). Source rows 86–95 name a "Fee balance (all e-deliverables)" output line, and this document previously treated that as a real artefact needing a definition of its own (an inference toward "a single-transaction balance line," having already ruled out Group C's now-retired standing-account reading). The client has since confirmed there is no such thing at all: every payment settles instantly through the standard payment gateway when the payment step is reached, with no wallet, no running balance, and no partial-payment state to report. The source's "Fee balance" phrasing was never describing a feature to build — it doesn't correspond to anything in this module's payment model.
+
+**Downstream correction:** #6 and #10 were the two service-flow files that had actually carried "Fee Balance Information" into their own Output sections (Section 15) — both corrected 2026-08-15, removed and, where the file was missing it entirely (#10), replaced with the standard Payment Receipt line every other fee-bearing service already has. #11–#16 (siblings of #10, same source-row inheritance) were checked and already correctly listed Payment Receipt with no Fee Balance reference, so needed no change.
 
 ## To Confirm — Summary
 
-**All items below are now resolved except #9 (the terminology question below), which remains genuinely open.**
+**All items below are now resolved.**
 
 1. ~~**#17, #18, #33, and #7's Owner/Entity Amendment component**~~ — resolved as no-fee (proposed answer confirmed by adoption; no client pushback received). Corrected in each file.
 2. ~~**#28**~~ — resolved: payment moves to after-approval, matching row 84's explicit wording. Corrected.
@@ -153,7 +155,7 @@ Every fee-bearing service in this module issues a **Payment Receipt**, generated
 6. ~~**#39**~~ — resolved: Track Complaint is now free, matching Feature #2. Corrected.
 7. ~~**#38**~~ — resolved by client (A7): the fee stands as originally documented. No file change needed.
 8. ~~**#6's Wallet Account reference**~~ — resolved by client (C1): no wallet mechanism exists; #6 uses the standard shared gateway. Corrected.
-9. **"Fee Balance" meaning in this module** — still open. Confirm it denotes a single-transaction balance line, not a Group-C-style standing account (which does not exist here). No file currently depends on this being resolved, so it carries no downstream correction yet.
+9. ~~**"Fee Balance" meaning in this module**~~ — resolved by client (C2): there is no Fee Balance concept at all; every payment settles instantly, no wallet, no balance. #6 and #10 corrected to remove the artefact from their Output sections.
 10. ~~**#30, #37**~~ — resolved: both corrected to explicitly inherit the selected underlying service's payment rule rather than asserting an independent, always-upfront one. Corrected.
 
 ## Downstream Corrections — Propagated
@@ -171,5 +173,6 @@ All corrections identified above have now been applied to the affected service-f
 - **`module-roadmap.md`'s** cross-cutting payment-timing observation, updated to remove the "unaudited" label for this module and record the audit's findings.
 - **Application Status Flow (Section 13) in #9–#16, #23, #24, #26** — found in a later audit pass to still show only the online channel's upfront "Payment Pending / Payment Successful" sequence, with no status reflecting the Trustee Centre / Service Center channel's audit-then-pay timing that Section 9/12 already documented for these same eleven files. Added an "Audited — Awaiting Payment" additional status to each, following the file's own existing convention for channel-specific statuses. #27 was checked and needed no change — it was rebuilt from scratch during the correction pass rather than edited in place, so its Section 13 already reflected the post-review payment timing correctly.
 - **Services #30, #37** — found in a fourth audit pass to describe an independent, always-upfront payment rule that contradicted (in #37's case, directly) their own acknowledgment that they're routing services. Corrected to explicitly inherit the selected underlying service's fee status and payment timing throughout — Sections 8, 9, 12, 13, 14, 15, and the relevant Business Rules in each file. See Category 9 above.
+- **Services #6, #10** — "Fee Balance Information" removed from Output sections, per client confirmation there is no such artefact anywhere in this module (C2, above).
 
-Nothing remains outstanding from this document except item 9 above ("Fee Balance" terminology), which has no file depending on it yet.
+Nothing remains outstanding from this document. All ten items on the To Confirm list are resolved.
