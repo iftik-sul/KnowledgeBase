@@ -3,7 +3,7 @@ project: RERAN
 module: individual-user
 type: user-group
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -17,6 +17,8 @@ tags:
 # Individual User Roles & Responsibilities
 
 The **Individual User** module serves natural persons who interact with the RERA platform to buy, own, rent, lease, sell, or manage real estate. Unlike organizational users, an individual may perform multiple roles over time using the same account. The platform grants access to services based on the user's current activities and permissions.
+
+**On the Landlord/Tenant overlap below, resolved 2026-08-15 (`open-questions.md` D1):** the Landlord and Tenant responsibility lists both include lease-related actions — "renew lease records" appears in both. This is not a drafting error and does not need disambiguating. It reflects the same principle stated in the paragraph above and worked out fully in `navigation.md`'s activity-scoped access model: **one account can hold both roles at once, against different properties.** Consider Mike: he rents the flat he lives in (Tenant) but also owns and rents out a separate flat to someone else (Landlord). When Mike renews the lease on his own rented flat, he may do so as Tenant, self-registering the lease he's signed, under the secondary applicant path `open-questions.md` B1 established for Register/Renew Lease. When Mike renews the lease on the flat he rents *out*, he does so as Landlord, the primary applicant on that same service. Same person, same account, same platform session even — two different leases, two different roles. Neither responsibility list is claiming exclusive ownership of "renew lease records"; each is describing what that action looks like when the account is acting in that role for that particular property. Nothing in the source or in this module's design model prevents one person from occupying both roles across their own portfolio, and B1's secondary-applicant resolution for #23/#24 exists precisely to support this.
 
 ## 1. Property Owner / Seller
 
@@ -46,7 +48,7 @@ Represents an individual who leases or rents out owned properties and manages te
 ### Responsibilities
 
 * Register rental properties  
-* Create and renew lease records  
+* Create and renew lease records **for properties they own and let out** — see the note above on how this overlaps, intentionally, with the Tenant role's own renewal responsibility below  
 * Manage tenancy information  
 * Update rental property details  
 * Monitor active rental agreements  
@@ -82,8 +84,8 @@ Represents an individual renting residential or commercial property who uses the
 
 ### Responsibilities
 
-* Register tenancy information  
-* Renew lease records  
+* Register tenancy information — as the secondary applicant path on Register Lease (#23), self-registering a lease they've signed; see `open-questions.md` B1  
+* Renew lease records **for the tenancy they themselves hold** — the same overlap with Landlord's responsibility above, and the same resolution: this is the account acting as Tenant on its own lease, not a conflicting claim over the Landlord's action on a different one  
 * Submit rental-related complaints  
 * Request dispute resolution  
 * Track tenancy applications and dispute cases
