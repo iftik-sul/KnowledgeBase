@@ -3,7 +3,7 @@ project: RERAN
 module: financial-trust-institutions
 type: ui-spec
 status: draft
-updated: 2026-08-11
+updated: 2026-08-15
 contains_proposals: true
 derived_from:
   - "RERAN/modules/financial-trust-institutions/roles-and-responsibilities.md"
@@ -17,15 +17,15 @@ tags:
 
 # Screen: Escrow Request Queue
 
-**Roles:** Account Trustee (`escrow` scope) · Institution Relationship Manager (read) · Auditing Bureau Officer (read)
+**Access:** Any of the institution's four Group C roles — unified access, not scope-gated (`navigation.md`, confirmed 2026-08-14; extended to escrow-queue access specifically by `roles-and-responsibilities.md`, confirmed 2026-08-15).
 
-The Account Trustee's primary workspace. Developer escrow requests arrive here from Group B, are assessed and certified, and are forwarded to the RERAN escrow department.
+Developer escrow requests arrive here from Group B, are assessed and certified, and are forwarded to the RERAN escrow department. Typically worked by the Account Trustee in practice, but not restricted to that role.
 
-**This screen did not previously exist.** The Account Trustee held no screen in the module despite owning six inbound request types. Answer A2 confirms from source rows 8–12 that the Trustee acts *inside* the platform — studying capability, uploading documents and sending them on — rather than working externally and recording an outcome.
+> **Corrected 2026-08-15.** This screen previously gated action behind an `escrow` permission scope, held by the Account Trustee. That scope is retired; any of the institution's four Group C roles may assess and certify an escrow request. See Role Variations, rewritten accordingly.
 
 ## Purpose
 
-Give the Account Trustee a single queue of every developer escrow request awaiting the institution's certification, ordered by regulatory urgency, with enough context on each row to triage without opening it.
+Give the institution a single queue of every developer escrow request awaiting the institution's certification, ordered by regulatory urgency, with enough context on each row to triage without opening it — typically worked by the Account Trustee, but reachable and actionable by any of the four roles.
 
 ## Layout
 
@@ -122,23 +122,21 @@ See [components.md](../components.md). This screen uses the Institution Operatio
 
 See [validation-rules.md](../validation-rules.md). Specific to this screen:
 
-1. Only users holding the `escrow` scope see Assess. Read-only roles see View.
+1. **Corrected 2026-08-15** — previously restricted Assess to users holding the `escrow` scope. Any of the institution's four roles may Assess; there is no scope check left to enforce.
 2. A request whose trust account is Suspended or Flagged cannot be certified; the action is not rendered and the row carries the account's status.
-3. A request cannot be certified by the user who last returned it to the developer, to preserve a second pair of eyes across the return cycle.
+3. A request cannot be certified by the user who last returned it to the developer, to preserve a second pair of eyes across the return cycle. **Unaffected by the 2026-08-15 correction** — this is a distinct return-cycle rule, not the retired scope-based maker≠checker restriction, and it stands on its own regardless of who holds what role.
 
 ## Role Variations
 
-### Account Trustee
+**Corrected 2026-08-15 — collapsed from a three-tier scope/role split to a description of typical practice.** Every institution user can Assess; the split below describes who typically does, not who is permitted to.
 
-Full operation. Sees only accounts under this institution's trusteeship. Assess opens [escrow-request-details.md](escrow-request-details.md) in an editing state.
+### Typically the Account Trustee
 
-### Institution Relationship Manager
+Full operation, in practice. Sees only accounts under this institution's trusteeship. Assess opens [escrow-request-details.md](escrow-request-details.md) in an editing state. Any other institution user has identical access, per the unified model.
 
-Read-only, institution-wide. Gains a **Trustee Workload** card set — requests per trustee, average time to certify, breaches this period — in place of the Assess action. This is oversight of the function, not participation in it.
+### Institution Relationship Manager and Auditing Bureau Officer, in practice
 
-### Auditing Bureau Officer
-
-Read-only. Gains an **Audit Flags** filter surfacing requests where a certification was later queried by RERAN, since those are the population an escrow audit examines. No Assess action — the auditor does not certify what they audit.
+Both roles can Assess like any other user, but their more typical use of this screen is oversight: the Institution Relationship Manager for a **Trustee Workload** card set (requests per user, average time to certify, breaches this period), the Auditing Bureau Officer for an **Audit Flags** filter surfacing requests where a certification was later queried by RERAN. Neither is a restriction — both roles retain the Assess action, and use it if a specific situation calls for it.
 
 ## User Flow
 
@@ -153,8 +151,8 @@ Escrow Requests
 
 ## Notes
 
-* **SLA is unresolved.** Answer A6 proposes reading the source's split SLA — "waiting time 20 business hours; service delivery 13 business hours" — as queue-and-counterparty time versus RERAN processing time, which would make the trustee window the waiting figure. That reading is an inference and sets the SLA for every escrow service in Group B as well as Group C. The countdown column is built; the number behind it needs the client.
-* **No bulk certification.** Answer A3 makes milestone certification a structured assessment with a solvency judgement inside it. A control that certifies twenty requests in one action is incompatible with that, and would make the audit timeline useless as evidence of judgement exercised.
+* **SLA is confirmed.** Answer A6 (confirmed 2026-08-15, client decision) reads the source's split SLA — "waiting time 20 business hours; service delivery 13 business hours" — as queue-and-counterparty time versus RERAN processing time, meaning the trustee window is the waiting figure. This applies to every escrow service in Group B as well as Group C. The countdown column can be built directly against this reading.
+* **No bulk certification.** Answer A3 (confirmed 2026-08-15) makes milestone certification a structured assessment with a solvency judgement inside it. A control that certifies twenty requests in one action is incompatible with that, and would make the audit timeline useless as evidence of judgement exercised.
 * Requests originate in the developer module. This screen never creates one.
 * The six request types come from the Group B escrow services (source rows 8–12, 20–21), not from the eighteen Group C services.
 * Certified requests leave this queue and appear in the RERAN audit gate. They remain visible under a Certified filter for the institution's own record.
