@@ -150,12 +150,12 @@ The one row this reasoning doesn't cleanly cover is **row 97 (PoA cancellation)*
 
 - **Legal Heir / Court-appointed Administrator (#19):** describes the applicant's *status entering* the transaction — the outcome of #19 is precisely that this person becomes the registered Property Owner/Seller of record. Not a new role; a precondition on who may currently invoke the Property Owner/Seller role for this specific service.
 - **Community Representative / Leader (#20):** same pattern — acting on behalf of a collective ownership structure, but the resulting registration still vests in an owner-type entity. Not a new role.
-- **Financial Institution (#34, as a requester of a valuation):** this is Group C reaching into an Individual User service as a *requester*, not Group C acting as a Group C role inside this module. Worth a one-line clarifying note in #34 rather than a role change.
+- **Financial Institution (#34, as a requester of a valuation):** this is Group C reaching into an Individual User service as a *requester*, not Group C acting as a Group C role inside this module. Worth a one-line clarifying note in #34 rather than a role change. **Added 2026-08-15** — this note existed only as a recommendation here for some time; #34's own file didn't actually carry it until a later audit pass caught the gap and added it.
 - **Property Management Company (#23, #24, #25):** this one is a genuine problem, not a status description. "Property Management Company" is Group D's **Property Management Officer** role (`real-estate-service-companies` module), not an Individual User concept at all. Its presence in #23/#24/#25's Who Can Apply sections looks like cross-module leakage, possibly copied from Group D material during drafting. **Recommend removing it** from all three files, leaving "Authorized Property Representative" (which is already a legitimate Individual User concept, covering PoA holders and similar) to cover delegated management without implying a Group D corporate actor can act as an Individual User.
 
 **Confidence:** High on the Property Management Company removal (a clear cross-module category error, the same kind of mistake Group C's A1 corrected for "internal auditor" vs. "Auditing Bureau Officer"). Medium on treating the other three as status descriptions rather than needing their own role entries — a defensible design choice, not a certainty.
 
-**Affects:** #23, #24, #25's Who Can Apply sections (remove Property Management Company); no change needed to `roles-and-responsibilities.md`'s six-role list.
+**Affects:** #23, #24, #25's Who Can Apply sections (Property Management Company removed); #34's Who Can Apply section (clarifying note added); no change needed to `roles-and-responsibilities.md`'s six-role list.
 
 ### B4. How much of Property Buyer/Investor's and Diaspora Investor's documented behaviour actually traces to source, versus extrapolation?
 
@@ -229,6 +229,8 @@ B1 above resolved the *service-flow* files' role attribution (Landlord primary, 
 
 C2 ("Fee Balance" terminology) and D1 (`roles-and-responsibilities.md`'s overlapping language) both remain genuinely undecided. C2 has no file depending on its answer yet. D1 is a standing client-facing flag, added 2026-08-15 — the total in the row above now reflects it as awaiting client data, unlike this document's earlier "0 awaiting" summary, which predates D1's discovery.
 
+**A found-but-not-yet-executed gap, closed 2026-08-15 in a later audit pass:** B3 above had recommended a clarifying note for #34's "Financial Institution" applicant category since this analysis was first written, but the note was only ever added to this document, not to #34's own service-flow file — a decision-vs-execution gap of exactly the kind this module has had to close repeatedly elsewhere (Section 13 status flows, the module README, the UI package's status vocabulary, #30/#37's routing architecture). It's fixed now; worth naming as one more instance of the same pattern rather than a new, unrelated finding.
+
 ### The answers that changed existing documents
 
 | Answer | What it changed |
@@ -238,7 +240,7 @@ C2 ("Fee Balance" terminology) and D1 (`roles-and-responsibilities.md`'s overlap
 | **A6** | #39 corrected to no-fee |
 | **A7** — client confirmed: #38's fee stands as documented | No file change — confirms existing text |
 | **B1** — conflict check found nothing blocking; proposed resolution adopted | #23, #24's Who Can Apply |
-| **B3** | #23, #24, #25's Who Can Apply (Property Management Company removed) |
+| **B3** | #23, #24, #25's Who Can Apply (Property Management Company removed); #34's Who Can Apply (clarifying note added, later pass) |
 | **C1** — client confirmed: no wallet mechanism exists | `payments.md`'s Settlement Mechanism section (not #6's file, which never had the reference — see C1 above) |
 | **D1** — new, no client answer yet | No file changed; this document itself is the flag |
 
