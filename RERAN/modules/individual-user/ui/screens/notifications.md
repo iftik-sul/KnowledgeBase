@@ -20,7 +20,7 @@ tags:
 
 ## Purpose
 
-Every alert the account needs to see: RERAN information requests, returned applications, decisions, PoA/counterparty confirmation requests, and payment reminders where payment falls after a decision.
+Every alert the account needs to see: RERAN information requests, returned applications, decisions, PoA/counterparty confirmation requests, and payment reminders where payment falls after some or all of a decision.
 
 ## Layout
 
@@ -34,7 +34,7 @@ Notification List
 
 ### Section 1 — Notification List
 
-Each notification: type icon, short description, timestamp, and a link to the relevant screen — Application Details (information requests, decisions, returns), Application Details' Pay Now action (Approved — Awaiting Payment), Power of Attorney or Application Details (Pattern C/H confirmation requests), or My Complaints (complaint resolution).
+Each notification: type icon, short description, timestamp, and a link to the relevant screen — Application Details (information requests, decisions, returns), Application Details' Pay Now action (Approved — Awaiting Payment or Audited — Awaiting Payment, per `status-badges.md`'s two-status split), Power of Attorney or Application Details (Pattern C/H confirmation requests), or My Complaints (complaint resolution).
 
 ## Empty State
 
