@@ -3,7 +3,7 @@ project: RERAN
 module: financial-trust-institutions
 type: ui-spec
 status: draft
-updated: 2026-08-11
+updated: 2026-08-15
 contains_proposals: true
 derived_from:
   - "RERAN/modules/financial-trust-institutions/open-questions.md"
@@ -18,45 +18,37 @@ tags:
 
 **Proposed.** Validation patterns shared across Group C screens. Screens link here rather than restating them.
 
+> **Corrected 2026-08-15.** This document previously described a six-scope permission model (`file`, `certify`, `escrow`, `audit`, `settlement`, `admin`) gating every action, a maker≠checker rule barring a user from certifying their own filing, and a Settlement section describing a standing pre-funded account. All three are retired — see `navigation.md` for the confirmed unified-access model and `open-questions.md` A1, B1, B11 for the decisions behind each correction.
+
 ---
 
-## Permission Scope
+## Access
 
-Every action is gated on the signed-in user's permission scope, not their job title. Scopes are provisioned by the Institution Relationship Manager (registration Flow 5) and are the mechanism behind the internal certification gate — see answer A1.
-
-| Scope | Permits |
-| :---- | :---- |
-| `file` | Create and submit service requests |
-| `certify` | Certify or return records at the internal gate |
-| `escrow` | Act on developer escrow requests |
-| `audit` | Submit compliance reports and view escrow audit records |
-| `settlement` | Fund the settlement account and export statements |
-| `admin` | Provision staff, manage scopes, renew institutional approvals |
+Every action is available to any of the institution's four Group C roles — there is no permission scope gating any screen, action, or record. Role is recorded as audit-trail attribution only, not as an access control.
 
 **Rules**
 
-1. An action a user's scope does not permit is not rendered — not rendered-and-disabled.
-2. A user cannot certify a record they filed. Maker and checker must be different users, whatever scopes they hold.
-3. Scope changes take effect at next sign-in and are recorded in the audit timeline.
+1. No action is hidden or disabled based on role. What varies between records is status and ownership (e.g. only the current holder of a Draft record may edit it), never who the signed-in user is.
+2. **A user may certify or return a record they themselves filed.** There is no maker≠checker restriction module-wide. This corrects the previous rule requiring maker and checker to be different users — that requirement was tied to the retired `certify` scope and does not survive its removal.
+3. Every action is written to the audit timeline with the acting user and the role they held at the time (`navigation.md#audit-trail-principle`).
 
 ## Institutional Standing
 
 1. No service request may be submitted while the institution's approval is expired. The form is reachable and saveable as draft; submission is blocked with a message pointing to Institution Profile.
-2. Inside 60 days of expiry, a renewal prompt appears in the Institution Context Header; inside 14 days it escalates to a blocking-warning treatment. Per answer B8, approvals run to a defined validity term.
+2. Inside 60 days of expiry, a renewal prompt appears in the Institution Context Header; inside 14 days it escalates to a blocking-warning treatment. Per answer B8 (confirmed 2026-08-15, client decision), approvals run to a renewing, per-approval-term validity; the specific two-year duration remains a proposal.
 
-## Settlement
+## Payments
 
-Per answer B1, fees are deducted from a standing pre-funded account after approval, not paid at submission.
+Per answers B1 and B11 (both confirmed by client decision), Group C pays per-transaction via the shared platform gateway — upfront, before lodging, for Services #1 and #3–#11; at the point of service for Services #12–#18; not at all for Service #2. There is no standing account, and nothing left to settle after approval.
 
-1. Submission is not blocked by an insufficient balance. Approval is not blocked either. **Settlement** is where insufficiency bites, and the record holds at `Approved — Awaiting Payment`.
-2. Where the projected balance after committed fees would fall below zero, the service request form shows a warning at review, before submission.
-3. The account may not go negative — no credit is extended (answer B4).
-4. An approved record left unsettled for 30 calendar days moves to `Approval Expired` and requires resubmission (answer B3). A warning is issued at 7 days and 24 hours.
-5. **The low-balance threshold is a per-institution setting**, edited by `admin` on [institution-profile.md](screens/institution-profile.md#section-3--settlement-preferences-tab), not a platform constant. Every screen that shows a low-balance state — the Settlement Account Balance Card, the Institution Context Header, the Dashboard — reads this one setting rather than each defining its own threshold. Added in this pass because the settlement-account and dashboard screens both referenced "the configured threshold" without either of them defining where it lived.
+1. **Submission is blocked until payment succeeds**, for every service that charges a fee. This replaces the previous rule, under which submission was never blocked by payment and insufficiency only surfaced later at settlement — there is no later stage left; payment happens at or before lodging for every fee-bearing service.
+2. A failed payment at checkout is retryable and is not an application-lifecycle event — nothing is submitted, certified, or audited until payment succeeds.
+3. Service #2 (Cancellation) presents no payment step at all, confirmed 2026-08-15 (`open-questions.md` B11) — this is not an omission to validate against; the service genuinely has no fee.
+4. **Removed 2026-08-15.** The low-balance-threshold setting, the negative-balance block, and the 30-calendar-day unsettled-approval expiry (previously tied to `open-questions.md` B3, B4) no longer apply to any Group C service — there is no balance to fall below zero and no post-approval unsettled state to lapse from. `open-questions.md` B3 itself was not revisited by either payment correction and remains as written there, flagging a tension rather than resolving it — see [payments.md](../payments.md#additional-statuses).
 
 ## Documented Reasoning
 
-Per FR-04, a reason is mandatory on every action that returns, rejects or queries a record — at the internal gate and at RERAN's. Free text, minimum length enforced, recorded in the audit timeline against the actor and the scope used.
+Per FR-04, a reason is mandatory on every action that returns, rejects or queries a record — at the internal gate and at RERAN's. Free text, minimum length enforced, recorded in the audit timeline against the actor and the role they held at the time. **Corrected 2026-08-15** — previously "against the actor and the scope used"; there is no scope to record any more.
 
 A positive decision does not require a reason but permits one.
 
@@ -78,4 +70,4 @@ Two users in the same institution may not hold the same record in an editing sta
 
 ## Audit
 
-Per FR-22, every create, edit, submit, certify, return, approve, reject, settle and document action is written to the audit timeline. Nothing in the module is editable after submission except through a documented return.
+Per FR-22, every create, edit, submit, certify, return, approve, reject and document action is written to the audit timeline, capturing the acting user and the role they held at the time. Nothing in the module is editable after submission except through a documented return. **Corrected 2026-08-15** — "settle" is removed from the list of logged actions; there is no settle action left in the module.
