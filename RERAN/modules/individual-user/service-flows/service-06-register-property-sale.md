@@ -230,9 +230,10 @@ Upon successful approval, the system generates:
 * Provisional Sale Contract  
 * Provisional Registration Contract  
 * Updated Property Transaction Record  
-* Fee Balance Information  
 * Property Map  
 * Payment Receipt
+
+*(Corrected 2026-08-15 — "Fee Balance Information" removed. Confirmed by client, `open-questions.md` C2: there is no Fee Balance concept anywhere in this module. Every payment is settled instantly through the standard payment gateway when the payment step is reached — no wallet, no running balance, no partial-payment state to report. The Payment Receipt above is the only payment-related output artefact this or any service in the module issues.)*
 
 ## 16. Related Services
 
