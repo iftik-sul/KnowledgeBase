@@ -3,7 +3,7 @@ project: RERAN
 module: financial-trust-institutions
 type: overview
 status: draft
-updated: 2026-08-14
+updated: 2026-08-15
 contains_proposals: true
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
@@ -86,17 +86,11 @@ Title-deed transactions executed through the institution rather than by the owne
 
 ## Service Ownership
 
-> **Proposed — re-derived, not the source's responsible-role column.** `open-questions.md` A4 finds that column unreliable as a per-service assignment: it names the Mortgage Officer for 15 of the 18 rows (30–44), including heirs' sale, company share sale, split ownership, and title-deed issuance — Trustee Centre counter transactions with no lending component that a bank's mortgage desk does not run. The table below re-derives ownership per service instead. **Confidence:** High for Services #1–#2; Medium for the #12–#17 re-derivation, since it contradicts the source column and that should be visible to the client.
+**Confirmed 2026-08-15 (client decision) — no service is role-specific.** Any of the institution's four Group C roles — Mortgage Officer, Institution Relationship Manager, Account Trustee, Auditing Bureau Officer — may act on any of the 18 services. There is no per-service or per-role assignment table; role is retained solely for audit-trail attribution (who performed which action), consistent with the access-model correction — see [navigation.md#audit-trail-principle](navigation.md#audit-trail-principle).
 
-| Role | Services | Basis |
-| :---- | :---: | :---- |
-| Institution Relationship Manager | 3 (#1, #2, #18) | #1–#2: A4 re-derivation (source names Account Trustee; IRM is described as maintaining registration and renewing trustee/auditor approvals). #18: sourced directly — row 45 already names the IRM. |
-| Mortgage Officer | 9 (#3–#11), plus #12–#17 where bank-originated | Sourced for #3–#11 — the only rows whose workflow text shows bank-originated entry ("bank employee enters ... via online mortgage system"). A4's rule for #12–#17 is conditional, not absolute — "Mortgage Officer where bank-originated; otherwise executed by a Trustee Centre operator" — but no row among 38, 40–44 sources a bank-originated variant for those six, so this branch is carried as unconfirmed rather than counted. |
-| Trustee Centre Operator (Group G, assisted mode) | 6 (#12–#17) | A4's *otherwise* branch — title & ownership transaction rows show customer walk-in entry with no bank involvement, despite the source column naming the Mortgage Officer. This is the only branch of A4's conditional that rows 38, 40–44 actually source; see each service flow's Open Questions for the unconfirmed Mortgage Officer branch. |
-| Account Trustee | 0 | Acts within Group B escrow services (A2); owns no numbered Group C service. |
-| Auditing Bureau Officer | 0 | Owns no numbered Group C service; audits developer escrow accounts and submits independent compliance reports to RERA — Group B-facing work, per the user group structure. **Corrected**: does **not** act as the internal certification gate on Mortgage Officer transactions. That claim was already wrong before 2026-08-14 — answer A1 established the internal certifier is not this role, by title, regardless of scopes — and is doubly wrong now: certification is an unrestricted action any of the four roles may perform, attributed by role in the audit trail, not a duty tied to this role or gated by a permission scope. See `roles-and-responsibilities.md`, Auditing Bureau Officer section, for the full correction. |
+The source's responsible-role column (naming the Mortgage Officer for 15 of the 18 rows, including several Trustee Centre counter transactions with no lending component) remains unreliable as a per-service assignment, which is why an earlier version of this section attempted to re-derive ownership per service rather than accept the column at face value. That re-derivation is superseded, not extended: the client has confirmed Group C does not assign services to roles at all, so no corrected table is needed — see `open-questions.md` A4 for the full reasoning and the retired per-service table, kept there for the record.
 
-The #12–#17 count reflects only the sourced (Trustee Centre) branch of A4's conditional — it is not a claim that these six services can *only* ever be bank-originated-excluded. This replaces the previous count (Mortgage Officer 17 / Institution Relationship Manager 1), which took the source's responsible-role column at face value.
+**Trustee Centre Operator (Group G) is a channel/assisted-mode role, not a Group C role**, and was never a correct entry in a Group C ownership table — see C2 for the assisted-mode channel model, which is unaffected by this correction.
 
 ## Shared Platform Features
 
@@ -145,7 +139,7 @@ The #12–#17 count reflects only the sourced (Trustee Centre) branch of A4's co
 
 | Status | Meaning | Set by |
 | :---- | :---- | :---- |
-| Draft | Started, not submitted | Mortgage Officer / Institution Relationship Manager / Trustee Centre Operator |
+| Draft | Started, not submitted | Any of the institution's four Group C roles |
 | Pending Internal Certification *(Group C extension — services with an internal certification gate only)* | Awaiting certify-or-return by any of the institution's four Group C users *(corrected 2026-08-14 — not a "checker permission scope"; scopes are retired, see [navigation.md](navigation.md))* | Any Group C role, attributed in the audit trail |
 | Returned by Certifier *(Group C extension)* | Sent back internally for correction | Any Group C role, attributed in the audit trail *(corrected 2026-08-14 — not "Internal Certifier (checker permission scope)")* |
 | Submitted | In RERA's Transaction Audit queue | Internal Certifier, or the applicant directly where no internal gate applies |
@@ -157,6 +151,8 @@ The #12–#17 count reflects only the sourced (Trustee Centre) branch of A4's co
 | Completed | Settled and output document issued | Platform |
 | Withdrawn | Abandoned by the applicant | Applicant |
 | Expired *(Group C: unclear if this still applies to any service — see note below)* | Approved but left unpaid for 30 calendar days (B3) | Platform |
+
+**Corrected 2026-08-15** — the "Set by" column for `Draft` previously read "Mortgage Officer / Institution Relationship Manager / Trustee Centre Operator," naming specific roles as if only they could start an application. Per the corrected A4, any of the institution's four Group C roles may do this; Trustee Centre Operator remains correct as the assisted-mode channel actor, unrelated to this correction.
 
 `Pending Internal Certification` and `Returned by Certifier` apply only to services with a sourced two-gate pattern (Services #3–#11, the mortgage and finance-lease lifecycle). Services #1, #2, and #12–#18 do not carry them, since no internal institutional certification step is described in source for those rows — see each service flow's Application Status Flow section.
 
@@ -174,12 +170,10 @@ Whether direct customer/institution access to a given service is *enabled at lau
 
 ## To Confirm
 
-Fourteen items remain open across this module's two documents, one fewer than before this rewrite — C2 (online path) and the Service Ownership questions for #1/#2 are now resolved per the answers doc and are not repeated here.
+Five items remain open in this section, down from seven — A4 (service ownership) is now confirmed by client decision (2026-08-15) and B5 (fee schedule) is resolved as a configuration fact rather than client data (2026-08-14); neither is repeated below. C2 (online path) and the original Service Ownership questions for #1/#2 were already excluded before this rewrite.
 
 1. Are the five proposed service categories acceptable, or should the source's Development / Transaction / Title-Deed Data grouping be retained? (C1 — proposed answer: adopt them, keep the reconciliation table.)
-2. Is the #12–#17 re-derivation to Trustee Centre Operator acceptable, given it contradicts the source's responsible-role column? (A4 — Medium confidence, flagged for the client explicitly.)
-3. Do the four Application Management features apply to Group C as they do to individual users? (C3 — proposed answer: yes, unchanged.)
-4. Are the five institution-specific features (including the two added by C4 — Payment History, Staff Records) correct, and is anything still missing?
-5. Is the proposed status vocabulary (platform core + Group C extension, D1) acceptable, and is the specific status list correct?
-6. Fee settlement: is the corrected three-way payer/timing split (Upfront Gateway Payment / Customer Payment at Counter / Institution Fee Payment — see `payments.md`) correct for all 18 services? **Corrected 2026-08-14** — the old version of this question asked whether finance-lease services (#8–#11) belonged in the account-debit group despite reading like a counter payment; that tension is resolved by the correction itself, since the account-debit model no longer exists for any service (B1) and #8–#11's point-of-sale-reading workflow text turns out to have been the more accurate signal all along — see each service flow's Open Questions section.
-7. Published fee schedule for the 18 services — the one question of 23 with no proposed answer (B5, client data).
+2. Do the four Application Management features apply to Group C as they do to individual users? (C3 — proposed answer: yes, unchanged.)
+3. Are the five institution-specific features (including the two added by C4 — Payment History, Staff Records) correct, and is anything still missing?
+4. Is the proposed status vocabulary (platform core + Group C extension, D1) acceptable, and is the specific status list correct?
+5. Fee settlement: is the corrected three-way payer/timing split (Upfront Gateway Payment / Customer Payment at Counter / Institution Fee Payment — see `payments.md`) correct for all 18 services? **Corrected 2026-08-14** — the old version of this question asked whether finance-lease services (#8–#11) belonged in the account-debit group despite reading like a counter payment; that tension is resolved by the correction itself, since the account-debit model no longer exists for any service (B1) and #8–#11's point-of-sale-reading workflow text turns out to have been the more accurate signal all along — see each service flow's Open Questions section.
