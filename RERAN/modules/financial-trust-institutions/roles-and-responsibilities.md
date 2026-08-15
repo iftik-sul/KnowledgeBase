@@ -111,11 +111,7 @@ Manages developer project trust accounts, certifies that milestone conditions ar
 
 A developer submits a request to draw down against a completed construction milestone. The request arrives in the queue. The acting user reviews the project's solvency position and the milestone evidence, uploads the supporting assessment, and certifies the request. It is forwarded to the RERA escrow department for final audit. On approval, the transfer is executed and the developer is notified.
 
-### To Confirm
-
-* Does the Account Trustee work from a dedicated queue in the RERA platform, or from the bank's own systems with only the outcome recorded here?
-* Is milestone certification a document upload, or a structured assessment with defined fields?
-* What is the SLA for a Trustee to act on a routed developer request?
+**Corrected 2026-08-15** — this section previously carried its own "To Confirm" list (dedicated queue vs. external system; document upload vs. structured assessment; SLA for routed requests). All three are now resolved — by A2, A3, and A6 respectively — and duplicated the "To Confirm — Summary" section below, which had already been updated to reflect A2 and A3 but not yet A6. Rather than maintain two lists that can drift out of sync, this section now points to the single Summary below: see [To Confirm — Summary](#to-confirm--summary) for the full history of what was asked here and how each was resolved.
 
 ---
 
@@ -172,17 +168,17 @@ For escrow work originating with developers, the Account Trustee typically handl
 
 ## To Confirm — Summary
 
-Seven items originally listed here; four survive as genuinely open, three are resolved by the answers doc and kept below with pointers rather than dropped.
+**Corrected 2026-08-15** — this section previously claimed "four survive as genuinely open" while listing five items under "Still open," two of which (items 1 and 2) already showed as resolved in their own text — an inconsistency present before today. A6's confirmation resolves item 3 as well, leaving genuinely open items down to two: item 6 (partially — A7 is Medium confidence, not fully closed) and item 7. Seven items originally listed here; two survive as genuinely open, five are resolved and kept below with pointers rather than dropped.
 
 **Still open:**
 
-1. Account Trustee interface: dedicated platform queue or external system with recorded outcome? **Resolved by A2** — dedicated platform queue, sourced from rows 8–12. See [ui/screens/escrow-request-queue.md](ui/screens/escrow-request-queue.md).
-2. Milestone certification: document upload or structured assessment? **Resolved by A3** — structured assessment, confirmed by the client 2026-08-15. See [ui/screens/escrow-request-details.md](ui/screens/escrow-request-details.md#section-4--milestone-certification).
-3. **SLA for Trustee action on routed developer requests — still open.** Answer A6 proposes reading the source's split SLA figures as queue-time versus RERA-processing-time, which would supply this, but flags that reading as an inference needing explicit client confirmation. A 2026-08-15 clarification confirmed Account Trustee access is unrestricted (A4), but did not resolve this specific SLA-reading question. Not resolved.
 6. Compliance report template — RERA-defined or institution's own? **Proposed answered by A7** (Medium confidence) — RERA-defined. Structure and cycle remain open; see [ui/screens/compliance-reports.md](ui/screens/compliance-reports.md#notes).
 7. **Does the Institution Relationship Manager get an institution-wide oversight dashboard? — still open in the general sense**, though a proposed answer now exists in the form of a specific screen: [ui/screens/dashboard.md](ui/screens/dashboard.md#institution-relationship-manager) and [ui/screens/institution-profile.md](ui/screens/institution-profile.md) implement one. Whether this is the *right* dashboard remains for the client to confirm; that it should exist is answer A5's High-confidence position.
 
 **Resolved, kept for record:**
 
+1. ~~Account Trustee interface: dedicated platform queue or external system with recorded outcome?~~ **Resolved by A2** — dedicated platform queue, sourced from rows 8–12. See [ui/screens/escrow-request-queue.md](ui/screens/escrow-request-queue.md).
+2. ~~Milestone certification: document upload or structured assessment?~~ **Resolved by A3** — structured assessment, confirmed by the client 2026-08-15. See [ui/screens/escrow-request-details.md](ui/screens/escrow-request-details.md#section-4--milestone-certification).
+3. ~~SLA for Trustee action on routed developer requests?~~ **Resolved by A6** (client decision, 2026-08-15) — the source's two-number reading (waiting time vs. delivery time) is confirmed correct; no new SLA figure is needed. *(Corrected 2026-08-15 — previously listed as "still open," carried over from before the client's confirmation.)*
 4. ~~Is the bank's internal auditor the Auditing Bureau Officer?~~ **Resolved by A1** — no. A1's mechanism (the `certify` permission scope, held by any delegated staff member) is **superseded 2026-08-14**: scopes are retired, and certification is now an unrestricted action any of the four roles may take. The "not this role by title" conclusion still stands, just for a different reason — see the Auditing Bureau Officer section above.
 5. ~~Transaction certification: per-transaction or batch?~~ **Moot per A1, mechanism superseded 2026-08-14** — this was a question about the Auditing Bureau Officer's certification cadence; the role does not certify, by practice rather than by scope restriction now. The per-record, no-bulk-action cadence in [ui/screens/internal-certification-queue.md](ui/screens/internal-certification-queue.md) has not yet been reconciled against the unified model.
