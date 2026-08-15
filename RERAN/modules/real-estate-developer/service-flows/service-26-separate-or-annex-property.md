@@ -24,7 +24,7 @@ tags:
 
 The **Separation or Annexing a Property** service allows a developer to either split a registered property into separate parcels or merge separate parcels into one, at the property level.
 
-> **Conceptually close to Service #15 (Sub-division) — documented as distinct.** Service #15 sub-divides at the *project* level (splitting a project into sub-projects); this service acts at the *property* level (splitting or merging individual parcels within an already-registered property set). The source places them in different categories (Real Estate Development Services vs. Title Deed Data Services) and gives each its own row, which is treated here as evidence they are meant to be distinct rather than duplicates — but the distinction is not spelled out in the source beyond the category split, so it is flagged for client confirmation rather than asserted with full confidence.
+> **Distinction from Service #15 (Sub-division) — resolved 2026-08-15 (issue #37).** Checked against both files' own sourced workflows rather than the category split alone: **Service #15 operates on the project** — "indicating number of phases," followed by re-uploading units through a survey company and opening a new Registrar account, the same pattern as initial project registration (Service #13). **This service operates on an already-registered property/parcel** — splitting or merging individual titled units after registration, with no Registrar-account-opening step and no phase count. These are different objects at different points in the property/project lifecycle, not the same action described twice. The source's category split (Real Estate Development Services vs. Title Deed Data Services) tracks this same distinction rather than being an arbitrary filing artifact. No client input needed on this point.
 
 ## 2. Purpose
 
@@ -131,7 +131,7 @@ Updated
 
 ## 16. Related Services
 
-* Service #15 – Real Estate Project Sub-division *(the project-level equivalent — see the near-duplicate note in Section 1)*
+* Service #15 – Real Estate Project Sub-division *(the project-level equivalent — see Section 1)*
 * Service #24 – Registration/Amendment of Real Estate Project Details
 * Service #25 – Issuing Map Application
 
@@ -178,4 +178,4 @@ Updated
 1. Only registered properties may be separated or annexed under this service.
 2. Annexation requires the affected properties to be adjoining — **proposed**, not stated explicitly in the source; needs client confirmation.
 3. All submissions, reviews, and notifications must be permanently recorded in the audit trail.
-4. **Distinction from Service #15 rests on the source's category split, not an explicit statement** — flagged for client confirmation.
+4. **Distinction from Service #15 is resolved** — see Section 1. Project-level (phases, #15) vs. property-level (parcels, #26), not a duplicate.
