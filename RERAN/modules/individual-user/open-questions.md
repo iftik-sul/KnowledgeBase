@@ -2,9 +2,9 @@
 project: RERAN
 module: individual-user
 type: decision
-status: draft
+status: current
 updated: 2026-08-15
-contains_proposals: true
+contains_proposals: false
 derived_from:
   - "RERAN/modules/individual-user/roles-and-responsibilities.md"
   - "RERAN/modules/individual-user/services-overview.md"
@@ -21,6 +21,8 @@ tags:
 # Individual User — Questions and Proposed Answers
 
 Fifteen questions arose from checking all 43 service-flow files individually against their sourced rows (`RERAN_service_flows_v2.md` rows 72–112) and against `roles-and-responsibilities.md`'s own worked examples, per the standing instruction not to accept the master table's role column, or a service file's stated position, at face value. Each carries a **proposed answer** to build against, per the standing preference for proposed positions over deferring to the client.
+
+**Updated 2026-08-15 — every question in this document is now resolved.** `status`/`contains_proposals` updated to reflect that this document no longer carries any open proposal awaiting a client decision; it's now a settled record.
 
 **How to read this:** each answer states a recommendation, the reasoning, confidence, and what breaks if it's wrong. Confidence follows the same scale used in Group C's `open-questions.md`:
 
@@ -191,11 +193,13 @@ This isn't necessarily wrong — `services-overview.md` already discloses the so
 
 ### C2. Does "Fee Balance" mean the same thing here as it meant in Group C's now-retired model?
 
-**Proposed: no — it can't, because the standing-account structure it described in Group C never existed for individual users in the first place.** Group C's B9 found "Fee Balance" was evidence of a since-retired standing pre-funded account. Individual User has no institutional account structure of any kind — there's no entity here analogous to a bank's settlement account. The term most plausibly denotes an amount-due or amount-paid line on a single transaction's receipt.
+**Confirmed by client (2026-08-15): there is no Fee Balance concept in this module at all.** Every payment settles instantly through the standard payment gateway when the payment step is reached — no wallet, no running or partial balance, no fee-balance state of any kind to represent or display. This goes further than this entry's original proposed answer (which had ruled out Group C's retired standing-account reading but still guessed the term meant *something* — a single-transaction balance line on a receipt). It doesn't. The client's answer closes the question entirely rather than narrowing it to a smaller inference.
 
-**Confidence:** Medium-high. The retired-account reading is confidently ruled out (there's nothing here for it to describe); the "single-transaction balance line" reading is the most natural remaining one but isn't independently confirmed by source.
+**Downstream correction:** two service-flow files, #6 and #10, had actually carried a "Fee Balance Information" line in their own Output sections (Section 15) — both corrected 2026-08-15, the line removed. #10 was additionally missing a Payment Receipt line entirely (every other fee-bearing service in the module has one), so that was added in its place. #11–#16 (siblings of #10 under the same source-row inheritance) were checked directly and already correctly listed Payment Receipt with no Fee Balance reference — no change needed there.
 
-**Affects:** `payments.md`'s Payment Artefacts section; no service-flow file changes needed unless the client's answer changes what the receipt UI should show.
+**Confidence:** Client data (now settled).
+
+**Affects:** `payments.md`'s Payment Artefacts section (rewritten to state the confirmed answer, not the prior inference); #6 and #10's Output sections (Fee Balance Information removed; #10 additionally gained the Payment Receipt line it was missing).
 
 ---
 
@@ -221,17 +225,17 @@ B1 above resolved the *service-flow* files' role attribution (Landlord primary, 
 
 ## Summary
 
-**Updated 2026-08-15 — all fifteen questions resolved, including D1.** 11 by proposed position (unchallenged), 3 by direct client confirmation, and D1 by applying the module's own activity-scoped access principle rather than requiring a client decision.
+**Updated 2026-08-15 — every question in this document is now resolved.** 11 by proposed position (unchallenged), 3 by direct client confirmation (A5, A7, C1), C2 by a fourth client confirmation, and D1 by applying the module's own activity-scoped access principle rather than requiring a client decision.
 
 | Area | Questions | Resolved | Awaiting client data |
 | :---- | :---: | :---: | :---: |
 | A. Payment Timing | 7 | 7 | 0 |
 | B. Role Attribution | 5 | 5 | 0 |
-| C. Payment Artefacts | 2 | 1 | 0 (1 open, see below) |
+| C. Payment Artefacts | 2 | 2 | 0 |
 | D. Documentation Completeness | 1 | 1 | 0 |
-| **Total** | **15** | **14** | **0** |
+| **Total** | **15** | **15** | **0** |
 
-C2 ("Fee Balance" terminology) is the only item remaining genuinely undecided, and it has no file depending on its answer — low priority, not urgent.
+Nothing remains open. This document's original client-facing list (A5, A7, C1) plus C2, added later, are all answered. D1, this module's one non-payment open item, is resolved by design principle rather than a client answer.
 
 **A found-but-not-yet-executed gap, closed 2026-08-15 in a later audit pass:** B3 above had recommended a clarifying note for #34's "Financial Institution" applicant category since this analysis was first written, but the note was only ever added to this document, not to #34's own service-flow file — a decision-vs-execution gap of exactly the kind this module has had to close repeatedly elsewhere. It's fixed now.
 
@@ -246,6 +250,7 @@ C2 ("Fee Balance" terminology) is the only item remaining genuinely undecided, a
 | **B1** — conflict check found nothing blocking; proposed resolution adopted | #23, #24's Who Can Apply |
 | **B3** | #23, #24, #25's Who Can Apply (Property Management Company removed); #34's Who Can Apply (clarifying note added, later pass) |
 | **C1** — client confirmed: no wallet mechanism exists | `payments.md`'s Settlement Mechanism section (not #6's file, which never had the reference — see C1 above) |
+| **C2** — client confirmed: no Fee Balance concept exists at all | `payments.md`'s Payment Artefacts section rewritten; #6 and #10's Output sections corrected |
 | **D1** — resolved by applying the module's own activity-scoped access principle | `roles-and-responsibilities.md` (explanatory note and cross-references added) |
 
-This document's client-facing list is now empty. C2 remains genuinely open but low-priority, not blocking anything.
+This document's client-facing list is now empty, and every question it originally raised — including the two (C2, D1) that were still open as of the last audit pass — is resolved. Nothing in this module's role attribution or payment documentation is waiting on a decision.
