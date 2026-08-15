@@ -4,7 +4,7 @@ module: individual-user
 type: service-flow
 status: current
 source_type: sourced
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -41,6 +41,8 @@ The service allows an eligible applicant to request a property valuation by subm
 * Authorized Representative acting under a valid Power of Attorney  
 * Financial Institution (where legally authorized)  
 * Individual User with legal authority or a legitimate interest, where permitted by RERAN regulations
+
+**Note on "Financial Institution," added 2026-08-15 (`open-questions.md` B3):** this is a Group C entity (a bank, mortgage provider, or similar Financial & Trust Institution) reaching into this Individual User service as a *requester* — for example, a lender wanting a valuation before approving a mortgage — not a Group C role acting as an Individual User. It is not one of this module's own six roles and doesn't need to become one; it's simply naming a legitimate non-individual applicant category the source allows for this specific service. B3 recommended this clarifying note when the question was first analyzed; it hadn't actually been added to this file until now.
 
 ## 5. Prerequisites
 
