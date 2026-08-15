@@ -3,12 +3,13 @@ project: RERAN
 module: individual-user
 type: overview
 status: current
-updated: 2026-08-10
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
+  - "RERAN/modules/individual-user/payments.md"
 tags:
   - individual-user
   - services-overview
@@ -149,7 +150,7 @@ These are common platform capabilities available to every Individual User.
 * Services Catalog  
 * Applications  
 * Documents  
-* Payments *(All applicable RERAN services are chargeable.)*  
+* Payments *(Most RERAN services are chargeable, but not all — corrected 2026-08-15. [payments.md](payments.md) documents five sourced no-fee exceptions (Services #17, #18, #33, and the Owner/Entity Information Amendment component of #7, alongside the already-correctly-documented #40 and #42), and a systemic payment-timing documentation defect affecting at least fifteen of Services #1–#39. See `open-questions.md` B1–B2 for what's confirmed vs. still pending client input.)*  
 * Notifications  
 * Profile & KYC  
 * Help & Support
