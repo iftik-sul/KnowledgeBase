@@ -4,7 +4,7 @@ module: individual-user
 type: service-flow
 status: current
 source_type: sourced
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -98,9 +98,11 @@ Applicable according to the RERAN fee schedule.
 
 ## 9. Payment Required
 
-**Yes**
+**Yes — seller only.**
 
-Payment must be completed before the property sale registration application is submitted.
+Payment must be completed by the seller before the property sale registration application is submitted. The purchaser does not pay a separate fee to participate; their side of the transaction is confirmation and document upload only.
+
+*(Corrected 2026-08-15 — this section previously didn't specify who pays, and Section 12's Processing Workflow showed a second "Review Service Fee → Complete Payment" step inside the purchaser's own sub-flow, implying both parties pay independently. That's inconsistent with this file's own Section 13 (only one Payment Pending/Payment Successful pair in the whole status flow), Section 20 ("payment is completed before submission," singular, no seller/purchaser distinction), and Business Rule 6 (same). It's also inconsistent with this service's own Pattern C siblings — #8 and #9, both checked directly, show only the primary applicant paying; the counterparty's sub-flow in both is confirmation-and-documents only, no payment step. The purchaser-side payment step in Section 12 has been removed as a documentation duplication artifact, not a sourced requirement — see Section 12 below.)*
 
 ## 10. Processing Authority
 
@@ -162,10 +164,6 @@ Enter Purchaser Information
 ↓  
 Upload Required Documents  
 ↓  
-Review Service Fee  
-↓  
-Complete Payment  
-↓  
 Submit Response
 
 ↓
@@ -177,6 +175,8 @@ Approval
 Property Sale Registered  
 ↓  
 Download Sale Registration Documents
+
+*(Corrected 2026-08-15 — the purchaser's sub-flow previously included "Review Service Fee → Complete Payment" before "Submit Response," mirroring the seller's steps. Removed — see Section 9 above for the full reasoning. The purchaser confirms and uploads documents; only the seller pays.)*
 
 ## 13. Application Status Flow
 
@@ -305,7 +305,7 @@ Upon successful approval, the system generates:
 * OTP verification is completed before purchaser participation.  
 * Purchaser reviews and accepts the property information.  
 * Required documents are uploaded successfully.  
-* Payment is completed before submission.  
+* Payment is completed by the seller before submission — the purchaser is not charged a separate fee. *(Corrected 2026-08-15 — see Section 9.)*  
 * Application receives a unique reference number.  
 * RERAN reviews and processes the application.  
 * Approved applications create an official property sale record.  
@@ -320,7 +320,7 @@ Upon successful approval, the system generates:
 3. A unique booking reference number must be generated for every sale transaction.  
 4. The purchaser must verify their identity using OTP before participating in the transaction.  
 5. Both seller and purchaser must complete their respective parts of the workflow before the application proceeds for review.  
-6. Payment must be completed before the application is submitted.  
+6. The seller must complete payment before the application is submitted; the purchaser's part of the workflow does not include a separate payment step. *(Corrected 2026-08-15 — see Section 9.)*  
 7. Registering a property sale records the sale transaction but does not automatically transfer legal ownership.  
 8. Ownership transfer must be completed through the **Transfer Property Ownership** service after the sale registration is approved.  
 9. Properties with multiple owners must obtain all required owner approvals before the sale can be approved.  
