@@ -18,7 +18,7 @@ tags:
 
 **Proposed.** Validation patterns shared across Group C screens. Screens link here rather than restating them.
 
-> **Corrected 2026-08-15.** This document previously described a six-scope permission model (`file`, `certify`, `escrow`, `audit`, `settlement`, `admin`) gating every action, a maker≠checker rule barring a user from certifying their own filing, and a Settlement section describing a standing pre-funded account. All three are retired — see `navigation.md` for the confirmed unified-access model and `open-questions.md` A1, B1, B11 for the decisions behind each correction.
+> **Corrected 2026-08-15, twice.** This document previously described a six-scope permission model, a maker≠checker rule, and a Settlement section describing a standing pre-funded account — all retired. **A second pass, later the same day, found the Payments section's rewrite itself contained a functionally serious error**: Rule 1 said submission is blocked until payment succeeds "for every service that charges a fee," which is backwards for Services #12 and #18 — both source RERA's decision *before* the counter payment, not after. Taken literally, that rule would have made #12 and #18 impossible to ever submit. Fixed below.
 
 ---
 
@@ -39,12 +39,20 @@ Every action is available to any of the institution's four Group C roles — the
 
 ## Payments
 
-Per answers B1 and B11 (both confirmed by client decision), Group C pays per-transaction via the shared platform gateway — upfront, before lodging, for Services #1 and #3–#11; at the point of service for Services #12–#18; not at all for Service #2. There is no standing account, and nothing left to settle after approval.
+**Corrected 2026-08-15, second pass.** Group C runs three payment *timings*, not two, once every service is checked individually rather than trusted against a module-wide summary:
 
-1. **Submission is blocked until payment succeeds**, for every service that charges a fee. This replaces the previous rule, under which submission was never blocked by payment and insufficiency only surfaced later at settlement — there is no later stage left; payment happens at or before lodging for every fee-bearing service.
-2. A failed payment at checkout is retryable and is not an application-lifecycle event — nothing is submitted, certified, or audited until payment succeeds.
+* **Upfront, before lodging** — Services #1 and #3–#11, via the shared platform gateway.
+* **At the point of service, before RERA's decision** — Services #13–#17, at a Trustee Centre or Land Department counter.
+* **At the point of service, after RERA's decision** — Services #12 and #18, at the counter, once approved.
+* **No fee at all** — Service #2.
+
+There is no standing account anywhere in Group C, but **#12 and #18 do have something to settle after approval** — the counter payment step — even though it isn't a settlement-account balance. "Nothing left to settle after approval," a claim this section previously made module-wide, was true for sixteen of the eighteen services and wrong for two.
+
+1. **Submission is blocked until payment succeeds, for Services #1 and #3–#17 only.** For #12 and #18, the opposite order applies: the application is lodged and audited *first*, and payment is collected only once RERA has approved it, at the counter. Do not build a single "block submission on unpaid" rule against all fee-bearing services — it would make #12 and #18 impossible to submit at all.
+2. A failed payment at checkout is retryable and is not an application-lifecycle event, for #1 and #3–#17 — nothing is submitted, certified, or audited until payment succeeds. **This does not apply to #12/#18**, where there is no checkout at lodging to fail; see rule 5 below for their payment-failure scenario instead.
 3. Service #2 (Cancellation) presents no payment step at all, confirmed 2026-08-15 (`open-questions.md` B11) — this is not an omission to validate against; the service genuinely has no fee.
-4. **Removed 2026-08-15.** The low-balance-threshold setting, the negative-balance block, and the 30-calendar-day unsettled-approval expiry (previously tied to `open-questions.md` B3, B4) no longer apply to any Group C service — there is no balance to fall below zero and no post-approval unsettled state to lapse from. `open-questions.md` B3 itself was not revisited by either payment correction and remains as written there, flagging a tension rather than resolving it — see [payments.md](../payments.md#additional-statuses).
+4. The low-balance-threshold setting, the negative-balance block, and the 30-calendar-day unsettled-approval expiry (previously tied to `open-questions.md` B3, B4) do not apply to any Group C service — there is no standing balance to fall below zero anywhere in the module. `open-questions.md` B3 itself was not revisited by any payment correction and remains as written there, flagging a tension rather than resolving it — see [payments.md](../payments.md#additional-statuses).
+5. **Added 2026-08-15, second pass.** For #12/#18, an approved application that hasn't yet been paid at the counter shows `Approved — Awaiting Payment` (see [status-badges.md](status-badges.md#application-status)). What happens if the customer never returns to pay is not addressed by any source document or client decision — flagged in `payments.md`'s To Confirm — Summary, not resolved here.
 
 ## Documented Reasoning
 
@@ -70,4 +78,4 @@ Two users in the same institution may not hold the same record in an editing sta
 
 ## Audit
 
-Per FR-22, every create, edit, submit, certify, return, approve, reject and document action is written to the audit timeline, capturing the acting user and the role they held at the time. Nothing in the module is editable after submission except through a documented return. **Corrected 2026-08-15** — "settle" is removed from the list of logged actions; there is no settle action left in the module.
+Per FR-22, every create, edit, submit, certify, return, approve, reject and document action is written to the audit timeline, capturing the acting user and the role they held at the time. Nothing in the module is editable after submission except through a documented return. **Corrected 2026-08-15** — "settle" is removed from the list of logged actions; there is no self-service settle action anywhere in the module, though #12/#18's counter payment is still logged as an event when it happens.
