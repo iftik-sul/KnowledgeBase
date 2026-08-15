@@ -18,7 +18,6 @@ tags:
   - auditing-company
   - cancellation
 ---
-
 # Service #2 – Cancellation of Account Trustee & Auditing Company
 
 **Service Category:** Institutional Approval Services
@@ -88,7 +87,7 @@ Not specified in source. Row 29's workflow lists no payment step, unlike row 28 
 
 **Waiting time: 29 business hours; Service delivery: 28 business hours.**
 
-Sourced from row 29 — identical figures to Service #1. Per `open-questions.md` A6, waiting time is read as the queue/counterparty portion and delivery time as RERA's own processing; this reading needs explicit client confirmation and remains genuinely open as of 2026-08-15.
+Sourced from row 29 — identical figures to Service #1. Per `open-questions.md` A6, waiting time is read as the queue/counterparty portion and delivery time as RERA's own processing. **Confirmed 2026-08-15 (client decision)** — this two-number reading is correct; no new SLA figure is needed. *(Corrected 2026-08-15 — previously "needs explicit client confirmation and remains genuinely open"; the client has since confirmed this reading directly, resolving it, the same as Service #1.)*
 
 ## 12. Processing Workflow
 
