@@ -41,7 +41,9 @@ The developer submits a request identifying the mortgage, the financing institut
 
 Any user of a registered developer account, whatever role they hold — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, or Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../navigation.md).
 
-*Typically filed in practice by the Escrow Liaison.* That is a description of customary practice, not a restriction — the role recorded against the submission is audit-trail attribution only.
+*Typically filed in practice by the Escrow Liaison* — a documented judgment call, not an uncontested fact. **Corrected 2026-08-15 (issue #37).** The master service table's own Responsible Role column for this row reads **"Sales & Disclosure Officer,"** not Escrow Liaison — a disagreement checked systematically across all seven escrow services (#8–#12, #20, #21). All seven rows are attributed to Sales & Disclosure Officer (with or without "/ Admin Officer") in the source table; none is attributed to Escrow Liaison. `roles-and-responsibilities.md`'s Escrow Liaison description — "coordinates trustee/auditor, files escrow statements and milestone-release requests" — is a near-verbatim match to what these seven services actually do, and reads as the more considered source: the source table's role column looks like a coarse, category-level default applied across nearly the whole Real Estate Development Services section, not a genuine per-service judgment — the same shape Group C's A4 finding identified in its own source table's role column. This document follows that precedent and treats Escrow Liaison as the better-reasoned typical attribution, not the source table's — but this is a stated judgment call, not a sourced fact either way. **It has no access consequence**: any of the four Group B roles may file this application regardless of which is "typical."
+
+That is a description of customary practice, not a restriction — the role recorded against the submission is audit-trail attribution only.
 
 ## 5. Prerequisites
 
