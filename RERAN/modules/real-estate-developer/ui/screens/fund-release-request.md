@@ -19,9 +19,11 @@ tags:
 
 The form used to prepare and submit a milestone-based fund release request, reached from [Escrow Details](escrow-details.md). The source documents a single variant, under the Escrow Liaison heading, with no second variant to reconcile. It is reachable and actionable by all four roles.
 
+> **Corrected 2026-08-15, second pass.** This screen's own Access line already said "all four roles," but its Purpose still described the workspace as being provided "for the Escrow Liaison," and Section 9 gated Reply on an unspecified "when permitted." Both fixed below — this screen, like [company-profile.md](company-profile.md), had no role variant to merge and appears to have been missed by the earlier access-model correction pass for that reason.
+
 ## Purpose
 
-Provide the Escrow Liaison with a complete operational workspace to prepare, validate, and submit a milestone-based fund release request. The liaison can specify the construction milestone, request the eligible release amount, upload supporting documents, respond to bank or RERA queries, and monitor the approval process until funds are released.
+Give any developer user a complete operational workspace to prepare, validate, and submit a milestone-based fund release request. Any user can specify the construction milestone, request the eligible release amount, upload supporting documents, respond to bank or RERA queries, and monitor the approval process until funds are released — typically the Escrow Liaison in practice, but not exclusively.
 
 ## Layout
 
@@ -239,8 +241,10 @@ Each message includes:
 
 #### **Actions**
 
-* Reply *(when permitted)*  
+* Reply
 * View Attachment
+
+**Corrected 2026-08-15, second pass** — Reply previously read "Reply (when permitted)." There is no permission gate left to qualify this with; Reply is available to any user on any message where a reply is the applicable next action, governed by the message's own state, not by who is viewing.
 
 Messages are displayed in chronological conversation format.
 
@@ -342,4 +346,4 @@ Fund Release Request
 * The system should automatically calculate the **maximum eligible release amount** based on the approved milestone schedule and escrow balance.  
 * Supporting documents from engineers and quantity surveyors are mandatory before submission.  
 * Once submitted, all actions and communications should be recorded in the **Activity Timeline** for audit and regulatory compliance.  
-* Requests that are **Approved** or **Funds Released** become read-only, except for viewing and downloading supporting information.
+* Requests that are **Approved** or **Funds Released** become read-only, except for viewing and downloading supporting information — a lifecycle rule, applying to every user equally.
