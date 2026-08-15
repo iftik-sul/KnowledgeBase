@@ -5,9 +5,10 @@ type: service-flow
 status: draft
 contains_proposals: true
 source_type: sourced
-updated: 2026-08-10
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/modules/real-estate-developer/ui/screens/property-registrations.md"
   - "RERAN/modules/real-estate-developer/ui/screens/property-registration-details.md"
 tags:
@@ -36,9 +37,11 @@ The developer selects the property (unit) within a registered project, fills in 
 
 ## 4. Who Can Apply
 
-* Project Registration Officer *(submits via the Property Registrations screen — see Section 16 note on role assignment)*
+Any user of a registered developer account, whatever role they hold — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, or Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../navigation.md).
 
-> **Source/UI role note.** The master table names "Sales & Disclosure Officer / Admin Officer" as the responsible role for this service. The matching UI screen, `property-registrations.md`, is scoped to the **Project Registration Officer's** sidebar in this module's UI documentation — Sales & Disclosure Officer's sidebar has no Property Registrations entry. Documenting both facts rather than resolving the discrepancy; flagged in the PR description as a source/UI role mismatch that applies to rows 1–7 and 19 alike.
+*Typically filed in practice by the Project Registration Officer.* That is a description of customary practice, not a restriction — the role recorded against the submission is audit-trail attribution only.
+
+> **Source/UI role mismatch — resolved 2026-08-15 by the unified-access decision.** This section previously flagged a discrepancy applying to rows 1–7 and 19: the master table names "Sales & Disclosure Officer / Admin Officer" as the responsible role for these services, while the matching UI screen (`property-registrations.md`) was scoped to the **Project Registration Officer's** sidebar, the Sales & Disclosure Officer having no Property Registrations entry at all. The two facts were documented side by side rather than reconciled, because reconciling them meant choosing which role held the permission. With access no longer gated by role, there is no permission to assign: both roles — and the other two — reach this service and its screens. The source's named role and the screen's former sidebar scoping now both read as typical practice, and no longer conflict.
 
 ## 5. Prerequisites
 
@@ -79,11 +82,11 @@ The developer selects the property (unit) within a registered project, fills in 
 
 ## 8. Service Fee
 
-Applicable according to the RERAN fee schedule.
+Applicable according to the RERAN fee schedule. Paid through the shared platform payment gateway, per transaction. There is no standing or pre-funded RERA-fee account for developers; each application is paid for on its own.
 
 ## 9. Payment Required
 
-**Yes** — the workflow selects a payment method before submission.
+**Yes — before RERA's decision.** The source workflow places payment at the point of submission, ahead of any review: the developer selects a payment method and sends the application in one step. Paid per transaction through the shared platform payment gateway.
 
 ## 10. Processing Authority
 

@@ -5,9 +5,10 @@ type: service-flow
 status: draft
 contains_proposals: true
 source_type: sourced
-updated: 2026-08-10
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/modules/real-estate-developer/ui/screens/fund-release-request.md"
   - "RERAN/modules/real-estate-developer/ui/screens/fund-release-request-details.md"
   - "RERAN/modules/financial-trust-institutions/ui/screens/escrow-request-queue.md"
@@ -37,7 +38,9 @@ The developer submits a fund release request against a project's escrow account,
 
 ## 4. Who Can Apply
 
-* Escrow Liaison
+Any user of a registered developer account, whatever role they hold — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, or Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../navigation.md).
+
+*Typically filed in practice by the Escrow Liaison.* That is a description of customary practice, not a restriction — the role recorded against the submission is audit-trail attribution only.
 
 ## 5. Prerequisites
 
@@ -60,11 +63,13 @@ The developer submits a fund release request against a project's escrow account,
 
 ## 8. Service Fee
 
-Applicable according to the RERAN fee schedule.
+**Not a fee-collecting service.** This service disburses funds *to* the developer from the project escrow account; RERA is not collecting a service fee here, and the source workflow contains no payment step.
+
+> The escrow account this draws on is a regulated holding account for sale proceeds and construction-milestone releases. It is not a pre-funded RERA-fee account, and the move to per-transaction fee payment does not apply to it.
 
 ## 9. Payment Required
 
-Not applicable — this service disburses funds to the developer rather than collecting a fee from them. **Proposed**: a processing fee may still apply per the standard fee schedule; needs client confirmation.
+Not applicable — this service disburses funds to the developer rather than collecting a fee from them. **Proposed**: a processing fee may still apply per the standard fee schedule, in which case it would be charged per transaction through the shared platform payment gateway; needs client confirmation.
 
 ## 10. Processing Authority
 

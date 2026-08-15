@@ -5,9 +5,10 @@ type: service-flow
 status: draft
 contains_proposals: true
 source_type: sourced
-updated: 2026-08-10
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/modules/real-estate-developer/ui/screens/projects.md"
   - "RERAN/modules/real-estate-developer/ui/screens/project-details.md"
 tags:
@@ -34,7 +35,9 @@ RERA first issues the developer a real estate license and designates a username 
 
 ## 4. Who Can Apply
 
-* Project Registration Officer
+Any user of a registered developer account, whatever role they hold — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, or Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../navigation.md).
+
+*Typically filed in practice by the Project Registration Officer.* That is a description of customary practice, not a restriction — the role recorded against the submission is audit-trail attribution only.
 
 ## 5. Prerequisites
 
@@ -68,11 +71,11 @@ RERA first issues the developer a real estate license and designates a username 
 
 ## 8. Service Fee
 
-Applicable according to the RERAN fee schedule; paid before certificate issuance.
+Applicable according to the RERAN fee schedule. Paid through the shared platform payment gateway, per transaction. There is no standing or pre-funded RERA-fee account for developers; each application is paid for on its own.
 
 ## 9. Payment Required
 
-**Yes**
+**Yes — after RERA's decision.** The source workflow places the audit/accept-or-reject step *before* the fee is paid; payment is what releases the output, not what admits the application to review. Paid per transaction through the shared platform payment gateway. This is a genuine payment-timing exception, verified against this service's own source row rather than inferred from neighbouring services.
 
 ## 10. Processing Authority
 

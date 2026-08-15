@@ -5,9 +5,10 @@ type: service-flow
 status: draft
 contains_proposals: true
 source_type: sourced
-updated: 2026-08-10
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/modules/real-estate-developer/ui/screens/property-registration-details.md"
 tags:
   - real-estate-developer
@@ -35,7 +36,9 @@ The developer submits a separation or annexation request identifying the affecte
 
 ## 4. Who Can Apply
 
-* Project Registration Officer
+Any user of a registered developer account, whatever role they hold — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, or Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../navigation.md).
+
+*Typically filed in practice by the Project Registration Officer.* That is a description of customary practice, not a restriction — the role recorded against the submission is audit-trail attribution only.
 
 ## 5. Prerequisites
 
@@ -59,11 +62,11 @@ The developer submits a separation or annexation request identifying the affecte
 
 ## 8. Service Fee
 
-Applicable according to the RERAN fee schedule.
+Applicable according to the RERAN fee schedule. Paid through the shared platform payment gateway, per transaction. There is no standing or pre-funded RERA-fee account for developers; each application is paid for on its own.
 
 ## 9. Payment Required
 
-Not specified in the source. **Proposed**: yes, consistent with other title-issuance services; needs client confirmation.
+**Yes — after RERA's decision.** The source workflow places the audit/accept-or-reject step *before* the fee is paid; payment is what releases the output, not what admits the application to review. Paid per transaction through the shared platform payment gateway. This is a genuine payment-timing exception, verified against this service's own source row rather than inferred from neighbouring services.
 
 ## 10. Processing Authority
 
@@ -87,6 +90,8 @@ Submit Application Online
 ↓
 RERA Reviews Application
 ↓
+Pay Fees via Payment Gateway
+↓
 Electronic Certificate of Title / Title Deed Issued
 ↓
 Electronic Map Issued
@@ -100,6 +105,10 @@ Submitted
 Under Review
 ↓
 Approved
+↓
+Payment Pending
+↓
+Payment Successful
 ↓
 Updated
 
@@ -129,6 +138,7 @@ Updated
 ## 17. UI Screens
 
 * Property Registration Details
+* Payment
 * Application Submitted
 
 ## 18. API Requirements
@@ -136,6 +146,9 @@ Updated
 * Retrieve Property/Parcel Records
 * Submit Separation/Annexation Application
 * Retrieve Application Status
+* Calculate Service Fee
+* Initiate Payment
+* Verify Payment
 * Generate Electronic Certificate of Title
 * Generate Electronic Map
 * Send Notifications
@@ -147,6 +160,8 @@ Updated
 * Parcel
 * Application
 * Document
+* Payment
+* Payment Transaction
 * Notification
 * Audit Log
 
@@ -156,6 +171,7 @@ Updated
 * System validates the affected properties are registered and, for annexation, adjoining.
 * Approved requests generate an updated Certificate of Title and Map.
 * All activities are recorded in the audit log.
+* Payment is completed after approval and before the title deed and map are issued.
 
 ## 21. Business Rules
 

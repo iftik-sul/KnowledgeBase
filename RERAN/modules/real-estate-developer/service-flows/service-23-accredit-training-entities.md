@@ -5,9 +5,10 @@ type: service-flow
 status: draft
 contains_proposals: true
 source_type: sourced
-updated: 2026-08-10
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/modules/real-estate-developer/navigation.md"
 tags:
   - real-estate-developer
   - service-flow
@@ -55,11 +56,11 @@ An organization applies for accreditation by request; a meeting is held; the app
 
 ## 8. Service Fee
 
-Not specified in the source. **Proposed**: none, given the partnership-agreement framing; needs client confirmation.
+**No RERA service fee is sourced for this service.** The source workflow contains no payment step.
 
 ## 9. Payment Required
 
-Not specified in the source. **Proposed**: no; needs client confirmation.
+**No.** Not required at any point in the sourced workflow. Should the client confirm a fee applies, it would be paid per transaction through the shared platform payment gateway — **proposed**, needs client confirmation.
 
 ## 10. Processing Authority
 

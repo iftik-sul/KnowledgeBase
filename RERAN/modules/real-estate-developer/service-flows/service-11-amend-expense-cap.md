@@ -5,9 +5,10 @@ type: service-flow
 status: draft
 contains_proposals: true
 source_type: sourced
-updated: 2026-08-10
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/modules/real-estate-developer/navigation.md"
 tags:
   - real-estate-developer
   - service-flow
@@ -35,7 +36,9 @@ The developer submits a request naming the current cap, the requested new cap, a
 
 ## 4. Who Can Apply
 
-* Escrow Liaison
+Any user of a registered developer account, whatever role they hold — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, or Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../navigation.md).
+
+*Typically filed in practice by the Escrow Liaison.* That is a description of customary practice, not a restriction — the role recorded against the submission is audit-trail attribution only.
 
 ## 5. Prerequisites
 
@@ -58,11 +61,13 @@ The developer submits a request naming the current cap, the requested new cap, a
 
 ## 8. Service Fee
 
-Applicable according to the RERAN fee schedule.
+**No RERA service fee is sourced for this service.** The source workflow runs from submission through Account Trustee assessment to the escrow department's approval or rejection, with no payment step at any point.
+
+> This is separate from the project escrow account itself, which this service acts upon. That account is a regulated holding account for sale proceeds and construction-milestone releases — not a pre-funded RERA-fee account, and not affected by the move to per-transaction fee payment.
 
 ## 9. Payment Required
 
-Not specified in the source. **Proposed**: not required; needs client confirmation.
+**No.** Not required at any point in the sourced workflow. Should the client confirm that a processing fee does apply, it would be paid per transaction through the shared platform payment gateway like every other Group B fee — **proposed**, needs client confirmation.
 
 ## 10. Processing Authority
 
