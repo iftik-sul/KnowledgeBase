@@ -122,6 +122,8 @@ The Sales & Disclosure Officer:
 
 They make sure every property sale is properly recorded and reported.
 
+> **Confirmed 2026-08-15 (issue #37).** Eight service-flow files — #1 (Register Initial Sale), #2 (Register Initial Rent-to-Own), #3 (Register Initial Usufruct), #4 (Amend Initial Procedures Data), #5 (Complete Initial Procedures Data), #6 (Register Mortgage-Linked Sale), #7 (Transfer Registration Fees), and #19 (Terminate Initial Registration) — previously attributed "typically filed by" to the Project Registration Officer, inherited from an old UI screen's role-gated sidebar scoping rather than checked against this section. All eight are corrected to Sales & Disclosure Officer, matching this role's worked example above and the master service table's own Responsible Role column. This section itself needed no correction — the "How They Work Together" table below already had it right; the service-flow files had drifted from it.
+
 ## 4. Escrow Liaison
 
 ### Who are they?
@@ -152,6 +154,8 @@ The Escrow Liaison:
 6. Updates management on the escrow status.
 
 They ensure construction payments are released according to approved milestones.
+
+> **Confirmed 2026-08-15 (issue #37).** Seven service-flow files — #8 through #12, #20, and #21 — carried the same disagreement in the other direction: the master service table's Responsible Role column says Sales & Disclosure Officer for all seven, not Escrow Liaison, but the actual work matches this section's Escrow Liaison description directly. All seven files now flag the table's disagreement explicitly rather than presenting the Escrow Liaison attribution as uncontested fact.
 
 ## How They Work Together
 
