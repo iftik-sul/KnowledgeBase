@@ -25,9 +25,9 @@ tags:
 
 The **Registration/Amendment of Real Estate Project Details** service issues title-deed-level data for a project — an Electronic Certificate of Title / Title Deed where the project is completed, or an Electronic Map where it is not — reflecting the project's current, detailed data with RERA's Title Deed Data function rather than the general project-registration workflow.
 
-> **Ambiguous screen mapping and near-duplicate concern — flagged, not resolved.** Two open questions:
-> 1. **Which screen.** The output (Title Deed / e-Map) reads like a document-issuance service closer to the property-level registration screens (`property-registration-details.md`) than the project-lifecycle ones (`project-details.md`). Documented against both, without picking one, pending client input.
-> 2. **Near-duplicate with rows 4, 5, 16, 17.** This service's "registration/amendment of project details" overlaps conceptually with Service #4 (Amend Initial Procedures Data), Service #5 (Complete Initial Procedures Data), Service #16 (Rename), and Service #17 (Re-registration) — all of which also update project/property data and reissue a certificate. The source table does not explain the functional boundary between this Title Deed Data Services row and those Real Estate Development Services rows. This is the same class of ambiguity the row 38/39 transposition surfaced in Group C — flagging rather than silently merging or picking one.
+> **Near-duplicate concern with rows 4, 5, 16, 17 — resolved 2026-08-15 (issue #37).** Checked against each of those services' own files rather than the master table's row summaries alone: **#4 and #5 act on a provisional *transaction* registration** (Services #1–#3's individual sale/rent-to-own/usufruct records), not the project record — a different object from this service entirely. **#17 (Re-registration)** is a redo-after-lapse trigger (committee resolution, notice period, fresh unit upload, new Registrar account), not ongoing maintenance — a different trigger from this service's. Neither is a genuine duplicate.
+>
+> **#16 (Rename) is the one real overlap, and the client has confirmed both routes are valid for a name change** — a developer may use the narrow, no-fee Rename Project service, or include the name among the fields changed here. Neither is the sole correct path; whichever the developer selects is what's recorded.
 
 ## 2. Purpose
 
@@ -52,7 +52,7 @@ Any user of a registered developer account, whatever role they hold — Develope
 
 * Project Reference Number
 * Project Completion Status
-* Updated Project Detail Fields
+* Updated Project Detail Fields — **may include the project name**, per the confirmed overlap with Service #16 (see Section 1)
 
 ## 7. Required Documents
 
@@ -140,10 +140,10 @@ Issued
 
 ## 16. Related Services
 
-* Service #4 – Amend Initial Procedures Data *(see the near-duplicate note in Section 1)*
-* Service #5 – Complete Initial Procedures Data *(see the near-duplicate note in Section 1)*
-* Service #16 – Changing the Name of a Real Estate Project
-* Service #17 – Project Re-registration
+* Service #4 – Amend Initial Procedures Data *(different object — acts on a transaction registration, not this project record; see Section 1)*
+* Service #5 – Complete Initial Procedures Data *(different object — same reasoning as #4)*
+* Service #16 – Changing the Name of a Real Estate Project *(confirmed overlap — either route may be used for a name change; see Section 1)*
+* Service #17 – Project Re-registration *(different trigger — redo-after-lapse, not ongoing maintenance; see Section 1)*
 * Service #13 – Registration of Real Estate Project
 
 ## 17. UI Screens
@@ -190,5 +190,5 @@ Issued
 
 1. Only a registered project's details may be registered/amended under this service.
 2. The output document depends on the project's completion status at time of approval.
-3. All submissions, reviews, and notifications must be permanently recorded in the audit trail.
-4. **Functional boundary against Services #4, #5, #16, #17 is not established by the source** — flagged for client confirmation rather than resolved unilaterally.
+3. **A name change may be submitted through this service or through Service #16 — client-confirmed 2026-08-15, issue #37.** Neither is the exclusive path; whichever the developer selects is what's recorded.
+4. All submissions, reviews, and notifications must be permanently recorded in the audit trail.
