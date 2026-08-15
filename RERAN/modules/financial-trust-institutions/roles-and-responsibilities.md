@@ -58,7 +58,7 @@ Registers, modifies and discharges mortgages and finance leases against register
 
 ### Practical Example
 
-A customer completes a mortgage application at the bank. The Mortgage Officer opens the Online Mortgage System, selects the property by title reference, enters the loan particulars and attaches the executed mortgage deed and party identification. The transaction is certified internally, then routed to the RERA Transaction Audit queue. On approval, fees are deducted from the bank's account and the mortgage registration certificate is delivered to both the bank and the property owner.
+A customer completes a mortgage application at the bank. The Mortgage Officer opens the Online Mortgage System, selects the property by title reference, enters the loan particulars, pays the fee upfront via the shared platform gateway, and attaches the executed mortgage deed and party identification. The transaction is certified internally, then routed to the RERA Transaction Audit queue. On approval, the mortgage registration certificate is delivered to both the bank and the property owner. **Corrected 2026-08-15** — previously "fees are deducted from the bank's account" after approval, matching the retired standing-account model; payment now happens upfront, as part of entering the transaction, per `open-questions.md` B1.
 
 ---
 
@@ -149,20 +149,24 @@ A trust account's periodic statement shows a movement the Auditing Bureau Office
 
 ## How They Work Together
 
+**Corrected 2026-08-15, second pass — Stage 5 was still describing the post-approval payment model B1 retired.** This table illustrates the sourced two-gate pattern (Services #3–#11 specifically — see the note below the table), and its "Fees settled" step previously sat after RERA's decision (Stage 4), matching the pre-2026-08-14 standing-account model. That's been wrong since B1 corrected this pattern to pay upfront; Stage 2's own correction note ("reworked 2026-08-14") never propagated to Stage 5, which kept the old ordering unnoticed until now.
+
 | Stage | Role | Action |
 | :---- | :---- | :---- |
-| 1 | Mortgage Officer *(typically — any role may do this)* | Enters the transaction and attaches documentation |
+| 1 | Mortgage Officer *(typically — any role may do this)* | Enters the transaction, pays the fee upfront via the shared platform gateway, and attaches documentation |
 | 2 | Any of the four roles, including the filer *(reworked 2026-08-14 — see below)* | Certifies the transaction internally, where the institution has configured this gate for the service |
 | 3 | — | Routed to the RERA Transaction Audit queue |
 | 4 | Compliance & Escrow Auditor (Group A) | Approves, queries or rejects |
-| 5 | — | Fees settled; output document issued |
+| 5 | — | Output document issued |
 | 6 | Institution Relationship Manager *(typically — any role may do this)* | Retains oversight of institution-wide outcomes |
+
+**Stage 1, corrected 2026-08-15 (second pass).** Payment moved into Stage 1 from the old Stage 5, matching `open-questions.md` B1's upfront-payment correction — the fee is paid as part of entering and lodging the transaction, well before internal certification or RERA's review, not after RERA's decision.
 
 **Stage 2, reworked 2026-08-14.** This row previously read `certify` permission scope (itself a correction of an earlier "Auditing Bureau Officer" version, per answer A1) — a gate only a delegated staff member holding that scope could pass, with maker ≠ checker enforced against the filer of stage 1. Per the client's 2026-08-14 decision, permission scopes are retired module-wide: certification is now an action any of the four roles may perform, including the same person who filed the transaction at stage 1, with the acting user and their role recorded in the audit trail. **A1's scope-based resolution of who may certify is superseded by this decision** — flagging the supersession here rather than rewriting A1 itself, since `open-questions.md` is out of scope for this edit. See [navigation.md](navigation.md#superseded-by-this-document) for the confirmed model.
 
 For escrow work originating with developers, the Account Trustee typically handles stages 1–2 in practice: the request arrives from Group B, the Trustee (or, under the unified model, any other Group C role acting on the queue) assesses and certifies, and it proceeds to the same RERA audit gate.
 
-**The two-gate pattern — sourced for the mortgage and finance-lease lifecycle, not proven universal.** Services #3–#7 source an explicit internal "bank auditor" step before RERA review. The remaining Group C services do not carry the same explicit language in the master service table, and the module's service-flow documents (see `service-flows/`) do not assert a `certify` gate for them by default — each states, service by service, whether the gate is sourced, configurable, or simply not addressed. Treat "every Group C action passes through both gates" as the working design intent for services where the institution enables it, not as a sourced fact for all eighteen. This paragraph previously stated the pattern as unconditional; that overstated what rows 28–45 actually support, and the correction is carried into every screen this document informs — see [ui/README.md](ui/README.md#structural-characteristic).
+**The two-gate pattern — sourced for the mortgage and finance-lease lifecycle, not proven universal.** Services #3–#7 source an explicit internal "bank auditor" step before RERA review. The remaining Group C services do not carry the same explicit language in the master service table, and the module's service-flow documents (see `service-flows/`) do not assert a `certify` gate for them by default — each states, service by service, whether the gate is sourced, configurable, or simply not addressed. Treat "every Group C action passes through both gates" as the working design intent for services where the institution enables it, not as a sourced fact for all eighteen. **This table's Stage 1–6 sequence, including the upfront-payment correction above, describes the #3–#11 pattern specifically** — Services #1, #12, #13–#17, and #18 each have their own payment-timing sequence, documented in `payments.md` and `role-workflows.md`'s Shared Journey, not this table.
 
 ---
 
