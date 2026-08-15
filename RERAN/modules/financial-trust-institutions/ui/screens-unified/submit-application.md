@@ -12,7 +12,6 @@ derived_from:
 tags:
   - financial-trust-institutions
   - ui-spec
-  - unified-portal
   - submit-application
 ---
 
@@ -20,9 +19,7 @@ tags:
 
 **Access:** Any of the institution's four Group C roles — identical screen for every user, for every one of the eighteen services.
 
-> **Regenerated 2026-08-15**, written fresh against the current corrected model. This is the same design concept as the existing 13-screen set's [service-request.md](../screens/service-request.md) — one configurable form behind all eighteen services — redrawn as a wizard rather than a single long form, per this unified set's own structure.
->
-> **Resolved 2026-08-15.** Section 3's field set does *not* survive as a single generic layout across all eighteen services — see Section 3 below, rewritten to describe two layout patterns rather than one.
+> **This is the canonical form screen for all eighteen services, as of 2026-08-15.** The existing single-page `service-request.md` is retired in this screen's favour — see `ui/screens-unified/README.md` for the decision and reasoning. This screen is not a Figma-prompt draft any more; it is the module's one configurable application form.
 
 ## Purpose
 
@@ -46,7 +43,7 @@ Step Navigation (Back / Continue)
 
 ### Section 1 — Service Confirmation
 
-Pre-filled if arriving from [Service Details](service-details.md); otherwise a service picker identical to [Services Catalog](services-catalog.md)'s list. Confirms the service before the rest of the form renders, since every subsequent step depends on which of the eighteen is selected — including, as of this correction, which **layout pattern** the Details step itself uses.
+Pre-filled if arriving from [Service Details](service-details.md); otherwise a service picker identical to [Services Catalog](services-catalog.md)'s list. Confirms the service before the rest of the form renders, since every subsequent step depends on which of the eighteen is selected — including which **layout pattern** the Details step itself uses.
 
 ### Section 2 — Institution & Party Information
 
@@ -57,18 +54,16 @@ Fixed shell fields, same for every service:
 
 ### Section 3 — Service-Specific Details (dynamic)
 
-**Corrected 2026-08-15 — this section does not use one layout for all eighteen services.** Two distinct patterns are needed, determined by the selected service's own `service-flows/service-NN-*.md` Section 6:
+**Full audit completed 2026-08-15.** All eighteen services' Section 6 (Required Information) checked individually. Three distinct patterns are needed, not one:
 
-**Pattern A — Flat fields.** A single set of named inputs, one value each. This is most of the eighteen services. Example, **Mortgage Registration (#3)**: Loan Amount, Mortgage Term, Interest Rate, Mortgagee Details, Mortgage Deed Reference — five fields, five inputs, no repetition.
+| Services | Pattern | Basis |
+| :---- | :---- | :---- |
+| #1, #2, #3–#11, #12, #17 (13 services) | **A — Flat fields** | One value per named field, single entity, no repetition. Checked individually, not assumed — e.g. #12's beneficial-owners list is a *document upload* (Section 7), not a repeatable form field, so it stays Pattern A despite involving multiple people. |
+| **#13 (Sale Procedure — Heirs), #16 (Split Ownership)** | **B — Repeatable groups** | Confirmed against source: #13's heir fields (name, NIN, contact, bank details) are explicitly tagged "(per heir)" in `service-flows/`; #16's owner fields repeat once per resulting parcel, a count the applicant sets earlier in the same step. Both need an add/remove repeatable-group control, not a fixed field set. |
+| **#15 (Update Title Deed Information)** | **C — Field-selection, conditional pairs** | A genuinely different problem from Pattern B: "Field(s) to be Updated" is not entity repetition — it's *attribute selection*. The applicant picks which recorded fields are changing, and the step then shows a Current Value / Requested New Value pair only for the fields picked. Needs a checklist-then-conditional-fields UI, not a repeatable-group UI. |
+| **#14 (Company Shares Sale), #18 (Contract Cancellation)** | **Ambiguous — flagged, not resolved** | Both have plural, unstructured fields ("Selling Shareholder(s)," "Property Registration Number(s)," "Parties to the Contract") with no "(per X)" tag the way #13 has. The source genuinely doesn't disambiguate single-value-listing-multiple-names versus a true repeatable structure. **Default to Pattern A** (a single multi-value text field) until a product decision says otherwise — this is a safe, reversible default, not a resolution of the ambiguity. |
 
-**Pattern B — Repeatable groups.** One or more sub-fields that repeat once per item in a variable-length list, with an add/remove control. **Confirmed needed for at least two services**, both found by checking their Section 6 directly rather than assuming Pattern A would do:
-
-* **Sale Procedure — Heirs (#13):** Full Name, NIN, Contact Information, Share of the Estate, and Bank Account Details, each **per heir** — an application with three heirs needs three repeated groups of these five fields, not five fields total.
-* **Split Ownership (#16):** Number of Resulting Parcels, then Owner(s) of Each Resulting Parcel — an application splitting a property into four parcels needs four repeated owner-detail groups, keyed to a number the applicant enters earlier in the same step.
-
-A single static form template — the assumption this document carried before this correction — cannot render either of these without either an artificial cap on how many heirs or parcels an applicant can enter, or the add/remove repeatable-group control this correction now specifies.
-
-**Not yet audited against the full eighteen.** Only #13 and #16 have been explicitly checked and confirmed to need Pattern B. The remaining sixteen are assumed to be Pattern A based on their Section 6 field lists reading as flat, but nobody has gone through all sixteen specifically looking for a repeatable structure the way #13 and #16 were found — Company Shares Sale (#14)'s "Selling Shareholder(s)" (plural) and Fund Company Registration (#12)'s beneficial-owner document requirement are two candidates worth checking before this list is treated as complete.
+**Result: 13 Pattern A, 2 Pattern B, 1 Pattern C, 2 defaulted-to-A-but-flagged.** This is the complete picture across all eighteen services — no service remains unchecked.
 
 ### Section 4 — Documents
 
@@ -92,14 +87,15 @@ Not applicable — this screen is always mid-workflow once reached.
 
 ## Reused Components
 
-Progress Tracker, Document Uploader, Document Reference Picker, Information Cards, Buttons. **Added 2026-08-15:** a Repeatable Field Group component, for Pattern B services — add/remove a group of sub-fields, with a running count matching whatever quantity field precedes it in the same step (e.g. Split Ownership's Number of Resulting Parcels).
+Progress Tracker, Document Uploader, Document Reference Picker, Information Cards, Buttons. **Repeatable Field Group** — add/remove a group of sub-fields, count tied to a preceding quantity field, for Pattern B (#13, #16). **Conditional Field Selector** — a checklist that reveals a current/new value pair per item checked, for Pattern C (#15).
 
 ## Validation
 
 1. **An application cannot advance past the Payment step, where one applies, until payment succeeds.** For #1 and #3–#11, this means the application cannot reach Review & Submit at all without a successful upfront payment — there is no draft-then-pay-later path.
 2. Required documents (per the selected service's own Section 7) must all be attached before Review & Submit is reachable.
-3. Section 3's field set is entirely determined by the service selected in Section 1 — changing the service selection after entering Section 3 data must warn that service-specific data will be lost, since the field sets are not compatible across services, and switching between a Pattern A and Pattern B service discards a different shape of data, not just different values.
-4. **Added 2026-08-15.** For Pattern B services, the repeatable group count must match any quantity field that governs it (e.g. Split Ownership's parcel count vs. the number of owner groups actually filled in) before Review & Submit is reachable — a mismatch is an error, not a silent truncation or padding.
+3. Section 3's field set — and its pattern (A, B, or C) — is entirely determined by the service selected in Section 1. Changing the service selection after entering Section 3 data must warn that service-specific data will be lost, since switching between patterns discards a different *shape* of data, not just different values.
+4. For Pattern B services, the repeatable group count must match any quantity field that governs it (e.g. Split Ownership's parcel count vs. the number of owner groups actually filled in) before Review & Submit is reachable — a mismatch is an error, not a silent truncation or padding.
+5. For Pattern C (#15), at least one field must be selected before Review & Submit is reachable — an empty "nothing is changing" submission is not a valid update.
 
 ## Access
 
@@ -111,14 +107,15 @@ Identical for all four roles, for every one of the eighteen services. There is n
 Services Catalog / Service Details / Dashboard
 ↓
 Submit Application
-├─ Service Confirmation → Institution & Party → Service-Specific Details (Pattern A or B) → Documents →
+├─ Service Confirmation → Institution & Party → Service-Specific Details (Pattern A, B, or C) → Documents →
 │    [Payment, where applicable] → Review
 └─ Review → Submit → Application Review confirmation → Applications (existing screen set)
 ```
 
 ## Notes
 
-* **This is the one screen in the unified set with the clearest 1:1 purpose match to an existing screen** ([service-request.md](../screens/service-request.md)) — both are "one configurable form behind eighteen services." The design question this document previously carried as open — whether a single generic layout survives across all eighteen — is now resolved: it doesn't, for at least Services #13 and #16, and this document is corrected to specify a second layout pattern rather than assume the first one stretches to cover everything.
-* **`service-request.md` (the existing single-form screen) has the identical unresolved question**, framed differently: its own Section 3 Transaction Details matrix lists "Heir/company/property reference — see each service's Required Information" for #13–#17 without flagging that #13 and #16 specifically need a repeatable structure a single-page form also has to build, not just a wizard step. This isn't a wizard-specific problem — whichever screen design is ultimately kept needs the Repeatable Field Group pattern for these services.
-* **Payment step visibility is service-dependent, not a single fixed step.** This is a direct consequence of the two-model payment split (`payments.md`) and remains a separate, already-handled piece of this screen's design — unaffected by the Pattern A/B correction above.
+* **This screen replaces `service-request.md` outright, not alongside it.** The retire-vs-rewrite question from issue #50 is resolved: the field-matrix problem this screen surfaced (three patterns, not one) applies identically to a single-page form, so it was never a reason to prefer the single-page design. The wizard was chosen because the payment step's three-way conditional behaviour and the Pattern B/C UI needs are both cleaner as dedicated steps than as dynamically-appearing sections on one long page — see `ui/screens-unified/README.md` for the full reasoning.
+* **Pattern C (#15) was not identified until the full audit.** The earlier partial pass (which found #13 and #16) treated "plural field name" as the signal to look for; #15's "Field(s) to be Updated" is plural for a different reason entirely — it names which attributes change, not how many people are involved. Worth remembering as a general lesson: a repeatable-entity problem and a conditional-attribute problem can look similar in a field list and are not the same UI problem.
+* **#14 and #18 are defaulted, not resolved.** If the client or a later design pass determines either genuinely needs multiple structured entries (e.g. a shares sale with three distinct selling shareholders, each needing separate identification), both would move to Pattern B and need the same Repeatable Field Group component #13 and #16 already require — no new component, just a reclassification.
+* Payment step visibility is service-dependent, not a single fixed step — a direct consequence of the two-model payment split (`payments.md`), unaffected by the Pattern A/B/C audit above.
 * Whether internal certification (Pending Internal Certification status) is a step inside this wizard or something that happens entirely after submission, on a separate screen, is not resolved here — this document treats certification as post-submission, consistent with the existing [internal-certification-queue.md](../screens/internal-certification-queue.md) screen owning that step rather than this form.
