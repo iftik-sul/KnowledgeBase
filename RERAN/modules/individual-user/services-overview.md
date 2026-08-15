@@ -150,7 +150,7 @@ These are common platform capabilities available to every Individual User.
 * Services Catalog  
 * Applications  
 * Documents  
-* Payments *(Most RERAN services are chargeable, but not all — corrected 2026-08-15. [payments.md](payments.md) documents five sourced no-fee exceptions (Services #17, #18, #33, and the Owner/Entity Information Amendment component of #7, alongside the already-correctly-documented #40 and #42), and a systemic payment-timing documentation defect affecting at least fifteen of Services #1–#39. See `open-questions.md` B1–B2 for what's confirmed vs. still pending client input.)*  
+* Payments *(Most RERAN services are chargeable, but not all — corrected 2026-08-15. [payments.md](payments.md) documents five sourced no-fee exceptions (Services #17, #18, #33, and the Owner/Entity Information Amendment component of #7, alongside the already-correctly-documented #40 and #42), plus a systemic payment-timing documentation defect that was found and corrected across 20 service-flow files. All findings are now resolved — see `open-questions.md` Section A for the full record, including three questions answered directly by the client.)*  
 * Notifications  
 * Profile & KYC  
 * Help & Support
