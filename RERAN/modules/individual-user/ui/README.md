@@ -30,10 +30,12 @@ Group C (18 services) found it needed three field-layout patterns and built one 
 
 Every one of the 43 services' Required Information sections was checked individually against the others before any service was assigned a pattern, per the standing instruction not to assume a pattern found in one service applies to its neighbours without checking.
 
+**Corrected 2026-08-15 — #43 was missing from this table entirely, found in a later audit pass.** Counting every pattern's service list against the module's own 43-service total left exactly two unaccounted for: #40 (explained separately below, correctly) and #43 (simply never classified anywhere — an omission, not a documented exclusion). #43's own service-flow file already flags a genuine ambiguity the source doesn't resolve: whether an exchange needs both property owners to separately confirm (like #6's purchaser confirmation) or whether one applicant can register on behalf of both. Classified below as Pattern B by default, matching its Title & Land Registration siblings and the fact that the source describes it "from a single applicant's perspective," but flagged rather than silently resolved — if the client confirms both owners must independently confirm, this moves to Pattern C instead, and the wizard gains a second user session the way #6 has.
+
 | Pattern | Shape | Services |
 | :---- | :---- | :---- |
 | **A — Search/Lookup** | Search criteria only; no documents, no confirmation step | #1, #2, #3 |
-| **B — Standard single-applicant** | Applicant + Property + transaction-specific flat fields | #4, #17, #18, #20, #22, #41 |
+| **B — Standard single-applicant** | Applicant + Property + transaction-specific flat fields | #4, #17, #18, #20, #22, #41, #43 (provisional — see note above) |
 | **C — Two-party with counterparty confirmation** | Primary applicant fills and submits; a named second party receives a notification and must separately confirm before the application proceeds | #5, #6, #8, #9, #10, #11, #14 |
 | **D — Amend/release/terminate an existing record** | "Select registered X" step first, then a shorter amendment-specific field set | #7 (two sub-flows), #12, #13, #15, #16, #19 (+ repeatable heir group), #21 (+ repeatable partner group) |
 | **E — Tenancy** | Property + Landlord + Tenant + lease terms; dual online/counter channel with different payment timing | #23, #24, #27 |
@@ -46,7 +48,7 @@ Every one of the 43 services' Required Information sections was checked individu
 
 **#40 (Upload Building Details for Leasing) has no UI at all** — the source specifies it as an off-platform, email-based intake process, not an in-app form (already flagged this way in its own service-flow file). It is documented in this package only as a note on [my-leases.md](screens/my-leases.md), not as a screen.
 
-**#30 and #37 are not independent forms.** #30 (Act on Behalf of Property Owner) validates a Power of Attorney and then hands off into whichever of #4–#35's own forms the representative selects — it reuses those forms' patterns rather than defining a new one. #37 (Remote Property Transactions) does the same after identity verification. Both are documented as routing behaviour inside [submit-application.md](screens-unified/submit-application.md), not as separate wizard patterns.
+**#30 and #37 are not independent forms.** #30 (Act on Behalf of Property Owner) validates a Power of Attorney and then hands off into whichever of #4–#35's own forms the representative selects — it reuses those forms' patterns rather than defining a new one. #37 (Remote Property Transactions) does the same after identity verification. Both are documented as routing behaviour inside [submit-application.md](screens-unified/submit-application.md), not as separate wizard patterns. Neither has an independent fee status either — see `payments.md` Category 9.
 
 ## Screens
 
@@ -92,3 +94,4 @@ None of the 43 service-flow files or the analysis layer describe actual screen d
 1. **Pattern G's ten sub-types (#26)** need their own field/document matrix before the wizard's dispute branch can be built out fully — this package documents the pattern shape and the branching principle, not all ten sub-type field sets individually. Same category of open item as Group C's `service-request.md`/`submit-application.md` field-matrix gap.
 2. **#42's field set is unknown** — its own service-flow file already documents this as the thinnest-specified service in the module, with no confirmed Required Information, output, or status flow. Its screen entry in this package is built on inference from #29's mirror-image shape, flagged as such.
 3. **Whether My Properties / My Leases render as first-class sidebar screens or inline selection steps** was left open in `navigation.md`. This package builds them as first-class screens (the richer option), which is reversible if the client prefers inline selection only.
+4. **#43's pattern is provisional (Pattern B), pending client confirmation of whether an exchange needs two-sided confirmation** — added 2026-08-15. If confirmed two-sided, it moves to Pattern C and needs the same counterparty-confirmation treatment as #5/#6/#9–#11/#14, including a second user session and the Counterparty Confirmation Card component.
