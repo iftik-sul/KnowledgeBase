@@ -4,7 +4,7 @@ module: financial-trust-institutions
 type: service-flow
 status: draft
 contains_proposals: true
-updated: 2026-08-14
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
@@ -38,7 +38,7 @@ The customer (lessee) completes the finance lease arrangement with the instituti
 
 ### Applicant (Lessor Institution)
 
-* Mortgage Officer — owns the finance-lease lifecycle per the source's responsible-role column and the A4 re-derivation  
+* Any of the institution's four Group C roles. **Confirmed 2026-08-15** — previously listed as Mortgage Officer only, on the strength of the source's responsible-role column and the retired A4 re-derivation; `open-questions.md` A4 now confirms no service is role-specific.
 * Trustee Centre Operator (Group G) — assisted mode, entering the transaction on the institution's behalf at the Trustee Centre (C2)
 
 ### Counterparty (Lessee)
@@ -47,7 +47,7 @@ The customer (lessee) completes the finance lease arrangement with the instituti
 
 ## 5. Prerequisites
 
-* Registered RERAN institution (Group C) account, with a Mortgage Officer provisioned.  
+* Registered RERAN institution (Group C) account, with staff provisioned.  
 * Property is registered with RERAN and its title is verified.  
 * Lessor and lessee have agreed finance lease terms before system entry.  
 * Payment has been completed via the shared platform payment gateway before the application is lodged (B1).
@@ -57,7 +57,7 @@ The customer (lessee) completes the finance lease arrangement with the instituti
 ### Institution (Lessor) Information
 
 * Institution Name  
-* Mortgage Officer / Officer Identifier
+* Acting Officer Identifier
 
 ### Lessee Information
 
@@ -105,12 +105,12 @@ Paid upfront by the institution via the shared platform payment gateway, before 
 
 ## 10. Processing Authority
 
-**Two gates**, by extension of the pattern established for mortgage services, since finance lease shares the same Mortgage Officer ownership and Compliance & Escrow Auditor approval:
+**Two gates**, by extension of the pattern established for mortgage services, since finance lease shares the same lender-side origination and Compliance & Escrow Auditor approval:
 
 1. **Internal Certifier** — a functional label, not a role or scope: any of the institution's four Group C users may act as internal certifier, including the person who filed the transaction. **Corrected 2026-08-14** — previously `checker permission scope` (A1/D2), now retired; see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle).  
 2. **Compliance & Escrow Auditor** (Group A).
 
-> **Proposed** — row 34 does not explicitly mention an internal bank-auditor step (unlike rows 30–33, 39, which say "audited by bank auditor"). This is inferred by extension from the mortgage lifecycle sharing the same institutional owner. See Open Questions.
+> **Proposed** — row 34 does not explicitly mention an internal bank-auditor step (unlike rows 30–33, 39, which say "audited by bank auditor"). This is inferred by extension from the mortgage lifecycle sharing the same institutional origination pattern. See Open Questions.
 
 ## 11. Expected Processing Time
 
@@ -124,7 +124,7 @@ Agree Finance Lease Terms
 
 ↓
 
-Mortgage Officer / Trustee Centre Operator
+Institution User / Trustee Centre Operator
 
 Visit Real Estate Registration Trustee Centre *(C2: assisted mode of the same online service)*  
 ↓  
@@ -142,7 +142,7 @@ Internal Certifier
 
 Review Transaction  
 ↓  
-Certify, or Return to Mortgage Officer
+Certify, or Return to Filer
 
 ↓
 
@@ -187,10 +187,9 @@ Completed
 * Payment Failed *(retryable, pre-lodging — see [payments.md](../payments.md))*  
 * Returned by Certifier  
 * Rejected  
-* Withdrawn  
+* Withdrawn
 
-**Corrected 2026-08-14** — `Approved — Awaiting Payment` and `Expired` (B3) removed; see Service #3's Application Status Flow section for the reasoning, which applies identically here.
-* Expired *(B3)*
+**Corrected 2026-08-14** — `Approved — Awaiting Payment` and `Expired` (B3) removed; see Service #3's Application Status Flow section for the reasoning, which applies identically here. **Corrected 2026-08-15** — a stray duplicate `Expired (B3)` bullet, left over from an earlier partial edit, is removed; this section now consistently omits both statuses.
 
 ## 14. Possible Outcomes
 
@@ -267,7 +266,7 @@ Upon successful completion, the system generates:
 
 ## 20. Acceptance Criteria
 
-* Mortgage Officer (or Trustee Centre operator, in assisted mode) can initiate finance lease registration against a registered title.  
+* Any of the institution's four Group C roles (or a Trustee Centre operator, in assisted mode) can initiate finance lease registration against a registered title. **Confirmed 2026-08-15** — not restricted to the Mortgage Officer (A4).  
 * System validates the property is registered and its title is verified.  
 * Internal certifier — any of the four Group C roles, including the filer — can certify or return the transaction before it reaches RERA.  
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
@@ -279,7 +278,7 @@ Upon successful completion, the system generates:
 
 ## 21. Business Rules
 
-1. Only a Mortgage Officer acting under the lessor institution's corporate account, or a Trustee Centre operator acting on its behalf, may initiate finance lease registration.  
+1. Any of the institution's four Group C roles acting under the lessor institution's corporate account, or a Trustee Centre operator acting on its behalf, may initiate finance lease registration. **Confirmed 2026-08-15** — previously restricted to "only a Mortgage Officer"; `open-questions.md` A4 confirms no service is role-specific.  
 2. The property must be registered with RERAN and its title verified.  
 3. The transaction must pass internal institutional certification before routing to RERA. *(Proposed by extension — not explicit in row 34; see Open Questions.)*  
 4. Payment is made via the shared platform payment gateway, upfront, before the application can be lodged — not deducted from a settlement account (B1, corrected 2026-08-14).  

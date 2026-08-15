@@ -4,7 +4,7 @@ module: financial-trust-institutions
 type: service-flow
 status: draft
 contains_proposals: true
-updated: 2026-08-14
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
@@ -33,13 +33,13 @@ Formally discharge a mortgage once it is no longer secured, so the property regi
 
 ## 3. Description
 
-The bank confirms settlement (or other release grounds) of the underlying loan. A Mortgage Officer enters the release into the Online Mortgage System against the existing mortgage record, pays the fee upfront via the shared platform payment gateway, and attaches evidence of settlement. The transaction is certified internally, then audited by RERA using the same workflow structure as mortgage registration. On approval, the mortgage is discharged on the registry, and the output documents — including the Mortgage Release Letter, where the mortgage was itself registered — are delivered to the customer by email. The service can alternatively be processed in assisted mode at a Real Estate Registration Trustee Centre.
+The bank confirms settlement (or other release grounds) of the underlying loan. Any of the institution's four Group C roles enters the release into the Online Mortgage System against the existing mortgage record, pays the fee upfront via the shared platform payment gateway, and attaches evidence of settlement. The transaction is certified internally, then audited by RERA using the same workflow structure as mortgage registration. On approval, the mortgage is discharged on the registry, and the output documents — including the Mortgage Release Letter, where the mortgage was itself registered — are delivered to the customer by email. The service can alternatively be processed in assisted mode at a Real Estate Registration Trustee Centre.
 
 ## 4. Who Can Apply
 
 ### Applicant (Mortgagee Institution)
 
-* Mortgage Officer — primary channel, via the Online Mortgage System  
+* Any of the institution's four Group C roles — primary channel, via the Online Mortgage System. **Confirmed 2026-08-15** — previously listed as Mortgage Officer only; `open-questions.md` A4 confirms no service is role-specific.
 * Trustee Centre Operator (Group G) — assisted mode (C2)
 
 ### Counterparty (Borrower / Property Owner)
@@ -48,7 +48,7 @@ The bank confirms settlement (or other release grounds) of the underlying loan. 
 
 ## 5. Prerequisites
 
-* Registered RERAN institution (Group C) account, with a Mortgage Officer provisioned.  
+* Registered RERAN institution (Group C) account, with staff provisioned.  
 * An existing, active registered mortgage against the property.  
 * The underlying loan has been settled, or other grounds for release apply.  
 * Payment has been completed via the shared platform payment gateway before the application is lodged (B1).
@@ -107,7 +107,7 @@ Confirm Loan Settlement / Release Grounds
 
 ↓
 
-Mortgage Officer
+Institution User (any of the four Group C roles)
 
 Login to Online Mortgage System  
 ↓  
@@ -127,7 +127,7 @@ Internal Certifier
 
 Review Release  
 ↓  
-Certify, or Return to Mortgage Officer
+Certify, or Return to Filer
 
 ↓
 
@@ -264,7 +264,7 @@ Upon successful completion, the system generates:
 
 ## 20. Acceptance Criteria
 
-* Mortgage Officer can select an existing mortgage and submit release information with settlement evidence.  
+* Any of the institution's four Group C roles can select an existing mortgage and submit release information with settlement evidence. **Confirmed 2026-08-15** — not restricted to the Mortgage Officer (A4).  
 * System validates the mortgage is active and registered before allowing release.  
 * Internal certifier — any of the four Group C roles, including the filer — can certify or return the release before it reaches RERA.  
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
@@ -276,7 +276,7 @@ Upon successful completion, the system generates:
 
 ## 21. Business Rules
 
-1. Only a Mortgage Officer, or a Trustee Centre operator acting on the institution's behalf, may initiate a release.  
+1. Any of the institution's four Group C roles, or a Trustee Centre operator acting on the institution's behalf, may initiate a release. **Confirmed 2026-08-15** — previously restricted to "only a Mortgage Officer"; `open-questions.md` A4 confirms no service is role-specific.  
 2. The mortgage being released must be active and registered.  
 3. The transaction must pass internal institutional certification before routing to RERA.  
 4. Payment is made via the shared platform payment gateway, upfront, before the application can be lodged — not deducted from a settlement account (B1, corrected 2026-08-14).  

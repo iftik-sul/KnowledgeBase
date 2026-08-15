@@ -4,7 +4,7 @@ module: financial-trust-institutions
 type: service-flow
 status: draft
 contains_proposals: true
-updated: 2026-08-14
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
@@ -33,13 +33,13 @@ Register a mortgage against a verified title so the lending institution's securi
 
 ## 3. Description
 
-The customer (borrower) completes mortgage requirements directly with the bank — loan approval, valuation, executed mortgage deed. A Mortgage Officer then enters the transaction into the Online Mortgage System, pays the fee upfront via the shared platform payment gateway, and attaches the required documents. The transaction is certified internally by any of the institution's four Group C users, including the person who filed it, before it is sent to RERA's Transaction Audit queue. On approval, the output documents are delivered to the customer by email. The same service can alternatively be processed in assisted mode at a Real Estate Registration Trustee Centre.
+The customer (borrower) completes mortgage requirements directly with the bank — loan approval, valuation, executed mortgage deed. Any of the institution's four Group C roles then enters the transaction into the Online Mortgage System, pays the fee upfront via the shared platform payment gateway, and attaches the required documents. **Corrected 2026-08-15** — this previously named the Mortgage Officer specifically; `open-questions.md` A4 confirms no service is role-specific. The transaction is certified internally by any of the institution's four Group C users, including the person who filed it, before it is sent to RERA's Transaction Audit queue. On approval, the output documents are delivered to the customer by email. The same service can alternatively be processed in assisted mode at a Real Estate Registration Trustee Centre.
 
 ## 4. Who Can Apply
 
 ### Applicant (Lending Institution)
 
-* Mortgage Officer — primary channel, via the Online Mortgage System  
+* Any of the institution's four Group C roles — primary channel, via the Online Mortgage System. **Confirmed 2026-08-15** — previously listed as Mortgage Officer only; `open-questions.md` A4 confirms no service is role-specific.
 * Trustee Centre Operator (Group G) — assisted mode, acting on the institution's behalf at a Real Estate Registration Trustee Centre *(C2: this is the same online service in assisted mode, not a separate channel)*
 
 ### Counterparty (Borrower / Property Owner)
@@ -48,7 +48,7 @@ The customer (borrower) completes mortgage requirements directly with the bank �
 
 ## 5. Prerequisites
 
-* Registered RERAN institution (Group C) account, with a Mortgage Officer provisioned under the corporate account.  
+* Registered RERAN institution (Group C) account, with staff provisioned under the corporate account.  
 * Property is registered with RERAN and its title is verified.  
 * Customer has completed mortgage requirements with the bank (loan approval, valuation, executed mortgage deed) before system entry.  
 * Payment has been completed via the shared platform payment gateway before the application is lodged (B1).
@@ -58,7 +58,7 @@ The customer (borrower) completes mortgage requirements directly with the bank �
 ### Institution Information
 
 * Institution Name  
-* Mortgage Officer Identifier  
+* Acting Officer Identifier  
 * Institution Reference Number
 
 ### Borrower (Property Owner) Information
@@ -130,7 +130,7 @@ Provide Mortgage Documents to Bank
 
 ↓
 
-Mortgage Officer
+Institution User (any of the four Group C roles)
 
 Login to Online Mortgage System  
 ↓  
@@ -150,7 +150,7 @@ Internal Certifier (any Group C role, including the filer)
 
 Review Transaction  
 ↓  
-Certify, or Return to Mortgage Officer
+Certify, or Return to Filer
 
 ↓
 
@@ -292,7 +292,7 @@ Upon successful completion, the system generates:
 
 ## 20. Acceptance Criteria
 
-* Mortgage Officer can initiate mortgage registration against a registered title (or a Trustee Centre operator, in assisted mode).  
+* Any of the institution's four Group C roles can initiate mortgage registration against a registered title (or a Trustee Centre operator, in assisted mode). **Confirmed 2026-08-15** — not restricted to the Mortgage Officer (A4).  
 * System validates the property is registered and its title is verified before registration.  
 * Internal certifier — any of the four Group C roles, including the filer — can certify or return the transaction before it reaches RERA.  
 * Required information and documents are validated before submission.  
@@ -306,7 +306,7 @@ Upon successful completion, the system generates:
 
 ## 21. Business Rules
 
-1. Only a Mortgage Officer acting under the lending institution's corporate account, or a Trustee Centre operator acting on the institution's behalf in assisted mode, may initiate mortgage registration.  
+1. Any of the institution's four Group C roles acting under the lending institution's corporate account, or a Trustee Centre operator acting on the institution's behalf in assisted mode, may initiate mortgage registration. **Confirmed 2026-08-15** — previously restricted to "only a Mortgage Officer"; `open-questions.md` A4 confirms no service is role-specific.  
 2. The property must be registered with RERAN and its title verified before a mortgage can be registered against it.  
 3. The transaction must pass internal institutional certification before it is routed to RERA. Certification is an unrestricted action any of the institution's four Group C users may perform, including the filer — not a maker-checker restriction and not gated by a permission scope.  
 4. Payment is made via the shared platform payment gateway, upfront, before the application can be lodged — not deducted from a settlement account, and not collected after approval (B1, corrected 2026-08-14).  

@@ -4,7 +4,7 @@ module: financial-trust-institutions
 type: service-flow
 status: draft
 contains_proposals: true
-updated: 2026-08-14
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
@@ -33,13 +33,13 @@ Keep the property registry accurate when the beneficiary of a registered mortgag
 
 ## 3. Description
 
-The outgoing and incoming institutions agree the assignment of the mortgage. A Mortgage Officer at the transferring (or receiving) institution enters the transfer into the Online Mortgage System against the existing mortgage record, pays the fee upfront via the shared platform payment gateway, and attaches the assignment documentation and the new mortgagee's details. The transaction is certified internally, then audited by RERA using the same workflow structure as mortgage registration (Service #3). On approval, the updated output documents are delivered to the customer by email. The service can alternatively be processed in assisted mode at a Real Estate Registration Trustee Centre.
+The outgoing and incoming institutions agree the assignment of the mortgage. Any of the initiating institution's four Group C roles enters the transfer into the Online Mortgage System against the existing mortgage record, pays the fee upfront via the shared platform payment gateway, and attaches the assignment documentation and the new mortgagee's details. The transaction is certified internally, then audited by RERA using the same workflow structure as mortgage registration (Service #3). On approval, the updated output documents are delivered to the customer by email. The service can alternatively be processed in assisted mode at a Real Estate Registration Trustee Centre.
 
 ## 4. Who Can Apply
 
 ### Applicant (Transferring or Receiving Institution)
 
-* Mortgage Officer — primary channel, via the Online Mortgage System  
+* Any of the institution's four Group C roles — primary channel, via the Online Mortgage System. **Confirmed 2026-08-15** — previously listed as Mortgage Officer only; `open-questions.md` A4 confirms no service is role-specific.
 * Trustee Centre Operator (Group G) — assisted mode (C2)
 
 ### Counterparty (Borrower / Property Owner)
@@ -48,7 +48,7 @@ The outgoing and incoming institutions agree the assignment of the mortgage. A M
 
 ## 5. Prerequisites
 
-* Registered RERAN institution (Group C) account, with a Mortgage Officer provisioned.  
+* Registered RERAN institution (Group C) account, with staff provisioned.  
 * An existing, active registered mortgage against the property.  
 * The receiving institution is itself a registered RERAN Group C institution able to hold a registered mortgage.  
 * Payment has been completed via the shared platform payment gateway before the application is lodged (B1).
@@ -113,7 +113,7 @@ Obtain Mortgagor's Consent, Where Required
 
 ↓
 
-Mortgage Officer (Initiating Institution)
+Institution User (any of the four Group C roles, initiating institution)
 
 Login to Online Mortgage System  
 ↓  
@@ -133,7 +133,7 @@ Internal Certifier
 
 Review Transfer  
 ↓  
-Certify, or Return to Mortgage Officer
+Certify, or Return to Filer
 
 ↓
 
@@ -267,7 +267,7 @@ Upon successful completion, the system generates:
 
 ## 20. Acceptance Criteria
 
-* Mortgage Officer can select an existing mortgage and submit transfer details naming a new mortgagee.  
+* Any of the institution's four Group C roles can select an existing mortgage and submit transfer details naming a new mortgagee. **Confirmed 2026-08-15** — not restricted to the Mortgage Officer (A4).  
 * System validates the mortgage is active and the receiving institution holds valid RERAN standing.  
 * Internal certifier — any of the four Group C roles, including the filer — can certify or return the transfer before it reaches RERA.  
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
@@ -279,7 +279,7 @@ Upon successful completion, the system generates:
 
 ## 21. Business Rules
 
-1. Only a Mortgage Officer, or a Trustee Centre operator acting on an institution's behalf, may initiate a transfer.  
+1. Any of the institution's four Group C roles, or a Trustee Centre operator acting on an institution's behalf, may initiate a transfer. **Confirmed 2026-08-15** — previously restricted to "only a Mortgage Officer"; `open-questions.md` A4 confirms no service is role-specific.  
 2. The mortgage being transferred must be active and registered.  
 3. The receiving institution must hold valid RERAN Group C standing able to hold a registered mortgage.  
 4. The transaction must pass internal institutional certification before routing to RERA.  

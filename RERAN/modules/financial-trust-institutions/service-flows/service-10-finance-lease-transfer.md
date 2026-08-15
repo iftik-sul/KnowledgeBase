@@ -4,7 +4,7 @@ module: financial-trust-institutions
 type: service-flow
 status: draft
 contains_proposals: true
-updated: 2026-08-14
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
@@ -39,7 +39,7 @@ The outgoing and incoming parties agree the assignment of the finance lease. The
 
 ### Applicant (Transferring or Receiving Institution)
 
-* Mortgage Officer  
+* Any of the institution's four Group C roles. **Confirmed 2026-08-15** — previously listed as Mortgage Officer only; `open-questions.md` A4 confirms no service is role-specific.
 * Trustee Centre Operator (Group G) — assisted mode (C2)
 
 ### Counterparty
@@ -48,7 +48,7 @@ The outgoing and incoming parties agree the assignment of the finance lease. The
 
 ## 5. Prerequisites
 
-* Registered RERAN institution (Group C) account, with a Mortgage Officer provisioned.  
+* Registered RERAN institution (Group C) account, with staff provisioned.  
 * An existing, active registered finance lease against the property.  
 * The receiving institution is itself a registered RERAN Group C institution able to hold a registered finance lease.  
 * Payment has been completed via the shared platform payment gateway before the application is lodged (B1).
@@ -107,7 +107,7 @@ Obtain Lessee's Consent, Where Required
 
 ↓
 
-Mortgage Officer (Initiating Institution) / Trustee Centre Operator
+Institution User (Initiating Institution) / Trustee Centre Operator
 
 Visit Real Estate Registration Trustee Centre *(C2: assisted mode)*  
 ↓  
@@ -226,7 +226,7 @@ Upon successful completion, the system generates:
 
 ## 20. Acceptance Criteria
 
-* Mortgage Officer can select an existing finance lease and submit transfer details naming a new lessor.  
+* Any of the institution's four Group C roles can select an existing finance lease and submit transfer details naming a new lessor. **Confirmed 2026-08-15** — not restricted to the Mortgage Officer (A4).  
 * System validates the lease is active and the receiving institution holds valid RERAN standing.  
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
 * Fee is paid via the shared platform payment gateway before the application is lodged.  
@@ -237,7 +237,7 @@ Upon successful completion, the system generates:
 
 ## 21. Business Rules
 
-1. Only a Mortgage Officer, or a Trustee Centre operator acting on an institution's behalf, may initiate a transfer.  
+1. Any of the institution's four Group C roles, or a Trustee Centre operator acting on an institution's behalf, may initiate a transfer. **Confirmed 2026-08-15** — previously restricted to "only a Mortgage Officer"; `open-questions.md` A4 confirms no service is role-specific.  
 2. The finance lease being transferred must be active and registered.  
 3. The receiving institution must hold valid RERAN Group C standing able to hold a registered finance lease.  
 4. Payment is made via the shared platform payment gateway, upfront, before the application can be lodged — not deducted from a settlement account (B1, corrected 2026-08-14).  

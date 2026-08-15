@@ -4,7 +4,7 @@ module: financial-trust-institutions
 type: service-flow
 status: draft
 contains_proposals: true
-updated: 2026-08-14
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
@@ -33,19 +33,19 @@ Give an institution a regulated path to cancel a real-estate contract it holds, 
 
 ## 3. Description
 
-The Institution Relationship Manager moves the request to the Land Department's Customer Center and submits documents to an employee, who enters, audits, and approves the cancellation. The customer pays the fee and receives an e-receipt. Outputs are received online.
+An institution user moves the request to the Land Department's Customer Center and submits documents to an employee, who enters, audits, and approves the cancellation. The customer pays the fee and receives an e-receipt. Outputs are received online.
 
 ## 4. Who Can Apply
 
 ### Applicant
 
-* Institution Relationship Manager
+* Any of the institution's four Group C roles
 
-Row 45 is the one Group C row whose source responsible-role column already names the **Institution Relationship Manager** — unlike Services #1, #2, and #12–#17, this is not an A4 re-derivation; it matches the source directly and the existing `services-overview.md` table.
+Row 45's source responsible-role column names the **Institution Relationship Manager** — unlike Services #1, #2, and #12–#17, this was never an A4 re-derivation; it matched the source directly. **Confirmed 2026-08-15** — per `open-questions.md` A4, ownership is not role-specific for any Group C service, including this one: the IRM is typically who submits this application in practice, but any of the four roles may act on the institution's behalf, consistent with Business Rule 1 below (already unrestricted before this correction).
 
 ## 5. Prerequisites
 
-* Registered RERAN institution (Group C) account, with an Institution Relationship Manager provisioned.  
+* Registered RERAN institution (Group C) account, with staff provisioned under the corporate account.  
 * An existing contract held by the institution that is eligible for cancellation.  
 * Required supporting documents are available.
 
@@ -54,7 +54,7 @@ Row 45 is the one Group C row whose source responsible-role column already names
 ### Institution Information
 
 * Institution Legal Name  
-* Institution Relationship Manager Identifier
+* Acting Officer Identifier
 
 ### Contract Information
 
@@ -92,7 +92,7 @@ Paid by the customer, with an e-receipt issued — sourced (row 45: "Customer pa
 
 ## 12. Processing Workflow
 
-Institution Relationship Manager
+Institution User
 
 Move Request to Customer Center at Land Department  
 ↓  
@@ -110,7 +110,7 @@ Approve, Return, or Reject
 
 ↓
 
-Institution Relationship Manager
+Institution User
 
 Pay Fees  
 ↓  
@@ -165,8 +165,10 @@ Upon successful completion, the system generates:
 
 ## 16. Related Services
 
-* Service #1 — Approval / Renewal of Account Trustee & Auditing Company *(also owned by the Institution Relationship Manager)*  
-* Service #2 — Cancellation of Account Trustee & Auditing Company *(also owned by the Institution Relationship Manager)*
+* Service #1 — Approval / Renewal of Account Trustee & Auditing Company  
+* Service #2 — Cancellation of Account Trustee & Auditing Company
+
+**Corrected 2026-08-15** — the "(also owned by the Institution Relationship Manager)" notes previously attached to both related services above are removed. Per `open-questions.md` A4, no service — including these two or this one — is owned by a particular role; any of the institution's four Group C roles may act on any of them.
 
 ## 17. UI Screens
 
@@ -211,7 +213,7 @@ Upon successful completion, the system generates:
 
 ## 20. Acceptance Criteria
 
-* Institution Relationship Manager can initiate a contract cancellation application.  
+* Any of the institution's four Group C roles can initiate a contract cancellation application.  
 * Required information and documents are validated before submission.  
 * Application receives a unique application reference number.  
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
@@ -222,7 +224,7 @@ Upon successful completion, the system generates:
 
 ## 21. Business Rules
 
-1. Typically the Institution Relationship Manager submits this application, though any authorized representative of the institution may act on its behalf — the platform does not gate this by a provisioned scope; the acting user and their role are recorded in the audit trail. **Corrected 2026-08-14** — previously required "an authorized representative under a delegated permission scope"; permission scopes are retired module-wide, see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle).  
+1. Typically the Institution Relationship Manager submits this application, though any of the institution's four Group C roles may act on its behalf — the platform does not gate this by role or a provisioned scope; the acting user and their role are recorded in the audit trail. **Corrected 2026-08-14** — previously required "an authorized representative under a delegated permission scope"; permission scopes are retired module-wide, see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle). **Confirmed 2026-08-15** — `open-questions.md` A4 confirms this was never an A4 re-derivation contest; the rule already matched the unrestricted model.  
 2. The contract being cancelled must exist and be held by the institution.  
 3. Cancellation, return, and rejection decisions must carry documented reasoning.  
 4. Payment is required, with an e-receipt voucher issued as proof, before the cancellation is finalized.  
