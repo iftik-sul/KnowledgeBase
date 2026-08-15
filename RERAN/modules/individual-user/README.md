@@ -3,7 +3,7 @@ project: RERAN
 module: individual-user
 type: overview
 status: current
-updated: 2026-08-10
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -16,9 +16,11 @@ tags:
 
 # Individual User Module
 
-Documentation for the RERAN Individual User module: the roles, business services, and shared platform features available to natural persons (property owners, landlords, tenants, buyers/investors, diaspora investors, and PoA holders) on the RERA platform.
+Documentation for the RERAN Individual User module: the roles, business services, shared platform features, analysis layer, and UI specifications available to natural persons (property owners, landlords, tenants, buyers/investors, diaspora investors, and PoA holders) on the RERA platform.
 
 This module's documentation was split from a single combined file, `RERAN_ individual user_service_flows.md` (removed from this directory; preserved in git history), into one file per role/services-overview/service/feature for maintainability.
+
+**Updated 2026-08-15.** This index previously stopped at the 43 service flows and shared platform features (as of 2026-08-10) — it predates and never mentioned the analysis layer or the UI package, both added later the same day the module's service flows were corrected. Both are now indexed below.
 
 ## Contents
 
@@ -27,10 +29,21 @@ This module's documentation was split from a single combined file, `RERAN_ indiv
 | Roles | 6 |
 | Business Services | 43 |
 | Shared Platform Features | 12 |
+| Analysis Layer | 4 documents |
+| UI Specifications | 20 files |
 
 ## Roles (6)
 
-* [roles-and-responsibilities.md](roles-and-responsibilities.md) — the 6 individual-user roles: Property Owner/Seller, Landlord, Owner's Representative/PoA Holder, Tenant, Property Buyer/Investor, Diaspora Investor.
+* [roles-and-responsibilities.md](roles-and-responsibilities.md) — the 6 individual-user roles: Property Owner/Seller, Landlord, Owner's Representative/PoA Holder, Tenant, Property Buyer/Investor, Diaspora Investor. **Not updated since 2026-08-09** — its Landlord and Tenant sections still give verbatim-overlapping responsibilities ("Create and renew lease records" / "Register tenancy information... Renew lease records"), the same overlap `open-questions.md` B1 cites as part of the evidence for the Register/Renew Lease role-attribution conflict. B1 resolved the *service-flow* files (Landlord primary, Tenant secondary applicant) but explicitly left this document's own overlapping language as "worth a separate flag to the client at some point, not resolved by this entry." That flag was never actually raised anywhere trackable until now — see `open-questions.md`'s Summary, where it has been added as a standing open item.
+
+## Analysis Layer (4 documents)
+
+Added 2026-08-15, built by checking all 43 service-flow files individually against the master table rather than trusting a module-wide pattern (see each document's own opening section for the full reasoning).
+
+* [payments.md](payments.md) — per-service payment timing and fee-existence findings; the single most-corrected fact in this module's documentation history.
+* [open-questions.md](open-questions.md) — role-attribution conflicts, payment questions, and their resolutions (13 of 14 resolved; 1 remains genuinely open).
+* [navigation.md](navigation.md) — activity-scoped access model and proposed sidebar structure.
+* [role-workflows.md](role-workflows.md) — the shared login-to-logout journey and what each of the 6 roles typically does, including a provenance finding: 3 of the 6 roles never appear as a Responsible Role in any sourced master-table row.
 
 ## Services Overview
 
@@ -119,3 +132,11 @@ This module's documentation was split from a single combined file, `RERAN_ indiv
 ### General Platform Features (8)
 
 Documented in [services-overview.md](services-overview.md) and [shared-platform-features.md](shared-platform-features.md); no separate file per feature.
+
+## UI Specifications (20 files)
+
+Added 2026-08-15, in [ui/](ui/). This module's first UI package — see [ui/README.md](ui/README.md) for the full Service × Form Matrix (11 field-layout patterns across the 43 services, not Group C's 3) and the reasoning behind it.
+
+* [ui/README.md](ui/README.md), [ui/components.md](ui/components.md), [ui/validation-rules.md](ui/validation-rules.md), [ui/status-badges.md](ui/status-badges.md) — shared documentation.
+* [ui/screens-unified/](ui/screens-unified/) (4 files) — Services Catalog, Service Details, the configurable Submit Application wizard, Application Review.
+* [ui/screens/](ui/screens/) (12 files) — Dashboard, My Properties, My Leases, Applications, Application Details, My Complaints, Power of Attorney, Documents, Payment History, Notifications, Profile & KYC, Help & Support.
