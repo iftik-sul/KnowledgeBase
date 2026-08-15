@@ -64,11 +64,14 @@ Standard multi-file upload with per-document-type labelling, matching each servi
 
 ## Payment Step
 
-Renders differently depending on which payment category the selected service falls into — see `payments.md` for the full per-service breakdown. Three renderings:
+Renders differently depending on which payment category the selected service falls into — see `payments.md` for the full per-service breakdown. Four renderings, not three — corrected 2026-08-15 in a second audit pass, which found the original three-way split described one trigger condition ("once the application reaches Approved status") that was only actually true for one of the six services it was applied to:
 
 1. **Upfront** (most services): "Review Service Fee → Complete Payment" appears before the Submit action.
-2. **After-decision** (#28, and the counter-channel path of #23, #24, #26, #27, #9–#16 where sourced): no payment step appears in the wizard at all; instead, [application-details.md](../screens/application-details.md) shows a "Pay Now" action once the application reaches Approved status.
-3. **No fee** (#17, #18, #33, #40, #42, and the Owner/Entity-Amendment half of #7): the wizard skips the payment step entirely — no "Review Service Fee" screen renders.
+2. **After audit, before approval** (the counter-channel path of #9–#16, #23, #24, #26): no payment step in the wizard; [application-details.md](../screens/application-details.md) shows "Pay Now" once the status reaches **Audited — Awaiting Payment** — a checkpoint that precedes formal approval, not one that follows it (`status-badges.md`).
+3. **After full approval** (#28 only): no payment step in the wizard; Application Details shows "Pay Now" once the status reaches **Approved — Awaiting Payment** — this is the one case where the trigger genuinely is post-approval.
+4. **No fee** (#17, #18, #33, #40, #42, and the Owner/Entity-Amendment half of #7): the wizard skips the payment step entirely — no "Review Service Fee" screen renders.
+
+**#27 is deliberately not listed in category 2 or 3** — its post-review payment step uses the generic `Payment Pending` status repositioned later in its own sequence, not a distinct "Awaiting Payment" status, so it's already covered by category 1's standard Payment Pending handling regardless of where in the sequence that status appears. The original version of this section grouped #27 in with #9–#16/#23/#24/#26 under one "after-decision" label; it's been removed from this list for that reason, not because #27 pays upfront — it doesn't, see `payments.md` Category 5.
 
 Every fee-bearing service also shows the standard shared platform gateway (card, bank transfer, USSD per the PRD) as the payment method — see `payments.md`'s Settlement Mechanism section, which confirmed there is no separate Wallet Account mechanism anywhere in this module (resolved 2026-08-15, `open-questions.md` C1).
 
