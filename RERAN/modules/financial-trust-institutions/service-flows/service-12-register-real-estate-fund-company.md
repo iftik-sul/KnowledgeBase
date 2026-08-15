@@ -85,7 +85,9 @@ Applicable according to the RERAN fee schedule.
 
 **Yes**
 
-Paid by the customer (the fund company) at the Trustee Centre counter, and an e-receipt is issued — sourced (row 38: "Customer pays fees and obtains e-receipt"). This is the **Customer Payment at Counter** model, unaffected by the 2026-08-14 payment-model correction (`open-questions.md` B1) — this service was never account-debited, so it's a receipt here as it always was. **Corrected 2026-08-14** — previously cited `B9` for the receipt-vs-fee-balance distinction; B9 is now superseded, since no Group C service produces a "fee balance" any more.
+Paid by the customer (the fund company) at the Trustee Centre counter, **after** RERA's approval — sourced (row 38's own sequence: the employee "checks and approves," and only then does "Customer pays fees and obtains e-receipt"). This is the **Customer Payment at Counter** model, unaffected by the 2026-08-14 payment-model correction (`open-questions.md` B1) — this service was never account-debited, so it's a receipt here as it always was. **Corrected 2026-08-14** — previously cited `B9` for the receipt-vs-fee-balance distinction; B9 is now superseded, since no Group C service produces a "fee balance" any more.
+
+**This service is one of two exceptions to the general Customer-Payment-at-Counter pattern, confirmed 2026-08-15.** Most services in this category (#13–#17) have the customer pay *before* RERA's review, per their own sourced workflows. This one, along with Service #18, sources payment *after* RERA's decision — see Section 13 for what that means for this service's status flow.
 
 ## 10. Processing Authority
 
@@ -160,7 +162,7 @@ Completed
 * Rejected  
 * Withdrawn
 
-> Does not carry the Group C `Pending Internal Certification` / `Returned by Certifier` extension: this service is executed by a Trustee Centre operator on the customer's behalf, not by institutional staff performing an internal certify-or-return step. *(Wording corrected 2026-08-14 — previously "under a maker-checker scope (A1/D2)"; permission scopes are retired module-wide, see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle).)*
+**Confirmed 2026-08-15 — `Approved — Awaiting Payment` is kept, and is genuinely sourced for this service, not a leftover from an earlier model.** Row 38's own sequence has RERA approve, return, or reject *before* the customer pays at the counter (Section 12, Section 9) — the opposite order from most of Services #13–#17, where payment happens first. This is one of exactly two Group C services (the other being Service #18) where an approved-but-unpaid state genuinely exists in the sourced workflow. `services-overview.md`'s Application Status Vocabulary section is corrected to note this exception rather than claim the status "does not occur for any Group C service" without qualification.
 
 ## 14. Possible Outcomes
 
@@ -231,7 +233,7 @@ Upon successful completion, the system generates:
 * Required information and documents are validated before submission.  
 * Application receives a unique application reference number.  
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
-* Payment is completed and an e-receipt issued before completion.  
+* Payment is completed and an e-receipt issued after RERA's approval, before completion.  
 * Approved applications update the official register of privileges.  
 * Ownership certificate and registration number document are generated on completion.  
 * Customer receives completion notification.  
@@ -241,7 +243,7 @@ Upon successful completion, the system generates:
 
 1. This application may be processed by any of the institution's four Group C roles where bank-originated, or otherwise by a Trustee Centre operator acting on the fund company's behalf. **Confirmed 2026-08-15** — previously conditioned on the Mortgage Officer specifically; `open-questions.md` A4 confirms no service is role-specific. *(Whether a bank-originated variant exists for this service at all remains unconfirmed by source — only the Trustee-Centre path is confirmed by row 38.)*
 2. The fund company must be validly constituted before its interest can be registered.  
-3. Payment is required at the counter before the application is finalized, and an e-receipt is issued as proof.  
+3. Payment is required at the counter, after RERA's approval, before the application is finalized, and an e-receipt is issued as proof.  
 4. Approved registrations update the official register of privileges.  
 5. Every application receives a unique application reference number.  
 6. All applications, approvals, payments, and notifications are permanently recorded in the audit trail.
