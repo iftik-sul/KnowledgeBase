@@ -196,7 +196,8 @@ Completed
 * Returned  
 * Rejected  
 * Cancelled  
-* Withdrawn
+* Withdrawn  
+* Audited — Awaiting Payment *(Trustee Centre channel only — the transaction is audited before payment is collected, unlike the online channel's upfront timing shown in the main flow above; see Section 9)*
 
 ## 14. Possible Outcomes
 
