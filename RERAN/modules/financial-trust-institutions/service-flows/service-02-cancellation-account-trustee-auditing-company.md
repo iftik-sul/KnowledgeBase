@@ -26,7 +26,7 @@ tags:
 
 ## 1. Service Overview
 
-The **Cancellation of Account Trustee & Auditing Company** service lets an institution give up its approved standing as an Account Trustee or Auditing Company. RERA reviews the request, issues a cancellation certificate, and removes the institution from the active register of approved trustees and auditors.
+The **Cancellation of Account Trustee & Auditing Company** service lets an institution give up its approved standing as an Account Trustee or Auditing Company. RERA reviews the request, issues a cancellation certificate, and removes the institution from the active register of approved trustees and auditors. This service is free — it carries no fee at any point.
 
 ## 2. Purpose
 
@@ -34,7 +34,7 @@ Formally terminate an institution's approved trustee or auditor standing at its 
 
 ## 3. Description
 
-An institution user submits a cancellation application. RERA's Compliance & Escrow Auditor studies and audits the request, then issues a cancellation e-certificate by email and updates the Trust Account System and public register to reflect the cancellation.
+An institution user submits a cancellation application. RERA's Compliance & Escrow Auditor studies and audits the request, then issues a cancellation e-certificate by email and updates the Trust Account System and public register to reflect the cancellation. No fee is charged at any point in this process.
 
 ## 4. Who Can Apply
 
@@ -71,13 +71,17 @@ An institution user submits a cancellation application. RERA's Compliance & Escr
 
 ## 8. Service Fee
 
-Not specified in source. Row 29's workflow lists no payment step, unlike row 28 (Approval/Renewal), which explicitly includes "Payment of fees." See Section 9 and Open Questions.
+**None. This service is free.**
+
+**Confirmed 2026-08-15 (client decision, `open-questions.md` B11)** — cancellation carries no fee at all. Row 29's workflow lists no payment step, unlike row 28 (Approval/Renewal), which explicitly includes "Payment of fees." That absence was previously read as either an omission in the source or a genuinely free service, and left as an open question; the client has now confirmed it is genuinely free, not an omission.
 
 ## 9. Payment Required
 
-**Not specified in source.**
+**No.**
 
-> **Proposed** — no payment step appears anywhere in row 29's workflow. The working assumption is that cancellation carries no fee, consistent with the source's silence, but this is an inference rather than a sourced position and should be confirmed with the client before it is treated as final. See Open Questions.
+**Confirmed 2026-08-15 (client decision, `open-questions.md` B11)** — this service does not charge a fee, at any point in the process. There is no checkout step, no post-decision payment step, and no payment screen to build for this service.
+
+> **Superseded framing (pre-2026-08-15).** This section previously read "Not specified in source," with a working assumption that cancellation carries no fee, consistent with the source's silence — but flagged as an inference needing client confirmation rather than a settled position. That confirmation has now been given directly; see Open Questions for the resolved item.
 
 ## 10. Processing Authority
 
@@ -87,7 +91,7 @@ Not specified in source. Row 29's workflow lists no payment step, unlike row 28 
 
 **Waiting time: 29 business hours; Service delivery: 28 business hours.**
 
-Sourced from row 29 — identical figures to Service #1. Per `open-questions.md` A6, waiting time is read as the queue/counterparty portion and delivery time as RERA's own processing. **Confirmed 2026-08-15 (client decision)** — this two-number reading is correct; no new SLA figure is needed. *(Corrected 2026-08-15 — previously "needs explicit client confirmation and remains genuinely open"; the client has since confirmed this reading directly, resolving it, the same as Service #1.)*
+Sourced from row 29 — identical figures to Service #1. Per `open-questions.md` A6, waiting time is read as the queue/counterparty portion and delivery time as RERA's own processing. **Confirmed 2026-08-15 (client decision)** — this two-number reading is correct; no new SLA figure is needed.
 
 ## 12. Processing Workflow
 
@@ -127,6 +131,8 @@ Update Public Register of Approved Trustees & Auditors
 ↓  
 Notify Institution
 
+There is no payment step anywhere in this workflow, confirmed 2026-08-15.
+
 ## 13. Application Status Flow
 
 Draft  
@@ -148,7 +154,7 @@ Completed
 * Rejected  
 * Withdrawn
 
-> **Proposed** — this service carries no `Approved — Awaiting Payment` state and no `Expired` state, because Section 9 finds no sourced payment step to make conditional. If a fee is later confirmed, both should be reinstated per the core vocabulary in `services-overview.md`. This service also does not carry the Group C `Pending Internal Certification` / `Returned by Certifier` extension, for the same reason given in Service #1: no internal institutional certification step is described in source.
+**Confirmed 2026-08-15** — this service carries no `Approved — Awaiting Payment` state and no `Expired` state, because it has no fee at all, not merely no sourced payment step. This service also does not carry the Group C `Pending Internal Certification` / `Returned by Certifier` extension, for the same reason given in Service #1: no internal institutional certification step is described in source.
 
 ## 14. Possible Outcomes
 
@@ -164,6 +170,8 @@ Upon successful completion, the system generates:
 
 * Cancellation e-Certificate — sourced (row 29)  
 * Updated Public Register Entry (institution removed from active trustee/auditor register)
+
+No payment receipt is issued, since no fee is charged.
 
 ## 16. Related Services
 
@@ -182,6 +190,8 @@ Upon successful completion, the system generates:
 * Application Submitted  
 * Application Details  
 * Cancellation Confirmation
+
+No payment screen is required, confirmed 2026-08-15.
 
 ## 18. API Requirements
 
@@ -211,6 +221,7 @@ Upon successful completion, the system generates:
 * Required information and documents are validated before submission.  
 * Application receives a unique application reference number.  
 * Compliance & Escrow Auditor can approve, return, or reject the application with documented reasoning.  
+* No payment step is presented at any point in the flow. *(Corrected 2026-08-15 — B11 confirms this service is free.)*  
 * Approved cancellations remove the institution from the active Trustee/Auditor register.  
 * Institution receives a cancellation e-certificate upon completion.  
 * Institution receives notification of the outcome.  
@@ -222,13 +233,13 @@ Upon successful completion, the system generates:
 2. The institution must hold an existing approved standing as Account Trustee or Auditing Company to cancel it.  
 3. Cancellation, return, and rejection decisions must carry documented reasoning.  
 4. The public register of approved trustees and auditors is updated on completion to remove the institution's active standing.  
-5. Every application receives a unique application reference number.  
-6. All applications, approvals, cancellations, and notifications are permanently recorded in the audit trail.
+5. This service carries no fee, at any point. *(Confirmed 2026-08-15 — `open-questions.md` B11.)*  
+6. Every application receives a unique application reference number.  
+7. All applications, approvals, cancellations, and notifications are permanently recorded in the audit trail.
 
 ## Open Questions
 
 The following could not be closed by row 29 or by the answers doc, and are carried forward rather than dropped:
 
-1. **Does cancellation carry a fee?** Row 29's workflow lists no payment step, unlike Service #1. Not clearly resolved either way by source or by the answers doc, which addresses fee *mechanism* (B1–B9) but not whether this specific service is chargeable at all.  
-2. **What happens to obligations under an active Account Trustee standing at the point of cancellation** (e.g., trust accounts still under the institution's management)? Not addressed in source.  
-3. **Exact fee amount, if one applies.** Client data — see `open-questions.md` B5.
+1. ~~Does cancellation carry a fee?~~ **Resolved 2026-08-15 (client decision, `open-questions.md` B11)** — no. Row 29's silence on payment was a genuine absence, not an omission.  
+2. **What happens to obligations under an active Account Trustee standing at the point of cancellation** (e.g., trust accounts still under the institution's management)? Not addressed in source.
