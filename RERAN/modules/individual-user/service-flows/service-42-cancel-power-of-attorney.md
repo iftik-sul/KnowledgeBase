@@ -3,7 +3,7 @@ project: RERAN
 module: individual-user
 type: service-flow
 status: current
-updated: 2026-08-10
+updated: 2026-08-15
 source_type: sourced
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
@@ -93,7 +93,7 @@ Not specified in the source material. Given the service name ("cancellation **no
 
 ## 17. UI Screens
 
-Not yet designed — this module has no UI documentation yet.
+**Corrected 2026-08-15** — this previously said "Not yet designed — this module has no UI documentation yet," which predates the module's UI package (added and merged the same day this correction was made). A UI screen for #42 now exists: [power-of-attorney.md](../ui/screens/power-of-attorney.md) documents a Cancel action for this service, with the same caveat repeated there that applies here — the action and its resulting status change to Revoked are inferred from #29's mirror shape, not confirmed by source. No dedicated wizard screens exist for #42 specifically, consistent with its own Required Information/Documents/Output all being unspecified above; the UI package couldn't design fields for a service whose fields aren't sourced.
 
 ## 18. API Requirements
 
