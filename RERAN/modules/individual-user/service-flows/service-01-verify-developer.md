@@ -4,7 +4,7 @@ module: individual-user
 type: service-flow
 status: current
 source_type: extrapolated
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -140,6 +140,8 @@ Typical information includes:
 * Verification Timestamp
 
 The displayed information should be limited to publicly available registry information.
+
+A **Payment Receipt** is also issued, matching every other fee-bearing service in this module. *(Added 2026-08-15 — this section previously listed only the verification-result fields, while Section 20's Acceptance Criteria already stated "a payment receipt is generated after successful payment." The two sections disagreed with each other on whether a receipt is produced; Section 20 was right, Section 15 was incomplete.)*
 
 ## 16. Related Services
 
