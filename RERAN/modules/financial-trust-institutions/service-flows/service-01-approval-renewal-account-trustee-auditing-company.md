@@ -4,7 +4,7 @@ module: financial-trust-institutions
 type: service-flow
 status: draft
 contains_proposals: true
-updated: 2026-08-14
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
@@ -34,21 +34,20 @@ Grant or renew RERA's approval of an institution's standing as a trustee or audi
 
 ## 3. Description
 
-The institution's Institution Relationship Manager applies for new approval or renewal, submitting institution and eligibility information and supporting documents. RERA's Compliance & Escrow Auditor studies and audits the application. A new approval additionally requires the institution to attend and sign a partner agreement before it takes effect; a renewal does not. The institution pays the applicable fee, and RERA updates the Trust Account System and the public register of approved trustees and auditors.
+An institution user applies for new approval or renewal, submitting institution and eligibility information and supporting documents. RERA's Compliance & Escrow Auditor studies and audits the application. A new approval additionally requires the institution to attend and sign a partner agreement before it takes effect; a renewal does not. The institution pays the applicable fee, and RERA updates the Trust Account System and the public register of approved trustees and auditors.
 
 ## 4. Who Can Apply
 
 ### Applicant
 
-* Institution Relationship Manager  
-* Any other authorized representative of the institution, acting on its behalf *(no delegated scope required — see Business Rule 1)*
+* Any of the institution's four Group C roles — the platform does not gate this by role; the acting user and their role are recorded in the audit trail
 
-> **Proposed** — the source assigns this application to the **Account Trustee** as responsible role. `open-questions.md` (A4) re-derives ownership: the Institution Relationship Manager "maintains registration, renews trustee/auditor approvals" — exactly what this service does — while the Account Trustee is the *subject* of the approval, not a plausible applicant for its own not-yet-existing (or expiring) status. This document follows the A4 re-derivation. **Confidence: High**, per the answers doc.
+> **Confirmed 2026-08-15** — previously proposed that the Institution Relationship Manager was the correct owner (an A4 re-derivation against the source, which assigns this application to the Account Trustee). `open-questions.md` A4 now resolves the underlying ownership question altogether: no service is role-specific, so there is no per-role assignment to re-derive. The IRM "maintains registration, renews trustee/auditor approvals" and so is typically who submits this in practice, but any of the four roles may do so.
 
 ## 5. Prerequisites
 
 * Registered RERAN institution (Group C) account. *(Registration and onboarding are out of module scope; this service assumes the base institution account already exists.)*  
-* Institution Relationship Manager has platform access under the institution's corporate account.  
+* At least one user has platform access under the institution's corporate account.  
 * For renewal: an existing approved standing that is active or nearing expiry.  
 * For new approval: the institution meets RERA's eligibility criteria for trustee/auditor status. *(Proposed — the specific criteria are not enumerated in the source. See Open Questions.)*
 
@@ -83,7 +82,7 @@ The institution's Institution Relationship Manager applies for new approval or r
 
 Applicable according to the RERAN fee schedule.
 
-> **Proposed** — per `open-questions.md` B8, institutional approval fees are treated as **per approval term, with a two-year validity and a renewal fee at renewal**, since "approval / renewal" is only meaningful if approvals expire. The duration is a proposal; the fee amount is client data not available in source.
+> **Proposed** — per `open-questions.md` B8, institutional approval fees are treated as **per approval term, with a two-year validity and a renewal fee at renewal**, since "approval / renewal" is only meaningful if approvals expire. **Confirmed 2026-08-15** — the renewing structure itself is now client-confirmed (B8); the two-year duration remains a proposal. The fee amount is client data not available in source.
 
 ## 9. Payment Required
 
@@ -103,11 +102,11 @@ This service uses the **Institution Fee Payment** model (paid by the institution
 
 **Waiting time: 29 business hours; Service delivery: 28 business hours.**
 
-Sourced from row 28. Per `open-questions.md` A6, the waiting-time figure is read as the queue/counterparty portion and the delivery figure as RERA's own processing — a reading the answers doc flags as needing explicit client confirmation, since every Group C SLA carrying two numbers depends on it.
+Sourced from row 28. Per `open-questions.md` A6, the waiting-time figure is read as the queue/counterparty portion and the delivery figure as RERA's own processing — a reading the answers doc flags as needing explicit client confirmation, since every Group C SLA carrying two numbers depends on it. **A6 remains genuinely open as of 2026-08-15** — a related clarification confirmed Account Trustee access is not role-restricted, but did not resolve this specific SLA-reading question.
 
 ## 12. Processing Workflow
 
-Institution Relationship Manager
+Institution User
 
 Login  
 ↓  
@@ -137,7 +136,7 @@ Approve, Return, or Reject
 
 ↓
 
-Institution Relationship Manager *(new approval only)*
+Institution User *(new approval only)*
 
 Coordinate Attendance  
 ↓  
@@ -145,7 +144,7 @@ Sign Partner Agreement
 
 ↓
 
-Institution Relationship Manager
+Institution User
 
 Complete Payment
 
@@ -207,8 +206,10 @@ Upon successful completion, the system generates:
 ## 16. Related Services
 
 * Service #2 — Cancellation of Account Trustee & Auditing Company  
-* Service #18 — Contract Cancellation *(also owned by the Institution Relationship Manager)*
+* Service #18 — Contract Cancellation
 * Group B — Escrow services the Account Trustee performs once approved *(Proposed cross-module note; the Account Trustee's escrow queue is documented in `open-questions.md` A2 and the Group B module, not in this module)*
+
+**Corrected 2026-08-15** — the "(also owned by the Institution Relationship Manager)" note previously attached to Service #18 is removed. Per `open-questions.md` A4, no service — including this one or Service #18 — is owned by a particular role.
 
 ## 17. UI Screens
 
@@ -257,7 +258,7 @@ Upon successful completion, the system generates:
 
 ## 20. Acceptance Criteria
 
-* Institution Relationship Manager can initiate a new-approval or renewal application.  
+* Any of the institution's four Group C roles can initiate a new-approval or renewal application.  
 * System distinguishes the new-approval flow (agreement signing) from the renewal flow.  
 * Required information and documents are validated before submission.  
 * Application receives a unique application reference number.  
@@ -270,7 +271,7 @@ Upon successful completion, the system generates:
 
 ## 21. Business Rules
 
-1. Typically the Institution Relationship Manager submits this application, though any authorized representative of the institution may act on its behalf — the platform does not gate this by a provisioned scope; the acting user and their role are recorded in the audit trail. **Corrected 2026-08-14** — previously required "an authorized representative under a delegated permission scope"; permission scopes are retired module-wide, see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle). *(Proposed — A4 re-derivation; the source assigns this to the Account Trustee.)*
+1. Typically the Institution Relationship Manager submits this application, though any of the institution's four Group C roles may act on its behalf — the platform does not gate this by role or a provisioned scope; the acting user and their role are recorded in the audit trail. **Corrected 2026-08-14** — previously required "an authorized representative under a delegated permission scope"; permission scopes are retired module-wide, see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle). **Confirmed 2026-08-15** — previously flagged as a contested A4 re-derivation against the source's Account Trustee assignment; `open-questions.md` A4 now resolves that no service is role-specific, so there is nothing left to re-derive.  
 2. The institution must hold, or be seeking, approved standing as an Account Trustee or Auditing Company.  
 3. A new-approval application requires attendance and execution of a partner agreement before completion; a renewal does not.  
 4. Payment is required before the approval or renewal is finalized, paid directly by the institution rather than deducted from a standing settlement account.  
@@ -286,4 +287,4 @@ The following could not be closed by rows 28–45 or by the answers doc, and are
 
 1. **Eligibility criteria for new approval.** The source states RERA "studies and audits" the application but never lists what makes an institution eligible to become an approved trustee or auditor. Client data.  
 2. **Specific approval/rejection criteria.** Beyond the platform-wide requirement for documented reasoning (FR-04, cited in `open-questions.md` A3), no service-specific decision criteria are sourced.  
-3. **Exact fee amount.** Client data — see `open-questions.md` B5, the one question of 23 with no proposed answer.
+3. **Exact fee amount.** Client data — see `open-questions.md` B5.

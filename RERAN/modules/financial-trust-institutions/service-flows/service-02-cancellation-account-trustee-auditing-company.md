@@ -4,7 +4,7 @@ module: financial-trust-institutions
 type: service-flow
 status: draft
 contains_proposals: true
-updated: 2026-08-14
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
@@ -35,21 +35,20 @@ Formally terminate an institution's approved trustee or auditor standing at its 
 
 ## 3. Description
 
-The Institution Relationship Manager submits a cancellation application. RERA's Compliance & Escrow Auditor studies and audits the request, then issues a cancellation e-certificate by email and updates the Trust Account System and public register to reflect the cancellation.
+An institution user submits a cancellation application. RERA's Compliance & Escrow Auditor studies and audits the request, then issues a cancellation e-certificate by email and updates the Trust Account System and public register to reflect the cancellation.
 
 ## 4. Who Can Apply
 
 ### Applicant
 
-* Institution Relationship Manager  
-* Any other authorized representative of the institution, acting on its behalf *(no delegated scope required — see Business Rule 1)*
+* Any of the institution's four Group C roles — the platform does not gate this by role; the acting user and their role are recorded in the audit trail
 
-> **Proposed** — as with Service #1, the source assigns this application to the **Account Trustee** as responsible role. `open-questions.md` A4 re-derives ownership to the Institution Relationship Manager, on the same reasoning: giving up institutional standing is a company-level act, not a transaction the trustee performs on itself. **Confidence: High**, per the answers doc.
+> **Confirmed 2026-08-15** — as with Service #1, the source assigns this application to the **Account Trustee** as responsible role. `open-questions.md` A4 no longer re-derives ownership to a different single role (previously the Institution Relationship Manager) — it resolves the underlying question altogether: no service is role-specific, so there is no per-role assignment to re-derive.
 
 ## 5. Prerequisites
 
 * Registered RERAN institution (Group C) account.  
-* Institution Relationship Manager has platform access under the institution's corporate account.  
+* At least one user has platform access under the institution's corporate account.  
 * An existing approved standing as Account Trustee or Auditing Company to cancel.  
 * No unresolved obligations under the standing being cancelled. *(Proposed — not stated in source; see Open Questions.)*
 
@@ -89,11 +88,11 @@ Not specified in source. Row 29's workflow lists no payment step, unlike row 28 
 
 **Waiting time: 29 business hours; Service delivery: 28 business hours.**
 
-Sourced from row 29 — identical figures to Service #1. Per `open-questions.md` A6, waiting time is read as the queue/counterparty portion and delivery time as RERA's own processing; this reading needs explicit client confirmation.
+Sourced from row 29 — identical figures to Service #1. Per `open-questions.md` A6, waiting time is read as the queue/counterparty portion and delivery time as RERA's own processing; this reading needs explicit client confirmation and remains genuinely open as of 2026-08-15.
 
 ## 12. Processing Workflow
 
-Institution Relationship Manager
+Institution User
 
 Login  
 ↓  
@@ -170,7 +169,9 @@ Upon successful completion, the system generates:
 ## 16. Related Services
 
 * Service #1 — Approval / Renewal of Account Trustee & Auditing Company  
-* Service #18 — Contract Cancellation *(also owned by the Institution Relationship Manager)*
+* Service #18 — Contract Cancellation
+
+**Corrected 2026-08-15** — the "(also owned by the Institution Relationship Manager)" note previously attached to Service #18 is removed. Per `open-questions.md` A4, no service — including this one or Service #18 — is owned by a particular role.
 
 ## 17. UI Screens
 
@@ -207,7 +208,7 @@ Upon successful completion, the system generates:
 
 ## 20. Acceptance Criteria
 
-* Institution Relationship Manager can initiate a cancellation application.  
+* Any of the institution's four Group C roles can initiate a cancellation application.  
 * Required information and documents are validated before submission.  
 * Application receives a unique application reference number.  
 * Compliance & Escrow Auditor can approve, return, or reject the application with documented reasoning.  
@@ -218,7 +219,7 @@ Upon successful completion, the system generates:
 
 ## 21. Business Rules
 
-1. Typically the Institution Relationship Manager submits this application, though any authorized representative of the institution may act on its behalf — the platform does not gate this by a provisioned scope; the acting user and their role are recorded in the audit trail. **Corrected 2026-08-14** — previously required "an authorized representative under a delegated permission scope"; permission scopes are retired module-wide, see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle). *(Proposed — A4 re-derivation; the source assigns this to the Account Trustee.)*
+1. Typically the Institution Relationship Manager submits this application, though any of the institution's four Group C roles may act on its behalf — the platform does not gate this by role or a provisioned scope; the acting user and their role are recorded in the audit trail. **Corrected 2026-08-14** — previously required "an authorized representative under a delegated permission scope"; permission scopes are retired module-wide, see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle). **Confirmed 2026-08-15** — previously flagged as a contested A4 re-derivation against the source's Account Trustee assignment; `open-questions.md` A4 now resolves that no service is role-specific, so there is nothing left to re-derive.  
 2. The institution must hold an existing approved standing as Account Trustee or Auditing Company to cancel it.  
 3. Cancellation, return, and rejection decisions must carry documented reasoning.  
 4. The public register of approved trustees and auditors is updated on completion to remove the institution's active standing.  
