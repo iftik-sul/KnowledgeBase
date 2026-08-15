@@ -3,11 +3,12 @@ project: RERAN
 module: individual-user
 type: navigation
 status: draft
-updated: 2026-08-15
 contains_proposals: true
+updated: 2026-08-15
 derived_from:
   - "RERAN/modules/individual-user/roles-and-responsibilities.md"
   - "RERAN/modules/individual-user/services-overview.md"
+  - "RERAN/modules/individual-user/shared-platform-features.md"
   - "RERAN/modules/individual-user/open-questions.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
 tags:
@@ -18,79 +19,63 @@ tags:
 
 # Individual User — Navigation & Access
 
-## Why This Module's Access Model Differs From Group C's
+This module has no UI documented yet (`module-roadmap.md`'s "mirror-image gap" of Real Estate Developer), so unlike Group C's `navigation.md` — which corrects a previously-documented access model — this is a first pass, written to inform the UI work this module still needs, not a correction of anything existing.
 
-Group C's navigation is unified precisely because its four roles are provisioned staff positions on a corporate account — a Mortgage Officer and an Auditing Bureau Officer are different *employees*, and the client decided role should be audit-trail attribution only, not a permission gate.
+## Why This Module's Access Model Is Different From Groups B and C
 
-Individual User is structurally different at the root: **one person holds one account, and the same person can hold several of the module's six roles at once, or acquire a new one at any time simply by taking an action.** `roles-and-responsibilities.md` says this directly — "an individual may perform multiple roles over time using the same account. The platform grants access to services based on the user's current activities." Ahmed is a Property Owner/Seller because he owns a registered property; the same Ahmed becomes a Landlord the moment he registers a lease against that property; nothing was provisioned, invited, or approved to make that happen.
+Groups B and C are **corporate accounts**: a company holds one account, and multiple staff members with different roles operate inside it. Group C's `navigation.md` resolved a real question there — whether role gates access — because a bank's Mortgage Officer and Auditing Bureau Officer are different people sharing one institutional login surface.
 
-So this module doesn't need Group C's "is role a permission gate or an audit-trail attribution?" question at all — **role here is neither.** It's a *derived state*, computed from what a person has already done or registered, not a static credential.
+Individual User is **not** a corporate account model. `roles-and-responsibilities.md` states this directly: *"Unlike organizational users, an individual may perform multiple roles over time using the same account."* Ahmed is a Property Owner/Seller when he sells his flat and nothing stops him from also being a Landlord for a different property, or a Property Buyer/Investor when he's shopping for his next purchase. There is one person, one account, and the "role" isn't a provisioned permission — it's a description of what the person is currently doing.
 
-## The Sidebar
+This means the Group C question ("does role X gate access to screen Y") doesn't translate directly. The equivalent question for Individual User is: **does the platform show every service to every logged-in user regardless of what they currently own or hold, or does it surface only the services relevant to what's actually in their account?**
 
-One menu, identical in structure for every Individual User, organized by the eight service categories `services-overview.md` already defines — not by role:
+## Proposed Access Model: Activity-Scoped, Not Role-Gated
+
+**Proposed** (no source or client decision settles this yet — flagged for confirmation): every authenticated Individual User can *see* the full Services Catalog (all 43 services, all 8 categories), consistent with the platform-wide principle that verification and informational services (#1–#3) are explicitly open to "All registered Individual Users" regardless of what they own. But several services are only *actionable* once a precondition is met:
+
+- **Register/Renew/Manage/Cancel Lease (#23–#27)** require the user to hold a registered property (as landlord) or a registered tenancy (as tenant) — see B1 in `open-questions.md`, now resolved: Landlord is the primary applicant, with Tenant added as a documented secondary path.
+- **Transfer, Sell, Amend, or otherwise act on a property (#5–#22, #35, #41, #43)** require the user to be the registered owner (or hold an active Power of Attorney over a registered owner — see #30) of the specific property selected.
+- **Act on Behalf of Property Owner (#30)** requires an active, RERAN-approved Power of Attorney (#29) before the service does anything beyond showing a "no active authorization" state — this is already how #30's own file describes it (`Authorization Validation` as the first real status in its Application Status Flow), so this module has already implicitly designed for activity-scoped access at the single-service level; it just hasn't been stated as a platform-wide navigation principle until now.
+- **Remote Identity Verification / Remote Property Transactions (#36–#37)** — #37 explicitly requires #36 to be completed first (`Prerequisites: Remote Identity Verification has been successfully completed`), a second example of one service gating another, already present in the sourced/extrapolated files without being generalised into a navigation rule.
+
+**What this is not:** it is not a role-selection screen where a user picks "I am a Landlord today" before logging in. Every logged-in user sees one dashboard and one Services Catalog; which actions are live depends on what's already in their account (properties owned, leases registered, PoAs granted or held), not on a role they declare.
+
+## Proposed Sidebar
+
+Based on `shared-platform-features.md`'s 8 general platform features and `services-overview.md`'s 8 business-service categories:
 
 * Dashboard
-* My Properties
-* Verification *(#1–#3)*
-* Ownership & Transactions *(#4–#16, #41, #43)*
-* Title & Land Registration *(#17–#22)*
-* Tenancy *(#23–#28, #40)*
-* Power of Attorney *(#29–#30, #42)*
-* Property Certificates *(#31–#35)*
-* Diaspora Services *(#36–#37)*
-* Complaints *(#38–#39)*
-* Applications
+* My Properties *(new — not named as a standalone platform feature in the source, but implied by nearly every service's "Select Registered Property" step; without a properties list, a user can't act on #5–#22, #35, #41, #43 at all)*
+* My Leases *(same reasoning, for #23–#28, #40)*
+* Services Catalog (all 43, organized by the 8 categories in `services-overview.md`)
+* My Applications *(Feature #2's home — free to use, per `payments.md` A6)*
+* My Complaints *(#38 charges a fee, #39 does not — resolved in `open-questions.md` A6/A7)*
+* Power of Attorney *(registered PoAs granted and PoAs held — #29, #30, #42)*
 * Documents
-* Payments
+* Payments *(payment history, receipts — via the standard shared gateway throughout; see `payments.md` C1, resolved — there is no separate Wallet Account mechanism)*
 * Notifications
-* Profile & KYC
+* Profile & KYC *(where Remote Identity Verification, #36, lives for diaspora users)*
 * Help & Support
 
-**Every category is visible to every logged-in user, always.** There is no role-based menu filtering — not because a client decision retired one (as in Group C), but because there was never a role-gated menu to retire: a person's roles change constantly as a side effect of ordinary use, so gating the *menu* on current role would mean the sidebar changes shape every time someone registers a new property or files a new lease. That's a worse experience than showing everything and letting eligibility be enforced at the point of use (Section 5, "Prerequisites," in each service-flow file) rather than at the point of menu rendering.
-
-**Confidence:** Medium-high — this is a reasoned design position, not confirmed by source (the source is silent on menu structure entirely), but follows directly from the "multiple roles, same account" principle `roles-and-responsibilities.md` already states.
-
-## What Changes Per Role Is Content, Not Access
-
-Inside a given category, what a person *sees* is scoped to what they actually have — a Landlord's Tenancy category shows the leases they've registered as landlord; a Tenant's shows the leases where they're the named tenant; someone who is both sees both, unmerged, since they're legally distinct relationships even when the underlying property is the same. This mirrors Service #6's already-documented seller/purchaser split (each party gets their own half of the same transaction) and extends it to every category where a person could plausibly sit on either side of a relationship (Tenancy, and — pending A1's resolution in `open-questions.md` — potentially Register/Renew Lease specifically).
-
-**Where this needs a decision, not a default:** Service #38/#39 (Complaints) and the Power of Attorney category are the two places "what a person sees" isn't obviously self-scoping. A PoA holder acting under Service #30 sees the represented owner's properties, not their own — this is already handled at the service level (Section 6 of `service-30-act-on-behalf-of-property-owner.md` requires selecting "Registered Property Owner" first), so no navigation-level change is needed, but it's worth naming here since it's the one place in this module where "whose data am I looking at" genuinely isn't the logged-in user's own by default.
+**Diaspora-specific note:** #36/#37 don't need a separate sidebar section under this model — a Diaspora Investor is still an Individual User acting through the same Services Catalog and My Properties surfaces as anyone else; #36's identity verification is a Profile & KYC action, and #37 is a mode of interacting with the same underlying services (#5, #6, etc.) once verified, not a parallel catalog. This matches how #37's own file describes it: *"Select Transaction Type"* from within Remote Property Transactions routes into the same transaction types documented elsewhere in the module.
 
 ## Landing After Login
 
-**Proposed:** a single Dashboard, not role-differentiated, showing:
+**Proposed:** a single Dashboard, same for every user, showing:
 
-* A summary of the user's active roles (computed, not selected) — e.g. "You are registered as: Property Owner (2 properties), Landlord (1 active lease)" — surfaced as information, not as a mode switch
-* Applications in progress, across every service category, sorted by most-recent-activity
-* Payment-pending items — see the note below on why this needs to be built carefully given `payments.md`'s findings
-* Quick actions: the four most-used services platform-wide are unknown without usage data, so propose Verify Property, Register Property Sale, Submit Tenancy Dispute, and Request Detailed Real Estate Statement as placeholders pending real usage data, not a sourced or confirmed set
+- Properties owned / leases held (empty state for a new user with neither)
+- Applications in progress (via Feature #2)
+- Notifications requiring action (Information Requested, Returned applications — Features #3/#4)
+- Quick actions: Register Property Ownership (#4), Verify a Property/Developer/Project (#1–#3), Submit Complaint (#38)
 
-**Confidence:** Medium — no source material describes a dashboard for this module at all; this follows Group C's already-confirmed pattern (one shared dashboard, no per-role default) since the same "should a unified dashboard show one CTA per role" question Group C answered applies here for the same underlying reason: a person's roles aren't a fixed identity to design a CTA around.
+No per-role landing default is proposed, for the same reason no role-selection step is proposed above — the same person may need different quick actions on different days, and the account itself (not a role) is what's logged in.
 
-**A caution specific to this module, not present in Group C's dashboard:** the Payment-pending summary cannot be built as a single "pay before you can proceed" queue the way Group C's could, because `payments.md` documents at least three different payment-timing models coexisting in this module (upfront, pay-after-audit-before-decision, pay-after-decision). A dashboard widget that shows every unpaid application as blocking, or every paid application as complete, will misrepresent Service #28 (which pays *after* approval — an item sitting in "Approved" with no payment yet is not stuck or overdue, it's exactly where it should be) and the Model B services (#23/#24/#26, where an application awaiting the post-audit payment step is mid-process, not abandoned). This needs `payments.md`'s corrected timing models to inform the dashboard's status logic, not the currently-published (and partly incorrect) Section 9 lines in the individual service files — see `open-questions.md` B2.
+## What Still Needs a Client Decision
 
-## External / Assisted Access — Trustee Centres
+1. **Whether My Properties / My Leases should exist as first-class sidebar sections**, or whether property/lease selection should instead happen inline within each service's own flow (as most service-flow files currently describe it — "Select Registered Property" as step 2 of the workflow, not a standalone screen visited first).
+2. **B1 is now resolved** (Landlord primary, Tenant secondary applicant — see `open-questions.md` B1), which settles that "My Leases" needs to support both a landlord's and a tenant's view of the same lease record, not just one. The detailed screen design for the tenant-initiated registration path is still deferred to when this module's UI work begins.
+3. Whether **Diaspora Investor** status should surface anywhere in navigation at all (a badge, a distinct onboarding path) given #36/#37's design already routes diaspora users through the same catalog as everyone else once verified.
 
-**Proposed, pending `open-questions.md` B4:** by analogy with Group C's confirmed C2 answer, the Real Estate Registration Trustee Centre channel — named as the only or an alternate channel on a large share of this module's sourced services (#5, #6, #9–#16, #19–#22, #23–#24, #26–#27, #31–#33, #35, #41, #43) — should be treated as an **assisted mode of the same service**, not a parallel paper process, consistent with the platform's stated goal of reducing in-person visits.
+## Superseded By This Document
 
-Trustee Centre operators are Group G users, not Individual User roles; they do not appear in this sidebar, and their own access model belongs in Group G's own navigation documentation once written (per `module-roadmap.md`'s Group G note). What belongs here is only the acknowledgment that an Individual User's application may be *filed on their behalf* through this channel, and that doing so changes the payment-timing sequence for the services listed in `payments.md`'s channel-split section — this is a genuine difference in the applicant's own experience (when they pay, relative to submission), not just a back-office detail.
-
-**Confidence:** Medium — the C2 reasoning transfers well, but hasn't been independently confirmed for this module, and closing `open-questions.md` B4 first would raise this to High.
-
-## Diaspora Access — A Genuine Difference From Group C
-
-Unlike any Group C role, two of this module's six roles (Diaspora Investor, and Property Owner/Seller or Landlord roles held by someone living abroad) are explicitly designed around **not** being able to use the Trustee Centre channel at all. Services #36 (Remote Identity Verification) and #37 (Remote Property Transactions) exist specifically to substitute for in-person presence. This has one navigation consequence worth stating plainly: for a diaspora user, the sidebar's Verification category functions as a gate — Service #37 and several PoA-adjacent flows (Section 5 of `service-37-remote-property-transactions.md`) require Remote Identity Verification to have already succeeded, which is not true of any other role in this module. **Proposed:** surface identity-verification status prominently (e.g., in the Dashboard's role summary described above), since it is the one piece of account state that gates access to an entire category for this user type specifically, unlike every other role's Section 5 prerequisites, which are typically per-service rather than per-category.
-
-**Confidence:** High that this gating exists (sourced, Section 5 of #37); Medium on the specific dashboard treatment proposed, which is a design judgement.
-
-## Summary of What's Confirmed vs. Proposed
-
-| Element | Status |
-| :---- | :---- |
-| One sidebar, no role-based menu filtering | Proposed — reasoned from `roles-and-responsibilities.md`'s multi-role principle, not source-confirmed |
-| Content within a category scoped to the user's actual relationships (not role) | Proposed, following Service #6's already-documented pattern |
-| Unified dashboard, no per-role CTA | Proposed, by analogy with Group C's confirmed answer |
-| Dashboard payment-status logic must reflect `payments.md`'s multiple timing models | High-confidence requirement, not yet built — flagged as a dependency on `open-questions.md` B2 being resolved first |
-| Trustee Centre as assisted mode, not a separate system | Proposed, pending `open-questions.md` B4 |
-| Diaspora identity-verification status as a prominent, category-gating dashboard element | Proposed, sourced gating + design judgement on treatment |
+Nothing — this is the first `navigation.md` this module has had. Once UI work begins (per `module-roadmap.md`'s Proposed Sequence item 4), the actual screen inventory in `ui/screens/` should be checked against the proposed sidebar above the same way Group C's UI reconciliation (issue #50) checked its screens against its navigation model, rather than letting the two drift independently from the start.
