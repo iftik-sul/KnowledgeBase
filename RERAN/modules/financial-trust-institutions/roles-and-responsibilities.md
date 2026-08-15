@@ -3,7 +3,7 @@ project: RERAN
 module: financial-trust-institutions
 type: user-group
 status: draft
-updated: 2026-08-14
+updated: 2026-08-15
 contains_proposals: true
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
@@ -21,17 +21,19 @@ Group C covers banks, mortgage institutions, account trustees and auditing burea
 This document describes post-login responsibilities only. Account creation and onboarding are out of scope for this project.
 
 > **Confirmed 2026-08-14 — roles are attribution only.** Client decision: none of the four roles below gates access. Every role can see and act on every screen and action in this module; the descriptions in this document say what each role *typically* does and why it exists, not what it is *permitted* to do. Every action is logged with the acting user and the role they held at the time — that's the only thing role now controls. See [navigation.md](navigation.md#audit-trail-principle) for the access model and [role-workflows.md](role-workflows.md) for the shared journey this produces. This also supersedes part of answer A1 (below) — see the note under Auditing Bureau Officer.
+>
+> **Confirmed 2026-08-15 — extended to service ownership.** The same principle now explicitly covers *which services* a role may act on, not just which screens: `open-questions.md` A4 confirms no service is role-specific, for any of the 18 services. The Role Summary table below no longer lists a "services owned" figure per role, since none exists.
 
 ## Role Summary
 
-| Role | Player | Services owned | Primary sub-system |
-| :---- | :---- | :---: | :---- |
-| Mortgage Officer | Bank lending desk | 9 (#3–#11), plus #12–#17 where bank-originated (unconfirmed) | Online Mortgage System |
-| Institution Relationship Manager | Bank admin | 3 (#1, #2, #18) | Trust-Account Approval & Renewal |
-| Account Trustee | Approved escrow trustee | 0 — see below | Escrow Request Queue (Group B-originated) |
-| Auditing Bureau Officer | Approved auditor | 0 — see below | Transaction Audit Queue |
+| Role | Player | Primary sub-system |
+| :---- | :---- | :---- |
+| Mortgage Officer | Bank lending desk | Online Mortgage System |
+| Institution Relationship Manager | Bank admin | Trust-Account Approval & Renewal |
+| Account Trustee | Approved escrow trustee | Escrow Request Queue (Group B-originated) |
+| Auditing Bureau Officer | Approved auditor | Transaction Audit Queue |
 
-> **Source gap.** The master service table's responsible-role column assigns 15 of 18 services to the Mortgage Officer and 1 to the Institution Relationship Manager, but `open-questions.md` A4 finds that column unreliable as a per-service assignment — it names the Mortgage Officer for Trustee Centre counter transactions with no lending component. The counts above are the re-derived ownership from `services-overview.md`, not the source column taken at face value. Account Trustee and Auditing Bureau Officer own no numbered service, yet the user group structure describes substantial functions for both. Their post-login behaviour below is proposed, not sourced.
+> **Corrected 2026-08-15 — "Services owned" column removed.** This table previously reported a per-role services-owned count (Mortgage Officer 9–plus-conditional, Institution Relationship Manager 3, Account Trustee 0, Auditing Bureau Officer 0), re-derived from the source's responsible-role column per an earlier version of `open-questions.md` A4. That re-derivation is superseded, not extended: A4 now confirms Group C does not assign services to roles at all — any of the four roles may act on any of the 18 services — so there is no ownership figure left to report, correct or otherwise. The "Primary sub-system" column survives because it describes where a role's *typical* work happens, not an access restriction; see the banner note above. Account Trustee and Auditing Bureau Officer's post-login behaviour, sourced from the user group structure rather than the numbered service catalogue, is still proposed rather than sourced — see each role's own section below.
 
 ---
 
@@ -41,7 +43,7 @@ This document describes post-login responsibilities only. Account creation and o
 
 ### Purpose
 
-Registers, modifies and discharges mortgages and finance leases against registered titles, and submits completed transactions for departmental audit. The highest-volume role in the module.
+Registers, modifies and discharges mortgages and finance leases against registered titles, and submits completed transactions for departmental audit. The highest-volume role in the module, though not an exclusive one — any of the institution's four Group C roles may perform the same actions (A4).
 
 ### Responsibilities
 
@@ -73,10 +75,10 @@ Maintains the institution's standing on the platform and manages the people who 
 * Maintain institutional registration details and banking credentials
 * Renew trustee and auditor approvals before expiry
 * Add and remove staff records within the institution *(reworded 2026-08-14 — previously "provision, scope and revoke staff access"; there are no permission scopes left to provision. Every staff member has identical system access from the moment they're added — this responsibility is now purely about who is on the institution's staff list, for audit-trail attribution, not about granting capability.)*
-* Submit contract cancellation applications (Service #18)
+* Submit contract cancellation applications (Service #18), typically — any of the institution's four roles may also do this (A4)
 * Monitor institution-wide transaction volume and audit outcomes
 
-> **Proposed** — not in source material. Rationale: the source describes this role as maintaining registration, renewing approvals and provisioning users, but only one numbered service exists for it. An institution-level oversight view is implied by the responsibility for renewals and user management, which cannot be discharged without visibility of expiry dates and staff activity. Needs client confirmation.
+> **Proposed** — not in source material. Rationale: the source describes this role as maintaining registration, renewing approvals and provisioning users, but only one numbered service exists for it, and A4 confirms even that one isn't exclusive to this role. An institution-level oversight view is implied by the responsibility for renewals and user management, which cannot be discharged without visibility of expiry dates and staff activity. Needs client confirmation.
 
 ### Practical Example
 
@@ -103,9 +105,11 @@ Manages developer project trust accounts, certifies that milestone conditions ar
 * File periodic audited statements for each managed trust account
 * Maintain the register of trust accounts under management
 
+**Confirmed 2026-08-15** — the client separately confirmed that Account Trustee access is not role-restricted, consistent with A4: any of the institution's four Group C roles, not just the Account Trustee by title, may act on escrow-queue items. The responsibilities above describe this role's typical function, not an exclusive one.
+
 ### Practical Example
 
-A developer submits a request to draw down against a completed construction milestone. The request arrives in the Account Trustee's queue. The Trustee reviews the project's solvency position and the milestone evidence, uploads the supporting assessment, and certifies the request. It is forwarded to the RERA escrow department for final audit. On approval, the Trustee executes the transfer and the developer is notified.
+A developer submits a request to draw down against a completed construction milestone. The request arrives in the queue. The acting user reviews the project's solvency position and the milestone evidence, uploads the supporting assessment, and certifies the request. It is forwarded to the RERA escrow department for final audit. On approval, the transfer is executed and the developer is notified.
 
 ### To Confirm
 
@@ -173,8 +177,8 @@ Seven items originally listed here; four survive as genuinely open, three are re
 **Still open:**
 
 1. Account Trustee interface: dedicated platform queue or external system with recorded outcome? **Resolved by A2** — dedicated platform queue, sourced from rows 8–12. See [ui/screens/escrow-request-queue.md](ui/screens/escrow-request-queue.md).
-2. Milestone certification: document upload or structured assessment? **Resolved by A3** — structured assessment. See [ui/screens/escrow-request-details.md](ui/screens/escrow-request-details.md#section-4--milestone-certification).
-3. **SLA for Trustee action on routed developer requests — still open.** Answer A6 proposes reading the source's split SLA figures as queue-time versus RERA-processing-time, which would supply this, but flags that reading as an inference needing explicit client confirmation. Not resolved.
+2. Milestone certification: document upload or structured assessment? **Resolved by A3** — structured assessment, confirmed by the client 2026-08-15. See [ui/screens/escrow-request-details.md](ui/screens/escrow-request-details.md#section-4--milestone-certification).
+3. **SLA for Trustee action on routed developer requests — still open.** Answer A6 proposes reading the source's split SLA figures as queue-time versus RERA-processing-time, which would supply this, but flags that reading as an inference needing explicit client confirmation. A 2026-08-15 clarification confirmed Account Trustee access is unrestricted (A4), but did not resolve this specific SLA-reading question. Not resolved.
 6. Compliance report template — RERA-defined or institution's own? **Proposed answered by A7** (Medium confidence) — RERA-defined. Structure and cycle remain open; see [ui/screens/compliance-reports.md](ui/screens/compliance-reports.md#notes).
 7. **Does the Institution Relationship Manager get an institution-wide oversight dashboard? — still open in the general sense**, though a proposed answer now exists in the form of a specific screen: [ui/screens/dashboard.md](ui/screens/dashboard.md#institution-relationship-manager) and [ui/screens/institution-profile.md](ui/screens/institution-profile.md) implement one. Whether this is the *right* dashboard remains for the client to confirm; that it should exist is answer A5's High-confidence position.
 
