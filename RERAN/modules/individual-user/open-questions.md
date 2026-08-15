@@ -132,7 +132,7 @@ Three readings are possible: (a) the master table's role column reflects which *
 
 **If wrong:** if the client later says Tenant should be the *sole* intended actor rather than a secondary one, #23/#24 would need a larger rewrite (currently Landlord-primary in every field, form, and business rule) — but that's a different, larger question than the one resolved here.
 
-**Affects:** `roles-and-responsibilities.md`'s Landlord/Tenant responsibility lists (still genuinely overlapping — worth a separate flag to the client at some point, not resolved by this entry); #23 and #24's Who Can Apply sections (corrected); `role-workflows.md` (updated).
+**Affects:** `roles-and-responsibilities.md`'s Landlord/Tenant responsibility lists (still genuinely overlapping — see D1 below, now tracked as a standing open item rather than only mentioned in passing here); #23 and #24's Who Can Apply sections (corrected); `role-workflows.md` (updated).
 
 ### B2. Is the master table's "Property Owner/Seller" default for rows 85–112 as unreliable as Group C's role column turned out to be?
 
@@ -199,18 +199,35 @@ This isn't necessarily wrong — `services-overview.md` already discloses the so
 
 ---
 
+## D. Documentation Completeness
+
+**Added 2026-08-15, found in an audit pass — not part of the original fifteen questions, tracked here because it had nowhere else to live.**
+
+### D1. `roles-and-responsibilities.md` still gives Landlord and Tenant verbatim-overlapping responsibilities. Should it be corrected to reflect B1's resolution, or flagged to the client instead?
+
+B1 above resolved the *service-flow* files' role attribution (Landlord primary, Tenant secondary applicant on #23/#24) but explicitly declined to resolve `roles-and-responsibilities.md`'s own overlapping language, calling it "worth a separate flag to the client at some point, not resolved by this entry." That flag was never actually raised anywhere trackable — `roles-and-responsibilities.md` itself still reads `updated: 2026-08-09`, untouched by any of this module's corrections, and still lists "Create and renew lease records" under Landlord and "Register tenancy information... Renew lease records" under Tenant with no cross-reference between them.
+
+**Proposed: flag to the client rather than silently edit.** Unlike B1's service-flow correction (which had a clear proposed resolution to adopt), this is a role-*definition* document, and the overlap may be intentional — the source's own worked examples (Grace for Landlord, Sarah for Tenant) don't actually contradict each other, they just both describe lease-related actions from each role's own side of the same transaction. Rewriting the responsibility lists to disambiguate risks asserting a design decision (e.g. "only Landlord creates, only Tenant registers") that neither B1's conflict check nor the source material actually settles.
+
+**Confidence:** Medium. The recommendation to flag rather than edit is a judgement call, not a sourced fact.
+
+**Affects:** `roles-and-responsibilities.md` (no edit made); this entry is the flag that document's own text said should exist somewhere.
+
+---
+
 ## Summary
 
-**Updated 2026-08-15 — client answers received for A5, A7, and C1.** All 14 questions are now resolved: 11 by proposed position (unchallenged), 3 by direct client confirmation. Nothing remains on the client-facing list.
+**Updated 2026-08-15 — client answers received for A5, A7, and C1.** All 14 original questions are resolved: 11 by proposed position (unchallenged), 3 by direct client confirmation. Nothing remains on the client-facing list from that original set.
 
 | Area | Questions | Resolved | Awaiting client data |
 | :---- | :---: | :---: | :---: |
 | A. Payment Timing | 7 | 7 | 0 |
 | B. Role Attribution | 5 | 5 | 0 |
 | C. Payment Artefacts | 2 | 1 | 0 (1 open, see below) |
-| **Total** | **14** | **13** | **0** |
+| D. Documentation Completeness | 1 | 0 | 1 (D1, flagged to client) |
+| **Total** | **15** | **13** | **1** |
 
-C2 ("Fee Balance" terminology) remains genuinely undecided but was never put to the client — it's a lower-priority item with no file currently depending on its answer, not counted as "awaiting" in the row above.
+C2 ("Fee Balance" terminology) and D1 (`roles-and-responsibilities.md`'s overlapping language) both remain genuinely undecided. C2 has no file depending on its answer yet. D1 is a standing client-facing flag, added 2026-08-15 — the total in the row above now reflects it as awaiting client data, unlike this document's earlier "0 awaiting" summary, which predates D1's discovery.
 
 ### The answers that changed existing documents
 
@@ -223,5 +240,6 @@ C2 ("Fee Balance" terminology) remains genuinely undecided but was never put to 
 | **B1** — conflict check found nothing blocking; proposed resolution adopted | #23, #24's Who Can Apply |
 | **B3** | #23, #24, #25's Who Can Apply (Property Management Company removed) |
 | **C1** — client confirmed: no wallet mechanism exists | `payments.md`'s Settlement Mechanism section (not #6's file, which never had the reference — see C1 above) |
+| **D1** — new, no client answer yet | No file changed; this document itself is the flag |
 
-This document previously listed a three-item client-facing list (A5, A7, C1). All three are now answered above and removed from that list.
+This document previously listed a three-item client-facing list (A5, A7, C1). All three are now answered above. D1 is a new, separate item now on that list, added by this audit pass rather than the original review.
