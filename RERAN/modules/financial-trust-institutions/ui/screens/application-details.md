@@ -65,7 +65,7 @@ Each step carries the actor who completed it and the date, pulled from the Audit
 
 ### Section 3 — Request Details
 
-Read-only display of everything entered on [service-request.md](service-request.md) for this record: institution/officer, represented party, property or instrument reference, and the service-specific transaction fields from the relevant `service-flows/service-NN-*.md` document. Editable only while the record is in Draft and held by its filer.
+Read-only display of everything entered on [Submit Application](../screens-unified/submit-application.md) for this record: institution/officer, represented party, property or instrument reference, and the service-specific transaction fields from the relevant `service-flows/service-NN-*.md` document. Editable only while the record is in Draft and held by its filer. **Corrected 2026-08-15** — previously linked to `service-request.md`, retired; see `ui/screens-unified/README.md` for the decision.
 
 ### Section 4 — Documents
 
@@ -131,7 +131,7 @@ Read-only throughout, in the ordinary case where this role is examining rather t
 Applications / Dashboard / Internal Certification Queue
 ↓
 Application Details
-├─ Edit (Draft, own record) → Service Request
+├─ Edit (Draft, own record) → Submit Application
 ├─ Certify / Return → Internal Certification Queue (record leaves this user's queue)
 ├─ Respond to Information Request → back to Submitted
 └─ Download Output → local
