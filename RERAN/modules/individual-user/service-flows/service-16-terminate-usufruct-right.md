@@ -4,7 +4,7 @@ module: individual-user
 type: service-flow
 status: current
 source_type: sourced
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -95,7 +95,13 @@ Applicable according to the RERAN fee schedule.
 
 **Yes**
 
-Payment must be completed before the application is submitted.
+Payment timing differs by channel — see Processing Workflow.
+
+**Real Estate Registration Trustee Centre:** documents are submitted and entered into the system first; payment is completed once the transaction is audited, immediately before the output is issued. Sourced by inheritance from row 86 ("same as sale registration"), per `services-overview.md`.
+
+**Online:** payment is completed before the application is submitted.
+
+*(Corrected 2026-08-15 — this file previously documented only the online path. See `payments.md` Category 3.)*
 
 ## 10. Processing Authority
 
@@ -106,6 +112,24 @@ Payment must be completed before the application is submitted.
 **10–15 minutes.**
 
 ## 12. Processing Workflow
+
+Option 1 – Real Estate Registration Trustee Centre
+
+Visit Real Estate Registration Trustee Centre  
+↓  
+Submit Required Documents  
+↓  
+Officer Enters Usufruct Termination into System  
+↓  
+Transaction Audited  
+↓  
+Pay Service Fee  
+↓  
+Receive Termination Documents via Email
+
+──────────────────────────
+
+Option 2 – Online
 
 Applicant
 
@@ -252,7 +276,7 @@ Upon successful completion, the system generates:
 * System validates that the usufruct right is active and eligible for termination.  
 * Required information is validated before submission.  
 * Required supporting documents are uploaded successfully.  
-* Payment is completed before regulatory review.  
+* Payment is completed at the point required by the selected channel.  
 * Application receives a unique application reference number.  
 * Approved applications update the official property registry.  
 * Updated registration documents are generated where applicable.  
@@ -264,7 +288,7 @@ Upon successful completion, the system generates:
 1. Only authorized parties to a registered usufruct right or their authorized representatives may request termination.  
 2. The usufruct right must be active and registered before a termination request can be submitted.  
 3. Termination may require the consent of all relevant parties or a legally enforceable order, where applicable.  
-4. Payment must be completed before the application proceeds for review.  
+4. Payment must be completed at the point required by the selected channel — before submission online, or after the Trustee Centre audits the transaction. *(Corrected 2026-08-15 — see Section 9.)*  
 5. The usufruct right is considered terminated only after approval by RERAN.  
 6. The official property registry is updated only after the termination has been approved.  
 7. Updated registration documents are issued where the termination affects the registered property records.  
