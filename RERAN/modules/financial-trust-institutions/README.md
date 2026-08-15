@@ -2,7 +2,7 @@
 project: RERAN
 module: financial-trust-institutions
 type: overview
-status: draft
+status: current
 updated: 2026-08-15
 contains_proposals: true
 derived_from:
@@ -26,11 +26,13 @@ RERAN user Group C — banks, mortgage institutions, account trustees and auditi
 | Roles | 4 |
 | Business Services | 18 |
 | Shared Platform Features | 17 |
+| UI Screens | 18 *(13 in `ui/screens/`, 5 in `ui/screens-unified/`)* |
 
 * [roles-and-responsibilities.md](roles-and-responsibilities.md) — Mortgage Officer, Institution Relationship Manager, Account Trustee, Auditing Bureau Officer. All four are attribution-only (2026-08-14 client decision): none gates access, and none owns a specific service (`open-questions.md` A4, 2026-08-15).
 * [services-overview.md](services-overview.md) — the 18 services, category breakdown, status vocabulary, and channels.
-* [payments.md](payments.md) — the three payer/timing models, payment artefacts, and the 2026-08-14 correction to a pay-upfront, no-standing-account model for the mortgage and finance-lease lifecycle. *(Corrected 2026-08-14 — previously "the three payer models, settlement account, and payment artefacts"; there is no standing account any more, see `open-questions.md` B1.)*
-* [open-questions.md](open-questions.md) — **all 23 questions raised while documenting this module are now confirmed or resolved; 0 need client data.** *(Corrected 2026-08-15 — previously "22 of 23... 1 (the fee schedule) is client data"; B5 was resolved 2026-08-14, and A4/A6, the two items that had been put directly in front of the client, were confirmed 2026-08-15. Nothing remains on that list — see `open-questions.md`'s own Summary.)*
+* [payments.md](payments.md) — the two payer/timing models, payment artefacts, and the corrected pay-upfront, no-standing-account model. *(Corrected 2026-08-15 — previously "three payer/timing models"; B11 folded Service #1 into the upfront model and confirmed Service #2 carries no fee, leaving two models, not three. See `open-questions.md` B11.)*
+* [open-questions.md](open-questions.md) — **all 24 questions raised while documenting this module are now confirmed or resolved; 0 need client data.** *(Corrected 2026-08-15 — previously "23 questions... all confirmed or resolved"; B11 was added 2026-08-15 as a genuinely new client decision on Service #1/#2 payment timing, bringing the total to 24. See `open-questions.md`'s own Summary.)*
+* [ui/README.md](ui/README.md) — the UI specification package: 18 screens, shared components, validation rules, and status vocabularies. *(Added 2026-08-15 — this bullet previously didn't exist; see "UI Specifications" below for what changed.)*
 
 ## Service Flows
 
@@ -61,7 +63,16 @@ All 18 carry `status: draft` and `contains_proposals: true` — each has genuine
 
 ## UI Specifications
 
-> Not yet written. Follows the service flows, per the project's derivation chain.
+**Written, not pending.** *(Corrected 2026-08-15 — this section previously read "Not yet written. Follows the service flows, per the project's derivation chain," which was accurate when this file was last touched but has been stale since the UI package was actually built; nobody updated this section as that work landed.)*
+
+Eighteen screens across two locations, described in full in [ui/README.md](ui/README.md):
+
+* **`ui/screens/`** (13 files) — Dashboard, Applications, Application Details, Internal Certification Queue, Escrow Request Queue, Escrow Request Details, Trust Accounts, Compliance Reports, Payment History, Institution Profile, Documents, Notifications, and the Group G-operated Assisted Service Terminal.
+* **`ui/screens-unified/`** (5 files) — Services Catalog, Service Details, Submit Application (the module's one canonical eighteen-service form, replacing the retired `service-request.md`), Application Review, and this folder's own README documenting how it maps against `ui/screens/`.
+
+Plus three shared reference documents: [ui/components.md](ui/components.md) (component library), [ui/validation-rules.md](ui/validation-rules.md) (validation patterns), and [ui/status-badges.md](ui/status-badges.md) (status vocabularies).
+
+Both the unified-access model and the corrected payment model have been reconciled across the entire UI package — see [ui/README.md](ui/README.md)'s own correction notes for the full history, and issue #50 for how the retire-vs-rewrite questions (Dashboard, Submit Application) were resolved.
 
 ## The Defining Pattern: Two Gates
 
@@ -83,12 +94,13 @@ The source names three for this group:
 
 This module contains proposed content marked with `contains_proposals: true` in frontmatter and inline `> **Proposed**` blocks. The source material is incomplete for this group — in particular, two of the four roles have no documented post-login behaviour at all.
 
-**All 23 questions raised while documenting this module are now confirmed or resolved** in [open-questions.md](open-questions.md); those positions have been applied throughout the service flows, `services-overview.md`, and `payments.md`. *(Corrected 2026-08-15 — previously "22 of 23... now carry a proposed working position"; see the Contents section above for what changed.)* Remaining open items — proposals not yet put to the client, as distinct from the closed question set above — are listed in each document's own To Confirm / Open Questions section:
+**All 24 questions raised while documenting this module are now confirmed or resolved** in [open-questions.md](open-questions.md); those positions have been applied throughout the service flows, `services-overview.md`, `payments.md`, and the UI package. *(Corrected 2026-08-15 — previously "23 questions... now confirmed"; B11 added, see the Contents section above.)* Remaining open items — proposals not yet put to the client, as distinct from the closed question set above — are listed in each document's own To Confirm / Open Questions section:
 
-* [roles-and-responsibilities.md](roles-and-responsibilities.md#to-confirm--summary) — 7 items listed, 4 genuinely still open as of 2026-08-15 (3 are resolved and kept for the record)
-* [services-overview.md](services-overview.md#to-confirm) — 5 items *(corrected 2026-08-15 — previously 7; the A4 and B5 items were resolved and removed, not repeated)*
-* [payments.md](payments.md#to-confirm--summary) — 6 items *(not re-verified as part of this correction — flagged, not fixed, if stale)*
-* Each of the 18 service-flow documents — its own Open Questions section, where something survived the answers doc genuinely unresolved
+* [roles-and-responsibilities.md](roles-and-responsibilities.md#to-confirm--summary) — 1 item genuinely still open as of 2026-08-15 (6 are resolved and kept for the record). *(Corrected 2026-08-15 — previously "4 genuinely still open"; the Dashboard rework (issue #50) resolved item 7, leaving only item 6 open.)*
+* [services-overview.md](services-overview.md#to-confirm) — 5 items.
+* [payments.md](payments.md#to-confirm--summary) — 4 items. *(Corrected 2026-08-15 — previously "6 items... not re-verified"; the B11 correction pass did update this section directly, resolving two more and leaving 4. No longer a stale caveat.)*
+* Each of the 18 service-flow documents — its own Open Questions section, where something survived the answers doc genuinely unresolved.
+* [ui/screens-unified/submit-application.md](ui/screens-unified/submit-application.md#section-3--service-specific-details-dynamic) — the per-service field-layout classification (Pattern A/B/C) for all 18 services, fully resolved as of 2026-08-15; nothing open there either, but worth a direct link since it's a substantial piece of design reasoning that doesn't fit the "To Confirm" framing of the other documents.
 
 When an item is confirmed, remove its `> **Proposed**` block and bump `updated`. When every proposal in a file is resolved, remove `contains_proposals` from its frontmatter.
 
@@ -97,6 +109,6 @@ When an item is confirmed, remove its `> **Proposed**` block and bump `updated`.
 * **Account Trustee and Auditing Bureau Officer own no numbered services.** Both have substantial described functions but appear in the service table only as participants in Group B's escrow workflow. Their Group C interface is reconstructed, not sourced.
 * **The "bank's internal auditor" in the mortgage workflow is modelled as a checker permission scope, not the Auditing Bureau Officer** (A1) — the Auditing Bureau Officer is an approved external firm auditing developer escrow, a different actor with different properties.
 * **The status vocabulary is now platform-wide core plus a Group C extension** (D1), rather than undefined for every user group.
-* **No service in Group C is role-specific, for any of the 18 services** (A4, confirmed 2026-08-15, client decision). *(Corrected 2026-08-15 — this bullet previously read "Services #1 and #2's role-assignment inconsistency is resolved — both now sit with the Institution Relationship Manager," which was the answer's superseded re-derivation, not the current one. The client has since confirmed Group C does not assign services to roles at all; that superseded position is kept in `open-questions.md` A4 for the record but is no longer accurate as a statement of the current model.)*
+* **No service in Group C is role-specific, for any of the 18 services** (A4, confirmed 2026-08-15, client decision).
 * **Row 38 (Service #12) and row 39 (Service #7) are transposed against file order** in the source workbook; the service flows follow the row-to-file mapping, not row sequence.
-* **Row 39 (Grant Property Mortgage) names "Payment receipts" as output**, which this document previously flagged as the one exception against every other mortgage row's "Fee balance" wording. **Corrected 2026-08-14** — under the corrected payment model (`open-questions.md` B1, B9), there is no standing account and no "fee balance" artefact for any Group C service; row 39's "Payment receipts" is the terminology every mortgage-service row now follows, not an anomaly. See [payments.md](payments.md).
+* **Row 39 (Grant Property Mortgage) names "Payment receipts" as output**, which this document previously flagged as the one exception against every other mortgage row's "Fee balance" wording. Under the corrected payment model (`open-questions.md` B1, B9), there is no standing account and no "fee balance" artefact for any Group C service; row 39's "Payment receipts" is the terminology every service now follows, not an anomaly. See [payments.md](payments.md).
