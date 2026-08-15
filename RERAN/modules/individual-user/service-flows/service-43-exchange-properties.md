@@ -3,7 +3,7 @@ project: RERAN
 module: individual-user
 type: service-flow
 status: current
-updated: 2026-08-10
+updated: 2026-08-15
 source_type: sourced
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
@@ -110,7 +110,7 @@ Completed
 
 ## 17. UI Screens
 
-Not yet designed — this module has no UI documentation yet.
+**Corrected 2026-08-15** — this previously said "Not yet designed — this module has no UI documentation yet," which predates the module's UI package. That correction surfaced a bigger gap: this service had actually been left out of `ui/README.md`'s Service × Form Matrix entirely, not just described as undesigned — an omission distinct from #40/#41/#42's stale-but-otherwise-correct Section 17 entries. Now classified there as Pattern B (provisional, [submit-application.md](../ui/screens-unified/submit-application.md)), matching this file's own "single applicant's perspective" framing above, with the two-party confirmation question flagged rather than resolved — see `ui/README.md`'s Open Items and Business Rule 1 below, which already documents the same open question.
 
 ## 18. API Requirements
 
