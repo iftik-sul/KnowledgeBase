@@ -101,6 +101,9 @@ Completed
 
 * E-Certificate of Title / Title Deed
 * E-Map
+* Payment Receipt
+
+*(Corrected 2026-08-15 — this Output list previously had no Payment Receipt at all, despite the service being fee-bearing (Section 9, "Yes"). Every other fee-bearing service in the module issues one; found while re-verifying #6/#10's own Payment Receipt / Fee Balance correction against neighbouring files. There is no Fee Balance concept in this module — see `payments.md`'s Payment Artefacts section, `open-questions.md` C2 — so Payment Receipt is the only payment artefact this service should list.)*
 
 ## 16. Related Services
 
