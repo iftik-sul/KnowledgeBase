@@ -55,7 +55,7 @@ The 8 categories from `services-overview.md`, each expandable/tabbed:
 
 ### Section 3 — Service Cards
 
-Each card shows: service name, one-line description (from each service-flow file's Purpose section), fee indicator (chargeable / free / conditional — matching `payments.md`'s findings, not a generic "chargeable" assumption), and expected processing time. Selecting a card opens [Service Details](service-details.md).
+Each card shows: service name, one-line description (from each service-flow file's Purpose section), fee indicator (chargeable / free / conditional / **depends on selection** — see the #30/#37 note below — matching `payments.md`'s findings, not a generic "chargeable" assumption), and expected processing time. Selecting a card opens [Service Details](service-details.md).
 
 **Fee indicator accuracy matters here specifically** — this is the first place a user sees whether a service costs money, and `payments.md`'s audit found the module's own documentation got this wrong for at least 5 services before correction. The catalog must read fee status from the corrected service-flow files, not from any older assumption that "everything is chargeable."
 
@@ -84,4 +84,4 @@ Dashboard / Sidebar → Services Catalog → Service Details → Submit Applicat
 ## Notes
 
 * #40 (Upload Building Details for Leasing) still appears as a catalog card even though it has no in-app wizard — its card, when selected, routes to a "this is an email-based process" explanation rather than Service Details' usual "Start Application" button. See `ui/README.md`.
-* #30 and #37's cards route into a different first step (PoA/identity validation) rather than straight into the wizard's field-collection steps — see [submit-application.md](submit-application.md).
+* #30 and #37's cards route into a different first step (PoA/identity validation) rather than straight into the wizard's field-collection steps — see [submit-application.md](submit-application.md). **Their fee indicator, added 2026-08-15:** neither has an independent fee status of its own — both were corrected to explicitly inherit whichever fee/timing rule the eventually-selected underlying service carries (`payments.md` Category 9). Their cards show "depends on selection" rather than a fixed chargeable/free/conditional label, since no single answer is accurate until the user picks what they're actually doing. This gap was found in the same audit pass that fixed #30 and #37's own files — the catalog's fee-indicator options had never been extended to cover them.
