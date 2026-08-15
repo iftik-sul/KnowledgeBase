@@ -34,22 +34,35 @@ View Dashboard
    Select Service → Enter Search Criteria → Pay → Submit → View Result
    (Upfront payment, confirmed — no counter-channel alternative sourced for any of these three.)
 
-   Property Ownership & Registration (#4, #17–#22, #35, #41, #43)
+   Property Ownership & Registration (#4, #17–#22, #35, #43)
    Select Service → Enter Property/Applicant Details → Upload Documents →
-     Pay (upfront, confirmed for #4, #19–#22, #35, #41, #43) →
+     Pay (upfront, confirmed for #4, #19–#22, #35, #43) →
      Submit → RERAN Review → Approved → Receive Title Documents
-   (#17, #18, #33 are the confirmed exception — no fee at all per `open-questions.md` A3;
-   #41 additionally sources a Trustee-Centre-only channel where payment happens *after*
-   RERAN's audit, not before — see `payments.md` Category 2.)
+   (#17, #18, #33 are the confirmed exception — no fee at all per `open-questions.md` A3.
+   #41 is deliberately excluded from this group — corrected 2026-08-15, found in an audit
+   pass. It was previously listed here alongside the upfront payers, but #41 is Trustee-
+   Centre-only with no online channel at all, and its one channel pays *after* RERAN's
+   audit, the opposite of "upfront" — see the Trustee Centre group below, where it now
+   belongs.)
 
    Property Transactions (#5–#16)
    Select Property → Enter Counterparty Details → Upload Documents →
      [Online:] Pay → Submit → RERAN Review → Approved → Receive Documents
      [Trustee Centre, where sourced:] Submit → RERAN Audits → Pay → Receive Documents
-   (The Trustee Centre branch is sourced for all of #5, #9–#16 and is now documented in
-   this module's files for all of them — see `payments.md` Category 3 and `open-questions.md`
-   A2. #7 splits into two components with different fee treatment — see `payments.md`
-   Category 4.)
+   (The Trustee Centre branch is sourced for #9–#16; #5 has it too but with a different
+   sequence — pay *before* the combined audit-and-approval step, not after an isolated
+   audit — see `payments.md` Category 3. #7 splits into two components with different fee
+   treatment — see `payments.md` Category 4. #6's counterparty pays nothing — corrected
+   2026-08-15, a documentation duplication that previously showed both parties paying;
+   only the primary applicant pays in this group.)
+
+   Trustee-Centre-only services, no online channel at all (#41)
+   Visit Trustee Centre → Submit Documents → RERAN Enters & Audits → Pay → Receive Output
+   (Added 2026-08-15, moved from the upfront group above. #41's own file documents no
+   in-app submission path — see `payments.md` Category 2, which correctly notes #41's
+   file needed no Section 9 fix because it never made the "before submission" claim in
+   the first place; the correction here is to this document's own grouping, not to #41's
+   file.)
 
    Tenancy (#23–#28, #40)
    Select Service → Enter Lease/Tenant Details → Upload Documents →
@@ -65,21 +78,29 @@ View Dashboard
    Power of Attorney (#29, #30, #42)
    Register (#29): Select Property → Enter Attorney Details → Define Scope → Pay → Submit
    Act on Behalf (#30): Select Property Owner → System Validates PoA → Select Service →
-     Pay (where the selected service requires it) → Submit
+     [Wizard re-opens at that service's own pattern and payment rule] → Submit
    Cancel (#42): Visit Customer Centre → Submit Documents → RERAN Reviews
-   (#42's fee, output document, and completion criteria are not specified in source at all —
-   the thinnest-specified service in the module, already flagged as such in its own file.)
+   (#30 has no independent fee of its own — corrected 2026-08-15, `payments.md` Category 9 —
+   it inherits whichever fee and timing rule the selected service uses, which could be any
+   of the groups above. #42's fee, output document, and completion criteria are not specified
+   in source at all — the thinnest-specified service in the module, already flagged as such
+   in its own file.)
 
    Property Information & Certificates (#31–#35)
    Search Property → Enter Request Details → Pay → Submit → Receive Document
-   (#33 is the confirmed no-fee exception among this group — see A3.)
+   (#33 is the confirmed no-fee exception among this group — see A3. #28 belongs to Tenancy
+   above, not here, despite being a certificate/valuation request in shape — its Who Can Apply
+   spans Property Owner, Landlord, and Tenant, and `ui/README.md`'s Pattern I list groups it
+   with the other certificate services for field shape even though its category placement is
+   Tenancy Services.)
 
    Diaspora (#36–#37)
    Verify Identity (#36): Enter Personal Info → Upload ID → Biometric Check → Pay → Submit
    Remote Transaction (#37): Confirm #36 Complete → Select Transaction Type → [routes into
      the relevant service above, e.g. #5, #6, #23]
    (#37 is a routing layer over other services, not a separate transaction type of its own —
-   its payment timing therefore inherits whatever the underlying selected service uses.)
+   its payment timing therefore inherits whatever the underlying selected service uses, same
+   as #30 above — see `payments.md` Category 9.)
 
    Consumer Protection (#38–#39)
    Submit Complaint (#38): Select Category → Enter Details → Upload Evidence →
@@ -147,7 +168,7 @@ The module's default/fallback role — the master table's Responsible Role colum
 * Participate as purchaser in Register Property Sale (#6)
 * Diaspora-adjacent purchase flows via #37 where relevant
 
-**Sourced vs. extrapolated — checked directly, not previously stated anywhere in this module (`open-questions.md` B4):** like Owner's Representative/PoA Holder above, this role **never appears as a Responsible Role in the sourced master-table rows.** Its documented service list is drawn almost entirely from the 11 extrapolated services (#1–#3 specifically). #6 is the one point of contact with a sourced row, and even there the master table's role column names Property Owner/Seller for the row, with "Purchaser" appearing only in the file's own workflow narrative (the purchaser's 16-step sub-flow), not the source's Responsible Role field.
+**Sourced vs. extrapolated — checked directly, not previously stated anywhere in this module (`open-questions.md` B4):** like Owner's Representative/PoA Holder above, this role **never appears as a Responsible Role in the sourced master-table rows.** Its documented service list is drawn almost entirely from the 11 extrapolated services (#1–#3 specifically). #6 is the one point of contact with a sourced row, and even there the master table's role column names Property Owner/Seller for the row, with "Purchaser" appearing only in the file's own workflow narrative, not the source's Responsible Role field. **The purchaser's own workflow no longer includes a payment step** — corrected 2026-08-15; the purchaser's role in #6 is confirmation and document upload only, matching #6's own corrected file.
 
 ### Diaspora Investor
 
