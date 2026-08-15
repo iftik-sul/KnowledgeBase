@@ -3,7 +3,7 @@ project: RERAN
 module: individual-user
 type: service-flow
 status: current
-updated: 2026-08-10
+updated: 2026-08-15
 source_type: sourced
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
@@ -104,7 +104,7 @@ Not specified in the source material beyond "data uploaded into the lease system
 
 ## 17. UI Screens
 
-Not yet designed — this module has no UI documentation yet (see module README). Given the email-based nature of this service per the source, it may not need the same screen set as other services; worth confirming before UI work begins.
+**Corrected 2026-08-15** — this previously said "Not yet designed — this module has no UI documentation yet," which predates the module's UI package (added and merged the same day this correction was made). [my-leases.md](../ui/screens/my-leases.md) addresses this service directly, and correctly: rather than a wizard entry, it shows a static note ("To list a new building for leasing, email building details to RERAN") with no Submit Application flow behind it, matching this service's own off-platform, email-based nature described above. The scope question in Section 12's own note — whether this should eventually become an in-app form — remains unresolved and is unaffected by this correction; the UI package deliberately didn't force a wizard onto a service the source describes as email-based.
 
 ## 18. API Requirements
 
