@@ -3,7 +3,7 @@ project: RERAN
 module: financial-trust-institutions
 type: navigation
 status: draft
-updated: 2026-08-11
+updated: 2026-08-15
 contains_proposals: true
 derived_from:
   - "RERAN/modules/financial-trust-institutions/roles-and-responsibilities.md"
@@ -20,38 +20,17 @@ tags:
 
 **Proposed.** The source material gives workflows, channels, output documents and SLAs, but no screen designs. This package applies the UI-spec format established in the Real Estate Developer module.
 
-**Derivation note.** These screens are derived from the roles document, the services overview and the answered open questions — not from the service-flow files, which are currently thin (see issue #23). Fourteen of the eighteen service flows will gain detail when that issue lands; the screens that will need re-checking against them are marked in the table below.
+**Derivation note.** These screens are derived from the roles document, the services overview and the answered open questions — not from the service-flow files, which are currently thin (see issue #23).
+
+> **Corrected 2026-08-15.** This package was reconciled against two decisions: the unified-access model (no role or permission-scope gating; role is audit-trail attribution only) and the corrected payment model (no standing account; per-transaction payment, upfront or at point of service, per `open-questions.md` B1 and B11). The Role × Screen Matrix below, the Service × Form Matrix's ownership column, and the Structural Characteristic section are all rewritten accordingly. `settlement-account.md` is retired and replaced by `payment-history.md`.
 
 ---
 
-## Role × Screen Matrix
+## Screen Access
 
-This is the index that makes a missing screen visible. Every role must be able to discharge every responsibility in `roles-and-responsibilities.md` through a screen listed here.
+Every screen in this package is reachable by any of the institution's four Group C roles — Mortgage Officer, Institution Relationship Manager, Account Trustee, Auditing Bureau Officer. There is no permission-scope gating and no role-restricted variant of any screen. The **Role × Screen Matrix** this document previously carried is removed: under the unified model, that matrix would be a column of `●` repeated four times per row, which conveys nothing a screen list doesn't already say. Each screen's own file describes, where relevant, which role *typically* performs which action in practice — a UX default, not an access rule — under a "typically" framing rather than a Role Variations access table.
 
-| Screen | Mortgage Officer | Institution Relationship Manager | Account Trustee | Auditing Bureau Officer | Certifier scope |
-| :---- | :---: | :---: | :---: | :---: | :---: |
-| [dashboard](screens/dashboard.md) | ● | ● | ● | ● | ● |
-| [service-request](screens/service-request.md) | ● | #1, #2, #18 | — | — | — |
-| [applications](screens/applications.md) | Own | Institution-wide | — | Read | Own† |
-| [application-details](screens/application-details.md) | ● | ● | — | Read | ● |
-| [internal-certification-queue](screens/internal-certification-queue.md) | — | Configure + Read | — | — | ● |
-| [escrow-request-queue](screens/escrow-request-queue.md) | — | Read | ● | Read | — |
-| [escrow-request-details](screens/escrow-request-details.md) | — | Read | ● | Read | — |
-| [trust-accounts](screens/trust-accounts.md) | — | Read | ● | ● | — |
-| [compliance-reports](screens/compliance-reports.md) | — | Read | — | ● | — |
-| [settlement-account](screens/settlement-account.md) | Read | ● | — | Read | — |
-| [institution-profile](screens/institution-profile.md) | Read | ● | Read | Read | Read |
-| [documents](screens/documents.md) | Own-linked | Institution-wide | Escrow-linked | Institution-wide (read) | — |
-| [notifications](screens/notifications.md) | ● | ● | ● | ● | ● |
-| [assisted-service-terminal](screens/assisted-service-terminal.md) | — | — | — | — | — |
-
-● = operates the screen · Read = read-only · — = no access
-
-† A `certify`-scope holder's Applications visibility is not a separate scoping rule — it inherits whatever their underlying role already grants (Own for a Mortgage Officer who also certifies, Institution-wide for an IRM who also certifies). The certification-specific queue is [internal-certification-queue](screens/internal-certification-queue.md), not this screen.
-
-**Two cells corrected against the finished screens (issue #27 verification pass):** Internal Certification's IRM column was `Configure` alone; the finished screen distinguishes configuring the scope (Institution Profile) from a read-only institution-wide view of the queue itself (built here), so the cell now reads `Configure + Read`. Documents previously showed `●` for every role, which the finished screen does not do — visibility there follows what each role is linked to, matching the correction made in `navigation.md`.
-
-**Assisted Service Terminal** is operated by a Trustee Centre operator (Group G), not by a Group C role. It is documented here because it executes Group C services on a walk-in customer's behalf under answer C2. When Group G's interfaces are written, this screen moves there and is linked from here.
+The one screen not reachable by any Group C role is [assisted-service-terminal](screens/assisted-service-terminal.md), operated by a Trustee Centre operator (Group G) — see its own entry below.
 
 ---
 
@@ -59,17 +38,20 @@ This is the index that makes a missing screen visible. Every role must be able t
 
 All eighteen services use one configurable form (`service-request.md`) rather than eighteen form specs. The form's field groups, document set and routing vary by service; the shell does not.
 
-| Services | Owner (per answer A4) | Assisted mode | Internal certification | Escrow-routed |
-| :---- | :---- | :---: | :---: | :---: |
-| #1–#2 institutional approval | Institution Relationship Manager | — | Optional | — |
-| #3–#7 mortgage lifecycle | Mortgage Officer | Where source names centre | Yes when configured | — |
-| #8–#11 finance lease lifecycle | Mortgage Officer | Yes | Yes when configured | — |
-| #12 fund company registration | Mortgage Officer, or Group G operator | Yes | Yes when configured | — |
-| #13–#17 title and ownership | Mortgage Officer, or Group G operator | Yes | Yes when configured | — |
-| #18 contract cancellation | Institution Relationship Manager | Yes | Yes when configured | — |
-| Group B escrow requests | Account Trustee (inbound) | — | — | Yes |
+| Services | Assisted mode | Internal certification | Escrow-routed |
+| :---- | :---: | :---: | :---: |
+| #1 institutional approval | — | Optional | — |
+| #2 institutional cancellation | — | Optional | — |
+| #3–#7 mortgage lifecycle | Where source names centre | Yes when configured | — |
+| #8–#11 finance lease lifecycle | Yes | Yes when configured | — |
+| #12 fund company registration | Yes | Yes when configured | — |
+| #13–#17 title and ownership | Yes | Yes when configured | — |
+| #18 contract cancellation | Yes | Yes when configured | — |
+| Group B escrow requests | — | — | Yes |
 
-Group B escrow requests are not among the eighteen. They arrive from the developer module and are worked in the escrow queue — see answer A2, which confirms from source rows 8–12 that the Account Trustee acts inside the platform rather than recording an outcome reached elsewhere.
+**Corrected 2026-08-15** — the previous "Owner (per answer A4)" column is removed. `open-questions.md` A4 (confirmed 2026-08-15, client decision) settles that no service is role-specific; any of the institution's four roles may act on any of the eighteen, so there is no per-service owner left to list.
+
+Group B escrow requests are not among the eighteen. They arrive from the developer module and are worked in the escrow queue — see answer A2, which confirms from source rows 8–12 that the institution acts inside the platform rather than recording an outcome reached elsewhere.
 
 ---
 
@@ -77,20 +59,22 @@ Group B escrow requests are not among the eighteen. They arrive from the develop
 
 | Screen | Purpose |
 | :---- | :---- |
-| [dashboard](screens/dashboard.md) | Role-specific entry point: work in hand, approvals, settlement and expiry warnings |
+| [dashboard](screens/dashboard.md) | Entry point: work in hand, approvals, and expiry warnings |
 | [service-request](screens/service-request.md) | The configurable form behind all eighteen services |
-| [applications](screens/applications.md) | Search, filter and act on submitted requests |
+| [applications](screens/applications.md) | Search, filter and act on submitted requests, institution-wide |
 | [application-details](screens/application-details.md) | One request: particulars, documents, workflow position, audit trail |
-| [internal-certification-queue](screens/internal-certification-queue.md) | Maker-checker gate before RERAN submission |
-| [escrow-request-queue](screens/escrow-request-queue.md) | Developer escrow requests awaiting trustee certification |
+| [internal-certification-queue](screens/internal-certification-queue.md) | The institution's own maker-checker gate before RERAN submission |
+| [escrow-request-queue](screens/escrow-request-queue.md) | Developer escrow requests awaiting certification |
 | [escrow-request-details](screens/escrow-request-details.md) | One escrow request: solvency, milestone evidence, decision |
 | [trust-accounts](screens/trust-accounts.md) | Register of trust accounts under the institution's trusteeship |
 | [compliance-reports](screens/compliance-reports.md) | Independent compliance reports and escrow audit findings |
-| [settlement-account](screens/settlement-account.md) | Standing pre-funded account: balance, funding, ledger, awaiting settlement |
-| [institution-profile](screens/institution-profile.md) | Approval standing, expiry tracking, staff and permission scopes |
-| [documents](screens/documents.md) | Institution document repository |
-| [notifications](screens/notifications.md) | Operational, approval, expiry and low-balance alerts |
+| [payment-history](screens/payment-history.md) | Per-transaction payment record: receipts, amounts, service references, status |
+| [institution-profile](screens/institution-profile.md) | Approval standing, expiry tracking, and the staff roster |
+| [documents](screens/documents.md) | Institution document repository, institution-wide |
+| [notifications](screens/notifications.md) | Operational, approval and expiry alerts |
 | [assisted-service-terminal](screens/assisted-service-terminal.md) | Group C services operated for a walk-in customer |
+
+**Corrected 2026-08-15** — `settlement-account` is removed from this table; `payment-history` replaces it, described per its actual content rather than the retired standing-account model. `dashboard`'s and `institution-profile`'s purpose lines drop role-specific and permission-scope language respectively.
 
 ---
 
@@ -99,7 +83,7 @@ Group B escrow requests are not among the eighteen. They arrive from the develop
 Shared logic is defined once in these files and linked from screens. Screens must not restate it.
 
 * [components.md](components.md) — component library, including the sidebar definition
-* [validation-rules.md](validation-rules.md) — validation patterns and permission-scope rules
+* [validation-rules.md](validation-rules.md) — validation patterns, corrected 2026-08-15 to remove the retired permission-scope model
 * [status-badges.md](status-badges.md) — status vocabularies and their treatments
 
 ---
@@ -108,14 +92,12 @@ Shared logic is defined once in these files and linked from screens. Screens mus
 
 Every screen file uses, in order: **Purpose, Layout, Sections, Empty State, Reused Components, Validation, Role Variations, User Flow, Notes.**
 
-Where a section is identical for all roles, state it once at screen level. Where it differs, state it under Role Variations and leave a pointer at screen level. Do not restate shared component or validation definitions — link to the shared files.
+**Corrected 2026-08-15** — under the unified model, most screens now have no Role Variations to state and the section is either removed or replaced with a short "typically does X in practice" note. Where a screen's access genuinely doesn't vary by role at all, state that plainly rather than leaving an empty heading.
 
 ---
 
 ## Structural Characteristic
 
-**Corrected in the issue #27 pass.** This section previously stated that every Group C action passes two gates. That overstates what the source supports: rows 28–45 source an explicit internal "bank auditor" step only for the mortgage and finance-lease lifecycle (#3–#7); the remaining services do not carry the same language, and several service-flow documents leave whether a `certify` gate applies to them as an open question rather than asserting one.
+**Corrected 2026-08-15, superseding the issue #27 correction below.** The two-gate pattern — internal certification inside the institution, then external audit at RERAN — is sourced only for the mortgage and finance-lease lifecycle (Services #3–#11); the remaining services either don't carry the same source language or leave whether a certification gate applies to them as an open question. Where it applies, both gates still exist, but **the internal gate is no longer a permission scope.** It is an unrestricted action any of the institution's four roles may perform, including the filer of the same record (`open-questions.md` A1, confirmed via the 2026-08-14 unified-access decision). Every screen that submits, certifies or approves must still show which gate the record currently sits at and who currently holds it — see [screens/application-details.md](screens/application-details.md#section-1--header) for how that's surfaced — but "who holds it" is never a scope-restricted set of users; it is either the filer, RERAN, or nobody.
 
-Where it applies — sourced or configured — every Group C action passes two gates: internal certification inside the institution, then external audit at RERAN, and no Group C role completes that action unilaterally. Every screen that submits, certifies or approves must show which gate the record currently sits at and who holds it — see [screens/application-details.md](screens/application-details.md#section-1--header) for how that's surfaced. But the pattern is not asserted as universal, and no screen in this package should imply otherwise; [screens/internal-certification-queue.md](screens/internal-certification-queue.md) and the services it serves are explicit about which ones actually route through it.
-
-The internal gate is a **permission scope**, not a role (answer A1). Any delegated staff member may hold a certifier scope; the screen serving that gate is filtered by scope, not by job title.
+> **Superseded 2026-08-14 correction, kept for the record.** This section previously stated that every Group C action passes two gates unconditionally, which overstated what rows 28–45 support; the mortgage/finance-lease-only scoping above was the fix. That fix stands. What's additionally corrected now is the final paragraph that fix left in place: "The internal gate is a permission scope, not a role... filtered by scope, not by job title." Permission scopes are retired module-wide; the internal gate is filtered by nothing at all except whether the service sources it.
