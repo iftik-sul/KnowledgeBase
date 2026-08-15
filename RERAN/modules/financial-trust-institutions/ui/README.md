@@ -2,7 +2,7 @@
 project: RERAN
 module: financial-trust-institutions
 type: navigation
-status: draft
+status: current
 updated: 2026-08-15
 contains_proposals: true
 derived_from:
@@ -22,7 +22,7 @@ tags:
 
 **Derivation note.** These screens are derived from the roles document, the services overview and the answered open questions — not from the service-flow files, which are currently thin (see issue #23).
 
-> **Corrected 2026-08-15.** This package was reconciled against two decisions: the unified-access model (no role or permission-scope gating; role is audit-trail attribution only) and the corrected payment model (no standing account; per-transaction payment, upfront or at point of service, per `open-questions.md` B1 and B11). The Role × Screen Matrix below, the Service × Form Matrix's ownership column, and the Structural Characteristic section are all rewritten accordingly. `settlement-account.md` is retired and replaced by `payment-history.md`.
+> **Corrected 2026-08-15.** This package was reconciled against two decisions: the unified-access model (no role or permission-scope gating; role is audit-trail attribution only) and the corrected payment model (no standing account; per-transaction payment, upfront or at point of service, per `open-questions.md` B1 and B11). The Role × Screen Matrix below, the Service × Form Matrix's ownership column, and the Structural Characteristic section are all rewritten accordingly. `settlement-account.md` is retired and replaced by `payment-history.md`; `service-request.md` is retired and replaced by `screens-unified/submit-application.md` (issue #50, resolved).
 
 ---
 
@@ -36,7 +36,7 @@ The one screen not reachable by any Group C role is [assisted-service-terminal](
 
 ## Service × Form Matrix
 
-All eighteen services use one configurable form (`service-request.md`) rather than eighteen form specs. The form's field groups, document set and routing vary by service; the shell does not.
+All eighteen services use one configurable form — [Submit Application](screens-unified/submit-application.md), a progress-tracked wizard — rather than eighteen form specs. **Corrected 2026-08-15** — previously `service-request.md`, a single-page form; retired in Submit Application's favour after a full field-matrix audit found the per-service field set needs three distinct layout patterns (flat fields, repeatable groups, field-selection), not one generic layout, a finding that applied equally to both screen designs and made the wizard the better fit — see `screens-unified/README.md` for the full reasoning.
 
 | Services | Assisted mode | Internal certification | Escrow-routed |
 | :---- | :---: | :---: | :---: |
@@ -59,8 +59,8 @@ Group B escrow requests are not among the eighteen. They arrive from the develop
 
 | Screen | Purpose |
 | :---- | :---- |
-| [dashboard](screens/dashboard.md) | Entry point: work in hand, approvals, and expiry warnings |
-| [service-request](screens/service-request.md) | The configurable form behind all eighteen services |
+| [dashboard](screens/dashboard.md) | Entry point: work in hand, approvals, and expiry warnings, with institution-wide Focus Area summaries |
+| [Submit Application](screens-unified/submit-application.md) | The configurable form behind all eighteen services |
 | [applications](screens/applications.md) | Search, filter and act on submitted requests, institution-wide |
 | [application-details](screens/application-details.md) | One request: particulars, documents, workflow position, audit trail |
 | [internal-certification-queue](screens/internal-certification-queue.md) | The institution's own maker-checker gate before RERAN submission |
@@ -74,7 +74,9 @@ Group B escrow requests are not among the eighteen. They arrive from the develop
 | [notifications](screens/notifications.md) | Operational, approval and expiry alerts |
 | [assisted-service-terminal](screens/assisted-service-terminal.md) | Group C services operated for a walk-in customer |
 
-**Corrected 2026-08-15** — `settlement-account` is removed from this table; `payment-history` replaces it, described per its actual content rather than the retired standing-account model. `dashboard`'s and `institution-profile`'s purpose lines drop role-specific and permission-scope language respectively.
+**Corrected 2026-08-15** — `settlement-account` is removed from this table; `payment-history` replaces it. `service-request` is removed; [Submit Application](screens-unified/submit-application.md) (a `screens-unified/` file, not `screens/`) replaces it — see the Service × Form Matrix note above. `dashboard`'s and `institution-profile`'s purpose lines drop role-specific and permission-scope language respectively.
+
+Three of the fourteen screens now live in [`screens-unified/`](screens-unified/) rather than `screens/`: [Services Catalog](screens-unified/services-catalog.md) and [Service Details](screens-unified/service-details.md), which have no equivalent in the original 13-screen set and are not listed above, plus [Submit Application](screens-unified/submit-application.md), which replaces one. [Application Review](screens-unified/application-review.md) also has no equivalent and is not listed above, since it is a step inside the Submit Application flow, not a standalone entry in this table.
 
 ---
 
