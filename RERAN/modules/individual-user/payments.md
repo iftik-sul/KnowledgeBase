@@ -18,7 +18,7 @@ tags:
 
 Every one of the 43 documented services was checked individually against its own sourced row in `RERAN_service_flows_v2.md` (rows 72–112, Groups E and F) before writing anything below. `module-roadmap.md`'s own cross-cutting note on payment timing — corrected four times while auditing Groups B and C, and explicitly warning that this module was "unaudited" — is the standing instruction this document follows. The short version of what that audit found: **payment timing in this module is not uniform, cannot be inferred from a neighbouring service, and every one of the 43 files needed to be read on its own terms.** Several were.
 
-**This is a first pass, not a correction of prior work** — `payments.md` did not exist before this document. But 33 of the 43 existing service-flow files carry a boilerplate Section 9 ("Payment must be completed before the application is submitted") that this audit found does not match either the source or, in several cases, the file's *own* Processing Workflow section. Those files are not corrected here — this document records what the audit found; propagating the correction into each service-flow file is separate follow-up work, listed at the end.
+**Updated 2026-08-15 — findings propagated.** This document's first version recorded the audit's findings without correcting the service-flow files themselves. That correction has since been made: 20 of the 43 files carried a boilerplate Section 9 ("Payment must be completed before the application is submitted") that did not match either the source or, in several cases, the file's *own* Processing Workflow section — all 20 have been corrected, along with three further client-confirmed payment questions (see "To Confirm — Summary" below). "Downstream Corrections — Propagated," at the end of this document, lists exactly what changed in each file.
 
 ## The Core Finding: Two Channels, Two Timings, One Boilerplate Line
 
@@ -90,13 +90,13 @@ Unlike Category 2, these files don't contain a contradicting Option 1 — they s
 
 **Proposed position:** treat #17, #18, #33, and #7's Owner/Entity-Amendment component as no-fee, pending client confirmation — consistent with #40 and #42, which are already documented this way and needed no correction here.
 
-### Category 5 — Online channel sourced with no fee step, counter channel sourced with one
+### Category 5 — Online channel sourced with no fee step, counter channel sourced with one. Resolved.
 
 | Service | Source row | Finding |
 | :---- | :---- | :---- |
-| **#27 – Cancel Tenancy Contract** | 83 | Counter channel: submit → audit → **pay** → receive. Online/App channel: *"fill details, attach docs, send; receive, review; email sent on approval"* — **no fee step at all.** The file states a fee is required uniformly, with no channel distinction. |
+| **#27 – Cancel Tenancy Contract** | 83 | Counter channel: submit → audit → **pay** → receive. Online/App channel: *"fill details, attach docs, send; receive, review; email sent on approval"* — no fee step in the source text. |
 
-**Proposed position:** flag rather than silently resolve — it's plausible the online path is genuinely free (a policy choice to encourage self-service cancellation) or that the source simply omitted a fee step present in the counter path. Either is defensible; the file currently asserts neither and instead states a single, unqualified fee.
+**Confirmed by client (`open-questions.md` A5): the fee applies to both channels, on the same timing as the counter channel** — payment after RERAN's review, not before submission. The source's online-channel silence on payment was an omission in the source material, not a deliberate free path. #27's service-flow file previously documented a single undifferentiated flow with no Trustee Centre channel at all (the same gap found in #9–#16) — it has been corrected to show both channels explicitly, both fee-bearing, both paying after review. See the corrected file for the resulting two-option Processing Workflow.
 
 ### Category 6 — Legitimate conditional fee (not an error)
 
@@ -110,15 +110,17 @@ A user who files a complaint under #38 (itself fee-bearing, see Category 8 below
 
 **Proposed position:** #39 should be free, matching Feature #2's pattern and every other trackable service in this module. No source row exists to override this — the current fee requirement appears to be an artefact of extrapolating #39 too closely from #1–#3's "Yes, pay per lookup" pattern (verification searches), which is a different kind of request (a fresh registry query) from checking on a case that already exists and was already paid for.
 
-### Category 8 — Should a consumer-protection complaint carry a fee at all?
+### Category 8 — Should a consumer-protection complaint carry a fee at all? Resolved.
 
-**Services #38 (Submit Complaint) and #39 (Track Complaint)** are both extrapolated, with no master-table row to check against, and both currently charge a fee. Group F is explicitly named "Tenants & Consumers" in the source's own group structure, and Consumer Protection Services exist specifically so an aggrieved party has recourse against a developer, landlord, or practitioner. Charging a fee to *file* that complaint — on top of #39's fee to check on it — sits awkwardly next to that stated purpose, and is different in kind from #26 (Submit Tenancy Dispute), which *does* carry a clearly sourced fee (rows 72–81 all show a "pay" step) because it's a formal adjudication/litigation process, not a regulatory grievance mechanism.
-
-**Proposed position:** #39 should be free regardless (Category 7). #38's fee is a closer call — RERAN plausibly wants to deter frivolous complaints the same way court filing fees deter frivolous suits — but it's worth flagging as a genuine open question rather than assuming either answer, since nothing in the source settles it either way for an extrapolated service. See `open-questions.md`.
+**Services #38 (Submit Complaint) and #39 (Track Complaint)** are both extrapolated, with no master-table row to check against. **Confirmed by client (`open-questions.md` A7): #38's fee stands as originally documented** — RERAN wants the deterrent effect against frivolous complaints, the same logic behind court filing fees. This closes the question as "confirmed as originally written," not a correction — #38's service-flow file needs no changes. #39 remains a separate, already-resolved finding (Category 7 below): tracking a complaint that has already been paid for and submitted should be free, matching Feature #2, and that fix is unaffected by A7's confirmation that *filing* the complaint carries a fee.
 
 ## Settlement Mechanism
 
-The source names the same three settlement routes seen platform-wide: payment gateway (card, bank transfer, USSD per the PRD), escrow deduction, and institution account debit. **Individual User uses payment gateway only** — there is no escrow relationship or institution account for a natural person acting in their own capacity. Service #6's Purchaser workflow additionally names a **Wallet Account** ("pay via Wallet Account") — this is the same P-22 wallet primitive flagged as an open question in Group C's `payments.md` B2, which found P-22 is balance-based and doesn't fit Group C's model. It fits here, in principle, since an individual purchaser is exactly the kind of user a top-up wallet is designed for — but nothing else in this module's 43 files references a wallet, so whether #6's purchaser flow is the wallet's only use in this module, or whether it should be the default payment method module-wide, is unresolved. See `open-questions.md`.
+The source names the same three settlement routes seen platform-wide: payment gateway (card, bank transfer, USSD per the PRD), escrow deduction, and institution account debit. **Individual User uses payment gateway only** — there is no escrow relationship or institution account for a natural person acting in their own capacity.
+
+**Resolved (`open-questions.md` C1): there is no separate Wallet Account mechanism in this module.** The master table's row 86 names "pay via Wallet Account" for Service #6's purchaser sub-flow, and this document previously flagged that language as an open question about whether a wallet primitive applies module-wide. The client has confirmed there is no distinct wallet mechanism — Service #6 uses the same shared platform payment gateway as every other service in this module, and as Groups B and C. #6's service-flow file has been corrected to describe standard gateway payment rather than a Wallet Account.
+
+**Note for whoever eventually resolves Group C's still-open B2** (whether the wallet primitive P-22 is shared build across modules): Individual User's Service #6 no longer needs P-22 at all, now that its "Wallet Account" language is confirmed to have been a source-table artefact rather than a real distinct payment path. This is recorded here as context only — Group C's own `open-questions.md` and `payments.md` are untouched by this correction.
 
 ## Fee Calculation
 
@@ -130,22 +132,30 @@ Every fee-bearing service in this module issues a **Payment Receipt**, generated
 
 ## To Confirm — Summary
 
-1. **#17, #18, #33, and #7's Owner/Entity Amendment component** — confirm these carry no fee (source has no pay step for any of them), matching #40/#42's existing treatment.
-2. **#28** — confirm payment moves to after-approval, matching row 84's explicit wording.
-3. **#23, #24, #26, #41** — no client input needed; these just need Section 9 corrected to match each file's own (already-correct) workflow.
-4. **#5, #9–#16** — confirm whether a Trustee Centre channel with post-audit payment should be documented alongside the existing online/upfront channel, or whether the online-only model is an intentional platform redesign that supersedes the physical-counter sourcing.
-5. **#27** — confirm whether the online cancellation path is genuinely fee-free, or whether a fee step was simply omitted from that part of the source.
-6. **#39** — confirm Track Complaint should be free, matching Feature #2.
-7. **#38** — open question on whether a consumer complaint should carry a fee at all; no proposed resolution given, genuinely undecided.
-8. **#6's Wallet Account reference** — confirm whether this is the module's standard payment method or an isolated mention, and its relationship to Group C's P-22 primitive.
-9. **"Fee Balance" meaning in this module** — confirm it denotes a single-transaction balance line, not a Group-C-style standing account (which does not exist here).
+**All items below are now resolved except #9, which remains genuinely open.**
 
-## Downstream Corrections Needed
+1. ~~**#17, #18, #33, and #7's Owner/Entity Amendment component**~~ — resolved as no-fee (proposed answer confirmed by adoption; no client pushback received). Corrected in each file.
+2. ~~**#28**~~ — resolved: payment moves to after-approval, matching row 84's explicit wording. Corrected.
+3. ~~**#23, #24, #26, #41**~~ — resolved: Section 9 corrected to match each file's own (already-correct) workflow. #41 needed no change.
+4. ~~**#5, #9–#16**~~ — resolved: a Trustee Centre channel with post-audit payment has been added alongside the existing online channel in each file; #5's Option 1 reordered to match row 106.
+5. ~~**#27**~~ — resolved by client (A5): the fee applies to both channels, on the counter channel's timing (after review). #27 corrected to document both channels explicitly, mirroring the #9–#16 fix.
+6. ~~**#39**~~ — resolved: Track Complaint is now free, matching Feature #2. Corrected.
+7. ~~**#38**~~ — resolved by client (A7): the fee stands as originally documented. No file change needed.
+8. ~~**#6's Wallet Account reference**~~ — resolved by client (C1): no wallet mechanism exists; #6 uses the standard shared gateway. Corrected.
+9. **"Fee Balance" meaning in this module** — still open. Confirm it denotes a single-transaction balance line, not a Group-C-style standing account (which does not exist here). No file currently depends on this being resolved, so it carries no downstream correction yet.
 
-This document is new; nothing else in the repository claims to match it yet. But its findings mean the following existing files will need correction once these questions are resolved, so they don't become another isolated fix the way Group C's B1 initially was:
+## Downstream Corrections — Propagated
 
-- All 43 service-flow files' **Section 9**, for the subset identified above.
-- **Service #5's Processing Workflow**, Option 1 specifically (reorder, not just reword).
-- **Services #9–#16's Processing Workflow**, to add the missing Trustee Centre channel if the proposed position in Category 3 is confirmed.
-- **Service #7**, to split Section 8/9 into its two components.
-- **`module-roadmap.md`'s** cross-cutting payment-timing observation, which currently lists this module as "unaudited" — that line needs updating now that the audit exists, with individual-user's own count of exceptions added alongside Group B's six and Group C's two.
+All corrections identified above have now been applied to the affected service-flow files, in the same PR that carries this update:
+
+- **Section 9** corrected in #5, #7 (split), #9–#18, #23, #24, #26, #27, #28, #33, #39. #6, #38, #40, #41, #42 needed no Section 9 change (already correct or already confirmed as-is).
+- **Service #5's Processing Workflow**, Option 1 reordered to match row 106 (pay before the combined audit-and-approval step, not after an isolated audit step).
+- **Services #9–#16's and #27's Processing Workflow**, Trustee Centre channel added alongside the existing online channel.
+- **Service #7** split into two fee models under Section 8/9 (Owner/Entity Amendment: no fee; Property Information Amendment: fee, unchanged).
+- **Services #17, #18, #33** corrected to no-fee throughout (Section 8/9, Processing Workflow, Application Status Flow, Output, Acceptance Criteria, Business Rules).
+- **Service #28** reordered so payment follows RERAN's approval, not submission.
+- **Service #39** corrected to no-fee, matching Feature #2.
+- **Services #23, #24, #25**: "Property Management Company" removed from Who Can Apply (cross-module leak from Group D — see `open-questions.md` B3). #23/#24 additionally gained Tenant as a documented secondary applicant path (see `open-questions.md` B1).
+- **`module-roadmap.md`'s** cross-cutting payment-timing observation, updated to remove the "unaudited" label for this module and record the audit's findings.
+
+Nothing remains outstanding from this document except item 9 above ("Fee Balance" terminology), which has no file depending on it yet.

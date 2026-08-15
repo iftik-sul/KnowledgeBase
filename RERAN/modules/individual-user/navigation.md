@@ -49,10 +49,10 @@ Based on `shared-platform-features.md`'s 8 general platform features and `servic
 * My Leases *(same reasoning, for #23–#28, #40)*
 * Services Catalog (all 43, organized by the 8 categories in `services-overview.md`)
 * My Applications *(Feature #2's home — free to use, per `payments.md` A6)*
-* My Complaints *(#38/#39 — pending the fee resolution in `open-questions.md` A6/A7)*
+* My Complaints *(#38 charges a fee, #39 does not — resolved in `open-questions.md` A6/A7)*
 * Power of Attorney *(registered PoAs granted and PoAs held — #29, #30, #42)*
 * Documents
-* Payments *(payment history, receipts — see `payments.md` for what's still unsettled about the Wallet Account question, C1)*
+* Payments *(payment history, receipts — via the standard shared gateway throughout; see `payments.md` C1, resolved — there is no separate Wallet Account mechanism)*
 * Notifications
 * Profile & KYC *(where Remote Identity Verification, #36, lives for diaspora users)*
 * Help & Support
@@ -73,7 +73,7 @@ No per-role landing default is proposed, for the same reason no role-selection s
 ## What Still Needs a Client Decision
 
 1. **Whether My Properties / My Leases should exist as first-class sidebar sections**, or whether property/lease selection should instead happen inline within each service's own flow (as most service-flow files currently describe it — "Select Registered Property" as step 2 of the workflow, not a standalone screen visited first).
-2. **B1's Landlord-vs-Tenant question** for #23/#24 directly affects whether "My Leases" needs to support both a landlord's and a tenant's view of the same lease record, or just one.
+2. **B1 is now resolved** (Landlord primary, Tenant secondary applicant — see `open-questions.md` B1), which settles that "My Leases" needs to support both a landlord's and a tenant's view of the same lease record, not just one. The detailed screen design for the tenant-initiated registration path is still deferred to when this module's UI work begins.
 3. Whether **Diaspora Investor** status should surface anywhere in navigation at all (a badge, a distinct onboarding path) given #36/#37's design already routes diaspora users through the same catalog as everyone else once verified.
 
 ## Superseded By This Document

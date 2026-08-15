@@ -46,19 +46,21 @@ View Dashboard
    Select Property → Enter Counterparty Details → Upload Documents →
      [Online:] Pay → Submit → RERAN Review → Approved → Receive Documents
      [Trustee Centre, where sourced:] Submit → RERAN Audits → Pay → Receive Documents
-   (The Trustee Centre branch is sourced for all of #5, #9–#16 but only fully documented in
-   this module's files for a subset — see `payments.md` Category 3 and `open-questions.md` A2.
-   #7 splits into two components with different fee treatment — see `payments.md` Category 4.)
+   (The Trustee Centre branch is sourced for all of #5, #9–#16 and is now documented in
+   this module's files for all of them — see `payments.md` Category 3 and `open-questions.md`
+   A2. #7 splits into two components with different fee treatment — see `payments.md`
+   Category 4.)
 
    Tenancy (#23–#28, #40)
    Select Service → Enter Lease/Tenant Details → Upload Documents →
      [Online:] Pay → Submit
      [Trustee Centre:] Submit → RERAN Audits → Pay → Receive Certificate
-   (#23, #24, #26 already document the Trustee-Centre order correctly in their own workflow
-   sections — only their Section 9 boilerplate needs correcting, per `open-questions.md` A1.
-   #28 sources payment *after* RERAN's approval, not before, per A4. #40 has no fee at all —
-   already correctly documented. #25 is fee-conditional, not upfront-or-after — see
-   `payments.md` Category 6.)
+   (#23, #24, #26 document the Trustee-Centre order correctly, and their Section 9 boilerplate
+   has been corrected to match, per `open-questions.md` A1. #27 was restructured to document
+   both channels explicitly, both fee-bearing on the counter channel's timing, per client
+   confirmation (A5). #28 sources payment *after* RERAN's approval, not before, per A4 — now
+   corrected. #40 has no fee at all — already correctly documented. #25 is fee-conditional,
+   not upfront-or-after — see `payments.md` Category 6.)
 
    Power of Attorney (#29, #30, #42)
    Register (#29): Select Property → Enter Attorney Details → Define Scope → Pay → Submit
@@ -81,9 +83,11 @@ View Dashboard
 
    Consumer Protection (#38–#39)
    Submit Complaint (#38): Select Category → Enter Details → Upload Evidence →
-     [Pay, pending `open-questions.md` A7] → Submit → RERAN Investigates → Resolution
-   Track Complaint (#39): Search → View Status (free, per `open-questions.md` A6 — payment
-     gate should be removed)
+     Pay → Submit → RERAN Investigates → Resolution
+   (Confirmed by client, A7 — the fee stands as originally documented; deters frivolous
+   complaints.)
+   Track Complaint (#39): Search → View Status (free, per `open-questions.md` A6 — the
+     payment gate has been removed)
 
 ↓
 Track Application Status (Feature #2, free) / Respond to Information Requests (Feature #3, free)
@@ -92,7 +96,7 @@ Retrieve Output Document — pay-then-retrieve, retrieve-then-pay-at-counter, or
   directly with no payment, depending on which category above the service falls into
   (see `payments.md` for the full per-service breakdown — this module does not have a
   single uniform answer to "when does payment happen," unlike what a first read of the
-  Section 9 boilerplate across all 43 files would suggest)
+  original Section 9 boilerplate across all 43 files would have suggested)
 ↓
 Logout
 ```
@@ -116,7 +120,7 @@ The module's default/fallback role — the master table's Responsible Role colum
 
 ### Landlord
 
-* Register and renew leases (#23, #24) — **flagged, not settled.** The master table attributes row 82 to *Tenant*, not Landlord; this module's own role-description text gives both roles overlapping "register/renew lease" language. Documented here as Landlord per the current service-flow files' framing, with the conflict and a proposed joint-access resolution recorded in `open-questions.md` B1. Treat this bullet as provisional until that question is confirmed.
+* Register and renew leases (#23, #24), as the **primary applicant**. The master table attributes row 82 to *Tenant*, not Landlord, and this module's own role-description text gives both roles overlapping "register/renew lease" language — a genuine conflict, resolved (not silently) by keeping Landlord primary and adding Tenant as a documented secondary applicant path in both files. See `open-questions.md` B1 for the full reasoning and the conflict check performed before adopting this resolution.
 * Manage active leases (#25)
 * Upload building details for leasing (#40) — the only service in the module specified in source as an off-platform, email-based process rather than an in-app form; already correctly documented that way in #40's own file.
 
@@ -130,7 +134,7 @@ The module's default/fallback role — the master table's Responsible Role colum
 
 ### Tenant
 
-* Register/renew leases as an alternate or joint actor with Landlord — see the B1 flag above
+* Register/renew leases (#23, #24) as a **documented secondary applicant** alongside Landlord — see `open-questions.md` B1. The master table's own attribution of row 82 to Tenant is the reason this path exists at all, even though Landlord remains the primary applicant as currently designed.
 * Cancel a tenancy contract (#27), jointly with Landlord
 * Submit and pursue tenancy disputes (#26) — the module's clearest sourced role attribution: all ten consolidated dispute rows (72–81) name Tenant as the Responsible Role without exception
 * Request rental valuation (#28), alongside Property Owner, Landlord, and prospective tenants

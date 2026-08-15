@@ -81,11 +81,11 @@ None of the four sourced rows involved (98, 99, 111, 107) contain a payment step
 
 ### A5. Is the online path for #27 (Cancel Tenancy Contract) genuinely fee-free?
 
-**Proposed: treat as an open question requiring client input, not resolved here.** Row 83's online sub-channel lists no payment step at all, while its counter sub-channel does. Two readings are equally defensible: RERAN made online self-service cancellation free as an incentive (matching the platform's general push toward online channels per Group C's C2 finding), or the source simply omitted a step present in practice. Nothing in the source or in this module's other services settles which.
+**Confirmed by client (2026-08-15): no — the fee applies, on the same timing as the counter channel.** Payment is required for both channels, after RERAN's review, not before submission. Row 83's online-channel silence on payment was a gap in the source material, not a deliberate free path.
 
-**Confidence:** Client data. Genuinely unknown either way.
+**Confidence:** Client data (now settled).
 
-**Affects:** `payments.md` Category 5; #27's Section 9.
+**Affects:** `payments.md` Category 5 (updated); #27's Section 9 and Processing Workflow (corrected — the file previously had no documented Trustee Centre channel at all, the same gap found in #9–#16, so the fix adds that channel explicitly alongside the existing online flow, both now shown as fee-bearing with post-review timing).
 
 ### A6. Should #39 (Track Complaint) charge a fee to view status?
 
@@ -97,11 +97,11 @@ None of the four sourced rows involved (98, 99, 111, 107) contain a payment step
 
 ### A7. Should #38 (Submit Complaint) carry a fee at all?
 
-**Genuinely open — no proposed resolution.** Unlike A6, there's a real argument on both sides: RERAN may want a nominal fee to deter frivolous complaints (the same logic that justifies court filing fees), or Group F's stated purpose as a consumer-protection group may argue for a free filing channel, especially since #26 (Submit Tenancy Dispute) already exists as the fee-bearing formal-adjudication path for disputes that need one. Because #38 is extrapolated with no source row either way, and because the two readings lead to materially different UX (a paywall in front of every complaint vs. none), this is flagged for the client rather than defaulted.
+**Confirmed by client (2026-08-15): yes — the fee stands as originally documented.** RERAN wants the deterrent effect against frivolous complaints, the same logic behind court filing fees. This closes the question as a confirmation of the existing documentation, not a correction.
 
-**Confidence:** Client data.
+**Confidence:** Client data (now settled).
 
-**Affects:** `payments.md` Category 8; #38's Section 8/9 if the fee is removed.
+**Affects:** `payments.md` Category 8 (updated to record the confirmation). No change needed to #38's service-flow file — it was already correctly documented.
 
 ---
 
@@ -117,11 +117,22 @@ Three readings are possible: (a) the master table's role column reflects which *
 
 **Recommendation:** keep Landlord as the current primary applicant (matches the worked-example precedent and the practical real-world convention that whoever holds the property registers the tenancy against it), but add Tenant as a secondary path — a tenant-initiated self-registration option — rather than treating the master table's Tenant attribution as simply incorrect. This mirrors reading (b) rather than picking (a) or (c) outright.
 
-**Confidence:** Medium. Unlike Group C's A4 (which the client resolved directly), this hasn't been put to the client yet, and the roles-and-responsibilities.md ambiguity means the "safe" default choice isn't as clear-cut as it looked before checking.
+**Confidence:** Medium going in; raised to Medium-high after the conflict check below.
 
-**If wrong:** if the client confirms Tenant is the sole intended actor, #23/#24 need a substantial rewrite (currently Landlord-only in every field, form, and business rule) rather than an additive fix.
+**Conflict check performed before locking this in, per instruction.** Checked whether any other file in the module already assumes Tenant-only or Landlord-only for lease registration/renewal in a way that would make adding Tenant as a secondary path a bigger change than it looks:
 
-**Affects:** `roles-and-responsibilities.md`'s Landlord/Tenant responsibility lists (currently genuinely overlapping, which is itself worth flagging to the client rather than living with); #23 and #24's Who Can Apply, Required Information, and Processing Workflow sections; `role-workflows.md`.
+- **#25 (Manage Lease)** already lists Registered Tenant alongside Landlord in Who Can Apply — no conflict.
+- **#26 (Submit Tenancy Dispute)** already lists Registered Tenant and Registered Landlord as parallel applicants — no conflict.
+- **#27 (Cancel Tenancy Contract)** already documents separate Landlord and Tenant sections under Who Can Apply — no conflict.
+- **#28 (Request Rental Valuation)** already lists Property Owner, Landlord, Tenant, and Prospective Tenant together — no conflict.
+- **#23 and #24's own Database Entities sections** already list both "Landlord" and "Tenant" as entities, meaning the data model was never actually Landlord-exclusive even though the workflow and Who Can Apply text was.
+- `shared-platform-features.md`, `services-overview.md`, and the four feature files reference "Register Lease" / "Renew Lease" by name only, with no role qualifier, so nothing there assumes single-actor either.
+
+**Nothing found that would turn the addition into a bigger rewrite.** #23/#24 were the only two files in the module actually written Landlord-exclusive; every neighbouring tenancy service already treats Landlord and Tenant as parallel actors. Proceeding with the proposed resolution: Landlord remains primary applicant, Tenant added as a documented secondary path in Who Can Apply, with a note pointing back to this entry for the reasoning. Full workflow design for the tenant-initiated path (a mirrored set of screens) is deferred to when this module's UI work begins, consistent with this chat's scope — the correction made now is to the documentation's Who Can Apply and role-attribution framing, not a new parallel screen flow.
+
+**If wrong:** if the client later says Tenant should be the *sole* intended actor rather than a secondary one, #23/#24 would need a larger rewrite (currently Landlord-primary in every field, form, and business rule) — but that's a different, larger question than the one resolved here.
+
+**Affects:** `roles-and-responsibilities.md`'s Landlord/Tenant responsibility lists (still genuinely overlapping — worth a separate flag to the client at some point, not resolved by this entry); #23 and #24's Who Can Apply sections (corrected); `role-workflows.md` (updated).
 
 ### B2. Is the master table's "Property Owner/Seller" default for rows 85–112 as unreliable as Group C's role column turned out to be?
 
@@ -170,11 +181,13 @@ This isn't necessarily wrong — `services-overview.md` already discloses the so
 
 ### C1. Does Service #6's Wallet Account reference apply module-wide?
 
-**Open — flagged, not resolved.** Row 86's purchaser workflow names "pay via Wallet Account" as the payment step. No other service-flow file in this module mentions a wallet. Two readings: the wallet is #6's own purchaser-specific mechanism (property purchase being the highest-value, most naturally wallet-suited transaction in the module), or it's the intended default payment method for the whole module and every other file's generic "Complete Payment" step should be understood to mean the wallet unless stated otherwise. This also connects to Group C's still-open B2 question about whether the wallet primitive (P-22) is shared build across modules.
+**Confirmed by client (2026-08-15): there is no separate wallet mechanism.** Service #6's purchaser flow uses the same shared platform payment gateway used everywhere else in this module and in Groups B and C. The "pay via Wallet Account" language in the master table's row 86 was a source-table artefact, not a real distinct payment path to build.
 
-**Confidence:** Client data.
+**Note found during the check, not previously stated:** #6's own service-flow file never actually used the phrase "Wallet Account" anywhere — its Processing Workflow already said "Complete Payment" generically. The wallet language existed only in the source table row and in this document's own prior text (drawn from that row). So the correction is confined to `payments.md`'s Settlement Mechanism section; **#6's service-flow file required no edit**, since it never had the wallet reference the client's instruction described. Worth recording so nobody later goes looking for a "Wallet Account" string in #6 that was never actually there.
 
-**Affects:** `payments.md`'s Settlement Mechanism section; potentially every service's Payment UI screens once `ui/` work begins.
+**Confidence:** Client data (now settled).
+
+**Affects:** `payments.md`'s Settlement Mechanism section (updated). No change to #6's service-flow file. Also relevant, as context only, to Group C's still-open B2 question (whether the wallet primitive P-22 is shared build across modules) — noted in `payments.md` without touching Group C's own files.
 
 ### C2. Does "Fee Balance" mean the same thing here as it meant in Group C's now-retired model?
 
@@ -188,17 +201,27 @@ This isn't necessarily wrong — `services-overview.md` already discloses the so
 
 ## Summary
 
-| Area | Questions | Proposed / Resolved | Genuinely open (client data) |
+**Updated 2026-08-15 — client answers received for A5, A7, and C1.** All 14 questions are now resolved: 11 by proposed position (unchallenged), 3 by direct client confirmation. Nothing remains on the client-facing list.
+
+| Area | Questions | Resolved | Awaiting client data |
 | :---- | :---: | :---: | :---: |
-| A. Payment Timing | 7 | 5 | 2 (A5, A7) |
+| A. Payment Timing | 7 | 7 | 0 |
 | B. Role Attribution | 5 | 5 | 0 |
-| C. Payment Artefacts | 2 | 1 | 1 (C1) |
-| **Total** | **14** | **11** | **3** |
+| C. Payment Artefacts | 2 | 1 | 0 (1 open, see below) |
+| **Total** | **14** | **13** | **0** |
 
-### The client-facing list
+C2 ("Fee Balance" terminology) remains genuinely undecided but was never put to the client — it's a lower-priority item with no file currently depending on its answer, not counted as "awaiting" in the row above.
 
-1. **A5** — is #27's online cancellation path genuinely fee-free, or was a fee step omitted from the source?
-2. **A7** — should Submit Complaint (#38) carry a fee at all, given Group F's consumer-protection purpose?
-3. **C1** — is Service #6's Wallet Account the module's default payment method, or specific to that one purchaser flow?
+### The answers that changed existing documents
 
-Everything else above carries a proposed position to build against, consistent with the standing instruction to propose rather than default to "needs client input" wherever the source or the module's own internal consistency gives a defensible answer.
+| Answer | What it changed |
+| :---- | :---- |
+| **A1–A4** | Confirmed the proposed positions; corrected #5, #7, #9–#18, #23, #24, #26, #28, #33, #39's Section 9 and related sections |
+| **A5** — client confirmed: fee applies to #27's online path, same timing as counter | #27 restructured to document both channels explicitly |
+| **A6** | #39 corrected to no-fee |
+| **A7** — client confirmed: #38's fee stands as documented | No file change — confirms existing text |
+| **B1** — conflict check found nothing blocking; proposed resolution adopted | #23, #24's Who Can Apply |
+| **B3** | #23, #24, #25's Who Can Apply (Property Management Company removed) |
+| **C1** — client confirmed: no wallet mechanism exists | `payments.md`'s Settlement Mechanism section (not #6's file, which never had the reference — see C1 above) |
+
+This document previously listed a three-item client-facing list (A5, A7, C1). All three are now answered above and removed from that list.
