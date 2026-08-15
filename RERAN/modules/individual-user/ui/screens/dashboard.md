@@ -48,7 +48,7 @@ Same three actions for every user, per `navigation.md` — no per-role default, 
 
 ### Section 2 — Requiring Action
 
-Applications with Information Requested or Returned status, PoA requests awaiting the account's confirmation (as a Pattern C/H counterparty), and services with Approved — Awaiting Payment status (see `status-badges.md`) where payment hasn't been completed yet. Empty when there's nothing pending.
+Applications with Information Requested or Returned status, PoA requests awaiting the account's confirmation (as a Pattern C/H counterparty), and services with Approved — Awaiting Payment or Audited — Awaiting Payment status (see `status-badges.md`'s two-status split) where payment hasn't been completed yet. Empty when there's nothing pending.
 
 ### Section 3 — My Properties / My Leases Summary
 
