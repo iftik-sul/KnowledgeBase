@@ -33,15 +33,15 @@ Give RERA a timely, regulated record of provisional unit sales as they happen, s
 
 The developer selects the property (unit) within a registered project, fills in the sale and purchaser details, attaches supporting documents, selects a payment method, and submits the application online through the Real Estate Developers Portal. RERA issues a provisional registration e-certificate, delivered by e-mail to the purchaser.
 
-> **Proposed** — the source describes the output as sent to the purchaser but does not say whether the developer also receives a copy in-app. Documenting an in-app copy to the submitting Registration Officer as the reasonable default; needs client confirmation.
+> **Proposed** — the source describes the output as sent to the purchaser but does not say whether the developer also receives a copy in-app. Documenting an in-app copy to the submitting officer as the reasonable default; needs client confirmation.
 
 ## 4. Who Can Apply
 
 Any user of a registered developer account, whatever role they hold — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, or Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../navigation.md).
 
-*Typically filed in practice by the Project Registration Officer.* That is a description of customary practice, not a restriction — the role recorded against the submission is audit-trail attribution only.
+*Typically filed in practice by the Sales & Disclosure Officer.* That is a description of customary practice, not a restriction — the role recorded against the submission is audit-trail attribution only.
 
-> **Source/UI role mismatch — resolved 2026-08-15 by the unified-access decision.** This section previously flagged a discrepancy applying to rows 1–7 and 19: the master table names "Sales & Disclosure Officer / Admin Officer" as the responsible role for these services, while the matching UI screen (`property-registrations.md`) was scoped to the **Project Registration Officer's** sidebar, the Sales & Disclosure Officer having no Property Registrations entry at all. The two facts were documented side by side rather than reconciled, because reconciling them meant choosing which role held the permission. With access no longer gated by role, there is no permission to assign: both roles — and the other two — reach this service and its screens. The source's named role and the screen's former sidebar scoping now both read as typical practice, and no longer conflict.
+> **Corrected 2026-08-15, second pass — the attribution was backwards.** This section previously said "typically filed by the Project Registration Officer," a claim inherited from `property-registrations.md`'s old role-gated sidebar scoping (Property Registrations only appeared on that role's menu) rather than checked against what the work actually is. `roles-and-responsibilities.md`'s Sales & Disclosure Officer worked example — "Apartment A-120 is sold to John Smith... Marks Apartment A-120 as Sold... Uploads the sale agreement... Submits the required disclosure to RERA" — is a near word-for-word description of this service. The Project Registration Officer's own worked example describes creating a new project, an unrelated activity. The master service table's Responsible Role column agrees: "Sales & Disclosure Officer / Admin Officer" for this row. Checked systematically across all eight sale/lease/usufruct-registration services this applies to (#1–#7, #19) — see `roles-and-responsibilities.md` for the corrected note. This has no access consequence: any of the four Group B roles may file this application regardless of which is "typical."
 
 ## 5. Prerequisites
 
