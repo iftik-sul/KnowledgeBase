@@ -4,7 +4,7 @@ module: financial-trust-institutions
 type: service-flow
 status: draft
 contains_proposals: true
-updated: 2026-08-14
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
@@ -33,13 +33,13 @@ Keep the registered mortgage record accurate when the underlying loan terms chan
 
 ## 3. Description
 
-The customer agrees amended terms with the bank. A Mortgage Officer enters the amendment into the Online Mortgage System against the existing mortgage record, pays the fee upfront via the shared platform payment gateway, and attaches the amendment documentation. The transaction is certified internally, then audited by RERA. On approval, the updated output documents are delivered to the customer by email. The service can alternatively be processed in assisted mode at a Real Estate Registration Trustee Centre.
+The customer agrees amended terms with the bank. Any of the institution's four Group C roles enters the amendment into the Online Mortgage System against the existing mortgage record, pays the fee upfront via the shared platform payment gateway, and attaches the amendment documentation. The transaction is certified internally, then audited by RERA. On approval, the updated output documents are delivered to the customer by email. The service can alternatively be processed in assisted mode at a Real Estate Registration Trustee Centre.
 
 ## 4. Who Can Apply
 
 ### Applicant (Lending Institution)
 
-* Mortgage Officer — primary channel, via the Online Mortgage System  
+* Any of the institution's four Group C roles — primary channel, via the Online Mortgage System. **Confirmed 2026-08-15** — previously listed as Mortgage Officer only; `open-questions.md` A4 confirms no service is role-specific.
 * Trustee Centre Operator (Group G) — assisted mode, acting on the institution's behalf (C2)
 
 ### Counterparty (Borrower / Property Owner)
@@ -48,7 +48,7 @@ The customer agrees amended terms with the bank. A Mortgage Officer enters the a
 
 ## 5. Prerequisites
 
-* Registered RERAN institution (Group C) account, with a Mortgage Officer provisioned.  
+* Registered RERAN institution (Group C) account, with staff provisioned.  
 * An existing, active registered mortgage against the property.  
 * Payment has been completed via the shared platform payment gateway before the application is lodged (B1).
 
@@ -57,7 +57,7 @@ The customer agrees amended terms with the bank. A Mortgage Officer enters the a
 ### Institution Information
 
 * Institution Name  
-* Mortgage Officer Identifier
+* Acting Officer Identifier
 
 ### Existing Mortgage Reference
 
@@ -110,7 +110,7 @@ Agree Amended Terms with Bank
 
 ↓
 
-Mortgage Officer
+Institution User (any of the four Group C roles)
 
 Login to Online Mortgage System  
 ↓  
@@ -130,7 +130,7 @@ Internal Certifier
 
 Review Amendment  
 ↓  
-Certify, or Return to Mortgage Officer
+Certify, or Return to Filer
 
 ↓
 
@@ -263,7 +263,7 @@ Upon successful completion, the system generates:
 
 ## 20. Acceptance Criteria
 
-* Mortgage Officer can select an existing mortgage and submit amendment details.  
+* Any of the institution's four Group C roles can select an existing mortgage and submit amendment details. **Confirmed 2026-08-15** — not restricted to the Mortgage Officer (A4).  
 * System validates the mortgage is active and registered before allowing amendment.  
 * Internal certifier — any of the four Group C roles, including the filer — can certify or return the amendment before it reaches RERA.  
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
@@ -275,7 +275,7 @@ Upon successful completion, the system generates:
 
 ## 21. Business Rules
 
-1. Only a Mortgage Officer, or a Trustee Centre operator acting on the institution's behalf, may initiate an amendment.  
+1. Any of the institution's four Group C roles, or a Trustee Centre operator acting on the institution's behalf, may initiate an amendment. **Confirmed 2026-08-15** — previously restricted to "only a Mortgage Officer"; `open-questions.md` A4 confirms no service is role-specific.  
 2. The mortgage being amended must be active and registered.  
 3. The transaction must pass internal institutional certification before routing to RERA.  
 4. Payment is made via the shared platform payment gateway, upfront, before the application can be lodged — not deducted from a settlement account (B1, corrected 2026-08-14).  
