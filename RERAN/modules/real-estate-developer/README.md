@@ -69,7 +69,7 @@ All 27 carry `status: draft` and `contains_proposals: true` — each has genuine
 
 ## Shared Platform Features
 
-* [shared-platform-features.md](shared-platform-features.md) — the four Application Management features (Submit Application, Track Application Status, Respond to Information Request, Resubmit Returned Application) shared across most of the 27 services, following the pattern already established in [individual-user](../individual-user/shared-platform-features.md) and already proposed (not yet written) for [financial-trust-institutions](../financial-trust-institutions/services-overview.md#shared-platform-features). **Proposed — not sourced, needs client confirmation**; see the document itself for what it deliberately does not assert (a single payment-timing order, since this module's own services vary).
+* [shared-platform-features.md](shared-platform-features.md) — **rebuilt 2026-08-16** from this module's actual 19 built screens, replacing an earlier draft that copied individual-user's generic Submit/Track/Respond/Resubmit framing without checking it against what's here. This module has no single canonical submission form — what's actually built is one cross-cutting **Applications** feature (written) plus five **domain workspaces** (Projects, Property Registrations, Escrow Management, Fund Release Request, Sales & Disclosures — named, not yet written) that applications actually originate from, plus six general-platform screens (also named, not yet written). **Proposed — not sourced, needs client confirmation**; see the document itself for the one still-unresolved screen-to-service mapping (Sales & Disclosures).
 
 ## UI Specifications
 
@@ -81,6 +81,7 @@ All 27 carry `status: draft` and `contains_proposals: true` — each has genuine
 
   That is no longer the case: the matrix is retired, and Documents is fully accessible to all four roles. The misplaced source fragment (found at the wrong heading level inside that role's Application Details section, source lines 9218–9475) has now been **checked against `documents.md` and merged in**, because it carries content the screen did not otherwise have — a **Buyer Filter** and **Disclosure Filter**, a sales-specific document category set (Sales Agreements, Buyer Identification, Proof of Payment, Mortgage Documents, Corporate Buyer Documents, Power of Attorney, Disclosure Forms), a `Sale / Disclosure / Buyer` value for the table's Linked Record column, and its own empty state. Dropping it would have lost real sales-disclosure detail. With access unified, including it is a merge rather than a matrix correction, so it no longer needs a client decision.
 * **Resolved** — service flows now exist in [service-flows/](service-flows/), written against the already-existing UI per issue #33. Every UI file's `derived_from` still points at `reference/source-of-truth/RERAN_service_flows_v2.md` and `RERAN_user_group_structure_v2.md` rather than the new service-flow documents; updating those pointers was out of scope for issue #33, which was service-flows only and explicitly did not touch `ui/`. Left as a follow-up.
+* **New 2026-08-16, unresolved:** `sales-and-disclosures.md`'s exact relationship to the numbered service catalogue. See [shared-platform-features.md](shared-platform-features.md) for what's known and what isn't.
 
 ## Known Gap from Source Retirement
 
