@@ -21,11 +21,11 @@ tags:
 
 # Group C — Questions and Proposed Answers
 
-Twenty-three questions arose from documenting the Financial & Trust Institutions module. Rather than hold the module until the client responds, each now carries a **proposed answer** we will build against unless told otherwise.
+Twenty-three questions arose from documenting the Financial & Trust Institutions module. Rather than hold the module until the client responds, each now carries a **proposed answer** we will build against unless told otherwise. A twenty-fourth item (B11) was added 2026-08-15, not from the original documentation pass but from a further client decision on institutional-approval payment timing — see below.
 
 **2026-08-14 update.** The payment questions (B1, B2, B4, B5, B6) were corrected following a client decision confirmed via discussion (not a written source document): Group C runs no standing account. Payment is per-transaction, upfront, via a shared platform-wide gateway, with RERA setting the fee per service directly. B9 and B10, both built entirely on the now-retired standing-account mechanism, are superseded rather than reworked. See each answer below for what changed and why the earlier reasoning is kept rather than deleted.
 
-**2026-08-15 update.** A4 is corrected: ownership is not role-specific at all, for any of the 18 services — a client decision, not a re-derivation. A3, B7, and B8 are confirmed by the client, matching their existing proposed answers. A6 is also confirmed by the client, resolving the last item that had been flagged to put in front of them directly — the module's answers doc is now fully closed, with no items remaining on that list. See each answer below.
+**2026-08-15 update.** A4 is corrected: ownership is not role-specific at all, for any of the 18 services — a client decision, not a re-derivation. A3, B7, and B8 are confirmed by the client, matching their existing proposed answers. A6 is also confirmed by the client. **B11 is added**: the client has further decided that Service #1 (Approval/Renewal) now pays upfront, merging into the same model as Services #3–#11, and confirmed Service #2 (Cancellation) carries no fee at all — see B11 below. See each answer below.
 
 **How to read this:** each answer states a recommendation, the reasoning behind it, how confident we are, and what breaks if it is wrong. Confidence is:
 
@@ -36,7 +36,7 @@ Twenty-three questions arose from documenting the Financial & Trust Institutions
 | **Medium** | A reasonable design judgement; a different answer would also be defensible |
 | **Client data** | Cannot be reasoned to. Only RERA holds the answer |
 
-**All twenty-three questions are now answered; none require client data**, as of the 2026-08-14 payment-model correction resolving B5 (previously the sole client-data item).
+**All twenty-four questions are now answered; none require client data.**
 
 **Scope note:** post-login functionality only. Registration and onboarding are excluded.
 
@@ -201,7 +201,7 @@ An indefinite hold accumulates a register of half-registered mortgages — appro
 
 The FR-16 configuration-engine reasoning survives intact — it was correct — only the framing changes: from "waiting on the client for missing data" to "this is how the system is meant to work, and RERA populates its own configuration," since there was never a separate published document to request. Build the engine against a representative test schedule; see `proposed-services.md` P-33 for who configures it.
 
-**Confidence:** Confirmed (client decision, 2026-08-14). **This is now 23 of 23 questions answered, 0 needing client data** — see the corrected Summary below.
+**Confidence:** Confirmed (client decision, 2026-08-14).
 
 **Affects:** `payments.md`'s Fee Calculation and To Confirm — Summary sections; `services-overview.md`'s To Confirm item on the payer-model split.
 
@@ -247,6 +247,22 @@ Service #1 is "approval **/ renewal**", which is only meaningful if approvals ex
 **Superseded by the corrected B1 — not reworked, retired.** B10's "same-day automatic credit-back" answer assumed a standing account to credit back into. With no standing account, there is nothing to credit back to automatically. A failed institutional payment is handled the same way any other per-transaction payment failure is (see `payments.md`'s reworked Failed and Reversed Payments section); a settled payment needing reversal now has no obvious reason to bypass the platform's public refund route the way the old answer argued — that argument rested on protecting a standing account's same-day reconciliation, which no longer exists. Whether Group C should still get an expedited refund path on other grounds is not addressed here and is not assumed either way.
 
 **Affects:** `payments.md`'s Failed and Reversed Payments and Additional Statuses sections.
+
+### B11. Does Service #1 (Approval/Renewal) pay upfront or after RERA's decision, and does Service #2 (Cancellation) carry a fee at all?
+
+**Confirmed 2026-08-15 (client decision) — Service #1 now pays upfront, before lodging, merging into the same Upfront Gateway Payment model as Services #3–#11. Service #2 carries no fee at all.**
+
+Row 28's sequencing — "Payment of fees" listed after the approval decision — was the sourced basis for the previous **Institution Fee Payment** model, in which #1–#2 paid only after RERA's audit decision, and a new #1 approval additionally required a signed partner agreement before completion. The client has now confirmed a change from that sourced sequencing: Service #1's fee is paid upfront, via the same shared-gateway checkout used by Services #3–#11, before the application is lodged. Service #2 is confirmed to carry no fee at all — resolving `service-02`'s own Open Questions item 1 ("does cancellation carry a fee?"), which had been left genuinely open pending confirmation either way.
+
+**With this decision, the Institution Fee Payment model as a distinct payer/timing category is retired.** Service #1 folds into Upfront Gateway Payment; Service #2 has no payment step to categorize at all. Group C now runs **two** payment models, not three: Upfront Gateway Payment (#1, #3–#11) and Customer Payment at Counter (#12–#18).
+
+**The partner agreement signing required for a new Service #1 approval (sourced, row 28) is unaffected by this change.** It remains a post-audit-decision step, independent of when payment happens: payment funds the application at lodging; the agreement is signed once RERA has approved, before completion.
+
+This is a genuinely new decision, not a re-derivation or a resolution of an ambiguity in the source — row 28's post-decision payment sequencing was correctly read the first time; the client has since decided to build differently from what the source describes for #1, and has separately clarified that #2 was never chargeable at all.
+
+**Confidence:** Confirmed (client decision, 2026-08-15).
+
+**Affects:** `payments.md` (pipeline table, Who Pays table, sequence diagrams, Fee Calculation, Additional Statuses); `services-overview.md` (Payments feature bullet, Application Status Vocabulary's `Approved — Awaiting Payment` and `Expired` notes — neither now applies to any Group C service); `service-01`'s Sections 8, 9, 12, 13, 21; `service-02`'s Sections 8, 9, and Open Questions.
 
 ---
 
@@ -337,15 +353,15 @@ Build it once, configurable per corporate account, with the scope set at the poi
 
 ## Summary
 
-**Updated 2026-08-15** — A4 and A6 moved from "flagged for the client" to confirmed by client decision; A3, B7, B8 moved from proposed to confirmed. B5 moved from "needs client data" to "answered" on 2026-08-14, per the payment-model correction (B1). **All 23 questions are now confirmed or resolved, and nothing remains on the "put in front of the client" list.**
+**Updated 2026-08-15** — A4 and A6 moved from "flagged for the client" to confirmed by client decision; A3, B7, B8 moved from proposed to confirmed. B5 moved from "needs client data" to "answered" on 2026-08-14, per the payment-model correction (B1). **B11 added**: Service #1 now pays upfront, merging into the Upfront Gateway Payment model; Service #2 confirmed to carry no fee. **All 24 questions are now confirmed or resolved, and nothing remains on the "put in front of the client" list.**
 
 | Area | Questions | Answered | Needs client data |
 | :---- | :---: | :---: | :---: |
 | A. Roles | 7 | 7 | 0 |
-| B. Payments | 10 | 10 | 0 |
+| B. Payments | 11 | 11 | 0 |
 | C. Service structure | 4 | 4 | 0 |
 | D. Platform-wide | 2 | 2 | 0 |
-| **Total** | **23** | **23** | **0** |
+| **Total** | **24** | **24** | **0** |
 
 ### The answers that change existing documents
 
@@ -354,15 +370,17 @@ Build it once, configurable per corporate account, with the scope set at the poi
 | **A4** — confirmed 2026-08-15: no service is role-specific | `services-overview.md`'s Service Ownership section (removed entirely); Section 4 and Business Rule 1 of Services #3–#18; `roles-and-responsibilities.md`'s Role Summary table |
 | **A6** — confirmed 2026-08-15: the two-number SLA reading is correct | No document changes required — this confirms the reading already reflected in `services-overview.md`'s Escrow Request Queue feature and the individual escrow service flows in Group B; no new SLA figure needs to be introduced |
 | **B1** — corrected 2026-08-14: no standing account, pay-per-transaction upfront via a shared gateway | `payments.md` (near-total rewrite); every mortgage/finance-lease service flow's Service Fee, Payment Required and Output sections; `services-overview.md`'s status vocabulary and features list; `navigation.md` and `role-workflows.md`'s settlement references; `module-roadmap.md`'s platform-wide payment-pipeline claim (see that file's own note on why) |
+| **B11** — confirmed 2026-08-15: Service #1 pays upfront (merges into Upfront Gateway Payment); Service #2 carries no fee | `payments.md` (pipeline/Who Pays tables, sequence diagrams, Fee Calculation, Additional Statuses); `services-overview.md`'s Payments feature bullet and Application Status Vocabulary notes; `service-01`'s Sections 8, 9, 12, 13, 21; `service-02`'s Sections 8, 9, and Open Questions |
 | **C2** — counter is an assisted mode | Every Group C service flow's channel section; reverses a prior assumption |
 
 B9 and B10 are not listed separately above — both are superseded by the corrected B1 rather than independently reworked; see their entries for what that means for `payments.md`.
 
 ### The client-facing list — now empty
 
-As of 2026-08-15, both items that had been flagged to put in front of the client directly are resolved:
+As of 2026-08-15, all items that had been flagged to put in front of the client directly are resolved:
 
 1. ~~**A4**~~ — resolved by client decision 2026-08-15; no service is role-specific.
 2. ~~**A6**~~ — resolved by client decision 2026-08-15; the two-number SLA reading is confirmed correct.
+3. ~~**B11**~~ — resolved by client decision 2026-08-15; Service #1 pays upfront, Service #2 carries no fee. This one was never on the original flagged list (it wasn't recognized as ambiguous until raised directly), but is included here for completeness since it's the same kind of direct client confirmation as A4 and A6.
 
-**One remaining item, still flagged for internal design rather than the client:** B2's claim that the shared payment gateway reuses individual-user's wallet primitive (P-22) doesn't survive a check against P-22's actual description, which is itself balance-based — the opposite of Group C's now-confirmed no-standing-account model. Worth a decision on whether the gateway integration is genuinely shared build, but this is an internal design question, not something requiring the client's input the way A4 and A6 did.
+**One remaining item, still flagged for internal design rather than the client:** B2's claim that the shared payment gateway reuses individual-user's wallet primitive (P-22) doesn't survive a check against P-22's actual description, which is itself balance-based — the opposite of Group C's now-confirmed no-standing-account model. Worth a decision on whether the gateway integration is genuinely shared build, but this is an internal design question, not something requiring the client's input the way A4, A6, and B11 did.
