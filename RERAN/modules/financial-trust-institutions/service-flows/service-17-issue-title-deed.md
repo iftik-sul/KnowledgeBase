@@ -85,7 +85,7 @@ Applicable according to the RERAN fee schedule.
 
 **Yes**
 
-Paid by the customer — sourced (row 44, Step 2–6 includes "pay"). **Customer Payment at Counter** model, unaffected by the 2026-08-14 payment-model correction (`open-questions.md` B1). *(Corrected 2026-08-14 — previously cited `B9`, now superseded.)*
+Paid by the customer, **before** RERA's review and approval — sourced (row 44's own sequence: transaction data entered, then payment, then "review & approval"). **Customer Payment at Counter** model, unaffected by the 2026-08-14 payment-model correction (`open-questions.md` B1). *(Corrected 2026-08-14 — previously cited `B9`, now superseded.)*
 
 ## 10. Processing Authority
 
@@ -143,7 +143,7 @@ Information Requested
 ↓  
 Returned for Correction  
 ↓  
-Approved — Awaiting Payment  
+Approved  
 ↓  
 Completed
 
@@ -151,6 +151,8 @@ Completed
 
 * Rejected  
 * Withdrawn
+
+**Corrected 2026-08-15 — `Approved — Awaiting Payment` removed.** This status previously sat between `Returned for Correction` and `Completed`, but contradicts this service's own sourced workflow (Section 12, Section 9): the customer pays *before* RERA's review and approval, not after. By the time a decision is reached, payment has already happened. Compare Services #12 and #18, where RERA's row-sourced sequence has approval *before* payment, and where this status is kept as accurate.
 
 ## 14. Possible Outcomes
 
@@ -220,7 +222,7 @@ Upon successful completion, the system generates:
 * System validates ownership evidence before allowing issuance.  
 * Application receives a unique application reference number.  
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
-* Payment is completed before the title deed is issued.  
+* Payment is completed before RERA's review.  
 * Approved applications result in an issued electronic title deed.  
 * Customer receives the title deed on completion.  
 * All activities are recorded in the audit log.
@@ -229,7 +231,7 @@ Upon successful completion, the system generates:
 
 1. This application may be processed by any of the institution's four Group C roles where bank-originated, or otherwise by a Trustee Centre / Land Department operator acting on the customer's behalf. **Confirmed 2026-08-15** — previously conditioned on the Mortgage Officer specifically; `open-questions.md` A4 confirms no service is role-specific. *(Whether a bank-originated variant exists for this service at all remains unconfirmed by source — only the counter path is confirmed by row 44.)*
 2. Ownership must be established and registrable before a title deed can be issued.  
-3. Payment is required before the application is finalized.  
+3. Payment is required before RERA's review and approval.  
 4. Approved applications result in an issued electronic title deed on the official registry.  
 5. Every application receives a unique application reference number.  
 6. All applications, approvals, payments, and notifications are permanently recorded in the audit trail.
