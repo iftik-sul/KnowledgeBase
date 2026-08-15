@@ -4,7 +4,7 @@ module: individual-user
 type: service-flow
 status: current
 source_type: extrapolated
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -37,8 +37,9 @@ The service provides a complete lease management workspace where authorized user
 * Registered Property Owner  
 * Landlord  
 * Registered Tenant  
-* Authorized Property Representative  
-* Property Management Company (where authorized)
+* Authorized Property Representative
+
+*(Corrected 2026-08-15 — "Property Management Company (where authorized)" removed. That was Group D's Property Management Officer role, a cross-module leak into this list; it is not an Individual User concept. See `open-questions.md` B3.)*
 
 ## 5. Prerequisites
 
@@ -82,7 +83,7 @@ Applicable according to the RERAN fee schedule for chargeable lease management r
 
 **Yes**
 
-Payment is required for lease management requests that attract a regulatory service fee.
+Payment is required for lease management requests that attract a regulatory service fee. This is a genuinely conditional fee model — some requests under this service carry no fee at all — and is documented correctly as such; see `payments.md` Category 6.
 
 ## 10. Processing Authority
 

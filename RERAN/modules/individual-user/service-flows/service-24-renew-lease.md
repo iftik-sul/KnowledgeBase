@@ -4,7 +4,7 @@ module: individual-user
 type: service-flow
 status: current
 source_type: sourced
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -34,9 +34,11 @@ The service allows a landlord or an authorized representative to renew an existi
 
 ## 4. Who Can Apply
 
-* Registered Property Owner (Landlord)  
-* Authorized Property Representative  
-* Property Management Company acting on behalf of the owner
+* Registered Property Owner (Landlord) — **primary applicant**, per the platform's current registration model.  
+* Authorized Property Representative.  
+* Registered Tenant — **secondary applicant path**, for the same reasons documented in Service #23's Who Can Apply section: the master table (row 82) attributes this service to the Tenant role, and this module's role descriptions give both roles overlapping "renew lease" responsibilities. See `open-questions.md` B1.
+
+*(Corrected 2026-08-15 — "Property Management Company acting on behalf of the owner" removed as a cross-module leak from Group D. See `open-questions.md` B3.)*
 
 ## 5. Prerequisites
 
@@ -44,7 +46,7 @@ The service allows a landlord or an authorized representative to renew an existi
 * User is logged into the platform.  
 * Property is registered with RERAN.  
 * An active registered lease exists.  
-* Applicant has authority to renew the lease.  
+* Applicant has authority to renew the lease (as landlord) or is a party to the tenancy agreement (as tenant).  
 * Required supporting documents are available.
 
 ## 6. Required Information
@@ -87,7 +89,13 @@ Applicable according to the RERAN fee schedule.
 
 **Yes**
 
-Payment must be completed before the application is submitted.
+Payment timing differs by channel — see Processing Workflow.
+
+**Real Estate Services Trustee (Option 1):** documents are submitted and updated lease information entered into the system first; payment is completed once the application is audited, immediately before approval.
+
+**RERA App / Land Department Tenancy System (Option 2, Online):** payment is completed before the application is submitted.
+
+*(Corrected 2026-08-15 — this file previously stated a single blanket "before submission" claim, which contradicted Option 1's own workflow below (already correctly ordered) and the sourced order in row 82. See `payments.md` Category 2.)*
 
 ## 10. Processing Authority
 
@@ -118,7 +126,7 @@ Lease Renewal Approved
 ↓  
 Receive Updated Electronic Contract Registration Certificate
 
-────────────────────────────
+──────────────────────────────
 
 Option 2 – Online
 
@@ -239,11 +247,11 @@ Upon successful completion, the system generates:
 
 ## 20. Acceptance Criteria
 
-* User can renew an eligible registered lease.  
+* User can renew an eligible registered lease, as landlord or as tenant.  
 * System validates that the applicant is authorized to renew the lease.  
 * Updated lease information is validated before submission.  
 * Required documents are uploaded successfully.  
-* Payment is completed before submission.  
+* Payment is completed at the point required by the selected channel.  
 * Application receives a unique reference number.  
 * User can monitor the application status.  
 * Approved applications update the registered lease.  
@@ -253,9 +261,9 @@ Upon successful completion, the system generates:
 
 ## 21. Business Rules
 
-1. Only the registered property owner or an authorized representative may renew a tenancy agreement.  
+1. The registered property owner (landlord), an authorized representative, or the registered tenant may renew a tenancy agreement. *(Corrected 2026-08-15 — see Section 4 and `open-questions.md` B1.)*  
 2. The lease must already be registered with RERAN.  
-3. Payment must be completed before the application is submitted.  
+3. Payment must be completed at the point required by the selected channel — before submission online, or after the Trustee audits the application. *(Corrected 2026-08-15 — see Section 9.)*  
 4. Renewal requests must be submitted with all mandatory updated lease information and supporting documents.  
 5. Lease renewal becomes effective only after approval by the Compliance & Escrow Auditor.  
 6. An updated Electronic Contract Registration Certificate is issued upon successful renewal.  

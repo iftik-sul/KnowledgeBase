@@ -4,7 +4,7 @@ module: individual-user
 type: service-flow
 status: current
 source_type: sourced
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -109,7 +109,13 @@ Applicable according to the RERAN fee schedule.
 
 **Yes**
 
-Payment must be completed before the application is submitted.
+Payment timing differs by channel — see Processing Workflow.
+
+**Real Estate Registration Trustee Centre:** documents are submitted and entered into the system first; payment is completed once the transaction is audited, immediately before the output is issued. Sourced by inheritance from row 86 ("same as sale registration"), per `services-overview.md`.
+
+**Online:** payment is completed before the application is submitted.
+
+*(Corrected 2026-08-15 — this file previously documented only the online path. See `payments.md` Category 3.)*
 
 ## 10. Processing Authority
 
@@ -120,6 +126,24 @@ Payment must be completed before the application is submitted.
 **Approximately 25 minutes.**
 
 ## 12. Processing Workflow
+
+Option 1 – Real Estate Registration Trustee Centre
+
+Visit Real Estate Registration Trustee Centre  
+↓  
+Submit Required Documents  
+↓  
+Officer Enters Lease-to-Own Registration into System  
+↓  
+Transaction Audited  
+↓  
+Pay Service Fee  
+↓  
+Receive Registration Documents via Email
+
+──────────────────────────
+
+Option 2 – Online
 
 Property Owner
 
@@ -187,7 +211,7 @@ Payment Successful
 ↓  
 Submitted  
 ↓  
-Purchaser Confirmation Pending  
+Purchaser Confirmation Pending *(Online only)*  
 ↓  
 Under Review  
 ↓  
@@ -205,18 +229,18 @@ Completed
 * Rejected  
 * Cancelled  
 * Withdrawn  
-* Purchaser Declined
+* Purchaser Declined *(Online only)*
 
 ## 14. Possible Outcomes
 
 * Lease-to-Own Successfully Registered  
 * Agreement Successfully Recorded  
-* Purchaser Accepted Agreement  
+* Purchaser Accepted Agreement *(Online only)*  
 * Additional Information Requested  
 * Application Returned  
 * Application Rejected  
 * Payment Failed  
-* Purchaser Declined Agreement
+* Purchaser Declined Agreement *(Online only)*
 
 ## 15. Output
 
@@ -289,10 +313,10 @@ Upon successful completion, the system generates:
 
 * Property owner can register a lease-to-own agreement for an eligible property.  
 * System validates ownership before submission.  
-* Purchaser successfully confirms participation.  
+* Purchaser successfully confirms participation *(Online channel)*.  
 * Required information is validated before submission.  
 * Required documents are uploaded successfully.  
-* Payment is completed before regulatory review.  
+* Payment is completed at the point required by the selected channel.  
 * Application receives a unique application reference number.  
 * Approved applications update the official property registry.  
 * Registration documents are generated after successful approval.  
@@ -304,8 +328,8 @@ Upon successful completion, the system generates:
 1. Only the registered property owner or an authorized representative may initiate a lease-to-own registration.  
 2. The property must be registered in the official RERAN property registry.  
 3. The lease-to-own agreement must identify both the property owner and the purchaser.  
-4. Payment must be completed before the application proceeds for review.  
-5. The purchaser must confirm participation before the application can be approved.  
+4. Payment must be completed at the point required by the selected channel — before submission online, or after the Trustee Centre audits the transaction. *(Corrected 2026-08-15 — see Section 9.)*  
+5. The purchaser must confirm participation before the application can be approved, where applicable to the selected channel.  
 6. The lease-to-own arrangement becomes officially registered only after approval by RERAN.  
 7. Registration documents are issued upon successful completion of the registration process.  
 8. Every lease-to-own registration application receives a unique application reference number.  

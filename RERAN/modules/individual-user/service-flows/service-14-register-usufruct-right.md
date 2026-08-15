@@ -4,7 +4,7 @@ module: individual-user
 type: service-flow
 status: current
 source_type: sourced
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -104,7 +104,13 @@ Applicable according to the RERAN fee schedule.
 
 **Yes**
 
-Payment must be completed before the application is submitted.
+Payment timing differs by channel — see Processing Workflow.
+
+**Real Estate Registration Trustee Centre:** documents are submitted and entered into the system first; payment is completed once the transaction is audited, immediately before the output is issued. Sourced by inheritance from row 86 ("same as sale registration"), per `services-overview.md`.
+
+**Online:** payment is completed before the application is submitted.
+
+*(Corrected 2026-08-15 — this file previously documented only the online path. See `payments.md` Category 3.)*
 
 ## 10. Processing Authority
 
@@ -115,6 +121,24 @@ Payment must be completed before the application is submitted.
 **Maximum 30 minutes.**
 
 ## 12. Processing Workflow
+
+Option 1 – Real Estate Registration Trustee Centre
+
+Visit Real Estate Registration Trustee Centre  
+↓  
+Submit Required Documents  
+↓  
+Officer Enters Usufruct Registration into System  
+↓  
+Transaction Audited  
+↓  
+Pay Service Fee  
+↓  
+Receive Registration Documents via Email
+
+──────────────────────────
+
+Option 2 – Online
 
 Property Owner
 
@@ -180,7 +204,7 @@ Payment Successful
 ↓  
 Submitted  
 ↓  
-Beneficiary Confirmation Pending  
+Beneficiary Confirmation Pending *(Online only)*  
 ↓  
 Under Review  
 ↓  
@@ -198,13 +222,13 @@ Completed
 * Rejected  
 * Cancelled  
 * Withdrawn  
-* Beneficiary Declined
+* Beneficiary Declined *(Online only)*
 
 ## 14. Possible Outcomes
 
 * Usufruct Right Successfully Registered  
 * Property Registry Successfully Updated  
-* Beneficiary Accepted Registration  
+* Beneficiary Accepted Registration *(Online only)*  
 * Additional Information Requested  
 * Application Returned  
 * Application Rejected  
@@ -279,10 +303,10 @@ Upon successful completion, the system generates:
 
 * Property owner can register a usufruct right for an eligible property.  
 * System validates ownership before submission.  
-* Beneficiary successfully confirms participation.  
+* Beneficiary successfully confirms participation *(Online channel)*.  
 * Required information is validated before submission.  
 * Required supporting documents are uploaded successfully.  
-* Payment is completed before regulatory review.  
+* Payment is completed at the point required by the selected channel.  
 * Application receives a unique application reference number.  
 * Approved applications update the official property registry.  
 * Registration documents are generated after successful approval.  
@@ -294,8 +318,8 @@ Upon successful completion, the system generates:
 1. Only the registered property owner or an authorized representative may register a usufruct right.  
 2. The property must be registered in the official RERAN property registry.  
 3. The beneficiary must be identified before the application is submitted.  
-4. Payment must be completed before the application proceeds for review.  
-5. The beneficiary may be required to confirm acceptance before registration is finalized.  
+4. Payment must be completed at the point required by the selected channel — before submission online, or after the Trustee Centre audits the transaction. *(Corrected 2026-08-15 — see Section 9.)*  
+5. The beneficiary may be required to confirm acceptance before registration is finalized, where applicable to the selected channel.  
 6. The usufruct right becomes legally effective only after approval by RERAN and registration in the official property registry.  
 7. An Electronic Usufruct Registration Certificate and related registration documents are issued upon successful registration.  
 8. Every Register Usufruct Right application receives a unique application reference number.  

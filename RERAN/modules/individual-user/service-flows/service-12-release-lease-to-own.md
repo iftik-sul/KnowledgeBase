@@ -4,7 +4,7 @@ module: individual-user
 type: service-flow
 status: current
 source_type: sourced
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -101,7 +101,13 @@ Applicable according to the RERAN fee schedule.
 
 **Yes**
 
-Payment must be completed before the application is submitted.
+Payment timing differs by channel — see Processing Workflow.
+
+**Real Estate Registration Trustee Centre:** documents are submitted and entered into the system first; payment is completed once the transaction is audited, immediately before the output is issued. Sourced by inheritance from row 86 ("same as sale registration"), per `services-overview.md`.
+
+**Online:** payment is completed before the application is submitted.
+
+*(Corrected 2026-08-15 — this file previously documented only the online path. See `payments.md` Category 3.)*
 
 ## 10. Processing Authority
 
@@ -112,6 +118,24 @@ Payment must be completed before the application is submitted.
 **Approximately 25 minutes.**
 
 ## 12. Processing Workflow
+
+Option 1 – Real Estate Registration Trustee Centre
+
+Visit Real Estate Registration Trustee Centre  
+↓  
+Submit Required Documents  
+↓  
+Officer Enters Lease-to-Own Release into System  
+↓  
+Transaction Audited  
+↓  
+Pay Service Fee  
+↓  
+Receive Release Documents via Email
+
+──────────────────────────
+
+Option 2 – Online
 
 Applicant
 
@@ -261,7 +285,7 @@ Upon successful completion, the system generates:
 * System validates that the agreement is active and eligible for release.  
 * Required information is validated before submission.  
 * Required supporting documents are uploaded successfully.  
-* Payment is completed before regulatory review.  
+* Payment is completed at the point required by the selected channel.  
 * Application receives a unique application reference number.  
 * Approved applications update the official property registry.  
 * Release documents are generated after successful approval.  
@@ -273,7 +297,7 @@ Upon successful completion, the system generates:
 1. Only an authorized party to the lease-to-own agreement or an authorized representative may request its release.  
 2. The lease-to-own agreement must be registered and active before a release request can be submitted.  
 3. All contractual obligations required for the release must be fulfilled before approval.  
-4. Payment must be completed before the application proceeds for review.  
+4. Payment must be completed at the point required by the selected channel — before submission online, or after the Trustee Centre audits the transaction. *(Corrected 2026-08-15 — see Section 9.)*  
 5. The property registry is updated only after the release application has been approved.  
 6. Where applicable, updated ownership documents are issued following the release.  
 7. Every Release Lease-to-Own application receives a unique application reference number.  

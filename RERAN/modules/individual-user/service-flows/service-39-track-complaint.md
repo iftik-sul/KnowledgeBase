@@ -4,7 +4,7 @@ module: individual-user
 type: service-flow
 status: current
 source_type: extrapolated
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -67,13 +67,15 @@ If additional information is requested during the investigation, supporting docu
 
 ## 8. Service Fee
 
-Applicable according to the RERAN fee schedule.
+**No fee.** Tracking a complaint that has already been submitted and paid for (see Service #38) is free, matching Feature #2 – Track Application Status, which this service specialises. See `payments.md` Category 7.
 
 ## 9. Payment Required
 
-**Yes**
+**No**
 
-Payment must be completed before complaint tracking is available.
+Payment is not required to track a complaint that has already been submitted, consistent with the platform-wide principle already applied to every other trackable service in this module (Feature #2).
+
+*(Corrected 2026-08-15 — this file previously required payment before complaint tracking was available, contradicting Feature #2's explicit "no additional fee" principle. There was no source row for this extrapolated service that could have justified the fee. See `payments.md` Category 7 and `open-questions.md` A6.)*
 
 ## 10. Processing Authority
 
@@ -83,7 +85,7 @@ The complaint information is retrieved from the official complaint management sy
 
 ## 11. Expected Processing Time
 
-Immediate (real-time lookup), subject to successful payment.
+Immediate (real-time lookup).
 
 ## 12. Processing Workflow
 
@@ -95,10 +97,6 @@ Select "Track Complaint"
 ↓  
 Search Complaint  
 ↓  
-Review Service Fee  
-↓  
-Complete Payment  
-↓  
 Retrieve Complaint Details  
 ↓  
 View Complaint Timeline  
@@ -109,10 +107,6 @@ Download Resolution (when available)
 
 ## 13. Application Status Flow
 
-Payment Pending  
-↓  
-Payment Successful  
-↓  
 Complaint Retrieved  
 ↓  
 Under Review  
@@ -139,8 +133,7 @@ Closed
 * Investigation In Progress  
 * Information Requested  
 * Complaint Resolved  
-* Complaint Closed  
-* Payment Failed
+* Complaint Closed
 
 ## 15. Output
 
@@ -155,8 +148,7 @@ The system displays:
 * Timeline of Activities  
 * Communications from RERAN  
 * Final Resolution (when available)  
-* Downloadable Decision Letter  
-* Payment Receipt
+* Downloadable Decision Letter
 
 ## 16. Related Services
 
@@ -169,8 +161,6 @@ The system displays:
 * Services  
 * Track Complaint  
 * Complaint Search  
-* Payment  
-* Payment Successful  
 * Complaint Details  
 * Complaint Timeline  
 * Investigation Updates  
@@ -182,9 +172,6 @@ The system displays:
 * Retrieve Complaint Details  
 * Retrieve Complaint Timeline  
 * Retrieve Investigation Updates  
-* Calculate Service Fee  
-* Initiate Payment  
-* Verify Payment  
 * Download Decision Letter
 
 ## 19. Database Entities
@@ -195,26 +182,23 @@ The system displays:
 * Investigation  
 * Department  
 * Service Request  
-* Payment  
-* Payment Transaction  
 * Audit Log  
 * Notification
 
 ## 20. Acceptance Criteria
 
 * User can search for submitted complaints.  
-* Payment is completed before complaint details are displayed.  
+* No payment is required to retrieve or view complaint details.  
 * Complaint details are retrieved successfully.  
 * Timeline displays all major complaint activities.  
 * Investigation updates are displayed when available.  
 * Final resolution can be downloaded after the complaint is closed.  
-* Payment receipt is generated after successful payment.  
 * All complaint access activities are recorded in the audit log.
 
 ## 21. Business Rules
 
 1. Only the complainant or an authorized representative may view complaint details.  
-2. Payment must be completed before complaint information is retrieved.  
+2. **No payment is required to track complaint information.** *(Corrected 2026-08-15 — see Section 8/9.)*  
 3. Users may only access complaints they are authorized to view.  
 4. Complaint status is updated automatically as the investigation progresses.  
 5. Resolution documents become available only after the complaint has been officially closed.  

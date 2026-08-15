@@ -4,7 +4,7 @@ module: individual-user
 type: service-flow
 status: current
 source_type: sourced
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -98,7 +98,11 @@ Applicable according to the RERAN fee schedule.
 
 **Yes**
 
-Payment must be completed before the application is submitted.
+Payment timing differs by channel — see Processing Workflow.
+
+**Online:** payment is completed before the application is submitted.
+
+**Customer Center (Land Department):** documents are submitted and the transfer information is entered into the system first; payment is completed at that point, and the transaction is then audited and approved as a combined step. *(Corrected 2026-08-15 — this file previously described payment as occurring after a separate audit step at the Customer Center, which reversed the order of source row 106: "...employee enters data, pay, transaction audited and approved..." Payment comes before audit and approval, not between them. See `payments.md` Category 3.)*
 
 ## 10. Processing Authority
 
@@ -120,11 +124,9 @@ Officer Reviews Documents
 ↓  
 Property Transfer Information Entered into System  
 ↓  
-Transaction Audited  
-↓  
 Pay Service Fee  
 ↓  
-Application Approved  
+Transaction Audited and Approved  
 ↓  
 Electronic Certificate of Title and Property Map Sent via Email
 
@@ -257,7 +259,7 @@ Upon successful completion, the system generates:
 * System validates ownership before submission.  
 * Required information is validated successfully.  
 * Supporting documents are uploaded successfully.  
-* Payment is completed before submission.  
+* Payment is completed at the point required by the selected channel (before submission online; at the Customer Center, before the transaction is audited).  
 * Application receives a unique reference number.  
 * User can monitor the application status.  
 * Approved applications update the official ownership registry.  
@@ -269,7 +271,7 @@ Upon successful completion, the system generates:
 
 1. Only the registered property owner or an authorized representative may initiate a title transfer.  
 2. The property must already be registered in the RERAN property registry.  
-3. Payment must be completed before the application is submitted.  
+3. Payment must be completed at the point required by the selected channel — before submission online, or before audit and approval at the Customer Center. *(Corrected 2026-08-15 — see Section 9.)*  
 4. Ownership transfer becomes legally effective only after approval by RERAN.  
 5. All mandatory supporting documents must be submitted before the application proceeds for review.  
 6. The official ownership registry is updated only after successful approval.  

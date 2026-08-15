@@ -4,7 +4,7 @@ module: individual-user
 type: service-flow
 status: current
 source_type: sourced
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -108,7 +108,13 @@ Applicable according to the RERAN fee schedule.
 
 **Yes**
 
-Payment must be completed before the application is submitted.
+Payment timing differs by channel — see Processing Workflow.
+
+**Real Estate Registration Trustee Centre:** documents are submitted and entered into the system first; payment is completed once the transaction is audited, immediately before the output is issued. Sourced by inheritance from row 86 ("same as sale registration"), per `services-overview.md`.
+
+**Online:** payment is completed before the application is submitted.
+
+*(Corrected 2026-08-15 — this file previously documented only the online path. See `payments.md` Category 3.)*
 
 ## 10. Processing Authority
 
@@ -119,6 +125,24 @@ Payment must be completed before the application is submitted.
 **Approximately 25 minutes.**
 
 ## 12. Processing Workflow
+
+Option 1 – Real Estate Registration Trustee Centre
+
+Visit Real Estate Registration Trustee Centre  
+↓  
+Submit Required Documents  
+↓  
+Officer Enters Lease-to-Own Transfer into System  
+↓  
+Transaction Audited  
+↓  
+Pay Service Fee  
+↓  
+Receive Updated Registration Documents via Email
+
+──────────────────────────
+
+Option 2 – Online
 
 Current Lease-to-Own Purchaser
 
@@ -186,7 +210,7 @@ Payment Successful
 ↓  
 Submitted  
 ↓  
-Incoming Purchaser Confirmation Pending  
+Incoming Purchaser Confirmation Pending *(Online only)*  
 ↓  
 Under Review  
 ↓  
@@ -204,18 +228,18 @@ Completed
 * Rejected  
 * Cancelled  
 * Withdrawn  
-* Incoming Purchaser Declined
+* Incoming Purchaser Declined *(Online only)*
 
 ## 14. Possible Outcomes
 
 * Lease-to-Own Successfully Transferred  
 * Transfer Successfully Registered  
-* Incoming Purchaser Accepted Transfer  
+* Incoming Purchaser Accepted Transfer *(Online only)*  
 * Additional Information Requested  
 * Application Returned  
 * Application Rejected  
 * Payment Failed  
-* Incoming Purchaser Declined Transfer
+* Incoming Purchaser Declined Transfer *(Online only)*
 
 ## 15. Output
 
@@ -285,10 +309,10 @@ Upon successful completion, the system generates:
 
 * Current lease-to-own purchaser can initiate a transfer for an eligible agreement.  
 * System validates that the agreement is active and transferable.  
-* Incoming purchaser successfully confirms participation.  
+* Incoming purchaser successfully confirms participation *(Online channel)*.  
 * Required information is validated before submission.  
 * Required documents are uploaded successfully.  
-* Payment is completed before regulatory review.  
+* Payment is completed at the point required by the selected channel.  
 * Application receives a unique application reference number.  
 * Approved applications update the official lease-to-own registry.  
 * Updated registration documents are generated upon approval.  
@@ -300,8 +324,8 @@ Upon successful completion, the system generates:
 1. Only the registered lease-to-own purchaser or an authorized representative may initiate a transfer.  
 2. The lease-to-own agreement must already be registered with RERAN.  
 3. The incoming purchaser must meet the eligibility requirements established by RERAN.  
-4. Payment must be completed before the application proceeds for review.  
-5. The incoming purchaser must confirm acceptance before the transfer can be approved.  
+4. Payment must be completed at the point required by the selected channel — before submission online, or after the Trustee Centre audits the transaction. *(Corrected 2026-08-15 — see Section 9.)*  
+5. The incoming purchaser must confirm acceptance before the transfer can be approved, where applicable to the selected channel.  
 6. Property owner consent shall be obtained where required by the terms of the lease-to-own agreement or applicable regulations.  
 7. The transfer becomes legally effective only after approval by RERAN and the lease-to-own registry is updated.  
 8. Updated registration documents are issued upon successful completion of the transfer.  

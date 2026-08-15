@@ -4,7 +4,7 @@ module: individual-user
 type: service-flow
 status: current
 source_type: sourced
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -97,13 +97,19 @@ The service allows an eligible landlord, tenant, or authorized representative to
 
 ## 8. Service Fee
 
-Applicable according to the RERAN fee schedule.
+Applicable according to the RERAN fee schedule. **Confirmed by client (2026-08-15): the fee applies to both channels, on the same timing** — see Section 9.
 
 ## 9. Payment Required
 
 **Yes**
 
-Payment must be completed before the application is submitted.
+Payment applies to both channels, on the counter channel's timing.
+
+**Real Estate Services Trustee Center (Option 1):** documents are submitted and entered into the system first; payment is completed once the transaction is audited, before the cancellation certificate and lease contract are issued.
+
+**RERA App / Land Department Tenancy System (Option 2, Online):** payment is completed on the same basis — after RERAN reviews the request, before the cancellation is confirmed.
+
+*(Corrected 2026-08-15 — this file previously documented a single undifferentiated flow with no Trustee Centre channel at all (the same gap found in Services #9–#16), and source row 83's online sub-channel text had no fee step, which this document's own `payments.md` had flagged as an open question. The client has confirmed the fee applies to both channels, matching the counter channel's timing. See `open-questions.md` A5.)*
 
 ## 10. Processing Authority
 
@@ -111,11 +117,28 @@ Payment must be completed before the application is submitted.
 
 ## 11. Expected Processing Time
 
-**Approximately 20–30 minutes.**
+**Via Real Estate Trustee Services:** 4 business hours.
+**Via RERA App:** Immediate to owners, subject to RERAN's review.
 
 ## 12. Processing Workflow
 
-Applicant
+Option 1 – Real Estate Services Trustee Center
+
+Visit Real Estate Services Trustee Center  
+↓  
+Submit Required Documents  
+↓  
+Officer Enters Cancellation into System  
+↓  
+Transaction Audited  
+↓  
+Pay Service Fee  
+↓  
+Receive Cancellation Certificate and Lease Contract
+
+──────────────────────────────
+
+Option 2 – Online (RERA App / Land Department Tenancy System)
 
 Login  
 ↓  
@@ -131,39 +154,17 @@ Provide Cancellation Information
 ↓  
 Upload Required Documents  
 ↓  
-Review Application  
+Submit Application  
 ↓  
-Complete Payment  
+RERAN Reviews  
 ↓  
-Submit Application
-
-↓
-
-RERAN
-
-Review Application  
+Pay Service Fee  
 ↓  
-Verify Tenancy Registration  
-↓  
-Verify Supporting Documents  
-↓  
-Review Cancellation Request  
-↓  
-Approve Contract Cancellation  
-↓  
-Update Tenancy Registry  
-↓  
-Generate Cancellation Confirmation  
-↓  
-Notify Landlord & Tenant
+Receive Cancellation Confirmation via Email
 
 ## 13. Application Status Flow
 
 Draft  
-↓  
-Payment Pending  
-↓  
-Payment Successful  
 ↓  
 Submitted  
 ↓  
@@ -171,7 +172,9 @@ Under Review
 ↓  
 Information Requested  
 ↓  
-Resubmitted  
+Payment Pending  
+↓  
+Payment Successful  
 ↓  
 Approved  
 ↓  
@@ -263,7 +266,7 @@ Upon successful completion, the system generates:
 * System validates that the tenancy contract is active and eligible for cancellation.  
 * Required information is validated before submission.  
 * Required supporting documents are uploaded successfully.  
-* Payment is completed before regulatory review.  
+* Payment is completed after RERAN's review, on either channel.  
 * Application receives a unique application reference number.  
 * Approved applications update the official tenancy registry.  
 * A cancellation certificate is generated upon approval.  
@@ -276,7 +279,7 @@ Upon successful completion, the system generates:
 2. The tenancy contract must be registered and active before it can be cancelled.  
 3. Where required by law or the tenancy agreement, the consent of both landlord and tenant shall be obtained before cancellation.  
 4. A court order or regulatory decision may be required in cases involving disputes or unilateral termination.  
-5. Payment must be completed before the application proceeds for review.  
+5. **Payment applies on both channels and is completed after RERAN reviews the request, not before submission.** *(Corrected 2026-08-15 — see Section 8/9 and `open-questions.md` A5.)*  
 6. The tenancy contract is considered cancelled only after approval by RERAN.  
 7. The official tenancy registry is updated only after the cancellation has been approved.  
 8. Every Cancel Tenancy Contract application receives a unique application reference number.  
