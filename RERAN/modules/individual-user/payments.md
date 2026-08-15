@@ -35,7 +35,9 @@ Every one of the 43 service-flow files carries a Section 9 that reads, verbatim 
 
 ### Category 1 — Upfront, before submission (confirmed, both channels agree or only one channel is sourced)
 
-Services #1–#4, #6, #8, #19–#22, #29, #30, #35–#38, #43, and the extrapolated verification/diaspora/complaint services (#1–#3, #36–#37) either have no counter-channel alternative sourced, or the sourced counter-channel order genuinely places payment before the final audit/approval decision. Section 9's "before submission" language is correct for these as written, though see the Category 4 note on #38 below.
+Services #1–#4, #6, #8, #19–#22, #29, #35, #38, #43, and the extrapolated verification/complaint services (#1–#3) either have no counter-channel alternative sourced, or the sourced counter-channel order genuinely places payment before the final audit/approval decision. Section 9's "before submission" language is correct for these as written, though see the Category 4 note on #38 below.
+
+**#30 and #37 removed from this category 2026-08-15** — see Category 9 below. Both were originally listed here as if they were ordinary upfront-paying services, but they're routing services (act-on-behalf-of-owner and remote-transaction respectively) with no independent payment rule of their own; their actual timing depends entirely on whichever underlying service is selected, which could be any of the categories in this document, not just Category 1.
 
 Representative source: Service #8 (row 87) — *"Customer pays fees, receives receipt via email. Auditor of Department processes..."* — payment precedes the auditor's processing. Services #19–#22 and #35 (rows 100–105) all read the same way: "...employee enters data, **pay**, transaction audited and approved, receive link via email."
 
@@ -114,6 +116,15 @@ A user who files a complaint under #38 (itself fee-bearing, see Category 8 below
 
 **Services #38 (Submit Complaint) and #39 (Track Complaint)** are both extrapolated, with no master-table row to check against. **Confirmed by client (`open-questions.md` A7): #38's fee stands as originally documented** — RERAN wants the deterrent effect against frivolous complaints, the same logic behind court filing fees. This closes the question as "confirmed as originally written," not a correction — #38's service-flow file needs no changes. #39 remains a separate, already-resolved finding (Category 7 below): tracking a complaint that has already been paid for and submitted should be free, matching Feature #2, and that fix is unaffected by A7's confirmation that *filing* the complaint carries a fee.
 
+### Category 9 — Routing services with no independent payment rule of their own. Found and corrected in a later audit pass.
+
+| Service | What it does | Original documentation | Corrected |
+| :---- | :---- | :---- | :---- |
+| **#30 – Act on Behalf of Property Owner** | Validates a PoA, then routes into whichever of #4–#35 the representative selects | Section 9 hedged ("where applicable") but Sections 12/13 showed one fixed unconditional "pay before submission" sequence regardless of what was selected | Explicitly inherits the selected service's own fee status, payment timing, fields, documents, status flow, and output — no independent rule |
+| **#37 – Remote Property Transactions** | Confirms identity (#36), then routes into whichever transaction the user selects | Section 9 stated flatly "payment must be completed before the application is submitted" (no hedge) — directly contradicting the file's own Business Rule 4, which already said transactions follow the selected service's own rules | Same fix as #30 |
+
+**Neither of these is a source-vs-file contradiction like Categories 2–5** — both are extrapolated services with no master-table row to check against. This is a design-consistency problem: both files predate the UI package's routing-wrapper architecture (`ui/screens-unified/submit-application.md`, which documents #30 and #37 as reopening the wizard at the selected service's own pattern) and were never reconciled with it. #30's own text had already partially caught this (the "where applicable" hedges), but its diagrams hadn't; #37's text hadn't caught it at all, producing a direct rule-vs-rule contradiction within the same file. Neither belongs in Category 1 (upfront) or any other single category — their actual timing is whatever the selected underlying service's own category says, which could be any of Categories 1–8 depending on what's chosen.
+
 ## Settlement Mechanism
 
 The source names the same three settlement routes seen platform-wide: payment gateway (card, bank transfer, USSD per the PRD), escrow deduction, and institution account debit. **Individual User uses payment gateway only** — there is no escrow relationship or institution account for a natural person acting in their own capacity.
@@ -132,7 +143,7 @@ Every fee-bearing service in this module issues a **Payment Receipt**, generated
 
 ## To Confirm — Summary
 
-**All items below are now resolved except #9, which remains genuinely open.**
+**All items below are now resolved except #9 (the terminology question below), which remains genuinely open.**
 
 1. ~~**#17, #18, #33, and #7's Owner/Entity Amendment component**~~ — resolved as no-fee (proposed answer confirmed by adoption; no client pushback received). Corrected in each file.
 2. ~~**#28**~~ — resolved: payment moves to after-approval, matching row 84's explicit wording. Corrected.
@@ -143,6 +154,7 @@ Every fee-bearing service in this module issues a **Payment Receipt**, generated
 7. ~~**#38**~~ — resolved by client (A7): the fee stands as originally documented. No file change needed.
 8. ~~**#6's Wallet Account reference**~~ — resolved by client (C1): no wallet mechanism exists; #6 uses the standard shared gateway. Corrected.
 9. **"Fee Balance" meaning in this module** — still open. Confirm it denotes a single-transaction balance line, not a Group-C-style standing account (which does not exist here). No file currently depends on this being resolved, so it carries no downstream correction yet.
+10. ~~**#30, #37**~~ — resolved: both corrected to explicitly inherit the selected underlying service's payment rule rather than asserting an independent, always-upfront one. Corrected.
 
 ## Downstream Corrections — Propagated
 
@@ -158,5 +170,6 @@ All corrections identified above have now been applied to the affected service-f
 - **Services #23, #24, #25**: "Property Management Company" removed from Who Can Apply (cross-module leak from Group D — see `open-questions.md` B3). #23/#24 additionally gained Tenant as a documented secondary applicant path (see `open-questions.md` B1).
 - **`module-roadmap.md`'s** cross-cutting payment-timing observation, updated to remove the "unaudited" label for this module and record the audit's findings.
 - **Application Status Flow (Section 13) in #9–#16, #23, #24, #26** — found in a later audit pass to still show only the online channel's upfront "Payment Pending / Payment Successful" sequence, with no status reflecting the Trustee Centre / Service Center channel's audit-then-pay timing that Section 9/12 already documented for these same eleven files. Added an "Audited — Awaiting Payment" additional status to each, following the file's own existing convention for channel-specific statuses. #27 was checked and needed no change — it was rebuilt from scratch during the correction pass rather than edited in place, so its Section 13 already reflected the post-review payment timing correctly.
+- **Services #30, #37** — found in a fourth audit pass to describe an independent, always-upfront payment rule that contradicted (in #37's case, directly) their own acknowledgment that they're routing services. Corrected to explicitly inherit the selected underlying service's fee status and payment timing throughout — Sections 8, 9, 12, 13, 14, 15, and the relevant Business Rules in each file. See Category 9 above.
 
 Nothing remains outstanding from this document except item 9 above ("Fee Balance" terminology), which has no file depending on it yet.
