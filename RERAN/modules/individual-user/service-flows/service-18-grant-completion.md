@@ -4,7 +4,7 @@ module: individual-user
 type: service-flow
 status: current
 source_type: sourced
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -30,7 +30,7 @@ Enable grant recipients to complete all statutory requirements necessary for the
 
 ## 3. Description
 
-The service allows an eligible applicant to finalize a previously approved grant registration by submitting the required documentation, completing the applicable service fee, and undergoing regulatory review. Once approved, the grant registration is completed and the official title documents are issued electronically.
+The service allows an eligible applicant to finalize a previously approved grant registration by submitting the required documentation and undergoing regulatory review. Once approved, the grant registration is completed and the official title documents are issued electronically.
 
 ## 4. Who Can Apply
 
@@ -82,19 +82,18 @@ The service allows an eligible applicant to finalize a previously approved grant
 * Government-issued Identification  
 * Survey Plan  
 * Property Map (where applicable)  
-* Proof of Payment  
 * Power of Attorney (where applicable)  
 * Other supporting documents required by RERAN
 
 ## 8. Service Fee
 
-Applicable according to the RERAN fee schedule.
+**No fee.** Source row 99 documents no payment step anywhere in its workflow — submit, enter data, audit and approve, send link. This mirrors #17 (Grant Registration), and both sit directly beside fee-bearing siblings #19–#22 in the same Title & Land Registration cluster — the same contrast-with-neighbours evidence Group C used to confirm its own Service #2's fee-free status. See `payments.md` Category 4.
 
 ## 9. Payment Required
 
-**Yes**
+**No**
 
-Payment must be completed before the application is submitted.
+*(Corrected 2026-08-15 — this file previously stated payment was required before submission. Source row 99 has no payment step. See `payments.md` Category 4.)*
 
 ## 10. Processing Authority
 
@@ -122,8 +121,6 @@ Upload Required Documents
 ↓  
 Review Application  
 ↓  
-Complete Payment  
-↓  
 Submit Application
 
 ↓
@@ -149,10 +146,6 @@ Notify Applicant
 ## 13. Application Status Flow
 
 Draft  
-↓  
-Payment Pending  
-↓  
-Payment Successful  
 ↓  
 Submitted  
 ↓  
@@ -180,8 +173,7 @@ Completed
 * Title Documents Successfully Issued  
 * Additional Information Requested  
 * Application Returned  
-* Application Rejected  
-* Payment Failed
+* Application Rejected
 
 ## 15. Output
 
@@ -190,8 +182,7 @@ Upon successful completion, the system generates:
 * Electronic Certificate of Title  
 * Electronic Title Deed  
 * Property Registration Certificate  
-* Property Map  
-* Payment Receipt
+* Property Map
 
 ## 16. Related Services
 
@@ -208,8 +199,6 @@ Upon successful completion, the system generates:
 * Grant Information  
 * Document Upload  
 * Application Review  
-* Payment  
-* Payment Successful  
 * Application Submitted  
 * Application Details  
 * Completion Confirmation
@@ -220,9 +209,6 @@ Upon successful completion, the system generates:
 * Retrieve Grant Details  
 * Validate Grant Registration  
 * Upload Documents  
-* Calculate Service Fee  
-* Initiate Payment  
-* Verify Payment  
 * Submit Grant Completion Application  
 * Retrieve Application Status  
 * Update Property Registry  
@@ -241,8 +227,6 @@ Upon successful completion, the system generates:
 * Application  
 * Service Request  
 * Document  
-* Payment  
-* Payment Transaction  
 * Notification  
 * Audit Log
 
@@ -252,7 +236,7 @@ Upon successful completion, the system generates:
 * System validates that the grant registration is eligible for completion.  
 * Required information is validated before submission.  
 * Required supporting documents are uploaded successfully.  
-* Payment is completed before regulatory review.  
+* No payment step applies to this service.  
 * Application receives a unique application reference number.  
 * Approved applications complete the official property registration.  
 * Final title documents are generated upon approval.  
@@ -264,10 +248,10 @@ Upon successful completion, the system generates:
 1. Only the approved grant recipient or an authorized representative may submit a Grant Completion application.  
 2. Grant Registration must already be approved before Grant Completion can be requested.  
 3. All completion requirements and supporting documents must be satisfied before approval.  
-4. Payment must be completed before the application proceeds for review.  
+4. **No fee applies to this service.** *(Corrected 2026-08-15 — see Section 8/9.)*  
 5. Grant Completion becomes legally effective only after approval by RERAN.  
 6. Final title documents are issued only after the completion process has been approved.  
 7. The official property registry is updated upon successful completion.  
 8. Every Grant Completion application receives a unique application reference number.  
 9. The completed grant becomes part of the permanent ownership history of the property.  
-10. All applications, approvals, payments, registry updates, document submissions, title issuance, and notifications must be permanently recorded in the audit trail.
+10. All applications, approvals, registry updates, document submissions, title issuance, and notifications must be permanently recorded in the audit trail.
