@@ -2,7 +2,7 @@
 project: RERAN
 type: overview
 status: current
-updated: 2026-08-14
+updated: 2026-08-15
 contains_proposals: true
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
@@ -93,6 +93,8 @@ Roles are now documented (`modules/allied-professionals/roles-and-responsibiliti
 
 > **Proposed** — Group G may not need a service catalogue at all, but does need documented interfaces for the actions it performs inside other groups' flows: survey data submission, valuation filing, and Trustee Centre operator transactions. Whether this is a module or a set of shared interface documents is an open question. Needs client confirmation.
 
+**Checked 2026-08-15, unrelated to the Group C ownership correction.** This note and the Group A section above both use "owns zero services" in a group-level, catalogue-membership sense — how many of the 145 total services are filed under that group's own catalogue — not in the per-role, within-Group-C sense that `open-questions.md` A4 corrects. No change is needed here: A4 is about whether a service is restricted to a specific role *inside* Group C, not about which group a service belongs to.
+
 ---
 
 ## Module Profiles
@@ -147,13 +149,13 @@ The 41-to-43 relationship reconciles: ten tenant-dispute source rows are legitim
 
 ### Group C — Financial & Trust Institutions (18 services)
 
-Roles, services overview, and a payments document are complete. 23 open questions sent to the client are recorded in `modules/financial-trust-institutions/open-questions.md`.
+Roles, services overview, and a payments document are complete. 23 open questions sent to the client are recorded in `modules/financial-trust-institutions/open-questions.md`; all 23 are now answered, with 0 requiring client data (see that document's Summary).
 
 **Status:** all 18 service-flow files now exist under `service-flows/`, but only Service #1 has substantive depth. The other seventeen average around 1 KB and record workflow, documents, fees, channel, output and SLA as "not specified in the available source material."
 
 That characterisation is wrong for most of them. Rows 28–45 of the master service table carry a workflow sequence, channel, issued document and SLA for every one of the 18. Mortgage registration (row 30) alone specifies the four-step bank-to-department sequence, both channels, five possible output documents and a 20–25 minute SLA — none of which reached `service-03-mortgage-registration.md`.
 
-The genuine open questions — fee settlement model, status vocabulary, the Service #1/#2 role inconsistency — remain genuinely open. But they are a smaller set than the current files imply. See Known Issues.
+**Corrected 2026-08-15** — this section previously listed "the Service #1/#2 role inconsistency" alongside fee settlement model and status vocabulary as a genuine open question still awaiting resolution. That's now stale: `open-questions.md` A4 resolves it directly, and more broadly than the #1/#2 framing implied — no service across all 18 is role-specific, not just #1 and #2. The genuine open questions remaining are narrower: SLA reading (A6) and the handful of service-specific items each service-flow file's own Open Questions section still carries (fee schedule amounts, which remain client data throughout). See Known Issues.
 
 ### Group G — Allied Professionals & Service Trustees (0 services)
 
@@ -192,13 +194,13 @@ The proposed-services list runs alongside this sequence rather than inside it: i
 | 17 of 18 service flows are thin stubs that record source-available data as unspecified | Financial & Trust | Open — backfill from master table rows 28–45 |
 | UI documented before service flows | Real Estate Developer | Drafted, unmerged — 27/27 service flows written underneath the existing UI (issue #33); merge pending review |
 | No UI documented at all | Individual User | Open — the mirror-image gap of Real Estate Developer's |
-| 23 client questions outstanding | Financial & Trust | Sent, awaiting answers |
+| 23 client questions outstanding | Financial & Trust | Sent; all 23 now answered per `open-questions.md`, though this table row has not been individually re-verified as part of this edit — flagged rather than fixed, see the Group C profile above for the up-to-date status |
 | No application status vocabulary exists platform-wide | All | Proposed for Group C; needs a platform decision |
 | Root `KnowledgeBase/README.md` lists seven projects; only RERAN is active | Project | Open |
 | `RERAN/README.md` has four stub sections ("Modules", "Tech Stack", "Stakeholders", "Entry Points" all say "To be completed") despite this roadmap holding most of that detail already | Project | Open |
 | The service catalogue carries instruments from its source jurisdiction that have no Nigerian equivalent (usufruct, Taqeemi certificate) while omitting ones that are mandatory here (Governor's Consent, C-of-O) | Project | Open — see proposed-services.md |
 
-**Resolved since this roadmap was first written:** the 43 individual-user service/feature docs have been moved into `service-flows/`; the 295 KB Group B UI source file has been fully split into 19 screen files plus consolidated component/validation/status-badge docs and retired; the individual-user 39-vs-41 count discrepancy has been audited and closed, with four genuinely undocumented services added and a `source_type` field introduced to distinguish sourced from extrapolated services; all 18 Group C service-flow files created.
+**Resolved since this roadmap was first written:** the 43 individual-user service/feature docs have been moved into `service-flows/`; the 295 KB Group B UI source file has been fully split into 19 screen files plus consolidated component/validation/status-badge docs and retired; the individual-user 39-vs-41 count discrepancy has been audited and closed, with four genuinely undocumented services added and a `source_type` field introduced to distinguish sourced from extrapolated services; all 18 Group C service-flow files created; Group C's 23 open questions fully answered (0 needing client data); Group C's payment model and role-specific ownership both corrected per client decision.
 
 ---
 
