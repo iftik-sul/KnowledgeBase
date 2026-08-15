@@ -31,7 +31,9 @@ Shared validation patterns, referenced by screens rather than restated.
 ## Two-Party Confirmation (Pattern C)
 
 * The counterparty's identity (NIN or equivalent) must match what the primary applicant entered before the counterparty's confirmation is accepted — prevents a wrong party confirming a transaction meant for someone else.
-* OTP verification is explicitly sourced for #6 (row 86) only. Whether the other Pattern C services (#5, #8, #9, #10, #11, #14) should carry the same OTP step is **not settled by source** — #6 is the only one where OTP appears in the master table's own workflow description. Proposed: extend OTP to all of Pattern C for consistency, but flagged as a design choice, not a sourced requirement.
+* OTP verification is explicitly sourced for #6 (row 86) only. Whether the other Pattern C services (#8, #9, #10, #11, #14) should carry the same OTP step is **not settled by source** — #6 is the only one where OTP appears in the master table's own workflow description. Proposed: extend OTP to the rest of Pattern C for consistency, but flagged as a design choice, not a sourced requirement.
+
+**Corrected 2026-08-15, found in a later audit pass** — this section previously listed #5 among "the other Pattern C services" needing an OTP consistency decision. #5 was moved from Pattern C to Pattern B in an earlier audit pass (checked directly against its own file: no second user session anywhere, unlike #6/#8/#9/#10/#11/#14), which makes an OTP discussion inapplicable to it — OTP verifies a *counterparty*, and #5 has none. This file was never updated when that reclassification happened; it's fixed now.
 
 ## Payment
 
@@ -47,7 +49,7 @@ Shared validation patterns, referenced by screens rather than restated.
 ## Power of Attorney (Pattern H)
 
 * #30 (Act on Behalf of Property Owner) must validate an Active PoA status (see `status-badges.md`) before allowing any downstream service selection — this is already how #30's own service-flow file describes its Application Status Flow (`Authorization Validation` as the first real status), carried into this package as a hard gate rather than a soft warning.
-* A PoA scope that does not cover the selected downstream service must block submission, not just warn — matches #30's own Business Rule 4: "Representatives cannot perform services outside the approved scope of authority."
+* A PoA scope that does not cover the selected downstream service must block submission, not just warn — matches #30's own Business Rule, which states representatives cannot perform services outside the approved scope of authority.
 
 ## Documents
 
