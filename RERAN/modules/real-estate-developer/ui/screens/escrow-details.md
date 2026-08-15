@@ -3,8 +3,9 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
@@ -14,13 +15,13 @@ tags:
 
 # Screen: Escrow Details
 
-**Roles:** Principal · Escrow Liaison
+**Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
 
-The detail view of a single escrow account, opened from [Escrow Management](escrow-management.md). The Developer Principal / Director sees a read-only view; the Escrow Liaison sees an operational workspace for requesting fund releases and managing milestones and documents.
+The detail view of a single escrow account, opened from [Escrow Management](escrow-management.md). The source defines two variants: an overview variant (under the Principal / Director heading) and an operational workspace (under the Escrow Liaison heading) for requesting fund releases and managing milestones and documents. Both variants are reachable and actionable by all four roles — the difference is in what the variant shows, not in who may open it.
 
 ## Purpose
 
-Purpose differs by role — see [Role Variations](#role-variations).
+Purpose differs between variants — see [Role Variations](#role-variations).
 
 ## Layout
 
@@ -35,17 +36,29 @@ The two Layout diagrams are structurally different: the Principal's is a stacked
 
 ## Sections
 
-Every section is role-specific — see [Role Variations](#role-variations). Only the Escrow Liaison's version has a **Right Sidebar — Alerts & Reminders** section; the Principal's has no equivalent.
+Every section differs between variants — see [Role Variations](#role-variations). Only the Escrow Liaison's version has a **Right Sidebar — Alerts & Reminders** section; the Principal's has no equivalent.
 
 ## Empty State
 
-Message and actions differ by role — see [Role Variations](#role-variations).
+Message and actions differ between variants — see [Role Variations](#role-variations).
 
 ## Reused Components
 
-Differs by role — see [Role Variations](#role-variations).
+Differs between variants — see [Role Variations](#role-variations).
 
 ## Role Variations
+
+> **Reframed 2026-08-15 — these are content variants, not access restrictions.** Every variant
+> below is reachable and actionable by all four roles; none of them is withheld from anyone. What
+> the blocks record is that the source material defined this screen more than once, with different
+> KPI sets, filters, columns, actions or empty states each time — differences of *content*, not of
+> permission. Those are preserved verbatim rather than merged, because collapsing them into one
+> screen is a design decision about which variant (or which union of them) is correct, and that is
+> the client's call, not a documentation cleanup. **Flagged for review — see
+> [../README.md](../README.md#per-role-content-variants-flagged-for-review).**
+>
+> The role headings below should now be read as *"the variant the source defined under this role's
+> heading"*, not *"what this role is allowed to see"*.
 
 ### Developer Principal / Director
 
@@ -54,18 +67,7 @@ Differs by role — see [Role Variations](#role-variations).
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Escrow Management**  
 * **Selected Item:** Escrow Details *(opened from Escrow Management list)*  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Projects  
-  * Property Registrations  
-  * Sales & Disclosures  
-  * **Escrow Management (Active)**  
-  * Applications  
-  * Documents  
-  * Reports  
-  * Company Profile  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -319,7 +321,7 @@ Escrow Details
 * This is an **executive oversight screen** for the **Developer Principal /Director**.  
 * It consolidates all financial and regulatory information related to a single escrow account.  
 * No financial transactions or approvals can be performed from this page.  
-* All operational escrow activities remain the responsibility of the **Escrow Liaison**, while approvals by financial institutions and RERA are reflected as read-only status updates.
+* Operational escrow activities are **typically** carried out by the Escrow Liaison, though any role may perform them; approvals by financial institutions and RERA are external and are reflected as status updates no developer user edits.
 
 ### Escrow Liaison
 
@@ -327,14 +329,7 @@ Escrow Details
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Escrow Management**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * **Escrow Management (Active)**  
-  * Applications  
-  * Documents  
-  * Reports  
-  * Notifications  
-  * Help & Support  
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 * **Selected Record:** Escrow Details
 
 ### Top Bar Status
@@ -599,8 +594,8 @@ Escrow Details
 
 ## User Flow
 
-Differs by role — see the "User Flow" heading within each role's block under [Role Variations](#role-variations). The Escrow Liaison's is rooted at Escrow Details itself rather than at Dashboard.
+Differs between variants — see the "User Flow" heading within each role's block under [Role Variations](#role-variations). The Escrow Liaison's is rooted at Escrow Details itself rather than at Dashboard.
 
 ## Notes
 
-Differs by role — see the "Notes" heading within each role's block under [Role Variations](#role-variations).
+Differs between variants — see the "Notes" heading within each role's block under [Role Variations](#role-variations).

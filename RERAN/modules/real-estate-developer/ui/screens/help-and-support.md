@@ -3,8 +3,9 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
@@ -14,13 +15,13 @@ tags:
 
 # Screen: Help & Support
 
-**Roles:** Principal · Registration Officer · Sales & Disclosure Officer · Escrow Liaison
+**Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
 
 A support center scoped to the viewing role, combining a knowledge base, support tickets, and contact channels. The Registration Officer and Sales & Disclosure Officer share close to the same structure (a role-specific Knowledge Base, Support Tickets, System Status, a "Contact RERA Support" block, and Feedback & Suggestions). The Principal's is close but uses "Help Center" instead of "Knowledge Base" as the section name. The Escrow Liaison's is structurally the most different of the four — see [Role Variations](#role-variations).
 
 ## Purpose
 
-Purpose differs by role — see [Role Variations](#role-variations).
+Purpose differs between variants — see [Role Variations](#role-variations).
 
 ## Layout
 
@@ -35,17 +36,29 @@ Which sidebar menu items are visible, the subtitle, and the layout diagram diffe
 
 ## Sections
 
-Every section is role-specific — see [Role Variations](#role-variations). Notably: only the Escrow Liaison's version has a **Training Resources** section and a **Quick Help Categories** section; only the Principal, Registration Officer, and Sales & Disclosure Officer versions have a **System Status** section and a **Feedback & Suggestions** section, and structure regulatory contact as "RERA Support Center / Live Chat / Emergency Regulatory Support" — the Escrow Liaison's "Contact Support" section instead lists a flat set of contact options with no equivalent breakdown.
+Every section differs between variants — see [Role Variations](#role-variations). Notably: only the variant under the Escrow Liaison heading has a **Training Resources** section and a **Quick Help Categories** section; only the variants under the Principal, Registration Officer and Sales & Disclosure Officer headings have a **System Status** section and a **Feedback & Suggestions** section, and structure regulatory contact as "RERA Support Center / Live Chat / Emergency Regulatory Support" — the Escrow Liaison's "Contact Support" section instead lists a flat set of contact options with no equivalent breakdown.
 
 ## Empty State
 
-Message and actions differ by role — see [Role Variations](#role-variations). Only the Escrow Liaison's version specifies an **Illustration** (a Support Agent) alongside the message, the same pattern seen on that role's Notifications screen; the other three roles specify text only.
+Message and actions differ between variants — see [Role Variations](#role-variations). Only the Escrow Liaison's version specifies an **Illustration** (a Support Agent) alongside the message, the same pattern seen on that role's Notifications screen; the other three roles specify text only.
 
 ## Reused Components
 
-Differs by role — see [Role Variations](#role-variations).
+Differs between variants — see [Role Variations](#role-variations).
 
 ## Role Variations
+
+> **Reframed 2026-08-15 — these are content variants, not access restrictions.** Every variant
+> below is reachable and actionable by all four roles; none of them is withheld from anyone. What
+> the blocks record is that the source material defined this screen more than once, with different
+> KPI sets, filters, columns, actions or empty states each time — differences of *content*, not of
+> permission. Those are preserved verbatim rather than merged, because collapsing them into one
+> screen is a design decision about which variant (or which union of them) is correct, and that is
+> the client's call, not a documentation cleanup. **Flagged for review — see
+> [../README.md](../README.md#per-role-content-variants-flagged-for-review).**
+>
+> The role headings below should now be read as *"the variant the source defined under this role's
+> heading"*, not *"what this role is allowed to see"*.
 
 ### Developer Principal / Director
 
@@ -53,18 +66,7 @@ Differs by role — see [Role Variations](#role-variations).
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Help & Support**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Projects  
-  * Property Registrations  
-  * Sales & Disclosures  
-  * Escrow Management  
-  * Applications  
-  * Documents  
-  * Reports  
-  * Company Profile  
-  * Notifications  
-  * **Help & Support (Active)**
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -345,15 +347,7 @@ Help & Support
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Help & Support**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Projects  
-  * Property Registrations  
-  * Applications  
-  * Documents  
-  * Reports  
-  * Notifications  
-  * **Help & Support (Active)**
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -628,14 +622,7 @@ Help & Support
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Help & Support**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Sales & Disclosures  
-  * Applications  
-  * Documents  
-  * Reports  
-  * Notifications  
-  * **Help & Support (Active)**
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -909,14 +896,7 @@ Help & Support
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Help & Support**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Escrow Management  
-  * Applications  
-  * Documents  
-  * Reports  
-  * Notifications  
-  * **Help & Support (Active)**
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -1145,8 +1125,8 @@ Track Ticket Status
 
 ## User Flow
 
-Differs by role — see the "User Flow" heading within each role's block under [Role Variations](#role-variations). The Escrow Liaison's is a single linear arrow diagram rooted at Help & Support itself, including a Yes/No decision branch ("Issue Resolved?"), rather than the Dashboard-rooted tree diagrams used by the other three roles.
+Differs between variants — see the "User Flow" heading within each role's block under [Role Variations](#role-variations). The Escrow Liaison's is a single linear arrow diagram rooted at Help & Support itself, including a Yes/No decision branch ("Issue Resolved?"), rather than the Dashboard-rooted tree diagrams used by the other three roles.
 
 ## Notes
 
-Differs by role — see the "Notes" heading within each role's block under [Role Variations](#role-variations).
+Differs between variants — see the "Notes" heading within each role's block under [Role Variations](#role-variations).

@@ -3,8 +3,9 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
@@ -14,13 +15,13 @@ tags:
 
 # Screen: Sales & Disclosure Details
 
-**Roles:** Principal · Sales & Disclosure Officer
+**Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
 
 The detail view of a single property sale, opened from [Sales & Disclosures](sales-and-disclosures.md). The Developer Principal / Director sees a read-only view; the Sales & Disclosure Officer sees an editable operational workspace covering the sale from recording through disclosure approval.
 
 ## Purpose
 
-Purpose differs by role — see [Role Variations](#role-variations).
+Purpose differs between variants — see [Role Variations](#role-variations).
 
 ## Layout
 
@@ -33,21 +34,33 @@ Both roles reuse the shared Background + HorizontalBorder component, worded slig
 
 ## Sections
 
-Every section is role-specific — see [Role Variations](#role-variations). The Principal's version is organized around read-only summary cards and history tables; the Sales & Disclosure Officer's is organized around the disclosure workflow itself (editable Sale/Buyer Information, Validation Summary, RERA Queries, Communication History).
+Every section differs between variants — see [Role Variations](#role-variations). The Principal's version is organized around read-only summary cards and history tables; the Sales & Disclosure Officer's is organized around the disclosure workflow itself (editable Sale/Buyer Information, Validation Summary, RERA Queries, Communication History).
 
 ## Empty State
 
-Message and actions differ by role — see [Role Variations](#role-variations).
+Message and actions differ between variants — see [Role Variations](#role-variations).
 
 ## Reused Components
 
-Differs by role — see [Role Variations](#role-variations).
+Differs between variants — see [Role Variations](#role-variations).
 
 ## Validation
 
-Only the Sales & Disclosure Officer's version has a Validation Summary — the Principal's is read-only and has none. See that role's "Validation Summary" block under [Role Variations](#role-variations).
+The variant under the Sales & Disclosure Officer heading has a Validation Summary; the one under the Principal / Director heading has none. A difference between variants, not a permission. See that role's "Validation Summary" block under [Role Variations](#role-variations).
 
 ## Role Variations
+
+> **Reframed 2026-08-15 — these are content variants, not access restrictions.** Every variant
+> below is reachable and actionable by all four roles; none of them is withheld from anyone. What
+> the blocks record is that the source material defined this screen more than once, with different
+> KPI sets, filters, columns, actions or empty states each time — differences of *content*, not of
+> permission. Those are preserved verbatim rather than merged, because collapsing them into one
+> screen is a design decision about which variant (or which union of them) is correct, and that is
+> the client's call, not a documentation cleanup. **Flagged for review — see
+> [../README.md](../README.md#per-role-content-variants-flagged-for-review).**
+>
+> The role headings below should now be read as *"the variant the source defined under this role's
+> heading"*, not *"what this role is allowed to see"*.
 
 ### Developer Principal / Director
 
@@ -56,18 +69,7 @@ Only the Sales & Disclosure Officer's version has a Validation Summary — the P
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Sales & Disclosures**  
 * **Selected Item:** Sales & Disclosure Details *(opened from Sales & Disclosures list)*  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Projects  
-  * Property Registrations  
-  * **Sales & Disclosures (Active)**  
-  * Escrow Management  
-  * Applications  
-  * Documents  
-  * Reports  
-  * Company Profile  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -292,14 +294,7 @@ Sales & Disclosure Details
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Sales & Disclosures**  
 * **Selected Item:** Sales & Disclosure Details *(opened from Sales & Disclosures list)*  
-* **Other Menu Items:**  
-  * Dashboard  
-  * **Sales & Disclosures (Active)**  
-  * Applications  
-  * Documents  
-  * Reports  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -595,8 +590,8 @@ Sales & Disclosure Details
 
 ## User Flow
 
-Differs by role — see the "User Flow" heading within each role's block under [Role Variations](#role-variations).
+Differs between variants — see the "User Flow" heading within each role's block under [Role Variations](#role-variations).
 
 ## Notes
 
-Only the Sales & Disclosure Officer's version has a Notes section — see that role's block under [Role Variations](#role-variations). The Principal's version has no Notes section; its content ends at User Flow.
+Only the variant under the Sales & Disclosure Officer heading has a Notes section — see that role's block under [Role Variations](#role-variations). The Principal's version has no Notes section; its content ends at User Flow.

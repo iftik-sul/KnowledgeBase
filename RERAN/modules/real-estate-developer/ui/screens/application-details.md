@@ -3,8 +3,9 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
@@ -14,15 +15,15 @@ tags:
 
 # Screen: Application Details
 
-**Roles:** Principal · Registration Officer · Sales & Disclosure Officer · Escrow Liaison
+**Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
 
-The detail view of a single application, opened from [Applications](applications.md). The Developer Principal / Director sees a read-only view; the three operational roles (Registration Officer, Sales & Disclosure Officer, Escrow Liaison) see an editable operational workspace scoped to their own application type.
+The detail view of a single application, opened from [Applications](applications.md). The source defines four variants: an overview variant (under the Principal / Director heading) without editing controls, and three operational workspace variants (under the Registration Officer, Sales & Disclosure Officer and Escrow Liaison headings) each oriented to a different application type. All four variants are reachable and actionable by all four roles.
 
 > **Migration note:** in the source material, the Sales & Disclosure Officer's Application Details section (lines 8881–9475) appears far larger than the other three roles' (~275–315 lines each). Once fully read, most of that size is a separate **Documents** (list) screen that is nested under this section at the wrong heading level (`## Screen: Documents` instead of a new `# Screen:` heading) rather than genuine Application Details content. Excluding that misplaced screen, the Sales & Disclosure Officer's actual Application Details content is ~335 lines — comparable to the other three roles. See the report for details; the misplaced Documents content is out of scope for this batch and untouched.
 
 ## Purpose
 
-Purpose differs by role — see [Role Variations](#role-variations).
+Purpose differs between variants — see [Role Variations](#role-variations).
 
 ## Layout
 
@@ -38,7 +39,7 @@ Which sidebar menu items are visible, the subtitle, top-bar page actions, and th
 
 ## Sections
 
-Every section (Application Header, the information cards, Related Project & Property, role-specific detail blocks, Supporting/Submitted Documents, review or query tables, Communication History, and the Activity Timeline) is role-specific — see [Role Variations](#role-variations).
+Every section (Application Header, the information cards, Related Project & Property, role-specific detail blocks, Supporting/Submitted Documents, review or query tables, Communication History, and the Activity Timeline) differs between variants — see [Role Variations](#role-variations).
 
 ## Empty State
 
@@ -46,13 +47,25 @@ Differs by role — and not just in wording. For the Principal, Registration Off
 
 ## Reused Components
 
-Differs by role — see [Role Variations](#role-variations).
+Differs between variants — see [Role Variations](#role-variations).
 
 ## Validation
 
-Only the three operational roles (Registration Officer, Sales & Disclosure Officer, Escrow Liaison) have a Validation Summary section — the Principal's version is read-only and has none. See each role's "Validation Summary" block under [Role Variations](#role-variations). Across all three, the pattern is the same in substance (automatic pre-submission checks, displayed as Passed / Warning / Error, with the primary submit button disabled until all mandatory checks pass) but the specific checks listed differ by role and are preserved verbatim per role rather than merged, since the checks are the actual business rule.
+Three of the four variants (those under the Registration Officer, Sales & Disclosure Officer and Escrow Liaison headings) have a Validation Summary section; the overview variant under the Principal / Director heading has none. This is a difference between variants, not a permission — any role may use any variant. See each role's "Validation Summary" block under [Role Variations](#role-variations). Across all three, the pattern is the same in substance (automatic pre-submission checks, displayed as Passed / Warning / Error, with the primary submit button disabled until all mandatory checks pass) but the specific checks listed differ by role and are preserved verbatim per role rather than merged, since the checks are the actual business rule.
 
 ## Role Variations
+
+> **Reframed 2026-08-15 — these are content variants, not access restrictions.** Every variant
+> below is reachable and actionable by all four roles; none of them is withheld from anyone. What
+> the blocks record is that the source material defined this screen more than once, with different
+> KPI sets, filters, columns, actions or empty states each time — differences of *content*, not of
+> permission. Those are preserved verbatim rather than merged, because collapsing them into one
+> screen is a design decision about which variant (or which union of them) is correct, and that is
+> the client's call, not a documentation cleanup. **Flagged for review — see
+> [../README.md](../README.md#per-role-content-variants-flagged-for-review).**
+>
+> The role headings below should now be read as *"the variant the source defined under this role's
+> heading"*, not *"what this role is allowed to see"*.
 
 ### Developer Principal / Director
 
@@ -61,18 +74,7 @@ Only the three operational roles (Registration Officer, Sales & Disclosure Offic
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Applications**  
 * **Selected Item:** Application Details *(opened from Applications list)*  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Projects  
-  * Property Registrations  
-  * Sales & Disclosures  
-  * Escrow Management  
-  * **Applications (Active)**  
-  * Documents  
-  * Reports  
-  * Company Profile  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -352,15 +354,7 @@ Application Details
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Applications**  
 * **Selected Item:** Application Details *(opened from Applications list)*  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Projects  
-  * Property Registrations  
-  * **Applications (Active)**  
-  * Documents  
-  * Reports  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -636,14 +630,7 @@ Application Details
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Applications**  
 * **Selected Item:** Application Details *(opened from Applications list)*  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Sales & Disclosures  
-  * **Applications (Active)**  
-  * Documents  
-  * Reports  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -942,14 +929,7 @@ Application Details
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Applications**  
 * **Selected Item:** Application Details *(opened from Applications list)*  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Escrow Management  
-  * **Applications (Active)**  
-  * Documents  
-  * Reports  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -1183,8 +1163,8 @@ See [components.md](../components.md) for definitions of every component used on
 
 ## User Flow
 
-Differs by role — see the "User Flow" heading within each role's block under [Role Variations](#role-variations). The Escrow Liaison's is written as a numbered procedural walkthrough rather than the arrow/tree diagrams used by the other three roles.
+Differs between variants — see the "User Flow" heading within each role's block under [Role Variations](#role-variations). The Escrow Liaison's is written as a numbered procedural walkthrough rather than the arrow/tree diagrams used by the other three roles.
 
 ## Notes
 
-Differs by role — see the "Notes" heading within each role's block under [Role Variations](#role-variations).
+Differs between variants — see the "Notes" heading within each role's block under [Role Variations](#role-variations).

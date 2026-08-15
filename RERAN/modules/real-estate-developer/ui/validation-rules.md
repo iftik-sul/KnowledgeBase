@@ -3,8 +3,9 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/modules/real-estate-developer/ui/screens/application-details.md"
   - "RERAN/modules/real-estate-developer/ui/screens/project-details.md"
   - "RERAN/modules/real-estate-developer/ui/screens/property-registration-details.md"
@@ -63,4 +64,4 @@ Everything below this point is validation content that looked like it *might* ge
 
 ## Screens Read-Only, No Validation
 
-The Developer Principal / Director's versions of Application Details, Project Details, Property Registration workflows, and Sales & Disclosure Details have no Validation Summary at all — those screens are read-only for that role, so there is nothing to validate. [company-profile.md](screens/company-profile.md) (Principal only) and [fund-release-request-details.md](screens/fund-release-request-details.md) (Escrow Liaison, but a details/review screen rather than a creation form) likewise have no Validation Summary in the source, even though both allow limited editing while a record is in an editable status — noted in each of those files individually.
+The Developer Principal / Director *variants* of Application Details, Project Details, Property Registration workflows, and Sales & Disclosure Details have no Validation Summary at all — those variants carry no editing controls, so there is nothing to validate. **Corrected 2026-08-15:** this is a property of the variant, not of the role. Access is not gated by role (see [../navigation.md](../navigation.md)); any user may open the operational variants of these screens, Validation Summary included. [company-profile.md](screens/company-profile.md) (a single variant, reachable by all roles) and [fund-release-request-details.md](screens/fund-release-request-details.md) (Escrow Liaison, but a details/review screen rather than a creation form) likewise have no Validation Summary in the source, even though both allow limited editing while a record is in an editable status — noted in each of those files individually.

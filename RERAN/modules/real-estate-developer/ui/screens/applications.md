@@ -3,8 +3,9 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
@@ -14,13 +15,13 @@ tags:
 
 # Screen: Applications
 
-**Roles:** Principal · Registration Officer · Sales & Disclosure Officer · Escrow Liaison
+**Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
 
-A list of every regulatory application relevant to the viewing role. The Developer Principal / Director sees an organization-wide, read-only monitoring view; the three operational roles (Registration Officer, Sales & Disclosure Officer, Escrow Liaison) each see an operational workspace scoped to their own application types, with the ability to continue, edit, respond to, and resubmit applications.
+A list of regulatory applications. The source defines four variants: an organization-wide monitoring variant (under the Principal / Director heading) and three operational workspace variants oriented to different application types, with controls to continue, edit, respond to and resubmit. All four variants are reachable and actionable by all four roles, and every user sees the organization's full application set.
 
 ## Purpose
 
-Purpose differs by role — see [Role Variations](#role-variations).
+Purpose differs between variants — see [Role Variations](#role-variations).
 
 ## Layout
 
@@ -31,21 +32,33 @@ Purpose differs by role — see [Role Variations](#role-variations).
 
 The page uses the shared **Background \+ HorizontalBorder** component.
 
-Which sidebar menu items are visible, the subtitle, top-bar page actions, and the layout diagram differ by role — see [Role Variations](#role-variations). The layout diagram is identical for the Registration Officer, Sales & Disclosure Officer, and Escrow Liaison (Application Summary Cards → Filters & Search → Applications Table → **Pending Actions** → Recent Regulatory Activities → Pagination); the Principal's differs by substituting **Application Analytics** for Pending Actions, reflecting the read-only nature of that role's screen.
+Which sidebar menu items are visible, the subtitle, top-bar page actions, and the layout diagram differ by role — see [Role Variations](#role-variations). The layout diagram is identical for the Registration Officer, Sales & Disclosure Officer, and Escrow Liaison (Application Summary Cards → Filters & Search → Applications Table → **Pending Actions** → Recent Regulatory Activities → Pagination); the variant under the Principal / Director heading differs by substituting **Application Analytics** for Pending Actions, reflecting its monitoring orientation rather than any access limit.
 
 ## Sections
 
-Every numbered section (Application Summary Cards, Filters, the Applications Table and its Row Actions, Pending Actions / Application Analytics, and Recent Regulatory Activities) is role-specific — see [Role Variations](#role-variations).
+Every numbered section (Application Summary Cards, Filters, the Applications Table and its Row Actions, Pending Actions / Application Analytics, and Recent Regulatory Activities) differs between variants — see [Role Variations](#role-variations).
 
 ## Empty State
 
-Message and actions differ by role — see [Role Variations](#role-variations).
+Message and actions differ between variants — see [Role Variations](#role-variations).
 
 ## Reused Components
 
-Differs by role — see [Role Variations](#role-variations).
+Differs between variants — see [Role Variations](#role-variations).
 
 ## Role Variations
+
+> **Reframed 2026-08-15 — these are content variants, not access restrictions.** Every variant
+> below is reachable and actionable by all four roles; none of them is withheld from anyone. What
+> the blocks record is that the source material defined this screen more than once, with different
+> KPI sets, filters, columns, actions or empty states each time — differences of *content*, not of
+> permission. Those are preserved verbatim rather than merged, because collapsing them into one
+> screen is a design decision about which variant (or which union of them) is correct, and that is
+> the client's call, not a documentation cleanup. **Flagged for review — see
+> [../README.md](../README.md#per-role-content-variants-flagged-for-review).**
+>
+> The role headings below should now be read as *"the variant the source defined under this role's
+> heading"*, not *"what this role is allowed to see"*.
 
 ### Developer Principal / Director
 
@@ -53,18 +66,7 @@ Differs by role — see [Role Variations](#role-variations).
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Applications**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Projects  
-  * Property Registrations  
-  * Sales & Disclosures  
-  * Escrow Management  
-  * **Applications (Active)**  
-  * Documents  
-  * Reports  
-  * Company Profile  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -267,15 +269,7 @@ Application Details
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Applications**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Projects  
-  * Property Registrations  
-  * **Applications (Active)**  
-  * Documents  
-  * Reports  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -534,14 +528,7 @@ This will be the operational workspace where the Project Registration Officer ca
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Applications**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Sales & Disclosures  
-  * **Applications (Active)**  
-  * Documents  
-  * Reports  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -782,14 +769,7 @@ Applications
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Applications**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Escrow Management  
-  * **Applications (Active)**  
-  * Documents  
-  * Reports  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -1031,8 +1011,8 @@ Track the approval process until the application is completed
 
 ## User Flow
 
-Differs by role — see the "User Flow" heading within each role's block under [Role Variations](#role-variations).
+Differs between variants — see the "User Flow" heading within each role's block under [Role Variations](#role-variations).
 
 ## Notes
 
-Differs by role — see the "Notes" heading within each role's block under [Role Variations](#role-variations). Only the Project Registration Officer's version includes a "Next Screen" preview of the Application Details screen; this is preserved verbatim in its block above.
+Differs between variants — see the "Notes" heading within each role's block under [Role Variations](#role-variations). Only the Project Registration Officer's version includes a "Next Screen" preview of the Application Details screen; this is preserved verbatim in its block above.

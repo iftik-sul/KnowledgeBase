@@ -3,8 +3,9 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
@@ -14,13 +15,13 @@ tags:
 
 # Screen: Dashboard
 
-**Roles:** Principal · Registration Officer · Sales & Disclosure Officer · Escrow Liaison
+**Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
 
 The Dashboard is the landing screen shown immediately after login. Its chrome (sidebar mechanics, top bar title, search) is shared; the Purpose, Layout, section content, Empty State, and Reused Components are role-specific and are documented in full under [Role Variations](#role-variations).
 
 ## Purpose
 
-Purpose differs by role — see [Role Variations](#role-variations).
+Purpose differs between variants — see [Role Variations](#role-variations).
 
 ## Layout
 
@@ -33,7 +34,7 @@ Which sidebar menu items are visible, the welcome subtitle, top-bar page actions
 
 ## Sections
 
-Every numbered section (Welcome Banner, KPI Cards, Quick Actions, and the role-specific tables and feeds below them) is role-specific — see [Role Variations](#role-variations).
+Every numbered section (Welcome Banner, KPI Cards, Quick Actions, and the role-specific tables and feeds below them) differs between variants — see [Role Variations](#role-variations).
 
 ## Empty State
 
@@ -41,9 +42,21 @@ Empty state message and actions differ by role — see [Role Variations](#role-v
 
 ## Reused Components
 
-Differs by role — see [Role Variations](#role-variations).
+Differs between variants — see [Role Variations](#role-variations).
 
 ## Role Variations
+
+> **Reframed 2026-08-15 — these are content variants, not access restrictions.** Every variant
+> below is reachable and actionable by all four roles; none of them is withheld from anyone. What
+> the blocks record is that the source material defined this screen more than once, with different
+> KPI sets, filters, columns, actions or empty states each time — differences of *content*, not of
+> permission. Those are preserved verbatim rather than merged, because collapsing them into one
+> screen is a design decision about which variant (or which union of them) is correct, and that is
+> the client's call, not a documentation cleanup. **Flagged for review — see
+> [../README.md](../README.md#per-role-content-variants-flagged-for-review).**
+>
+> The role headings below should now be read as *"the variant the source defined under this role's
+> heading"*, not *"what this role is allowed to see"*.
 
 ### Developer Principal / Director
 
@@ -51,18 +64,7 @@ Differs by role — see [Role Variations](#role-variations).
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Dashboard**  
-* **Other Menu Items:**  
-  * Dashboard *(Active)*  
-  * Projects  
-  * Property Registrations  
-  * Sales & Disclosures  
-  * Escrow Management  
-  * Applications  
-  * Documents  
-  * Reports  
-  * Company Profile  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -254,15 +256,7 @@ This dashboard is designed for **executive monitoring**, allowing the Developer 
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Dashboard**  
-* **Other Menu Items:**  
-  * **Dashboard (Active)**  
-  * Projects  
-  * Property Registrations  
-  * Applications  
-  * Documents  
-  * Reports  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -502,14 +496,7 @@ Dashboard
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Dashboard**  
-* **Other Menu Items:**  
-  * **Dashboard (Active)**  
-  * Sales & Disclosures  
-  * Applications  
-  * Documents  
-  * Reports  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -748,14 +735,7 @@ Dashboard
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Dashboard**  
-* **Other Menu Items:**  
-  * **Dashboard (Active)**  
-  * Escrow Management  
-  * Applications  
-  * Documents  
-  * Reports  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 

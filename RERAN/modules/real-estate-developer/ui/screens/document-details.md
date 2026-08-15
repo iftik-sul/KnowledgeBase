@@ -3,8 +3,9 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
@@ -14,13 +15,13 @@ tags:
 
 # Screen: Document Details
 
-**Roles:** Principal · Registration Officer · Sales & Disclosure Officer · Escrow Liaison
+**Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
 
-The detail view of a single document, opened from the Documents list. The Developer Principal / Director sees a read-only master viewer; the three operational roles (Registration Officer, Sales & Disclosure Officer, Escrow Liaison) see an editable operational workspace for managing that document through its verification lifecycle.
+The detail view of a single document, opened from the Documents list. The source defines four variants: a master viewer (under the Principal / Director heading) and three operational workspace variants for managing a document through its verification lifecycle. All four are reachable and actionable by all four roles.
 
 ## Purpose
 
-Purpose differs by role — see [Role Variations](#role-variations).
+Purpose differs between variants — see [Role Variations](#role-variations).
 
 ## Layout
 
@@ -36,7 +37,7 @@ Which sidebar menu items are visible, the subtitle, top-bar page actions, and th
 
 ## Sections
 
-Every section (Document Header, Document Preview, Document Information, Linked Records, verification/review content, Version History, query and communication tables, and the Activity Timeline) is role-specific — see [Role Variations](#role-variations).
+Every section (Document Header, Document Preview, Document Information, Linked Records, verification/review content, Version History, query and communication tables, and the Activity Timeline) differs between variants — see [Role Variations](#role-variations).
 
 ## Empty State
 
@@ -44,9 +45,21 @@ Differs by role — and not just in wording. For the Principal, Registration Off
 
 ## Reused Components
 
-Differs by role — see [Role Variations](#role-variations).
+Differs between variants — see [Role Variations](#role-variations).
 
 ## Role Variations
+
+> **Reframed 2026-08-15 — these are content variants, not access restrictions.** Every variant
+> below is reachable and actionable by all four roles; none of them is withheld from anyone. What
+> the blocks record is that the source material defined this screen more than once, with different
+> KPI sets, filters, columns, actions or empty states each time — differences of *content*, not of
+> permission. Those are preserved verbatim rather than merged, because collapsing them into one
+> screen is a design decision about which variant (or which union of them) is correct, and that is
+> the client's call, not a documentation cleanup. **Flagged for review — see
+> [../README.md](../README.md#per-role-content-variants-flagged-for-review).**
+>
+> The role headings below should now be read as *"the variant the source defined under this role's
+> heading"*, not *"what this role is allowed to see"*.
 
 ### Developer Principal / Director
 
@@ -55,18 +68,7 @@ Differs by role — see [Role Variations](#role-variations).
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Documents**  
 * **Selected Item:** Document Details *(opened from Documents list)*  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Projects  
-  * Property Registrations  
-  * Sales & Disclosures  
-  * Escrow Management  
-  * Applications  
-  * **Documents (Active)**  
-  * Reports  
-  * Company Profile  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -325,15 +327,7 @@ Document Details
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Documents**  
 * **Selected Item:** Document Details *(opened from Documents list)*  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Projects  
-  * Property Registrations  
-  * Applications  
-  * **Documents (Active)**  
-  * Reports  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -639,14 +633,7 @@ This will be the Project Registration Officer's reporting workspace, allowing of
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Documents**  
 * **Selected Item:** Document Details *(opened from Documents list)*  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Sales & Disclosures  
-  * Applications  
-  * **Documents (Active)**  
-  * Reports  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -965,14 +952,7 @@ Document Details
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Documents**  
 * **Selected Item:** **Document Details** *(opened from Documents list)*  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Escrow Management  
-  * Applications  
-  * **Documents (Active)**  
-  * Reports  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -1258,8 +1238,8 @@ Save Changes / Submit Response
 
 ## User Flow
 
-Differs by role — see the "User Flow" heading within each role's block under [Role Variations](#role-variations). The Escrow Liaison's is a single linear arrow diagram describing the review procedure rather than the Dashboard-rooted tree diagrams used by the other three roles.
+Differs between variants — see the "User Flow" heading within each role's block under [Role Variations](#role-variations). The Escrow Liaison's is a single linear arrow diagram describing the review procedure rather than the Dashboard-rooted tree diagrams used by the other three roles.
 
 ## Notes
 
-Differs by role — see the "Notes" heading within each role's block under [Role Variations](#role-variations). Only the Project Registration Officer's version includes a "Next Screen" preview of the Reports screen; this is preserved verbatim in its block above.
+Differs between variants — see the "Notes" heading within each role's block under [Role Variations](#role-variations). Only the Project Registration Officer's version includes a "Next Screen" preview of the Reports screen; this is preserved verbatim in its block above.

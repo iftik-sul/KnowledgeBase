@@ -3,8 +3,9 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
@@ -14,13 +15,17 @@ tags:
 
 # Screen: Escrow Management
 
-**Roles:** Principal · Escrow Liaison
+**Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
 
-A list of escrow accounts. The Developer Principal / Director has read-only, organization-wide oversight; the Escrow Liaison has an operational workspace for registering escrow accounts and initiating fund release requests.
+A list of escrow accounts. The source defines two variants: an organization-wide oversight variant (under the Principal / Director heading) and an operational workspace (under the Escrow Liaison heading) for registering escrow accounts and initiating fund release requests. Both variants are reachable and actionable by all four roles — the difference is in what the variant shows, not in who may open it.
+
+> **The escrow balances on this screen are not a RERA-fee account.** The balance, milestone and fund-release figures shown here belong to the developer's **project escrow account** — the regulated holding account for sale proceeds, deposits and construction-milestone releases that is the subject matter of Services [#8](../../service-flows/service-08-activate-escrow-account.md)–[#12](../../service-flows/service-12-receive-escrow-payment.md) and [#20](../../service-flows/service-20-deposit-mortgage-into-escrow.md)–[#21](../../service-flows/service-21-cancel-bank-guarantee.md). It is a product feature, entirely separate from how RERA's *service fees* are paid.
+>
+> RERA service fees moved to per-transaction payment through the shared platform payment gateway on 2026-08-15 (issue #58); there is no standing or pre-funded RERA-fee account for developers. That change does not touch anything on this screen. A balance, a top-up, or a debit shown here is escrow, not fees — do not read it as a retired fee-account artifact and remove it.
 
 ## Purpose
 
-Purpose differs by role — see [Role Variations](#role-variations).
+Purpose differs between variants — see [Role Variations](#role-variations).
 
 ## Layout
 
@@ -35,17 +40,29 @@ The two Layout diagrams differ substantially: the Principal's is a 6-step flow i
 
 ## Sections
 
-Every section is role-specific — see [Role Variations](#role-variations). The Escrow Liaison's version has no KPI/summary-card section, and organizes filters and status badges differently from the Principal's.
+Every section differs between variants — see [Role Variations](#role-variations). The Escrow Liaison's version has no KPI/summary-card section, and organizes filters and status badges differently from the Principal's.
 
 ## Empty State
 
-Message and actions differ by role — see [Role Variations](#role-variations). Only the Escrow Liaison's version specifies an illustration (Escrow Account), consistent with the pattern seen on that role's other screens.
+Message and actions differ between variants — see [Role Variations](#role-variations). Only the Escrow Liaison's version specifies an illustration (Escrow Account), consistent with the pattern seen on that role's other screens.
 
 ## Reused Components
 
-Differs by role — see [Role Variations](#role-variations).
+Differs between variants — see [Role Variations](#role-variations).
 
 ## Role Variations
+
+> **Reframed 2026-08-15 — these are content variants, not access restrictions.** Every variant
+> below is reachable and actionable by all four roles; none of them is withheld from anyone. What
+> the blocks record is that the source material defined this screen more than once, with different
+> KPI sets, filters, columns, actions or empty states each time — differences of *content*, not of
+> permission. Those are preserved verbatim rather than merged, because collapsing them into one
+> screen is a design decision about which variant (or which union of them) is correct, and that is
+> the client's call, not a documentation cleanup. **Flagged for review — see
+> [../README.md](../README.md#per-role-content-variants-flagged-for-review).**
+>
+> The role headings below should now be read as *"the variant the source defined under this role's
+> heading"*, not *"what this role is allowed to see"*.
 
 ### Developer Principal / Director
 
@@ -53,18 +70,7 @@ Differs by role — see [Role Variations](#role-variations).
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Escrow Management**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Projects  
-  * Property Registrations  
-  * Sales & Disclosures  
-  * **Escrow Management (Active)**  
-  * Applications  
-  * Documents  
-  * Reports  
-  * Company Profile  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -148,7 +154,7 @@ Each row includes:
 
 * View Details
 
-This screen is read-only for the Developer Principal.
+This variant provides no editing controls; the operational variant below does, and any role may use either.
 
 ### Escrow Status Badges
 
@@ -245,14 +251,7 @@ Escrow Details
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Escrow Management**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * **Escrow Management (Active)**  
-  * Applications  
-  * Documents  
-  * Reports  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -440,8 +439,8 @@ Escrow Management
 
 ## User Flow
 
-Differs by role — see the "User Flow" heading within each role's block under [Role Variations](#role-variations).
+Differs between variants — see the "User Flow" heading within each role's block under [Role Variations](#role-variations).
 
 ## Notes
 
-Differs by role — see the "Notes" heading within each role's block under [Role Variations](#role-variations).
+Differs between variants — see the "Notes" heading within each role's block under [Role Variations](#role-variations).

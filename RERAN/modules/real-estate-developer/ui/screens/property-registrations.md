@@ -3,8 +3,9 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
@@ -14,13 +15,13 @@ tags:
 
 # Screen: Property Registrations
 
-**Roles:** Principal · Registration Officer
+**Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
 
 A list of property registrations. The Developer Principal / Director has read-only, organization-wide visibility; the Registration Officer has an operational workspace for creating, editing, submitting, and correcting registrations under approved projects.
 
 ## Purpose
 
-Purpose differs by role — see [Role Variations](#role-variations).
+Purpose differs between variants — see [Role Variations](#role-variations).
 
 ## Layout
 
@@ -35,17 +36,29 @@ Both roles' Layout diagrams share the same core shape (Top Bar → Registration 
 
 ## Sections
 
-Every section (Registration Summary Cards, Filters, the Property Registrations Table and its Row Actions, Registration Status Badges, Bulk Actions — Registration Officer only — and the closing insights section) is role-specific — see [Role Variations](#role-variations).
+Every section (Registration Summary Cards, Filters, the Property Registrations Table and its Row Actions, Registration Status Badges, Bulk Actions, in the Registration Officer variant only, and the closing insights section) differs between variants — see [Role Variations](#role-variations).
 
 ## Empty State
 
-Message and actions differ by role — see [Role Variations](#role-variations).
+Message and actions differ between variants — see [Role Variations](#role-variations).
 
 ## Reused Components
 
-Differs by role — see [Role Variations](#role-variations).
+Differs between variants — see [Role Variations](#role-variations).
 
 ## Role Variations
+
+> **Reframed 2026-08-15 — these are content variants, not access restrictions.** Every variant
+> below is reachable and actionable by all four roles; none of them is withheld from anyone. What
+> the blocks record is that the source material defined this screen more than once, with different
+> KPI sets, filters, columns, actions or empty states each time — differences of *content*, not of
+> permission. Those are preserved verbatim rather than merged, because collapsing them into one
+> screen is a design decision about which variant (or which union of them) is correct, and that is
+> the client's call, not a documentation cleanup. **Flagged for review — see
+> [../README.md](../README.md#per-role-content-variants-flagged-for-review).**
+>
+> The role headings below should now be read as *"the variant the source defined under this role's
+> heading"*, not *"what this role is allowed to see"*.
 
 ### Developer Principal / Director
 
@@ -53,18 +66,7 @@ Differs by role — see [Role Variations](#role-variations).
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Property Registrations**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Projects  
-  * **Property Registrations (Active)**  
-  * Sales & Disclosures  
-  * Escrow Management  
-  * Applications  
-  * Documents  
-  * Reports  
-  * Company Profile  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -237,15 +239,7 @@ It serves as the primary read-only review page for the Developer Principal / Dir
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Property Registrations**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Projects  
-  * **Property Registrations (Active)**  
-  * Applications  
-  * Documents  
-  * Reports  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -450,8 +444,8 @@ Property Registrations
 
 ## User Flow
 
-Differs by role — see the "User Flow" heading within each role's block under [Role Variations](#role-variations).
+Differs between variants — see the "User Flow" heading within each role's block under [Role Variations](#role-variations).
 
 ## Notes
 
-Only the Registration Officer's version has an explicit Notes section — see that role's block under [Role Variations](#role-variations). The Principal's version has no Notes section; it closes instead with a "Next Screen" preview of Property Registration Details, preserved verbatim in its block above.
+Only the variant under the Registration Officer heading has an explicit Notes section — see that role's block under [Role Variations](#role-variations). The Principal's version has no Notes section; it closes instead with a "Next Screen" preview of Property Registration Details, preserved verbatim in its block above.

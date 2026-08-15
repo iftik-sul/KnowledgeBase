@@ -3,8 +3,9 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
@@ -14,13 +15,13 @@ tags:
 
 # Screen: Reports
 
-**Roles:** Principal · Registration Officer · Sales & Disclosure Officer · Escrow Liaison
+**Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
 
 A reporting hub scoped to the viewing role. The Developer Principal / Director gets an executive business-intelligence view across the whole organization; the three operational roles (Registration Officer, Sales & Disclosure Officer, Escrow Liaison) each get an operational reporting workspace scoped to their own domain (registrations, sales disclosures, or escrow, respectively).
 
 ## Purpose
 
-Purpose differs by role — see [Role Variations](#role-variations).
+Purpose differs between variants — see [Role Variations](#role-variations).
 
 ## Layout
 
@@ -35,17 +36,29 @@ Which sidebar menu items are visible, the subtitle, top-bar page actions, and th
 
 ## Sections
 
-Every section (Report Summary Cards, Report Categories, Report Filters, Saved Reports, Report Templates, Recent Generated Reports, and the closing insights/scheduling section) is role-specific — see [Role Variations](#role-variations).
+Every section (Report Summary Cards, Report Categories, Report Filters, Saved Reports, Report Templates, Recent Generated Reports, and the closing insights/scheduling section) differs between variants — see [Role Variations](#role-variations).
 
 ## Empty State
 
-Message and actions differ by role — see [Role Variations](#role-variations). The Escrow Liaison's version omits the "Message" sub-heading used by the other three roles, presenting the message text directly under "Empty State"; this is preserved as-is.
+Message and actions differ between variants — see [Role Variations](#role-variations). The Escrow Liaison's version omits the "Message" sub-heading used by the other three roles, presenting the message text directly under "Empty State"; this is preserved as-is.
 
 ## Reused Components
 
-Differs by role — see [Role Variations](#role-variations).
+Differs between variants — see [Role Variations](#role-variations).
 
 ## Role Variations
+
+> **Reframed 2026-08-15 — these are content variants, not access restrictions.** Every variant
+> below is reachable and actionable by all four roles; none of them is withheld from anyone. What
+> the blocks record is that the source material defined this screen more than once, with different
+> KPI sets, filters, columns, actions or empty states each time — differences of *content*, not of
+> permission. Those are preserved verbatim rather than merged, because collapsing them into one
+> screen is a design decision about which variant (or which union of them) is correct, and that is
+> the client's call, not a documentation cleanup. **Flagged for review — see
+> [../README.md](../README.md#per-role-content-variants-flagged-for-review).**
+>
+> The role headings below should now be read as *"the variant the source defined under this role's
+> heading"*, not *"what this role is allowed to see"*.
 
 ### Developer Principal / Director
 
@@ -53,18 +66,7 @@ Differs by role — see [Role Variations](#role-variations).
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Reports**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Projects  
-  * Property Registrations  
-  * Sales & Disclosures  
-  * Escrow Management  
-  * Applications  
-  * Documents  
-  * **Reports (Active)**  
-  * Company Profile  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -382,15 +384,7 @@ Reports
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Reports**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Projects  
-  * Property Registrations  
-  * Applications  
-  * Documents  
-  * **Reports (Active)**  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -667,14 +661,7 @@ Reports
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Reports**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Sales & Disclosures  
-  * Applications  
-  * Documents  
-  * **Reports (Active)**  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -968,14 +955,7 @@ Reports
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Reports**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Escrow Management  
-  * Applications  
-  * Documents  
-  * **Reports (Active)**  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -1258,8 +1238,8 @@ Export / Download / Schedule Report
 
 ## User Flow
 
-Differs by role — see the "User Flow" heading within each role's block under [Role Variations](#role-variations). The Escrow Liaison's is a single linear arrow diagram rooted at Reports itself rather than the Dashboard-rooted tree diagrams used by the other three roles.
+Differs between variants — see the "User Flow" heading within each role's block under [Role Variations](#role-variations). The Escrow Liaison's is a single linear arrow diagram rooted at Reports itself rather than the Dashboard-rooted tree diagrams used by the other three roles.
 
 ## Notes
 
-Differs by role — see the "Notes" heading within each role's block under [Role Variations](#role-variations).
+Differs between variants — see the "Notes" heading within each role's block under [Role Variations](#role-variations).

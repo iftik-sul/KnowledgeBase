@@ -3,8 +3,9 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
@@ -14,13 +15,13 @@ tags:
 
 # Screen: Sales & Disclosures
 
-**Roles:** Principal · Sales & Disclosure Officer
+**Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
 
 A list of property sales and their disclosure status. The Developer Principal / Director has read-only, organization-wide oversight; the Sales & Disclosure Officer has an operational workspace for recording sales, preparing disclosures, and progressing them through RERA review.
 
 ## Purpose
 
-Purpose differs by role — see [Role Variations](#role-variations).
+Purpose differs between variants — see [Role Variations](#role-variations).
 
 ## Layout
 
@@ -35,17 +36,29 @@ Both roles' Layout diagrams share the same core shape (Top Bar → Sales Summary
 
 ## Sections
 
-Every section (Sales Summary Cards, Filters, the Sales & Disclosures Table and its Row Actions, Sales/Disclosure Status Badges, Bulk Actions — Sales & Disclosure Officer only — and the closing analytics/performance section) is role-specific — see [Role Variations](#role-variations).
+Every section (Sales Summary Cards, Filters, the Sales & Disclosures Table and its Row Actions, Sales/Disclosure Status Badges, Bulk Actions, in the Sales & Disclosure Officer variant only, and the closing analytics/performance section) differs between variants — see [Role Variations](#role-variations).
 
 ## Empty State
 
-Message and actions differ by role — see [Role Variations](#role-variations).
+Message and actions differ between variants — see [Role Variations](#role-variations).
 
 ## Reused Components
 
-Differs by role — see [Role Variations](#role-variations).
+Differs between variants — see [Role Variations](#role-variations).
 
 ## Role Variations
+
+> **Reframed 2026-08-15 — these are content variants, not access restrictions.** Every variant
+> below is reachable and actionable by all four roles; none of them is withheld from anyone. What
+> the blocks record is that the source material defined this screen more than once, with different
+> KPI sets, filters, columns, actions or empty states each time — differences of *content*, not of
+> permission. Those are preserved verbatim rather than merged, because collapsing them into one
+> screen is a design decision about which variant (or which union of them) is correct, and that is
+> the client's call, not a documentation cleanup. **Flagged for review — see
+> [../README.md](../README.md#per-role-content-variants-flagged-for-review).**
+>
+> The role headings below should now be read as *"the variant the source defined under this role's
+> heading"*, not *"what this role is allowed to see"*.
 
 ### Developer Principal / Director
 
@@ -53,18 +66,7 @@ Differs by role — see [Role Variations](#role-variations).
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Sales & Disclosures**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Projects  
-  * Property Registrations  
-  * **Sales & Disclosures (Active)**  
-  * Escrow Management  
-  * Applications  
-  * Documents  
-  * Reports  
-  * Company Profile  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -231,14 +233,7 @@ Sales & Disclosure Details
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Sales & Disclosures**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * **Sales & Disclosures (Active)**  
-  * Applications  
-  * Documents  
-  * Reports  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -458,8 +453,8 @@ Sales & Disclosures
 
 ## User Flow
 
-Differs by role — see the "User Flow" heading within each role's block under [Role Variations](#role-variations).
+Differs between variants — see the "User Flow" heading within each role's block under [Role Variations](#role-variations).
 
 ## Notes
 
-Differs by role — see the "Notes" heading within each role's block under [Role Variations](#role-variations).
+Differs between variants — see the "Notes" heading within each role's block under [Role Variations](#role-variations).

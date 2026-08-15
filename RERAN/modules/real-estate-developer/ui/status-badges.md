@@ -3,8 +3,9 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/modules/real-estate-developer/ui/screens/applications.md"
   - "RERAN/modules/real-estate-developer/ui/screens/projects.md"
   - "RERAN/modules/real-estate-developer/ui/screens/property-registrations.md"
@@ -28,7 +29,7 @@ The status vocabulary for this module.
 
 **No colour coding survived migration.** The source material never specifies actual colours or hex values for any status badge — every screen only says something like "use the shared status badge component," "badge colours follow the existing RERA design system," or "use the platform's standard status badges." The one exception ([property-registrations.md](screens/property-registrations.md), Principal's version) says "Badge colors follow the existing RERA design system" — a pointer to a design system that isn't itself documented in this source. There is nothing to consolidate on the colour side; only the state *labels* are consolidated below.
 
-**Conflicts are reported, not resolved**, per this batch's instructions. Where two screens (or two role variants of the same screen) list different states for what is nominally the same status, both lists are shown in full and the difference is called out — no state has been silently added, dropped, or renamed to make the lists agree.
+**Conflicts are reported, not resolved**, per this batch's instructions. **Note 2026-08-15:** where this file contrasts "role variants" of a screen, that names the heading the source defined a list under — not who may see it. All four roles reach every screen and every status (see [../navigation.md](../navigation.md)); the disagreements below are unreconciled source variance awaiting the merge decision flagged in [README.md](README.md#per-role-content-variants-flagged-for-review). Where two screens (or two role variants of the same screen) list different states for what is nominally the same status, both lists are shown in full and the difference is called out — no state has been silently added, dropped, or renamed to make the lists agree.
 
 **Status badges vs. workflow stages.** This file covers the *status badge* shown on a record in a table or header (e.g. "Approved," "Rejected"). It does **not** cover the stage names used by the horizontal Progress Tracker component on form/detail screens (e.g. "Initial Validation → Technical Review → Compliance Review → Final Approval"), which describe a fixed pipeline of steps rather than a badge vocabulary. Those stage lists are screen-specific and remain in each screen's own Layout/Sections content.
 
@@ -147,7 +148,7 @@ The Escrow Liaison's list is the odd one out twice over: it has no "Draft" or "E
 
 ### Company / RERA License Status
 
-[company-profile.md](screens/company-profile.md) (Principal only — this screen has no other role's version to compare against, so no conflict is possible): Active, Pending Renewal, Expiring Soon, Suspended, Expired (5 states), covering the developer organization's own RERA license, distinct from any project's or application's status. Found under a plain "Status badges:" prose lead-in rather than a heading, easy to miss on a first pass of the source — added here for completeness.
+[company-profile.md](screens/company-profile.md) (a single variant, reachable by all four roles — the source defined no second version to compare against, so no conflict is possible): Active, Pending Renewal, Expiring Soon, Suspended, Expired (5 states), covering the developer organization's own RERA license, distinct from any project's or application's status. Found under a plain "Status badges:" prose lead-in rather than a heading, easy to miss on a first pass of the source — added here for completeness.
 
 ### Report Generation Status
 

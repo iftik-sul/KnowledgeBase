@@ -3,8 +3,9 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/modules/real-estate-developer/ui/screens/dashboard.md"
   - "RERAN/modules/real-estate-developer/ui/screens/applications.md"
   - "RERAN/modules/real-estate-developer/ui/screens/application-details.md"
@@ -40,7 +41,7 @@ UI components reused across screens in this module, gathered from every "Reused 
 
 ### Left Sidebar
 
-The persistent navigation sidebar shown on every operational screen (referred to in each screen's own Layout section as the "Developer Operational Sidebar," with role-scoped visible/active menu items). Named "Left Sidebar" in 46 of the 49 Reused Components lists that mention it.
+The persistent navigation sidebar shown on every operational screen (referred to in each screen's own Layout section as the "Developer Operational Sidebar"). **Corrected 2026-08-15:** the sidebar is no longer role-scoped — one identical menu is shown to all four roles, with only the *active* item varying by screen. See [../navigation.md](../navigation.md).. Named "Left Sidebar" in 46 of the 49 Reused Components lists that mention it.
 
 **Naming divergence:** three lists — the Escrow Liaison's variants of [help-and-support.md](screens/help-and-support.md), [notifications.md](screens/notifications.md), and [reports.md](screens/reports.md) — name it "Developer Operational Sidebar" directly instead of "Left Sidebar." Same component; the Escrow Liaison's Reused Components lists on those three screens consistently use the specific instance name rather than the generic component name used everywhere else.
 
@@ -48,7 +49,7 @@ The persistent navigation sidebar shown on every operational screen (referred to
 
 The page header: title, subtitle, search bar, and page-specific actions, built on a shared background/border treatment referenced across nearly every screen as "the shared Background + HorizontalBorder component."
 
-**Naming divergence, not just cosmetic:** appears as "Top Bar" (bare, mostly on Principal's read-only screens — 15 mentions), "Top Bar (Background + HorizontalBorder)" (21 mentions), "Top Bar (**Background + HorizontalBorder**)" (bold variant, 8 mentions), and with a missing space — "Top Bar (Background +HorizontalBorder)" / "Top Bar (**Background +HorizontalBorder**)" — in 2 mentions (both on operational-role variants of [application-details.md](screens/application-details.md) and [escrow-management.md](screens/escrow-management.md); likely typos rather than a deliberate distinct styling, but preserved as written since this batch's rules don't permit silently "fixing" source wording). The same three Escrow Liaison lists noted under Left Sidebar above list "Background + HorizontalBorder" as if it were a **separate** component from "Top Bar," rather than a styling note on the Top Bar entry — a real structural inconsistency, not just a wording one.
+**Naming divergence, not just cosmetic:** appears as "Top Bar" (bare, mostly on the Principal / Director variants — 15 mentions), "Top Bar (Background + HorizontalBorder)" (21 mentions), "Top Bar (**Background + HorizontalBorder**)" (bold variant, 8 mentions), and with a missing space — "Top Bar (Background +HorizontalBorder)" / "Top Bar (**Background +HorizontalBorder**)" — in 2 mentions (both on operational-role variants of [application-details.md](screens/application-details.md) and [escrow-management.md](screens/escrow-management.md); likely typos rather than a deliberate distinct styling, but preserved as written since this batch's rules don't permit silently "fixing" source wording). The same three Escrow Liaison lists noted under Left Sidebar above list "Background + HorizontalBorder" as if it were a **separate** component from "Top Bar," rather than a styling note on the Top Bar entry — a real structural inconsistency, not just a wording one.
 
 ### Search Bar
 
@@ -146,7 +147,7 @@ The tab navigation used on the Escrow Liaison's detail screens (Overview / Fund 
 
 ### Confirmation Dialogs
 
-Modal confirmation prompts, mentioned only on Escrow Liaison operational screens (5 mentions — [applications.md](screens/applications.md), [document-details.md](screens/document-details.md), [documents.md](screens/documents.md), [fund-release-request-details.md](screens/fund-release-request-details.md)). No other role's Reused Components lists mention this component at all, even on screens with similarly consequential actions (e.g. submitting an application) — plausibly an oversight in the source rather than a deliberate role restriction, but not assumed either way here.
+Modal confirmation prompts, mentioned only on Escrow Liaison operational screens (5 mentions — [applications.md](screens/applications.md), [document-details.md](screens/document-details.md), [documents.md](screens/documents.md), [fund-release-request-details.md](screens/fund-release-request-details.md)). No other role's Reused Components lists mention this component at all, even on screens with similarly consequential actions (e.g. submitting an application) — plausibly an oversight in the source rather than a deliberate omission, but not assumed either way here. Either way it is not an access rule — all four roles reach every screen.
 
 ### Overflow Action Menu
 

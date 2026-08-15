@@ -3,8 +3,9 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
@@ -14,15 +15,15 @@ tags:
 
 # Screen: Documents
 
-**Roles:** Principal · Registration Officer · Escrow Liaison
+**Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
 
-A list of documents scoped to the viewing role. The Developer Principal / Director sees a read-only, organization-wide repository; the Registration Officer and Escrow Liaison each see an operational workspace scoped to their own document categories, with the ability to upload, replace, and resubmit documents.
+A list of documents. The source defines four variants: an organization-wide repository (under the Principal / Director heading) and three operational workspace variants — registration, escrow, and sales & disclosure — each with its own document categories and the ability to upload, replace and resubmit. All four are reachable and actionable by all four roles, over the organization's full document set.
 
-> **Sales & Disclosure Officer:** not documented here. The source material has no top-level Documents screen for this role — see the open question in [../README.md](../README.md). During Batch 2 migration, a `## Screen: Documents` fragment for the Sales & Disclosure Officer was found nested at the wrong heading level inside that role's Application Details section (source lines 9218–9475); it was left untouched there and is not included in this merge, per this issue's instruction not to silently correct the matrix.
+> **All four variants are now documented here.** The Sales & Disclosure Officer variant was merged in on 2026-08-15 — see its block under [Role Variations](#role-variations) for the provenance note.
 
 ## Purpose
 
-Purpose differs by role — see [Role Variations](#role-variations).
+Purpose differs between variants — see [Role Variations](#role-variations).
 
 ## Layout
 
@@ -33,21 +34,33 @@ Purpose differs by role — see [Role Variations](#role-variations).
 
 The page uses the shared **Background \+ HorizontalBorder** component.
 
-Which sidebar menu items are visible, the subtitle, top-bar page actions, and the layout diagram differ by role — see [Role Variations](#role-variations). The layout diagram is identical for the Registration Officer and Escrow Liaison (Document Summary Cards → Filters & Search → Documents Table → **Pending Verification** → Recent Document Activity → Pagination); the Principal's differs by substituting **Document Analytics** for Pending Verification, reflecting the read-only nature of that role's screen.
+Which sidebar menu items are visible, the subtitle, top-bar page actions, and the layout diagram differ by role — see [Role Variations](#role-variations). The layout diagram is identical for the Registration Officer and Escrow Liaison (Document Summary Cards → Filters & Search → Documents Table → **Pending Verification** → Recent Document Activity → Pagination); the variant under the Principal / Director heading differs by substituting **Document Analytics** for Pending Verification, reflecting its repository orientation rather than any access limit.
 
 ## Sections
 
-Every section (Document Summary Cards, Filters, the Documents Table and its Row Actions, Pending Verification / Document Analytics, and Recent Document Activity) is role-specific — see [Role Variations](#role-variations).
+Every section (Document Summary Cards, Filters, the Documents Table and its Row Actions, Pending Verification / Document Analytics, and Recent Document Activity) differs between variants — see [Role Variations](#role-variations).
 
 ## Empty State
 
-Message and actions differ by role — see [Role Variations](#role-variations).
+Message and actions differ between variants — see [Role Variations](#role-variations).
 
 ## Reused Components
 
-Differs by role — see [Role Variations](#role-variations).
+Differs between variants — see [Role Variations](#role-variations).
 
 ## Role Variations
+
+> **Reframed 2026-08-15 — these are content variants, not access restrictions.** Every variant
+> below is reachable and actionable by all four roles; none of them is withheld from anyone. What
+> the blocks record is that the source material defined this screen more than once, with different
+> KPI sets, filters, columns, actions or empty states each time — differences of *content*, not of
+> permission. Those are preserved verbatim rather than merged, because collapsing them into one
+> screen is a design decision about which variant (or which union of them) is correct, and that is
+> the client's call, not a documentation cleanup. **Flagged for review — see
+> [../README.md](../README.md#per-role-content-variants-flagged-for-review).**
+>
+> The role headings below should now be read as *"the variant the source defined under this role's
+> heading"*, not *"what this role is allowed to see"*.
 
 ### Developer Principal / Director
 
@@ -55,18 +68,7 @@ Differs by role — see [Role Variations](#role-variations).
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Documents**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Projects  
-  * Property Registrations  
-  * Sales & Disclosures  
-  * Escrow Management  
-  * Applications  
-  * **Documents (Active)**  
-  * Reports  
-  * Company Profile  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -174,7 +176,7 @@ Each row includes:
 
 * View Details
 
-No editing or uploading is permitted from this screen.
+This variant offers no editing or uploading controls; the operational variants below do, and any role may use them.
 
 ### Section 4 — Document Analytics
 
@@ -271,15 +273,7 @@ Document Details
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Documents**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Projects  
-  * Property Registrations  
-  * Applications  
-  * **Documents (Active)**  
-  * Reports  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -525,20 +519,266 @@ This screen will be the Project Registration Officer's operational workspace for
 * Review version history  
 * Track document activity and audit history
 
+### Sales & Disclosure Officer
+
+> **Merged 2026-08-15 (issue #58).** This variant was absent from the file until now. The source defined it as a `## Screen: Documents` fragment nested at the wrong heading level inside the Sales & Disclosure Officer's Application Details section (source lines 9218–9475). It was previously left out because including it would have meant silently overriding the Role Permission Matrix, which granted this role Documents access the screen did not provide. With access no longer gated by role, including it is a straightforward merge. Reproduced verbatim, headings demoted one level to sit under this block.
+
+### Sidebar Status
+
+* **Visible Sidebar:** Developer Operational Sidebar  
+* **Active Menu:** **Documents**  
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
+
+### Top Bar Status
+
+**Title:** Documents
+
+**Subtitle:** Upload, organize, and manage buyer documents, sales agreements, and disclosure attachments throughout the sales compliance process.
+
+**Search Bar:** Search anything...
+
+The page uses the shared **Background \+ HorizontalBorder** component.
+
+**Page Actions (Right Side):**
+
+* Upload Documents
+
+### Purpose
+
+Provide the Sales & Disclosure Officer with an operational document management workspace where all documents related to property sales, buyers, and disclosure applications can be uploaded, replaced, tracked, and maintained throughout the disclosure lifecycle.
+
+Unlike the Developer Principal's version, this page supports full document management.
+
+### Layout
+
+Top Bar  
+↓  
+Document Summary Cards  
+↓  
+Filters & Search  
+↓  
+Documents Table  
+↓  
+Pending Verification  
+↓  
+Recent Document Activity  
+↓  
+Pagination
+
+### Section 1 — Document Summary Cards
+
+Display **8 KPI cards**.
+
+| KPI | Description |
+| ----- | ----- |
+| Total Documents | All uploaded documents |
+| Draft Documents | Documents saved but not submitted |
+| Pending Verification | Awaiting RERA verification |
+| Verified Documents | Successfully verified |
+| Returned Documents | Require replacement or correction |
+| Rejected Documents | Failed verification |
+| Missing Required Documents | Mandatory documents not yet uploaded |
+| Expiring Documents | Documents nearing expiry |
+
+Selecting a KPI filters the document list.
+
+### Section 2 — Filters
+
+Located above the table.
+
+### **Components**
+
+* Search Document  
+* Category Filter  
+* Project Filter  
+* Property Filter  
+* Buyer Filter  
+* Disclosure Filter  
+* Verification Status  
+* Upload Date Range  
+* Reset Filters
+
+### **Document Categories**
+
+* Sales Agreements  
+* Buyer Identification  
+* Proof of Payment  
+* Mortgage Documents  
+* Corporate Buyer Documents  
+* Power of Attorney  
+* Disclosure Forms  
+* Compliance Documents  
+* Supporting Documents  
+* Other
+
+### **Verification Status**
+
+* Draft  
+* Pending Verification  
+* Verified  
+* Information Requested  
+* Returned  
+* Rejected  
+* Expired
+
+### Section 3 — Documents Table
+
+### **Columns**
+
+| Column | Description |
+| ----- | ----- |
+| Document Name | Uploaded document |
+| Category | Document category |
+| Linked Record | Sale / Disclosure / Buyer |
+| Uploaded By | Officer |
+| Upload Date | Date uploaded |
+| Verification Status | Current status |
+| Expiry Date | If applicable |
+| Action | Available actions |
+
+### Row Actions
+
+### **Draft**
+
+* Edit Details  
+* Replace  
+* Preview  
+* Delete
+
+### **Pending Verification**
+
+* Preview  
+* View Details
+
+### **Information Requested / Returned**
+
+* Replace Document  
+* Upload Revised Version  
+* Preview  
+* Resubmit
+
+### **Verified**
+
+* View  
+* Download
+
+### **Rejected**
+
+* View Remarks  
+* Replace Document
+
+### Section 4 — Pending Verification
+
+Displays documents requiring immediate attention.
+
+### **Examples**
+
+* Missing buyer identification  
+* Sales agreement requires correction  
+* Proof of payment missing  
+* Expiring identity document  
+* Low-quality document scan  
+* Missing buyer signature
+
+### **Columns**
+
+| Document | Issue | Due Date | Priority | Action |
+| :---: | :---: | :---: | :---: | :---: |
+
+### **Actions**
+
+* Upload  
+* Replace  
+* Continue
+
+High-priority items appear first.
+
+### Section 5 — Recent Document Activity
+
+Timeline showing recent document events.
+
+Examples
+
+* Buyer ID uploaded  
+* Sales agreement replaced  
+* Verification started  
+* Additional information requested  
+* Revised document uploaded  
+* Document verified  
+* Document rejected
+
+Selecting an activity opens the corresponding document.
+
+### Empty State
+
+**Message**
+
+> No sales disclosure documents have been uploaded yet. Upload the required buyer and transaction documents to support your disclosure applications.
+
+Primary Button
+
+* Upload Documents
+
+Secondary Button
+
+* Record Property Sale
+
+### Pagination
+
+Bottom of the table.
+
+### **Components**
+
+* Rows per page  
+* Previous  
+* Next  
+* Page Number  
+* Total Records
+
+### Reused Components
+
+* Left Sidebar  
+* Top Bar (Background \+ HorizontalBorder)  
+* KPI Cards  
+* Search Bar  
+* Filter Bar  
+* Data Table  
+* Status Badges  
+* Timeline  
+* Task Cards  
+* Pagination  
+* File Upload Component  
+* Buttons  
+* Empty State
+
+### User Flow
+
+Dashboard  
+↓  
+Documents  
+├── Upload Document  
+├── Replace Document  
+├── Preview Document  
+├── Submit Revised Version  
+├── Download Verified Document  
+└── View Document Details
+
+### Notes
+
+* This is the **primary operational document management screen** for the **Sales & Disclosure Officer**.  
+* Documents can be linked to **Property Sales, Buyers, Sales Disclosures, or Disclosure Applications**, allowing one centralized repository for the entire disclosure workflow.  
+* Documents with **Returned** or **Information Requested** status should automatically appear at the top of the list to help officers respond quickly.  
+* Version history must be preserved whenever a document is replaced to maintain a complete regulatory audit trail.  
+* Mandatory buyer and transaction documents should be validated automatically before a sales disclosure can be submitted to RERA.  
+* Personally identifiable buyer information should be protected according to the platform's security and privacy rules.
+
 ### Escrow Liaison
 
 ### Sidebar Status
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Documents**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Escrow Management  
-  * Applications  
-  * **Documents (Active)**  
-  * Reports  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -775,8 +1015,8 @@ Open Document Details when additional action is required
 
 ## User Flow
 
-Differs by role — see the "User Flow" heading within each role's block under [Role Variations](#role-variations). The Escrow Liaison's is a single linear arrow diagram rooted at Documents itself rather than the Dashboard-rooted tree diagrams used by the other two roles.
+Differs between variants — see the "User Flow" heading within each role's block under [Role Variations](#role-variations). The Escrow Liaison's is a single linear arrow diagram rooted at Documents itself rather than the Dashboard-rooted tree diagrams used by the other two roles.
 
 ## Notes
 
-Differs by role — see the "Notes" heading within each role's block under [Role Variations](#role-variations). Only the Project Registration Officer's version includes a "Next Screen" preview of Document Details; this is preserved verbatim in its block above.
+Differs between variants — see the "Notes" heading within each role's block under [Role Variations](#role-variations). Only the Project Registration Officer's version includes a "Next Screen" preview of Document Details; this is preserved verbatim in its block above.
