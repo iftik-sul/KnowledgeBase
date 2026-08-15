@@ -18,148 +18,210 @@ tags:
   - client
 ---
 
-# Individual User (Groups E+F) — Questions and Proposed Answers
+# Individual User — Questions and Proposed Answers
 
-Built the same way Group C's equivalent document was: each question carries a proposed answer to build against unless told otherwise, with a confidence level and what breaks if it's wrong. This module's questions arose from checking all 43 service-flow files individually against the master service table (rows 72–112) before writing `payments.md`, `navigation.md`, and `role-workflows.md` — per the standing instruction to check every service and every role attribution individually rather than trust a pattern from a neighbor.
+Fifteen questions arose from checking all 43 service-flow files individually against their sourced rows (`RERAN_service_flows_v2.md` rows 72–112) and against `roles-and-responsibilities.md`'s own worked examples, per the standing instruction not to accept the master table's role column, or a service file's stated position, at face value. Each carries a **proposed answer** to build against, per the standing preference for proposed positions over deferring to the client.
+
+**How to read this:** each answer states a recommendation, the reasoning, confidence, and what breaks if it's wrong. Confidence follows the same scale used in Group C's `open-questions.md`:
 
 | Level | Meaning |
 | :---- | :---- |
 | **Sourced** | The source material answers this directly |
-| **High** | A strong inference from the source |
+| **High** | A strong inference, or the only option that survives contact with the source |
 | **Medium** | A reasonable design judgement; a different answer would also be defensible |
-| **Client data** | Cannot be reasoned to; only RERA/the client holds the answer |
+| **Client data** | Cannot be reasoned to; only RERA holds the answer |
 
-**Scope note:** post-login functionality only, matching the project-wide scope rule. This document does not resolve the UI/screen-level questions this module will need once UI work starts — those are out of scope for this chat's brief.
-
----
-
-## A. Roles
-
-### A1. Register Lease (#23) and Renew Lease (#24) — is this a Landlord service or a Tenant service?
-
-**Real conflict, not resolved here — proposed answer: Landlord-initiated, with Tenant confirmation, but flagged for client confirmation because the source itself disagrees with the current documentation.**
-
-Three sources disagree with each other:
-
-1. **The master service table** files row 82 under the source category "TENANT – Real Estate Rental Services" and names **Tenant** as the Responsible Role.
-2. **`roles-and-responsibilities.md`'s own responsibility lists** give *both* roles overlapping duties here: Landlord — "Register rental properties, Create and renew lease records"; Tenant — "Register tenancy information, Renew lease records." The worked examples don't resolve it either — Grace (Landlord) "registers each lease agreement... renews tenancy records," which reads as the same action row 82 describes, while Sarah (Tenant)'s worked example is about disputes, not registration.
-3. **The current Service #23/#24 files** frame the entire service around the Landlord, with "Property Management Company acting on behalf of the owner" also listed as an eligible applicant — a role that doesn't appear in `roles-and-responsibilities.md`'s six Individual User roles at all (it's a Group D role).
-
-**Reasoning toward a proposed answer:** row 82's own workflow text doesn't name who initiates — "submit docs, enter system and audit, pay, receive contract registration certificate" reads equally well from either party's perspective. But the master table's *category* label ("TENANT – Real Estate Rental Services") most plausibly reflects that the *source jurisdiction's* system had tenants self-register their own leases for rental protection purposes — consistent with Group F's platform sub-system being named "RERA Mobile App, Tenancy (Tenant)" in the Groups & Roles table, versus Group E's "Title-Deed & Transaction, Tenancy System, **Owner Self-Service (App)**." Both groups have a tenancy-adjacent sub-system, which is itself evidence the source intended *both* roles to have some form of tenancy access, not that one is right and one is wrong.
-
-**Proposed:** the Landlord registers and renews the lease (matching the current files and Grace's worked example, and matching that only the Landlord holds the underlying property registration this service modifies), with the Tenant able to *view and confirm* the registered lease but not *initiate* it — the same "confirm, don't initiate" pattern Service #6 (Register Property Sale) already uses for its purchaser side. This resolves the ambiguity without discarding either role's documented responsibilities: Tenant's "register tenancy information" responsibility is read as encompassing tenant-side confirmation, not independent initiation.
-
-**Confidence:** Medium. This is a genuine three-way disagreement between source table, role descriptions, and current documentation, not a case where one source is clearly right. **Flagged for direct client confirmation, same standard as Group C's A4.**
-
-**Affects:** `service-23-register-lease.md` and `service-24-renew-lease.md` Section 4 (add Tenant as confirming party, remove "Property Management Company" or relocate it to a cross-module note); `role-workflows.md` (this document, built assuming the proposed answer above); `roles-and-responsibilities.md`'s Landlord and Tenant responsibility lists (add a cross-reference noting the overlap and how it's resolved, rather than leaving two roles silently claiming the same action).
-
-### A2. The master table's role column looks like a category-level default, not a per-service judgement — same finding as Group C's A4
-
-**Confirmed pattern, not yet a client decision — flagged the same way Group C flagged A4 before its client resolution.**
-
-Twenty-six of the twenty-seven Group E rows (86–112, excluding row 85) name **Property Owner / Seller** as the Responsible Role — including heirs' ownership registration, community land registration, partners division, industrial/commercial land ownership, property surveys, valuations, and certificate requests, none of which obviously belong to a "seller" specifically. This is the same shape Group C's A4 found: a source column giving one role the overwhelming majority of a group's services regardless of whether the underlying transaction fits that role's description.
-
-Unlike Group C, this module's current service-flow files mostly **already correct for this** — most files list "Joint Property Owner," "Authorized Representative acting under a valid Power of Attorney," and similar broadened applicant sets in their own Section 4, rather than repeating the master table's narrow column verbatim. That's the right instinct and shouldn't be undone. What it hasn't done is **name applicant categories that don't map to any of the six roles in `roles-and-responsibilities.md` at all** — see A3 below.
-
-**Confidence:** High that the master table's role column is a coarse default here too, by direct analogy with Group C's confirmed A4. **Proposed:** treat the six roles in `roles-and-responsibilities.md` as attribution categories applied per-service by the service-flow files' own Section 4 (already largely done), not by the master table's role column — i.e., no correction needed to the *files*, but `roles-and-responsibilities.md` and `role-workflows.md` should say explicitly that the master table's role column is not the authority for this module, the same way Group C's navigation.md now says role is "attribution only." Not yet put to the client; recommend bundling with A1 above since both concern the same underlying question of how much weight the master table's role column deserves in this module.
-
-### A3. Some services name applicants that aren't any of the six documented roles
-
-**Real gap, not resolved here.**
-
-Two examples found during the per-service check:
-
-* **Service #19 (Register Heirs Ownership)** lists "Legal Heir recognized under applicable law" and "Court-appointed Administrator or Executor" as eligible applicants. Neither is a role in `roles-and-responsibilities.md`. An heir may well *become* a Property Owner/Seller once ownership is registered, but at the point of filing this application, they are not yet one — the role that would cover them doesn't exist yet in the six-role list.
-* **Service #20 (Register Community Land)** lists "Community Leader" and "Authorized Community Committee Member" as eligible applicants — again, no matching role.
-
-**Proposed:** rather than inventing two new individual-user roles for what are edge-case applicant categories (an heir mid-succession, a community representative), treat these as **temporary or special-capacity personas layered on top of the existing six roles** — e.g., a person acting as "Legal Heir" for the purposes of Service #19 is, functionally, exercising a subset of Property Owner/Seller's eventual responsibilities before that status is confirmed. This avoids a role-count increase for what may be two genuinely narrow cases, but is a documentation judgement, not something the source resolves.
-
-**Confidence:** Medium. **Flagged for client input** on whether these deserve their own role entries in `roles-and-responsibilities.md` or should be handled as described above.
-
-**Affects:** `roles-and-responsibilities.md` (if the client wants dedicated entries); `role-workflows.md` (currently built treating these as capacity-limited extensions of Property Owner/Seller, per the proposal above).
+**Scope note:** post-login functionality only, matching the rest of this project.
 
 ---
 
-## B. Payments
+## A. Payment Timing
 
-All payment findings are detailed in `payments.md`. This section records the decisions needed to close them, in the same format Group C used.
+### A1. Should the Section-9 boilerplate be corrected for #23, #24, #26, and #41?
 
-### B1. Should the five no-fee services (#17, #18, #33, and #7's Owner/Entity Information Amendment component) be built as genuinely free?
+**Yes — this isn't really a question, it's a bug.** Three of these four files (#23, #24, #26) already document the correct payment order in their own Processing Workflow section; only their Section 9 header claim is wrong. #41 already has both parts correct. This is the same two-sections-of-the-same-file-disagreeing pattern in three places, not three separate design questions.
 
-**Proposed: yes**, on the same basis as Group C's confirmed Service #2 — see `payments.md`'s "No-Fee Services" section for the full evidence. Every one of these rows is silent on payment in a source document that is otherwise consistently explicit about fees. Two sibling services (#40, #42) already correctly document themselves as free using this exact reasoning.
+**Confidence:** Sourced. The correct order is already written down in each file; it just needs to be copied into the section that currently contradicts it.
 
-**Confidence:** Medium-high. **Flagged for client confirmation**, same standard as Group C's B11 needed a direct answer rather than an inference.
+**Affects:** `payments.md` Category 2; Section 9 of service-flow files #23, #24, #26.
 
-**Affects:** `service-17-grant-registration.md`, `service-18-grant-completion.md`, `service-33-request-property-survey.md`, and `service-07-update-property-ownership-information.md` Sections 8–9 (Owner/Entity Information Amendment branch only — the Property Information Amendment branch remains fee-bearing per row 112).
+### A2. Do #5 and #9–#16 need a documented Trustee Centre payment channel?
 
-### B2. Should the systemic Section 9 defect across Services #1–#39 be corrected as one dedicated pass?
+**Proposed: yes, for #9–#16; #5 needs its existing Option 1 reordered rather than a channel added.**
 
-**Proposed: yes**, and recommended as the very next piece of work on this module, before UI work starts — because every UI screen for payment steps will otherwise be built against a wrong assumption in 15+ of the 39 files. Full itemized list, by service:
+#9–#16 either have no counter-channel path documented at all (#9) or inherit row 86's "-V" Trustee Centre pattern by explicit source cross-reference ("same as sale registration") without that pattern ever being written into the files (#10–#16). Since Service #6 (which row 86 directly sources) already documents both an online path and implies the Trustee Centre alternative exists, the sibling services #10–#16 dropping that second channel looks like an oversight in extending #6's template to its neighbours, not a deliberate simplification.
 
-| Service | Current Section 9 claim | What the source/file's own workflow actually shows | Fix needed |
-| :---- | :---- | :---- | :---- |
-| #5 – Transfer Property Ownership | Pay before submission | Row 106 + the file's own Option 1 workflow both show pay **after** audit | Correct Section 9 to match Option 1; Option 1 itself is already right |
-| #7 – Update Property Ownership Info (Owner/Entity branch) | Pay before submission | Row 107 — no fee at all | See B1 above |
-| #9 – Register Gift Transfer | Pay before submission | Row 88 (only sourced channel) — pay **after** audit | Add a Trustee Centre option matching source order, or flag the online flow as an unsourced platform extension |
-| #10–#16 – Lease-to-Own / Usufruct family (7 files) | Pay before submission | Row 86 pattern inherited by cross-reference — Trustee Centre channel pays after audit | Same as #9 |
-| #17 – Grant Registration | Pay before submission | Row 98 — no fee | See B1 |
-| #18 – Grant Completion | Pay before submission | Row 99 — no fee | See B1 |
-| #23 – Register Lease | Pay before submission | Row 82 + file's own Option 1 — pay **after** initial audit, before hearing/decision | Correct Section 9 to match Option 1 |
-| #24 – Renew Lease | Pay before submission | Same as #23 | Same fix |
-| #26 – Submit Tenancy Dispute | Pay before dispute submission | Rows 72–81 + file's own Option 1 — pay **after** initial audit, before hearing | Correct Section 9 to match Option 1 |
-| #27 – Cancel Tenancy Contract | Pay before submission | Row 83 — Trustee Centre pays after audit; Online channel shows no fee step at all | Needs a two-channel rewrite, not a one-line fix — see `payments.md`'s channel-split section |
-| #28 – Request Rental Valuation | Pay before submission | Row 84 — explicit: "Pay fees **after approval**" | Highest-confidence, cleanest fix in the set |
-| #31 – Detailed Real Estate Statement | Pay before request processed | Row 109 — in-person channel pays after the identity check/audit step | Lower confidence than #28; identity verification may not be a substantive "decision" the way audit is elsewhere |
-| #32 – To Whom It May Concern Certificate | Pay before certificate generated | Row 108 — same shape as #31 | Same caveat |
-| #33 – Request Property Survey | Pay before request processed | Row 111 — no fee at all | See B1 |
-| #38, #39 – Submit/Track Complaint | Pay before submission/tracking | No source row (extrapolated) — see B3 below for whether a fee should exist at all | Depends on B3's resolution |
+#5 is different: it already has an Option 1 (Customer Center) section, but that section's step order doesn't match row 106's actual sequence — payment there was written to look like the "pay after audit" pattern common to rows 88–95, when row 106's own wording is "...pay, transaction audited and approved" (one combined post-payment step, not an audit gate before payment). This isn't a missing channel, it's a misremembered one.
 
-**Confidence:** Sourced for #5, #9, #10–#16, #17, #18, #23, #24, #26, #28, #33 (the row itself is unambiguous). Medium for #27, #31, #32 (real conflicts found, but the "decision" being paid around is less clearly substantive than elsewhere).
+**Confidence:** Medium-high. The channel-inheritance logic is sourced (services-overview.md's own note that #10–#16 come from "-V: Same as sale registration"); the specific fix each file needs is a judgement call about how literally to extend that inheritance.
 
-**Not done in this pass** — this chat's brief was the analysis layer (`payments.md`, `open-questions.md`, `navigation.md`, `role-workflows.md`), not the 43 service-flow files themselves. Recommend a dedicated correction pass, the same way Group C's UI reconciliation ran as its own tracked issue (#50) rather than folding into the payment-model correction that motivated it.
+**If wrong:** if the online-only model for #9–#16 is an intentional platform redesign rather than an oversight, no fix is needed there — but #5 still needs its Option 1 reordered regardless, since that reading doesn't rescue #5's internal sequence.
 
-### B3. Should Submit Complaint (#38) and Track Complaint (#39) carry a fee at all?
+**Affects:** `payments.md` Category 3; Processing Workflow sections of #5, #9–#16.
 
-**Proposed: no — make both free, or at minimum make #39 free.**
+### A3. Do #17, #18, #33, and #7's Owner/Entity-Amendment component actually carry no fee?
 
-Neither service has a source row; both are fully extrapolated, meaning "Payment Required: Yes" in both files is a platform design decision, not something the source specifies. Two things argue against that design decision:
+**Proposed: yes, no fee — matching the standard Group C used for its own Service #2.**
 
-1. **Consumer-protection complaint mechanisms are typically free to encourage reporting.** A fee to report a developer, agent, or transaction problem to the regulator is an unusual design choice for a *consumer protection* category of service, and nothing in the PRD's stated anti-fraud and consumer-protection goals suggests RERA wants to charge for intake.
-2. **#39 duplicates a feature that is explicitly sourced as free.** `feature-02-track-application-status.md` states outright: "No additional fee. Application tracking is included as part of the submitted service." Service #39 performs the identical function — status lookup by reference number — for one specific application type (complaints) and charges for it. There's no source or design rationale distinguishing why tracking a complaint should cost money when tracking every other application type doesn't.
+None of the four sourced rows involved (98, 99, 111, 107) contain a payment step anywhere in their workflow description, and in three of the four cases (#17, #18, #7-component) the row sits directly beside sibling rows in the same source cluster that *do* name a "pay" step at the equivalent point in an otherwise near-identical workflow shape — the same contrast-with-neighbours reasoning that made Group C confident #2 was a genuine no-fee case rather than an omission.
 
-**Confidence:** Medium on #38 (a fee isn't unreasonable per se — Group C's own consumer-facing services aren't free), **High on #39** (the internal inconsistency with Feature #2 is hard to justify either way).
+**Confidence:** High for #17/#18 (both flanked by fee-bearing siblings #19–#22 in the same Title & Land Registration cluster). Medium for #33 (Request Property Survey) and the #7 Owner/Entity component, since neither sits in as tight a same-shape cluster to contrast against.
 
-**Flagged for client confirmation** — this is a policy/design question, not a documentation-accuracy one, since no source contradicts the current files.
+**If wrong:** four services gain a checkout step that currently doesn't exist in their documentation; low build cost either way since the payment UI pattern is shared platform-wide.
 
-**Affects:** `service-38-submit-complaint.md`, `service-39-track-complaint.md` Sections 8–9; `payments.md`'s Model D no-fee list (would need #39, and possibly #38, added if confirmed).
+**Affects:** `payments.md` Category 4; Section 8/9 of #17, #18, #33; #7's Section 8/9 split into two components.
 
-### B4. Should the Trustee Centre / Online payment-timing split be documented as two sub-flows per affected service?
+### A4. Does #28's payment timing move to after RERA's decision?
 
-Not proposed here — see `payments.md`'s "Trustee Centre / Online channel split" section for the full evidence and reasoning. This is flagged as a workflow-design decision, not resolved with a recommendation, because it materially changes seven files' structure rather than correcting a single line, and because it echoes Group C's C2 question (should a counter-only channel get built as a genuinely separate flow, or treated as an assisted mode of the same underlying service) closely enough that the same answer might apply here without needing independent re-derivation.
+**Yes — this is sourced, not inferred.** Row 84 states outright: *"Pay fees after approval."* There is no ambiguity to resolve.
 
-**Proposed, tentatively, by analogy with Group C's confirmed C2:** treat the Trustee Centre as an assisted-mode channel of the same service, not a second service — meaning these seven files need their Trustee Centre payment-timing added as an annotated alternate path, not a structurally separate flow. **Confidence:** Medium — C2's reasoning transfers well (same anti-in-person-visit PRD goals apply to Groups E+F as to Group C), but hasn't been independently confirmed for this module.
+**Confidence:** Sourced.
+
+**Affects:** `payments.md` Category 2; #28's Section 9 and Processing Workflow.
+
+### A5. Is the online path for #27 (Cancel Tenancy Contract) genuinely fee-free?
+
+**Confirmed by client (2026-08-15): no — the fee applies, on the same timing as the counter channel.** Payment is required for both channels, after RERAN's review, not before submission. Row 83's online-channel silence on payment was a gap in the source material, not a deliberate free path.
+
+**Confidence:** Client data (now settled).
+
+**Affects:** `payments.md` Category 5 (updated); #27's Section 9 and Processing Workflow (corrected — the file previously had no documented Trustee Centre channel at all, the same gap found in #9–#16, so the fix adds that channel explicitly alongside the existing online flow, both now shown as fee-bearing with post-review timing).
+
+### A6. Should #39 (Track Complaint) charge a fee to view status?
+
+**No.** Feature #2 (Track Application Status), which #39 functionally specialises, is explicit that tracking is free once an application is submitted — a principle this module already applies to every other trackable service. #39 currently contradicts its own platform's shared feature for no sourced reason (it's extrapolated, so there's no row to defend the fee).
+
+**Confidence:** High. This isn't a source dispute; it's an internal-consistency fix against a rule the module has already committed to elsewhere.
+
+**Affects:** `payments.md` Category 7; #39's Section 8/9, Processing Workflow (removing the payment gate before "Retrieve Complaint Details").
+
+### A7. Should #38 (Submit Complaint) carry a fee at all?
+
+**Confirmed by client (2026-08-15): yes — the fee stands as originally documented.** RERAN wants the deterrent effect against frivolous complaints, the same logic behind court filing fees. This closes the question as a confirmation of the existing documentation, not a correction.
+
+**Confidence:** Client data (now settled).
+
+**Affects:** `payments.md` Category 8 (updated to record the confirmation). No change needed to #38's service-flow file — it was already correctly documented.
 
 ---
 
-## C. Service Structure
+## B. Role Attribution
 
-### C1. Does the Wallet Account referenced at row 86 belong to this module?
+### B1. Is Register Lease / Renew Lease (#23/#24) a Landlord service or a Tenant service?
 
-**Yes — this module is the actual sourced home of `proposed-services.md` P-22**, not just a user of a platform-wide primitive. See `payments.md`'s Settlement Mechanisms section for the full reasoning. This isn't a question requiring an answer so much as a correction that should propagate: `proposed-services.md` P-22 already notes row 86 as its evidence but doesn't say which module that row belongs to (it's filed under the platform-wide Tier 4 list, not attributed to Individual User specifically).
+**Genuine conflict, not silently resolved. Proposed: Landlord as primary applicant, matching the files as currently written — but flagged, not asserted with full confidence.**
 
-**Confidence:** Sourced on the row; Medium on the P-22 identity claim (see `payments.md`).
+The master table's Responsible Role column for row 82 says **Tenant**. Both service-flow files (#23, #24) frame the entire workflow around the **Landlord** — "Registered Property Owner (Landlord)" as the primary applicant, with the tenant appearing only as a data field, not a workflow participant. `roles-and-responsibilities.md` doesn't settle this cleanly either: the Landlord's responsibilities list includes "Create and renew lease records," and Grace's worked example has her registering and renewing leases directly — but the Tenant's responsibilities list *also* includes "Register tenancy information" and "Renew lease records," verbatim overlapping language.
 
-**Affects:** `proposed-services.md` P-22's entry could note Individual User Service #6 as its concrete source, strengthening the case for building it early — not changed in this pass since `proposed-services.md` belongs to a different scope than this module's own documents, but worth flagging to whoever next touches that file.
+Three readings are possible: (a) the master table's role column reflects which *source category heading* the row sits under ("TENANT – Real Estate Rental Services") rather than a considered per-service actor assignment — the same kind of coarse, category-level default Group C's A4 found in its own role column, just manifesting through the category grouping instead of the column itself this time; (b) both roles genuinely can initiate registration (a landlord registering a lease they're renting out, or a tenant self-registering a lease they've signed for their own protection, especially plausible given RERAN's consumer-protection mandate), meaning this should be a joint/either-party service like #6's seller/purchaser model rather than single-actor; or (c) the files are simply wrong and Tenant is the primary actor.
+
+**Recommendation:** keep Landlord as the current primary applicant (matches the worked-example precedent and the practical real-world convention that whoever holds the property registers the tenancy against it), but add Tenant as a secondary path — a tenant-initiated self-registration option — rather than treating the master table's Tenant attribution as simply incorrect. This mirrors reading (b) rather than picking (a) or (c) outright.
+
+**Confidence:** Medium going in; raised to Medium-high after the conflict check below.
+
+**Conflict check performed before locking this in, per instruction.** Checked whether any other file in the module already assumes Tenant-only or Landlord-only for lease registration/renewal in a way that would make adding Tenant as a secondary path a bigger change than it looks:
+
+- **#25 (Manage Lease)** already lists Registered Tenant alongside Landlord in Who Can Apply — no conflict.
+- **#26 (Submit Tenancy Dispute)** already lists Registered Tenant and Registered Landlord as parallel applicants — no conflict.
+- **#27 (Cancel Tenancy Contract)** already documents separate Landlord and Tenant sections under Who Can Apply — no conflict.
+- **#28 (Request Rental Valuation)** already lists Property Owner, Landlord, Tenant, and Prospective Tenant together — no conflict.
+- **#23 and #24's own Database Entities sections** already list both "Landlord" and "Tenant" as entities, meaning the data model was never actually Landlord-exclusive even though the workflow and Who Can Apply text was.
+- `shared-platform-features.md`, `services-overview.md`, and the four feature files reference "Register Lease" / "Renew Lease" by name only, with no role qualifier, so nothing there assumes single-actor either.
+
+**Nothing found that would turn the addition into a bigger rewrite.** #23/#24 were the only two files in the module actually written Landlord-exclusive; every neighbouring tenancy service already treats Landlord and Tenant as parallel actors. Proceeding with the proposed resolution: Landlord remains primary applicant, Tenant added as a documented secondary path in Who Can Apply, with a note pointing back to this entry for the reasoning. Full workflow design for the tenant-initiated path (a mirrored set of screens) is deferred to when this module's UI work begins, consistent with this chat's scope — the correction made now is to the documentation's Who Can Apply and role-attribution framing, not a new parallel screen flow.
+
+**If wrong:** if the client later says Tenant should be the *sole* intended actor rather than a secondary one, #23/#24 would need a larger rewrite (currently Landlord-primary in every field, form, and business rule) — but that's a different, larger question than the one resolved here.
+
+**Affects:** `roles-and-responsibilities.md`'s Landlord/Tenant responsibility lists (still genuinely overlapping — worth a separate flag to the client at some point, not resolved by this entry); #23 and #24's Who Can Apply sections (corrected); `role-workflows.md` (updated).
+
+### B2. Is the master table's "Property Owner/Seller" default for rows 85–112 as unreliable as Group C's role column turned out to be?
+
+**Checked directly — proposed answer: no, it holds up, unlike Group C's case.** Group C's A4 found the source's role column assigned the Mortgage Officer to services with no plausible connection to mortgage lending (heirs' sales, title-deed issuance) — a genuine mismatch between the assigned role and the transaction's substance. Checking the equivalent pattern here: rows 96–105 (Heirs Ownership, Community Land, Partners Division, Industrial/Commercial Land, Indemnity, Exchange) are all uniformly attributed to Property Owner/Seller, and in every one of these cases the applicant genuinely *is* someone establishing or exercising an ownership-adjacent claim over the property — an heir becoming the new owner-of-record, a community's authorized representative registering title, a co-owner dividing joint ownership. Unlike Group C's Mortgage Officer being assigned services with no lending nexus, "Property Owner/Seller" for these rows describes the applicant's substantive relationship to the transaction, not a coarse category default.
+
+The one row this reasoning doesn't cleanly cover is **row 97 (PoA cancellation)** — but on reflection that also holds: only the original grantor (the Property Owner) has legal standing to revoke a Power of Attorney they issued, so Property Owner/Seller is the only role that makes sense there too.
+
+**Confidence:** High, as a check performed rather than an assumption relied on. Genuinely different conclusion from Group C's A4 despite superficially similar-looking master-table uniformity — worth recording precisely because it would have been easy to pattern-match "uniform role column = same problem as Group C" without checking.
+
+**Affects:** No document changes — this confirms the current attribution across #5, #7 (property-info component), #17–#22, #35, #41–#43 is sound and needs no correction.
+
+### B3. Do the applicant categories named in individual service files (Legal Heir, Community Representative, Financial Institution, Property Management Company) need to become new platform roles?
+
+**Proposed: no — three of the four are status descriptions within an existing role, one is a genuine cross-module error needing removal.**
+
+- **Legal Heir / Court-appointed Administrator (#19):** describes the applicant's *status entering* the transaction — the outcome of #19 is precisely that this person becomes the registered Property Owner/Seller of record. Not a new role; a precondition on who may currently invoke the Property Owner/Seller role for this specific service.
+- **Community Representative / Leader (#20):** same pattern — acting on behalf of a collective ownership structure, but the resulting registration still vests in an owner-type entity. Not a new role.
+- **Financial Institution (#34, as a requester of a valuation):** this is Group C reaching into an Individual User service as a *requester*, not Group C acting as a Group C role inside this module. Worth a one-line clarifying note in #34 rather than a role change.
+- **Property Management Company (#23, #24, #25):** this one is a genuine problem, not a status description. "Property Management Company" is Group D's **Property Management Officer** role (`real-estate-service-companies` module), not an Individual User concept at all. Its presence in #23/#24/#25's Who Can Apply sections looks like cross-module leakage, possibly copied from Group D material during drafting. **Recommend removing it** from all three files, leaving "Authorized Property Representative" (which is already a legitimate Individual User concept, covering PoA holders and similar) to cover delegated management without implying a Group D corporate actor can act as an Individual User.
+
+**Confidence:** High on the Property Management Company removal (a clear cross-module category error, the same kind of mistake Group C's A1 corrected for "internal auditor" vs. "Auditing Bureau Officer"). Medium on treating the other three as status descriptions rather than needing their own role entries — a defensible design choice, not a certainty.
+
+**Affects:** #23, #24, #25's Who Can Apply sections (remove Property Management Company); no change needed to `roles-and-responsibilities.md`'s six-role list.
+
+### B4. How much of Property Buyer/Investor's and Diaspora Investor's documented behaviour actually traces to source, versus extrapolation?
+
+**Checked, not previously flagged: almost none of it traces to a master-table row.** Across all 41 sourced rows for Groups E and F (72–112), the Responsible Role column names only three values: Property Owner/Seller, Landlord, and Tenant. **Property Buyer/Investor and Diaspora Investor never appear as a Responsible Role in the source table at all.** Their entire documented presence in this module rests on the 11 extrapolated services — #1–#3 (verification, tied to Buyer/Investor by role-description inference) and #36–#37 (diaspora, tied to Diaspora Investor the same way).
+
+This isn't necessarily wrong — `services-overview.md` already discloses the sourced/extrapolated split at the service level — but it hasn't previously been stated at the *role* level: two of the module's six roles are almost entirely a documentation team's inference from role-description prose (roles-and-responsibilities.md's own "Purpose" paragraphs), not a role the source's own workflow table ever assigns a service to.
+
+**Confidence:** Sourced, as a factual observation about what is and isn't in the master table. Not a problem to fix — a provenance note worth surfacing so nobody later treats Buyer/Investor's or Diaspora Investor's service list as more source-grounded than it is.
+
+**Affects:** `role-workflows.md` — this note belongs in each of those two roles' sections, matching how Group C's A4 answer documents provenance directly in the affected role sections rather than only in this file.
+
+### B5. Same question for Owner's Representative / PoA Holder.
+
+**Same finding.** This role never appears as a Responsible Role in the sourced master-table rows either. Its documented service list (#29, #30) is entirely extrapolated. It also appears constantly as a *secondary* applicant category — "Authorized Representative acting under a valid Power of Attorney" — sprinkled through nearly every sourced service's Who Can Apply section, which gives it more textual presence in the module than #4's role-column tally alone would suggest, but that presence is all secondary/derivative, never a row's primary Responsible Role.
+
+**Confidence:** Sourced, same basis as B4.
+
+**Affects:** `role-workflows.md`.
+
+---
+
+## C. Payment Artefacts and Mechanisms
+
+### C1. Does Service #6's Wallet Account reference apply module-wide?
+
+**Confirmed by client (2026-08-15): there is no separate wallet mechanism.** Service #6's purchaser flow uses the same shared platform payment gateway used everywhere else in this module and in Groups B and C. The "pay via Wallet Account" language in the master table's row 86 was a source-table artefact, not a real distinct payment path to build.
+
+**Note found during the check, not previously stated:** #6's own service-flow file never actually used the phrase "Wallet Account" anywhere — its Processing Workflow already said "Complete Payment" generically. The wallet language existed only in the source table row and in this document's own prior text (drawn from that row). So the correction is confined to `payments.md`'s Settlement Mechanism section; **#6's service-flow file required no edit**, since it never had the wallet reference the client's instruction described. Worth recording so nobody later goes looking for a "Wallet Account" string in #6 that was never actually there.
+
+**Confidence:** Client data (now settled).
+
+**Affects:** `payments.md`'s Settlement Mechanism section (updated). No change to #6's service-flow file. Also relevant, as context only, to Group C's still-open B2 question (whether the wallet primitive P-22 is shared build across modules) — noted in `payments.md` without touching Group C's own files.
+
+### C2. Does "Fee Balance" mean the same thing here as it meant in Group C's now-retired model?
+
+**Proposed: no — it can't, because the standing-account structure it described in Group C never existed for individual users in the first place.** Group C's B9 found "Fee Balance" was evidence of a since-retired standing pre-funded account. Individual User has no institutional account structure of any kind — there's no entity here analogous to a bank's settlement account. The term most plausibly denotes an amount-due or amount-paid line on a single transaction's receipt.
+
+**Confidence:** Medium-high. The retired-account reading is confidently ruled out (there's nothing here for it to describe); the "single-transaction balance line" reading is the most natural remaining one but isn't independently confirmed by source.
+
+**Affects:** `payments.md`'s Payment Artefacts section; no service-flow file changes needed unless the client's answer changes what the receipt UI should show.
 
 ---
 
 ## Summary
 
-| Area | Questions | Proposed | Needs client confirmation |
-| :---- | :---: | :---: | :---: |
-| A. Roles | 3 | 3 | 3 (A1, A2 bundled with A1, A3) |
-| B. Payments | 4 | 3 with a proposed direction | 4 (all) |
-| C. Service structure | 1 | 1 | 0 (informational) |
-| **Total** | **8** | **7** | **7** |
+**Updated 2026-08-15 — client answers received for A5, A7, and C1.** All 14 questions are now resolved: 11 by proposed position (unchallenged), 3 by direct client confirmation. Nothing remains on the client-facing list.
 
-Unlike Group C's open-questions.md at its current state, **none of these are resolved yet** — this is the first pass through this module's analysis layer, not a multi-round audit. The single highest-priority item for a follow-up pass is **B2** (the Section 9 correction sweep across #1–#39), since `navigation.md` and `role-workflows.md` in this same delivery already had to make a judgement call about which payment-timing claim to trust (the file's own Option 1 workflow where one exists, the master table row otherwise) rather than the files' Section 9 line — meaning the four documents delivered in this chat are already internally consistent with the *correct* payment timing, not the currently-published Section 9 text. That gap between what this module's four new documents say and what the 43 existing service-flow files say should be closed before UI work starts, or the UI will be built against whichever one a given screen author happens to open first.
+| Area | Questions | Resolved | Awaiting client data |
+| :---- | :---: | :---: | :---: |
+| A. Payment Timing | 7 | 7 | 0 |
+| B. Role Attribution | 5 | 5 | 0 |
+| C. Payment Artefacts | 2 | 1 | 0 (1 open, see below) |
+| **Total** | **14** | **13** | **0** |
+
+C2 ("Fee Balance" terminology) remains genuinely undecided but was never put to the client — it's a lower-priority item with no file currently depending on its answer, not counted as "awaiting" in the row above.
+
+### The answers that changed existing documents
+
+| Answer | What it changed |
+| :---- | :---- |
+| **A1–A4** | Confirmed the proposed positions; corrected #5, #7, #9–#18, #23, #24, #26, #28, #33, #39's Section 9 and related sections |
+| **A5** — client confirmed: fee applies to #27's online path, same timing as counter | #27 restructured to document both channels explicitly |
+| **A6** | #39 corrected to no-fee |
+| **A7** — client confirmed: #38's fee stands as documented | No file change — confirms existing text |
+| **B1** — conflict check found nothing blocking; proposed resolution adopted | #23, #24's Who Can Apply |
+| **B3** | #23, #24, #25's Who Can Apply (Property Management Company removed) |
+| **C1** — client confirmed: no wallet mechanism exists | `payments.md`'s Settlement Mechanism section (not #6's file, which never had the reference — see C1 above) |
+
+This document previously listed a three-item client-facing list (A5, A7, C1). All three are now answered above and removed from that list.
