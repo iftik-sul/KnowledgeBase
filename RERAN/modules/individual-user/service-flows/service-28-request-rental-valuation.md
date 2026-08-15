@@ -4,7 +4,7 @@ module: individual-user
 type: service-flow
 status: current
 source_type: sourced
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -30,7 +30,7 @@ Provide an official and transparent rental valuation that supports leasing decis
 
 ## 3. Description
 
-The service allows an eligible applicant to request a rental valuation for a residential, commercial, industrial, or mixed-use property. The applicant submits the required property information, supporting documents, and applicable service fee. Following verification and valuation by RERAN, an official Rental Valuation Report is generated and made available to the applicant.
+The service allows an eligible applicant to request a rental valuation for a residential, commercial, industrial, or mixed-use property. The applicant submits the required property information and supporting documents. Following verification and valuation by RERAN, and once the valuation is approved, the applicable fee is paid and an official Rental Valuation Report is generated and made available to the applicant.
 
 ## 4. Who Can Apply
 
@@ -83,7 +83,6 @@ The service allows an eligible applicant to request a rental valuation for a res
 * Property Photographs (where applicable)  
 * Site Plan or Property Map (where applicable)  
 * Previous Valuation Report (Optional)  
-* Proof of Payment  
 * Other supporting documents required by RERAN
 
 ## 8. Service Fee
@@ -94,7 +93,9 @@ Applicable according to the RERAN fee schedule.
 
 **Yes**
 
-Payment must be completed before the application is submitted.
+**Payment is completed after RERAN approves the valuation, not before submission.** Source row 84 states this directly: *"Add details → Upload documents → Pay fees after approval → Receive rental evaluation certificate."*
+
+*(Corrected 2026-08-15 — this file previously required payment before submission, the opposite of what the source explicitly states. This was the clearest single-service finding in `payments.md`'s audit — see Category 2.)*
 
 ## 10. Processing Authority
 
@@ -122,8 +123,6 @@ Upload Required Documents
 ↓  
 Review Application  
 ↓  
-Complete Payment  
-↓  
 Submit Application
 
 ↓
@@ -140,17 +139,27 @@ Conduct Property Valuation
 ↓  
 Prepare Rental Valuation Report  
 ↓  
-Approve Report  
+Approve Report
+
+↓
+
+Applicant
+
+Review Service Fee  
 ↓  
-Notify Applicant
+Pay Service Fee
+
+↓
+
+RERAN
+
+Notify Applicant  
+↓  
+Release Rental Valuation Report
 
 ## 13. Application Status Flow
 
 Draft  
-↓  
-Payment Pending  
-↓  
-Payment Successful  
 ↓  
 Submitted  
 ↓  
@@ -160,7 +169,11 @@ Property Inspection Scheduled (if required)
 ↓  
 Valuation in Progress  
 ↓  
-Approved  
+Approved — Awaiting Payment  
+↓  
+Payment Pending  
+↓  
+Payment Successful  
 ↓  
 Completed
 
@@ -207,9 +220,10 @@ Upon successful completion, the system generates:
 * Valuation Details  
 * Document Upload  
 * Application Review  
+* Application Submitted  
+* Valuation Approved — Payment Due  
 * Payment  
 * Payment Successful  
-* Application Submitted  
 * Application Details  
 * Rental Valuation Report
 
@@ -219,12 +233,12 @@ Upon successful completion, the system generates:
 * Retrieve Property Details  
 * Validate Property Information  
 * Upload Documents  
-* Calculate Service Fee  
-* Initiate Payment  
-* Verify Payment  
 * Submit Rental Valuation Request  
 * Schedule Property Inspection  
 * Generate Rental Valuation Report  
+* Calculate Service Fee  
+* Initiate Payment  
+* Verify Payment  
 * Retrieve Application Status  
 * Download Valuation Report  
 * Send Notifications
@@ -250,11 +264,11 @@ Upon successful completion, the system generates:
 * Applicant can submit a rental valuation request.  
 * System validates the property information before submission.  
 * Required supporting documents are uploaded successfully.  
-* Payment is completed before regulatory review.  
 * Property inspection can be scheduled where required.  
 * Application receives a unique application reference number.  
-* An official rental valuation report is generated upon approval.  
-* Applicant can download the completed valuation report.  
+* An official rental valuation report is prepared and approved by RERAN before payment is requested.  
+* Payment is completed after approval, before the report is released to the applicant.  
+* Applicant can download the completed valuation report once payment is confirmed.  
 * Applicant receives completion notifications.  
 * All activities are recorded in the audit log.
 
@@ -263,10 +277,10 @@ Upon successful completion, the system generates:
 1. Only eligible applicants with a legitimate interest in the property may request a rental valuation.  
 2. The valuation shall be conducted using RERAN-approved valuation standards and methodologies.  
 3. A physical property inspection may be required depending on the property type or regulatory requirements.  
-4. Payment must be completed before the application proceeds for review.  
-5. The rental valuation report becomes official only after approval by RERAN.  
+4. **Payment is completed after RERAN approves the valuation report, not before submission.** *(Corrected 2026-08-15 — see Section 9.)*  
+5. The rental valuation report becomes official only after approval by RERAN and is released only once payment is confirmed.  
 6. The issued valuation reflects the property's estimated rental value as of the valuation date and should not be interpreted as a guaranteed rental price.  
 7. Every Request Rental Valuation application receives a unique application reference number.  
 8. Rental valuation reports remain part of the property's historical records and may be referenced in future regulatory processes.  
 9. Applicants may submit a new valuation request whenever an updated assessment is required.  
-10. All applications, approvals, inspections, valuation reports, payments, document submissions, and notifications must be permanently recorded in the audit trail.
+10. All applications, approvals, valuation reports, payments, document submissions, and notifications must be permanently recorded in the audit trail.

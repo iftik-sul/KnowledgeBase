@@ -4,7 +4,7 @@ module: individual-user
 type: service-flow
 status: current
 source_type: sourced
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -88,7 +88,13 @@ Applicable according to the RERAN fee schedule.
 
 **Yes**
 
-Payment must be completed before the dispute application is submitted.
+Payment timing differs by channel — see Processing Workflow.
+
+**Service Center (Option 1):** documents are submitted and the application is entered and audited first; payment is completed at that point, before the dispute is assigned to a hearing or conciliation track.
+
+**Online (Option 2):** payment is completed before the application is submitted.
+
+*(Corrected 2026-08-15 — this file previously stated a single blanket "before submission" claim, which contradicted Option 1's own workflow below (already correctly ordered) and the sourced order across all ten consolidated dispute rows (72–81). See `payments.md` Category 2.)*
 
 ## 10. Processing Authority
 
@@ -137,7 +143,7 @@ Decision Issued
 ↓  
 Receive Resolution / Judgment
 
-────────────────────────────
+──────────────────────────────
 
 Option 2 – Online
 
@@ -283,7 +289,7 @@ Depending on the dispute category:
 * System validates the applicant before submission.  
 * User selects a dispute category.  
 * Required documents are uploaded successfully.  
-* Payment is completed before submission.  
+* Payment is completed at the point required by the selected channel.  
 * Application receives a unique reference number.  
 * System routes the application to the correct dispute process.  
 * Hearing or conciliation sessions are scheduled where required.  
@@ -293,7 +299,7 @@ Depending on the dispute category:
 ## 21. Business Rules
 
 1. Only authorized landlords, tenants, or their legal representatives may submit tenancy disputes.  
-2. Payment must be completed before the application is submitted.  
+2. Payment must be completed at the point required by the selected channel — before submission online, or after the Service Center audits the application. *(Corrected 2026-08-15 — see Section 9.)*  
 3. Every dispute must be assigned to one official dispute category.  
 4. The dispute category determines the workflow, processing time, and expected outcome.  
 5. RERAN may conduct conciliation sessions, hearings, or remote litigation depending on the selected dispute type.  
