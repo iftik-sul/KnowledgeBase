@@ -3,7 +3,7 @@ project: RERAN
 module: financial-trust-institutions
 type: navigation
 status: current
-updated: 2026-08-14
+updated: 2026-08-15
 derived_from:
   - "RERAN/modules/financial-trust-institutions/roles-and-responsibilities.md"
   - "RERAN/modules/financial-trust-institutions/open-questions.md"
@@ -77,16 +77,9 @@ Every item is visible and actionable to every role. There is no menu filtering, 
 
 ## Landing After Login
 
-Every role lands on Dashboard, with identical access to its content. Only the suggested primary call to action differs, as a convenience default rather than an access restriction:
+**Resolved 2026-08-15.** Every role lands on the same [Dashboard](ui/screens/dashboard.md), with identical content and no per-role primary call to action.
 
-| Role | Primary call to action |
-| :---- | :---- |
-| Mortgage Officer | New Service Request |
-| Institution Relationship Manager | Approaching approval renewal, if any; otherwise institution overview. **Corrected 2026-08-14** — previously "whichever of approval renewal or settlement shortfall is more urgent"; there is no standing settlement account left to run short (`open-questions.md` B1), so that half of the comparison no longer has a referent. No replacement urgency trigger is proposed in its place — flagged as a gap, not silently filled. |
-| Account Trustee | Oldest escrow request awaiting assessment |
-| Auditing Bureau Officer | Nearest reporting obligation |
-
-**Kept, reworded.** These CTAs describe what each role *typically* does first — not what they are limited to. Any user can act on any queue from the Dashboard regardless of which CTA is shown for their role. Whether a unified dashboard should instead show one shared CTA for everyone is a design question this issue doesn't decide; flagging it here rather than resolving it unilaterally. The certification queue count on the Dashboard — previously described as visible "regardless of role" because of the `certify` scope — is now simply the institution-wide count, visible to everyone, since certification is not scope-gated at all.
+> **Superseded 2026-08-14 framing, replaced rather than extended.** This section previously proposed a different suggested CTA per role — New Service Request (Mortgage Officer), approaching approval renewal (Institution Relationship Manager), oldest escrow request (Account Trustee), nearest reporting obligation (Auditing Bureau Officer) — described as "a convenience default, not an access restriction," with the underlying design question ("should a unified dashboard show one shared CTA for everyone?") explicitly left open. That question is now answered: the reworked Dashboard (issue #50) shows the same Quick Actions row to every user — New Service Request, View Applications, Internal Certification Queue, Escrow Requests — plus Focus Area summaries covering what the four role-specific CTAs used to point at individually (applications, escrow & trust accounts, compliance, institution standing). There is no remaining per-role landing default to document.
 
 ---
 
@@ -100,4 +93,4 @@ Every role lands on Dashboard, with identical access to its content. Only the su
 
 Until 2026-08-14, this document described a role × permission-scope matrix: six permission scopes (`file`, `certify`, `escrow`, `audit`, `settlement`, `admin`), each provisioned per staff member under registration Flow 5, gating which menu items a given user could see; a maker ≠ checker access rule; and an `audit`-exclusivity rule barring a user from holding `audit` alongside `escrow` or `certify`. All of that is **retired**, not demoted to optional detail, per the client decision above. See [roles-and-responsibilities.md](roles-and-responsibilities.md#how-they-work-together) for how certification now works as an unrestricted action, attributed by role in the audit trail rather than gated by scope.
 
-**Not yet reconciled.** `ui/screens/*.md` (13 files), `ui/validation-rules.md`, and `ui/components.md` still describe the retired role/scope model and cross-reference this document's previous framing. Reconciling them against the unified model is explicitly out of scope for issue #38 and is tracked as a separate, later pass — those files are left exactly as they were.
+**Corrected 2026-08-15 — mostly reconciled now, not "not yet reconciled."** This section previously stated that all 13 `ui/screens/*.md` files, `ui/validation-rules.md`, and `ui/components.md` still described the retired role/scope model, and that reconciling them was tracked as a separate later pass (issue #50). That pass has largely happened: `ui/validation-rules.md`, `ui/components.md`, and 12 of the 13 screens — every one except `service-request.md` — are reconciled against both the unified-access model and the corrected payment model. `service-request.md` remains genuinely open, tied to an unresolved question about its per-service field matrix (see `ui/screens-unified/README.md`), and is the one file this note still applies to.
