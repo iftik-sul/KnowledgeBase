@@ -253,7 +253,9 @@ Upon successful completion, the system generates:
 * Statement Certificate  
 * Provisional Sale Registration Certificate  
 * Property Map  
-* Fee Balance Information
+* Payment Receipt
+
+*(Corrected 2026-08-15 — "Fee Balance Information" removed and replaced with "Payment Receipt," which this file's Output list previously lacked entirely despite every other fee-bearing service in the module issuing one. Confirmed by client, `open-questions.md` C2: there is no Fee Balance concept anywhere in this module — every payment settles instantly through the standard payment gateway, no wallet, no running or partial balance to report.)*
 
 ## 16. Related Services
 
