@@ -8,6 +8,7 @@ contains_proposals: true
 derived_from:
   - "RERAN/modules/financial-trust-institutions/roles-and-responsibilities.md"
   - "RERAN/modules/financial-trust-institutions/open-questions.md"
+  - "RERAN/modules/financial-trust-institutions/ui/screens-unified/submit-application.md"
 tags:
   - financial-trust-institutions
   - ui-spec
@@ -19,6 +20,8 @@ tags:
 **Proposed.** Shared components used across the Group C screens. Screens link here rather than restating definitions.
 
 > **Corrected 2026-08-15.** The Balance Card and Ledger Table components are removed — both were built for the retired standing-account model (`open-questions.md` B1). References to permission scopes throughout this document are removed — scopes are retired module-wide (`navigation.md`). See `payment-history.md` for the screen that replaced the account-balance model these components served.
+>
+> **Added 2026-08-15.** Repeatable Field Group and Conditional Field Selector, both required by [screens-unified/submit-application.md](screens-unified/submit-application.md)'s Service-Specific Details step once its full eighteen-service field audit found a single flat-field layout doesn't cover every service. See each component below.
 
 ---
 
@@ -87,6 +90,33 @@ Drag-and-drop plus file picker. Shows required versus optional documents for the
 ## Document Reference Picker
 
 Attach a document already in the institution repository to a new request. Prevents the same instrument being uploaded once per transaction.
+
+## Repeatable Field Group
+
+**Added 2026-08-15.** A block of sub-fields that can be added or removed as a unit, for form sections where the number of entries varies per application rather than being fixed. Used on [screens-unified/submit-application.md](screens-unified/submit-application.md)'s Service-Specific Details step for its **Pattern B** services:
+
+* **Sale Procedure — Heirs (#13)** — one group per heir (name, NIN, contact, bank account details), added until every heir is captured.
+* **Company Shares Sale (#14)** — one group per selling shareholder (name, shareholding, identification), embedded inside an otherwise flat form.
+* **Split Ownership (#16)** — one group per resulting parcel (owner details), with the group count expected to match a Number of Resulting Parcels field entered earlier in the same step.
+
+**Behaviour**
+
+* Add Another / Remove controls on each group; at least one group is required where the field is itself required.
+* Where a preceding quantity field governs the count (Split Ownership's parcel count), the component should track that figure and flag a mismatch rather than silently truncating or padding — see [screens-unified/submit-application.md](screens-unified/submit-application.md#validation) rule 4.
+* Where no quantity field precedes it (Sale Procedure, Company Shares Sale), the count is simply however many groups the filer adds — no target to validate against beyond "at least one."
+* Each group validates independently; an incomplete group blocks progression the same way a missing flat field would.
+
+## Conditional Field Selector
+
+**Added 2026-08-15.** A checklist of available attributes, where checking an item reveals a Current Value / Requested New Value input pair for that attribute only. Used on [screens-unified/submit-application.md](screens-unified/submit-application.md)'s Service-Specific Details step for its one **Pattern C** service:
+
+* **Update Title Deed Information (#15)** — the applicant selects which recorded fields are changing (from the property's existing record), and a value pair renders per field selected. This is not the same problem the Repeatable Field Group solves: it's attribute selection against a fixed, known set of possible fields, not a variable-length list of similar entities.
+
+**Behaviour**
+
+* At least one item must be selected before the step can be completed — see [screens-unified/submit-application.md](screens-unified/submit-application.md#validation) rule 5.
+* Unchecking an item after entering values for it clears those values rather than hiding them, so a later re-check doesn't silently resurrect stale data.
+* Current Value is pre-filled and read-only, sourced from the existing property record; only Requested New Value is editable.
 
 ## Audit Timeline
 
