@@ -3,9 +3,10 @@ project: RERAN
 module: real-estate-developer
 type: navigation
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
   - "RERAN/modules/real-estate-developer/roles-and-responsibilities.md"
+  - "RERAN/modules/real-estate-developer/ui/README.md"
 tags:
   - real-estate-developer
   - navigation
@@ -13,6 +14,8 @@ tags:
 ---
 
 # Real Estate Developer Navigation & Access
+
+**Confirmed 2026-08-15.** Client decision: Group B does not gate access by role or permission scope. The sidebar and access rules below reflect a single unified model — every role sees and can act on everything; role is recorded as audit-trail attribution only. This supersedes the Role Permission Matrix this document previously described — see [Superseded By This Document](#superseded-by-this-document) at the bottom.
 
 The shared navigation structure and access rules for the module. Screen files reference this document rather than repeating the sidebar in every file.
 
@@ -28,9 +31,25 @@ Real Estate Developer
 │  
 └── Escrow Liaison
 
+## Audit-Trail Principle
+
+Every action in this module is logged with the acting user and the role they held at the time:
+
+```
+Action: Project Registration Submitted
+Performed by: Adaeze Nwosu
+Role at time of action: Project Registration Officer
+
+Action: Sales Disclosure Filed
+Performed by: Adaeze Nwosu
+Role at time of action: Project Registration Officer
+```
+
+Role is **attribution only**. It does not filter which menu items are visible, which actions are enabled, or who may act on which record. Any of the four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison — may perform any action described in this module, including acting on a record they themselves filed.
+
 ## Left Sidebar Navigation
 
-The following sidebar is shared by operational users. Visibility depends on assigned role.
+One sidebar, identical for every user of a registered developer account, regardless of role. Every item below is visible and actionable to all four roles.
 
 | Menu | Description |
 | ----- | ----- |
@@ -46,27 +65,22 @@ The following sidebar is shared by operational users. Visibility depends on assi
 | Notifications | View alerts and system messages |
 | Help & Support | Contact RERA support |
 
-## Role Permission Matrix
+## Access Rules
 
-| Feature | Principal / Director | Project Registration Officer | Sales & Disclosure Officer | Escrow Liaison |
-| ----- | ----- | ----- | ----- | ----- |
-| Dashboard | ✅ | ✅ | ✅ | ✅ |
-| Company Profile | Full | View | View | View |
-| Projects | Full | Full | View | View |
-| Property Registrations | Full | Full | View | ❌ |
-| Sales & Disclosures | Full | View | Full | View |
-| Escrow Management | View | ❌ | View | Full |
-| Applications | Full | Full | View | View |
-| Documents | Full | Full | Full | Full |
-| Reports | Full | Registration | Sales | Escrow |
-| Notifications | ✅ | ✅ | ✅ | ✅ |
+1. **Every menu item is reachable by every role.** All four roles have full access to every feature listed above — there is no rendering distinction between roles, no `View`-only variant, and no feature withheld from any role.
+2. **No maker ≠ checker restriction.** A user may review, certify, or act on a record they themselves filed. Role is not a basis for excluding anyone from a record's next step.
+3. **No role has a read-only variant of any screen.** Every user sees full detail and full action controls on every record in the module.
+4. **Reports are not scoped by role.** The full report set — registration, sales, escrow, and organizational — is available to every role. This replaces the previous per-role report scoping (`Registration` / `Sales` / `Escrow`).
 
-## Dashboard Overview by Role
+## Dashboard
 
-| Role | Dashboard Focus |
-| ----- | ----- |
-| Developer Principal / Director | Executive overview, projects, registrations, sales, reports |
-| Project Registration Officer | Project registrations, applications, document submissions |
-| Sales & Disclosure Officer | Property listings, disclosures, buyer documentation |
-| Escrow Liaison | Escrow activities, fund release status, coordination tasks |
+Every role lands on the same [Dashboard](ui/screens/dashboard.md), with identical content and no per-role default view.
+
+The four focus areas the dashboard covers — executive/project overview, registrations and applications, sales and disclosures, and escrow activity — are the same for everyone. They previously appeared as four separate per-role dashboard definitions; they are now sections of one shared screen, since any role may act on any of them.
+
+## Superseded By This Document
+
+Until 2026-08-15, this document described a **Role Permission Matrix** granting each of the four roles `Full`, `View`, or `❌` per feature: Property Registrations barred outright for the Escrow Liaison, Escrow Management barred for the Project Registration Officer, Company Profile editable only by the Principal / Director, and Reports scoped to each role's own domain. It also stated under Left Sidebar Navigation that "visibility depends on assigned role," and defined a separate **Dashboard Overview by Role** table assigning each role a different dashboard focus.
+
+All of that is **retired**, not demoted to optional detail, per the client decision above. Role descriptions remain in [roles-and-responsibilities.md](roles-and-responsibilities.md) and the typical-practice notes in [role-workflows.md](role-workflows.md), but they describe what each role usually does, not what it is permitted to do.
 

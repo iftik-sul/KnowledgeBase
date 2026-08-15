@@ -21,7 +21,9 @@ tags:
 
 ## Why This Module No Longer Differs From The Others
 
-Group C now works the same way Group B does: one sidebar, identical for every user of a verified institution account, whatever their role. What still differs from Group B is not the access model — that's now identical in kind — but the *reason* roles are documented at all here. Group B roles determine access; Group C roles exist purely as an audit-trail attribution field, recording who performed an action and what role they held at the time. See [roles-and-responsibilities.md](roles-and-responsibilities.md) for the role descriptions and how they feed the audit trail.
+Group C now works the same way Group B does: one sidebar, identical for every user of a verified institution account, whatever their role.
+
+**Corrected 2026-08-15.** This section previously added that the two groups still differed in the *reason* roles are documented — "Group B roles determine access; Group C roles exist purely as an audit-trail attribution field." That distinction no longer holds. The same client decision has since been applied to Group B (issue #58): its four roles no longer gate access either, and are likewise retained as audit-trail attribution only. Roles in both modules now mean the same thing — a record of who performed an action and what role they held at the time, not a permission. See [roles-and-responsibilities.md](roles-and-responsibilities.md) for Group C's role descriptions and how they feed the audit trail, and [`../real-estate-developer/navigation.md`](../real-estate-developer/navigation.md) for Group B's.
 
 ---
 
