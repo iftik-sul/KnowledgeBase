@@ -86,7 +86,7 @@ Applicable according to the RERAN fee schedule.
 
 **Yes**
 
-Paid by the customer — sourced (row 43, Step 2–6 includes "pay"). **Customer Payment at Counter** model, unaffected by the 2026-08-14 payment-model correction (`open-questions.md` B1). *(Corrected 2026-08-14 — previously cited `B9`, now superseded.)*
+Paid by the customer, **before** RERA's review and approval — sourced (row 43's own sequence: transaction data entered, then payment, then "review & approval"). **Customer Payment at Counter** model, unaffected by the 2026-08-14 payment-model correction (`open-questions.md` B1). *(Corrected 2026-08-14 — previously cited `B9`, now superseded.)*
 
 ## 10. Processing Authority
 
@@ -146,7 +146,7 @@ Information Requested
 ↓  
 Returned for Correction  
 ↓  
-Approved — Awaiting Payment  
+Approved  
 ↓  
 Completed
 
@@ -154,6 +154,8 @@ Completed
 
 * Rejected  
 * Withdrawn
+
+**Corrected 2026-08-15 — `Approved — Awaiting Payment` removed.** This status previously sat between `Returned for Correction` and `Completed`, but contradicts this service's own sourced workflow (Section 12, Section 9): the customer pays *before* RERA's review and approval, not after. By the time a decision is reached, payment has already happened. Compare Services #12 and #18, where RERA's row-sourced sequence has approval *before* payment, and where this status is kept as accurate.
 
 ## 14. Possible Outcomes
 
@@ -227,7 +229,7 @@ Upon successful completion, the system generates:
 * System validates the property's registration and current ownership before allowing a split.  
 * Application receives a unique application reference number.  
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
-* Payment is completed before the split is finalized.  
+* Payment is completed before RERA's review.  
 * Approved splits create new, separately registered property records.  
 * Customer receives new title deeds and a map on completion.  
 * All activities are recorded in the audit log.
@@ -237,7 +239,7 @@ Upon successful completion, the system generates:
 1. This application may be processed by any of the institution's four Group C roles where bank-originated, or otherwise by a Trustee Centre / Land Department operator acting on the owner(s)' behalf. **Confirmed 2026-08-15** — previously conditioned on the Mortgage Officer specifically; `open-questions.md` A4 confirms no service is role-specific. *(Whether a bank-originated variant exists for this service at all remains unconfirmed by source — only the counter path is confirmed by row 43.)*
 2. The property must be registered with RERAN before it can be split.  
 3. All co-owners must consent to the split, where applicable.  
-4. Payment is required before the application is finalized.  
+4. Payment is required before RERA's review and approval.  
 5. Approved splits create new, separately registered property records, each with its own title deed.  
 6. Every application receives a unique application reference number.  
 7. All applications, approvals, payments, and notifications are permanently recorded in the audit trail.
