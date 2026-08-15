@@ -15,970 +15,174 @@ tags:
 
 # Screen: Notifications
 
-**Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
+**Access:** Any of the developer's four Group B roles — identical screen for every user, no role-based variant.
 
-A centralized communication hub consolidating notifications relevant to the viewing role. The Developer Principal / Director sees organization-wide notifications across every module; the three operational roles (Registration Officer, Sales & Disclosure Officer, Escrow Liaison) each see notifications scoped to their own domain, organized around a dedicated Priority Notifications section that the Principal's version does not have.
+> **Rebuilt 2026-08-15.** This screen previously described four designs — one per role — differing in their notification type vocabularies, their summary cards and whether they carried a Priority Notifications section or Pinned Announcements. All four are **retired**; this is one screen absorbing the load-bearing content of each, including the **union of the four notification type vocabularies**.
 
 ## Purpose
 
-Purpose differs between variants — see [Role Variations](#role-variations).
+Show every alert and system message relevant to the organization — regulatory decisions, information requests, deadlines, escrow and bank events, document expiry and system announcements — with the controls to read, act on, and dismiss them.
 
 ## Layout
 
-* **Visible Sidebar:** Developer Operational Sidebar
-* **Active Menu:** **Notifications**
-* **Top Bar Title:** Notifications
-* **Search Bar:** Search anything...
-
-The page uses the shared **Background \+ HorizontalBorder** component.
-
-Which sidebar menu items are visible, the subtitle, and the layout diagram differ by role — see [Role Variations](#role-variations). The layout diagram is identical for the Registration Officer, Sales & Disclosure Officer, and Escrow Liaison (Notification Summary Cards → Filters → **Priority Notifications** → Notifications List → Upcoming Deadlines → Recent System Announcements); the Principal's differs both in content (no Priority Notifications or Upcoming Deadlines) and in ending with a Pagination step.
+```
+Top Bar
+↓
+Notification Summary Cards
+↓
+Filters & Search
+↓
+Priority Notifications
+↓
+Notifications List
+↓
+Upcoming Deadlines
+↓
+Pinned Announcements
+↓
+Pagination
+```
 
 ## Sections
 
-Every section (Notification Summary Cards, Filters, the notification types/priority vocabulary, Priority Notifications, the Notifications List, Upcoming Deadlines, Pinned Announcements / Recent System Announcements) differs between variants — see [Role Variations](#role-variations). Only the Principal's version has an explicit **Pagination** section; the other three roles do not paginate the notifications list.
+### Section 1 — Notification Summary Cards
+
+| KPI | Description |
+| :---- | :---- |
+| Total Notifications | All notifications, organization-wide |
+| Unread | Not yet read |
+| High Priority | Requiring prompt attention |
+| Action Required | Carrying an action the organization must take |
+| Due This Week | Tied to a deadline within seven days |
+| Read | Already read |
+| Archived | Dismissed to archive |
+
+**Absorbed 2026-08-15:** the union of all four variants' cards. Each defined a similar set scoped to its own notification domain.
+
+### Section 2 — Filters
+
+* Search Notifications
+* **Notification Type Filter** — see Section 3
+* Priority Filter — Critical · High · Medium · Low
+* Read Status Filter — Unread · Read · Archived
+* Related Record Filter — project · property · application · sale · escrow account
+* Date Range Filter
+* Reset Filters
+
+### Section 3 — Notification Types
+
+**Absorbed 2026-08-15 — the union of all four vocabularies**, grouped by subject. As with [documents.md](documents.md)'s categories, the four lists overlapped on the general types and diverged entirely on the domain ones; picking any single list would have deleted whole classes of notification.
+
+**Regulatory**
+
+* Application approved · Application rejected · Application returned for correction
+* Additional information requested
+* Inspection scheduled
+* Technical clarification requested
+* Compliance deadline approaching
+
+**Project & Registration**
+
+* Project registration approved · Property registration approved
+* Registration returned for correction
+* Survey or technical review update
+
+**Sales & Disclosure**
+
+* Disclosure submitted · Disclosure approved · Disclosure returned
+* Buyer document required or expiring
+
+**Escrow**
+
+* Fund release approved · Fund release returned · Funds released
+* Milestone verification required · Milestone overdue
+* Bank action pending · Account Trustee response received
+* Escrow agreement expiring
+
+**Documents & System**
+
+* Document verified · Document rejected · Document expiring · Document expired
+* System announcement · Scheduled maintenance
+* Payment confirmation *(per-transaction gateway payment — see the relevant [service flow](../../service-flows/) for that service's payment timing)*
+
+### Section 4 — Priority Notifications
+
+High-priority and action-required notifications surfaced above the main list, with a primary and secondary action per item.
+
+**Absorbed 2026-08-15** from the three operational variants. The Principal / Director variant had no equivalent — it opened directly on the full list. Kept, since surfacing urgent items is real function.
+
+### Section 5 — Notifications List
+
+| Column | Description |
+| :---- | :---- |
+| Notification | Title and body |
+| Type | Notification type |
+| Related Record | The record it concerns |
+| Priority | Critical / High / Medium / Low |
+| Received | Timestamp |
+| Status | Unread / Read / Archived |
+| Action | Available actions |
+
+**Notification Actions:** Open Related Record · Mark as Read · Mark as Unread · Archive · Dismiss.
+
+**Reconciled 2026-08-15:** the Principal / Director variant rendered this as a card list with header/body/footer rather than a table; the three operational variants used a table with columns. Kept as the **table**, which carries more per row and matches every other list screen in the module. The card layout's header/body/footer content maps onto the columns without loss.
+
+### Section 6 — Upcoming Deadlines
+
+Deadline-bearing notifications with due dates, sorted nearest first.
+
+**Absorbed** from the three operational variants, each of which scoped it to its own domain. Now one list across all deadline types — the same consolidation applied on [dashboard.md](dashboard.md).
+
+### Section 7 — Pinned Announcements
+
+System and regulatory announcements pinned above the feed.
+
+**Absorbed 2026-08-15** from the Principal / Director variant's *Pinned Announcements* and the operational variants' *Recent System Announcements* — the same content, pinned in one and listed in the others. Kept pinned, which is the stronger treatment.
+
+### Read Status
+
+Unread · Read · Archived. See [status-badges.md](../status-badges.md) — this vocabulary was already consistent across all four variants, the one legend in this screen with no conflict.
 
 ## Empty State
 
-Message and actions differ between variants — see [Role Variations](#role-variations). Only the Escrow Liaison's version specifies an **Illustration** (a Notification Bell) alongside the message; the other three roles specify text only.
+> No notifications. Alerts about applications, registrations, disclosures, escrow activity and documents will appear here.
+
+## Pagination
+
+Rows per page · Previous · Next · Page Number · Total Records
 
 ## Reused Components
 
-Differs between variants — see [Role Variations](#role-variations).
+See [components.md](../components.md). **Reconciled naming:** three variants listed "Notification Cards" while the Escrow Liaison's listed "Notification List" plus a separate "Priority Alert Cards" entry. With one screen and a table layout, the resolved components are **Data Table**, **Status Badges** and **Priority Alert Cards** for Section 4; `components.md` is updated.
 
-## Role Variations
+## Validation
 
-> **Reframed 2026-08-15 — these are content variants, not access restrictions.** Every variant
-> below is reachable and actionable by all four roles; none of them is withheld from anyone. What
-> the blocks record is that the source material defined this screen more than once, with different
-> KPI sets, filters, columns, actions or empty states each time — differences of *content*, not of
-> permission. Those are preserved verbatim rather than merged, because collapsing them into one
-> screen is a design decision about which variant (or which union of them) is correct, and that is
-> the client's call, not a documentation cleanup. **Flagged for review — see
-> [../README.md](../README.md#per-role-content-variants-flagged-for-review).**
->
-> The role headings below should now be read as *"the variant the source defined under this role's
-> heading"*, not *"what this role is allowed to see"*.
-
-### Developer Principal / Director
-
-### Sidebar Status
-
-* **Visible Sidebar:** Developer Operational Sidebar  
-* **Active Menu:** **Notifications**  
-* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
-
-### Top Bar Status
-
-**Title:** Notifications
-
-**Subtitle:** Stay informed about regulatory updates, application progress, compliance reminders, and organization activities.
-
-**Search Bar:** Search anything...
-
-**Page Actions (Right Side):**
-
-* Mark All as Read  
-* Notification Settings
-
-The page uses the shared **Background \+ HorizontalBorder** component.
-
-### Purpose
-
-Provide the Developer Principal / Director with a centralized communication hub where all notifications from RERA, financial institutions, internal teams, and the platform are consolidated. This screen helps executives stay informed about important events requiring awareness or action.
-
-### Layout
-
-Top Bar  
-↓  
-Notification Summary Cards  
-↓  
-Filters  
-↓  
-Notifications List  
-↓  
-Pinned Announcements  
-↓  
-Recent Activities  
-↓  
-Pagination
-
-### Section 1 — Notification Summary Cards
-
-Display six KPI cards.
-
-| KPI | Description |
-| ----- | ----- |
-| Total Notifications | All notifications received |
-| Unread | Notifications not yet viewed |
-| High Priority | Critical notifications |
-| Action Required | Items requiring organizational action |
-| Announcements | Official RERA communications |
-| This Week | Notifications received this week |
-
-Selecting a KPI filters the notification list.
-
-### Section 2 — Filters
-
-Located above the notification list.
-
-#### **Components**
-
-* Search Notifications  
-* Notification Type  
-* Priority  
-* Status  
-* Source  
-* Date Range  
-* Reset Filters
-
-### Notification Types
-
-* Applications  
-* Projects  
-* Property Registration  
-* Sales Disclosure  
-* Escrow  
-* Documents  
-* Company Profile  
-* Compliance  
-* License  
-* Payment  
-* Announcement  
-* System
-
-### Priority Levels
-
-* Critical  
-* High  
-* Medium  
-* Low
-
-### Status
-
-See [status-badges.md](../status-badges.md#notification-status).
-
-### Section 3 — Notifications List
-
-Each notification is displayed as a card.
-
-Each card contains:
-
-#### **Header**
-
-* Notification Icon  
-* Notification Title  
-* Priority Badge  
-* Time Received
-
-#### **Body**
-
-* Short Description  
-* Related Module  
-* Related Reference Number *(if applicable)*
-
-#### **Footer**
-
-* View Details  
-* Mark as Read
-
-Unread notifications are visually highlighted.
-
-### Section 4 — Pinned Announcements
-
-Displays important organization-wide announcements.
-
-Examples
-
-* New RERA Regulation  
-* Scheduled Platform Maintenance  
-* New Compliance Requirement  
-* Policy Update  
-* Holiday Notice
-
-Each announcement displays:
-
-* Title  
-* Summary  
-* Published Date  
-* Effective Date
-
-Button
-
-* Read Full Announcement
-
-### Section 5 — Recent Activities
-
-Timeline showing significant recent events.
-
-Examples
-
-* Project Approved  
-* Property Registration Completed  
-* Escrow Fund Released  
-* License Renewal Due  
-* Compliance Certificate Issued  
-* Sales Disclosure Approved  
-* Document Verification Completed
-
-Each activity displays:
-
-* Activity  
-* Date & Time  
-* Current Status  
-* Related Module
-
-Selecting an activity opens the related record.
-
-### Empty State
-
-If there are no notifications:
-
-**Message**
-
-> You're all caught up\! There are no new notifications at this time.
-
-Primary Button
-
-* Go to Dashboard
-
-### Pagination
-
-Bottom of the page.
-
-Components
-
-* Rows per page  
-* Previous  
-* Next  
-* Page Number  
-* Total Records
-
-### Reused Components
-
-See [components.md](../components.md) for definitions of every component used on this screen.
-
-### User Flow
-
-Dashboard  
-↓  
-Notifications
-
-├── Read Notification
-
-├── View Related Record
-
-├── Mark as Read
-
-└── Open Announcement
-
-### Notes
-
-* This is the **central communication hub** for the **Developer Principal / Director**.  
-* Notifications are aggregated from every module in the platform, ensuring executives do not need to monitor each module individually.  
-* High-priority and action-required notifications should remain pinned at the top until acknowledged.  
-* Every notification should include deep links to the relevant module (Project, Property Registration, Escrow, Application, Document, etc.) to reduce navigation time.  
-* Read/unread status is tracked per user and synchronized across devices.
-
-### Project Registration Officer
-
-### Sidebar Status
-
-* **Visible Sidebar:** Developer Operational Sidebar  
-* **Active Menu:** **Notifications**  
-* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
-
-### Top Bar Status
-
-**Title:** Notifications
-
-**Subtitle:** Stay informed about project registrations, regulatory updates, document reviews, and upcoming deadlines.
-
-**Search Bar:** Search anything...
-
-The page uses the shared **Background \+ HorizontalBorder** component.
-
-**Page Actions (Right Side):**
-
-* Mark All as Read  
-* Notification Settings
-
-### Purpose
-
-Provide the Project Registration Officer with a centralized notification center for monitoring all operational events related to projects, property registrations, applications, documents, and communications from RERA. The page prioritizes actionable notifications so officers can respond promptly and maintain compliance with regulatory timelines.
-
-### Layout
-
-Top Bar  
-↓  
-Notification Summary Cards  
-↓  
-Filters  
-↓  
-Priority Notifications  
-↓  
-Notifications List  
-↓  
-Upcoming Deadlines  
-↓  
-Recent System Announcements
-
-### Section 1 — Notification Summary Cards
-
-Display **8 KPI cards**.
-
-| KPI | Description |
-| ----- | ----- |
-| Total Notifications | All notifications |
-| Unread | Notifications not yet viewed |
-| High Priority | Urgent notifications |
-| RERA Requests | Information or action requests |
-| Returned Items | Returned projects, registrations, or applications |
-| Upcoming Deadlines | Due within the next 7 days |
-| Document Reviews | Document verification updates |
-| Completed Today | Notifications resolved today |
-
-Selecting a KPI filters the notification list.
-
-### Section 2 — Filters
-
-Allow officers to quickly locate specific notifications.
-
-#### **Components**
-
-* Search Notifications  
-* Notification Type  
-* Priority  
-* Status (Read / Unread)  
-* Related Module  
-* Date Range  
-* Reset Filters
-
-#### **Notification Types**
-
-* Project Registration  
-* Property Registration  
-* Application  
-* Document  
-* Inspection  
-* Deadline Reminder  
-* RERA Announcement  
-* System Notification
-
-#### **Priority Levels**
-
-* Critical  
-* High  
-* Medium  
-* Low
-
-### Section 3 — Priority Notifications
-
-Display important notifications requiring immediate action.
-
-Examples:
-
-* Additional information requested by RERA  
-* Project returned for correction  
-* Property registration returned  
-* Application approaching deadline  
-* Missing mandatory documents  
-* Scheduled inspection tomorrow
-
-Each notification displays:
-
-* Priority Indicator  
-* Notification Title  
-* Related Record  
-* Due Date  
-* Time Received
-
-Primary Action
-
-* Resolve Now
-
-Secondary Action
-
-* View Details
-
-### Section 4 — Notifications List
-
-Chronological list of notifications.
-
-#### **Columns**
-
-| Column | Description |
-| ----- | ----- |
-| Notification | Title |
-| Module | Related module |
-| Reference | Project / Property / Application ID |
-| Date & Time | Received |
-| Status | Read / Unread |
-| Priority | Priority level |
-| Action | Open |
-
-#### **Notification Actions**
-
-* View Details  
-* Mark as Read  
-* Mark as Unread  
-* Archive *(where permitted)*
-
-### Section 5 — Upcoming Deadlines
-
-Display all upcoming regulatory deadlines.
-
-#### **Columns**
-
-| Deadline | Related Record | Due Date | Days Remaining | Action |
-| :---: | :---: | :---: | :---: | :---: |
-
-Examples
-
-* Submit Project Registration  
-* Respond to RERA Query  
-* Upload Missing Documents  
-* Property Registration Submission  
-* Inspection Preparation
-
-High-priority deadlines appear first.
-
-### Section 6 — Recent System Announcements
-
-Display organization-wide and RERA announcements.
-
-Examples
-
-* Planned platform maintenance  
-* New registration guidelines  
-* Updated document requirements  
-* Regulatory policy changes  
-* Service availability updates
-
-Each announcement displays:
-
-* Announcement Title  
-* Published Date  
-* Category  
-* Read More
-
-### Empty State
-
-#### **Message**
-
-> You're all caught up\! There are no new notifications requiring your attention.
-
-Primary Button
-
-* Go to Dashboard
-
-Secondary Button
-
-* View Projects
-
-### Reused Components
-
-See [components.md](../components.md) for definitions of every component used on this screen.
-
-### User Flow
-
-Dashboard  
-↓  
-Notifications
-
-├── View Notification
-
-├── Open Related Project
-
-├── Open Property Registration
-
-├── Open Application
-
-├── Open Document
-
-├── Mark as Read
-
-└── Configure Notification Settings
-
-### Notes
-
-* This is the **central operational notification hub** for the **Project Registration Officer**.  
-* Notifications should automatically prioritize **Critical** and **High Priority** items, followed by approaching deadlines.  
-* Selecting a notification should navigate directly to the related **Project**, **Property Registration**, **Application**, or **Document**.  
-* Notifications should update in real time whenever RERA requests information, changes an application status, verifies documents, schedules inspections, or publishes important announcements.  
-* Read/unread status should synchronize across all devices for the logged-in user.
-
-### Sales & Disclosure Officer
-
-### Sidebar Status
-
-* **Visible Sidebar:** Developer Operational Sidebar  
-* **Active Menu:** **Notifications**  
-* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
-
-### Top Bar Status
-
-**Title:** Notifications
-
-**Subtitle:** Stay informed about sales disclosures, buyer verification, regulatory reviews, and compliance deadlines.
-
-**Search Bar:** Search anything...
-
-The page uses the shared **Background \+ HorizontalBorder** component.
-
-**Page Actions (Right Side):**
-
-* Mark All as Read  
-* Notification Settings
-
-### Purpose
-
-Provide the Sales & Disclosure Officer with a centralized notification center for monitoring every operational event related to property sales, disclosure applications, buyer documentation, communications from RERA, and approaching compliance deadlines. The page prioritizes actionable notifications so officers can quickly respond and keep sales disclosures compliant.
-
-### Layout
-
-Top Bar  
-↓  
-Notification Summary Cards  
-↓  
-Filters  
-↓  
-Priority Notifications  
-↓  
-Notifications List  
-↓  
-Upcoming Deadlines  
-↓  
-Recent System Announcements
-
-### Section 1 — Notification Summary Cards
-
-Display **8 KPI cards**.
-
-| KPI | Description |
-| ----- | ----- |
-| Total Notifications | All notifications |
-| Unread | Notifications not yet viewed |
-| High Priority | Urgent notifications |
-| RERA Requests | Requests requiring action |
-| Returned Disclosures | Disclosures returned for correction |
-| Buyer Verification | Buyer information requiring attention |
-| Upcoming Deadlines | Due within the next 7 days |
-| Completed Today | Notifications resolved today |
-
-Selecting a KPI filters the notification list.
-
-### Section 2 — Filters
-
-Allow officers to quickly locate specific notifications.
-
-#### **Components**
-
-* Search Notifications  
-* Notification Type  
-* Priority  
-* Status (Read / Unread)  
-* Related Module  
-* Date Range  
-* Reset Filters
-
-#### **Notification Types**
-
-* Property Sale  
-* Sales Disclosure  
-* Buyer Verification  
-* Buyer Documents  
-* Regulatory Application  
-* Deadline Reminder  
-* RERA Announcement  
-* System Notification
-
-#### **Priority Levels**
-
-* Critical  
-* High  
-* Medium  
-* Low
-
-### Section 3 — Priority Notifications
-
-Display notifications requiring immediate attention.
-
-Examples
-
-* Sales disclosure returned by RERA  
-* Additional buyer information requested  
-* Buyer identification rejected  
-* Proof of payment missing  
-* Disclosure submission deadline approaching  
-* Compliance review scheduled  
-* Identity verification failed  
-* Supporting document expired
-
-Each notification displays:
-
-* Priority Indicator  
-* Notification Title  
-* Related Sale / Disclosure  
-* Due Date  
-* Time Received
-
-#### **Primary Action**
-
-* Resolve Now
-
-#### **Secondary Action**
-
-* View Details
-
-### Section 4 — Notifications List
-
-Chronological notification list.
-
-#### **Columns**
-
-| Column | Description |
-| ----- | ----- |
-| Notification | Title |
-| Module | Related module |
-| Reference | Sale / Disclosure / Application |
-| Date & Time | Received |
-| Status | Read / Unread |
-| Priority | Priority level |
-| Action | Open |
-
-#### **Notification Actions**
-
-* View Details  
-* Mark as Read  
-* Mark as Unread  
-* Archive *(where permitted)*
-
-Selecting a notification opens the related Sale, Disclosure, Application, or Document.
-
-### Section 5 — Upcoming Deadlines
-
-Display all upcoming sales compliance deadlines.
-
-#### **Columns**
-
-| Deadline | Related Record | Due Date | Days Remaining | Action |
-| :---: | :---: | :---: | :---: | :---: |
-
-Examples
-
-* Submit Sales Disclosure  
-* Respond to RERA Query  
-* Upload Buyer Identification  
-* Submit Proof of Payment  
-* Correct Returned Disclosure  
-* Complete Buyer Verification
-
-Critical deadlines appear first.
-
-### Section 6 — Recent System Announcements
-
-Display organization-wide and RERA announcements.
-
-Examples
-
-* Updated sales disclosure requirements  
-* Buyer identity verification policy changes  
-* New accepted document formats  
-* Planned platform maintenance  
-* Disclosure processing improvements  
-* Regulatory guideline updates
-
-Each announcement displays:
-
-* Announcement Title  
-* Published Date  
-* Category  
-* Read More
-
-### Empty State
-
-#### **Message**
-
-> You're all caught up\! There are no new notifications requiring your attention.
-
-**Primary Button**
-
-* Go to Dashboard
-
-**Secondary Button**
-
-* View Sales & Disclosures
-
-### Reused Components
-
-See [components.md](../components.md) for definitions of every component used on this screen.
-
-### User Flow
-
-Dashboard  
-↓  
-Notifications
-
-├── View Notification
-
-├── Open Sale Record
-
-├── Open Sales Disclosure
-
-├── Open Application
-
-├── Open Document
-
-├── Mark as Read
-
-└── Configure Notification Settings
-
-### Notes
-
-* This is the **central operational notification hub** for the **Sales & Disclosure Officer**.  
-* Notifications automatically prioritize **Critical** and **High Priority** items, followed by approaching regulatory deadlines.  
-* Selecting a notification should navigate directly to the related **Sale Record, Sales Disclosure, Application, or Document**, allowing the officer to resolve issues with minimal navigation.  
-* Notifications should be grouped by **Today**, **Yesterday**, **Earlier This Week**, and **Earlier** to improve readability.  
-* Badge counters should update in real time as notifications are received or resolved.
-
-### Escrow Liaison
-
-### Sidebar Status
-
-* **Visible Sidebar:** Developer Operational Sidebar  
-* **Active Menu:** **Notifications**  
-* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
-
-### Top Bar Status
-
-**Title:** Notifications
-
-**Subtitle:** Stay informed about escrow activities, fund releases, milestone verification, and regulatory updates.
-
-**Search Bar:** Search anything...
-
-The page uses the shared **Background \+ HorizontalBorder** component.
-
-**Page Actions (Right Side):**
-
-* Mark All as Read  
-* Notification Settings
-
-### Purpose
-
-Provide the Escrow Liaison with a centralized notification center for monitoring escrow account activities, fund release requests, milestone verification updates, communications from RERA and financial institutions, and approaching compliance deadlines. The page prioritizes notifications that require operational action.
-
-### Layout
-
-Top Bar  
-↓  
-Notification Summary Cards  
-↓  
-Filters  
-↓  
-Priority Notifications  
-↓  
-Notifications List  
-↓  
-Upcoming Deadlines  
-↓  
-Recent System Announcements
-
-### Section 1 — Notification Summary Cards
-
-Display **8 KPI cards**.
-
-| KPI | Description |
-| ----- | ----- |
-| Total Notifications | All notifications |
-| Unread | Notifications not yet viewed |
-| High Priority | Urgent notifications |
-| RERA Requests | Requests requiring action |
-| Financial Institution Requests | Notifications from banks |
-| Returned Fund Releases | Fund release requests returned for correction |
-| Upcoming Deadlines | Due within the next 7 days |
-| Completed Today | Notifications resolved today |
-
-Selecting a KPI filters the notification list.
-
-### Section 2 — Filters
-
-Allow users to quickly locate specific notifications.
-
-#### **Components**
-
-* Search Notifications  
-* Notification Type  
-* Priority  
-* Status (Read / Unread)  
-* Related Module  
-* Financial Institution  
-* Date Range  
-* Reset Filters
-
-#### **Notification Types**
-
-* Escrow Account  
-* Fund Release  
-* Milestone Verification  
-* Document Verification  
-* Financial Institution Request  
-* RERA Request  
-* Deadline Reminder  
-* System Notification
-
-#### **Priority Levels**
-
-* Critical  
-* High  
-* Medium  
-* Low
-
-### Section 3 — Priority Notifications
-
-Display notifications requiring immediate attention.
-
-#### **Examples**
-
-* Fund release returned by RERA  
-* Bank requested additional documents  
-* Engineer certificate missing  
-* Quantity Surveyor report rejected  
-* Milestone verification pending  
-* Escrow account nearing compliance deadline  
-* Construction inspection scheduled  
-* Financial institution approval received
-
-Each notification displays:
-
-* Priority Indicator  
-* Notification Title  
-* Related Escrow Account / Fund Release  
-* Due Date  
-* Time Received
-
-#### **Primary Action**
-
-* Resolve Now
-
-#### **Secondary Action**
-
-* View Details
-
-### Section 4 — Notifications List
-
-Chronological notification list.
-
-#### **Columns**
-
-| Column | Description |
-| ----- | ----- |
-| Notification | Title |
-| Module | Related module |
-| Reference | Escrow / Fund Release / Application |
-| Date & Time | Received |
-| Status | Read / Unread |
-| Priority | Priority level |
-| Action | Open |
-
-#### **Notification Actions**
-
-* View Details  
-* Mark as Read  
-* Mark as Unread  
-* Archive *(where permitted)*
-
-Selecting a notification opens the related Escrow Account, Fund Release Request, Application, or Document.
-
-### Section 5 — Upcoming Deadlines
-
-Display all upcoming escrow and compliance deadlines.
-
-#### **Columns**
-
-| Deadline | Related Record | Due Date | Days Remaining | Action |
-| ----- | ----- | ----- | ----- | ----- |
-| Submit Fund Release | FR-001245 | 05 Aug 2026 | 3 Days | Continue |
-| Respond to RERA Query | APP-000874 | 06 Aug 2026 | 4 Days | Respond |
-| Upload Engineer Certificate | ESC-000351 | 07 Aug 2026 | 5 Days | Upload |
-| Bank Clarification | ESC-000218 | 08 Aug 2026 | 6 Days | Respond |
-| Milestone Verification | Project A | 09 Aug 2026 | 7 Days | View |
-
-Critical deadlines appear first.
-
-### Section 6 — Recent System Announcements
-
-Display organization-wide and RERA announcements.
-
-#### **Examples**
-
-* Planned platform maintenance  
-* Updated escrow compliance requirements  
-* New fund release verification process  
-* Financial institution integration updates  
-* Regulatory policy changes  
-* Scheduled maintenance notice
-
-Each announcement displays:
-
-* Title  
-* Category  
-* Published Date  
-* Summary
-
-#### **Actions**
-
-* Read More  
-* View Announcement
-
-### Empty State
-
-**Illustration**
-
-Notification Bell
-
-**Message**
-
-> You're all caught up. No new notifications at the moment.
-
-**Primary Button**
-
-* Go to Dashboard
-
-### Reused Components
-
-See [components.md](../components.md) for definitions of every component used on this screen.
-
-### User Flow
-
-Notifications  
-    ↓  
-Review Notification Summary Cards  
-    ↓  
-Apply Filters  
-    ↓  
-Open Priority Notification  
-    ↓  
-Review Notification Details  
-    ↓  
-Navigate to Related Record  
-    ↓  
-Complete Required Action  
-    ↓  
-Mark Notification as Read
-
-### Notes
-
-* Notifications are generated automatically from escrow accounts, fund release requests, milestone verification, document verification, RERA activities, and financial institution interactions.  
-* Critical notifications remain pinned until resolved or acknowledged.  
-* Users can configure notification preferences by module and priority.  
-* Notifications link directly to the relevant operational record for faster action.
+1. No card, column, filter, notification type or action on this screen is role-gated. Every user sees every organization notification.
+2. Notification type filters are driven by subject, never by role.
+3. Summary card figures must match the list's own filtered counts exactly.
 
 ## User Flow
 
-Differs between variants — see the "User Flow" heading within each role's block under [Role Variations](#role-variations). The Escrow Liaison's is a single linear arrow diagram rooted at Notifications itself rather than the Dashboard-rooted tree diagrams used by the other three roles.
+```
+Dashboard
+↓
+Notifications
+├─ Priority item → the record it concerns
+├─ List row → the record it concerns
+├─ Upcoming Deadline → the record it concerns
+└─ Mark Read / Archive → stays on screen
+```
 
 ## Notes
 
-Differs between variants — see the "Notes" heading within each role's block under [Role Variations](#role-variations).
+* **This absorbs, rather than references, all four retired variants.**
+
+* **The notification type vocabularies were the substantive merge**, for the same reason as [documents.md](documents.md)'s categories: four domain-specific lists with no overlap at the domain end. Unioned and grouped by subject.
+
+* **Reconciliation — card list vs table.** The Principal / Director variant was the only one to render notifications as cards. Resolved to the table, matching every other list screen; no field was lost in the mapping.
+
+* **Reconciliation — Pinned Announcements vs Recent System Announcements.** Same content, different prominence. Kept pinned.
+
+* **Every user now sees every organization notification.** Previously each variant scoped the feed to its own domain, which under role-gating meant a user simply never saw other domains' alerts. There is no longer a basis for that filtering — the Notification Type and Related Record filters let anyone narrow the feed themselves.
+
+* **What was dropped, and why.** Only the per-domain scoping of the feed and its summary cards, and the card-list layout. Nothing representing distinct work was discarded — the Principal variant's Pinned Announcements and Recent Activities are carried forward, as are the operational variants' Priority Notifications and Upcoming Deadlines.
