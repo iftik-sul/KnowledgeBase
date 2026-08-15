@@ -15,358 +15,172 @@ tags:
 
 # Screen: Projects
 
-**Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
+**Access:** Any of the developer's four Group B roles — identical screen for every user, no role-based variant.
 
-A list of development projects. The source defines two variants: an executive portfolio view (under the Principal / Director heading) and an operational workspace (under the Registration Officer heading) for creating, editing, submitting and correcting projects. Both variants are reachable and actionable by all four roles — the difference is in what the variant shows, not in who may open it.
+> **Rebuilt 2026-08-15.** This screen previously described two structurally different designs: an executive portfolio view (Developer Principal / Director) and an operational workspace (Project Registration Officer), with different KPI sets, filters, table columns, row actions and status vocabularies. Both are **retired**; this is one screen absorbing the load-bearing content of each. The monitoring content that only the portfolio view carried is preserved as Portfolio Insights rather than discarded.
 
 ## Purpose
 
-Purpose differs between variants — see [Role Variations](#role-variations).
+List the organization's development projects and provide both the monitoring view of the portfolio and the operational controls to create, edit, submit and correct project registrations. Any user may do either.
 
 ## Layout
 
-* **Visible Sidebar:** Developer Operational Sidebar
-* **Active Menu:** **Projects**
-* **Top Bar Title:** Projects
-* **Search Bar:** Search anything...
+```
+Top Bar
+↓
+Project Summary Cards
+↓
+Filters & Search
+↓
+Projects Table
+↓
+Portfolio Insights
+↓
+Pagination
+```
 
-Both roles' Layout diagrams are the same shape (Top Bar → Project Summary Cards → Filters & Search → Projects Table → Pagination), but the subtitle, the top-bar description sentence, and page actions differ by role — see [Role Variations](#role-variations).
+**Top Bar**
+
+* Title: Projects
+* Subtitle: Register, track and monitor the organization's development projects.
+* Search Bar: Search anything...
+* Page Actions: **Register New Project**
+
+The page uses the shared **Background + HorizontalBorder** component.
 
 ## Sections
 
-Every section (Project Summary Cards, Filters, the Projects Table and its Row Actions, Project Status Badges, and, in the Registration Officer variant only, Bulk Actions) differs between variants — see [Role Variations](#role-variations).
-
-## Empty State
-
-Message and actions differ between variants — see [Role Variations](#role-variations).
-
-## Reused Components
-
-Differs between variants — see [Role Variations](#role-variations).
-
-## Role Variations
-
-> **Reframed 2026-08-15 — these are content variants, not access restrictions.** Every variant
-> below is reachable and actionable by all four roles; none of them is withheld from anyone. What
-> the blocks record is that the source material defined this screen more than once, with different
-> KPI sets, filters, columns, actions or empty states each time — differences of *content*, not of
-> permission. Those are preserved verbatim rather than merged, because collapsing them into one
-> screen is a design decision about which variant (or which union of them) is correct, and that is
-> the client's call, not a documentation cleanup. **Flagged for review — see
-> [../README.md](../README.md#per-role-content-variants-flagged-for-review).**
->
-> The role headings below should now be read as *"the variant the source defined under this role's
-> heading"*, not *"what this role is allowed to see"*.
-
-### Developer Principal / Director
-
-### Sidebar Status
-
-* **Visible Sidebar:** Developer Operational Sidebar  
-* **Active Menu:** **Projects**  
-* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
-
-### Top Bar Status
-
-**Title:** Projects
-
-**Subtitle:** Monitor and oversee all development projects across your organization.
-
-**Search Bar:** Search anything...
-
-No additional controls are displayed in the top bar. It reuses the shared **Background \+ HorizontalBorder** component.
-
-### Purpose
-
-Provide the Developer Principal / Director with a centralized view of all development projects, allowing executive monitoring of project progress, approvals, compliance status, and overall portfolio performance.
-
-### Layout
-
-Top Bar  
-↓  
-Project Summary Cards  
-↓  
-Filters & Search  
-↓  
-Projects Table  
-↓  
-Pagination
-
 ### Section 1 — Project Summary Cards
 
-Display six KPI cards.
+| KPI | Description | Absorbed from |
+| :---- | :---- | :---- |
+| Total Projects | All projects, organization-wide | Both *(reconciled — see Notes)* |
+| Draft Projects | Still being prepared, not submitted | Registration Officer |
+| Submitted Projects | Submitted to RERA | Registration Officer |
+| Under Review | Currently under regulatory review | Both *(reconciled)* |
+| Information Requested | Waiting for additional information | Registration Officer |
+| Returned Projects | Returned for correction | Registration Officer |
+| Approved Projects | Successfully approved | Both |
+| Active Projects | Currently under development | Principal |
+| Suspended Projects | On hold or suspended | Principal |
+| Completed Projects | Development completed | Both |
 
-| KPI | Description |
-| ----- | ----- |
-| Total Projects | All registered projects |
-| Active Projects | Projects currently under development |
-| Pending Approval | Awaiting RERA review |
-| Approved Projects | Successfully approved |
-| Completed Projects | Development completed |
-| Suspended Projects | Projects on hold or suspended |
-
-Each card acts as a quick filter.
+Selecting a card filters the table.
 
 ### Section 2 — Filters
 
-Located directly above the table.
-
-#### **Components**
-
-* Search Project  
-* Status Filter  
-* Location Filter  
-* Registration Stage Filter  
-* Date Range Filter  
+* Search Project
+* Project Status Filter
+* Development Type Filter
+* Location Filter
+* Registration Stage Filter
+* Date Range Filter
 * Reset Filters
+
+**Removed 2026-08-15:** the Registration Officer variant's **Assigned Officer Filter** *(marked "if applicable" even in the source)*. It filtered by which officer a project was assigned to — a scoping concept that does not survive unified access, where no project belongs to one user's view. The **Uploaded/Created By** attribution remains visible on the record itself and in the audit trail; it is simply no longer a filter dimension for narrowing "my" work.
 
 ### Section 3 — Projects Table
 
-#### **Columns**
-
 | Column | Description |
-| ----- | ----- |
-| Project ID | Unique reference |
-| Project Name | Registered project name |
-| Location | State / City |
-| Registration Status | Draft / Pending / Approved / Rejected |
-| Development Stage | Planning / Construction / Completed |
-| Progress | Percentage completion |
-| Last Updated | Latest activity |
-| Action | View Details |
-
-### Row Actions
-
-Each row contains:
-
-* View Details
-
-The Principal / Director has oversight responsibilities, so this screen focuses on reviewing project information rather than operational editing.
-
-### Project Status Badges
-
-See [status-badges.md](../status-badges.md#project-status) for the status vocabulary — including a conflict between the Principal's and the Registration Officer's lists.
-
-### Empty State
-
-#### **Message**
-
-> No development projects have been registered yet.
-
-Primary Button
-
-* Learn About Project Registration
-
-### Pagination
-
-Bottom of the table.
-
-Components:
-
-* Rows per page  
-* Previous  
-* Next  
-* Page Number  
-* Total Results
-
-### Reused Components
-
-See [components.md](../components.md) for definitions of every component used on this screen.
-
-### User Flow
-
-Dashboard  
-↓  
-Projects  
-↓  
-Search / Filter Projects  
-↓  
-Select Project  
-↓  
-Project Details
-
-### Notes
-
-* This is an **executive portfolio view**, optimized for monitoring rather than project administration.  
-* All project creation, document submission, and registration activities are handled by the **Project Registration Officer**, while the Principal / Director uses this screen to review progress and organizational performance.  
-* The table should support sorting by Project Name, Status, Progress, and Last Updated.
-
-### Project Registration Officer
-
-### Sidebar Status
-
-* **Visible Sidebar:** Developer Operational Sidebar  
-* **Active Menu:** **Projects**  
-* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
-
-### Top Bar Status
-
-**Title:** Projects
-
-**Subtitle:** Create, manage, and submit development projects for regulatory approval.
-
-**Search Bar:** Search anything...
-
-The page uses the shared **Background \+ HorizontalBorder** component.
-
-**Page Actions (Right Side):**
-
-* Register New Project
-
-### Purpose
-
-Provide the Project Registration Officer with a centralized workspace to create, edit, submit, and track development projects throughout their registration lifecycle. Unlike the Developer Principal's read-only portfolio view, this screen is operational and supports day-to-day project registration activities.
-
-### Layout
-
-Top Bar  
-↓  
-Project Summary Cards  
-↓  
-Filters & Search  
-↓  
-Projects Table  
-↓  
-Pagination
-
-### Section 1 — Project Summary Cards
-
-Display **8 KPI cards**.
-
-| KPI | Description |
-| ----- | ----- |
-| Total Projects | All assigned projects |
-| Draft Projects | Projects still being prepared |
-| Submitted Projects | Submitted to RERA |
-| Under Review | Currently under regulatory review |
-| Information Requested | Waiting for additional information |
-| Approved Projects | Successfully approved |
-| Returned Projects | Returned for correction |
-| Completed Projects | Fully registered projects |
-
-Selecting a KPI filters the project list.
-
-### Section 2 — Filters
-
-Located above the table.
-
-#### **Components**
-
-* Search Project  
-* Project Status Filter  
-* Development Type Filter  
-* Location Filter  
-* Assigned Officer Filter *(if applicable)*  
-* Date Range Filter  
-* Reset Filters
-
-### Section 3 — Projects Table
-
-#### **Columns**
-
-| Column | Description |
-| ----- | ----- |
+| :---- | :---- |
 | Project ID | Unique project reference |
 | Project Name | Development project name |
 | Development Type | Residential, Commercial, Mixed Use, etc. |
 | Location | State / City |
 | Current Status | Registration status |
+| Development Stage | Planning / Construction / Completed |
+| Progress | Percentage completion |
 | Last Updated | Latest activity |
-| Assigned To | Responsible officer |
 | Action | Available actions |
+
+**Absorbed 2026-08-15:** the union of both variants' columns. *Development Stage* and *Progress* came only from the portfolio view; *Development Type* only from the operational view. Both are real project attributes and both are kept. The Registration Officer variant's **Assigned To** column is dropped for the same reason as the Assigned Officer filter.
+
+The table supports sorting by Project Name, Status, Progress and Last Updated.
 
 ### Row Actions
 
-Available actions depend on project status.
+Available actions depend on **project status**, not on who is looking.
 
-#### **Draft**
+| Status | Actions |
+| :---- | :---- |
+| Draft | Continue Registration · Edit · Delete |
+| Submitted / Under Review | View Details |
+| Information Requested / Returned | Respond to Query · Upload Documents · Resubmit |
+| Approved | View Details · Register Properties |
+| Suspended / Completed | View Details |
 
-* Continue Registration  
-* Edit  
-* Delete
-
-#### **Submitted / Under Review**
-
-* View Details
-
-#### **Information Requested / Returned**
-
-* Respond to Query  
-* Upload Documents  
-* Resubmit
-
-#### **Approved**
-
-* View Details  
-* Register Properties
-
-### Project Status Badges
-
-See [status-badges.md](../status-badges.md#project-status) for the status vocabulary — including a conflict between the Principal's and the Registration Officer's lists.
+**Reconciled 2026-08-15:** the portfolio view offered only *View Details* on every row. That was an access restriction expressed as a row-action list, not a lifecycle rule, so it is retired — the status-driven actions above now apply for every user. Status still governs what is possible: a submitted project cannot be edited by anyone.
 
 ### Bulk Actions
 
-Allow bulk operations for eligible records.
-
-* Export Selected  
-* Download Summary  
-* Submit Multiple Drafts *(if supported)*  
+* Export Selected
+* Download Summary
+* Submit Multiple Drafts *(if supported)*
 * Delete Drafts
 
-### Empty State
+Previously available only in the Registration Officer variant; now available to every user, since bulk operations were gated by role rather than by record state.
 
-#### **Message**
+### Section 4 — Portfolio Insights
 
-> You haven't created any development projects yet.
+**Absorbed 2026-08-15** from the executive portfolio view, which was the only variant to carry monitoring analytics. Retained in full — it is real distinct content, not a role's framing of shared content.
 
-Primary Button
+* Project distribution by development stage and by type.
+* Progress summary across active projects.
+* Organizational performance over the current quarter.
 
-* Register New Project
+Links to [reports.md](reports.md) for the full report set.
 
-Secondary Button
+### Project Status Badges
 
-* Learn About Project Registration
+See [status-badges.md](../status-badges.md#project-status). **The two variants' conflicting status lists were reconciled on 2026-08-15** — see [Notes](#notes).
 
-### Pagination
+## Empty State
 
-Bottom of the table.
+**Message**
 
-Components:
+> No development projects yet. Register a project to begin, or learn how project registration works.
 
-* Rows per page  
-* Previous  
-* Next  
-* Page Number  
-* Total Records
+**Primary Button** — Register New Project
+**Secondary Button** — Learn About Project Registration
 
-### Reused Components
+**Reconciled 2026-08-15:** the portfolio view's empty state offered only *Learn About Project Registration*, with no create action; the operational view's read "You haven't created any development projects yet" and offered creation. The organization-level phrasing plus both actions is what survives — the screen is no longer addressed to a role, and "you haven't created any" is wrong on a shared, organization-wide list.
+
+## Pagination
+
+Rows per page · Previous · Next · Page Number · Total Results
+
+## Reused Components
 
 See [components.md](../components.md) for definitions of every component used on this screen.
 
-### User Flow
+## Validation
 
-Dashboard  
-↓  
-Projects  
-├── Register New Project  
-├── Continue Registration  
-├── Edit Project  
-├── Submit Project  
-├── Respond to RERA Query  
-├── Register Properties  
-└── View Project Details
-
-### Notes
-
-* This is the **primary operational screen** for the **Project Registration Officer**.  
-* Unlike the Developer Principal's version, this page supports **creating, editing, submitting, correcting, and resubmitting** projects.  
-* Projects returned by RERA should be clearly highlighted with high-visibility status badges and surfaced near the top of the list.  
-* "Register Properties" becomes available only after the development project reaches the appropriate approved status, following the defined registration workflow.
+1. No card, column, filter, row action or section on this screen is role-gated. What a user can do to a record depends on the record's status, never on who they are.
+2. Summary card figures must match the table's own filtered counts exactly.
+3. Status vocabulary comes from [status-badges.md](../status-badges.md#project-status) and is not redefined here.
 
 ## User Flow
 
-Differs between variants — see the "User Flow" heading within each role's block under [Role Variations](#role-variations).
+```
+Dashboard
+↓
+Projects
+├─ Register New Project → project registration flow
+├─ Summary Card → filtered table
+├─ Row → Project Details
+└─ Portfolio Insights → Reports
+```
 
 ## Notes
 
-Differs between variants — see the "Notes" heading within each role's block under [Role Variations](#role-variations).
+* **This absorbs, rather than references, both retired variants.** The executive portfolio view and the operational workspace are gone as separate designs; their load-bearing content — KPI sets, filters, columns, status-driven row actions, bulk actions and portfolio analytics — is now one screen.
+
+* **Reconciliation — the two status vocabularies genuinely conflicted and are now merged.** [status-badges.md](../status-badges.md#project-status) recorded the conflict as unresolvable-by-subsetting: the Principal's list had *Pending Review* and *Suspended*, which the Registration Officer's lacked entirely; the Registration Officer's had *Submitted*, *Under Review*, *Information Requested* and *Returned*, which the Principal's lacked. Resolved as follows, since one screen cannot carry two vocabularies:
+  * **Union of both**, giving nine states: Draft, Submitted, Under Review, Information Requested, Returned, Approved, Rejected, Suspended, Completed.
+  * **"Pending Review" is dropped as a duplicate label**, not as a state — it and "Under Review" describe the same regulatory position, and "Under Review" is the label used everywhere else in the module and in the service flows.
+  * **"Suspended" is kept.** It was the harder case: it describes a project put on hold, a state genuinely unrepresentable in the operational vocabulary. Dropping it because only one variant listed it would have lost a real state.
+  * `status-badges.md` is updated to record this resolution in place of the flagged conflict.
+
+* **Reconciliation — "Total Projects" meant two things.** The portfolio view counted "all registered projects"; the operational view counted "all *assigned* projects." Resolved to organization-wide, consistent with the removal of per-user assignment scoping across the module.
+
+* **What was dropped, and why.** Only the Assigned Officer filter and Assigned To column (per-user scoping, retired with the access model), the "Pending Review" duplicate label, the view-only row-action list (an access restriction in disguise), and the portfolio view's Notes paragraph stating that "all project creation, document submission and registration activities are handled by the Project Registration Officer" — a permission claim that is no longer true. Nothing representing distinct work was discarded.

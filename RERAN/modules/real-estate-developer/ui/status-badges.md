@@ -37,23 +37,37 @@ The status vocabulary for this module.
 
 Used on [projects.md](screens/projects.md).
 
-**⚠ Conflict — the Principal's and Registration Officer's lists disagree, not just in ordering:**
+**Resolved 2026-08-15 — nine states:**
 
-- **Developer Principal / Director:** Draft, Pending Review, Approved, Rejected, Suspended, Completed (6 states)
-- **Project Registration Officer:** Draft, Submitted, Under Review, Information Requested, Returned, Approved, Rejected, Completed (8 states)
+`Draft` · `Submitted` · `Under Review` · `Information Requested` · `Returned` · `Approved` · `Rejected` · `Suspended` · `Completed`
 
-The Principal's list has no "Submitted," "Under Review," "Information Requested," or "Returned" states — it also has "Pending Review" and "Suspended," which the Registration Officer's list lacks entirely. These aren't reconcilable by assuming one is a subset of the other; "Pending Review" and "Suspended" appear nowhere in the Registration Officer's list, and "Suspended" in particular describes a state (a project put on hold) that isn't representable at all in the Registration Officer's vocabulary. Flagged as-is; not resolved here.
+> **How this was resolved.** Until the screens were unified, this section recorded an unresolved conflict between two role variants of `projects.md`:
+>
+> - **Developer Principal / Director:** Draft, Pending Review, Approved, Rejected, Suspended, Completed (6 states)
+> - **Project Registration Officer:** Draft, Submitted, Under Review, Information Requested, Returned, Approved, Rejected, Completed (8 states)
+>
+> It was flagged as not reconcilable by subsetting, correctly: "Pending Review" and "Suspended" appeared nowhere in the Registration Officer's list, and "Suspended" described a state — a project put on hold — unrepresentable in the other vocabulary. That flag stood while two screens existed. With `projects.md` rebuilt as a single screen, two vocabularies is no longer an option, so:
+>
+> * **Union of both lists.** Every state either variant defined describes real project positions.
+> * **"Pending Review" dropped as a duplicate label, not as a state.** It and "Under Review" name the same regulatory position; "Under Review" is what the service flows and the rest of the module use.
+> * **"Suspended" kept.** This was the substantive call: only one variant listed it, but dropping a state for being single-sourced would have lost the only way to represent a project on hold.
+>
+> No state was silently added, dropped or renamed beyond the "Pending Review" → "Under Review" merge recorded here.
 
 ## Property Registration Status
 
 Used on [property-registrations.md](screens/property-registrations.md) and referenced from [property-registration-details.md](screens/property-registration-details.md).
 
-**⚠ Conflict — one state present only in the Registration Officer's list:**
+**Resolved 2026-08-15 — seven states:**
 
-- **Developer Principal / Director:** Draft, Submitted, Under Review, Information Requested, Approved, Rejected (6 states)
-- **Project Registration Officer:** Draft, Submitted, Under Review, Information Requested, Returned, Approved, Rejected (7 states — adds "Returned")
+`Draft` · `Submitted` · `Under Review` · `Information Requested` · `Returned` · `Approved` · `Rejected`
 
-The Principal's version notes "Badge colors follow the existing RERA design system" (see note above); the Registration Officer's version doesn't repeat that note but uses the same label set otherwise, plus "Returned."
+> **How this was resolved.** This section previously recorded a conflict between two role variants of `property-registrations.md`:
+>
+> - **Developer Principal / Director:** Draft, Submitted, Under Review, Information Requested, Approved, Rejected (6 states)
+> - **Project Registration Officer:** the same 6 plus **Returned** (7 states)
+>
+> Unlike the project-status conflict above, this one is a clean subset — the shorter list adds nothing the longer one lacks. Resolved to the **7-state union**, keeping "Returned," now that `property-registrations.md` is a single screen. Badge colours follow the existing RERA design system, per the note above.
 
 ## Sales & Disclosure Status
 
