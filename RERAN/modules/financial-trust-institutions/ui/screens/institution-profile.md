@@ -48,8 +48,8 @@ The Institution Context Header is suppressed here — this screen's own Institut
 * Institution legal name, type (Account Trustee / Auditing Company standing, where applicable), registration reference.
 * Approval status badge — see [status-badges.md](../status-badges.md#institutional-approval-status).
 * **Expiry countdown**, per answer B8 (confirmed 2026-08-15, client decision — renewing, per-approval-term structure; two-year validity remains a proposal): neutral beyond 60 days, warning inside 60, error inside 14. Matches the Institution Context Header's own threshold, defined once here rather than twice.
-* **Renew** action (routes to Service #1) shown inside the 60-day window; always visible, not conditionally hidden, so renewal can happen early. **Corrected 2026-08-15** — Service #1 now pays upfront (`open-questions.md` B11); Renew routes into the same checkout-before-lodging flow as any other service request.
-* **Cancel Approval** action (Service #2 — confirmed 2026-08-15 to carry no fee at all) and **Cancel Contract** (Service #18), both requiring confirmation.
+* **Renew** action (routes to Submit Application, pre-populated with Service #1) shown inside the 60-day window; always visible, not conditionally hidden, so renewal can happen early. **Corrected 2026-08-15** — Service #1 now pays upfront (`open-questions.md` B11); Renew routes into the same checkout-before-lodging flow as any other service request.
+* **Cancel Approval** action (Service #2 — confirmed 2026-08-15 to carry no fee at all) and **Cancel Contract** (Service #18 — pays after RERA's decision, at the counter, one of the two exceptions to the module's general pattern; see `payments.md`), both requiring confirmation.
 
 ### Section 2 — Staff Records Tab
 
@@ -111,14 +111,17 @@ See [validation-rules.md](../validation-rules.md#institutional-standing). Specif
 Dashboard
 ↓
 Institution Profile
-├─ Renew → Service Request (#1)
-├─ Cancel Approval → Service Request (#2)
-├─ Cancel Contract → Service Request (#18)
+├─ Renew → Submit Application (#1)
+├─ Cancel Approval → Submit Application (#2)
+├─ Cancel Contract → Submit Application (#18)
 └─ Invite Staff Member → Staff Records (Invited)
 ```
+
+**Corrected 2026-08-15, second pass** — previously named "Service Request" as the destination screen, deleted in favour of Submit Application (issue #50).
 
 ## Notes
 
 * **B8's renewing structure is confirmed; the two-year duration specifically remains a proposal** (`open-questions.md` B8, confirmed 2026-08-15). The structure — approvals expire and are renewed — is sourced from Service #1 being named "approval / renewal"; the specific duration is this module's own proposal.
 * **The Settlement Preferences tab is gone, not relocated.** There is no low-balance threshold, funding authoriser list, or any other standing-account setting left to configure anywhere in this module — see [payments.md](../../payments.md) and `open-questions.md` B1.
+* **Cancel Contract (#18) is one of two Group C services (with #12) that pays after RERA's decision, not before.** Confirming the cancellation here doesn't collect payment — the institution pays at the counter once RERA has decided, per `payments.md` and `assisted-service-terminal.md#section-3a--payment-at-counter`.
 * Staff provisioning itself (the invitation and identity-verification flow under registration Flow 5) is out of this module's scope per the module's own scope note; this screen covers only who is on the roster, not the invitation/verification mechanics.
