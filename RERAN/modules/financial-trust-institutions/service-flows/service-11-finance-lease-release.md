@@ -4,7 +4,7 @@ module: financial-trust-institutions
 type: service-flow
 status: draft
 contains_proposals: true
-updated: 2026-08-14
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
@@ -39,7 +39,7 @@ The lessor confirms the lease has ended (term completion, early termination, or 
 
 ### Applicant (Lessor Institution)
 
-* Mortgage Officer  
+* Any of the institution's four Group C roles. **Confirmed 2026-08-15** — previously listed as Mortgage Officer only; `open-questions.md` A4 confirms no service is role-specific.
 * Trustee Centre Operator (Group G) — assisted mode (C2)
 
 ### Counterparty (Lessee)
@@ -48,7 +48,7 @@ The lessor confirms the lease has ended (term completion, early termination, or 
 
 ## 5. Prerequisites
 
-* Registered RERAN institution (Group C) account, with a Mortgage Officer provisioned.  
+* Registered RERAN institution (Group C) account, with staff provisioned.  
 * An existing, active registered finance lease against the property.  
 * The lease has ended (term completion, early termination, or exercised purchase option).  
 * Payment has been completed via the shared platform payment gateway before the application is lodged (B1).
@@ -102,7 +102,7 @@ Confirm Lease Completion / Termination / Purchase Option Exercise
 
 ↓
 
-Mortgage Officer / Trustee Centre Operator
+Institution User / Trustee Centre Operator
 
 Visit Real Estate Registration Trustee Centre *(C2: assisted mode)*  
 ↓  
@@ -222,7 +222,7 @@ Upon successful completion, the system generates:
 
 ## 20. Acceptance Criteria
 
-* Mortgage Officer can select an existing finance lease and submit release information.  
+* Any of the institution's four Group C roles can select an existing finance lease and submit release information. **Confirmed 2026-08-15** — not restricted to the Mortgage Officer (A4).  
 * System validates the lease is active and registered before allowing release.  
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
 * Fee is paid via the shared platform payment gateway before the application is lodged.  
@@ -233,7 +233,7 @@ Upon successful completion, the system generates:
 
 ## 21. Business Rules
 
-1. Only a Mortgage Officer, or a Trustee Centre operator acting on the institution's behalf, may initiate a release.  
+1. Any of the institution's four Group C roles, or a Trustee Centre operator acting on the institution's behalf, may initiate a release. **Confirmed 2026-08-15** — previously restricted to "only a Mortgage Officer"; `open-questions.md` A4 confirms no service is role-specific.  
 2. The finance lease being released must be active and registered.  
 3. Payment is made via the shared platform payment gateway, upfront, before the application can be lodged — not deducted from a settlement account (B1, corrected 2026-08-14).  
 4. **Corrected 2026-08-14** — the previous low-balance-warning and 30-day-expiry rules (B4, B3) are removed; see Service #3's Business Rules for the reasoning, which applies identically here.  
