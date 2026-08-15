@@ -4,7 +4,7 @@ module: financial-trust-institutions
 type: service-flow
 status: draft
 contains_proposals: true
-updated: 2026-08-14
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
@@ -32,7 +32,7 @@ Give legal and registry effect to a bank's grant of a property-secured loan, so 
 
 ## 3. Description
 
-The customer prepares the mortgage requirements with the bank. A Mortgage Officer enters the transaction documents through the Online Mortgage System and pays the fee upfront via the shared platform payment gateway; it is audited by the bank's internal auditor before being sent to RERA. Outputs are delivered to the customer by email.
+The customer prepares the mortgage requirements with the bank. Any of the institution's four Group C roles enters the transaction documents through the Online Mortgage System and pays the fee upfront via the shared platform payment gateway; it is audited by the bank's internal auditor before being sent to RERA. Outputs are delivered to the customer by email.
 
 > **Proposed / flagged** — row 39's workflow text is nearly identical to Service #3 (Mortgage Registration, row 30): both describe a bank employee entering documents via the online mortgage system, internal bank-auditor certification, RERA audit, account-debited fees, and email delivery. The source does not state what functionally distinguishes "granting" a mortgage from "registering" one. One plausible reading is that Grant Property Mortgage is the bank's origination of a new loan secured by the property (the lending event itself), while Mortgage Registration records an already-arranged mortgage onto the RERAN registry. This distinction is not confirmed by source and is flagged for the client — see Open Questions and the PR's template-fit notes.
 
@@ -40,7 +40,7 @@ The customer prepares the mortgage requirements with the bank. A Mortgage Office
 
 ### Applicant (Lending Institution)
 
-* Mortgage Officer
+* Any of the institution's four Group C roles. **Confirmed 2026-08-15** — previously listed as Mortgage Officer only; `open-questions.md` A4 confirms no service is role-specific.
 
 > Unlike Services #3–#6, row 39 names only the **Land Department website (online mortgage system)** as channel — no Trustee Centre alternative is listed. This document does not add an assisted-mode variant here, since none is sourced; see `services-overview.md` C2 for the general principle that Trustee Centre access is documented only where the source supports it.
 
@@ -50,7 +50,7 @@ The customer prepares the mortgage requirements with the bank. A Mortgage Office
 
 ## 5. Prerequisites
 
-* Registered RERAN institution (Group C) account, with a Mortgage Officer provisioned.  
+* Registered RERAN institution (Group C) account, with staff provisioned.  
 * Property is registered with RERAN and its title is verified.  
 * Customer has prepared mortgage requirements with the bank (loan approval, valuation) before system entry.  
 * Payment has been completed via the shared platform payment gateway before the application is lodged (B1).
@@ -60,7 +60,7 @@ The customer prepares the mortgage requirements with the bank. A Mortgage Office
 ### Institution Information
 
 * Institution Name  
-* Mortgage Officer Identifier
+* Acting Officer Identifier
 
 ### Borrower (Property Owner) Information
 
@@ -120,7 +120,7 @@ Prepare Mortgage Requirements with Bank
 
 ↓
 
-Mortgage Officer
+Institution User (any of the four Group C roles)
 
 Login to Online Mortgage System  
 ↓  
@@ -138,7 +138,7 @@ Internal Certifier
 
 Review Transaction  
 ↓  
-Certify, or Return to Mortgage Officer
+Certify, or Return to Filer
 
 ↓
 
@@ -257,7 +257,7 @@ Upon successful completion, the system generates:
 
 ## 20. Acceptance Criteria
 
-* Mortgage Officer can initiate a mortgage grant against a registered title.  
+* Any of the institution's four Group C roles can initiate a mortgage grant against a registered title. **Confirmed 2026-08-15** — not restricted to the Mortgage Officer (A4).  
 * System validates the property is registered and its title is verified.  
 * Internal certifier — any of the four Group C roles, including the filer — can certify or return the transaction before it reaches RERA.  
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
@@ -269,7 +269,7 @@ Upon successful completion, the system generates:
 
 ## 21. Business Rules
 
-1. Only a Mortgage Officer acting under the lending institution's corporate account may initiate a mortgage grant.  
+1. Any of the institution's four Group C roles acting under the lending institution's corporate account may initiate a mortgage grant. **Confirmed 2026-08-15** — previously restricted to "only a Mortgage Officer"; `open-questions.md` A4 confirms no service is role-specific.  
 2. The property must be registered with RERAN and its title verified.  
 3. The transaction must pass internal institutional certification before routing to RERA.  
 4. Payment is made via the shared platform payment gateway, upfront, before the application can be lodged — not deducted from a settlement account (B1, corrected 2026-08-14).  
