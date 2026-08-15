@@ -24,6 +24,8 @@ tags:
 
 The **Changing the Name of a Real Estate Project** service allows a developer to rename a registered project — for example following a rebrand — without affecting its underlying registration or unit set.
 
+> **Confirmed overlap with Service #24 — client-confirmed 2026-08-15, issue #37.** A name change may also be submitted as one of the fields on Service #24 (Register/Amend Project Details). Neither service is the exclusive path — this one is the narrow, no-fee, name-only route; #24 is the broader route when a name change accompanies other project detail changes. Whichever the developer selects is what's recorded.
+
 ## 2. Purpose
 
 Keep a project's registered name current, so RERA's public-facing project records and the developer's marketing remain consistent.
@@ -121,7 +123,7 @@ Renamed
 
 * Service #13 – Registration of Real Estate Project
 * Service #17 – Project Re-registration
-* Service #24 – Register/Amend Real Estate Project Details
+* Service #24 – Register/Amend Real Estate Project Details *(confirmed overlap — either route may be used for a name change; see Section 1)*
 
 ## 17. UI Screens
 
@@ -158,4 +160,5 @@ Renamed
 1. Only a registered project's name may be changed under this service.
 2. A reason for the name change is required for every submission.
 3. The project's reference number and unit set are unaffected by a name change.
-4. All submissions, approvals, and notifications must be permanently recorded in the audit trail.
+4. **A name change may also be submitted through Service #24 — client-confirmed 2026-08-15, issue #37.** Neither is the exclusive path.
+5. All submissions, approvals, and notifications must be permanently recorded in the audit trail.
