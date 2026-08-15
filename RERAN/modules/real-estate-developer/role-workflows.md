@@ -3,121 +3,69 @@ project: RERAN
 module: real-estate-developer
 type: overview
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
   - "RERAN/modules/real-estate-developer/roles-and-responsibilities.md"
+  - "RERAN/modules/real-estate-developer/navigation.md"
 tags:
   - real-estate-developer
   - workflow
 ---
 
-# Real Estate Developer Role Workflows
+# Real Estate Developer Workflows
 
-The linear path each role takes through the system, from login to logout. These describe the user's route, not the interface — screen-level detail lives in [ui/screens/](ui/screens/).
+**Corrected 2026-08-15.** This document previously described four separate linear journeys, one per role, each limited to that role's permitted area. Group B no longer gates access by role — all four roles share identical access to every screen and action (see [navigation.md](navigation.md)). Four distinct paths therefore no longer describe anything real, and have been replaced by the single shared journey below.
 
-## Developer Principal / Director
+The path a developer user takes through the system, from login to logout. This describes the user's route, not the interface — screen-level detail lives in [ui/screens/](ui/screens/).
 
-Login  
-↓  
-View Dashboard  
-↓  
-Monitor Development Projects  
-↓  
-Review Property Registrations  
-↓  
-Review Sales Activities  
-↓  
-Monitor Escrow Status  
-↓  
-Review Reports  
-↓  
-Coordinate with RERA  
-↓  
-Logout
+## Shared Journey
 
-### Primary Services
-
-* Executive Oversight  
-* Project Monitoring  
-* Sales Oversight  
-* Escrow Monitoring  
-* Executive Reporting
-
-## Project Registration Officer
+Any user of a registered developer account may follow any branch below, in any order, whatever role they hold.
 
 Login  
 ↓  
 View Dashboard  
 ↓  
-Register Development Project  
+**Project & registration work**  
+Register Development Project → Submit Supporting Documents → Register Properties → Respond to RERA Queries  
 ↓  
-Submit Supporting Documents  
+**Sales & disclosure work**  
+Manage Property Listings → Record Property Sales → Submit Sales Disclosure → Manage Buyer Documentation  
 ↓  
-Track Application Status  
+**Escrow work**  
+Monitor Escrow Activities → Submit Escrow Documents → Coordinate with Account Trustee → Track Fund Release Status  
 ↓  
-Respond to RERA Queries  
-↓  
-Generate Registration Report  
-↓  
-Logout
-
-### Primary Services
-
-* Project Registration  
-* Property Registration  
-* Application Submission  
-* Document Management  
-* Registration Reporting
-
-## Sales & Disclosure Officer
-
-Login  
-↓  
-View Dashboard  
-↓  
-Manage Property Listings  
-↓  
-Submit Sales Disclosure  
-↓  
-Update Property Information  
-↓  
-Manage Buyer Documentation  
-↓  
-Generate Sales Report  
+**Tracking & reporting**  
+Track Application Status → Generate Reports → Review Notifications  
 ↓  
 Logout
 
-### Primary Services
+### Services Available to Every Role
 
-* Property Sales Management  
-* Sales Disclosure  
-* Property Information Management  
-* Buyer Documentation  
-* Sales Reporting
+* Project Registration
+* Property Registration
+* Application Submission & Tracking
+* Document Management
+* Property Sales Management
+* Sales Disclosure
+* Buyer Documentation
+* Escrow Coordination & Documentation
+* Fund Release Monitoring
+* Financial Institution Coordination
+* Reporting — registration, sales, escrow, and executive alike
+* Executive & Project Oversight
 
-## Escrow Liaison
+There is no per-role subset of this list. The previous "Primary Services" lists divided these across the four roles; that division was an access restriction and has been removed.
 
-Login  
-↓  
-View Dashboard  
-↓  
-Monitor Escrow Activities  
-↓  
-Coordinate with Financial Institution  
-↓  
-Submit Escrow Documents  
-↓  
-Track Fund Release Status  
-↓  
-Generate Escrow Report  
-↓  
-Logout
+## Typical Practice by Role
 
-### Primary Services
+**Descriptive only — not access-restrictive.** These notes record what each role usually does day to day, which is what makes the audit trail meaningful when an action is attributed to a role. They do not limit what any role may do; any of the four may perform any action above.
 
-* Escrow Coordination  
-* Escrow Documentation  
-* Fund Release Monitoring  
-* Financial Institution Coordination  
-* Escrow Reporting
+| Role | What they typically do in practice |
+| :---- | :---- |
+| Developer Principal / Director | Reviews rather than files — monitors projects, registrations, sales and escrow status, and reads reports ahead of investor and RERA meetings. |
+| Project Registration Officer | Spends most of the day in registration and applications — creating projects, uploading plans and approvals, answering RERA queries, tracking approvals. |
+| Sales & Disclosure Officer | Works in listings and disclosures — recording sales, entering buyer details, uploading sale agreements, submitting the required disclosures. |
+| Escrow Liaison | Works the escrow surface — confirming construction milestones, uploading evidence, coordinating with the Account Trustee, tracking fund releases. |
 
+See [roles-and-responsibilities.md](roles-and-responsibilities.md) for the fuller role descriptions and worked examples.

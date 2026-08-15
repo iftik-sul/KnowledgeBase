@@ -3,8 +3,9 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
@@ -14,9 +15,9 @@ tags:
 
 # Screen: Property Registration Details
 
-**Roles:** Registration Officer
+**Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
 
-The detail view of a single property registration, opened from [Property Registrations](property-registrations.md). Documented for the Registration Officer only — no other role has a version of this screen in the source material.
+The detail view of a single property registration, opened from [Property Registrations](property-registrations.md). The source documents a single variant, under the Registration Officer heading, with no second variant to reconcile. It is reachable and actionable by all four roles.
 
 ## Purpose
 
@@ -29,15 +30,7 @@ Provide the Project Registration Officer with a complete operational workspace t
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Property Registrations**  
 * **Selected Item:** Property Registration Details *(opened from Property Registrations list)*  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Projects  
-  * **Property Registrations (Active)**  
-  * Applications  
-  * Documents  
-  * Reports  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 

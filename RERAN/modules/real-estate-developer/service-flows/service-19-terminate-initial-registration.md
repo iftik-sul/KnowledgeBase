@@ -5,9 +5,10 @@ type: service-flow
 status: draft
 contains_proposals: true
 source_type: sourced
-updated: 2026-08-10
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/modules/real-estate-developer/ui/screens/property-registration-details.md"
 tags:
   - real-estate-developer
@@ -33,7 +34,9 @@ The developer opens the provisional registration record, selects termination, pr
 
 ## 4. Who Can Apply
 
-* Project Registration Officer *(see Service #1 §4 for the source/UI role-assignment note — applies identically here)*
+Any user of a registered developer account, whatever role they hold — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, or Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../navigation.md).
+
+*Typically filed in practice by the Project Registration Officer.* That is a description of customary practice, not a restriction — the role recorded against the submission is audit-trail attribution only.
 
 ## 5. Prerequisites
 
@@ -54,11 +57,11 @@ The developer opens the provisional registration record, selects termination, pr
 
 ## 8. Service Fee
 
-Applicable according to the RERAN fee schedule.
+Applicable according to the RERAN fee schedule. Paid through the shared platform payment gateway, per transaction. There is no standing or pre-funded RERA-fee account for developers; each application is paid for on its own.
 
 ## 9. Payment Required
 
-Not specified in the source. **Proposed**: not required, since this is a cancellation rather than a new registration action; needs client confirmation.
+**Yes — before RERA's decision.** The source workflow places payment at the point of submission, ahead of any review: the developer selects a payment method and sends the application in one step. Paid per transaction through the shared platform payment gateway.
 
 ## 10. Processing Authority
 
@@ -78,6 +81,8 @@ Select "Request Termination of Initial Registration"
 ↓
 Provide Reason for Termination
 ↓
+Pay Fees via Payment Gateway
+↓
 Submit Application Online
 ↓
 RERA Reviews Application
@@ -87,6 +92,10 @@ Procedure Validation Document Issued
 ## 13. Application Status Flow
 
 Draft
+↓
+Payment Pending
+↓
+Payment Successful
 ↓
 Submitted
 ↓
@@ -123,6 +132,7 @@ Terminated
 ## 17. UI Screens
 
 * Property Registration Details
+* Payment
 * Application Submitted
 
 ## 18. API Requirements
@@ -131,6 +141,9 @@ Terminated
 * Validate Termination Eligibility
 * Submit Termination Application
 * Retrieve Application Status
+* Calculate Service Fee
+* Initiate Payment
+* Verify Payment
 * Generate Procedure Validation Document
 * Send Notifications
 
@@ -141,6 +154,8 @@ Terminated
 * Termination Record
 * Application
 * Document
+* Payment
+* Payment Transaction
 * Notification
 * Audit Log
 
@@ -151,6 +166,7 @@ Terminated
 * A reason for termination is required.
 * Approved terminations generate a Procedure Validation Document.
 * All activities are recorded in the audit log.
+* Payment is completed at submission, before the application proceeds for review.
 
 ## 21. Business Rules
 

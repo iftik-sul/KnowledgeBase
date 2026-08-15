@@ -3,8 +3,9 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
@@ -14,9 +15,9 @@ tags:
 
 # Screen: Fund Release Request Details
 
-**Roles:** Escrow Liaison
+**Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
 
-The detail view of a single, already-submitted fund release request, opened from Escrow Details' Fund Releases tab or directly from Escrow Management. Documented for the Escrow Liaison only — no other role has a version of this screen in the source material.
+The detail view of a single, already-submitted fund release request, opened from Escrow Details' Fund Releases tab or directly from Escrow Management. The source documents a single variant, under the Escrow Liaison heading, with no second variant to reconcile. It is reachable and actionable by all four roles.
 
 ## Purpose
 
@@ -29,14 +30,7 @@ Provide the Escrow Liaison with a complete operational workspace to review and m
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Escrow Management**  
 * **Selected Item:** Fund Release Request Details *(opened from Escrow Details → Fund Releases or Escrow Management)*  
-* **Other Menu Items:**  
-  * Dashboard  
-  * **Escrow Management (Active)**  
-  * Applications  
-  * Documents  
-  * Reports  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 
@@ -293,7 +287,7 @@ See [components.md](../components.md) for definitions of every component used on
 
 ## Validation
 
-The source material has no explicit Validation Summary section for this screen, unlike [fund-release-request.md](fund-release-request.md) (the creation form). Edits remain governed by status: "The Escrow Liaison may update request information and upload revised documents only while the request is in an editable status (such as Draft, Returned, or Information Requested). Once the request reaches Approved or Funds Released, it becomes read-only." — see Notes below.
+The source material has no explicit Validation Summary section for this screen, unlike [fund-release-request.md](fund-release-request.md) (the creation form). Edits remain governed by status: "A user may update request information and upload revised documents only while the request is in an editable status (such as Draft, Returned, or Information Requested). Once the request reaches Approved or Funds Released, it becomes read-only." — see Notes below.
 
 ## User Flow
 
@@ -322,7 +316,7 @@ Track the approval workflow until the funds are released
 ## Notes
 
 * This screen serves as the **operational detail page** for a single fund release request and is accessed from the **Fund Releases** tab within **Escrow Details** or directly from **Escrow Management**.  
-* The Escrow Liaison may update request information and upload revised documents **only while the request is in an editable status** (such as **Draft**, **Returned**, or **Information Requested**). Once the request reaches **Approved** or **Funds Released**, it becomes **read-only**.  
+* Any user may update request information and upload revised documents **only while the request is in an editable status** (such as **Draft**, **Returned**, or **Information Requested**). Once the request reaches **Approved** or **Funds Released**, it becomes **read-only**.  
 * All approval decisions by the **Financial Institution** and **RERA** are displayed as status updates and cannot be modified by the developer.  
 * Every response to queries, document upload, status change, and review action is automatically recorded in the **Activity Timeline** to maintain a complete audit trail for regulatory compliance.  
 * The system validates that any revised request continues to comply with the approved milestone, eligible release amount, and supporting document requirements before allowing a response or resubmission.  

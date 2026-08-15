@@ -5,9 +5,10 @@ type: service-flow
 status: draft
 contains_proposals: true
 source_type: sourced
-updated: 2026-08-10
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/modules/real-estate-developer/ui/screens/project-details.md"
 tags:
   - real-estate-developer
@@ -33,7 +34,9 @@ The developer opens the project record, selects cancellation, provides a reason,
 
 ## 4. Who Can Apply
 
-* Project Registration Officer
+Any user of a registered developer account, whatever role they hold — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, or Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../navigation.md).
+
+*Typically filed in practice by the Project Registration Officer.* That is a description of customary practice, not a restriction — the role recorded against the submission is audit-trail attribution only.
 
 ## 5. Prerequisites
 
@@ -55,11 +58,11 @@ The developer opens the project record, selects cancellation, provides a reason,
 
 ## 8. Service Fee
 
-Applicable according to the RERAN fee schedule.
+**No RERA service fee is sourced for this service.** The source workflow contains no payment step.
 
 ## 9. Payment Required
 
-Not specified in the source. **Proposed**: not required, since this is a cancellation rather than a new registration action; needs client confirmation.
+**No.** Not required at any point in the sourced workflow. Should the client confirm a fee applies, it would be paid per transaction through the shared platform payment gateway — **proposed**, needs client confirmation.
 
 ## 10. Processing Authority
 

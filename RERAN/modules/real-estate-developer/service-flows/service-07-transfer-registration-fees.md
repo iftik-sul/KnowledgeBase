@@ -5,9 +5,10 @@ type: service-flow
 status: draft
 contains_proposals: true
 source_type: sourced
-updated: 2026-08-10
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/modules/real-estate-developer/navigation.md"
 tags:
   - real-estate-developer
   - service-flow
@@ -34,7 +35,9 @@ The developer identifies the source application whose fee was paid, the destinat
 
 ## 4. Who Can Apply
 
-* Project Registration Officer *(see Service #1 §4 for the source/UI role-assignment note — applies identically here)*
+Any user of a registered developer account, whatever role they hold — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, or Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../navigation.md).
+
+*Typically filed in practice by the Project Registration Officer.* That is a description of customary practice, not a restriction — the role recorded against the submission is audit-trail attribution only.
 
 ## 5. Prerequisites
 
@@ -57,11 +60,11 @@ The developer identifies the source application whose fee was paid, the destinat
 
 ## 8. Service Fee
 
-Applicable according to the RERAN fee schedule — subject to the fee credit being transferred, per the service's purpose.
+Applicable according to the RERAN fee schedule — subject to the fee credit being transferred, per the service's purpose. Any balance payable is charged through the shared platform payment gateway, per transaction. There is no standing or pre-funded RERA-fee account for developers; each application is paid for on its own.
 
 ## 9. Payment Required
 
-**Conditional** — no new fee payment where the transferred credit fully covers the destination application; an additional payment may be required for a shortfall. Not specified in the source; **proposed**, needs client confirmation.
+**Conditional — before RERA's decision where payable.** The source places payment selection at submission, ahead of review, as with the other initial-procedures services. No new payment where the transferred credit fully covers the destination application; a shortfall is charged per transaction through the shared platform payment gateway. The shortfall handling is not specified in the source; **proposed**, needs client confirmation.
 
 ## 10. Processing Authority
 

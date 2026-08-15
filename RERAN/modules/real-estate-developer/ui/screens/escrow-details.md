@@ -3,8 +3,10 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
+contains_proposals: true
 derived_from:
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
@@ -14,593 +16,150 @@ tags:
 
 # Screen: Escrow Details
 
-**Roles:** Principal · Escrow Liaison
+**Access:** Any of the developer's four Group B roles — identical screen for every user, no role-based variant.
 
-The detail view of a single escrow account, opened from [Escrow Management](escrow-management.md). The Developer Principal / Director sees a read-only view; the Escrow Liaison sees an operational workspace for requesting fund releases and managing milestones and documents.
+> **Rebuilt 2026-08-15.** This screen previously described two designs that disagreed on **page structure itself**, not merely on content: the Developer Principal / Director variant was a linear ten-section page, and the Escrow Liaison variant was a five-tab workspace with a persistent summary card and a right-hand alerts sidebar. Both are **retired**. This is one screen, and the structural conflict is resolved explicitly in [Notes](#notes) rather than by picking a side silently.
+
+> **The balances on this screen are the project escrow account's, not a RERA-fee account.** See [escrow-management.md](escrow-management.md) for the full distinction. RERA service fees are paid per transaction through the shared platform payment gateway (issue #58) and have no bearing on anything here.
 
 ## Purpose
 
-Purpose differs by role — see [Role Variations](#role-variations).
+The detail view of a single project escrow account, opened from [Escrow Management](escrow-management.md). Covers the account, its financial institution, the construction milestone schedule, fund release history and requests, escrow documents, regulatory correspondence and the full activity log — with the controls to request releases, upload evidence and coordinate with the Account Trustee. Any user may do any of it.
 
 ## Layout
 
-* **Visible Sidebar:** Developer Operational Sidebar
-* **Active Menu:** **Escrow Management**
-* **Top Bar Title:** Escrow Details
-* **Search Bar:** (differs by role — see below)
+**Tabbed, with a persistent header and summary card above the tabs.**
 
-The page uses the shared **Background \+ HorizontalBorder** component.
-
-The two Layout diagrams are structurally different: the Principal's is a stacked, numbered-section layout; the Escrow Liaison's uses **Information Tabs** (Overview, Fund Releases, Milestones, Documents, Activity Log) under a single summary card, the same tab pattern seen on that role's Application Details and Document Details screens. The subtitle and search-bar placeholder text also differ by role — see [Role Variations](#role-variations).
+```
+Top Bar
+↓
+Escrow Header
+↓
+Escrow Summary Card + Quick Actions
+↓
+┌─ Tabs ────────────────────────────────────────────────┐
+│ Overview · Fund Releases · Milestones · Documents ·    │
+│ Regulatory History · Activity Log                     │
+└───────────────────────────────────────────────────────┘
+                                    ↕
+                          Right Sidebar — Alerts & Reminders
+```
 
 ## Sections
 
-Every section is role-specific — see [Role Variations](#role-variations). Only the Escrow Liaison's version has a **Right Sidebar — Alerts & Reminders** section; the Principal's has no equivalent.
+### Escrow Header
 
-## Empty State
+Escrow ID, project, financial institution, escrow status badge, release status badge.
 
-Message and actions differ by role — see [Role Variations](#role-variations).
+**Actions:** **Request Fund Release** · **Upload Documents** · **Download Escrow Summary** · **View Applications**
 
-## Reused Components
+**Reconciled 2026-08-15:** the linear variant's header offered view actions only. The full action set now applies to every user, subject to the account's own state.
 
-Differs by role — see [Role Variations](#role-variations).
+### Escrow Summary Card + Quick Actions
 
-## Role Variations
+Persistent above the tabs, from the tabbed variant: escrow account number, current balance, current milestone, last release, next scheduled milestone — with the Quick Actions row.
 
-### Developer Principal / Director
-
-### Sidebar Status
-
-* **Visible Sidebar:** Developer Operational Sidebar  
-* **Active Menu:** **Escrow Management**  
-* **Selected Item:** Escrow Details *(opened from Escrow Management list)*  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Projects  
-  * Property Registrations  
-  * Sales & Disclosures  
-  * **Escrow Management (Active)**  
-  * Applications  
-  * Documents  
-  * Reports  
-  * Company Profile  
-  * Notifications  
-  * Help & Support
-
-### Top Bar Status
-
-**Title:** Escrow Details
-
-**Subtitle:** Review the complete escrow account, milestone progress, and fund release history.
-
-**Search Bar:** Search anything...
-
-**Page Actions (Right Side):**
-
-* Download Escrow Summary  
-* View Linked Project  
-* View Sales Record
-
-The page uses the shared **Background \+ HorizontalBorder** component.
-
-### Purpose
-
-Provide the Developer Principal / Director with a complete, read-only view of an escrow account, including financial institution details, construction milestones, fund releases, supporting documents, and compliance history.
-
-### Layout
-
-Top Bar  
-↓  
-Escrow Header  
-↓  
-Escrow Summary Cards  
-↓  
-Escrow Account Information  
-↓  
-Project Information  
-↓  
-Financial Institution Information  
-↓  
-Milestone & Fund Release Timeline  
-↓  
-Fund Release History  
-↓  
-Escrow Documents  
-↓  
-RERA Review History  
-↓  
-Activity Timeline
-
-### Section 1 — Escrow Header
-
-Displays high-level escrow information.
-
-#### **Left**
-
-* Escrow Account Number  
-* Project Name  
-* Escrow Status Badge
-
-#### **Right**
-
-* Financial Institution  
-* Last Updated  
-* Managed By (Escrow Liaison)
-
-### Section 2 — Escrow Summary Cards
-
-Display six KPI cards.
-
-| KPI | Description |
-| ----- | ----- |
-| Escrow Status | Current account status |
-| Escrow Balance | Current funds held |
-| Total Funds Released | Cumulative released funds |
-| Current Milestone | Active construction milestone |
-| Next Release Amount | Amount pending approval |
-| Compliance Status | Compliant / Pending |
-
-### Section 3 — Escrow Account Information
-
-Two-column information card.
-
-#### **Account Details**
-
-* Escrow Account Number  
-* Escrow Reference  
-* Account Opening Date  
-* Escrow Type  
-* Current Balance  
-* Currency
-
-#### **Responsible Parties**
-
-* Developer Company  
-* Escrow Liaison  
-* Financial Institution  
-* RERA Reference
-
-### Section 4 — Project Information
-
-Information card.
-
-Display:
-
-* Project Name  
-* Project ID  
-* Project Location  
-* Development Phase  
-* Overall Progress  
-* Linked Property Registrations
-
-Button
-
-* View Project Details
-
-### Section 5 — Financial Institution Information
-
-Information card.
-
-Display:
-
-* Institution Name  
-* Branch  
-* Relationship Manager  
-* Contact Information  
-* Escrow Agreement Reference
-
-Button
-
-* View Institution Details
-
-### Section 6 — Milestone & Fund Release Timeline
-
-Horizontal progress tracker.
-
-#### **Stages**
-
-* Escrow Account Created  
-* Initial Deposit  
-* Milestone 1 Completed  
-* Fund Release 1  
-* Milestone 2 Completed  
-* Fund Release 2  
-* Final Completion  
-* Escrow Closed
-
-Completed stages use the platform's standard success indicator.
-
-The current stage is highlighted.
-
-### Section 7 — Fund Release History
-
-Table showing all release requests.
-
-#### **Columns**
-
-| Column | Description |
-| ----- | ----- |
-| Release No. | Sequential release number |
-| Milestone | Construction milestone |
-| Requested Amount | Requested release amount |
-| Approved Amount | Approved release amount |
-| Approval Date | Date approved |
-| Status | Release status |
-| Action | View Details |
-
-### Section 8 — Escrow Documents
-
-Table.
-
-#### **Columns**
-
-* Document Name  
-* Category  
-* Uploaded By  
-* Upload Date  
-* Verification Status  
-* Action
-
-#### **Actions**
-
-* View Document
-
-### Section 9 — RERA Review History
-
-Table.
-
-#### **Columns**
-
-* Review Date  
-* Reviewing Officer  
-* Activity  
-* Outcome  
-* Status
-
-Examples
-
-* Escrow Agreement Approved  
-* Milestone Verified  
-* Fund Release Approved  
-* Compliance Review Completed
-
-### Section 10 — Activity Timeline
-
-Chronological history.
-
-Examples
-
-* Escrow account opened  
-* Initial deposit received  
-* Milestone inspection completed  
-* Fund release requested  
-* RERA approval granted  
-* Funds released  
-* Escrow account updated
-
-Latest activities appear first.
-
-### Empty State
-
-If the escrow account has been created but no fund releases have occurred:
-
-**Message**
-
-> The escrow account has been established. Fund releases will appear once construction milestones are completed and approved.
-
-Primary Button
-
-* View Project
-
-### Reused Components
-
-See [components.md](../components.md) for definitions of every component used on this screen.
-
-### User Flow
-
-Dashboard  
-↓  
-Escrow Management  
-↓  
-Escrow Details
-
-├── View Project Details
-
-├── View Sales Record
-
-├── View Escrow Documents
-
-├── View Financial Institution
-
-└── Download Escrow Summary
-
-### Notes
-
-* This is an **executive oversight screen** for the **Developer Principal /Director**.  
-* It consolidates all financial and regulatory information related to a single escrow account.  
-* No financial transactions or approvals can be performed from this page.  
-* All operational escrow activities remain the responsibility of the **Escrow Liaison**, while approvals by financial institutions and RERA are reflected as read-only status updates.
-
-### Escrow Liaison
-
-### Sidebar Status
-
-* **Visible Sidebar:** Developer Operational Sidebar  
-* **Active Menu:** **Escrow Management**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * **Escrow Management (Active)**  
-  * Applications  
-  * Documents  
-  * Reports  
-  * Notifications  
-  * Help & Support  
-* **Selected Record:** Escrow Details
-
-### Top Bar Status
-
-**Title:** Escrow Details
-
-**Subtitle:** View escrow account information, milestones, fund releases, and compliance activities
-
-**Search Bar:** Search within escrow records...
-
-The page uses the shared **Background \+ HorizontalBorder** component.
-
-**Page Actions (Right Side):**
-
-* Request Fund Release  
-* Download Escrow Summary
-
-### Purpose
-
-Provide a complete view of a single escrow account, allowing the Escrow Liaison to monitor the account lifecycle, review milestones, track fund releases, upload supporting documents, and respond to regulatory or financial institution requirements.
-
-### Layout
-
-Top Bar  
-↓  
-Escrow Summary Card  
-↓  
-Information Tabs  
-    ├─ Overview  
-    ├─ Fund Releases  
-    ├─ Milestones  
-    ├─ Documents  
-    └─ Activity Log
-
-### Section 1 — Escrow Summary Card
-
-Displays key information at the top of the page.
-
-#### **Information**
-
-* Escrow ID  
-* Project Name  
-* Project Registration Number  
-* Financial Institution  
-* Escrow Account Number  
-* Current Balance  
-* Total Deposits  
-* Total Released  
-* Current Milestone  
-* Escrow Status  
-* Registration Date
-
-#### **Quick Actions**
-
-* Request Fund Release  
-* Upload Documents  
-* Download Summary
+**Absorbed:** the linear variant's *Escrow Summary Cards* section covered the same figures as a card row. Merged into this one persistent card so the numbers stay visible while moving between tabs.
 
 ### Tab 1 — Overview
 
-Displays the general escrow account information.
+* **Project Information** — project, registration number, developer, unit counts, construction status.
+* **Escrow Account Information** — account number, registration date, status, terms.
+* **Financial Institution Information** — bank, branch, Account Trustee contact, agreement reference.
+* **Financial Summary** — total deposited, total released, current balance, pending release value.
+* **Responsible Parties** — named contacts against the account. *(Descriptive attribution, not access assignment.)*
 
-#### **Project Information**
-
-* Project Name  
-* Development Type  
-* Developer Name  
-* Project Registration Number  
-* Project Location
-
-#### **Escrow Information**
-
-* Financial Institution  
-* Escrow Account Number  
-* Account Opening Date  
-* Current Status
-
-#### **Financial Summary**
-
-* Initial Deposit  
-* Total Deposited  
-* Total Released  
-* Remaining Balance
+**Absorbed 2026-08-15:** the linear variant's Sections 3, 4 and 5 (*Escrow Account Information*, *Project Information*, *Financial Institution Information*, plus *Responsible Parties*) and the tabbed variant's Overview groups. The linear variant carried more detail on the financial institution; the tabbed variant carried the Financial Summary. Both kept.
 
 ### Tab 2 — Fund Releases
 
-Displays every release request associated with the escrow account.
+Table of release requests: reference, milestone, requested amount, approved amount, request date, decision date, status, action.
 
-#### **Table Columns**
+**Actions** — governed by release status: Continue Draft · Edit · Submit · Respond to Query · View Details · Download Approval.
 
-| Column | Description |
-| ----- | ----- |
-| Release ID | Unique request number |
-| Milestone | Construction milestone |
-| Requested Amount | Amount requested |
-| Approved Amount | Amount approved |
-| Request Date | Submission date |
-| Status | Current status |
-| Action | View Details |
+**Absorbed 2026-08-15:** the linear variant's *Fund Release History* (a read-only record) and the tabbed variant's *Fund Releases* tab (the same record plus request controls). The tabbed version is the superset.
 
-#### **Status**
-
-See [status-badges.md](../status-badges.md#fund-release-status) for the status vocabulary — including a conflict between this list, the Principal's escrow-management.md list, and the Escrow Liaison's own escrow-management.md list.
-
-#### **Actions**
-
-* View Details
-
-If the request is still editable:
-
-* Continue Draft
+Links to [fund-release-request.md](fund-release-request.md) and [fund-release-request-details.md](fund-release-request-details.md).
 
 ### Tab 3 — Milestones
 
-Displays all construction milestones linked to this escrow account.
+Construction milestone schedule: milestone, planned date, actual date, release amount, verification status, evidence, action.
 
-#### **Columns**
-
-* Milestone Name  
-* Planned Completion  
-* Actual Completion  
-* Verification Status  
-* Eligible Release Amount  
-* Status
-
-#### **Status**
-
-See [status-badges.md](../status-badges.md#milestone-verification-status-additional-vocabulary-found-during-consolidation) for the status vocabulary.
+**Absorbed 2026-08-15:** the linear variant's *Milestone & Fund Release Timeline* was a combined stage tracker covering both milestones and releases. Splitting it follows the tabbed variant, since the two have different cardinality — a milestone may carry no release, and a release may be returned and resubmitted against the same milestone. The timeline *view* survives as the ordering of this tab.
 
 ### Tab 4 — Documents
 
-Displays all escrow-related documents.
+Escrow documents by category — Escrow Agreement, Bank Confirmation Letter, Engineer Progress Certificate, Quantity Surveyor Report, Construction Progress Report, Site Inspection Report, Fund Release Documents, Financial Statements, Compliance Documents, Supporting Documents, Other.
 
-#### **Categories**
+Table with Upload / Replace / Preview / Resubmit actions governed by document status.
 
-* Escrow Agreement  
-* Bank Confirmation Letter  
-* Construction Progress Report  
-* Engineer Certificate  
-* Quantity Surveyor Report  
-* Fund Release Documents  
-* Supporting Documents
+**Absorbed 2026-08-15:** the linear variant's *Escrow Documents* section (view/download only) and the tabbed variant's *Documents* tab (categories plus upload controls). The tabbed version is the superset.
 
-#### **Columns**
+### Tab 5 — Regulatory History
 
-* Document Name  
-* Category  
-* Uploaded By  
-* Upload Date  
-* Version  
-* Status  
-* Action
+RERA review history against this escrow account: review round, reviewer, decision, date, remarks — together with any open queries and their response actions.
 
-#### **Actions**
+**Absorbed 2026-08-15** from the linear variant's *RERA Review History*, which the tabbed variant had no equivalent for. **This was the tabbed variant's one real omission**, and it is restored here as its own tab rather than folded into the Activity Log, where a decision record would be hard to find among routine events.
 
-* View  
-* Download
+### Tab 6 — Activity Log
 
-### Tab 5 — Activity Log
+Chronological record of everything that has happened to this escrow account. Each entry shows who acted and what role they held at the time ([navigation.md](../../navigation.md#audit-trail-principle)).
 
-Displays every activity performed on the escrow account.
-
-#### **Timeline**
-
-Examples
-
-* Escrow account registered  
-* Initial deposit received  
-* Construction milestone submitted  
-* Milestone verified  
-* Fund release requested  
-* Bank confirmed request  
-* RERA approved release  
-* Funds transferred  
-* Additional documents requested  
-* Escrow account closed
-
-Each activity displays
-
-* Date & Time  
-* User  
-* Description  
-* Status
+**Absorbed** from the linear variant's *Activity Timeline* and the tabbed variant's *Activity Log* — the same section under two names.
 
 ### Right Sidebar — Alerts & Reminders
 
-Displays important notifications related to this escrow account.
+Milestone dates approaching, releases awaiting bank action, documents expiring, queries with due dates.
 
-Examples
+**Absorbed 2026-08-15** from the tabbed variant, the only one to define it. Backed by the **Alerts Sidebar** component recorded in [components.md](../components.md), which notes this as the component's single usage in the module. Retained — it is real content, and dropping it would have orphaned that component.
 
-* Milestone awaiting verification  
-* Bank confirmation pending  
-* Additional documents required  
-* Fund release returned  
-* Compliance review scheduled  
-* Upcoming submission deadline
+## Empty State
 
-### Empty State
+> This escrow account has no fund release requests yet. Request a release once a construction milestone is verified.
 
-If no milestones or releases exist yet:
+**Primary Button** — Request Fund Release
 
-**Message**
+Applies to the Fund Releases tab. The Overview tab always renders, since account and institution details exist from registration onward.
 
-> This escrow account has been registered successfully. No fund release requests or construction milestones have been recorded yet.
+## Reused Components
 
-**Primary Button**
+See [components.md](../components.md) for definitions of every component used on this screen — including the Alerts Sidebar, used only here.
 
-* Request Fund Release
+## Validation
 
-**Secondary Button**
-
-* Upload Documents
-
-### Reused Components
-
-See [components.md](../components.md) for definitions of every component used on this screen.
-
-### User Flow
-
-Escrow Details
-
-├── Request Fund Release
-
-│      ↓
-
-│  Fund Release Request
-
-│
-
-├── View Fund Release
-
-│      ↓
-
-│  Fund Release Details
-
-│
-
-├── Upload Documents
-
-│      ↓
-
-│  Documents
-
-│
-
-├── Download Summary
-
-│
-
-└── Back
-
-       ↓
-
-   Escrow Management
-
-### Notes
-
-* This screen acts as the central workspace for managing an individual escrow account.  
-* All fund release requests, construction milestones, supporting documents, and activity history should be linked to the selected escrow account.  
-* Users cannot modify approved or released fund requests; those records are read-only.  
-* Every action performed on the escrow account should be recorded in the **Activity Log** for audit and regulatory compliance.
+1. No tab, section, field or action on this screen is role-gated. What a user can do depends on the escrow account's and the release's state, never on who they are.
+2. Users cannot modify approved or released fund requests; those records are read-only. A lifecycle rule, applying to every user equally.
+3. The escrow account's status and each release's status are separate values and must not be conflated.
+4. Balances and release figures come from the escrow system of record and must match [escrow-management.md](escrow-management.md) exactly.
 
 ## User Flow
 
-Differs by role — see the "User Flow" heading within each role's block under [Role Variations](#role-variations). The Escrow Liaison's is rooted at Escrow Details itself rather than at Dashboard.
+```
+Escrow Management
+↓
+Escrow Details
+├─ Request Fund Release → Fund Release Request
+├─ Fund Releases row → Fund Release Request Details
+├─ Documents row → Document Details
+├─ Regulatory History query → response flow
+└─ Project link → Project Details
+```
 
 ## Notes
 
-Differs by role — see the "Notes" heading within each role's block under [Role Variations](#role-variations).
+* **The structural conflict, and how it was resolved.** The two variants did not merely differ in content — they were different page architectures. The Principal's was ten stacked sections; the Escrow Liaison's was five tabs plus a sidebar. Neither is a subset of the other, and no merge could preserve both.
+
+  **Resolved in favour of the tabbed layout**, for reasons specific to this screen rather than a general preference:
+  * The merged content runs to six substantial groupings. As a linear page that is a long scroll in which the Fund Releases table — the thing users come here to act on — sits below three information blocks.
+  * The escrow record is genuinely multi-dimensional: account, milestones, releases and documents are related but separately navigable, which is what tabs are for.
+  * The persistent summary card keeps the balance and current milestone visible from every tab, which the linear layout could not do at all.
+
+  **What the linear layout contributed and kept:** its richer Financial Institution detail, its Responsible Parties block, and its RERA Review History — the last being content the tabbed variant lacked entirely, now restored as Tab 5. The linear ordering itself is gone.
+
+  **Flagged:** this is a design decision made in the course of a documentation merge. If the client prefers the linear layout, the content mapping above is reversible — every tab corresponds to a former section — but the reverse move loses the persistent summary card.
+
+* **Reconciliation — milestones and releases were one section, now two.** The linear variant combined them into a single *Milestone & Fund Release Timeline*. They have different cardinality (a milestone may have no release; a release may be resubmitted against one milestone), so combining them cannot represent the real relationship. Split, following the tabbed variant.
+
+* **The Alerts & Reminders sidebar was single-sourced and is kept.** Same reasoning as "Suspended" in the project-status merge: single-sourced is not the same as redundant.
+
+* **What was dropped, and why.** Only the linear page ordering, the view-only header actions, and the linear variant's note that "all operational escrow activities remain the responsibility of the Escrow Liaison" — a permission claim, already corrected once and now removed with the variant. Every information group, table, column and action from both variants is present above.

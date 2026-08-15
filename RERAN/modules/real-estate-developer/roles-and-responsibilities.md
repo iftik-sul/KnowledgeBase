@@ -3,9 +3,10 @@ project: RERAN
 module: real-estate-developer
 type: user-group
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
+  - "RERAN/modules/real-estate-developer/navigation.md"
 tags:
   - real-estate-developer
   - roles
@@ -154,9 +155,11 @@ They ensure construction payments are released according to approved milestones.
 
 ## How They Work Together
 
+**Descriptive, not access-restrictive — corrected 2026-08-15.** The table below shows who *typically* handles each stage in practice, not who is *permitted* to. Group B does not gate access by role: all four roles have identical access to every screen and action, and any of them may perform any stage's actions. See [navigation.md](navigation.md) for the unified access model. This table previously read as an assignment of each stage to one role; it is now a description of customary division of labour, useful for understanding the audit trail rather than for determining permissions.
+
 Let's follow a real project from start to finish:
 
-| Stage | Responsible Role |
+| Stage | Typically handled by |
 | :---- | :---- |
 | Company decides to build a new estate | **Developer Principal / Director** |
 | Register the new project with RERA | **Project Registration Officer** |
@@ -166,7 +169,9 @@ Let's follow a real project from start to finish:
 | Manage escrow account and milestone-based fund releases | **Escrow Liaison** |
 | Monitor the overall progress, compliance, sales, and financial status | **Developer Principal / Director** |
 
-In short:
+Any of these stages may be carried out by any role — a Principal / Director may file a registration directly, an Escrow Liaison may record a sale, and the officer who files a record may also act on it later. Whoever performs the action, the audit trail records their name and the role they held at the time.
+
+In short, each role's customary focus is:
 
 * **Developer Principal / Director** → Runs the business and makes strategic decisions.  
 * **Project Registration Officer** → Registers projects and manages regulatory applications.  

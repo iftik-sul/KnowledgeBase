@@ -5,9 +5,10 @@ type: service-flow
 status: draft
 contains_proposals: true
 source_type: sourced
-updated: 2026-08-10
+updated: 2026-08-15
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/modules/real-estate-developer/ui/screens/project-details.md"
   - "RERAN/modules/real-estate-developer/ui/screens/property-registration-details.md"
 tags:
@@ -38,7 +39,9 @@ The developer submits updated project details. RERA's Compliance & Escrow Audito
 
 ## 4. Who Can Apply
 
-* Project Registration Officer
+Any user of a registered developer account, whatever role they hold — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, or Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../navigation.md).
+
+*Typically filed in practice by the Project Registration Officer.* That is a description of customary practice, not a restriction — the role recorded against the submission is audit-trail attribution only.
 
 ## 5. Prerequisites
 
@@ -60,11 +63,13 @@ The developer submits updated project details. RERA's Compliance & Escrow Audito
 
 ## 8. Service Fee
 
-Applicable according to the RERAN fee schedule.
+Applicable according to the RERAN fee schedule. Paid through the shared platform payment gateway, per transaction. There is no standing or pre-funded RERA-fee account for developers; each application is paid for on its own.
 
 ## 9. Payment Required
 
-Not specified in the source. **Proposed**: yes, consistent with other title-issuance services; needs client confirmation.
+**Yes — in two stages, one before RERA's decision and one after.** Uniquely among the 27, this service's source row contains two distinct payment steps: an *application approval fee* paid before the Survey Department reviews, and an *approval fee in the real estate records* paid after approval and before the output is issued. Both are charged per transaction through the shared platform payment gateway. Neither stage may be collapsed into the other.
+
+> **Who tenders the first payment is not settled by the source.** The row reads "Pay application approval fees **and send from survey company to Survey Department**," which attributes the transmission — and possibly the payment itself — to the developer's designated survey company rather than to the developer directly. The workflow below documents it as a developer-side gateway payment, since that is the only payment route this module has; whether the survey company pays on the developer's behalf, or merely forwards an application the developer has already paid for, is **proposed** and needs client confirmation. The second payment is unambiguously the developer's.
 
 ## 10. Processing Authority
 
@@ -84,9 +89,13 @@ Select "Register/Amend Project Details"
 ↓
 Enter Updated Details
 ↓
+Pay Application Approval Fee via Payment Gateway
+↓
 Submit Application Online
 ↓
 RERA Reviews Application
+↓
+Pay Approval Fee in Real Estate Records via Payment Gateway
 ↓
 If Project Completed: Electronic Certificate of Title / Title Deed Issued
 ↓
@@ -96,11 +105,19 @@ If Project Not Completed: Electronic Map Issued
 
 Draft
 ↓
+Application Fee Pending
+↓
+Application Fee Paid
+↓
 Submitted
 ↓
 Under Review
 ↓
 Approved
+↓
+Approval Fee Pending
+↓
+Approval Fee Paid
 ↓
 Issued
 
@@ -132,6 +149,7 @@ Issued
 ## 17. UI Screens
 
 * Project Details **or** Property Registration Details *(unresolved — see Section 1)*
+* Payment
 * Application Submitted
 
 ## 18. API Requirements
@@ -140,6 +158,10 @@ Issued
 * Submit Project Details Registration/Amendment
 * Determine Project Completion Status
 * Retrieve Application Status
+* Calculate Application Approval Fee
+* Calculate Records Approval Fee
+* Initiate Payment
+* Verify Payment
 * Generate Electronic Certificate of Title
 * Generate Electronic Map
 * Send Notifications
@@ -151,6 +173,8 @@ Issued
 * Title Deed Record
 * Application
 * Document
+* Payment
+* Payment Transaction
 * Notification
 * Audit Log
 
@@ -160,6 +184,7 @@ Issued
 * System determines the project's completion status to select the correct output document.
 * Approved submissions generate the completion-appropriate title document.
 * All activities are recorded in the audit log.
+* The application approval fee is completed before Survey Department review, and the approval fee in the real estate records after approval and before the output is issued.
 
 ## 21. Business Rules
 

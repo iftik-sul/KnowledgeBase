@@ -3,8 +3,9 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
@@ -14,9 +15,9 @@ tags:
 
 # Screen: Fund Release Request
 
-**Roles:** Escrow Liaison
+**Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
 
-The form used to prepare and submit a milestone-based fund release request, reached from [Escrow Details](escrow-details.md). Documented for the Escrow Liaison only — no other role has a version of this screen in the source material.
+The form used to prepare and submit a milestone-based fund release request, reached from [Escrow Details](escrow-details.md). The source documents a single variant, under the Escrow Liaison heading, with no second variant to reconcile. It is reachable and actionable by all four roles.
 
 ## Purpose
 

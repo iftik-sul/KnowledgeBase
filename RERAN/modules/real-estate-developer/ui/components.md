@@ -3,8 +3,9 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/modules/real-estate-developer/ui/screens/dashboard.md"
   - "RERAN/modules/real-estate-developer/ui/screens/applications.md"
   - "RERAN/modules/real-estate-developer/ui/screens/application-details.md"
@@ -32,7 +33,7 @@ tags:
 
 # Shared Component Library
 
-UI components reused across screens in this module, gathered from every "Reused Components" list across all 19 screen files (49 role-scoped instances in total). Screen files link here instead of describing a component again.
+UI components reused across screens in this module, gathered from every "Reused Components" list across all 19 screen files (originally 49 role-scoped instances, since merged into 19 unified screens — see [README.md](README.md)). Screen files link here instead of describing a component again.
 
 **Naming is not consistent in the source.** Several components are named differently from screen to screen, or from role to role on the same screen, without any apparent pattern. Where that happens, this file records every name used and picks the most descriptive one as the heading — it does not assume the differently-named mentions are describing different things, but it also doesn't silently erase the inconsistency. Divergences in name or description are called out explicitly rather than smoothed over.
 
@@ -40,7 +41,7 @@ UI components reused across screens in this module, gathered from every "Reused 
 
 ### Left Sidebar
 
-The persistent navigation sidebar shown on every operational screen (referred to in each screen's own Layout section as the "Developer Operational Sidebar," with role-scoped visible/active menu items). Named "Left Sidebar" in 46 of the 49 Reused Components lists that mention it.
+The persistent navigation sidebar shown on every operational screen (referred to in each screen's own Layout section as the "Developer Operational Sidebar"). **Corrected 2026-08-15:** the sidebar is no longer role-scoped — one identical menu is shown to all four roles, with only the *active* item varying by screen. See [../navigation.md](../navigation.md).. Named "Left Sidebar" in 46 of the 49 Reused Components lists that mention it.
 
 **Naming divergence:** three lists — the Escrow Liaison's variants of [help-and-support.md](screens/help-and-support.md), [notifications.md](screens/notifications.md), and [reports.md](screens/reports.md) — name it "Developer Operational Sidebar" directly instead of "Left Sidebar." Same component; the Escrow Liaison's Reused Components lists on those three screens consistently use the specific instance name rather than the generic component name used everywhere else.
 
@@ -48,11 +49,11 @@ The persistent navigation sidebar shown on every operational screen (referred to
 
 The page header: title, subtitle, search bar, and page-specific actions, built on a shared background/border treatment referenced across nearly every screen as "the shared Background + HorizontalBorder component."
 
-**Naming divergence, not just cosmetic:** appears as "Top Bar" (bare, mostly on Principal's read-only screens — 15 mentions), "Top Bar (Background + HorizontalBorder)" (21 mentions), "Top Bar (**Background + HorizontalBorder**)" (bold variant, 8 mentions), and with a missing space — "Top Bar (Background +HorizontalBorder)" / "Top Bar (**Background +HorizontalBorder**)" — in 2 mentions (both on operational-role variants of [application-details.md](screens/application-details.md) and [escrow-management.md](screens/escrow-management.md); likely typos rather than a deliberate distinct styling, but preserved as written since this batch's rules don't permit silently "fixing" source wording). The same three Escrow Liaison lists noted under Left Sidebar above list "Background + HorizontalBorder" as if it were a **separate** component from "Top Bar," rather than a styling note on the Top Bar entry — a real structural inconsistency, not just a wording one.
+**Naming divergence, not just cosmetic:** appears as "Top Bar" (bare, mostly on the Principal / Director variants — 15 mentions), "Top Bar (Background + HorizontalBorder)" (21 mentions), "Top Bar (**Background + HorizontalBorder**)" (bold variant, 8 mentions), and with a missing space — "Top Bar (Background +HorizontalBorder)" / "Top Bar (**Background +HorizontalBorder**)" — in 2 mentions (both on operational-role variants of [application-details.md](screens/application-details.md) and [escrow-management.md](screens/escrow-management.md); likely typos rather than a deliberate distinct styling, but preserved as written since this batch's rules don't permit silently "fixing" source wording). The same three Escrow Liaison lists noted under Left Sidebar above list "Background + HorizontalBorder" as if it were a **separate** component from "Top Bar," rather than a styling note on the Top Bar entry — a real structural inconsistency, not just a wording one.
 
 ### Search Bar
 
-The top-bar search input, generally captioned "Search anything..." (though [escrow-management.md](screens/escrow-management.md) and [escrow-details.md](screens/escrow-details.md) use role-specific placeholder text instead — see those screens' Role Variations for the exact wording). Named "Search Bar" in every mention except one: [dashboard.md](screens/dashboard.md)'s Developer Principal / Director variant calls it "Search Component" instead, even though every other screen — including that same Dashboard's other three role variants — calls it "Search Bar."
+The top-bar search input, captioned "Search anything...". **Resolved 2026-08-15 — "Search Bar".** One retired variant of [dashboard.md](screens/dashboard.md) called it "Search Component"; every other mention across every screen called it "Search Bar". Resolved to the majority name. The escrow screens previously carried their own placeholder text in their variant blocks; the rebuilt [escrow-management.md](screens/escrow-management.md) and [escrow-details.md](screens/escrow-details.md) use the shared caption, with domain-specific searching handled by their own Filters sections instead of by placeholder wording.
 
 ## Data Display
 
@@ -72,7 +73,7 @@ Two-column (or multi-field) read-only information display, used throughout detai
 
 A card presenting 2–4 rollup metrics together (e.g. "Sales Performance," "Compliance Summary"), distinct from the single-metric KPI Cards above.
 
-**Naming divergence:** most screens ([applications.md](screens/applications.md), [documents.md](screens/documents.md), [sales-and-disclosures.md](screens/sales-and-disclosures.md), [property-registrations.md](screens/property-registrations.md), [escrow-management.md](screens/escrow-management.md) — 7 mentions) call this "Analytics Cards"; [reports.md](screens/reports.md) (3 mentions, all operational-role variants) calls the same kind of card "Analytics Widgets" instead.
+**Resolved 2026-08-15 — "Analytics Cards".** Most screens (7 mentions) used "Analytics Cards"; [reports.md](screens/reports.md)'s operational variants (3 mentions) used "Analytics Widgets" for the same card. Resolved to the majority name, now referenced from the rebuilt [reports.md](screens/reports.md).
 
 ### Status Badges
 
@@ -82,13 +83,13 @@ The colour-coded status indicator shown on records throughout the module. **See 
 
 An embedded, in-page preview of a document (zoom, rotate, page navigation, download), used on read-only detail screens.
 
-**Naming divergence:** the Developer Principal / Director's variants say "Document Viewer" (3 mentions — [application-details.md](screens/application-details.md), [escrow-details.md](screens/escrow-details.md)); the operational roles' equivalents on [document-details.md](screens/document-details.md) all say "Embedded Document Viewer" instead (4 mentions). Likely the same component with the Principal's screens using a shortened name, since the underlying feature list (zoom, rotate, page navigation, full screen, download) is identical wherever it's spelled out in full in the screen body — but the Reused Components lists themselves never spell that out, so this is inferred, not confirmed from the component list alone.
+**Resolved 2026-08-15 — "Embedded Document Viewer".** The Principal / Director variants said "Document Viewer" (3 mentions); the operational variants on [document-details.md](screens/document-details.md) said "Embedded Document Viewer" (4 mentions). This was previously recorded as *probably* the same component, inferred from the identical feature list (zoom, rotate, page navigation, full screen, download) but not confirmed from the Reused Components lists themselves. With the screens rebuilt as single unified screens, one name is required — and the identical feature lists confirm the inference. Resolved to the longer, more descriptive name.
 
 ### Version History Table
 
 A table of every previously uploaded version of a document.
 
-**Naming divergence:** [document-details.md](screens/document-details.md)'s Principal variant calls it "Version History Component" (1 mention); the three operational-role variants of the same screen, plus [fund-release-request-details.md](screens/fund-release-request-details.md), call it "Version History Table" (3 mentions).
+**Resolved 2026-08-15 — "Version History Table".** The Principal variant of [document-details.md](screens/document-details.md) called it "Version History Component" (1 mention); the three operational variants plus [fund-release-request-details.md](screens/fund-release-request-details.md) called it "Version History Table" (3 mentions). Same component; resolved to the majority name now that the variants are merged.
 
 ### Document List
 
@@ -136,7 +137,9 @@ Shortcut cards on a Dashboard or list screen linking to common next actions (e.g
 
 A card- or list-style summary of pending, actionable work items (distinct from a full Data Table of records) — e.g. Dashboard's "Projects Requiring Attention" for operational roles.
 
-**⚠ Possible conflict, not fully resolved:** "Task Cards" (3 mentions — [applications.md](screens/applications.md), [documents.md](screens/documents.md), both operational-role variants) and "Task List" (2 mentions — [dashboard.md](screens/dashboard.md)'s Registration Officer and Sales & Disclosure Officer variants) are presented together here because they describe the same kind of "requires action" summary, but the source never clarifies whether "Task Cards" and "Task List" are the same visual pattern (a list vs. a card grid) or genuinely different presentations of the same data. Not merged into a single unqualified name; both are recorded.
+**Resolved 2026-08-15 — "Task Cards", with one open question.** "Task Cards" (3 mentions) and "Task List" (2 mentions) both described a "requires action" summary. The rebuilt screens use **Task Cards** on [dashboard.md](screens/dashboard.md)'s Requiring Action section and a **Data Table** on [applications.md](screens/applications.md)'s and [documents.md](screens/documents.md)'s Pending Actions / Pending Verification sections, since those carry per-row columns the dashboard's does not.
+
+**Still open:** whether the source intended a card grid and a list as two distinct visual patterns, or was simply inconsistent. The rebuild picked by context rather than resolving the underlying question — flagged for the client.
 
 ### Information Tabs
 
@@ -146,7 +149,7 @@ The tab navigation used on the Escrow Liaison's detail screens (Overview / Fund 
 
 ### Confirmation Dialogs
 
-Modal confirmation prompts, mentioned only on Escrow Liaison operational screens (5 mentions — [applications.md](screens/applications.md), [document-details.md](screens/document-details.md), [documents.md](screens/documents.md), [fund-release-request-details.md](screens/fund-release-request-details.md)). No other role's Reused Components lists mention this component at all, even on screens with similarly consequential actions (e.g. submitting an application) — plausibly an oversight in the source rather than a deliberate role restriction, but not assumed either way here.
+Modal confirmation prompts. **Updated 2026-08-15:** previously mentioned only on Escrow Liaison variants (5 mentions), and flagged as plausibly a source oversight since no other variant listed it even on screens with similarly consequential actions. With the variants merged, the component now applies wherever a destructive or irreversible action exists — delete a draft, resubmit, close a ticket, restore a document version — on any rebuilt screen. **Proposed**: the extension beyond the escrow screens follows the component's own definition rather than any source statement.
 
 ### Overflow Action Menu
 
@@ -164,7 +167,7 @@ Grouped, editable form fields on creation/edit screens.
 
 A document upload widget with replace/preview/delete actions, backing every screen's "Supporting Documents" / "Required Documents" section.
 
-**Possible naming divergence, reported not resolved:** "File Upload Component" on 8 mentions across most operational form screens; "Document Upload Table" on 2 mentions, both on Escrow Liaison forms ([application-details.md](screens/application-details.md), [fund-release-request.md](screens/fund-release-request.md)). Every screen's actual Supporting Documents section — regardless of which name its Reused Components list uses — describes the identical pattern: a table with Document/Status/Uploaded On/Version/Action columns and Upload/Replace/Preview/Delete row actions. It's plausible "Document Upload Table" and "File Upload Component" are two names for that exact same pattern; it's also plausible the Escrow Liaison's forms present upload as a table-first UI while other roles' forms present it as a discrete upload widget with a table underneath. The source doesn't say which, so both names are kept rather than collapsed into one.
+**Resolved 2026-08-15 — "File Upload Component", the widget, over a Data Table.** "File Upload Component" appeared on 8 mentions; "Document Upload Table" on 2, both Escrow Liaison forms. Every screen's Supporting Documents section describes the identical pattern regardless of the name used: a table with Document / Status / Uploaded On / Version / Action columns and Upload / Replace / Preview / Delete row actions. The rebuilt screens document that as a **File Upload Component** (the control) rendering above a **Data Table** (the list), which is what both names were describing from different ends. No behaviour changed.
 
 ### Validation Panel
 
@@ -192,7 +195,7 @@ Dashboard-level alert cards for items needing executive attention, mentioned onc
 
 ### Alert Panel
 
-A dedicated sidebar of alerts and reminders, mentioned once, on [escrow-details.md](screens/escrow-details.md)'s Escrow Liaison variant (backing that screen's unique "Right Sidebar — Alerts & Reminders" section — see that file's Role Variations).
+A dedicated sidebar of alerts and reminders. Backs the "Right Sidebar — Alerts & Reminders" section of [escrow-details.md](screens/escrow-details.md), which remains its only usage in the module. **Retained through the 2026-08-15 rebuild**: it was defined in only one of that screen's two retired variants, and dropping single-sourced content would have orphaned this component.
 
 **Possible naming divergence, not resolved:** "Alert Cards" (Dashboard, Principal) and "Alert Panel" (Escrow Details, Escrow Liaison) might be the same underlying alerting component used in two different layouts (a card grid vs. a sidebar panel), or they might be unrelated. Each is mentioned only once in the entire source, so there isn't enough information to say either way — recorded separately rather than merged on a guess.
 
@@ -200,7 +203,7 @@ A dedicated sidebar of alerts and reminders, mentioned once, on [escrow-details.
 
 The rendering of an individual notification.
 
-**Naming divergence:** "Notification Cards" on 3 mentions (Developer Principal / Director, Registration Officer, Sales & Disclosure Officer variants of [notifications.md](screens/notifications.md)); the Escrow Liaison's variant of the same screen instead lists "Notification List" (implying a denser list rendering rather than cards) plus a separate "Priority Alert Cards" entry that the other three roles don't call out independently (they fold priority notifications into the same Notification Cards component, backed by a separate "Priority Indicators" badge — see below).
+**Resolved 2026-08-15 — "Data Table" plus "Priority Alert Cards".** Three variants of [notifications.md](screens/notifications.md) listed "Notification Cards"; the Escrow Liaison's listed "Notification List" plus a separate "Priority Alert Cards" entry. The rebuilt screen renders the main feed as a **Data Table** (matching every other list screen in the module, and carrying more per row than a card) and the Priority Notifications section as **Priority Alert Cards**. The Escrow Liaison variant's two-component split turned out to be the more accurate description of what the screen needs; the card-only framing is retired.
 
 ### Priority Indicators
 

@@ -3,8 +3,9 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-09
+updated: 2026-08-15
 derived_from:
+  - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 tags:
@@ -14,7 +15,7 @@ tags:
 
 # Screen: Company Profile
 
-**Roles:** Principal
+**Access:** All four roles — Developer Principal / Director, Project Registration Officer, Sales & Disclosure Officer, Escrow Liaison. Group B does not gate access by role or permission scope; see [navigation.md](../../navigation.md). Role is audit-trail attribution only.
 
 The organization's master profile: corporate information, RERA registration, authorized representatives, office locations, banking/escrow information, company documents, and settings. Documented for the Developer Principal / Director only — no other role has a version of this screen in the source material.
 
@@ -28,18 +29,7 @@ Provide the Developer Principal / Director with a centralized view of the organi
 
 * **Visible Sidebar:** Developer Operational Sidebar  
 * **Active Menu:** **Company Profile**  
-* **Other Menu Items:**  
-  * Dashboard  
-  * Projects  
-  * Property Registrations  
-  * Sales & Disclosures  
-  * Escrow Management  
-  * Applications  
-  * Documents  
-  * Reports  
-  * **Company Profile (Active)**  
-  * Notifications  
-  * Help & Support
+* **Other Menu Items:** the full shared sidebar — every menu item is visible to every role, see [navigation.md](../../navigation.md).
 
 ### Top Bar Status
 

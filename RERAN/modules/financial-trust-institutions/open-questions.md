@@ -343,7 +343,9 @@ FR-18 requires a live operational dashboard across all submissions and FR-19 req
 
 **Yes, and it is a corporate-account feature rather than a group property** — see the mechanism at the top of this document.
 
-The evidence is already in Group B: the Developer Principal "authorises project registrations, escrow drawdowns and completion filings" that the Project Registration Officer and Escrow Liaison prepare. That is a maker-checker gate under a different name. Group D shows the same shape with the Company Dispute Filing Officer under the Brokerage Principal.
+The evidence cited here was Group B: the Developer Principal "authorises project registrations, escrow drawdowns and completion filings" that the Project Registration Officer and Escrow Liaison prepare — a maker-checker gate under a different name. Group D shows the same shape with the Company Dispute Filing Officer under the Brokerage Principal.
+
+> **Corrected 2026-08-15 — the Group B half of this evidence no longer holds.** Issue #58 applied the same unified-access decision to Group B: its four roles no longer gate access, and there is explicitly no maker ≠ checker restriction there either (see [`../real-estate-developer/navigation.md`](../real-estate-developer/navigation.md)). A Developer Principal's authorisation is now customary practice, not an enforced gate. **Group D remains valid evidence** and the answer above is unchanged on its merits — the two-gate pattern is still a configurable corporate-account feature rather than a group property — but it now rests on Group D and Group C's own certification step, not on Group B.
 
 Build it once, configurable per corporate account, with the scope set at the point Flow 5 already provides for it.
 
