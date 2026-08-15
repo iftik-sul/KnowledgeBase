@@ -3,7 +3,7 @@ project: RERAN
 module: individual-user
 type: service-flow
 status: current
-updated: 2026-08-10
+updated: 2026-08-15
 source_type: sourced
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
@@ -110,7 +110,7 @@ Registered
 
 ## 17. UI Screens
 
-Not yet designed — this module has no UI documentation yet.
+**Corrected 2026-08-15** — this previously said "Not yet designed — this module has no UI documentation yet," which predates the module's UI package (added and merged the same day this correction was made). This service is documented under Pattern B in [submit-application.md](../ui/screens-unified/submit-application.md), which correctly notes its fields are documented for reference but that #41 "has no online submission path at all" — matching Section 12's own note above that this is a Trustee-Centre-only service. No in-app wizard flow was built for it beyond the field documentation, consistent with there being no online channel to build a wizard for.
 
 ## 18. API Requirements
 
