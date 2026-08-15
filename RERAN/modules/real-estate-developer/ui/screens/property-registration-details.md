@@ -19,9 +19,11 @@ tags:
 
 The detail view of a single property registration, opened from [Property Registrations](property-registrations.md). The source documents a single variant, under the Registration Officer heading, with no second variant to reconcile. It is reachable and actionable by all four roles.
 
+> **Corrected 2026-08-15, second pass.** Same pattern as the other three no-role-variant screens in this module: this screen's Access line already said "all four roles," but Purpose and Notes still described it as the Project Registration Officer's screen specifically. Fixed below.
+
 ## Purpose
 
-Provide the Project Registration Officer with a complete operational workspace to register an individual property under an approved development project. The officer can create and edit property information, upload supporting documents, validate required information, submit the registration to RERA, respond to regulatory queries, and track approval progress.
+Give any developer user a complete operational workspace to register an individual property under an approved development project. Any user can create and edit property information, upload supporting documents, validate required information, submit the registration to RERA, respond to regulatory queries, and track approval progress — typically the Project Registration Officer or Sales & Disclosure Officer in practice, but not exclusively.
 
 ## Layout
 
@@ -283,10 +285,9 @@ Property Registration Details
 
 ## Notes
 
-* This is the **primary operational screen** for the **Project Registration Officer**.  
+* This is a **primary operational screen**, reachable and actionable by any developer user — typically used by the Project Registration Officer or Sales & Disclosure Officer, but not restricted to either. **Corrected 2026-08-15, second pass** — previously described as "the primary operational screen for the Project Registration Officer," which contradicted this file's own Access line.
 * A property can only be registered under an **approved development project**.  
-* The officer can edit the registration freely while it remains in **Draft**.  
-* Once submitted, the registration becomes read-only unless RERA returns it for correction or requests additional information.  
+* Any user can edit the registration freely while it remains in **Draft**.  
+* Once submitted, the registration becomes read-only unless RERA returns it for correction or requests additional information — a status-based lifecycle rule, applying equally to every user.
 * After approval, the system should display the registration certificate and allow it to be downloaded.  
 * Every modification, submission, document upload, and regulatory response should be recorded in the activity timeline to maintain a complete audit trail.
-
