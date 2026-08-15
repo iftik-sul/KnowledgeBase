@@ -20,7 +20,7 @@ tags:
 
 The application vocabulary is the platform core proposed in answer D1 plus the Group C extension. It should be adopted platform-wide — FR-18's live dashboard and FR-19's cross-service reporting cannot be built over per-module vocabularies.
 
-> **Corrected 2026-08-15 — this file had not been touched by any of the module's other corrections until now.** Three things were wrong: it still listed `Approved — Awaiting Payment` and `Approval Expired` as live Application Status states, when both were removed from the module months — in document time — ago (`open-questions.md` B1, B11: no Group C service is ever approved while payment is still pending, and Service #1's approval no longer lapses unpaid); it referenced `service-request`, a screen deleted in favour of `screens-unified/submit-application.md`; and its closing note described role-based status subsetting, which contradicts the unified-access model. All three fixed below.
+> **Corrected 2026-08-15, twice in the same day.** This file had not been touched by any of the module's other corrections until the first pass today, which fixed a broken `service-request` link and a stale role-based-subsetting note, but **incorrectly removed `Approved — Awaiting Payment` and `Approval Expired` entirely**, on the strength of a services-overview.md claim that neither status applied to any Group C service. A fuller per-service audit later the same day found that claim itself was wrong: **`Approved — Awaiting Payment` genuinely applies to two services, #12 and #18**, where RERA's decision precedes the customer's counter payment (sourced, rows 38 and 45). This second pass restores that status with the correct, narrower scoping. `Approval Expired` remains correctly removed — no source or client decision gives either #12 or #18 an expiry window, and B3's 30-day figure has no natural application to a same-visit counter wait.
 
 ---
 
@@ -37,13 +37,16 @@ Used on: [submit-application](../screens-unified/submit-application.md), applica
 | Under Review | Info | With the Compliance & Escrow Auditor |
 | Information Requested | Warning | RERAN has raised a query |
 | Returned for Correction | Warning | Sent back to the institution |
+| Approved — Awaiting Payment | Warning | Passed audit; fee not yet settled — **Services #12 and #18 only** |
 | Rejected | Error | Refused, with documented reason |
 | Completed | Success | Settled and output document issued |
 | Withdrawn | Neutral | Abandoned by the institution |
 
-**Removed 2026-08-15 — `Approved — Awaiting Payment` and `Approval Expired`.** Both described a state where an application could be approved while payment remained outstanding. Per `open-questions.md` B1 and B11 (confirmed 2026-08-15), payment now happens before lodging for Services #1 and #3–#11, at the point of service for #12–#18, and not at all for Service #2 — there is no Group C service left where approval can occur ahead of payment. Neither status has a live scenario anywhere in the module; see `services-overview.md`'s own Application Status Vocabulary section for the same removal.
+**Corrected 2026-08-15 (second pass) — `Approved — Awaiting Payment` restored, scoped to Services #12 and #18 only.** Every other service either pays before lodging (#1, #3–#11), pays before RERA's decision at the point of service (#13–#17), or carries no fee at all (#2) — none of those sixteen services can be approved while payment is still pending. Only #12 (Registration of Real Estate Fund Companies, row 38) and #18 (Contract Cancellation, row 45) source RERA's decision *before* the counter payment step. See those two files' own Section 13 for the sourced sequence, and `services-overview.md`'s Application Status Vocabulary for the module-wide statement of this.
 
-The two Group C extension statuses sit **before** Submitted. Where an institution has not enabled internal certification, neither appears.
+**Removed, and correctly so — `Approval Expired`.** No source describes an expiry window for #12 or #18's approved-but-unpaid state, and `open-questions.md` B3's 30-calendar-day figure was written for a different scenario (a registered title left unregistered) that doesn't map onto a same-visit counter payment. This status has no live scenario anywhere in Group C.
+
+The two Group C extension statuses (`Pending Internal Certification`, `Returned by Certifier`) sit **before** Submitted. Where an institution has not enabled internal certification, neither appears.
 
 ## Escrow Request Status
 
