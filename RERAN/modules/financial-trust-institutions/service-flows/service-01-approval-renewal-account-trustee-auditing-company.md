@@ -17,7 +17,6 @@ tags:
   - account-trustee
   - auditing-company
 ---
-
 # Service #1 – Approval / Renewal of Account Trustee & Auditing Company
 
 **Service Category:** Institutional Approval Services
@@ -102,7 +101,7 @@ This service uses the **Institution Fee Payment** model (paid by the institution
 
 **Waiting time: 29 business hours; Service delivery: 28 business hours.**
 
-Sourced from row 28. Per `open-questions.md` A6, the waiting-time figure is read as the queue/counterparty portion and the delivery figure as RERA's own processing — a reading the answers doc flags as needing explicit client confirmation, since every Group C SLA carrying two numbers depends on it. **A6 remains genuinely open as of 2026-08-15** — a related clarification confirmed Account Trustee access is not role-restricted, but did not resolve this specific SLA-reading question.
+Sourced from row 28. Per `open-questions.md` A6, the waiting-time figure is read as the queue/counterparty portion and the delivery figure as RERA's own processing. **Confirmed 2026-08-15 (client decision)** — this two-number reading is correct; no new SLA figure is needed. *(Corrected 2026-08-15 — previously "A6 remains genuinely open"; the client has since confirmed this reading directly, resolving it.)*
 
 ## 12. Processing Workflow
 
