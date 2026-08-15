@@ -43,7 +43,7 @@ Enter Search Criteria → Review Service Fee → Complete Payment → Submit →
 ```
 No document upload, no multi-step wizard — effectively a single-screen search-and-pay flow. Shortest of the eleven patterns.
 
-### Pattern B (Standard single-applicant) — #4, #17, #18, #20, #22, #41
+### Pattern B (Standard single-applicant) — #4, #5, #17, #18, #20, #22, #41, #43
 
 ```
 Select/Enter Property → Applicant Details → Transaction-Specific Details →
@@ -51,7 +51,11 @@ Select/Enter Property → Applicant Details → Transaction-Specific Details →
 ```
 #17, #18 skip the Payment step entirely (confirmed no-fee, `payments.md` Category 4). #41 is Trustee-Centre-only per its own source — this pattern documents its *fields*, but #41 has no online submission path at all; see its own service-flow file.
 
-### Pattern C (Two-party with counterparty confirmation) — #5, #6, #8, #9, #10, #11, #14
+**#5 moved here from Pattern C, corrected 2026-08-15** — checked directly against its own Processing Workflow, which has no second user session anywhere. "New Owner Information" is data the transferor enters about the new owner, not a step the new owner performs themselves — unlike #6/#8/#9/#10/#11/#14, all of which genuinely do have the new party log in, review, and accept or decline. #5 keeps a channel-timing complication none of this pattern's other members have: **online pays upfront; the Trustee Centre channel pays before the combined audit-and-approval step** (not after, unlike #9–#16's Trustee Centre timing) — see `payments.md` Category 3.
+
+**#43 provisional here too** — see `ui/README.md`'s Open Items for the unresolved two-party question that could move it to Pattern C.
+
+### Pattern C (Two-party with counterparty confirmation) — #6, #8, #9, #10, #11, #14
 
 ```
 Primary Applicant: Select Property → Enter Counterparty Details →
@@ -64,7 +68,9 @@ RERAN Review → Approved → Both Parties Notified
 ```
 This is the only pattern with two distinct user sessions inside one application. The wizard state must persist correctly across both — the counterparty is not filling out a fresh wizard, they're completing a specific pending application. See Counterparty Confirmation Card in `components.md`.
 
-**Channel split, where sourced:** #5, #9–#16 (Pattern C and D both) source a Trustee Centre channel with a different payment timing than the online path documented above — see `payments.md` Category 3. This wizard documents the online path; the Trustee Centre path is an assisted-mode workflow outside this wizard's scope, operated by Group G (not yet documented — see `module-roadmap.md`'s Group G Note).
+**Channel split, where sourced:** #9–#16 source a Trustee Centre channel with a different payment timing than the online path documented above — see `payments.md` Category 3. This wizard documents the online path; the Trustee Centre path is an assisted-mode workflow outside this wizard's scope, operated by Group G (not yet documented — see `module-roadmap.md`'s Group G Note). **#5 removed from this pattern and this note, corrected 2026-08-15** — see Pattern B above; it has a Trustee Centre channel split too, but no counterparty confirmation step, so it never belonged in this pattern's channel-split note either.
+
+**#6's counterparty payment step removed, corrected 2026-08-15** — its own service-flow file previously showed the purchaser completing a separate "Review Service Fee → Complete Payment" step; checked against #6's own Application Status Flow, Acceptance Criteria, and Business Rule 6 (all of which assume one undifferentiated payment), plus #8/#9's own confirmation-only counterparty sub-flows, and corrected as a documentation duplication artifact. Only the primary applicant pays in this pattern, in every one of its six members.
 
 ### Pattern D (Amend/release/terminate existing record) — #7, #12, #13, #15, #16, #19, #21
 
@@ -186,3 +192,4 @@ Services Catalog → Service Details → Submit Application (pattern-appropriate
 * This is the largest design surface in the package and the one most likely to need revision once actual field-level mockups are built — the pattern classification is High confidence (checked service-by-service against source), but the exact step ordering within each pattern is design judgement, not sourced fact, except where a specific payments.md/service-flow file citation is given above.
 * Pattern G's ten sub-types and #42's field set are the two genuinely open gaps — see `ui/README.md`.
 * The #19/#21 repeatable-group share-validation rule needs a client answer before it can be enforced rather than just displayed as guidance.
+* **#5's reclassification (Pattern C → B) and #6's counterparty-payment removal, both corrected 2026-08-15, were found by checking every Pattern C member's own Processing Workflow directly against the pattern's own definition, rather than trusting the original classification.** Worth repeating as a general lesson for this document: a pattern assignment is only as reliable as the last time it was checked against the actual file, not just the pattern's own description.
