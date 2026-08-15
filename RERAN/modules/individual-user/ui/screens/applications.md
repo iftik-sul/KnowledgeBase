@@ -40,7 +40,7 @@ By application reference number, service name, property address (where applicabl
 
 ### Section 2 — Status Summary Cards
 
-Counts by status group: Draft, Awaiting Action (Payment Pending, Information Requested, Awaiting Counterparty Confirmation), In Progress (Submitted, Under Review), Approved — Awaiting Payment (shown only if the account has any — see `status-badges.md`'s note that this status is genuinely conditional, not universal), Completed.
+Counts by status group: Draft, Awaiting Action (Payment Pending, Information Requested, Awaiting Counterparty Confirmation), In Progress (Submitted, Under Review), Awaiting Payment — grouping both Approved — Awaiting Payment and Audited — Awaiting Payment together, shown only if the account has any (see `status-badges.md`'s note that both statuses are genuinely conditional, not universal, and its correction splitting what was originally one status into two), Completed.
 
 ### Section 3 — Applications Table
 
