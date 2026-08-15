@@ -3,7 +3,7 @@ project: RERAN
 module: financial-trust-institutions
 type: overview
 status: draft
-updated: 2026-08-15
+updated: 2026-08-16
 contains_proposals: true
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
@@ -98,16 +98,18 @@ The source's responsible-role column (naming the Mortgage Officer for 15 of the 
 
 ### Application Management (4)
 
-* Feature #1 — Submit Application
-* Feature #2 — Track Application Status
-* Feature #3 — Respond to Information Request
-* Feature #4 — Resubmit Returned Application
+**Written 2026-08-16** — all four now exist as standalone documents in [service-flows/](service-flows/), following the same 21-section template as this module's numbered services and cross-checked against this module's own two-gate certification pattern and two-way payment-timing split, rather than copied uniformly from individual-user's version of the same features. Each remains `status: draft` / `contains_proposals: true` pending client confirmation of To Confirm item 2 below.
+
+* [Feature #1 — Submit Application](service-flows/feature-01-submit-application.md)
+* [Feature #2 — Track Application Status](service-flows/feature-02-track-application-status.md)
+* [Feature #3 — Respond to Information Request](service-flows/feature-03-respond-to-information-request.md)
+* [Feature #4 — Resubmit Returned Application](service-flows/feature-04-resubmit-returned-application.md)
 
 ### Institution-Specific Features (5)
 
 > **Proposed** — C4 finds the original three correct but incomplete. Two more are load-bearing consequences of B1 and A1/A5 and are added here.
 
-* Feature #5 — Internal Certification Queue — transactions awaiting certify-or-return by any of the institution's four Group C users before routing to RERA. **Corrected 2026-08-14**: previously described as gated by a "checker permission scope"; permission scopes are retired module-wide, and this is now an unrestricted action attributed by role in the audit trail, not a scope or a fifth role — see [navigation.md#audit-trail-principle](navigation.md#audit-trail-principle).
+* Feature #5 — Internal Certification Queue — transactions awaiting certify-or-return by any of the institution's four Group C users before routing to RERA. **Corrected 2026-08-14**: previously described as gated by a "checker permission scope"; permission scopes are retired module-wide, and this is now an unrestricted action attributed by role in the audit trail, not a scope or a fifth role — see [navigation.md#audit-trail-principle](navigation.md#audit-trail-principle). *(Not yet written as a standalone document — out of scope for the 2026-08-16 Application Management pass; the four docs above reference it but do not duplicate it.)*
 * Feature #6 — Escrow Request Queue — developer-originated requests awaiting Account Trustee action, confirmed as a queue inside the platform (A2)
 * Feature #7 — Approval Expiry Tracking — trustee and auditor approval renewal windows, now driven by the two-year validity period proposed in B8
 * Feature #8 — Payment History — per-transaction payment records for the institution: receipts, amounts, service references, and status (successful / failed / refund-requested). **Corrected 2026-08-14** — previously "Settlement Account" (balance, top-up, transaction ledger, low-balance alerting, periodic statements) for a standing pre-funded account; that account is retired (`open-questions.md` B1). This feature is a per-transaction history/reporting view, not an account-management subsystem — see [payments.md](payments.md).
@@ -173,7 +175,7 @@ Whether direct customer/institution access to a given service is *enabled at lau
 Five items remain open in this section, down from seven — A4 (service ownership) is now confirmed by client decision (2026-08-15) and B5 (fee schedule) is resolved as a configuration fact rather than client data (2026-08-14); neither is repeated below. C2 (online path) and the original Service Ownership questions for #1/#2 were already excluded before this rewrite.
 
 1. Are the five proposed service categories acceptable, or should the source's Development / Transaction / Title-Deed Data grouping be retained? (C1 — proposed answer: adopt them, keep the reconciliation table.)
-2. Do the four Application Management features apply to Group C as they do to individual users? (C3 — proposed answer: yes, unchanged.)
+2. Do the four Application Management features apply to Group C as they do to individual users? (C3 — proposed answer: yes, unchanged.) **Written 2026-08-16, still open**: the four documents now exist (linked above) and are cross-checked against this module's own two-gate and two-payment-model patterns rather than copied uniformly — but the underlying question (should Group C carry this layer at all, and does the write-up correctly capture it) is unchanged and still needs client confirmation.
 3. Are the five institution-specific features (including the two added by C4 — Payment History, Staff Records) correct, and is anything still missing?
 4. Is the proposed status vocabulary (platform core + Group C extension, D1) acceptable, and is the specific status list correct?
 5. Fee settlement: is the corrected two-way payer/timing split (Upfront Gateway Payment / Customer Payment at Counter, with Service #2 fee-free — see `payments.md`) correct for all 18 services? **Corrected 2026-08-15** — this item previously described a three-way split, including Institution Fee Payment for Services #1–#2; that model is retired per `open-questions.md` B11. **Also worth confirming with the client:** whether #12 and #18's post-approval payment timing is intentional design, or an artefact of the source's counter-based process that should be normalized to match #13–#17's pay-first pattern once digitized.
