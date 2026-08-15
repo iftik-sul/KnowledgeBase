@@ -25,7 +25,7 @@ Twenty-three questions arose from documenting the Financial & Trust Institutions
 
 **2026-08-14 update.** The payment questions (B1, B2, B4, B5, B6) were corrected following a client decision confirmed via discussion (not a written source document): Group C runs no standing account. Payment is per-transaction, upfront, via a shared platform-wide gateway, with RERA setting the fee per service directly. B9 and B10, both built entirely on the now-retired standing-account mechanism, are superseded rather than reworked. See each answer below for what changed and why the earlier reasoning is kept rather than deleted.
 
-**2026-08-15 update.** A4 is corrected: ownership is not role-specific at all, for any of the 18 services — a client decision, not a re-derivation. A3, B7, and B8 are confirmed by the client, matching their existing proposed answers. See each answer below.
+**2026-08-15 update.** A4 is corrected: ownership is not role-specific at all, for any of the 18 services — a client decision, not a re-derivation. A3, B7, and B8 are confirmed by the client, matching their existing proposed answers. A6 is also confirmed by the client, resolving the last item that had been flagged to put in front of them directly — the module's answers doc is now fully closed, with no items remaining on that list. See each answer below.
 
 **How to read this:** each answer states a recommendation, the reasoning behind it, how confident we are, and what breaks if it is wrong. Confidence is:
 
@@ -129,13 +129,15 @@ This resolves, rather than re-derives, the ownership question the source table r
 
 ### A6. What SLA applies to Trustee action on a routed request?
 
-**Take it from the waiting-time figure already in the source.**
+**Confirmed 2026-08-15 (client decision) — the two-number reading is correct. No new SLA needed.**
 
-The escrow service rows carry two numbers — "waiting time 20 business hours; service delivery 13 business hours". The most plausible reading is that waiting time is the queue-and-counterparty portion and delivery is RERA's own processing. On that reading the Trustee SLA is already specified per service, and no new figure is needed.
+The escrow service rows carry two numbers — "waiting time 20 business hours; service delivery 13 business hours". Waiting time is the queue-and-counterparty portion (how long the request sits before the Account Trustee acts on it); delivery time is RERA's own processing after that. The client has confirmed this reading directly. The Trustee SLA is already specified per service, in source, and no new figure needs to be invented — this applies across Group B's escrow services as well as Group C's, since the same two-number pattern and the same question applied to both.
 
-Where a row gives only one number, propose 24 business hours with escalation to the Compliance & Escrow Auditor on breach.
+Where a row gives only one number, propose 24 business hours with escalation to the Compliance & Escrow Auditor on breach. This part of the answer was not put to the client and remains a proposal, not a confirmed figure — see Confidence below.
 
-**Confidence:** Medium — the two-number interpretation is an inference and should be put to the client explicitly, because every escrow SLA in Group B depends on it. **Still open** — a 2026-08-15 client clarification confirmed that Account Trustee access is not role-restricted (consistent with A4), but did not resolve this specific SLA-reading question, which remains genuinely open pending client confirmation.
+> **Superseded framing (pre-2026-08-15).** This reading was carried as a Medium-confidence inference, flagged explicitly to put in front of the client because every escrow SLA in Group B depended on it. That flag is resolved now; the reasoning survives unchanged, only the confidence status changes.
+
+**Confidence:** Confirmed on the two-number reading (client decision, 2026-08-15). The 24-business-hour single-number fallback remains a Medium-confidence proposal, not separately confirmed.
 
 ### A7. Does the compliance report follow a RERA template?
 
@@ -335,7 +337,7 @@ Build it once, configurable per corporate account, with the scope set at the poi
 
 ## Summary
 
-**Updated 2026-08-15** — A4 moved from "Medium confidence, contradicts source, flagged for client" to "confirmed, no service is role-specific"; A3, B7, B8 moved from proposed to confirmed. B5 moved from "needs client data" to "answered" on 2026-08-14, per the payment-model correction (B1).
+**Updated 2026-08-15** — A4 and A6 moved from "flagged for the client" to confirmed by client decision; A3, B7, B8 moved from proposed to confirmed. B5 moved from "needs client data" to "answered" on 2026-08-14, per the payment-model correction (B1). **All 23 questions are now confirmed or resolved, and nothing remains on the "put in front of the client" list.**
 
 | Area | Questions | Answered | Needs client data |
 | :---- | :---: | :---: | :---: |
@@ -350,17 +352,17 @@ Build it once, configurable per corporate account, with the scope set at the poi
 | Answer | What it changes |
 | :---- | :---- |
 | **A4** — confirmed 2026-08-15: no service is role-specific | `services-overview.md`'s Service Ownership section (removed entirely); Section 4 and Business Rule 1 of Services #3–#18; `roles-and-responsibilities.md`'s Role Summary table |
+| **A6** — confirmed 2026-08-15: the two-number SLA reading is correct | No document changes required — this confirms the reading already reflected in `services-overview.md`'s Escrow Request Queue feature and the individual escrow service flows in Group B; no new SLA figure needs to be introduced |
 | **B1** — corrected 2026-08-14: no standing account, pay-per-transaction upfront via a shared gateway | `payments.md` (near-total rewrite); every mortgage/finance-lease service flow's Service Fee, Payment Required and Output sections; `services-overview.md`'s status vocabulary and features list; `navigation.md` and `role-workflows.md`'s settlement references; `module-roadmap.md`'s platform-wide payment-pipeline claim (see that file's own note on why) |
 | **C2** — counter is an assisted mode | Every Group C service flow's channel section; reverses a prior assumption |
 
 B9 and B10 are not listed separately above — both are superseded by the corrected B1 rather than independently reworked; see their entries for what that means for `payments.md`.
 
-### The one to put in front of the client anyway
+### The client-facing list — now empty
 
-Not because we lack an answer, but because the answer costs money, contradicts the source, or rests on an assumption worth surfacing:
+As of 2026-08-15, both items that had been flagged to put in front of the client directly are resolved:
 
-1. **A6** — the waiting-time / delivery-time reading sets the SLA for every escrow service in Group B, not just Group C. Still genuinely open as of 2026-08-15 — a related clarification confirmed Account Trustee access is unrestricted (A4), but did not resolve this specific SLA-reading question.
+1. ~~**A4**~~ — resolved by client decision 2026-08-15; no service is role-specific.
+2. ~~**A6**~~ — resolved by client decision 2026-08-15; the two-number SLA reading is confirmed correct.
 
-**A4 is no longer on this list** — resolved by client decision 2026-08-15, not merely re-derived; see above.
-
-**One more, downgraded from "put in front of the client" to "flagged for design":** B2's claim that the shared payment gateway reuses individual-user's wallet primitive (P-22) doesn't survive a check against P-22's actual description, which is itself balance-based — the opposite of Group C's now-confirmed no-standing-account model. Worth a decision on whether the gateway integration is genuinely shared build, but this is an internal design question, not something requiring the client's input the way A4 and A6 do.
+**One remaining item, still flagged for internal design rather than the client:** B2's claim that the shared payment gateway reuses individual-user's wallet primitive (P-22) doesn't survive a check against P-22's actual description, which is itself balance-based — the opposite of Group C's now-confirmed no-standing-account model. Worth a decision on whether the gateway integration is genuinely shared build, but this is an internal design question, not something requiring the client's input the way A4 and A6 did.
