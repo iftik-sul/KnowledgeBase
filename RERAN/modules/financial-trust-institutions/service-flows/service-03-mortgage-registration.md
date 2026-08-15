@@ -33,7 +33,7 @@ Register a mortgage against a verified title so the lending institution's securi
 
 ## 3. Description
 
-The customer (borrower) completes mortgage requirements directly with the bank — loan approval, valuation, executed mortgage deed. A Mortgage Officer then enters the transaction into the Online Mortgage System, pays the fee upfront via the shared platform payment gateway, and attaches the required documents. The transaction is certified internally by any of the institution's four Group C users, including the person who filed it, before it is sent to RERA's Transaction Audit queue. On approval, the output documents are delivered to the customer by email. The same service can alternatively be processed in assisted mode at a Real Estate Registration Trustee Centre.
+The customer (borrower) completes mortgage requirements directly with the bank — loan approval, valuation, executed mortgage deed. Any of the institution's four Group C roles then enters the transaction into the Online Mortgage System, pays the fee upfront via the shared platform payment gateway, and attaches the required documents. **Corrected 2026-08-15** — this previously named the Mortgage Officer specifically; `open-questions.md` A4 confirms no service is role-specific. The transaction is certified internally by any of the institution's four Group C users, including the person who filed it, before it is sent to RERA's Transaction Audit queue. On approval, the output documents are delivered to the customer by email. The same service can alternatively be processed in assisted mode at a Real Estate Registration Trustee Centre.
 
 ## 4. Who Can Apply
 
