@@ -3,8 +3,8 @@ project: RERAN
 module: financial-trust-institutions
 type: ui-spec
 status: draft
-updated: 2026-08-15
 contains_proposals: true
+updated: 2026-08-16
 derived_from:
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
   - "RERAN/modules/financial-trust-institutions/open-questions.md"
@@ -57,7 +57,7 @@ Pagination
 
 Selecting a card filters the table. Cards reflect institution-wide totals — the same totals for every user, since the underlying data is not role-scoped.
 
-**Corrected 2026-08-15, twice.** This section previously claimed the `Approved — Awaiting Payment` card should be removed because the status "does not occur for any Group C application." A fuller per-service audit found that claim was wrong: **Services #12 and #18 genuinely source this status** — RERA decides before the customer pays at the counter, unlike every other service. No dedicated summary card is added for it here, since it applies to only two of eighteen services and a dedicated card would overstate its frequency — but the status itself is real and must render correctly wherever a #12 or #18 application actually reaches it, via the Status filter and the table's Status column below. Don't build against the earlier "never occurs" claim.
+**Corrected 2026-08-16 — no `Approved — Awaiting Payment` card, and none needed.** An earlier pass (2026-08-15) found this status genuinely applied to Services #12 and #18, on the strength of their then-sourced payment sequencing. The client has since reviewed that sequencing directly and normalized both services to pay before RERA's decision, the same as #13–#17 (see `payments.md`). Every fee-bearing Group C service now pays before a decision is reached, so this status no longer occurs anywhere in the module — see [status-badges.md](../status-badges.md#application-status) for the full history of this status's three corrections.
 
 ### Section 2 — Filters & Search
 
@@ -66,8 +66,8 @@ Selecting a card filters the table. Cards reflect institution-wide totals — th
 **Filters**
 
 * **Service** — all eighteen, grouped as in the Service × Form Matrix
-* **Status** — the Application Status vocabulary in [status-badges.md](../status-badges.md#application-status), which correctly includes `Approved — Awaiting Payment` scoped to Services #12/#18
-* **Gate** — Internal Certification · RERAN Review · Completed *(corrected 2026-08-15 — "Settlement" removed as a gate; see Section 3)*
+* **Status** — the Application Status vocabulary in [status-badges.md](../status-badges.md#application-status)
+* **Gate** — Internal Certification · RERAN Review · Completed
 * **Origination** — Direct · Assisted (Trustee Centre / Land Department)
 * **Filed By** — dropdown of institution staff, added 2026-08-15 to preserve the "my filings" narrowing this screen used to provide by default, now available as an explicit filter instead of a role restriction
 * **Date Range** — submitted date
@@ -89,7 +89,7 @@ Selecting a card filters the table. Cards reflect institution-wide totals — th
 | SLA | Countdown against the service's sourced SLA, where one exists |
 | Action | Open |
 
-**Corrected 2026-08-15** — the Gate column's "Settlement" stage is removed. This is a different concept from the `Approved — Awaiting Payment` status above: no Group C service ever passes through a distinct "Settlement" processing *gate* between audit approval and completion (that concept described the old settlement-account model), even though #12/#18 do carry a status describing payment as outstanding at that point. The Gate column tracks which processing stage a record is in; the Status column tracks its detailed state within that stage — #12/#18 sit in the "Completed" gate's neighborhood carrying an `Approved — Awaiting Payment` status until the counter payment clears.
+No "Settlement" gate exists in this column — no Group C service ever passes through a distinct processing gate for payment; every fee-bearing service settles its payment as part of lodging, before Internal Certification or RERAN Review begin.
 
 **Row actions:** Open · Download Application Summary
 
@@ -136,4 +136,4 @@ Applications
 
 * **The Account Trustee's inbound escrow work is a separate screen, not a role restriction on this one.** [escrow-request-queue.md](escrow-request-queue.md) exists because Group B-originated escrow requests are not one of the eighteen numbered Group C services and don't belong in this table structurally — any of the four roles can still open this Applications screen and act on any of the eighteen services here, same as anywhere else in the module.
 * SLA figures shown are only as reliable as the source SLA for each service — several services (institutional approval, several title & ownership transactions) carry sourced SLAs; others remain proposed where the module's own service-flow documents flag them as such.
-* **Approved — Awaiting Payment is real for #12/#18, but rare.** Don't design the Status Summary Cards or any dashboard rollup around it as if it were a common state — it applies to exactly two of eighteen services, both with short (15–30 minute) SLAs, so the window during which a record actually sits in this status is brief.
+* **`Approved — Awaiting Payment` no longer occurs for any Group C service, as of 2026-08-16.** This screen previously carried an extensive note explaining why the status was rare-but-real for Services #12 and #18 specifically. That exception is retired — see the correction in Section 1 above and [status-badges.md](../status-badges.md#application-status) for the full three-pass history.
