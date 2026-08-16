@@ -23,7 +23,7 @@ tags:
 
 **Source row:** 65 of `RERAN_service_flows_v2.md`.
 
-> **Provenance flagged — not resolved.** This service's own workflow text reads as a Valuer-facing service (Group G — Allied Professionals & Service Trustees), not a Brokerage-facing one: the acting party "accepts or rejects" a customer's evaluation request and performs the valuation itself, a structurally different shape from every other Group D service, where RERA is always the one accepting or rejecting. Kept in Group D's catalogue per the source table's own group assignment, per `open-questions.md` A2, but documented here with that provenance question unresolved rather than presented as settled. **If reassigned to Group G, this file should move rather than be duplicated.**
+> **Confirmed 2026-08-16 (client decision, `open-questions.md` A2) — this service stays in Group D.** Module ownership is settled; the underlying structural oddity in this row's own workflow text is not changed by that decision and is preserved below, since it still explains why this service needs different UI treatment from every other Group D service. This row's own workflow reads as a Valuer-facing process (Group G — Allied Professionals & Service Trustees): the acting party "accepts or rejects" a customer's evaluation request and performs the valuation itself, a structurally different shape from every other Group D service, where RERA is always the one accepting or rejecting. **What was previously an ownership question is now a UI-design question**: this service needs its own screen, not a forced fit into the shared Submit Application wizard — see `ui/screens/submit-application.md`'s own Notes and `shared-platform-features.md`'s Open Questions, which flag the screen as not yet designed.
 
 ## 1. Service Overview
 
@@ -39,11 +39,11 @@ The evaluation company signs up and logs in via the evaluation-company option. I
 
 ## 4. Who Can Apply
 
-**Sourced as the evaluation company itself**, acting on a customer's behalf — not, on this row's own text, a company applying *to RERA* the way every other Group D service works. Any of the company's four Group D roles may act, consistent with the unified-access model, though which role this maps to in practice is unclear given the provenance question above (Brokerage Principal is Group D's licensing-cluster role by convention, but this service's actual actor description — "evaluation company" — doesn't map cleanly onto any of Group D's four defined roles).
+**Sourced as the evaluation company itself**, acting on a customer's behalf — not, on this row's own text, a company applying *to RERA* the way every other Group D service works. Any of the company's four Group D roles may act, consistent with the unified-access model, though which role this maps to in practice is unclear given this service's own structural oddity (Brokerage Principal is Group D's licensing-cluster role by convention, but this service's actual actor description — "evaluation company" — doesn't map cleanly onto any of Group D's four defined roles).
 
 ## 5. Prerequisites
 
-* Registered evaluation-company account (the specific registration path for this account type is not sourced elsewhere in Group D — possibly a Group G credential, reinforcing the provenance question).
+* Registered evaluation-company account (the specific registration path for this account type is not sourced elsewhere in Group D).
 * A customer's valuation request exists or is being prepared on the customer's behalf.
 
 ## 6. Required Information
@@ -79,7 +79,7 @@ Sourced (row 65) at a high level — "add evaluation details, value and notes" �
 
 ## 10. Processing Authority
 
-**Licensing & Registration Officer** (Group A) — sourced (approver column, row 65), though the workflow text itself describes no RERA review step; the "accept or reject" decision described belongs to the evaluation company, not RERA. **This is the clearest evidence for the provenance question** — RERA's own approver role is named in the source table's structure, but does not appear to act anywhere in the actual described process.
+**Licensing & Registration Officer** (Group A) — sourced (approver column, row 65), though the workflow text itself describes no RERA review step; the "accept or reject" decision described belongs to the evaluation company, not RERA. **This remains the clearest evidence of this service's atypical shape**, unaffected by the A2 ownership decision — RERA's own approver role is named in the source table's structure, but does not appear to act anywhere in the actual described process.
 
 ## 11. Expected Processing Time
 
@@ -121,7 +121,7 @@ Completed
 
 * Withdrawn
 
-**Proposed**, given the source's atypical shape — this status flow is inferred from the workflow steps rather than confirmed against a sourced Application Status column, which this row (like most Group D rows) does not separately provide.
+**Proposed**, given the source's atypical shape — this status flow is inferred from the workflow steps rather than confirmed against a sourced Application Status column, which this row (like most Group D rows) does not separately provide. **Notably, this status flow does not fit `ui/status-badges.md`'s platform-core Application Status vocabulary** — there is no RERA "Under Review" or "Information Requested" stage here at all, since RERA never reviews anything in this row's own described process. This may need its own status vocabulary once the service's screen is designed, rather than being forced into the shared vocabulary used by every other Group D service.
 
 ## 14. Possible Outcomes
 
@@ -135,11 +135,11 @@ Completed
 ## 16. Related Services
 
 * Service #12 – Real Estate Licensing Application
-* Financial & Trust Institutions — no direct equivalent; this service's shape (professional-to-customer valuation) is closer to what Group G's Valuer role would perform, per the provenance question above
+* Financial & Trust Institutions — no direct equivalent; this service's shape (professional-to-customer valuation) is closer to what Group G's Valuer role would perform, though module ownership itself is now settled (see the banner note above)
 
 ## 17. UI Screens
 
-Not yet built — Phase 4.
+**Not yet built.** Confirmed to stay in Group D (`open-questions.md` A2, 2026-08-16), but excluded from Phase 4's Submit Application wizard due to its atypical shape — see the banner note above. Needs its own screen, designed against this service's own evaluation-company-decides workflow rather than the standard company-files-RERA-reviews shape every other Group D service uses.
 
 ## 18. API Requirements
 
@@ -174,7 +174,8 @@ Not yet built — Phase 4.
 
 ## Open Questions
 
-1. **Whether this service genuinely belongs to Group D or to Group G (Allied Professionals — Valuer)** — the primary open question for this service, carried from `open-questions.md` A2. Recommend resolving this before building any UI for it, since the answer changes which module's navigation and role model it should live under.
-2. **Fee treatment** — whether the evaluation company charges the customer directly (outside RERA's fee schedule) is not addressed in source.
-3. **Registration path for an "evaluation company" account** is not described anywhere in Group D's source rows — possibly a Group G registration flow this module doesn't own.
-4. **Required information and document lists are proposed, not sourced beyond the high-level workflow text.**
+1. ~~Whether this service genuinely belongs to Group D or to Group G (Allied Professionals — Valuer).~~ **Resolved 2026-08-16 (client decision)** — confirmed Group D. See `open-questions.md` A2.
+2. **This service's own screen is not yet designed**, and its status flow doesn't fit the shared Application Status vocabulary every other Group D service uses (see Section 13) — the primary remaining open item, now that ownership itself is settled.
+3. **Fee treatment** — whether the evaluation company charges the customer directly (outside RERA's fee schedule) is not addressed in source.
+4. **Registration path for an "evaluation company" account** is not described anywhere in Group D's source rows.
+5. **Required information and document lists are proposed, not sourced beyond the high-level workflow text.**
