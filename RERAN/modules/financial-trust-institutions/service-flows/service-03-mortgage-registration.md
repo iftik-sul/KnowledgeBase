@@ -28,7 +28,7 @@ tags:
 
 The **Mortgage Registration** service records a new mortgage against a registered property title, on the bank's initiative and at the bank's cost, subject to internal certification and RERA audit before the record and the associated fee take effect.
 
-> **Inbound dependency, 2026-08-16, fully decided.** Real-estate-developer's Service #6 (Register Sale Associated with an Initial Mortgage) validates its mortgage reference against this service's own records before that sale can proceed to RERA's audit, requiring a `Completed` match. **This module's own screen and workflow are entirely unaffected — by client decision, this dependency stays invisible on this side.** No indicator, no notification, no UI change here; this service's users have no reason to know a developer's sale is waiting on their record's completion, and nothing in this document proposes giving them one. The consequence lives entirely on real-estate-developer's side: a developer cannot successfully register a mortgage-linked sale until this service reaches `Completed`, and gets no advance warning of that before submitting and paying — see that service's own file.
+> **Inbound dependency, 2026-08-16, fully decided.** Real-estate-developer's Service #6 (Register Sale Associated with an Initial Mortgage) validates its mortgage reference against this service's own records, in real time, requiring a `Completed` match, before that sale can proceed to RERA's audit. **This module's own screen and workflow are entirely unaffected — by client decision, this dependency stays invisible on this side.** No indicator, no notification, no UI change here; this service's users have no reason to know a developer's sale is waiting on their record's completion, and nothing in this document proposes giving them one. The consequence lives entirely on real-estate-developer's side: a developer cannot successfully register a mortgage-linked sale until this service reaches `Completed`, and finds that out immediately, in the same request, if they try before it has — see that service's own file.
 
 ## 2. Purpose
 
@@ -123,7 +123,7 @@ This differs from the individual-user pay-then-submit model: here, submission is
 
 Sourced from row 30 as a single end-to-end figure (unlike Services #1/#2, this SLA is not split into waiting/delivery components, so the A6 reading does not apply here).
 
-**Relevant to the inbound dependency**: this 20–25 minute figure is now also the practical floor on how long a developer must wait, at minimum, before their linked sale (Service #6, real-estate-developer) can validate — assuming the institution files the mortgage first. This institution has no visibility into that fact and no reason to treat this SLA any differently because of it — see Feature Overview.
+**Relevant to the inbound dependency**: this 20–25 minute figure is now also the practical floor on how long a developer must wait, at minimum, before their linked sale (Service #6, real-estate-developer) can validate — assuming the institution files the mortgage first. Because that validation is real-time, the developer learns this the moment they try, not after any additional platform-side delay. This institution has no visibility into that fact and no reason to treat this SLA any differently because of it — see Feature Overview.
 
 ## 12. Processing Workflow
 
@@ -171,7 +171,7 @@ Generate Output Documents
 ↓  
 Deliver Outputs to Customer via Email
 ↓
-*(Record reaches `Completed` — real-estate-developer's Service #6 can now validate against it, invisibly to this workflow)*
+*(Record reaches `Completed` — real-estate-developer's Service #6 can now validate against it in real time, invisibly to this workflow)*
 
 ### Assisted-Mode Alternative (C2)
 
@@ -224,7 +224,7 @@ Completed
 
 Uses the platform core status vocabulary plus the Group C extension (D1): `Pending Internal Certification` and `Returned by Certifier` sit before `Submitted`, since this service's two-gate pattern is directly sourced (unlike Services #1/#2).
 
-**Resolved 2026-08-16, for the inbound dependency (see Feature Overview): only `Completed` satisfies real-estate-developer Service #6's validation check.** A query against this service's records while the matching mortgage is at any earlier status — `Pending Internal Certification`, `Under Review`, `Information Requested`, etc. — should report "not yet valid," not "found." This status vocabulary itself is otherwise unchanged by the dependency.
+**Resolved 2026-08-16, for the inbound dependency (see Feature Overview): only `Completed` satisfies real-estate-developer Service #6's validation check.** A real-time query against this service's records while the matching mortgage is at any earlier status — `Pending Internal Certification`, `Under Review`, `Information Requested`, etc. — should report "not yet valid," not "found." This status vocabulary itself is otherwise unchanged by the dependency.
 
 ## 14. Possible Outcomes
 
@@ -249,7 +249,7 @@ Upon successful completion, the system generates:
 * Service #6 — Mortgage Release  
 * Service #7 — Grant Property Mortgage  
 * Individual-user Service #8 — Register Sale of Mortgaged Property *(cross-module: describes the seller/purchaser side of a sale where the property carries a mortgage this service registered; that flow's Mortgage Release Letter corresponds to this module's Service #6)*
-* Real Estate Developer Service #6 — Register Sale Associated with an Initial Mortgage *(cross-module, inbound, decided 2026-08-16: that service validates its mortgage reference against this service's records, requiring a `Completed` match, before its own application can proceed to RERA's audit — see Feature Overview, Section 12, Section 13. Not a sourced relationship; a documented product decision that makes this service's completion a gating event for that one. This service's own workflow, screens, and users are unaffected — the dependency exists purely on the querying side, by client decision.)*
+* Real Estate Developer Service #6 — Register Sale Associated with an Initial Mortgage *(cross-module, inbound, decided 2026-08-16: that service validates its mortgage reference against this service's records in real time, requiring a `Completed` match, before its own application can proceed to RERA's audit — see Feature Overview, Section 12, Section 13. Not a sourced relationship; a documented product decision that makes this service's completion a gating event for that one. This service's own workflow, screens, and users are unaffected — the dependency exists purely on the querying side, by client decision.)*
 
 ## 17. UI Screens
 
@@ -285,7 +285,7 @@ Upon successful completion, the system generates:
 * Generate Certificate of Title / Statement Certificate  
 * Update Mortgage Registry  
 * Send Notifications
-* **Expose Mortgage Lookup / Validation** *(cross-module endpoint allowing real-estate-developer's Service #6 to check a mortgage reference against this service's records. Response contract: only a `Completed` record is reported as valid; any earlier status is reported as not-yet-valid, not as not-found, so the calling side can distinguish "wrong reference" from "still processing." This is a read-only query endpoint — it does not trigger any notification or institution-facing effect. Real-time vs. batch is still open — see Open Questions.)*
+* **Expose Mortgage Lookup / Validation** *(cross-module, real-time synchronous endpoint — decided 2026-08-16 — allowing real-estate-developer's Service #6 to check a mortgage reference against this service's records within that service's own submission request. Response contract: only a `Completed` record is reported as valid; any earlier status is reported as not-yet-valid, not as not-found, so the calling side can distinguish "wrong reference" from "still processing." This is a read-only query endpoint, expected to respond fast enough to sit inside a synchronous caller request — it does not trigger any notification or institution-facing effect.)*
 
 ## 19. Database Entities
 
@@ -316,8 +316,8 @@ Upon successful completion, the system generates:
 * Approved registrations update the official mortgage and property registry.  
 * Institution and customer receive completion notifications.  
 * All activities are recorded in the audit log.
-* A validating lookup from real-estate-developer's Service #6 reports "valid" only for a `Completed` record, and reports every earlier status as not-yet-valid rather than not-found.
-* **Decided 2026-08-16.** No screen, notification, or workflow step in this service surfaces the existence of the Service #6 dependency to institution users.
+* A real-time validating lookup from real-estate-developer's Service #6 reports "valid" only for a `Completed` record, and reports every earlier status as not-yet-valid rather than not-found, within the caller's own submission request.
+* No screen, notification, or workflow step in this service surfaces the existence of the Service #6 dependency to institution users.
 
 ## 21. Business Rules
 
@@ -330,7 +330,8 @@ Upon successful completion, the system generates:
 7. All applications, certifications, approvals, payments, and notifications are permanently recorded in the audit trail.
 8. This service does not itself change behavior to accommodate the Service #6 validation dependency — it is queried against, not altered.
 9. Only a `Completed` record on this service satisfies a validating lookup from real-estate-developer's Service #6. This service's own completion is therefore a gating event for that service, not merely a reference lookup — this institution's processing pace directly determines when the developer's linked sale can proceed.
-10. **Decided 2026-08-16.** This dependency is one-directional and invisible on this side: no institution user, screen, or notification within this service reflects that a developer sale is waiting on a given mortgage's completion.
+10. This dependency is one-directional and invisible on this side: no institution user, screen, or notification within this service reflects that a developer sale is waiting on a given mortgage's completion.
+11. **Decided 2026-08-16.** The lookup exposed for this dependency (Section 18) is real-time and synchronous — it must respond within the calling service's own submission request, not on a batch or deferred schedule.
 
 ## Open Questions
 
@@ -340,5 +341,7 @@ The following could not be closed by row 30 or by the answers doc, and are carri
 2. **Which of the five possible output documents applies to a given mortgage** (Certificate of Title vs. Title Deed vs. Usufruct Title Deed vs. Statement Certificate vs. Provisional Sale Registration Certificate)? The source lists all five as possibilities without stating the selection criteria.  
 3. **Exact fee schedule** (bands, floor, cap). Client data — see `open-questions.md` B5, B6.
 4. ~~Which application status(es) satisfy real-estate-developer Service #6's validation check?~~ **Decided 2026-08-16 — `Completed` only.**
-5. **Still unresolved.** Real-time synchronous lookup, or asynchronous/batch reconciliation? Not specified. Mirrored on Service #6's own file.
+5. ~~Real-time or batch validation?~~ **Decided 2026-08-16 — real-time, synchronous.**
 6. ~~Should this institution's own screen surface the downstream dependency?~~ **Decided 2026-08-16 — no. Stays invisible on this side.**
+
+All open questions raised by the Service #6 inbound dependency are now decided.
