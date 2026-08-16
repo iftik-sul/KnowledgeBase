@@ -178,7 +178,19 @@ Completed
 
 ## 17. UI Screens
 
-Not yet built — Phase 4.
+**Corrected 2026-08-16 — Phase 4 is complete; this section previously said "Not yet built."** Online channel only — the Service Center channel is out of scope pending resolution of whether Group D has any assisted-mode surface at all (`navigation.md`).
+
+* Services
+* Primary Suit (Joint Property)
+* Property & Dispute Information
+* Document Upload
+* Payment
+* Payment Successful
+* Application Review
+* Application Submitted
+* Application Details
+* Hearing Schedule
+* Judgment
 
 ## 18. API Requirements
 
@@ -230,3 +242,4 @@ Not yet built — Phase 4.
 1. **Required information and document lists are proposed, not sourced.** Needs client confirmation.
 2. **What standing is required to file this suit** — whether any Group D company with a JOP relationship to the property can file, or whether specific authorization from the owners' association is required. Not specified in source.
 3. **Exact fee amount.** Client data.
+4. **The Service Center channel has no designed screen**, pending `navigation.md`'s open question about whether Group D has any assisted-mode surface at all.

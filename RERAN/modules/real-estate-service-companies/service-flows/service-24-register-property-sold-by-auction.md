@@ -28,7 +28,7 @@ tags:
 
 The **Register Property Sold by Auction** service records the outcome of a public auction sale conducted under a valid permit (Service #23), issuing the resulting title documents once the sale is registered.
 
-> **Payment model — Model 3, Upfront / Pay-Then-Output (`payments.md`).** This is the one Group D service where payment sits at the end of submission, immediately before output delivery, with no separate audit step named between them — structurally distinct from both Model 1 (no fee) and Model 2 (pay after decision) elsewhere in this module.
+> **Payment model — Model 3, Upfront / Pay-Then-Output (`payments.md`).** This is the one Group D service where payment sits at the end of submission, immediately before output delivery, with no separate audit step named between them — structurally distinct from Model 1 (no fee) and Model 2 (upfront, before RERA review, following the #12–#15 normalization) elsewhere in this module.
 
 ## 2. Purpose
 
@@ -144,7 +144,18 @@ Completed
 
 ## 17. UI Screens
 
-Not yet built — Phase 4.
+**Corrected 2026-08-16 — Phase 4 is complete; this section previously said "Not yet built."**
+
+* Services
+* Register Property Sold by Auction
+* Auction Sale Information
+* Document Upload
+* Payment
+* Payment Successful
+* Application Review
+* Application Submitted
+* Application Details
+* Registration Confirmation
 
 ## 18. API Requirements
 

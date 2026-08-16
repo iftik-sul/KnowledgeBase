@@ -172,7 +172,20 @@ Completed
 
 ## 17. UI Screens
 
-Not yet built — Phase 4.
+**Corrected 2026-08-16 — Phase 4 is complete; this section previously said "Not yet built."** Online channel only — the Service Center channel is out of scope pending resolution of whether Group D has any assisted-mode surface at all (`navigation.md`).
+
+* Services
+* Execution Case (Joint Ownership)
+* Judgment Reference
+* Execution Information
+* Document Upload
+* Payment
+* Payment Successful
+* Application Review
+* Application Submitted
+* Application Details
+* Follow-Up e-Application (where applicable)
+* Judge's Resolution
 
 ## 18. API Requirements
 
@@ -221,3 +234,4 @@ Not yet built — Phase 4.
 1. **What triggers the need for a follow-up e-application 15 days after notice**, and what it contains, is not fully specified in source beyond "if necessary." Client data.
 2. **Required information and document lists are proposed, not sourced.** Needs client confirmation.
 3. **Exact fee amount(s).** Client data.
+4. **The Service Center channel has no designed screen**, pending `navigation.md`'s open question about whether Group D has any assisted-mode surface at all.
