@@ -4,7 +4,7 @@ module: financial-trust-institutions
 type: service-flow
 status: draft
 contains_proposals: true
-updated: 2026-08-15
+updated: 2026-08-16
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
@@ -33,7 +33,9 @@ Give an institution a regulated path to cancel a real-estate contract it holds, 
 
 ## 3. Description
 
-An institution user moves the request to the Land Department's Customer Center and submits documents to an employee, who enters, audits, and approves the cancellation. The customer pays the fee and receives an e-receipt. Outputs are received online.
+An institution user moves the request to the Land Department's Customer Center, submits documents to an employee, and pays the fee, receiving an e-receipt. The employee enters, audits, and approves the cancellation. Outputs are received online.
+
+> **Corrected 2026-08-16, by client decision.** Row 45 sources payment happening *after* RERA's audit and approval ("enters, audits and approves" → "Customer pay fees, gets e-receipt"). The client has confirmed this ordering is an artefact of the source's original physical-counter process, not intentional design, and normalized it to match Services #13–#17: payment now happens at submission, before RERA's review. Section 9, 12, and 13 reflect the corrected sequence.
 
 ## 4. Who Can Apply
 
@@ -80,9 +82,9 @@ Applicable according to the RERAN fee schedule.
 
 **Yes**
 
-Paid by the customer, **after** RERA's audit and approval, with an e-receipt issued — sourced (row 45's own sequence: the employee "enters, audits and approves," and only then does "Customer pay fees, gets e-receipt"). **Customer Payment at Counter** model, unaffected by the 2026-08-14 payment-model correction (`open-questions.md` B1). **Corrected 2026-08-14** — previously cited `B9` for the receipt-vs-fee-balance distinction; B9 is now superseded, since no Group C service produces a "fee balance" any more.
+Paid by the customer, **before** RERA's audit and approval — **corrected 2026-08-16, by client decision**, normalizing what row 45 originally sourced as a post-decision payment to match Services #13–#17's pay-first pattern, with an e-receipt issued at that point. **Customer Payment at Counter** model, unaffected by the 2026-08-14 payment-model correction (`open-questions.md` B1). **Corrected 2026-08-14** — previously cited `B9` for the receipt-vs-fee-balance distinction; B9 is now superseded, since no Group C service produces a "fee balance" any more.
 
-**This service is one of two exceptions to the general Customer-Payment-at-Counter pattern, confirmed 2026-08-15.** Most services in this category (#13–#17) have the applicant pay *before* RERA's review, per their own sourced workflows. This one, along with Service #12, sources payment *after* RERA's decision — see Section 13 for what that means for this service's status flow.
+**This service was previously one of two exceptions to the general Customer-Payment-at-Counter pattern, found 2026-08-15 and normalized away on 2026-08-16.** All six services in this category (#12–#18 except #2) now pay before RERA's review, matching Services #13–#17's original sourced pattern.
 
 ## 10. Processing Authority
 
@@ -94,11 +96,17 @@ Paid by the customer, **after** RERA's audit and approval, with an e-receipt iss
 
 ## 12. Processing Workflow
 
+**Corrected 2026-08-16 — payment moved ahead of RERA's audit, by client decision.**
+
 Institution User
 
 Move Request to Customer Center at Land Department  
 ↓  
-Submit Documents to Employee
+Submit Documents to Employee  
+↓  
+Pay Fees *(moved ahead of RERA's audit, 2026-08-16)*  
+↓  
+Obtain e-Receipt
 
 ↓
 
@@ -112,14 +120,6 @@ Approve, Return, or Reject
 
 ↓
 
-Institution User
-
-Pay Fees  
-↓  
-Obtain e-Receipt
-
-↓
-
 RERA
 
 Generate Approved e-Certificate of Title / Title Deed  
@@ -130,7 +130,13 @@ Deliver Outputs Online
 
 ## 13. Application Status Flow
 
+**Corrected 2026-08-16 — `Approved — Awaiting Payment` retired for this service, by client decision.**
+
 Draft  
+↓  
+Payment Pending  
+↓  
+Payment Successful  
 ↓  
 Submitted  
 ↓  
@@ -140,16 +146,17 @@ Information Requested
 ↓  
 Returned for Correction  
 ↓  
-Approved — Awaiting Payment  
+Approved  
 ↓  
 Completed
 
 ### Additional Statuses
 
+* Payment Failed *(retryable, pre-lodging)*  
 * Rejected  
 * Withdrawn
 
-**Confirmed 2026-08-15 — `Approved — Awaiting Payment` is kept, and is genuinely sourced for this service, not a leftover from an earlier model.** Row 45's own sequence has the Land Department employee audit and approve, return, or reject *before* the institution pays fees (Section 12, Section 9) — the opposite order from most of Services #13–#17, where payment happens first. This is one of exactly two Group C services (the other being Service #12) where an approved-but-unpaid state genuinely exists in the sourced workflow. `services-overview.md`'s Application Status Vocabulary section is corrected to note this exception rather than claim the status "does not occur for any Group C service" without qualification.
+**Superseded 2026-08-16.** This service previously carried `Approved — Awaiting Payment` as a genuinely sourced status (row 45's own sequence had RERA approve before the institution paid). The client has since confirmed that sequencing was an artefact of the original counter-based process, not intentional design, and normalized payment to precede RERA's review — matching Services #13–#17. `services-overview.md`'s Application Status Vocabulary section is corrected accordingly: the status no longer applies to any Group C service, without exception.
 
 ## 14. Possible Outcomes
 
@@ -157,15 +164,14 @@ Completed
 * Additional Information Requested  
 * Application Returned  
 * Application Rejected  
-* Payment Failed  
-* Application Withdrawn
+* Payment Failed
 
 ## 15. Output
 
 Upon successful completion, the system generates:
 
 * Approved e-Certificate of Title / Title Deed — sourced (row 45)  
-* Approved e-Receipt Voucher — sourced (row 45), the same artefact every Group C service now issues (see [payments.md](../payments.md))
+* Approved e-Receipt Voucher — sourced (row 45), the same artefact every Group C service now issues, at the same pipeline stage (see [payments.md](../payments.md))
 
 ## 16. Related Services
 
@@ -181,9 +187,9 @@ Upon successful completion, the system generates:
 * Institution Information  
 * Contract Information  
 * Document Upload  
-* Application Review  
 * Payment  
 * Payment Successful  
+* Application Review  
 * Application Submitted  
 * Application Details  
 * Cancellation Confirmation
@@ -218,10 +224,10 @@ Upon successful completion, the system generates:
 ## 20. Acceptance Criteria
 
 * Any of the institution's four Group C roles can initiate a contract cancellation application.  
+* Payment is completed with an e-receipt voucher issued at submission, before RERA's review — **corrected 2026-08-16**.  
 * Required information and documents are validated before submission.  
 * Application receives a unique application reference number.  
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.  
-* Payment is completed with an e-receipt voucher issued after RERA's approval, before completion.  
 * Approved cancellations are recorded against the contract.  
 * Institution receives an approved e-certificate and e-receipt voucher on completion.  
 * All activities are recorded in the audit log.
@@ -231,7 +237,7 @@ Upon successful completion, the system generates:
 1. Typically the Institution Relationship Manager submits this application, though any of the institution's four Group C roles may act on its behalf — the platform does not gate this by role or a provisioned scope; the acting user and their role are recorded in the audit trail. **Corrected 2026-08-14** — previously required "an authorized representative under a delegated permission scope"; permission scopes are retired module-wide, see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle). **Confirmed 2026-08-15** — `open-questions.md` A4 confirms this was never an A4 re-derivation contest; the rule already matched the unrestricted model.  
 2. The contract being cancelled must exist and be held by the institution.  
 3. Cancellation, return, and rejection decisions must carry documented reasoning.  
-4. Payment is required, with an e-receipt voucher issued as proof, after RERA's approval and before the cancellation is finalized.  
+4. **Corrected 2026-08-16, by client decision.** Payment is required at submission, before RERA's review, with an e-receipt voucher issued as proof — normalized from the original post-approval sourced sequence.
 5. Every application receives a unique application reference number.  
 6. All applications, approvals, payments, and notifications are permanently recorded in the audit trail.
 
