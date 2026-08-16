@@ -13,6 +13,7 @@ derived_from:
   - "RERAN/modules/real-estate-developer/service-flows/service-09-transfer-escrow-account.md"
   - "RERAN/modules/real-estate-developer/service-flows/service-20-deposit-mortgage-into-escrow.md"
   - "RERAN/modules/real-estate-developer/service-flows/service-21-cancel-bank-guarantee.md"
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
 tags:
   - real-estate-developer
   - shared-feature
@@ -31,6 +32,8 @@ tags:
 **Important distinction, stated explicitly in the source screen itself:** the balances shown here are the project escrow account's own balances — entirely separate from how RERA's service fees are paid (per-transaction, via the shared platform gateway, since 2026-08-15). A balance or debit on this screen is escrow, not fees.
 
 > **Cross-module status vocabulary — corrected 2026-08-16, superseding an earlier same-day resolution.** A first pass adopted `No Request → Pending Approval → Under Review → Approved → Released` as canonical, taken from this screen's own UI filter values. That was wrong: it was never checked against the six individual service files (#8, #9, #10, #12, #20, #21), all of which were written independently in an earlier PR and all of which — verified directly, all six — use `Draft → Submitted → Trustee Review → RERA Escrow Audit → Approved → [service-specific terminal state]`, with additional statuses `Information Requested / Returned / Rejected`. That vocabulary traces to the master source table; the one adopted in the first pass traced only to a UI screen's filter dropdown, one layer removed from source. **The sourced vocabulary is now canonical**, replacing the incorrect first resolution. See Section 13.
+
+> **Terminology clarified 2026-08-16.** "RERA Escrow Audit" / "Escrow Account Department" and financial-trust-institutions' "Compliance & Escrow Auditor" name the **same regulatory role**, not two different offices. Confirmed directly against `RERAN_service_flows_v2.md`'s master Service Workflows table: rows 8–12, 20–21 (this module's six escrow services) and rows 30–39 (financial-trust-institutions' mortgage/lease services) all carry the identical value **"Compliance & Escrow Auditor"** in the Regulator / Approver column — the same single Group A role defined once in the Groups & Roles table (*"Compliance Directorate — Audits escrow/trust accounts, vets off-plan sales, monitors disclosure, sanctions defaulters"*). "Escrow account department audits by approval or rejection," which this module's own service files' narrative workflow text uses, is the source table's own Workflow-column phrasing for that same role's action — not a second, distinct department. Both phrasings are individually accurate to source; they were just never cross-linked before. Not renamed here, since both trace to source — but readers should treat "RERA Escrow Audit," "Escrow Account Department," and "Compliance & Escrow Auditor" as synonyms throughout this module and financial-trust-institutions alike.
 
 ## 2. Purpose
 
@@ -76,7 +79,7 @@ Set by the selected service (RERA fee, per transaction, via the shared platform 
 
 ## 10. Processing Authority
 
-**Account Trustee** (Financial & Trust Institutions module) first, escalating to **RERA's Escrow Department** for final audit — a fixed two-stage chain, sourced identically across all six services. Not RERA directly, and not a single "Compliance & Escrow Auditor" step as previously stated.
+**Account Trustee** (Financial & Trust Institutions module) first, escalating to **RERA's Escrow Account Department** for final audit — a fixed two-stage chain, sourced identically across all six services. This second-stage authority is the **Compliance & Escrow Auditor** (Group A) — the identical role and Regulator/Approver-column value used across financial-trust-institutions' mortgage/lease services (rows 30–39) — not a separate department, see the terminology note under Feature Overview.
 
 ## 11. Expected Processing Time
 
@@ -96,7 +99,7 @@ Submit Application
 ↓
 Account Trustee Reviews, Uploads Assessment
 ↓
-RERA Escrow Department Audits: Approve or Reject
+Compliance & Escrow Auditor Audits (Escrow Account Department): Approve or Reject
 ↓
 If Approved, Escrow Account Status Updated (per selected service's terminal state)
 
@@ -110,7 +113,7 @@ Submitted
 ↓
 Trustee Review
 ↓
-RERA Escrow Audit
+RERA Escrow Audit *(performed by the Compliance & Escrow Auditor — see the terminology note under Feature Overview)*
 ↓
 Approved
 ↓
@@ -143,7 +146,7 @@ Not specified in source for any of the four services ("no doc" against each row)
 
 * Fund Release Request *(Feature #5 — the milestone-based withdrawal/receipt flow reached from Escrow Details, Services #10/#12, using the same sourced status vocabulary)*
 * Applications *(Feature #1)*
-* Financial & Trust Institutions' Escrow Request Queue and Trust Accounts *(cross-module — the Account Trustee's side of the same accounts; **status vocabulary corrected 2026-08-16**, see Feature Overview)*
+* Financial & Trust Institutions' Escrow Request Queue and Trust Accounts *(cross-module — the Account Trustee's side of the same accounts; **status vocabulary corrected 2026-08-16, and the RERA-side approver confirmed to be the same Compliance & Escrow Auditor role in both modules**, see Feature Overview)*
 
 ## 17. UI Screens
 
@@ -185,6 +188,7 @@ Not specified in source for any of the four services ("no doc" against each row)
 4. Row actions depend on the account's own state — a closed or already-actioned request takes no duplicate action, regardless of who asks.
 5. All escrow activity is permanently recorded in the audit trail, including the acting user's role.
 6. The status vocabulary (`Draft → Submitted → Trustee Review → RERA Escrow Audit → Approved → [service-specific terminal state]`, plus `Information Requested / Returned / Rejected`) is sourced from the individual service files and is authoritative — the screen's own UI filter values are not.
+7. "RERA Escrow Audit," "Escrow Account Department," and financial-trust-institutions' "Compliance & Escrow Auditor" are the same regulatory role, confirmed against the master source table — not three different names for three different things.
 
 ## Open Questions
 
