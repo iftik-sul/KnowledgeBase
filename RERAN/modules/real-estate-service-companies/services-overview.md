@@ -7,6 +7,7 @@ updated: 2026-08-16
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/real-estate-service-companies/roles-and-responsibilities.md"
+  - "RERAN/modules/real-estate-service-companies/shared-platform-features.md"
 tags:
   - real-estate-service-companies
   - services-overview
@@ -44,7 +45,7 @@ These services cover the firm's own licence, permits, professional practice card
 * Service #15 – Renew Professional Practice Card
 * Service #16 – Cancel Professional Practice Card
 * Service #17 – Amend Professional Practice Card
-* Service #18 – Register Real Estate Evaluation Details Certificate
+* Service #18 – Register Real Estate Evaluation Details Certificate *(provenance flagged — see below; excluded from the module's UI as built)*
 * Service #19 – Accreditation of Training Entities
 
 ### 3. Real Estate Rental Services
@@ -122,13 +123,23 @@ Every service file's frontmatter will carry a `source_type` field, per the house
 | 25 | 57 | Real Estate Dispute |
 | 26 | 58 | Real Estate Dispute |
 
-**Row 65 provenance flag, carried from `roles-and-responsibilities.md`.** This row's own workflow text ("sign up and login via evaluation company option... make real estate evaluation") reads as a Valuer-facing service (Group G — Allied Professionals & Service Trustees), not a Brokerage service. It is provisionally kept in Group D's catalogue, matching the source table's own group assignment (D), but flagged for confirmation in `open-questions.md` before treating that assignment as settled. If reassigned to Group G, this module's total would drop to 25 and Real Estate Licensing Services to 7 — noted here so the count is traceable either way.
+**Row 65 provenance flag, carried from `roles-and-responsibilities.md`.** This row's own workflow text ("sign up and login via evaluation company option... make real estate evaluation") reads as a Valuer-facing service (Group G — Allied Professionals & Service Trustees), not a Brokerage service. It is provisionally kept in Group D's catalogue, matching the source table's own group assignment (D), but flagged for confirmation in `open-questions.md` before treating that assignment as settled. **As of Phase 4, this flag has a concrete consequence**: `navigation.md` excludes Service #18 from the module's built UI entirely — no catalogue entry, no submission wizard path, no dashboard reference — rather than building screens against a service that may move modules. If reassigned to Group G, this module's total would drop to 25 and Real Estate Licensing Services to 7 — noted here so the count is traceable either way; if confirmed to stay in Group D, Phase 4's UI package needs a follow-up pass to wire the service back in.
 
-**Row 60 (Real Estate Permit Application) may bundle multiple permit sub-types.** Its channel column lists "Electronic, classified, billboard, and SMS advertisement permits" as distinct permit types under one row. Whether this should split into separate services the way Individual User's lease-registration row split into two, or stay as one service with a permit-type field, is checked in `open-questions.md` rather than assumed here.
+**Row 60 (Real Estate Permit Application) may bundle multiple permit sub-types.** Its channel column lists "Electronic, classified, billboard, and SMS advertisement permits" as distinct permit types under one row. Resolved provisionally in `open-questions.md` A4 as one service with a Permit Type field, and built that way in `ui/screens/submit-application.md` — Pattern A, not split into multiple services. Flagged as Medium confidence, reversible if wrong.
 
 ## Shared Platform Features
 
-**Deliberately not populated yet.** Per the module build playbook (`RERAN/module-build-playbook.md`, Phase 5), the shared-features layer is derived bottom-up from the actual built UI screens, not proposed by analogy to another module's feature list. Both Group B's original 17-feature guess and Group C's proposed feature set had to be substantially corrected once checked against real screens. This section is filled in after Phase 4 (UI Screens), not before.
+**Populated as of Phase 5.** Derived bottom-up from the module's 12 built UI screens, not proposed by analogy to another module — see [shared-platform-features.md](shared-platform-features.md) for the full derivation and reasoning.
+
+**8 features**, fewer than Financial & Trust Institutions' 12 or Real Estate Developer's 13:
+
+| Category | Features |
+| :---- | :---- |
+| Application Lifecycle | Service Requests, Applications |
+| Company-Specific | Jointly Owned Property Register |
+| General Platform | Dashboard, Documents, Notifications, Company Profile, Help & Support |
+
+The lower count is a direct consequence of what Group D's own source material does and doesn't contain — no internal certification gate, no Trustee-mediated escrow mechanism, no sourced recurring compliance-reporting obligation — not an indication the module is smaller or simpler than it is (26 services is comparable in scale to Financial & Trust Institutions' 18).
 
 ## The Difference
 
@@ -144,4 +155,4 @@ Business Services represent the regulatory services RERAN provides to Group D co
 
 ### Shared Platform Features
 
-Shared Platform Features are reusable platform capabilities that support one or more Business Services. They do not represent standalone regulatory services but provide common functionality across the platform. Populated in Phase 5, once the UI screens they're derived from exist.
+Shared Platform Features are reusable platform capabilities that support one or more Business Services. They do not represent standalone regulatory services but provide common functionality across the platform. See [shared-platform-features.md](shared-platform-features.md) for the full list.
