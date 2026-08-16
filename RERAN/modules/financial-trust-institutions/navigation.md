@@ -3,7 +3,7 @@ project: RERAN
 module: financial-trust-institutions
 type: navigation
 status: current
-updated: 2026-08-15
+updated: 2026-08-16
 derived_from:
   - "RERAN/modules/financial-trust-institutions/roles-and-responsibilities.md"
   - "RERAN/modules/financial-trust-institutions/open-questions.md"
@@ -95,4 +95,4 @@ Every item is visible and actionable to every role. There is no menu filtering, 
 
 Until 2026-08-14, this document described a role × permission-scope matrix: six permission scopes (`file`, `certify`, `escrow`, `audit`, `settlement`, `admin`), each provisioned per staff member under registration Flow 5, gating which menu items a given user could see; a maker ≠ checker access rule; and an `audit`-exclusivity rule barring a user from holding `audit` alongside `escrow` or `certify`. All of that is **retired**, not demoted to optional detail, per the client decision above. See [roles-and-responsibilities.md](roles-and-responsibilities.md#how-they-work-together) for how certification now works as an unrestricted action, attributed by role in the audit trail rather than gated by scope.
 
-**Corrected 2026-08-15 — mostly reconciled now, not "not yet reconciled."** This section previously stated that all 13 `ui/screens/*.md` files, `ui/validation-rules.md`, and `ui/components.md` still described the retired role/scope model, and that reconciling them was tracked as a separate later pass (issue #50). That pass has largely happened: `ui/validation-rules.md`, `ui/components.md`, and 12 of the 13 screens — every one except `service-request.md` — are reconciled against both the unified-access model and the corrected payment model. `service-request.md` remains genuinely open, tied to an unresolved question about its per-service field matrix (see `ui/screens-unified/README.md`), and is the one file this note still applies to.
+**Fully reconciled as of 2026-08-16.** This section previously reported all 14 `ui/screens/*.md` files, plus `ui/screens-unified/`, `ui/validation-rules.md`, and `ui/components.md`, as "mostly reconciled" against the unified-access and corrected-payment models, with `service-request.md` named as the one file still carrying the retired scope model. That framing is now stale on both counts: `service-request.md` was deleted outright in favour of `screens-unified/submit-application.md` (issue #50) — it was never reconciled, because it stopped existing — and every file in the current 14-screen set (`ui/screens/`) and the four-screen `ui/screens-unified/` package, along with `ui/validation-rules.md` and `ui/components.md`, has since been checked directly against both the unified-access model and the corrected two-timing payment model (`payments.md`), including a further correction pass on 2026-08-16 following the normalization of Services #12 and #18's payment timing. Nothing in this module's UI package still describes the retired role/scope model or an outdated payment timing.
