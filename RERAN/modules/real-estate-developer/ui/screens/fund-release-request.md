@@ -3,7 +3,7 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-15
+updated: 2026-08-16
 derived_from:
   - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
@@ -21,9 +21,11 @@ The form used to prepare and submit a milestone-based fund release request, reac
 
 > **Corrected 2026-08-15, second pass.** This screen's own Access line already said "all four roles," but its Purpose still described the workspace as being provided "for the Escrow Liaison," and Section 9 gated Reply on an unspecified "when permitted." Both fixed below — this screen, like [company-profile.md](company-profile.md), had no role variant to merge and appears to have been missed by the earlier access-model correction pass for that reason.
 
+> **Corrected 2026-08-16.** Section 2's progress tracker previously named its bank-review stage "Under Bank Review." The source names the reviewing party as the **Account Trustee**, not a bank — this stage is renamed "Under Trustee Review" below, matching the terminology already corrected in [feature-05-fund-release-request.md](../../service-flows/feature-05-fund-release-request.md) and [status-badges.md](../status-badges.md#fund-release-status). This correction had been recorded as made in the feature document on 2026-08-15 but was never actually applied to this screen file — found during a full file-by-file audit.
+
 ## Purpose
 
-Give any developer user a complete operational workspace to prepare, validate, and submit a milestone-based fund release request. Any user can specify the construction milestone, request the eligible release amount, upload supporting documents, respond to bank or RERA queries, and monitor the approval process until funds are released — typically the Escrow Liaison in practice, but not exclusively.
+Give any developer user a complete operational workspace to prepare, validate, and submit a milestone-based fund release request. Any user can specify the construction milestone, request the eligible release amount, upload supporting documents, respond to Trustee or RERA queries, and monitor the approval process until funds are released — typically the Escrow Liaison in practice, but not exclusively.
 
 ## Layout
 
@@ -65,7 +67,7 @@ Supporting Documents
 ↓  
 Validation Summary  
 ↓  
-RERA / Bank Queries (If Applicable)  
+RERA / Trustee Queries (If Applicable)  
 ↓  
 Communication History  
 ↓  
@@ -102,10 +104,12 @@ Display a horizontal workflow tracker.
 * Documents Uploaded  
 * Validation Passed  
 * Submitted  
-* Under Bank Review  
+* Under Trustee Review  
 * Under RERA Review  
 * Approved  
 * Funds Released
+
+**Corrected 2026-08-16** — this stage was previously labelled "Under Bank Review." The source names the reviewing party as the Account Trustee, not a bank. See the correction note at the top of this file.
 
 Completed stages use the platform's standard success indicator.
 
@@ -207,7 +211,7 @@ Upload documents required for fund release.
 
 See [validation-rules.md](../validation-rules.md) for the shared automatic-validation mechanism and the common field-level checks (required fields, required documents, file verification). This screen's own additional checks: Escrow account is active, Milestone eligible for release, Requested amount within approved limit, Engineer verification completed, Quantity Surveyor verification completed, Duplicate release request check.
 
-### Section 8 — RERA / Bank Queries
+### Section 8 — RERA / Trustee Queries
 
 Visible only when additional information is requested.
 
@@ -259,15 +263,17 @@ Displays every event related to this fund release request.
 * Release amount updated  
 * Supporting documents uploaded  
 * Validation completed  
-* Submitted to bank  
-* Bank review started  
+* Submitted to Trustee  
+* Trustee review started  
 * Additional information requested  
 * Response submitted  
-* Bank approved request  
+* Trustee approved request  
 * Submitted to RERA  
 * RERA approved release  
 * Funds transferred  
 * Request completed
+
+**Corrected 2026-08-16** — "Submitted to bank" and "Bank review started" and "Bank approved request" renamed to Trustee, matching the correction above.
 
 Each activity displays:
 
@@ -322,7 +328,7 @@ Fund Release Request
 
         │        ↓
 
-        │   Bank Review
+        │   Trustee Review
 
         │        ↓
 
@@ -347,3 +353,4 @@ Fund Release Request
 * Supporting documents from engineers and quantity surveyors are mandatory before submission.  
 * Once submitted, all actions and communications should be recorded in the **Activity Timeline** for audit and regulatory compliance.  
 * Requests that are **Approved** or **Funds Released** become read-only, except for viewing and downloading supporting information — a lifecycle rule, applying to every user equally.
+* **Terminology corrected 2026-08-16.** "Bank" was replaced with "Trustee" throughout this screen (Section 2's tracker, Section 8's queries table, Section 10's activity examples) — the source names the reviewing party as the Account Trustee, not a bank. This screen's own detailed 9-stage tracker maps onto the sourced status badge vocabulary in [status-badges.md](../status-badges.md#fund-release-status): Draft/Information Completed/Documents Uploaded/Validation Passed → Draft; Submitted → Submitted; Under Trustee Review → Trustee Review; Under RERA Review → RERA Escrow Audit; Approved → Approved; Funds Released → Released.
