@@ -3,7 +3,7 @@ project: RERAN
 module: financial-trust-institutions
 type: navigation
 status: current
-updated: 2026-08-15
+updated: 2026-08-16
 contains_proposals: true
 derived_from:
   - "RERAN/modules/financial-trust-institutions/roles-and-responsibilities.md"
@@ -23,6 +23,8 @@ tags:
 **Derivation note.** These screens are derived from the roles document, the services overview and the answered open questions — not from the service-flow files, which are currently thin (see issue #23).
 
 > **Corrected 2026-08-15.** This package was reconciled against two decisions: the unified-access model (no role or permission-scope gating; role is audit-trail attribution only) and the corrected payment model (no standing account; per-transaction payment, upfront or at point of service, per `open-questions.md` B1 and B11). The Role × Screen Matrix below, the Service × Form Matrix's ownership column, and the Structural Characteristic section are all rewritten accordingly. `settlement-account.md` is retired and replaced by `payment-history.md`; `service-request.md` is retired and replaced by `screens-unified/submit-application.md` (issue #50, resolved).
+
+> **Added 2026-08-16, by client decision.** `help-and-support.md` is new — no source material describes it, and no screen existed anywhere in the module before this date. Built at Claude's full discretion, structured on real-estate-developer's Help & Support screen and deliberately narrowed for an institutional audience — see the screen's own file for the reasoning. This brings `ui/screens/` to 14 files, not 13.
 
 ---
 
@@ -51,7 +53,7 @@ All eighteen services use one configurable form — [Submit Application](screens
 
 **Corrected 2026-08-15** — the previous "Owner (per answer A4)" column is removed. `open-questions.md` A4 (confirmed 2026-08-15, client decision) settles that no service is role-specific; any of the institution's four roles may act on any of the eighteen, so there is no per-service owner left to list.
 
-Group B escrow requests are not among the eighteen. They arrive from the developer module and are worked in the escrow queue — see answer A2, which confirms from source rows 8–12 that the institution acts inside the platform rather than recording an outcome reached elsewhere.
+Group B escrow requests are not among the eighteen. They arrive from the developer module and are worked in the escrow queue — see answer A2, which confirms from source rows 8–12 that the institution acts inside the platform rather than recording an outcome reached elsewhere. **Status vocabulary for this queue corrected 2026-08-16, twice** — see `services-overview.md`'s Cross-Module Correction section; the queue's Certify action now advances a request into an explicitly named `RERA Escrow Audit` stage rather than an ambiguous continuation of a shared "Under Review."
 
 ---
 
@@ -73,10 +75,11 @@ Group B escrow requests are not among the eighteen. They arrive from the develop
 | [documents](screens/documents.md) | Institution document repository, institution-wide |
 | [notifications](screens/notifications.md) | Operational, approval and expiry alerts |
 | [assisted-service-terminal](screens/assisted-service-terminal.md) | Group C services operated for a walk-in customer |
+| [help-and-support](screens/help-and-support.md) | Knowledge base, support tickets, and RERA contact routes — **added 2026-08-16, by client decision, not sourced** |
 
 **Corrected 2026-08-15** — `settlement-account` is removed from this table; `payment-history` replaces it. `service-request` is removed; [Submit Application](screens-unified/submit-application.md) (a `screens-unified/` file, not `screens/`) replaces it — see the Service × Form Matrix note above. `dashboard`'s and `institution-profile`'s purpose lines drop role-specific and permission-scope language respectively.
 
-Three of the fourteen screens now live in [`screens-unified/`](screens-unified/) rather than `screens/`: [Services Catalog](screens-unified/services-catalog.md) and [Service Details](screens-unified/service-details.md), which have no equivalent in the original 13-screen set and are not listed above, plus [Submit Application](screens-unified/submit-application.md), which replaces one. [Application Review](screens-unified/application-review.md) also has no equivalent and is not listed above, since it is a step inside the Submit Application flow, not a standalone entry in this table.
+Three of these fifteen screens now live in [`screens-unified/`](screens-unified/) rather than `screens/`: [Services Catalog](screens-unified/services-catalog.md) and [Service Details](screens-unified/service-details.md), which have no equivalent in the original 13-screen set and are not listed above, plus [Submit Application](screens-unified/submit-application.md), which replaces one. [Application Review](screens-unified/application-review.md) also has no equivalent and is not listed above, since it is a step inside the Submit Application flow, not a standalone entry in this table.
 
 ---
 
