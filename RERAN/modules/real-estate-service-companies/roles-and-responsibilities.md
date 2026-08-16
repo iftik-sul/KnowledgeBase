@@ -7,6 +7,7 @@ updated: 2026-08-16
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
+  - "RERAN/modules/real-estate-service-companies/open-questions.md"
 tags:
   - real-estate-service-companies
   - roles
@@ -44,16 +45,18 @@ Holds the firm's RERA licence and oversees the company's licensing standing, lis
 * Hold the firm's real estate licence and keep it in good standing
 * Apply for real estate permits (advertisement types: electronic, classified, billboard, SMS)
 * Issue, renew, cancel, and amend real estate professional practice cards for agents
-* Register real estate evaluation details certificates *(role attribution flagged — see Open Questions)*
+* Register real estate evaluation details certificates *(confirmed 2026-08-16 as a Group D service — see Open Questions for what remains genuinely unresolved about this one)*
 * Apply for accreditation of the firm as a training entity
 * Apply for permits to sell real estate by public auction
 * Register properties sold by public auction
 
 ### Practical Example
 
-A brokerage wants to list a new billboard advertisement for an upcoming project launch. The Brokerage Principal opens the licensing system, selects the real estate permit service, fills in the advertisement details, attaches supporting documents, and sends the application. RERA audits the request and, on acceptance, sends notice; the firm logs in, pays the fee, and receives the permit e-certificate through the digital system.
+A brokerage wants to list a new billboard advertisement for an upcoming project launch. The Brokerage Principal opens the licensing system, selects the real estate permit service, fills in the advertisement details, attaches supporting documents, pays the fee upfront via the shared platform gateway, and sends the application. RERA audits the request and, on acceptance, delivers the permit e-certificate through the digital system.
 
-> **Proposed** — the source's Responsible Role column attributes all eight Licensing Services rows (59–66) to Brokerage Principal uniformly. Whether that attribution holds up service-by-service, the way Group C's did not for several of its rows, is checked in `open-questions.md` rather than assumed here.
+**Corrected 2026-08-16, by client decision (`open-questions.md` B4).** This example previously described payment happening after RERA's acceptance, matching the row's original sourced sequence. Payment now happens before submission, matching the normalization applied to this service and #12, #14, and #15.
+
+> **Proposed** — the source's Responsible Role column attributes all eight Licensing Services rows (59–66) to Brokerage Principal uniformly. Whether that attribution holds up service-by-service, the way Group C's did not for several of its rows, is checked in `open-questions.md` rather than assumed here — and, per A1, does hold up cleanly for this module, unlike Group B or C's equivalent columns.
 
 ---
 
@@ -83,7 +86,7 @@ Administers jointly-owned-property matters on behalf of an owners' association: 
 
 An owners' association at a mixed-use development needs its annual accounts audited. The Owners'-Association Manager opens the JOP system, selects the appropriate audit-office-appointment service, and submits the request with the proposed auditor's details. RERA reviews and approves; the appointment is recorded against the joint property's own record.
 
-> **Proposed** — the roadmap flags JOP as potentially mirroring Group B's escrow-account mechanism (which Group C models as its own Escrow Request Queue) with different actors. Whether JOP's escrow-adjacent services (rows 50–52) genuinely route through the same Account Trustee / Compliance & Escrow Auditor mechanism, or operate on a separate track specific to jointly-owned property, is unresolved — see `open-questions.md` and `payments.md`.
+> **Resolved 2026-08-16 (`open-questions.md` A3)** — the roadmap flagged JOP as potentially mirroring Group B's escrow-account mechanism (which Group C models as its own Escrow Request Queue) with different actors. Checked directly against the source: JOP's escrow-adjacent services (rows 50–56) route directly from the Owners'-Association Manager to RERA's Compliance & Escrow Auditor, with no Account Trustee intermediary sourced anywhere. This does not mirror Group B/C's mechanism.
 
 ---
 
@@ -151,5 +154,5 @@ In short, each role's customary focus is:
 
 ## Open Questions
 
-1. **Row 65 (Real Estate Evaluation Details Certificate)** reads as a Valuer-facing service in its own workflow text ("sign up via evaluation company option... make real estate evaluation") rather than a Brokerage service. Whether this row genuinely belongs to Group D at all, or is a Group G (Allied Professionals) service the source table filed under the wrong group, needs checking against the source before Phase 2 closes — see `services-overview.md`'s Service Provenance section.
-2. **Role attribution for the Licensing Services cluster (rows 59–66)** is taken directly from the source's Responsible Role column without independent re-derivation. Given Group B and Group C's own Responsible Role columns each turned out to be a coarse category default rather than a genuine per-service assignment, this attribution should be checked service-by-service in `open-questions.md` before being treated as settled — though, per the unified-access model above, the check affects only the "typically handled by" framing, never actual access.
+1. ~~**Row 65 (Real Estate Evaluation Details Certificate)** — does this row genuinely belong to Group D, or is it a Group G (Allied Professionals) service the source table filed under the wrong group?~~ **Resolved 2026-08-16 (client decision, `open-questions.md` A2)** — confirmed Group D. What remains open: this row's own workflow text still reads as a Valuer-facing process ("sign up via evaluation company option... make real estate evaluation") structurally unlike every other Group D service, and it has no designed UI screen yet — see `service-flows/service-18-register-evaluation-details-certificate.md`'s own Open Questions for the details.
+2. **Role attribution for the Licensing Services cluster (rows 59–66)** is taken directly from the source's Responsible Role column without independent re-derivation. Given Group B and Group C's own Responsible Role columns each turned out to be a coarse category default rather than a genuine per-service assignment, this attribution should be checked service-by-service — checked in `open-questions.md` A1, which found the column holds up cleanly for every Group D category, including Licensing, unlike Group B or C's equivalents. Though, per the unified-access model above, this affects only the "typically handled by" framing, never actual access.
