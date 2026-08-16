@@ -129,7 +129,10 @@ Accredited
 
 ## 17. UI Screens
 
-Not yet built — Phase 4. Not currently expected to need one, given the sourced email-only channel — matching Real Estate Developer's equivalent, which was documented with no proposed UI surface for the same reason.
+**Corrected 2026-08-16 — Phase 4 is complete; this section previously said "Not yet built."** Given the sourced email-only channel, this service does not use a portal wizard:
+
+* Services
+* Accreditation of Training Entities — static instructional screen, matching the treatment already built for Service #6
 
 ## 18. API Requirements
 
@@ -157,4 +160,4 @@ Not applicable in the same sense as portal-based services. **Proposed**: if a po
 ## Open Questions
 
 1. **Whether this service is genuinely distinct from Real Estate Developer's Service #23, or a source-table duplication of the same underlying accreditation process** — the primary open question, not resolved by this document. Client data.
-2. **No UI screen exists or is proposed for this service**, consistent with its non-portal channel — flagged for the client to confirm scope before any UI work is considered.
+2. **No portal-based UI screen exists or is proposed for this service**, consistent with its non-portal channel — flagged for the client to confirm scope before any further UI work is considered.
