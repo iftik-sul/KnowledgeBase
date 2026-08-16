@@ -22,35 +22,34 @@ tags:
 
 Surface the module's deadline- and decision-driven alerts in one place.
 
+> **Corrected 2026-08-16, by client decision (`open-questions.md` B4).** The Payment Due Priority Alert category, built specifically for Services #12–#15's now-retired post-decision payment timing, is removed — not merely relabelled, since the scenario it existed to flag no longer occurs.
+
 ## Layout
 
 ```
 Top Bar
-↓
-Priority Alerts
 ↓
 Category Filters
 ↓
 Notification List
 ```
 
+**Corrected 2026-08-16** — the Priority Alerts banner strip is removed from the layout entirely. With Payment Due retired and no other category in this module ever having needed an un-mutable treatment, there is no remaining category that blocks work if missed — unlike Financial & Trust Institutions, which retains its own Approval Expiry Warning as a genuine Priority Alert.
+
 ## Sections
 
-### Section 1 — Priority Alerts
-
-A banner strip for the category that blocks work if missed: **Payment Due** — Services #12–#15 only, once RERA accepts an application and payment becomes the next required action. This category cannot be muted, matching the reasoning Financial & Trust Institutions applies to its own un-mutable Approval Expiry Warning — a real, sourced scenario where inaction has a consequence, not a generic "stay informed" nudge.
-
-### Section 2 — Categories
+### Section 1 — Categories
 
 | Category | Trigger | Typically relevant to |
 | :---- | :---- | :---- |
 | Application Outcomes | RERA approves, returns, or rejects | Filer |
 | Information Requested | RERA raises a query | Filer |
-| **Payment Due** | Services #12–#15 accepted, payment now required | Brokerage Principal |
 | JOP Activity | A property's supervision, association, or escrow-adjacent status changes | Owners'-Association Manager |
 | Licence Expiry | Company licence (Service #12) approaching expiry — **proposed**, pending confirmation of whether Group D licences expire the way institutional approvals do elsewhere in the project | Brokerage Principal |
 
-### Section 3 — Notification List
+**Corrected 2026-08-16 — Payment Due removed.** This category was checked directly against Services #12–#15's own sourced workflow text at the time it was built, not built by analogy to any other module's category — that checking was correct when done. The category is now removed because the underlying fact it was built on has since changed by client decision (`open-questions.md` B4), not because the original check was wrong.
+
+### Section 2 — Notification List
 
 | Column | Description |
 | :---- | :---- |
@@ -69,7 +68,9 @@ A banner strip for the category that blocks work if missed: **Payment Due** — 
 
 **Message**
 
-> No notifications. You'll be alerted here about application outcomes, information requests, payments due, and JOP activity.
+> No notifications. You'll be alerted here about application outcomes, information requests, and JOP activity.
+
+**Corrected 2026-08-16** — "payments due" removed from this message.
 
 ## Reused Components
 
@@ -78,8 +79,7 @@ Company Operations Sidebar, Top Bar, Status Badge, Buttons.
 ## Validation
 
 1. Any company user can receive any category.
-2. The Payment Due Priority Alert cannot be muted.
-3. Every other category is independently toggleable, in-app and by email.
+2. Every category is independently toggleable, in-app and by email — with the Priority Alert un-mutable exception retired along with the category it applied to.
 
 ## Access
 
@@ -92,12 +92,10 @@ Dashboard (unread count)
 ↓
 Notifications
 ├─ Open (Application Outcome / Info Request) → Application Details
-├─ Open (Payment Due) → Application Details, Complete Payment action
 ├─ Open (JOP Activity) → Jointly Owned Property
 └─ Mark All Read → list refreshed
 ```
 
 ## Notes
 
-* **Payment Due is a genuinely sourced category, checked directly against Services #12–#15's own workflow text** — not built by analogy to Financial & Trust Institutions' now-retired Awaiting Counter Payment category (see that module's own three-pass correction history for why that comparison should be treated with caution rather than copied uncritically). This module's version rests on a different, still-current sourced fact: #12–#15 genuinely pay after acceptance, and that timing has not been normalized away the way Financial & Trust Institutions' #12/#18 was.
-* If `open-questions.md` B4 resolves toward normalizing #12–#15 to pay-before-lodging, this category becomes moot the same way Financial & Trust Institutions' equivalent did — flagged for whoever revisits this screen if that happens.
+* **This screen's Payment Due history is worth recording, since it directly mirrors a pattern Financial & Trust Institutions went through at larger scale.** That module added, then removed, an equivalent category for its own #12/#18 after their payment timing was normalized on 2026-08-16 — the same day, coincidentally, this module's own #12–#15 were normalized. Both modules ended up in the same place (no post-decision payment category) via the same mechanism (a client decision changing the underlying sourced timing), even though the two modules' services are otherwise unrelated.

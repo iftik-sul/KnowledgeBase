@@ -22,7 +22,9 @@ The full record of one application, from draft to output issue.
 
 ## Purpose
 
-Let anyone with visibility into a record see its full history and current position, and take the one action available from here — respond to a query, or complete a post-decision payment where the service requires it.
+Let anyone with visibility into a record see its full history and current position, and take the one action available from here — respond to a query.
+
+> **Corrected 2026-08-16, by client decision (`open-questions.md` B4).** The "Currently with... payment due" state, the Payment Pending progress step, and the Complete Payment action — all built specifically for Services #12–#15's now-retired post-decision payment timing — are removed. This screen is simpler than the version Phase 4 produced, not more complex, since the scenario those additions existed to handle no longer occurs.
 
 ## Layout
 
@@ -48,11 +50,15 @@ Audit Timeline
 
 ### Section 1 — Header
 
-Application reference, service, represented party, current status badge, sourced SLA, and a single **"Currently with"** line: the filer (drafting), "RERA" (submitted/under review), **"Your company — payment due" (Services #12–#15 only, once accepted and before payment)**, or nobody (completed, rejected, withdrawn).
+Application reference, service, represented party, current status badge, sourced SLA, and a single **"Currently with"** line: the filer (drafting), "RERA" (submitted/under review), or nobody (completed, rejected, withdrawn).
+
+**Corrected 2026-08-16** — the third state this line carried in Phase 4, "Your company — payment due" for Services #12–#15, is removed. Those four services now pay during submission, the same as every other fee-bearing service, so there is no post-decision payment-due state left for this line to describe.
 
 ### Section 2 — Progress
 
-A Progress Tracker: `Draft → Submitted → RERA Review → Approved → Completed`. **For Services #12–#15 specifically**, an additional `Payment Pending` step sits between `Approved` and `Completed`, matching the sourced sequence — payment genuinely follows acceptance for these four services, unlike every other fee-bearing service in this module.
+A Progress Tracker: `Draft → Submitted → RERA Review → Approved → Completed`.
+
+**Corrected 2026-08-16** — the additional `Payment Pending` step this tracker carried between Approved and Completed for Services #12–#15 specifically is removed. Every service now follows the same four-stage tracker, with payment (where applicable) already resolved before `Submitted`, consistent with `ui/components.md`'s own corrected Progress Tracker definition.
 
 ### Section 3 — Request Details
 
@@ -68,10 +74,11 @@ Read-only. Shows RERA's decision (Approved / Returned for Correction / Informati
 
 ### Section 6 — Outputs
 
-Shown once the record reaches Completed, **or, for Services #12–#15, once RERA accepts the application and the record enters the payment-due state.**
+Shown once the record reaches Completed.
 
-* **Complete Payment** action — shown for Services #12–#15 only, in the payment-due state. Selecting it opens the payment step this module's build still needs to design (see `submit-application.md`'s own Notes for the same flagged gap).
-* Payment Receipt — issued once payment succeeds, for every fee-bearing service.
+**Corrected 2026-08-16** — the Complete Payment action previously shown here for Services #12–#15 in their payment-due state is removed; payment for these four services now happens on Submit Application, before the record ever reaches this screen in a completed state.
+
+* Payment Receipt — issued at checkout, before the application was lodged, for every fee-bearing service.
 * Issued output document(s), matching the specific list in the service's own service-flow document.
 
 ### Section 7 — Audit Timeline
@@ -92,7 +99,6 @@ Company Operations Sidebar, Top Bar, Progress Tracker, Information Cards, Docume
 
 1. Editability follows status and ownership, not role.
 2. A reason is mandatory on Return and on Respond to Information Request.
-3. **For Services #12–#15, the Complete Payment action is only enabled once RERA's acceptance has been recorded** — attempting payment before acceptance is blocked, matching the sourced sequence.
 
 ## Access
 
@@ -106,11 +112,10 @@ Applications / Dashboard
 Application Details
 ├─ Edit (Draft, own record) → Submit Application
 ├─ Respond to Information Request → back to Submitted
-├─ Complete Payment (Services #12–#15 only) → payment step (not yet designed)
 └─ Download Output → local
 ```
 
 ## Notes
 
-* **This screen's "Currently with" line and Complete Payment action for #12–#15 are the most consequential open design item in this module's UI package**, carried forward from `submit-application.md`'s own flagged gap. Whichever screen or step eventually collects that payment, this screen needs to link to it correctly once it exists.
+* **This screen's most consequential Phase 4 open item — where and how Services #12–#15's post-decision payment would be collected — is now resolved by removing the scenario, not by designing the missing screen.** B4's normalization means every payment this module collects happens on Submit Application, during the same session as the rest of submission; this screen never needs a payment-collection action of its own.
 * This screen does not need Financial & Trust Institutions' "Certification & RERA Decision" two-part section, since no internal certification gate exists anywhere in Group D (`open-questions.md` A5) — there is only ever one decision-maker (RERA) to display.

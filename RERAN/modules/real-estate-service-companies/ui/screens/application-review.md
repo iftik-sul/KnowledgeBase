@@ -22,6 +22,8 @@ tags:
 
 A read-only, final checkpoint before an application is submitted — everything entered across [Submit Application](submit-application.md)'s steps, in one place, so a filer catches an error before it becomes a submitted record.
 
+> **Corrected 2026-08-16, by client decision (`open-questions.md` B4).** Section 5 (Payment Confirmation) now shows for Services #12–#15 as well as #24 and #25/#26 online, since all of these now pay during submission.
+
 ## Layout
 
 ```
@@ -62,7 +64,9 @@ Every attached document, by name and type, with a preview action.
 
 ### Section 5 — Payment Confirmation
 
-**Shown only for Service #24 and Services #25/#26 (online channel)** — the amount charged, payment method, and Payment Receipt reference, confirming payment already succeeded in the prior step. **Not shown** for the 19 no-fee services, or for Services #12–#15, whose payment happens after this point in the process entirely — see Submit Application's own Notes.
+**Shown for Services #12–#15, #24, and #25/#26 (online channel)** — the amount charged, payment method, and Payment Receipt reference, confirming payment already succeeded in the prior step. **Not shown** for the 19 no-fee services.
+
+**Corrected 2026-08-16** — previously excluded #12–#15 from this section, since those four services paid after submission at the time. With B4's normalization, they pay during submission like every other fee-bearing service this wizard handles, and this section now covers all of them uniformly.
 
 ### Section 6 — Declaration
 
@@ -80,7 +84,7 @@ Information Cards, Status Badge, Buttons.
 
 1. Submit is disabled until the Declaration checkbox is checked.
 2. Any Edit link returns to this screen after the edited step is resaved.
-3. Where payment was required during submission (#24, #25/#26 online), Submit is not reachable unless Section 5 shows a successful Payment Receipt reference.
+3. Where payment was required during submission (now every fee-bearing service this wizard handles), Submit is not reachable unless Section 5 shows a successful Payment Receipt reference.
 
 ## Access
 
@@ -98,5 +102,5 @@ Application Review
 
 ## Notes
 
-* **For Services #12–#15, this screen's confirmation should say so explicitly** — "Submitted for RERA review. You will be notified when payment is due" — rather than a generic "Submitted" message that could read as though payment is already settled.
-* No internal certification loop exists anywhere in this module (`open-questions.md` A5), so unlike Financial & Trust Institutions' equivalent screen, this confirmation message never needs to distinguish "submitted for internal certification" from "submitted to RERA" — every submission goes straight to RERA.
+* **This screen's confirmation message no longer needs a #12–#15-specific variant.** The Phase 4 version of this file proposed "Submitted for RERA review. You will be notified when payment is due" for those four services specifically, since payment happened after submission at the time. With B4's normalization, a single confirmation message works for every service this wizard handles: payment (where applicable) has already succeeded by the time this screen's Submit action fires.
+* No internal certification loop exists anywhere in this module (`open-questions.md` A5), so this confirmation message never needs to distinguish "submitted for internal certification" from "submitted to RERA" — every submission goes straight to RERA.

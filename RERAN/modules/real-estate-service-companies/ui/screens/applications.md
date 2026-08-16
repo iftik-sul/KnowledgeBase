@@ -22,6 +22,8 @@ tags:
 
 Give every company user a single, company-wide view of application activity across the module's services, with filters to narrow it to what they're working on.
 
+> **Corrected 2026-08-16, by client decision (`open-questions.md` B4).** The Awaiting Payment status card and Payment State value, both built specifically for Services #12–#15's now-retired post-decision payment timing, are removed.
+
 ## Layout
 
 ```
@@ -47,10 +49,9 @@ Pagination
 | Draft | Started, not submitted |
 | Submitted / Under Review | With RERA |
 | Information Requested | RERA has raised a query |
-| Awaiting Payment | Approved, payment outstanding — Services #12–#15 only, see Notes |
 | Completed This Month | Settled and issued |
 
-**Awaiting Payment is a genuinely real state for this module**, unlike Financial & Trust Institutions' now-retired equivalent (see that module's `status-badges.md` for the full three-pass history of getting this wrong and then right). Services #12–#15 source payment happening after acceptance, not before — confirmed directly against each service's own file, not assumed from a filter list. This status card exists because the underlying scenario is sourced, not because a UI screen implied it.
+**Corrected 2026-08-16 — Awaiting Payment card removed.** This card previously tracked Services #12–#15's approved-but-unpaid state. With those four services normalized to pay before lodging (`open-questions.md` B4, `payments.md` Model 2), no Group D service is ever approved while payment is still pending — the scenario this card existed to surface no longer occurs.
 
 ### Section 2 — Filters & Search
 
@@ -59,8 +60,8 @@ Pagination
 **Filters**
 
 * **Category** — Jointly Owned Property · Licensing · Rental · Transaction · Dispute
-* **Status** — the Application Status vocabulary in `ui/status-badges.md` (Phase 5)
-* **Payment State** — No Fee · Pending · Paid · Awaiting Payment (post-decision)
+* **Status** — the Application Status vocabulary in `ui/status-badges.md`
+* **Payment State** — No Fee · Pending · Paid *(Corrected 2026-08-16 — "Awaiting Payment (post-decision)" value removed; no longer applies to any service)*
 * **Filed By** — dropdown of company staff, attribution-only, not an access filter
 * **Date Range** — submitted date
 
@@ -69,11 +70,11 @@ Pagination
 | Column | Description |
 | :---- | :---- |
 | Application Reference | Links to Application Details |
-| Service | Which of the 25 |
+| Service | Which of the module's services |
 | Category | JOP · Licensing · Rental · Transaction · Dispute |
 | Filed By | The company user who filed it, whatever their role |
 | Status | See `ui/status-badges.md` |
-| Payment State | No Fee · Pending · Paid · Awaiting Payment |
+| Payment State | No Fee · Pending · Paid |
 | Submitted | Date, blank for drafts |
 | Action | Open |
 
@@ -97,7 +98,7 @@ Company Operations Sidebar, Top Bar, Company Context Header, KPI Summary Cards, 
 ## Validation
 
 1. Row visibility is company-wide for every role; the Filed By filter narrows the view by choice, not access.
-2. Open is always available on any visible row. Further action (respond to query, complete post-decision payment) is gated on the current status, not on who is viewing.
+2. Open is always available on any visible row. Further action (respond to query) is gated on the current status, not on who is viewing.
 
 ## User Flow
 
@@ -110,5 +111,5 @@ Applications
 
 ## Notes
 
-* **This table shows all 25 selectable-service applications, including Jointly Owned Property services.** Even though JOP also has its own dedicated register (`jointly-owned-property.md`), JOP applications still appear here — the register shows JOP *properties* as standing entities; this table shows every individual *application* filed against the module's services, JOP included. The two screens serve different questions, not competing ones.
-* Service #18 does not appear anywhere in this table, consistent with `navigation.md`'s provenance exclusion.
+* **This table shows applications for every wizard-eligible and email-only service, including Jointly Owned Property services.** Even though JOP also has its own dedicated register (`jointly-owned-property.md`), JOP applications still appear here.
+* **Service #18 now appears in this table, per `open-questions.md` A2's 2026-08-16 decision to keep it in Group D** — previously excluded entirely. Its own atypical shape (evaluation-company-decides, not a standard RERA application) may need a distinct row treatment or status vocabulary; flagged for follow-up once Service #18's own dedicated screen is designed, not resolved here.
