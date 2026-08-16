@@ -3,8 +3,8 @@ project: RERAN
 module: financial-trust-institutions
 type: ui-spec
 status: draft
-updated: 2026-08-15
 contains_proposals: true
+updated: 2026-08-16
 derived_from:
   - "RERAN/modules/financial-trust-institutions/service-flows/"
   - "RERAN/modules/financial-trust-institutions/payments.md"
@@ -19,7 +19,7 @@ tags:
 
 **Access:** Any of the institution's four Group C roles — identical screen for every user.
 
-> **Regenerated 2026-08-15**, written fresh against the current corrected model. **Corrected again same day** — Section 3 claimed to match `payments.md` "exactly" while describing a two-way timing split that `payments.md` no longer uses. Fixed below.
+> **Regenerated 2026-08-15**, written fresh against the current corrected model. **Corrected 2026-08-16.** Section 3 previously distinguished four fee-timing states, since Services #12 and #18 then sourced RERA's decision preceding the counter payment. The client has since normalized both services to pay before RERA's decision, the same as #13–#17. Back to three states.
 
 ## Purpose
 
@@ -58,14 +58,13 @@ The service's own Purpose and Description, drawn directly from the corresponding
 ### Section 3 — Fees & Payment
 
 * **Fee** — "Set by RERA, configuration-based" (`open-questions.md` B5) rather than a hardcoded figure, since the exact amount is not sourced.
-* **When you pay** — one of four states, matching `payments.md` exactly:
+* **When you pay** — one of three states, matching `payments.md` exactly:
   * "Paid upfront, before your application is submitted" (#1, #3–#11)
-  * "Paid at a Trustee Centre or the Land Department, before RERA reviews your application" (#13–#17)
-  * "Paid at a Trustee Centre or the Land Department, once RERA has approved your application" (#12, #18)
+  * "Paid at a Trustee Centre or the Land Department, before RERA reviews your application" (#12–#18)
   * "No fee for this service" (#2 only)
 * **VAT** — "VAT applies" on every service except #2, per answer B7 (confirmed 2026-08-15, no exemptions).
 
-**Corrected 2026-08-15 (second pass).** This section previously listed three states, collapsing #12–#18 into one "paid at the point of service" line. That was inaccurate at the timing level: #12 and #18 source RERA's decision *before* the counter payment, the reverse of #13–#17. An applicant deciding whether to apply needs to know this — whether they'll pay when they submit, or only once told they're approved — so the four-state list above replaces the three-state one, matching `payments.md`'s own correction.
+**Corrected 2026-08-16.** This section previously listed four states, splitting #12/#18 (paid after approval) from #13–#17 (paid before). The client has since normalized #12 and #18 to pay before RERA's decision as well — the four-state list is retired, back to the original three-state split, now genuinely uniform across #12–#18 rather than an approximation.
 
 ### Section 4 — Eligibility & Prerequisites
 
@@ -77,7 +76,9 @@ The service's own Section 7 (Required Documents) list. Most of these lists are t
 
 ### Section 6 — Process Timeline
 
-A simplified version of the service's own Processing Workflow (Section 12): who does what, in what order, ending in output delivery. Shows whether internal certification applies to this service (sourced for #3–#11; a configurable/open question for the rest), whether an assisted-mode path exists, and — for #12/#18 specifically — that RERA's decision precedes the payment step, unlike the rest of the catalogue.
+A simplified version of the service's own Processing Workflow (Section 12): who does what, in what order, ending in output delivery. Shows whether internal certification applies to this service (sourced for #3–#11; a configurable/open question for the rest) and whether an assisted-mode path exists.
+
+**Corrected 2026-08-16** — this section previously called out #12/#18 specifically as paying after RERA's decision, "unlike the rest of the catalogue." That distinction no longer exists; every service's timeline now follows the same pattern within its payment model (upfront for #1/#3–#11, at-counter-before-decision for #12–#18).
 
 ## Empty State
 
@@ -90,7 +91,7 @@ Top Bar, Information Cards, Status Badge, Buttons.
 ## Validation
 
 1. Every field on this screen must trace to the corresponding service's own `service-flows/service-NN-*.md` document — this screen has no independent source of truth and must not diverge from it.
-2. Fee timing and VAT applicability must match `payments.md` and `open-questions.md` B7 exactly, per service — including the #12/#18 post-decision exception, not just the upfront/at-counter/no-fee split.
+2. Fee timing and VAT applicability must match `payments.md` and `open-questions.md` B7 exactly, per service.
 
 ## Access
 
@@ -109,4 +110,4 @@ Service Details
 
 * **This screen is read-only and pre-application.** It does not collect any data — that happens on [Submit Application](submit-application.md). Its job is entirely to inform the decision to apply, not to begin the application itself.
 * Where a service's own Open Questions section (in `service-flows/`) flags something genuinely unresolved — e.g. which of several possible output documents applies, or whether a bank-originated path exists for a title & ownership service — this screen does not need to surface that uncertainty to the applicant; it's a documentation-completeness concern, not something an applicant needs to see before applying.
-* **#12/#18's payment timing is worth surfacing clearly here, not softening.** An applicant who expects to pay at submission (matching #13–#17's pattern) and instead is told to return once approved could reasonably experience that as a broken flow if this screen doesn't set the expectation upfront.
+* **#12/#18's payment timing no longer needs special callout.** This section previously stressed surfacing #12/#18's post-approval payment timing clearly to applicants, since it broke from the #13–#17 pattern and could read as a broken flow if not flagged. That concern is moot now that all six services (#12–#18) share one timing.
