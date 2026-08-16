@@ -24,6 +24,8 @@ tags:
 
 The **Escrow Request Queue** is the institution-side counterpart to Group B's developer escrow services: a single queue of every developer-originated escrow request (account activation, account transfer, profit withdrawal, payment release, mortgage deposit, bank guarantee cancellation) awaiting the institution's assessment and certification, ordered by SLA urgency, before it is forwarded to RERA's escrow department.
 
+> **Cross-module status mismatch, found 2026-08-16, not resolved.** This feature treats all six request types as one queue with one status vocabulary (Section 13). The real-estate-developer module's own docs for the same transactions — [`feature-04-escrow-management.md`](../../real-estate-developer/service-flows/feature-04-escrow-management.md) for #8/9/20/21, [`feature-05-fund-release-request.md`](../../real-estate-developer/service-flows/feature-05-fund-release-request.md) for #10/12 — split across two features with two different, non-matching vocabularies (`Pending Approval → Under Review → Approved → Released`, and a separate 9-stage `Draft → ... → Under Bank Review → Under RERA Review → Funds Released` tracker respectively). Neither developer-side term appears here. **Separately, this feature's own Section 13 has a gap**: it treats `Certified` as the end state, but this section's own prose says a certified request is then "forwarded to RERA's escrow department for final audit" — no status represents that subsequent RERA review, even though the developer side's `Under RERA Review` (Feature #5) shows exactly that stage exists. Not silently reconciled here — flagged in both modules' overview docs pending a decision on which vocabulary (if either, as-is) should be authoritative.
+
 ## 2. Purpose
 
 Give the institution one place to triage, assess, and certify or return the six types of developer escrow requests, typically worked by the Account Trustee but reachable by any of the institution's four Group C roles.
@@ -101,6 +103,8 @@ Certified → forwarded to RERA escrow department
 
 SLA state (Within window / Approaching breach / Breached) tracks alongside status, not as a replacement for it.
 
+**Known gap, see the note under Feature Overview above**: no status here represents RERA's own subsequent review after `Certified` — the developer-side `Under RERA Review` stage (Feature #5) has no counterpart in this vocabulary.
+
 ## 14. Possible Outcomes
 
 * Request Certified, Forwarded to RERA
@@ -119,6 +123,7 @@ SLA state (Within window / Approaching breach / Breached) tracks alongside statu
 * Trust Accounts *(the account a request draws against — View Trust Account row action)*
 * Internal Certification Queue *(a structurally similar certify/return gate, for Services #3–#11 instead)*
 * Compliance Reports *(findings may reference escrow activity on a covered account)*
+* Real Estate Developer's Escrow Management and Fund Release Request *(cross-module — the developer's side of the same six request types; **status vocabulary does not currently reconcile**, see Feature Overview)*
 
 ## 17. UI Screens
 
@@ -163,4 +168,5 @@ SLA state (Within window / Approaching breach / Breached) tracks alongside statu
 
 ## Open Questions
 
-1. `services-overview.md` To Confirm item 2 remains open and covers this feature too.
+1. **Cross-module status vocabulary mismatch** (found 2026-08-16, detailed under Feature Overview) — needs a client or architecture decision on which side's vocabulary, if either as-is, should be authoritative, and needs this feature's own gap (no status for RERA's post-certification review) resolved regardless.
+2. `services-overview.md` To Confirm item 2 remains open and covers this feature too.
