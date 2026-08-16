@@ -23,7 +23,7 @@ tags:
 
 Give any company user everything they need to decide whether and how to apply for one specific service, before committing to the application form.
 
-> **Corrected 2026-08-16, twice, by client decision.** **B4** — Section 3's payment-timing description for Services #12–15 is corrected from "paid after decision" to "paid upfront." **A2** — this screen now renders for Service #18 too, though its Start Application action leads to a placeholder rather than Submit Application, since #18 has no designed wizard entry yet.
+> **Corrected 2026-08-16, three times, by client decision and by audit finding.** **B4** — Section 3's payment-timing description for Services #12–15 is corrected from "paid after decision" to "paid upfront." **A2** — this screen now renders for Service #18 too, though its Start Application action leads to a placeholder rather than Submit Application, since #18 has no designed wizard entry yet. **Audit correction** — Service #11 joins Services #6 and #19 as email-only; this screen's email-only references previously listed only two services.
 
 ## Layout
 
@@ -103,12 +103,12 @@ Service Details
     (or, for Service #18, a placeholder — see Notes)
 ```
 
-**For Services #6 and #19 (email-only):** the sticky action changes from "Start Application" to a static instructional note directing the user to the appropriate email address, matching the module's own service-flow files' description of these two channels. No wizard opens.
+**For Services #6, #11, and #19 (email-only):** the sticky action changes from "Start Application" to a static instructional note directing the user to the appropriate email address, matching the module's own service-flow files' description of these three channels. No wizard opens. **Corrected 2026-08-16** — previously named only Services #6 and #19; Service #11 was found during the same-day Phase 6 audit to be email-only as well.
 
 **For Service #18:** the sticky action currently has nowhere designed to lead — see Notes.
 
 ## Notes
 
 * This screen is read-only and pre-application — it does not collect any data.
-* Services #6 and #19 are two of the three services in the catalogue where this screen doesn't lead into Submit Application.
-* **Service #18 is the third — corrected 2026-08-16.** Previously excluded from the catalogue entirely pending its `open-questions.md` A2 provenance question; now confirmed to stay in Group D, so this screen renders for it, but Start Application has no designed destination yet. Until Service #18's own screen exists (see `ui/screens/submit-application.md`'s and `ui/screens/services-catalog.md`'s own Notes), this screen's Start Application button should show a "This service's dedicated interface is still being designed" state for #18 specifically.
+* **Services #6, #11, and #19 are three of the four services in the catalogue where this screen doesn't lead into Submit Application** — corrected 2026-08-16, previously described as "two of the three," which undercounted both the email-only group (missing #11) and the total non-wizard group (missing the resulting fourth member).
+* **Service #18 is the fourth — corrected 2026-08-16.** Previously excluded from the catalogue entirely pending its `open-questions.md` A2 provenance question; now confirmed to stay in Group D, so this screen renders for it, but Start Application has no designed destination yet. Until Service #18's own screen exists (see `ui/screens/submit-application.md`'s and `ui/screens/services-catalog.md`'s own Notes), this screen's Start Application button should show a "This service's dedicated interface is still being designed" state for #18 specifically.
