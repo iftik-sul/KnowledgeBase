@@ -3,7 +3,7 @@ project: RERAN
 module: individual-user
 type: overview
 status: current
-updated: 2026-08-15
+updated: 2026-08-16
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -34,14 +34,14 @@ This module's documentation was split from a single combined file, `RERAN_ indiv
 
 ## Roles (6)
 
-* [roles-and-responsibilities.md](roles-and-responsibilities.md) — the 6 individual-user roles: Property Owner/Seller, Landlord, Owner's Representative/PoA Holder, Tenant, Property Buyer/Investor, Diaspora Investor. **Not updated since 2026-08-09** — its Landlord and Tenant sections still give verbatim-overlapping responsibilities ("Create and renew lease records" / "Register tenancy information... Renew lease records"), the same overlap `open-questions.md` B1 cites as part of the evidence for the Register/Renew Lease role-attribution conflict. B1 resolved the *service-flow* files (Landlord primary, Tenant secondary applicant) but explicitly left this document's own overlapping language as "worth a separate flag to the client at some point, not resolved by this entry." That flag was never actually raised anywhere trackable until now — see `open-questions.md`'s Summary, where it has been added as a standing open item.
+* [roles-and-responsibilities.md](roles-and-responsibilities.md) — the 6 individual-user roles: Property Owner/Seller, Landlord, Owner's Representative/PoA Holder, Tenant, Property Buyer/Investor, Diaspora Investor. **Corrected 2026-08-16 — this bullet was itself stale.** It previously said the Landlord/Tenant verbatim-overlap ("Create and renew lease records" / "Register tenancy information... Renew lease records") was "not updated since 2026-08-09" and that the flag about it "was never actually raised anywhere trackable until now." Checked directly against the file: it was updated 2026-08-15 with an explanatory note and inline cross-references in both the Landlord and Tenant sections, resolving `open-questions.md` D1 — the overlap is intentional (one account can hold both roles at once, against different properties), not an unresolved conflict. `open-questions.md`'s own Summary confirms D1 as resolved, not standing open.
 
 ## Analysis Layer (4 documents)
 
 Added 2026-08-15, built by checking all 43 service-flow files individually against the master table rather than trusting a module-wide pattern (see each document's own opening section for the full reasoning).
 
 * [payments.md](payments.md) — per-service payment timing and fee-existence findings; the single most-corrected fact in this module's documentation history.
-* [open-questions.md](open-questions.md) — role-attribution conflicts, payment questions, and their resolutions (13 of 14 resolved; 1 remains genuinely open).
+* [open-questions.md](open-questions.md) — role-attribution conflicts, payment questions, and their resolutions. **Corrected 2026-08-16 — this bullet previously said "13 of 14 resolved; 1 remains genuinely open."** Checked directly against `open-questions.md`'s own Summary table: **all 15 questions are resolved, 0 awaiting client data** — the same figure `module-roadmap.md` already carried, which this file had fallen behind. The apparent "1 remaining open item" was D1, resolved the same day this README was last touched but never reflected here — see the Roles entry above for the same drift, caught in the same document.
 * [navigation.md](navigation.md) — activity-scoped access model and proposed sidebar structure.
 * [role-workflows.md](role-workflows.md) — the shared login-to-logout journey and what each of the 6 roles typically does, including a provenance finding: 3 of the 6 roles never appear as a Responsible Role in any sourced master-table row.
 
@@ -140,3 +140,7 @@ Added 2026-08-15, in [ui/](ui/). This module's first UI package — see [ui/READ
 * [ui/README.md](ui/README.md), [ui/components.md](ui/components.md), [ui/validation-rules.md](ui/validation-rules.md), [ui/status-badges.md](ui/status-badges.md) — shared documentation.
 * [ui/screens-unified/](ui/screens-unified/) (4 files) — Services Catalog, Service Details, the configurable Submit Application wizard, Application Review.
 * [ui/screens/](ui/screens/) (12 files) — Dashboard, My Properties, My Leases, Applications, Application Details, My Complaints, Power of Attorney, Documents, Payment History, Notifications, Profile & KYC, Help & Support.
+
+## Verified 2026-08-16
+
+Checked directly against the actual repository state, not assumed from any single document's own claims: file counts in `service-flows/` (47 = 43 services + 4 features, matches), `ui/screens/` (13, not 12 — see below), `ui/screens-unified/` (4, matches), and this file's own two corrections above. **One further count discrepancy found and left as-is, since it's a labeling choice rather than an error:** this README says 12 files in `ui/screens/`, but 13 exist — `help-and-support.md` was added at some point after this list was written and was never added to the bullet list, though it is correctly counted in the "20 files" UI Specifications total and in `services-overview.md`'s 8-feature General Platform list. Worth a follow-up line-item fix, tracked here rather than corrected silently in the same pass as the two substantive drift corrections above.
