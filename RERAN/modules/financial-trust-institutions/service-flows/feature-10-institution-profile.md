@@ -23,6 +23,8 @@ tags:
 
 **Institution Profile** is the institution's own standing (legal name, type, registration reference, approval status and expiry) and staff roster — not gated by role, and absorbing the display-only part of approval-expiry tracking, since no dedicated screen exists for that as a separate feature.
 
+**Staff Records already live here — not a separate feature.** `open-questions.md` C4 lists "Staff Records" as an item to add to the module's institution-specific feature set; that instruction is stale. This document's Section 3 already describes the staff roster in full, and no separate Staff Records feature or screen exists or is needed — C4 should be read as satisfied by this feature, not as an outstanding action item.
+
 ## 2. Purpose
 
 Let any institution user view and maintain the institution's approved standing and staff roster — role is attribution only, not a gate on who may administer the profile.
@@ -49,11 +51,13 @@ None.
 
 ## 8. Service Fee
 
-No fee for the feature itself. Renew, Cancel Approval, and Cancel Contract inherit their fee from Services #1 (upfront), #2 (no fee, confirmed by `open-questions.md` B11), and #18 (at counter, after RERA's decision) respectively.
+No fee for the feature itself. Renew, Cancel Approval, and Cancel Contract inherit their fee from Services #1 (upfront), #2 (no fee, confirmed by `open-questions.md` B11), and #18 (at counter, before RERA's decision) respectively.
 
 ## 9. Payment Required
 
-**Not for viewing or staff management.** Renew routes into Service #1's own upfront-payment checkout; Cancel Contract (#18) collects payment at the counter after RERA's decision, not through this feature directly.
+**Not for viewing or staff management.** Renew routes into Service #1's own upfront-payment checkout; Cancel Contract (#18) collects payment at the counter as part of lodging, not through this feature directly.
+
+**Corrected 2026-08-16** — this section previously described Cancel Contract's payment as happening "after RERA's decision." The client has since normalized Service #18 to pay before RERA's decision, the same as #13–#17.
 
 ## 10. Processing Authority
 
