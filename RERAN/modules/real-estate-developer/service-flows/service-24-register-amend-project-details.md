@@ -5,7 +5,7 @@ type: service-flow
 status: draft
 contains_proposals: true
 source_type: sourced
-updated: 2026-08-15
+updated: 2026-08-16
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/real-estate-developer/navigation.md"
@@ -35,7 +35,9 @@ Keep the Title Deed data record for a project current, issuing the completion-ap
 
 ## 3. Description
 
-The developer submits updated project details. RERA's Compliance & Escrow Auditor function reviews. On approval, the output depends on the project's completion status: a completed project receives an Electronic Certificate of Title / Title Deed; an uncompleted project receives an Electronic Map.
+The developer submits updated project details. Survey Department reviews and confirms the data before RERA's Compliance & Escrow Auditor function makes the final decision. On approval, the output depends on the project's completion status: a completed project receives an Electronic Certificate of Title / Title Deed; an uncompleted project receives an Electronic Map.
+
+**Corrected 2026-08-16.** This section, along with Sections 10 and 12, previously omitted the Survey Department step that Section 9 already quoted directly from the source row ("Pay application approval fees **and send from survey company to Survey Department**"). Section 9's own quote was correct and never changed; Sections 3, 10, and 12 are the ones brought into line with it here — found during a full file-by-file audit.
 
 ## 4. Who Can Apply
 
@@ -73,7 +75,7 @@ Applicable according to the RERAN fee schedule. Paid through the shared platform
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor**
+**Survey Department** (initial review, before the first payment stage) **and Compliance & Escrow Auditor** (final decision, before the output is issued) — corrected 2026-08-16 to include the Survey Department step Section 9 already sourced; see the note in Section 3.
 
 ## 11. Expected Processing Time
 
@@ -90,6 +92,10 @@ Select "Register/Amend Project Details"
 Enter Updated Details
 ↓
 Pay Application Approval Fee via Payment Gateway
+↓
+Application Sent to Survey Department for Review
+↓
+Survey Department Confirms Data
 ↓
 Submit Application Online
 ↓
@@ -108,6 +114,8 @@ Draft
 Application Fee Pending
 ↓
 Application Fee Paid
+↓
+Survey Department Review
 ↓
 Submitted
 ↓
@@ -156,6 +164,8 @@ Issued
 
 * Retrieve Project
 * Submit Project Details Registration/Amendment
+* Notify Survey Department
+* Retrieve Survey Department Confirmation
 * Determine Project Completion Status
 * Retrieve Application Status
 * Calculate Application Approval Fee
@@ -181,6 +191,7 @@ Issued
 ## 20. Acceptance Criteria
 
 * Developer can submit project details for registration or amendment against an existing project.
+* Survey Department confirms updated data before RERA's final decision.
 * System determines the project's completion status to select the correct output document.
 * Approved submissions generate the completion-appropriate title document.
 * All activities are recorded in the audit log.
@@ -189,6 +200,7 @@ Issued
 ## 21. Business Rules
 
 1. Only a registered project's details may be registered/amended under this service.
-2. The output document depends on the project's completion status at time of approval.
-3. **A name change may be submitted through this service or through Service #16 — client-confirmed 2026-08-15, issue #37.** Neither is the exclusive path; whichever the developer selects is what's recorded.
-4. All submissions, reviews, and notifications must be permanently recorded in the audit trail.
+2. Survey Department review precedes RERA's final decision — corrected 2026-08-16, see Sections 3 and 10.
+3. The output document depends on the project's completion status at time of approval.
+4. **A name change may be submitted through this service or through Service #16 — client-confirmed 2026-08-15, issue #37.** Neither is the exclusive path; whichever the developer selects is what's recorded.
+5. All submissions, reviews, and notifications must be permanently recorded in the audit trail.
