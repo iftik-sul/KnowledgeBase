@@ -160,7 +160,15 @@ Sourced (row 46): **none as a downloadable document** — the row explicitly sta
 
 ## 17. UI Screens
 
-Not yet built — Phase 4 of the module build sequence. **Proposed** minimum surface: a company-to-property registration form within a JOP module workspace.
+**Corrected 2026-08-16 — Phase 4 is complete; this section previously said "Not yet built."**
+
+* Services
+* Register Company for JOP Administrative Supervision
+* Company & Property Information
+* Document Upload
+* Application Review
+* Application Submitted
+* Application Details
 
 ## 18. API Requirements
 

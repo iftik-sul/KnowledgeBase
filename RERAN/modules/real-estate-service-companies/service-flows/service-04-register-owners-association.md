@@ -160,7 +160,19 @@ Completed
 
 ## 17. UI Screens
 
-Not yet built — Phase 4. **Proposed**: this service likely needs two distinct entry points (company-side and owner-side), not one shared form, given the two sourced channels.
+**Corrected 2026-08-16 — Phase 4 is complete; this section previously said "Not yet built."**
+
+* Services
+* Register Owners Association
+* Association Information
+* Applicant Information
+* Document Upload
+* Application Review
+* Application Submitted
+* Application Details
+* Owner Committee Registration Certificate
+
+**Proposed**: given the two sourced applicant channels (company vs. owner), this service likely needs two distinct entry points sharing the same underlying form, rather than one shared form indistinguishable by applicant type — needs client confirmation before final design.
 
 ## 18. API Requirements
 

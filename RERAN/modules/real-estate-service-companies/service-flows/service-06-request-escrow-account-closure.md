@@ -155,7 +155,12 @@ Sourced (row 51 — blank in the Issued Document column, but the service's own n
 
 ## 17. UI Screens
 
-Not yet built — Phase 4. **Proposed**: given the email-only channel, this may not need a full in-app wizard the way most Group D services do — comparable to Individual User's Service #40 (Upload Building Details for Leasing), which the module's UI package represented as a static instructional note rather than a form.
+**Corrected 2026-08-16 — Phase 4 is complete; this section previously said "Not yet built."**
+
+Given the email-only channel, this service does not use the standard Submit Application wizard. A minimal portal surface is proposed:
+
+* Services
+* Request No-Objection Letter to Close Escrow Account — static instructional screen directing the user to complete and email the Land-Department-approved form, matching the treatment given to Service #19 (Accreditation of Training Entities)
 
 ## 18. API Requirements
 

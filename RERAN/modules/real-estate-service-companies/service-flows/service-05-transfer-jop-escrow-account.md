@@ -161,7 +161,16 @@ Sourced (row 50): **none as a downloadable document** — output is view-only da
 
 ## 17. UI Screens
 
-Not yet built — Phase 4.
+**Corrected 2026-08-16 — Phase 4 is complete; this section previously said "Not yet built."**
+
+* Services
+* Transfer JOP Escrow Account
+* Property & Account Reference
+* Transfer Information
+* Document Upload
+* Application Review
+* Application Submitted
+* Application Details
 
 ## 18. API Requirements
 
