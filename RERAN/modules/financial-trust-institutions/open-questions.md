@@ -3,7 +3,7 @@ project: RERAN
 module: financial-trust-institutions
 type: decision
 status: draft
-updated: 2026-08-15
+updated: 2026-08-16
 contains_proposals: true
 derived_from:
   - "RERAN/modules/financial-trust-institutions/roles-and-responsibilities.md"
@@ -26,6 +26,8 @@ Twenty-three questions arose from documenting the Financial & Trust Institutions
 **2026-08-14 update.** The payment questions (B1, B2, B4, B5, B6) were corrected following a client decision confirmed via discussion (not a written source document): Group C runs no standing account. Payment is per-transaction, upfront, via a shared platform-wide gateway, with RERA setting the fee per service directly. B9 and B10, both built entirely on the now-retired standing-account mechanism, are superseded rather than reworked. See each answer below for what changed and why the earlier reasoning is kept rather than deleted.
 
 **2026-08-15 update.** A4 is corrected: ownership is not role-specific at all, for any of the 18 services — a client decision, not a re-derivation. A3, B7, and B8 are confirmed by the client, matching their existing proposed answers. A6 is also confirmed by the client. **B11 is added**: the client has further decided that Service #1 (Approval/Renewal) now pays upfront, merging into the same model as Services #3–#11, and confirmed Service #2 (Cancellation) carries no fee at all — see B11 below. See each answer below.
+
+**2026-08-16 update.** B11 is extended: the client has reviewed Services #12 and #18's payment timing directly and normalized both to pay before RERA's decision, closing the exception a fuller per-service audit had found on 2026-08-15. See B11 below for the full history. C4's answer is also corrected — see below; it had instructed adding a "Staff Records" feature that turned out to already exist inside Institution Profile.
 
 **How to read this:** each answer states a recommendation, the reasoning behind it, how confident we are, and what breaks if it is wrong. Confidence is:
 
@@ -260,9 +262,11 @@ Row 28's sequencing — "Payment of fees" listed after the approval decision —
 
 This is a genuinely new decision, not a re-derivation or a resolution of an ambiguity in the source — row 28's post-decision payment sequencing was correctly read the first time; the client has since decided to build differently from what the source describes for #1, and has separately clarified that #2 was never chargeable at all.
 
-**Confidence:** Confirmed (client decision, 2026-08-15).
+**Extended 2026-08-16 — Services #12 and #18 normalized to the same before-decision pattern.** A fuller per-service audit on 2026-08-15 found that #12 (Registration of Real Estate Fund Companies) and #18 (Contract Cancellation) genuinely sourced RERA's decision *before* the customer's counter payment — a real exception within the Customer Payment at Counter model, distinct from #13–#17, which pay before the decision. The client has since reviewed that exception directly, confirmed it was an artefact of the source's original physical-counter process rather than intentional design, and normalized both services to pay before RERA's decision, closing the gap. **Group C's payment models are now genuinely two, without exception**: Upfront Gateway Payment (#1, #3–#11) and Customer Payment at Counter, before RERA's decision (#12–#18). See `service-12` and `service-18`'s own files for the normalization itself.
 
-**Affects:** `payments.md` (pipeline table, Who Pays table, sequence diagrams, Fee Calculation, Additional Statuses); `services-overview.md` (Payments feature bullet, Application Status Vocabulary's `Approved — Awaiting Payment` and `Expired` notes — neither now applies to any Group C service); `service-01`'s Sections 8, 9, 12, 13, 21; `service-02`'s Sections 8, 9, and Open Questions.
+**Confidence:** Confirmed (client decision, 2026-08-15; extended 2026-08-16).
+
+**Affects:** `payments.md` (pipeline table, Who Pays table, sequence diagrams, Fee Calculation, Additional Statuses); `services-overview.md` (Payments feature bullet, Application Status Vocabulary's `Approved — Awaiting Payment` and `Expired` notes — neither now applies to any Group C service); `service-01`'s Sections 8, 9, 12, 13, 21; `service-02`'s Sections 8, 9, and Open Questions; `service-12` and `service-18`'s Sections 3, 9, 12, 13, 20, 21 (2026-08-16 extension); `status-badges.md`, `validation-rules.md`, `role-workflows.md`, and every UI screen and feature document that had described the #12/#18 exception.
 
 ---
 
@@ -296,7 +300,7 @@ This is also the only reading compatible with the PRD. US-14 requires diaspora u
 
 ### C4. Are the three institution-specific features correct?
 
-**Correct but incomplete. Five, not three.**
+**Correct but incomplete. Five, not three — and one of the two additions turned out already built into an existing feature, not a new one.**
 
 | Feature | Status |
 | :---- | :---- |
@@ -304,9 +308,11 @@ This is also the only reading compatible with the PRD. US-14 requires diaspora u
 | Escrow Request Queue | Keep — confirmed sourced (A2) |
 | Approval Expiry Tracking | Keep — now driven by a defined validity period (B8) |
 | **Payment History** | **Add** — per-transaction payment records: receipts, amounts, service references, status (B1) |
-| **Staff Records** | **Add** — roster and staff-record management (A1, A5) |
+| **Staff Records** | **Already covered — not a separate feature.** Roster and staff-record management (A1, A5) is part of the existing Institution Profile feature's own scope, not a new addition — see the correction note below. |
 
-**Corrected 2026-08-14** — this row previously read "Settlement Account | Add — balance, top-up, ledger, statements (B1)" and "Staff & Permission Scopes | Add — roster, scope assignment, revocation (A1, A5)". Both features survive, renamed: there is no standing account for the first (B1, corrected) and no scopes to assign or revoke for the second (A1, corrected) — see `services-overview.md`'s Feature #8 and Feature #9, which this table now matches.
+**Corrected 2026-08-14** — this row previously read "Settlement Account | Add — balance, top-up, ledger, statements (B1)" and "Staff & Permission Scopes | Add — roster, scope assignment, revocation (A1, A5)". The first survives, renamed, as Payment History: there is no standing account for it to describe any more (B1, corrected). The second was originally kept as a separate "Staff Records" addition, reasoning that there were no longer scopes to assign or revoke, only a roster.
+
+**Corrected again 2026-08-16.** That "Staff Records" addition was never built as a separate feature or screen — when [feature-10-institution-profile.md](service-flows/feature-10-institution-profile.md) was written, the staff roster was documented as one section of Institution Profile (Section 3, "Description"), not as a standalone feature. On review, that turns out to be the more accurate design: staff records are institution-standing information, the same category as approval status and expiry, and belong alongside it rather than as a separately-numbered feature. This table is corrected to say so directly, so a future reader doesn't treat "Staff Records: Add" as an outstanding action — it is neither outstanding nor a new feature; it was folded into Institution Profile from the start of that document's own rebuild.
 
 **Confidence:** Medium-high.
 
@@ -337,6 +343,8 @@ FR-18 requires a live operational dashboard across all submissions and FR-19 req
 
 **Group C extension:** *Pending Internal Certification* and *Returned by Certifier*, both sitting before Submitted. Any group that enables maker-checker inherits the same two.
 
+**Note, added 2026-08-16:** `Approved — Awaiting Payment` remains part of this proposed platform-wide core list — it is a generic status a module *could* need, and other modules (e.g. Real Estate Developer's Service #24, which has two separate payment stages) may still use it. It no longer describes any Group C service specifically, following the 2026-08-16 normalization of Services #12 and #18 (see B11) — Group C's own status vocabulary is documented in `status-badges.md`, not this platform-wide proposal.
+
 **Confidence:** High on the principle, proposal on the specific list.
 
 ### D2. Does the two-gate pattern apply beyond Group C?
@@ -355,7 +363,7 @@ Build it once, configurable per corporate account, with the scope set at the poi
 
 ## Summary
 
-**Updated 2026-08-15** — A4 and A6 moved from "flagged for the client" to confirmed by client decision; A3, B7, B8 moved from proposed to confirmed. B5 moved from "needs client data" to "answered" on 2026-08-14, per the payment-model correction (B1). **B11 added**: Service #1 now pays upfront, merging into the Upfront Gateway Payment model; Service #2 confirmed to carry no fee. **All 24 questions are now confirmed or resolved, and nothing remains on the "put in front of the client" list.**
+**Updated 2026-08-16** — A4 and A6 moved from "flagged for the client" to confirmed by client decision; A3, B7, B8 moved from proposed to confirmed. B5 moved from "needs client data" to "answered" on 2026-08-14, per the payment-model correction (B1). **B11 added and then extended**: Service #1 pays upfront, Service #2 carries no fee (2026-08-15); Services #12 and #18 normalized to pay before RERA's decision, closing the exception a fuller audit had found (2026-08-16). **C4 corrected**: its "Staff Records — Add" instruction is stale; that content already lives inside Institution Profile. **All 24 questions are now confirmed or resolved, and nothing remains on the "put in front of the client" list.**
 
 | Area | Questions | Answered | Needs client data |
 | :---- | :---: | :---: | :---: |
@@ -372,8 +380,9 @@ Build it once, configurable per corporate account, with the scope set at the poi
 | **A4** — confirmed 2026-08-15: no service is role-specific | `services-overview.md`'s Service Ownership section (removed entirely); Section 4 and Business Rule 1 of Services #3–#18; `roles-and-responsibilities.md`'s Role Summary table |
 | **A6** — confirmed 2026-08-15: the two-number SLA reading is correct | No document changes required — this confirms the reading already reflected in `services-overview.md`'s Escrow Request Queue feature and the individual escrow service flows in Group B; no new SLA figure needs to be introduced |
 | **B1** — corrected 2026-08-14: no standing account, pay-per-transaction upfront via a shared gateway | `payments.md` (near-total rewrite); every mortgage/finance-lease service flow's Service Fee, Payment Required and Output sections; `services-overview.md`'s status vocabulary and features list; `navigation.md` and `role-workflows.md`'s settlement references; `module-roadmap.md`'s platform-wide payment-pipeline claim (see that file's own note on why) |
-| **B11** — confirmed 2026-08-15: Service #1 pays upfront (merges into Upfront Gateway Payment); Service #2 carries no fee | `payments.md` (pipeline/Who Pays tables, sequence diagrams, Fee Calculation, Additional Statuses); `services-overview.md`'s Payments feature bullet and Application Status Vocabulary notes; `service-01`'s Sections 8, 9, 12, 13, 21; `service-02`'s Sections 8, 9, and Open Questions |
+| **B11** — confirmed 2026-08-15, extended 2026-08-16: Service #1 pays upfront, Service #2 carries no fee, Services #12/#18 normalized to pay before RERA's decision | `payments.md` (pipeline/Who Pays tables, sequence diagrams, Fee Calculation, Additional Statuses); `services-overview.md`'s Payments feature bullet and Application Status Vocabulary notes; `service-01`'s Sections 8, 9, 12, 13, 21; `service-02`'s Sections 8, 9, and Open Questions; `service-12` and `service-18`'s own files; `status-badges.md`, `validation-rules.md`, `role-workflows.md`, and every UI screen and feature document describing the #12/#18 exception |
 | **C2** — counter is an assisted mode | Every Group C service flow's channel section; reverses a prior assumption |
+| **C4** — corrected 2026-08-16: "Staff Records" already lives in Institution Profile, not a separate feature | This document's own C4 table above; no other document needed correction, since `feature-10-institution-profile.md` had it right from the start |
 
 B9 and B10 are not listed separately above — both are superseded by the corrected B1 rather than independently reworked; see their entries for what that means for `payments.md`.
 
@@ -383,6 +392,6 @@ As of 2026-08-15, all items that had been flagged to put in front of the client 
 
 1. ~~**A4**~~ — resolved by client decision 2026-08-15; no service is role-specific.
 2. ~~**A6**~~ — resolved by client decision 2026-08-15; the two-number SLA reading is confirmed correct.
-3. ~~**B11**~~ — resolved by client decision 2026-08-15; Service #1 pays upfront, Service #2 carries no fee. This one was never on the original flagged list (it wasn't recognized as ambiguous until raised directly), but is included here for completeness since it's the same kind of direct client confirmation as A4 and A6.
+3. ~~**B11**~~ — resolved by client decision 2026-08-15, extended 2026-08-16; Service #1 pays upfront, Service #2 carries no fee, and Services #12/#18 are normalized to the same before-decision timing as the rest of the Customer Payment at Counter model. This one was never on the original flagged list (it wasn't recognized as ambiguous until raised directly), but is included here for completeness since it's the same kind of direct client confirmation as A4 and A6.
 
 **One remaining item, still flagged for internal design rather than the client:** B2's claim that the shared payment gateway reuses individual-user's wallet primitive (P-22) doesn't survive a check against P-22's actual description, which is itself balance-based — the opposite of Group C's now-confirmed no-standing-account model. Worth a decision on whether the gateway integration is genuinely shared build, but this is an internal design question, not something requiring the client's input the way A4, A6, and B11 did.
