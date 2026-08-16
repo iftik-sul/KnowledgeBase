@@ -5,7 +5,7 @@ type: service-flow
 status: draft
 contains_proposals: true
 source_type: sourced
-updated: 2026-08-15
+updated: 2026-08-16
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/real-estate-developer/navigation.md"
@@ -23,11 +23,13 @@ tags:
 
 ## 1. Service Overview
 
-The **Register Sale Associated with an Initial Mortgage** service allows a developer to register the provisional sale of a unit where the purchaser is financing the purchase through a mortgage, coordinating the sale record with the mortgage institution's provisional mortgage registration.
+The **Register Sale Associated with an Initial Mortgage** service allows a developer to register the provisional sale of a unit where the purchaser is financing the purchase through a mortgage. The application captures the mortgage institution, reference number, and amount as reference data.
+
+> **Corrected 2026-08-16.** Previously described this service as "coordinating the sale record with the mortgage institution's provisional mortgage registration" — stated as an active, verified link. Checked against row 6 of the master source table: the sourced workflow is self-contained. It records mortgage institution/reference/amount as plain data fields, with no waiting step, no validation call to financial-trust-institutions' own mortgage registration process, and no dependency described. The relationship to financial-trust-institutions' Service #3 (Mortgage Registration) is a plausible inference — the two services likely concern the same underlying mortgage — not a sourced or system-verified coordination. See the corrected Section 16 for the same distinction applied to the cross-module citation.
 
 ## 2. Purpose
 
-Provide a regulated, provisional record of a mortgage-financed unit sale, linking the developer's sale record to the mortgage institution's provisional mortgage registration under a single project unit.
+Provide a regulated, provisional record of a mortgage-financed unit sale, capturing the identity of the financing mortgage as reference data under a single project unit.
 
 ## 3. Description
 
@@ -156,7 +158,7 @@ Registered
 * Service #1 – Register Initial Sale
 * Service #4 – Amend Initial Procedures Data
 * Service #5 – Complete Initial Procedures Data
-* Financial & Trust Institutions Service #3 – Mortgage Registration *(cross-module: the mortgage institution's side of this same financing arrangement)*
+* Financial & Trust Institutions Service #3 – Mortgage Registration *(cross-module, unconfirmed — corrected 2026-08-16: this service and FTI's Service #3 plausibly concern the same underlying mortgage, since this service captures the mortgage institution, reference number, and amount as reference data. But neither the master source table nor financial-trust-institutions' own Service #3 file establishes a workflow dependency between them — FTI Service #3's own Related Services cites individual-user's Service #8, not this service, and this service's own sourced workflow has no waiting step or validation call to FTI's mortgage registration. Presented previously as "coordinating... this same financing arrangement," which overstated a plausible inference as a confirmed link. Contrast with individual-user Service #8's Mortgage Release Letter dependency on FTI Service #6, which the source explicitly states.)*
 
 ## 17. UI Screens
 
@@ -214,3 +216,7 @@ Registered
 3. Payment must be completed before the application proceeds for regulatory review.
 4. Every application receives a unique application reference number.
 5. All submissions, approvals, payments, and notifications must be permanently recorded in the audit trail.
+
+## Open Questions
+
+1. **New 2026-08-16.** Is this service actually expected to coordinate with financial-trust-institutions' Service #3 (e.g. validating that the cited mortgage is genuinely registered there before this application can proceed), or are the two services intentionally independent, with the mortgage information here serving only as a reference field? Not established by source either way — needs client confirmation.
