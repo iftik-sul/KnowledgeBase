@@ -18,7 +18,7 @@ tags:
 
 **Derived bottom-up from the 12 built UI screens (Phase 4), not proposed by analogy to another module's feature count** — per the module build playbook's Phase 5 instruction, and the specific lesson both Group B's and Group C's shared-features layers had to learn the hard way after their first, analogy-based feature lists turned out wrong once checked against actual screens.
 
-> **Corrected 2026-08-16, twice, by client decision.** **B4** — Feature #2's post-decision payment handling for Services #12–15 is removed; those four services now pay during submission, under Feature #1. **A2** — Service #18 stays in Group D; Feature #1's exclusion note is corrected, though the service still doesn't have a designed screen of its own yet — see Open Questions.
+> **Corrected 2026-08-16, three times, by client decision and by audit finding.** **B4** — Feature #2's post-decision payment handling for Services #12–15 is removed; those four services now pay during submission, under Feature #1. **A2** — Service #18 stays in Group D; Feature #1's exclusion note is corrected, though the service still doesn't have a designed screen of its own yet — see Open Questions. **Audit correction** — Feature #1's own service count was doubly stale: it said "24 of 25 services," when the total is 26, and it credited only two email-only exclusions (#6, #19) when Service #11 is a third.
 
 ## Application Lifecycle Features (2)
 
@@ -26,7 +26,9 @@ tags:
 
 **Screens:** Services Catalog, Service Details, Submit Application, Application Review.
 
-Covers browsing 24 of the module's 25 services (all except the two email-only services, #6 and #19, which route to a static instruction screen instead), reviewing a service's requirements, completing the dynamic submission form (three field-layout patterns — see `ui/screens/submit-application.md`), and the final read-only checkpoint before submission.
+Covers browsing 22 of the module's 26 services (all except the three email-only services — #6, #11, #19, which route to a static instruction screen instead — and Service #18, which has no designed screen of its own), reviewing a service's requirements, completing the dynamic submission form (three field-layout patterns — see `ui/screens/submit-application.md`), and the final read-only checkpoint before submission.
+
+**Corrected 2026-08-16** — this description previously said "24 of the module's 25 services (all except the two email-only services, #6 and #19)," which was wrong on both counts: the module has 26 services, not 25, and Service #11 is a third email-only exclusion alongside #6 and #19, found during the same-day Phase 6 audit. 22 is the correct wizard-eligible count, matching `ui/screens/submit-application.md`'s own corrected figure.
 
 **Service #18 is confirmed to stay in Group D (`open-questions.md` A2) but is not yet covered by this feature's screens.** Its own sourced workflow — an evaluation company deciding on a customer's valuation request, not a company filing an application RERA reviews — doesn't fit this feature's shared shell. It needs its own screen, not yet designed; see Open Questions.
 
@@ -101,7 +103,7 @@ Not sourced — built at Claude's discretion, matching the precedent already est
 | General Platform | 5 |
 | **Total** | **8** |
 
-Unaffected by either 2026-08-16 correction — B4 simplified Feature #2's scope without removing it, and A2 confirmed Service #18's module ownership without yet producing a screen that would change this count.
+Unaffected by any 2026-08-16 correction — B4 simplified Feature #2's scope without removing it, A2 confirmed Service #18's module ownership without yet producing a screen that would change this count, and the audit correction to Feature #1's own service count changed which services it lists as covered, not the feature count itself.
 
 ## Open Questions
 
