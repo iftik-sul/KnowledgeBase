@@ -3,7 +3,7 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-15
+updated: 2026-08-16
 derived_from:
   - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
@@ -20,6 +20,8 @@ tags:
 The detail view of a single property registration, opened from [Property Registrations](property-registrations.md). The source documents a single variant, under the Registration Officer heading, with no second variant to reconcile. It is reachable and actionable by all four roles.
 
 > **Corrected 2026-08-15, second pass.** Same pattern as the other three no-role-variant screens in this module: this screen's Access line already said "all four roles," but Purpose and Notes still described it as the Project Registration Officer's screen specifically. Fixed below.
+
+> **Corrected 2026-08-16.** Section 1's header field previously read "Assigned Officer" — the same per-user-assignment concept explicitly removed from [projects.md](projects.md)'s Assigned Officer Filter and Assigned To column, and [property-registrations.md](property-registrations.md)'s Assigned Officer Filter, as incompatible with the unified-access model (nothing "belongs" to one user's view). Renamed to **Filed By**, carrying the same audit-trail attribution every other list and detail screen in this module already uses (see [navigation.md](../../navigation.md#audit-trail-principle)) — who created the record and the role they held at the time, not an assignment. Found during a full file-by-file audit.
 
 ## Purpose
 
@@ -85,7 +87,7 @@ Displays the registration summary.
 
 * Created Date  
 * Last Updated  
-* Assigned Officer  
+* Filed By *(the user who created the record, and the role they held at the time — attribution only, not an assignment; corrected 2026-08-16, see the note above)*  
 * Save Status
 
 ### Section 2 — Registration Progress
@@ -291,3 +293,4 @@ Property Registration Details
 * Once submitted, the registration becomes read-only unless RERA returns it for correction or requests additional information — a status-based lifecycle rule, applying equally to every user.
 * After approval, the system should display the registration certificate and allow it to be downloaded.  
 * Every modification, submission, document upload, and regulatory response should be recorded in the activity timeline to maintain a complete audit trail.
+* **Terminology corrected 2026-08-16.** Section 1's "Assigned Officer" field is renamed "Filed By" — see the correction note at the top of this file.
