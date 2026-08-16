@@ -3,8 +3,8 @@ project: RERAN
 module: financial-trust-institutions
 type: ui-spec
 status: draft
-updated: 2026-08-15
 contains_proposals: true
+updated: 2026-08-16
 derived_from:
   - "RERAN/modules/financial-trust-institutions/open-questions.md"
   - "RERAN/modules/financial-trust-institutions/payments.md"
@@ -21,11 +21,13 @@ tags:
 
 The full record of one service request, from draft to output issue. This screen's one job the list screens cannot do: show **which gate the record currently sits at, and who holds it.**
 
-> **Corrected 2026-08-15, twice.** This screen previously gated the certification Decision Panel behind a `certify` permission scope and enforced maker ≠ checker by hiding the panel from a record's own filer. Both are retired. Certification is now an unrestricted action any of the institution's four roles may perform — **including the filer of the same record** — attributed by role in the audit trail rather than gated by scope or by who filed it (`navigation.md#access-rules` rule 2; `open-questions.md` A1). The Settlement section was also retired on this first pass, on the claim that no Group C service is ever approved while payment is pending. **A second pass, later the same day, found that claim was wrong for two services** — see Section 6, corrected again below.
+> **Corrected 2026-08-15.** This screen previously gated the certification Decision Panel behind a `certify` permission scope and enforced maker ≠ checker by hiding the panel from a record's own filer. Both are retired. Certification is now an unrestricted action any of the institution's four roles may perform — **including the filer of the same record** — attributed by role in the audit trail rather than gated by scope or by who filed it (`navigation.md#access-rules` rule 2; `open-questions.md` A1).
+
+> **Corrected 2026-08-16.** An earlier same-day correction found `Approved — Awaiting Payment` genuinely applied to Services #12 and #18, and reworked this screen's Header, Progress tracker, and Outputs section around a payment-outstanding wait state for those two services. The client has since reviewed that #12/#18 exception directly and normalized both to pay before RERA's decision, the same as #13–#17. That wait state — and every reference to it below — is now retired for the same reason it was added: the sourced sequencing it was built on has changed. See [status-badges.md](../status-badges.md#application-status) for the full three-pass history of this status.
 
 ## Purpose
 
-Let anyone with visibility into a record see its full history and current position, and let whoever currently holds it — filer, RERAN, the customer awaiting counter payment (Services #12/#18 only), or nobody — take the one action available to them from here.
+Let anyone with visibility into a record see its full history and current position, and let whoever currently holds it — filer, RERAN, or nobody — take the one action available to them from here.
 
 ## Layout
 
@@ -47,19 +49,17 @@ Outputs
 Audit Timeline
 ```
 
-**Corrected 2026-08-15** — "Settlement & Outputs" is renamed **Outputs**. This section still shows a payment-outstanding state for Services #12 and #18 specifically — see Section 6 — but that's now handled as part of Outputs (the approved record awaiting its output), not as a distinct "Settlement" pipeline stage the way the old standing-account model had it.
-
 ## Sections
 
 ### Section 1 — Header
 
-Application reference, service, represented party, current status badge, sourced SLA, and a single **"Currently with"** line: the filer (drafting), "Awaiting Internal Certification" (any of the institution's four users may act, including the filer), "RERAN — Compliance & Escrow Auditor" (submitted/under review), **"Customer — awaiting counter payment" (Services #12/#18 only, once approved and before the counter payment clears)**, or nobody (completed, rejected, withdrawn). This line exists because the two-gate pattern — and, for #12/#18, the post-approval payment step — makes "who acts next" genuinely ambiguous without it.
+Application reference, service, represented party, current status badge, sourced SLA, and a single **"Currently with"** line: the filer (drafting), "Awaiting Internal Certification" (any of the institution's four users may act, including the filer), "RERAN — Compliance & Escrow Auditor" (submitted/under review), or nobody (completed, rejected, withdrawn). This line exists because the two-gate pattern makes "who acts next" genuinely ambiguous without it.
+
+**Corrected 2026-08-16** — a third "Currently with" state, "Customer — awaiting counter payment" for Services #12/#18, is removed. Both services now pay at the counter before RERA's review, the same point every other counter-paid service (#13–#17) pays at — there is no longer a payment-outstanding wait state for this line to describe.
 
 ### Section 2 — Progress
 
 The Progress Tracker (see [components.md](../components.md#progress-tracker)): `Draft → Internal Certification → Submitted → RERAN Review → Approved → Completed`. Where the institution has not enabled internal certification for this service, or the service does not source it, that step is omitted from the tracker rather than shown as skipped — the record moves straight from Draft to Submitted.
-
-**Corrected 2026-08-15** — "Settled" is removed as a tracker step for every service except #12 and #18, where an `Approved — Awaiting Payment` sub-state genuinely sits between `Approved` and `Completed` (see Section 6). This isn't a reintroduction of the old universal "Settled" step — it's scoped to exactly two services, sourced from their own workflow order (rows 38, 45), not a platform-wide pipeline stage.
 
 Each step carries the actor who completed it and the date, pulled from the Audit Timeline rather than duplicating it — this section is the summary, Section 7 is the record.
 
@@ -81,12 +81,12 @@ Two sub-sections, shown according to the record's current gate:
 
 ### Section 6 — Outputs
 
-Shown once the record reaches Completed, **or, for Services #12 and #18, once RERA approves and the record enters `Approved — Awaiting Payment`.**
+Shown once the record reaches Completed.
 
-* Payment Receipt — issued at checkout, before the application was lodged (#1, #3–#11), before RERA's decision at the point of service (#13–#17), or **after** RERA's decision at the point of service (#12, #18). No fee applies to Service #2. **Corrected 2026-08-15** — this section previously distinguished a "fee balance" artefact (institution account debit services) from a "payment receipt" (counter-paid services), per the now-superseded `open-questions.md` B9. There is only one artefact, issued whenever the counter payment happens to fall for that service — never a standing-account entry.
+* Payment Receipt — issued at checkout, before the application was lodged (#1, #3–#11), or at the counter, before RERA's decision at the point of service (#13–#17, and now #12, #18 as well). No fee applies to Service #2. This is now a uniform two-timing model across all eighteen services — see [payments.md](../../payments.md) and the correction note at the top of this file.
 * Issued output document(s), downloadable, matching the specific list in the service's own service-flow document (Certificate of Title, Mortgage Release Letter, etc. — these vary by service and are not restated here).
 
-**Corrected 2026-08-15, second pass — no self-service Settle action, but the payment-outstanding state is real for #12/#18.** This section previously claimed `Approved — Awaiting Payment` "does not occur for any Group C service," which was wrong: it does, for #12 and #18 (`open-questions.md` B1, B11's closure applied to #1–#11 only, and #12/#18's own sourced workflows were never re-checked until a second pass). What the earlier correction got right is that this screen still doesn't need a **Settle** button: #12/#18's counter payment (row 38, row 45) is a physical, in-person transaction at the Trustee Centre or Land Department, not a digital checkout this screen would initiate. For these two services, this screen displays the `Approved — Awaiting Payment` status and waits — the payment event, once it happens at the counter, updates the record from outside this screen's own action set, the same way a Trustee Centre operator's data entry does elsewhere in the module. Per-transaction payment history, once collected, is [payment-history.md](payment-history.md) (formerly `settlement-account.md`).
+**Corrected 2026-08-16 — no post-approval payment wait for any service.** This section previously described a payment-outstanding state for Services #12 and #18 specifically, where this screen displayed `Approved — Awaiting Payment` and waited for a counter payment collected outside this screen's own action set. That state no longer exists for any Group C service: #12 and #18 now pay at the counter as part of lodging, the same as #13–#17, so Outputs renders identically for all eighteen services — it appears once, at Completed, with a receipt already on file. Per-transaction payment history is [payment-history.md](payment-history.md).
 
 ### Section 7 — Audit Timeline
 
@@ -111,7 +111,7 @@ See [validation-rules.md](../validation-rules.md). Specific to this screen:
 1. Editability follows status and ownership, not role: only the current holder of a Draft record may edit Request Details or Documents.
 2. **Removed 2026-08-15** — the certification Decision Panel is no longer withheld from a record's own filer. Certification is unrestricted, including self-certification, per `navigation.md#access-rules` rule 2.
 3. A reason is mandatory on Return, on any RERAN-side negative decision display prompting a response, and on Respond to Information Request — submitting a response without adequately addressing the query is not itself blocked; RERAN's own review catches an inadequate response.
-4. **Corrected 2026-08-15, second pass** — there is genuinely no Settle *action* on this screen, for any service, since #12/#18's payment happens at a physical counter rather than through a digital self-service control. But `Approved — Awaiting Payment` is a real status this screen must be able to display, for exactly those two services — this rule no longer claims the status itself doesn't occur, only that there's no button here to click through it.
+4. **Corrected 2026-08-16** — there is no Settle *action* on this screen, for any service, and no service reaches Approved with payment still outstanding either. This rule previously had to carve out an exception for #12/#18; it no longer needs to.
 
 ## Role Variations
 
@@ -139,8 +139,8 @@ Application Details
 
 ## Notes
 
-* **"Currently with" is the load-bearing addition this screen was built with.** It replaced an earlier generic Progress Tracker with no indication of who held the record. It now also has to say something sensible for #12/#18's post-approval payment wait, which earlier passes on this screen didn't account for.
+* **"Currently with" is the load-bearing addition this screen was built with.** It replaced an earlier generic Progress Tracker with no indication of who held the record.
 * The RERAN Decision sub-section is deliberately read-only for every role in this module — Compliance & Escrow Auditor is Group A, and no Group C screen should imply that role's action happens here.
 * Output document lists differ by service and are sourced in each service's own `service-flows/service-NN-*.md` document (Section 15, Output) — this screen displays whatever that document specifies, and does not maintain its own copy of the list.
 * Whether internal certification applies at all to a given record is itself service-dependent (see the Service × Form Matrix in [README.md](../README.md#service--form-matrix)) — the Progress Tracker's omission of that step is not always a configuration choice; sometimes it is because the step is unsourced for that service.
-* **This screen was corrected twice in one day on the same underlying issue** — first removing `Approved — Awaiting Payment` entirely, then partially restoring it once #12/#18's sourced exception was found. Worth remembering as a general lesson: a module-wide claim like "this status never occurs" needs checking against every individual service it claims to cover, not just the ones a correction was originally scoped to.
+* **`Approved — Awaiting Payment` no longer applies to any service, as of 2026-08-16.** This screen was corrected twice in one day (2026-08-15) around this status — first removing it entirely, then partially restoring it for #12/#18 once their exception was found sourced. A third correction (2026-08-16) removes it again, this time because the client normalized #12/#18's payment timing rather than because the earlier audit was wrong. Worth remembering as a general lesson distinct from the 2026-08-15 one: a correction can be accurate when made and still need revisiting later if the underlying business decision itself changes — check whether a "sourced exception" is still current, not just whether it was correctly read from source at the time.
