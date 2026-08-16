@@ -76,11 +76,13 @@ Every role lands on the same [Dashboard](ui/screens/dashboard.md), with identica
 
 ---
 
-## Service #18's Provenance Question
+## Service #18 — Confirmed in Group D, Screen Still Pending
 
-**This module's navigation does not yet include a path to Service #18 (Register Real Estate Evaluation Details Certificate).** Per `open-questions.md` A2, this service's own sourced workflow describes an evaluation company accepting or rejecting customer requests directly, with no RERA review step named — a structurally different shape from every other Group D service, and one that may belong to Group G (Allied Professionals — Valuer) rather than this module.
+**Corrected 2026-08-16 (client decision, `open-questions.md` A2).** This module's navigation previously excluded Service #18 (Register Real Estate Evaluation Details Certificate) entirely, pending confirmation of whether it belonged to Group D or an undocumented Group G module. The client has confirmed it stays in Group D.
 
-Until that question is resolved, Service #18 is documented (`service-flows/service-18-register-evaluation-details-certificate.md`) but **not wired into this navigation model** — it doesn't appear in the Services catalogue's default flow, and no UI screen is built against it in this phase. Building navigation around a service that may move modules risks the same kind of drift-inducing false start this module's build is otherwise trying to avoid.
+**This section is retained, reframed, rather than deleted — because the underlying reason for the exclusion is only partly resolved.** Service #18's own sourced workflow still describes an evaluation company accepting or rejecting customer requests directly, with no RERA review step named — a structurally different shape from every other Group D service. That's now a UI-design problem, not an ownership question: the service is confirmed to belong here, but it still doesn't fit the shared Services Catalogue → Submit Application → Application Details pattern every other service in this navigation model uses.
+
+**Current state:** Service #18 is documented (`service-flows/service-18-register-evaluation-details-certificate.md`) and should now appear in [Services Catalog](ui/screens/services-catalog.md)'s selectable list — that screen needs its own follow-up correction, not yet done as of this entry. No dedicated screen for the service's own atypical accept/reject-by-company workflow has been designed yet; until it is, selecting Service #18 from the catalogue has no wizard to route into.
 
 ---
 
