@@ -3,11 +3,13 @@ project: RERAN
 module: financial-trust-institutions
 type: overview
 status: draft
-updated: 2026-08-15
+updated: 2026-08-16
 contains_proposals: true
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
+  - "RERAN/modules/financial-trust-institutions/ui/README.md"
+  - "RERAN/modules/financial-trust-institutions/roles-and-responsibilities.md"
 tags:
   - financial-trust-institutions
   - services-overview
@@ -94,44 +96,61 @@ The source's responsible-role column (naming the Mortgage Officer for 15 of the 
 
 ## Shared Platform Features
 
-> **Proposed** — not in source material. Rationale: the source defines a standard six-stage pipeline (lodge → validate → audit → pay → issue → record) that every regulated service follows, and the individual-user module documents four shared application-management features serving that pipeline. Group C services run the same pipeline and therefore require the same capabilities. Needs client confirmation.
+> **Rebuilt 2026-08-16, bottom-up, from the module's actual built screens** — `ui/screens/` (13 files) and `ui/screens-unified/` (4 files, plus README), cross-checked against `roles-and-responsibilities.md`'s documented per-role responsibilities. This replaces the previous 17-feature list (4 Application Management + 5 Institution-Specific + 8 General Platform), which was proposed by analogy to individual-user's feature count rather than checked against what this module actually has built. The count is now **12**, not because features were arbitrarily cut, but because several of the original 17 turned out to be the same screen described twice (Track Application Status and Applications; Services Catalog and Submit Application), while two others that genuinely have their own built screens — Trust Accounts, Compliance Reports — were missing from the original 17 entirely. Still `> **Proposed**` overall: the *existence* of this shared layer is not itself sourced (no such concept appears in `RERAN_service_flows_v2.md`), only its content is now checked against what's actually built. Needs client confirmation.
 
-### Application Management (4)
+**All 12 are now written as standalone documents (2026-08-16).**
 
-* Feature #1 — Submit Application
-* Feature #2 — Track Application Status
-* Feature #3 — Respond to Information Request
-* Feature #4 — Resubmit Returned Application
+### Application Lifecycle (2)
 
-### Institution-Specific Features (5)
+**Restructured 2026-08-16** from a four-feature split (Submit Application / Track Application Status / Respond to Information Request / Resubmit Returned Application) that mirrored individual-user's framing rather than this module's own screens. `ui/screens-unified/` groups Services Catalog + Service Details + Submit Application as one flow; `ui/screens/` has exactly one pair of screens (`applications.md` + `application-details.md`, plus `application-review.md`) covering tracking, responding, and resubmitting — there was never a dedicated screen for any of those three as a separate thing.
 
-> **Proposed** — C4 finds the original three correct but incomplete. Two more are load-bearing consequences of B1 and A1/A5 and are added here.
+* [Feature #1 — Service Requests](service-flows/feature-01-service-requests.md) — browse the catalog, view a service's requirements, complete and submit the canonical application form. Absorbs what was separately proposed as "Services Catalog" (General Platform) and "Submit Application" (Application Management).
+* [Feature #2 — Applications](service-flows/feature-02-applications.md) — the single workspace for everything after submission: tracking, responding to RERA information requests, resubmitting after a RERA return, downloading outputs. Absorbs what were separately proposed as "Track Application Status," "Respond to Information Request," and "Resubmit Returned Application."
 
-* Feature #5 — Internal Certification Queue — transactions awaiting certify-or-return by any of the institution's four Group C users before routing to RERA. **Corrected 2026-08-14**: previously described as gated by a "checker permission scope"; permission scopes are retired module-wide, and this is now an unrestricted action attributed by role in the audit trail, not a scope or a fifth role — see [navigation.md#audit-trail-principle](navigation.md#audit-trail-principle).
-* Feature #6 — Escrow Request Queue — developer-originated requests awaiting Account Trustee action, confirmed as a queue inside the platform (A2)
-* Feature #7 — Approval Expiry Tracking — trustee and auditor approval renewal windows, now driven by the two-year validity period proposed in B8
-* Feature #8 — Payment History — per-transaction payment records for the institution: receipts, amounts, service references, and status (successful / failed / refund-requested). **Corrected 2026-08-14** — previously "Settlement Account" (balance, top-up, transaction ledger, low-balance alerting, periodic statements) for a standing pre-funded account; that account is retired (`open-questions.md` B1). This feature is a per-transaction history/reporting view, not an account-management subsystem — see [payments.md](payments.md).
-* Feature #9 — Staff Records — roster and staff-record management for the institution's delegated staff (A1, A5). **Corrected 2026-08-14** — previously "Staff & Permission Scopes," with scope assignment and revocation; permission scopes are retired module-wide, and every staff member has identical system access from the moment they're added, so this feature is now purely about who is on the institution's staff list for audit-trail attribution — see [navigation.md#audit-trail-principle](navigation.md#audit-trail-principle).
+### Institution-Specific (5)
 
-### General Platform Features (8)
+**Two genuinely new entries found 2026-08-16** by checking role responsibilities against built screens, not present in the original 17-feature list at all: Trust Accounts and Compliance Reports.
 
-* Dashboard
-* Services Catalog
-* Applications
-* Documents
-* Payments — note: Group C runs two payer/timing models, not one (see `payments.md`, corrected 2026-08-15): **Upfront gateway payment** for Services #1 and #3–#11 (paid by the institution via the shared platform gateway, before the application is lodged — #3–#11 corrected 2026-08-14, #1 corrected 2026-08-15, both retiring earlier post-approval models) and **Customer Payment at Counter** for Services #12–#18 (paid by the customer at the point of service, sourced, unaffected by either correction). **Service #2 carries no fee at all** (confirmed 2026-08-15, `open-questions.md` B11) — it is not a third model, simply the absence of a payment step. *(Corrected 2026-08-15 — previously listed three models, including "Institution Fee Payment" for Services #1–#2, paid after RERA's decision; that model is retired, see `payments.md`.)*
-* Notifications
-* Institution Profile
-* Help & Support
+* [Feature #3 — Internal Certification Queue](service-flows/feature-03-internal-certification-queue.md) — transactions awaiting certify-or-return by any of the institution's four Group C users before routing to RERA, Services #3–#11 only. Sourced screen: `internal-certification-queue.md`. **Corrected 2026-08-14**: previously gated by a "checker permission scope"; scopes are retired module-wide, this is now an unrestricted action attributed by role — see [navigation.md#audit-trail-principle](navigation.md#audit-trail-principle).
+* [Feature #4 — Escrow Request Queue](service-flows/feature-04-escrow-request-queue.md) — developer-originated requests (Real Estate Developer's escrow services, not one of Group C's own 18) awaiting assessment, certification, or return by any of the institution's four Group C roles. Sourced screens: `escrow-request-queue.md`, `escrow-request-details.md` (A2). SLA sourced via A6. **Status vocabulary reconciled with real-estate-developer's Escrow Management and Fund Release Request, 2026-08-16, by client decision** — see Cross-Module Resolution below.
+* [Feature #5 — Trust Accounts](service-flows/feature-05-trust-accounts.md) *(new)* — the institution's register of trust accounts under management, distinct from the intake queue above. Sourced directly from the Account Trustee's documented responsibility: *"Maintain the register of trust accounts under management"* (`roles-and-responsibilities.md`). Sourced screen: `trust-accounts.md`.
+* [Feature #6 — Compliance Reports](service-flows/feature-06-compliance-reports.md) *(new)* — the Auditing Bureau Officer's independent audit and reporting function: raising findings against trust accounts, opening/closing audit engagements, submitting RERA-defined compliance reports. Sourced directly from documented responsibilities: *"Prepare and submit independent compliance reports to RERA... Raise findings against trust accounts... Open and close audit engagements."* Sourced screen: `compliance-reports.md`.
+* [Feature #7 — Payment History](service-flows/feature-07-payment-history.md) — per-transaction payment records: receipts, amounts, service references, status, across three payment timings (upfront, at-counter-before-decision, at-counter-after-decision for #12/#18). Sourced screen: `payment-history.md`. **Corrected 2026-08-14** — previously "Settlement Account" (balance, top-up, ledger, low-balance alerting); that standing account is retired (`open-questions.md` B1) — see [payments.md](payments.md).
+
+**Dropped from the previous list, with reasons:**
+* *Approval Expiry Tracking* — no dedicated screen exists. Expiry display already lives on `institution-profile.md`; folded into Feature #10 (Institution Profile) below rather than kept as a separate feature with no screen behind it.
+* *Staff Records / Staff & Permission Scopes* — see **Open Gap** below. Not folded into anything, because folding it in would misrepresent an actual documentation hole as resolved.
+
+### General Platform (5)
+
+* [Feature #8 — Dashboard](service-flows/feature-08-dashboard.md) — the same content for every user (2026-08-15 unification, [navigation.md](navigation.md#landing-after-login)); not role-specific. Aggregates Features #1–#7's own figures without independent data of its own. Sourced screen: `dashboard.md`.
+* [Feature #9 — Documents](service-flows/feature-09-documents.md) — centralized repository across applications, escrow requests, compliance records; upload happens only from within an originating feature, never standalone. Sourced screen: `documents.md`.
+* [Feature #10 — Institution Profile](service-flows/feature-10-institution-profile.md) — the institution's registered identity and regulatory standing, including current approval status and expiry (absorbing the display-only part of the dropped Approval Expiry Tracking above — renewal itself is *initiated* through Service #1, not a separate action here). Sourced screen: `institution-profile.md`.
+* [Feature #11 — Notifications](service-flows/feature-11-notifications.md) — centralized alerts across applications, approvals, escrow, certification, compliance, and (a genuinely new category found 2026-08-15) the #12/#18 awaiting-counter-payment state. Sourced screen: `notifications.md`.
+* [Feature #12 — Help & Support](service-flows/feature-12-help-and-support.md) — **largely `TBD`.** Named in [navigation.md](navigation.md)'s sidebar; no screen file exists anywhere in the module (`ui/screens/` and `ui/screens-unified/` both checked directly). Written honestly as a gap, not filled in with invented content — see the document itself for what's genuinely unknown versus presumed by convention with other modules.
+
+## Open Gap: Staff Management
+
+**Found 2026-08-16, not resolved.** `roles-and-responsibilities.md` documents the Institution Relationship Manager's responsibility to *"Add and remove staff records within the institution"* — and `open-questions.md` A1/A5 both assume delegated staff exist under a corporate account. But no screen in `ui/screens/` or `ui/screens-unified/`, and no item in [navigation.md](navigation.md)'s sidebar, represents staff management at all. This is a genuine hole between a documented role responsibility and the built UI — not silently folded into Institution Profile (which has no staff-roster content in its own spec) and not invented as a new feature without a screen behind it, the same standard applied to Approval Expiry Tracking above, and to Help & Support's own honest `TBD` treatment. Needs a client decision: build a dedicated screen, or confirm this responsibility is out of scope for the current UI package.
+
+## Cross-Module Resolution: Escrow Status Vocabulary
+
+**Resolved 2026-08-16, by client decision.** This module's Escrow Request Queue (Feature #4) previously treated all six developer-originated escrow request types (Services #8–#12, #20–#21 from real-estate-developer) as one queue with its own status vocabulary (`Awaiting Assessment → Under Assessment → Certified`), which didn't match either of real-estate-developer's own two vocabularies for the same transactions.
+
+**Resolved by adopting real-estate-developer's Escrow Management vocabulary as canonical across both modules:** `No Request → Pending Approval → Under Review → Approved → Released`, or `Returned` / `Rejected`. This feature's vocabulary is renamed to match — `Awaiting Assessment` → `Pending Approval`, `Under Assessment` → `Under Review`.
+
+**This also closes this feature's own previous gap.** `Certified` was shown as a terminal status with nothing representing RERA's subsequent review. Under the new vocabulary, `Under Review` explicitly spans both the institution's own assessment and RERA's later audit — a request stays `Under Review` after the institution's Certify action, only becoming `Approved` once RERA decides and `Released` once funds actually move. See `feature-04-escrow-request-queue.md`'s own Feature Overview and Section 13 for the full corrected flow, and the mirrored resolution in real-estate-developer's `shared-platform-features.md`.
 
 ## Platform Features Summary
 
-| Category | Features |
-| :---- | :---: |
-| Application Management | 4 |
-| Institution-Specific | 5 |
-| General Platform | 8 |
-| **Total Shared Platform Features** | **17** |
+| Category | Features | Status |
+| :---- | :---: | :---- |
+| Application Lifecycle | 2 | Written |
+| Institution-Specific | 5 | Written |
+| General Platform | 5 | Written (Feature #12 largely `TBD` — no screen exists) |
+| **Total Shared Platform Features** | **12** | **12 of 12 written** |
+
+Open gap (not counted above): Staff Management — documented responsibility, no screen, no feature.
 
 ## Application Status Vocabulary
 
@@ -170,10 +189,9 @@ Whether direct customer/institution access to a given service is *enabled at lau
 
 ## To Confirm
 
-Five items remain open in this section, down from seven — A4 (service ownership) is now confirmed by client decision (2026-08-15) and B5 (fee schedule) is resolved as a configuration fact rather than client data (2026-08-14); neither is repeated below. C2 (online path) and the original Service Ownership questions for #1/#2 were already excluded before this rewrite.
-
 1. Are the five proposed service categories acceptable, or should the source's Development / Transaction / Title-Deed Data grouping be retained? (C1 — proposed answer: adopt them, keep the reconciliation table.)
-2. Do the four Application Management features apply to Group C as they do to individual users? (C3 — proposed answer: yes, unchanged.)
-3. Are the five institution-specific features (including the two added by C4 — Payment History, Staff Records) correct, and is anything still missing?
-4. Is the proposed status vocabulary (platform core + Group C extension, D1) acceptable, and is the specific status list correct?
-5. Fee settlement: is the corrected two-way payer/timing split (Upfront Gateway Payment / Customer Payment at Counter, with Service #2 fee-free — see `payments.md`) correct for all 18 services? **Corrected 2026-08-15** — this item previously described a three-way split, including Institution Fee Payment for Services #1–#2; that model is retired per `open-questions.md` B11. **Also worth confirming with the client:** whether #12 and #18's post-approval payment timing is intentional design, or an artefact of the source's counter-based process that should be normalized to match #13–#17's pay-first pattern once digitized.
+2. Does the restructured 12-feature Shared Platform Features layer (rebuilt 2026-08-16 from actual screens, replacing the earlier 17-feature list) correctly represent what this module needs? **All 12 are now written.**
+3. Staff Management open gap (new 2026-08-16): should a dedicated screen/feature be built, or is this responsibility out of scope for the current UI package?
+4. Help & Support (Feature #12): should a dedicated screen be built, and if so, what should it contain? Currently `TBD` — no screen exists anywhere in the module.
+5. Is the proposed status vocabulary (platform core + Group C extension, D1) acceptable, and is the specific status list correct?
+6. Fee settlement: is the corrected two-way payer/timing split (Upfront Gateway Payment / Customer Payment at Counter, with Service #2 fee-free — see `payments.md`) correct for all 18 services? **Also worth confirming with the client:** whether #12 and #18's post-approval payment timing is intentional design, or an artefact of the source's counter-based process that should be normalized to match #13–#17's pay-first pattern once digitized.
