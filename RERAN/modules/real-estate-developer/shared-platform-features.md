@@ -14,6 +14,7 @@ derived_from:
   - "RERAN/modules/real-estate-developer/service-flows/service-08-activate-escrow-account.md"
   - "RERAN/modules/real-estate-developer/service-flows/service-10-withdraw-project-profit.md"
   - "RERAN/modules/real-estate-developer/service-flows/service-13-register-real-estate-project.md"
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
 tags:
   - real-estate-developer
   - shared-feature
@@ -69,6 +70,10 @@ All six rebuilt 2026-08-15 from four role-based designs into one screen apiece, 
 * **Financial & Trust Institutions' Escrow Request Queue** — corrected to the same sourced vocabulary, which fixes that feature's original gap (no status for RERA's post-certification review) more precisely than the first correction did: `RERA Escrow Audit` is now an explicit named stage, not an ambiguous continuation of a shared "Under Review."
 
 See Features #4 and #5's own Feature Overview sections, and financial-trust-institutions' `feature-04-escrow-request-queue.md`, for the full detail.
+
+## Cross-Module Clarification: "RERA Escrow Audit" and "Compliance & Escrow Auditor" Are the Same Role
+
+**Clarified 2026-08-16.** During the correction above, a further terminology gap was found and checked directly against `RERAN_service_flows_v2.md`'s master Service Workflows table: this module's six escrow rows (8–12, 20–21) and financial-trust-institutions' mortgage/lease rows (30–39) carry the identical **"Compliance & Escrow Auditor"** value in the Regulator/Approver column. There is only one such role in the source's Groups & Roles table (Group A, Compliance Directorate). This module's "RERA Escrow Audit" / "Escrow Account Department" — phrasing carried over from the source table's own narrative Workflow-column text — names the same role financial-trust-institutions calls by its formal Groups & Roles name. Both phrasings are individually accurate to source; neither was wrong, they were simply never cross-linked before. Not renamed, since both trace to source — Features #4 and #5 now note the equivalence explicitly, and financial-trust-institutions' `feature-04-escrow-request-queue.md` cross-links back.
 
 ## Superseded
 
