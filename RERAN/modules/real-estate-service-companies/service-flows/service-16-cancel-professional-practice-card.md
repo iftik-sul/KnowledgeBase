@@ -140,7 +140,15 @@ Completed
 
 ## 17. UI Screens
 
-Not yet built — Phase 4.
+**Corrected 2026-08-16 — Phase 4 is complete; this section previously said "Not yet built."**
+
+* Services
+* Cancel Professional Practice Card
+* Card Reference
+* Document Upload *(optional — sourced as "if any")*
+* Application Review
+* Application Submitted
+* Application Details
 
 ## 18. API Requirements
 

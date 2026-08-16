@@ -113,7 +113,7 @@ Completed
 
 * Withdrawn
 
-**Note:** matching Service #15's reasoning, manual-review and rejection statuses are omitted, since automatic approval is sourced with no described review step. Flagged as the same inference, not a separately confirmed fact.
+**Note:** matching Service #15's reasoning, manual-review and rejection statuses are omitted, since automatic approval is sourced with no described review step.
 
 ## 14. Possible Outcomes
 
@@ -131,7 +131,15 @@ Sourced (row 64): **not specified beyond "card updated"** — unlike Service #15
 
 ## 17. UI Screens
 
-Not yet built — Phase 4.
+**Corrected 2026-08-16 — Phase 4 is complete; this section previously said "Not yet built."**
+
+* Services
+* Amend Professional Practice Card
+* Card Reference
+* Field Selection & Updated Values (conditional field selector — Pattern C, checking a field reveals a Current Value / Requested New Value pair for that field only)
+* Document Upload
+* Application Submitted
+* Application Details
 
 ## 18. API Requirements
 

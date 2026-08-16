@@ -29,6 +29,8 @@ tags:
 
 The **Approval / Renewal of Financial Auditing Company** service is how a financial auditing company obtains, or renews, RERA's approval to act as an auditor for jointly-owned-property matters within Group D — the institutional-standing counterpart, within this module, to Financial & Trust Institutions' Service #1 (Approval/Renewal of Account Trustee & Auditing Company).
 
+> **Channel inconsistency, flagged 2026-08-16.** Row 56's own Channel column names only "Official email of the Jointly Owned Property" — the same email-only pattern Services #6 and #19 use. Section 12's workflow below still describes a "Sign Up / Log In" step inherited from the Service #5 cross-reference this file was originally derived from, which does not match the sourced email-only channel. This is a genuine internal inconsistency, found during the Phase 6 audit, not yet corrected here beyond this flag — see Open Questions.
+
 > **Note on the parallel to Financial & Trust Institutions' Service #1.** That service pays *upfront*, following a 2026-08-15 client normalization from its originally-sourced post-decision timing. This row's own workflow ('same as transferring escrow account steps') sources **no payment step at all**, unlike that service — the two are structurally similar in purpose (institutional approval/renewal) but genuinely different in their sourced payment treatment. Do not assume this service should be normalized to match Financial & Trust Institutions' #1 without a separate client decision; it is not part of Open Question B4, which concerns Group D's own Licensing services #12–15.
 
 ## 2. Purpose
@@ -118,7 +120,7 @@ Send Acceptance / Rejection Notice
 ↓
 *(if accepted)* Send Approval Notice via Email
 
-*Channel: Official email of the Jointly Owned Property — sourced (row 56), unusual among Group D's institutional-standing pattern for using an email-based channel where most services use a portal.*
+*Channel: Official email of the Jointly Owned Property — sourced (row 56). See the flagged inconsistency at the top of this file: the workflow steps above describe portal-style "Sign Up / Log In" language inherited from Service #5, which does not match this sourced email-only channel.*
 
 ## 13. Application Status Flow
 
@@ -162,7 +164,10 @@ Sourced (row 56): **none as a downloadable document** — the row names no issue
 
 ## 17. UI Screens
 
-Not yet built — Phase 4.
+**Corrected 2026-08-16 — Phase 4 is complete; this section previously said "Not yet built."** Given the sourced email-only channel (see the flagged inconsistency above), this service likely needs the same static-instruction treatment as Services #6 and #19, not a portal wizard:
+
+* Services
+* Approval / Renewal of Financial Auditing Company — static instructional screen, pending resolution of the Section 12 channel inconsistency
 
 ## 18. API Requirements
 
@@ -184,7 +189,7 @@ Not yet built — Phase 4.
 
 ## 20. Acceptance Criteria
 
-* Any of the four Group D roles at the applicant company can submit a new-approval or renewal application.
+* Any of the applicant company's four Group D roles can submit a new-approval or renewal application.
 * Required information and documents are validated before submission.
 * Application receives a unique application reference number.
 * Compliance & Escrow Auditor can approve, return, or reject with documented reasoning.
@@ -201,7 +206,8 @@ Not yet built — Phase 4.
 
 ## Open Questions
 
-1. **Who the applicant actually is — the JOP-supervising company, or the auditing company itself seeking Group D standing — is not clearly distinguished in source.** This affects Section 4 (Who Can Apply) directly. Needs client confirmation.
-2. **Required information and document lists are proposed, not sourced.** Needs client confirmation.
-3. **Whether an approval/renewal validity period applies** (comparable to Financial & Trust Institutions' proposed two-year term for its own Service #1) is not addressed in source.
-4. **The absence of any output document is notable and may be a source gap rather than a genuine "nothing is issued" design** — flagged, not assumed either way.
+1. **Section 12's workflow describes portal "Sign Up / Log In" language that contradicts row 56's own sourced email-only channel** — found during the 2026-08-16 Phase 6 audit, not yet resolved. This file was originally derived by cross-reference from Service #5 (a portal-based service), and that cross-reference appears to have carried over Service #5's channel assumptions incorrectly. Needs a full Section 12 rewrite to an email-based workflow, matching Services #6 and #19, once confirmed.
+2. **Who the applicant actually is — the JOP-supervising company, or the auditing company itself seeking Group D standing — is not clearly distinguished in source.** This affects Section 4 (Who Can Apply) directly. Needs client confirmation.
+3. **Required information and document lists are proposed, not sourced.** Needs client confirmation.
+4. **Whether an approval/renewal validity period applies** (comparable to Financial & Trust Institutions' proposed two-year term for its own Service #1) is not addressed in source.
+5. **The absence of any output document is notable and may be a source gap rather than a genuine "nothing is issued" design** — flagged, not assumed either way.
