@@ -60,7 +60,7 @@ No fee for viewing or editing the profile itself.
 
 ## 11. Expected Processing Time
 
-Edits are immediate. No source Validation Summary section exists for this screen — unlike the module's form screens, there is no automated pre-submission validation panel described.
+Edits are immediate. **Confirmed 2026-08-16 — no Validation Summary is needed here, by client decision.** The absence noted in the previous version of this document is not a gap: this is a profile-editing screen, not a submission-based service, and the module's Validation Summary pattern exists specifically for pre-submission checks (required fields, required documents, cross-service consistency) that don't apply to editing a standing record.
 
 ## 12. Processing Workflow
 
@@ -122,6 +122,7 @@ Not a submission-based feature — no application status flow. RERA License Stat
 * Masked banking information is masked identically for every user — a display convention, not a permission tier.
 * All profile changes are recorded in the audit log with acting user and role.
 * Escrow figures shown here match Escrow Management's own figures exactly.
+* No pre-submission Validation Summary panel is required for this screen.
 
 ## 21. Business Rules
 
@@ -129,8 +130,9 @@ Not a submission-based feature — no application status flow. RERA License Stat
 2. Sensitive financial data (bank account numbers) is masked identically for every user, protecting the data itself rather than distinguishing between users.
 3. All changes are permanently recorded in the audit trail, including the acting user's role.
 4. This feature is the authoritative source of organization-level information used elsewhere in the module.
+5. **Decided 2026-08-16.** This is a profile-editing screen, not a submission service — no Validation Summary panel is needed, unlike the module's form screens.
 
 ## Open Questions
 
-1. No automated pre-submission validation is described in source for this screen, unlike the module's form screens — worth confirming whether one is actually needed here or genuinely not applicable to a profile page.
+1. ~~Is the absence of a Validation Summary a gap?~~ **Decided 2026-08-16 — no, not applicable to a profile page.**
 2. Same adoption question as Feature #1 — needs client confirmation.
