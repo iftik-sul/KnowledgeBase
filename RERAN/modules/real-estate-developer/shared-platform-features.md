@@ -30,8 +30,8 @@ tags:
 * [Feature #1 — Applications](service-flows/feature-01-applications.md) — the cross-cutting post-submission workspace: tracking, responding to RERA information requests, resubmitting after a return, downloading outputs. `applications.md` + `application-details.md` are the only screens covering anything post-submission — there was never a dedicated screen for tracking, responding, or resubmitting as separate things.
 * [Feature #2 — Projects](service-flows/feature-02-projects.md) — Services #13–19 (project registration, cancellation, subdivision, rename, re-registration, settlements, termination). Confirmed via service-13's `derived_from`.
 * [Feature #3 — Property Registrations](service-flows/feature-03-property-registrations.md) — Services #1–7 (initial sale, rent-to-own, usufruct, amendments, mortgage-linked sale, fee transfers). Confirmed via **two** services' `derived_from` (service-01 and service-06), not just one — the module's highest-volume domain workspace.
-* [Feature #4 — Escrow Management](service-flows/feature-04-escrow-management.md) — Services #8–9, #20–21 (escrow activation, transfer, mortgage deposit, bank guarantee cancellation). Confirmed via service-08's `derived_from`; the module's own README flags cardinality mismatches for #9, #20, #21 against this screen — the mapping is directionally right but not field-exact, flagged rather than resolved. **Cross-module status vocabulary mismatch against financial-trust-institutions' Escrow Request Queue, found 2026-08-16** — see Open Questions below.
-* [Feature #5 — Fund Release Request](service-flows/feature-05-fund-release-request.md) — Services #10, #12 (project profit withdrawal, receive escrow payment). Confirmed via service-10's `derived_from`. **Carries a genuinely unresolved UI mismatch, flagged at source and not resolved here**: the screen is shaped as a milestone/construction-draw request, and Service #10 (a margin distribution, not a milestone draw) is documented against it as the closest match, not a confirmed fit. **Also carries the cross-module status vocabulary mismatch** flagged on Feature #4.
+* [Feature #4 — Escrow Management](service-flows/feature-04-escrow-management.md) — Services #8–9, #20–21 (escrow activation, transfer, mortgage deposit, bank guarantee cancellation). Confirmed via service-08's `derived_from`; the module's own README flags cardinality mismatches for #9, #20, #21 against this screen — the mapping is directionally right but not field-exact, flagged rather than resolved. Its Fund Release Status vocabulary is now the **canonical cross-module status** for all six developer escrow request types — see Cross-Module Resolution below.
+* [Feature #5 — Fund Release Request](service-flows/feature-05-fund-release-request.md) — Services #10, #12 (project profit withdrawal, receive escrow payment). Confirmed via service-10's `derived_from`. **Carries a genuinely unresolved UI mismatch, flagged at source and not resolved here**: the screen is shaped as a milestone/construction-draw request, and Service #10 (a margin distribution, not a milestone draw) is documented against it as the closest match, not a confirmed fit. Its detailed 9-stage tracker is now mapped onto Feature #4's canonical vocabulary — see Cross-Module Resolution below.
 * [Feature #6 — Sales & Disclosures](service-flows/feature-06-sales-and-disclosures.md) — **resolved 2026-08-16, not a domain workspace tied to a numbered service.** Checked directly: Services #1 and #6 both cite Property Registrations in their own `derived_from`, not this screen — so this is a **compliance-tracking layer** (sale record + separate disclosure obligation, two lifecycles) running parallel to Property Registrations, the same shape as financial-trust-institutions' Compliance Reports feature. **Whether every Property Registrations sale requires a Sales & Disclosures filing is itself unresolved** — flagged as an open question in the document itself, not assumed.
 
 ## General Platform (6)
@@ -53,16 +53,19 @@ All six rebuilt 2026-08-15 from four role-based designs into one screen apiece, 
 | General Platform | 6 | Written |
 | **Total** | **12** | **12 of 12 written** |
 
-## Cross-Module Flag: Escrow Status Vocabulary Does Not Reconcile
+## Cross-Module Resolution: Escrow Status Vocabulary
 
-**Found 2026-08-16, not resolved.** Three documents describe what should be the same underlying escrow-and-fund-release transactions once they leave the developer, and none of their status vocabularies match:
+**Resolved 2026-08-16, by client decision.** Three documents describe what should be the same underlying escrow-and-fund-release transactions once they leave the developer, and their status vocabularies previously didn't match. Resolved by adopting this module's own Escrow Management vocabulary as canonical across both modules:
 
-| | This module's Escrow Management (#4) | This module's Fund Release Request (#5) | Financial & Trust Institutions' Escrow Request Queue |
-| :---- | :---- | :---- | :---- |
-| Covers | Services #8/9/20/21 | Services #10/12 | **All six**, #8–#12/20–21, as one queue |
-| Vocabulary | No Request → Pending Approval → Under Review → Approved → Released | 9-stage: Draft → ... → Under Bank Review → Under RERA Review → Funds Released | Awaiting Assessment → Under Assessment → Certified *(→ forwarded to RERA, no further status)* |
+**Canonical status:** `No Request → Pending Approval → Under Review → Approved → Released`, or `Returned` / `Rejected`.
 
-Two distinct problems: this module splits one institution-side queue into two features with two non-matching vocabularies, and the institution's own `Certified` status has no counterpart for RERA's subsequent review — even though this module's `Under RERA Review` (Feature #5) shows that stage exists. Written independently across both modules without cross-checking, this is exactly the kind of silent drift the project's own merge-conflict discipline exists to catch. See Features #4 and #5's own Feature Overview sections, and financial-trust-institutions' `feature-04-escrow-request-queue.md`, for the full detail. Not fixed here — needs a client or architecture decision on which vocabulary should be authoritative before either side is edited.
+Applied as follows:
+
+* **This module's Escrow Management (Feature #4)** already used this vocabulary — now declared canonical, no change needed.
+* **This module's Fund Release Request (Feature #5)** keeps its own detailed 9-stage progress tracker for its screen's own UI, but each stage now explicitly maps onto the canonical vocabulary — `Under Bank Review` and `Under RERA Review` both fall under canonical `Under Review`.
+* **Financial & Trust Institutions' Escrow Request Queue** is renamed to match: `Awaiting Assessment` → `Pending Approval`, `Under Assessment` → `Under Review`. This also closes that feature's own previous gap, where `Certified` was shown as a terminal status with nothing representing RERA's subsequent review — `Under Review` now explicitly continues through RERA's audit after the institution's Certify action, only becoming `Approved` once RERA decides and `Released` once funds move.
+
+See Features #4 and #5's own Feature Overview sections, and financial-trust-institutions' `feature-04-escrow-request-queue.md`, for the full detail.
 
 ## Superseded
 
@@ -74,5 +77,4 @@ The original 2026-08-15 version of this document proposed four features (Submit 
 2. **Sales & Disclosures' relationship to Property Registrations** (Feature #6's own Open Question #1): is a disclosure required for every sale, or only some? No source document establishes this.
 3. **Fund Release Request's UI-mismatch question** (Feature #5's own Open Question #1): is Service #10 genuinely the right fit for a milestone/construction-draw-shaped screen?
 4. **Company Profile's missing Validation Summary** (Feature #9's own Open Question #1): every other form screen in the module has one; this one doesn't — confirm whether that's a genuine gap or not applicable to a profile page.
-5. **Cross-module escrow status vocabulary mismatch** (see section above, new 2026-08-16) — needs a client or architecture decision on which of three non-matching vocabularies, if any as-is, should be authoritative.
-6. Should individual service-flow files (Services #1–27) be updated to cross-reference whichever domain-workspace or Applications feature they belong to?
+5. Should individual service-flow files (Services #1–27) be updated to cross-reference whichever domain-workspace or Applications feature they belong to?
