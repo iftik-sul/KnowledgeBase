@@ -10,8 +10,10 @@ derived_from:
   - "RERAN/modules/financial-trust-institutions/ui/screens/escrow-request-queue.md"
   - "RERAN/modules/financial-trust-institutions/roles-and-responsibilities.md"
   - "RERAN/modules/financial-trust-institutions/open-questions.md"
+  - "RERAN/modules/financial-trust-institutions/service-flows/service-03-mortgage-registration.md"
   - "RERAN/modules/real-estate-developer/service-flows/service-08-activate-escrow-account.md"
   - "RERAN/modules/real-estate-developer/service-flows/service-10-withdraw-project-profit.md"
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
 tags:
   - financial-trust-institutions
   - shared-feature
@@ -28,13 +30,15 @@ The **Escrow Request Queue** is the institution-side counterpart to Group B's de
 
 > **Cross-module status vocabulary — corrected 2026-08-16, superseding an earlier same-day resolution.** A first pass renamed this feature's statuses to `Pending Approval → Under Review → Approved → Released`, taken from a real-estate-developer UI screen's filter values. That was wrong on both sides: neither term traces to source. **All six individual escrow service files on the developer side** (Services #8, #9, #10, #12, #20, #21 — verified directly, all six) use `Draft → Submitted → Trustee Review → RERA Escrow Audit → Approved → [service-specific terminal state]`, with additional statuses `Information Requested / Returned / Rejected`. That is now the corrected canonical vocabulary. `Trustee Review` is this feature's own assessment stage — the institution's Certify action is what advances a request out of `Trustee Review` into `RERA Escrow Audit`, not into an ambiguous shared "Under Review." See Section 13.
 
+> **Terminology clarified 2026-08-16.** "RERA's Escrow Department" / "RERA Escrow Audit" (this feature's second stage) is the **same role** this module already calls the **Compliance & Escrow Auditor** everywhere else — Service #3 (Mortgage Registration) and every other two-gate FTI service names this exact role as the second, RERA-side gate. Confirmed against `RERAN_service_flows_v2.md`'s master Service Workflows table: real-estate-developer's six escrow rows (8–12, 20–21) and this module's mortgage/lease rows (30–39) carry the identical Regulator/Approver-column value **"Compliance & Escrow Auditor."** This feature was the one place in either module still calling that role by its Workflow-column narrative name ("escrow department") rather than its Groups & Roles name — now cross-linked rather than left as an unlabeled synonym. See Real Estate Developer's `feature-04-escrow-management.md` for the full source citation.
+
 ## 2. Purpose
 
 Give the institution one place to triage and assess the six types of developer escrow requests, typically worked by the Account Trustee but reachable by any of the institution's four Group C roles, before RERA's own audit.
 
 ## 3. Description
 
-Requests arrive from Group B's escrow services (Real Estate Developer module Services #8–#12, #20–#21) already at the `Trustee Review` stage — the developer-side `Draft` and `Submitted` stages happen before a request reaches this queue at all. Any institution user assesses a request — checking requested amount against the trust account's available balance, reviewing the cited construction milestone where applicable — and either **certifies** it (advancing the request to `RERA Escrow Audit`) or returns it to the developer, or requests further information. Certification is a structured assessment with a solvency judgement inside it (per `open-questions.md` A3), not a document upload, so there is no bulk-certify action — the same reasoning applied to the Internal Certification Queue.
+Requests arrive from Group B's escrow services (Real Estate Developer module Services #8–#12, #20–#21) already at the `Trustee Review` stage — the developer-side `Draft` and `Submitted` stages happen before a request reaches this queue at all. Any institution user assesses a request — checking requested amount against the trust account's available balance, reviewing the cited construction milestone where applicable — and either **certifies** it (advancing the request to `RERA Escrow Audit`) or returns it to the developer, or requests further information. Certification is a structured assessment with a solvement judgement inside it (per `open-questions.md` A3), not a document upload, so there is no bulk-certify action — the same reasoning applied to the Internal Certification Queue.
 
 ## 4. Used By
 
@@ -69,7 +73,7 @@ Not sourced as a fee-bearing action for the institution — this is an assessmen
 
 ## 10. Processing Authority
 
-**Any of the institution's four Group C roles**, unrestricted, for the `Trustee Review` stage; **RERA's Escrow Department**, for the subsequent `RERA Escrow Audit` that a Certify action advances a request into. **Corrected 2026-08-15**: previously gated by an `escrow` permission scope held by the Account Trustee; the scope is retired. Typically worked by the Account Trustee in practice — not a restriction.
+**Any of the institution's four Group C roles**, unrestricted, for the `Trustee Review` stage; the **Compliance & Escrow Auditor** (Group A) — this module's standard second-gate regulator, used identically across all 18 numbered Group C services — for the subsequent `RERA Escrow Audit` that a Certify action advances a request into. Not a separate "escrow department"; see the terminology note under Feature Overview. **Corrected 2026-08-15**: previously gated by an `escrow` permission scope held by the Account Trustee; the scope is retired. Typically worked by the Account Trustee in practice — not a restriction.
 
 ## 11. Expected Processing Time
 
@@ -87,11 +91,11 @@ Assess a Request (status: Trustee Review)
 ↓
 Review Requested Amount vs. Trust Account Balance, Milestone Evidence
 ↓
-Certify (advances to RERA Escrow Audit) **or** Return (to developer) **or** Request Information
+Certify (advances to RERA Escrow Audit, performed by the Compliance & Escrow Auditor) **or** Return (to developer) **or** Request Information
 ↓
 Record Removed from Active Queue on Certify/Return; Remains, Updated, on Information Request
 ↓
-*(after Certify)* RERA Audits → Approved → *(service-specific terminal state)*
+*(after Certify)* Compliance & Escrow Auditor Audits → Approved → *(service-specific terminal state)*
 
 ## 13. Application Status Flow
 
@@ -103,7 +107,7 @@ Trustee Review *(this feature's own assessment stage)*
 ↓
 *(Certify action taken)*
 ↓
-RERA Escrow Audit
+RERA Escrow Audit *(performed by the Compliance & Escrow Auditor — see the terminology note under Feature Overview)*
 ↓
 Approved
 ↓
@@ -143,7 +147,7 @@ SLA state (Within window / Approaching breach / Breached) tracks alongside statu
 * Trust Accounts *(the account a request draws against — View Trust Account row action)*
 * Internal Certification Queue *(a structurally similar certify/return gate, for Services #3–#11 instead)*
 * Compliance Reports *(findings may reference escrow activity on a covered account)*
-* Real Estate Developer's Escrow Management and Fund Release Request *(cross-module — the developer's side of the same six request types; **status vocabulary corrected 2026-08-16**, see Feature Overview)*
+* Real Estate Developer's Escrow Management and Fund Release Request *(cross-module — the developer's side of the same six request types; **status vocabulary corrected 2026-08-16, and the RERA-side approver confirmed to be the same Compliance & Escrow Auditor role in both modules**, see Feature Overview)*
 
 ## 17. UI Screens
 
@@ -187,7 +191,8 @@ SLA state (Within window / Approaching breach / Breached) tracks alongside statu
 5. Certification is a structured, per-request assessment; there is no bulk-certify action.
 6. Certify is an action that advances a request from `Trustee Review` to `RERA Escrow Audit` — not a terminal status.
 7. The terminal state after `Approved` is service-specific (Active / Transferred / Released / Deposited / Cancelled), not a single uniform word.
-8. Every assessment, certification, and return is permanently recorded in the audit trail, including the acting user's role.
+8. `RERA Escrow Audit` is performed by the same Compliance & Escrow Auditor role that approves all 18 numbered Group C services — not a separate escrow department, confirmed against the master source table.
+9. Every assessment, certification, and return is permanently recorded in the audit trail, including the acting user's role.
 
 ## Open Questions
 
