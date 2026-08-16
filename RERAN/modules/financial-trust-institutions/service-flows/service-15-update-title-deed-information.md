@@ -4,7 +4,7 @@ module: financial-trust-institutions
 type: service-flow
 status: draft
 contains_proposals: true
-updated: 2026-08-15
+updated: 2026-08-16
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
@@ -155,7 +155,7 @@ Completed
 * Rejected  
 * Withdrawn
 
-**Corrected 2026-08-15 — `Approved — Awaiting Payment` removed.** This status previously sat between `Returned for Correction` and `Completed`, but contradicts this service's own sourced workflow (Section 12, Section 9): the customer pays at the counter *before* RERA's review and approval (row 42, Step 4 before Step 5), not after. By the time a decision is reached, payment has already happened. Compare Services #12 and #18, where RERA's row-sourced sequence has approval *before* payment, and where this status is kept as accurate.
+**Corrected 2026-08-15 — `Approved — Awaiting Payment` removed.** This status previously sat between `Returned for Correction` and `Completed`, but contradicts this service's own sourced workflow (Section 12, Section 9): the customer pays at the counter *before* RERA's review and approval (row 42, Step 4 before Step 5), not after. By the time a decision is reached, payment has already happened. This is now the pattern for every fee-bearing Group C service, without exception — see [status-badges.md](../ui/status-badges.md#application-status) for the module-wide confirmation following the 2026-08-16 normalization of Services #12 and #18, the last two services that previously paid after RERA's decision.
 
 ## 14. Possible Outcomes
 
