@@ -38,7 +38,7 @@ Give the institution one place to triage and assess the six types of developer e
 
 ## 3. Description
 
-Requests arrive from Group B's escrow services (Real Estate Developer module Services #8–#12, #20–#21) already at the `Trustee Review` stage — the developer-side `Draft` and `Submitted` stages happen before a request reaches this queue at all. Any institution user assesses a request — checking requested amount against the trust account's available balance, reviewing the cited construction milestone where applicable — and either **certifies** it (advancing the request to `RERA Escrow Audit`) or returns it to the developer, or requests further information. Certification is a structured assessment with a solvement judgement inside it (per `open-questions.md` A3), not a document upload, so there is no bulk-certify action — the same reasoning applied to the Internal Certification Queue.
+Requests arrive from Group B's escrow services (Real Estate Developer module Services #8–#12, #20–#21) already at the `Trustee Review` stage — the developer-side `Draft` and `Submitted` stages happen before a request reaches this queue at all. Any institution user assesses a request — checking requested amount against the trust account's available balance, reviewing the cited construction milestone where applicable — and either **certifies** it (advancing the request to `RERA Escrow Audit`) or returns it to the developer, or requests further information. Certification is a structured assessment with a solvency judgement inside it (per `open-questions.md` A3), not a document upload, so there is no bulk-certify action — the same reasoning applied to the Internal Certification Queue.
 
 ## 4. Used By
 
