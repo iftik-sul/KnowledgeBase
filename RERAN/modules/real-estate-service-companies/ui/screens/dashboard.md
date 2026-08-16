@@ -118,13 +118,13 @@ A compact activity feed: submissions, RERA decisions, JOP registrations, card is
 
 ## Reused Components
 
-See `ui/components.md` (Phase 5) for definitions of every component used on this screen — Company Operations Sidebar, Top Bar, Company Context Header, KPI Summary Cards, Quick Action Cards, Status Badge, Buttons.
+See `ui/components.md` for definitions of every component used on this screen — Company Operations Sidebar, Top Bar, Company Context Header, KPI Summary Cards, Quick Action Cards, Status Badge, Buttons.
 
 ## Validation
 
 1. No card, action, or Focus Area on this screen is role-gated.
 2. Every Focus Area figure must match its source screen's own figures exactly — this dashboard has no independent data source.
-3. Status vocabulary comes from `ui/status-badges.md` (Phase 5); this screen defines no status of its own.
+3. Status vocabulary comes from `ui/status-badges.md`; this screen defines no status of its own.
 
 ## User Flow
 
@@ -140,5 +140,5 @@ Dashboard
 
 ## Notes
 
-* **Service #18 does not appear anywhere on this dashboard**, consistent with `navigation.md`'s provenance note — no Evaluation Certificate KPI, Focus Area, or Quick Action exists here pending resolution of whether the service belongs to this module at all.
+* **Service #18 is confirmed to stay in Group D (`open-questions.md` A2, 2026-08-16), but still doesn't appear anywhere on this dashboard.** That's no longer because of an unresolved ownership question — it's because the service has no designed screen yet to link a KPI, Focus Area, or Quick Action to. Once its own screen exists (see `ui/screens/services-catalog.md`'s Notes), the Licensing Focus Area's "active permits, practice cards" summary is the natural place to fold in an evaluation-certificate count, but that's a follow-up, not something to guess at here.
 * JOP's own Focus Area intentionally links out to a dedicated screen rather than the generic Applications list, matching `navigation.md`'s reasoning for giving JOP its own sidebar item.
