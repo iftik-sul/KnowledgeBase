@@ -4,7 +4,7 @@ module: individual-user
 type: ui-spec
 status: draft
 contains_proposals: true
-updated: 2026-08-15
+updated: 2026-08-16
 derived_from:
   - "RERAN/modules/individual-user/service-flows/"
   - "RERAN/modules/individual-user/payments.md"
@@ -57,7 +57,7 @@ Read from the service-flow file's Required Documents list.
 
 ### Section 4 — Fee & Payment Timing
 
-**The section most likely to need correction if this package is ever built against a stale copy of the service-flow files.** Must read: whether a fee applies at all (5 services confirmed free: #17, #18, #33, #7's Owner/Entity-Amendment path, plus #40/#42 already unspecified), and if so, when it's collected (upfront vs. after RERAN's decision — see `payments.md` for the full per-service table). Shown here exactly as documented, not summarized as a generic "fees apply."
+**The section most likely to need correction if this package is ever built against a stale copy of the service-flow files.** Must read: whether a fee applies at all (4 services confirmed no-fee — #17, #18, #33, #7's Owner/Entity-Amendment path — plus #40 and #42, where the source leaves payment unspecified rather than confirming either way), and if so, when it's collected (upfront vs. after RERAN's decision — see `payments.md` for the full per-service table). Shown here exactly as documented, not summarized as a generic "fees apply." *(Corrected 2026-08-16 — this section previously said "5 services confirmed free," which miscounted its own list: 4 items were genuinely confirmed no-fee, and #40/#42 were separately described as unspecified, not confirmed-free — a different category. Found during a full file-by-file UI audit.)*
 
 ### Section 5 — Expected Processing Time
 
