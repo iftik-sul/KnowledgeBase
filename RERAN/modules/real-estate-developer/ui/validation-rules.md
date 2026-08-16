@@ -3,7 +3,7 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-15
+updated: 2026-08-16
 derived_from:
   - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/modules/real-estate-developer/ui/screens/application-details.md"
@@ -12,6 +12,7 @@ derived_from:
   - "RERAN/modules/real-estate-developer/ui/screens/sales-and-disclosure-details.md"
   - "RERAN/modules/real-estate-developer/ui/screens/fund-release-request.md"
   - "RERAN/modules/real-estate-developer/ui/screens/document-details.md"
+  - "RERAN/modules/real-estate-developer/ui/status-badges.md"
 tags:
   - real-estate-developer
   - ui-spec
@@ -117,7 +118,14 @@ Two screens still carry no Validation Summary in the source, for reasons unrelat
 * [fund-release-request-details.md](screens/fund-release-request-details.md) — a details/review screen
   rather than a creation form. Its sibling [fund-release-request.md](screens/fund-release-request.md)
   (the creation form) does have one. Edits here are governed by status instead: a request may be
-  updated only while Draft, Returned or Information Requested, and becomes read-only once Approved or
-  Funds Released.
+  updated only while Draft, Returned or Information Requested, and becomes read-only once **Approved**
+  or **Released** — the sourced terminal status; see [status-badges.md](status-badges.md#fund-release-status).
+
+  **Corrected 2026-08-16** — this bullet previously said "Approved or Funds Released," the pre-correction
+  UI-filter term. `status-badges.md` was corrected on 2026-08-16 to use the sourced status flow's own
+  terminal state, "Released," for fund release requests generally (Service #12) — "Funds Released" is
+  this screen's own detailed-tracker label for the same state, per
+  [fund-release-request.md](screens/fund-release-request.md)'s own mapping table. Found during a full
+  file-by-file audit; this bullet had not been updated when the status vocabulary was corrected.
 
 Both are noted in their own files. Neither gap is a role restriction.
