@@ -32,7 +32,7 @@ Rebuilt 2026-08-15 from four domain-specific designs into one, with the category
 
 ## 4. Used By
 
-All 27 numbered services, plus Sales & Disclosures — anywhere a document is attached anywhere in the module.
+All 27 numbered services, plus Sales & Disclosures and Profit Withdrawal Request — anywhere a document is attached anywhere in the module.
 
 ## 5. Prerequisites
 
@@ -94,7 +94,7 @@ Draft → Pending Verification → Verified, or → Information Requested / Retu
 
 ## 16. Related Features
 
-* Projects, Property Registrations, Escrow Management, Fund Release Request, Sales & Disclosures — the domain workspaces documents are typically uploaded from and linked to.
+* Projects, Property Registrations, Escrow Management, Fund Release Request, Profit Withdrawal Request, Sales & Disclosures — the domain workspaces documents are typically uploaded from and linked to. *(Corrected 2026-08-16 — Profit Withdrawal Request, Feature #13, added; this list predated that feature's split from Fund Release Request.)*
 
 ## 17. UI Screens
 
@@ -114,7 +114,7 @@ Draft → Pending Verification → Verified, or → Information Requested / Retu
 
 * Developer Company, User
 * Document, Document Category, Document Version
-* Linked Record *(cross-reference to Project, Property Registration, Sale, Disclosure, Escrow Account, Fund Release, Application)*
+* Linked Record *(cross-reference to Project, Property Registration, Sale, Disclosure, Escrow Account, Fund Release, Profit Withdrawal Request, Application)*
 * Audit Log
 
 ## 20. Acceptance Criteria
