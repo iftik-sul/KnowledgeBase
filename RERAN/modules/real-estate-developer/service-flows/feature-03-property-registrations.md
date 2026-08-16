@@ -9,6 +9,7 @@ updated: 2026-08-16
 derived_from:
   - "RERAN/modules/real-estate-developer/ui/screens/property-registrations.md"
   - "RERAN/modules/real-estate-developer/navigation.md"
+  - "RERAN/modules/real-estate-developer/service-flows/service-06-register-mortgage-linked-sale.md"
 tags:
   - real-estate-developer
   - shared-feature
@@ -86,6 +87,8 @@ Upload Required Documents
 ↓
 Select Payment Method → Submit
 ↓
+*(Service #6 only, post-submission)* System Validates Mortgage Reference Against Financial & Trust Institutions' Records in Real Time — see Service #6's own file for the full five-decision design
+↓
 RERA Reviews
 ↓
 Registration Certificate Issued *(and Electronic Map, for mortgage-linked sales)*
@@ -112,7 +115,7 @@ Registration Certificate; Mortgage Provisional Registration Certificate and Elec
 
 * Applications *(Feature #1 — post-submission tracking, response, resubmission)*
 * Escrow Management *(Feature #4/#5 — where a sale's escrow-related consequences are handled, distinct from the sale registration itself)*
-* Financial & Trust Institutions Service #3 – Mortgage Registration *(cross-module, for Service #6 specifically)*
+* Financial & Trust Institutions Service #3 – Mortgage Registration *(cross-module, for Service #6 specifically — see that service's own file for the full real-time mortgage-validation dependency, decided 2026-08-16)*
 
 ## 17. UI Screens
 
@@ -122,7 +125,8 @@ Registration Certificate; Mortgage Provisional Registration Certificate and Elec
 ## 18. API Requirements
 
 * Retrieve Project Units / Validate Unit Availability
-* Validate Purchaser / Mortgage Institution (where applicable)
+* Validate Purchaser
+* **Validate Mortgage Registration** *(Service #6 only — cross-module, real-time synchronous call to Financial & Trust Institutions' Mortgage Registration records, made within the submission request itself, after payment. Requires the matched record's status to be `Completed`. Corrected 2026-08-16 — this line previously read "Validate Purchaser / Mortgage Institution (where applicable)," a generic placeholder that predated Service #6's own decided validation design; see that service's own file for the full mechanism.)*
 * Upload Documents
 * Calculate Service Fee / Initiate Payment / Verify Payment
 * Submit Registration
@@ -144,6 +148,7 @@ Registration Certificate; Mortgage Provisional Registration Certificate and Elec
 * System validates the unit belongs to a registered project and is available.
 * Row actions are governed by registration status, never by who is viewing.
 * Registration Insights figures match the table's own filtered counts exactly.
+* For Service #6, the cited mortgage reference is validated against Financial & Trust Institutions' records in real time, after submission and payment, requiring a `Completed` match.
 * All registration activity is recorded in the audit log, including the acting user's role.
 
 ## 21. Business Rules
@@ -151,8 +156,9 @@ Registration Certificate; Mortgage Provisional Registration Certificate and Elec
 1. Only a unit belonging to a registered project (Feature #2) may be registered under this feature.
 2. Any of the four Group B roles may file, regardless of typical practice.
 3. Payment must be completed before regulatory review, for the services confirmed to require it.
-4. Every registration receives a unique reference number.
-5. All submissions, approvals, payments, and notifications are permanently recorded in the audit trail, including the acting user's role.
+4. For Service #6 specifically, the mortgage reference is validated against Financial & Trust Institutions' records in real time — see that service's own file for the full design.
+5. Every registration receives a unique reference number.
+6. All submissions, approvals, payments, and notifications are permanently recorded in the audit trail, including the acting user's role.
 
 ## Open Questions
 
