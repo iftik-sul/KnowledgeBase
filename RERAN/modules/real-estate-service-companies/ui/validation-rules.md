@@ -19,6 +19,8 @@ tags:
 
 Validation patterns shared by two or more screens in this module. Validation genuinely specific to a single screen stays documented in that screen's own file and is linked from here.
 
+> **Corrected 2026-08-16, by client decision (`open-questions.md` B4).** The Payments section below is simplified — Services #12–15 no longer need a carve-out exception in the submission-blocking rule, since they now pay during submission like every other fee-bearing service.
+
 ## Access
 
 Every action is available to any of the company's four Group D roles — there is no permission gating any screen, action, or record. Role is recorded as audit-trail attribution only. Built this way from the start (`navigation.md`), not corrected into it after an earlier role-scoped design.
@@ -36,17 +38,15 @@ Every action is available to any of the company's four Group D roles — there i
 
 ## Payments
 
-**Four distinct timing models, not one** — checked service-by-service in `payments.md`, not assumed uniform:
+**Corrected 2026-08-16 — back to a simpler shape now that Services #12–15 are normalized.** Three distinct timing models, not four:
 
 * **No fee at all** — 19 services (#1–11, #16, #17, #20–23). No payment step ever renders.
-* **Pay before submission completes** — Service #24, and Services #25/#26 (online channel). Submission is blocked until payment succeeds.
-* **Pay after decision** — Services #12–15. Submission completes *without* collecting payment; a separate Complete Payment action becomes available on Application Details once RERA accepts.
-* **Channel-dependent, possibly two-stage** — Services #25/#26 (Service Center channel: pay after audit; online: pay near-upfront; #26 additionally may require a second e-application fee 15 days after notice).
+* **Pay during submission, before the application is lodged** — Services #12–15 (upfront gateway) and #24 (pay-then-output), and Services #25/#26 online channel. Submission is blocked until payment succeeds.
+* **Channel-dependent, possibly two-stage** — Services #25/#26 (Service Center channel: pay after audit; online: covered above; #26 additionally may require a second e-application fee 15 days after notice).
 
-1. **Submission is blocked until payment succeeds, only for the services where payment happens *during* submission** (#24, #25/#26 online). Do not build a single "block submission on unpaid" rule against every fee-bearing service — applied to #12–15, it would make those four services impossible to ever submit, since their payment step doesn't exist yet at submission time.
-2. **For Services #12–15, submission completing without payment is the correct, sourced behavior, not a bug.** The Complete Payment action appears later, on Application Details, gated on the application having reached an Approved/accepted state first.
-3. Service #26's possible second payment (the 15-day follow-up e-application fee) is not itself blocking — whether the follow-up is "necessary" is a RERA determination communicated to the company, not something this module's validation layer can pre-determine.
-4. A failed payment, wherever it occurs in a given service's sequence, is retryable and does not itself constitute an application-lifecycle event.
+1. **Submission is blocked until payment succeeds, for every fee-bearing service this module's wizard handles.** With B4's normalization, this rule is now uniform — the previous version had to explicitly carve out Services #12–15 as an exception (payment happens *after* submission, not before), since their post-decision timing made a blanket submission-blocking rule actively wrong for them. That exception is retired; the rule now applies without qualification.
+2. Service #26's possible second payment (the 15-day follow-up e-application fee) is not itself blocking — whether the follow-up is "necessary" is a RERA determination communicated to the company, not something this module's validation layer can pre-determine.
+3. A failed payment is retryable and does not itself constitute an application-lifecycle event.
 
 ## Documents
 
