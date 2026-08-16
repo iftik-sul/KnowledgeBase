@@ -30,6 +30,8 @@ Every question below carries a **proposed answer**, following the standing instr
 
 **Scope note:** post-login functionality only. Registration and onboarding are excluded.
 
+**2026-08-16 update, post-Phase-5.** Both items flagged for direct client confirmation are now resolved: **A2** — Service #18 stays in Group D, to be wired into the UI. **B4** — Services #12–15 are normalized to pay-before-lodging, matching the precedent set for Financial & Trust Institutions' #1/#12/#18. Both are client decisions, not re-derivations — see each answer below for what changes as a result, and the propagation checklist each carries.
+
 ---
 
 ## A. Roles & Service Structure
@@ -44,13 +46,26 @@ This doesn't change anything about access — per the unified-access decision, a
 
 ### A2. Does row 65 (Real Estate Evaluation Details Certificate) genuinely belong to Group D?
 
-**Provisionally kept in Group D, flagged for client confirmation, not moved unilaterally.**
+**Confirmed 2026-08-16 (client decision) — kept in Group D, to be wired into the UI.**
 
-Row 65's own workflow text reads differently from every other Group D row: "sign up and login via evaluation company option... accept or reject application... make real estate evaluation... add evaluation details, value and notes." The actor accepting or rejecting is the evaluation company itself, processing a customer's request for a valuation — not RERA reviewing a company's own regulatory filing, which is the shape every other Group D row has. This reads as a Group G (Allied Professionals — Valuer role) service that the source table happened to file under Group D's row range.
+Row 65's own workflow text still reads differently from every other Group D row: "sign up and login via evaluation company option... accept or reject application... make real estate evaluation... add evaluation details, value and notes." The actor accepting or rejecting is the evaluation company itself, processing a customer's request for a valuation — not RERA reviewing a company's own regulatory filing, the shape every other Group D row has. That structural oddity is unchanged by this decision; **what's resolved is ownership, not the service's own atypical shape.** The client has confirmed this stays a Group D service on the source table's own terms, rather than being reassigned to an undocumented Group G module.
 
-Against moving it: the source table explicitly assigns this row to Group D in its own Group column, and Group G's roles and services are not yet documented in this project — reassigning it now would mean building Group D content for a service that might belong to an undocumented module. Kept here, provenance flagged in `services-overview.md`, service-flow file (once written) to carry the same flag rather than presenting Group D ownership as settled.
+**What this changes:** Service #18 was excluded from the module's Phase 4 UI build entirely (no catalogue entry, no wizard path, no dashboard reference) pending this decision. It now needs a Phase 4 follow-up pass — see the propagation checklist below. Its own atypical workflow (evaluation company decides, not RERA) still doesn't fit the standard company-to-RERA submission pattern every other service uses, so it needs its own screen treatment, not a forced fit into `submit-application.md`'s Pattern A/B/C shell.
 
-**Confidence:** Medium. **If wrong:** the module's count drops from 26 to 25, and Real Estate Licensing Services from 8 to 7 — both are cleanly reversible if the client confirms reassignment.
+> **Superseded framing (pre-2026-08-16).** Previously: "provisionally kept in Group D, flagged for client confirmation, not moved unilaterally... kept here, provenance flagged... rather than presenting Group D ownership as settled." Ownership is now settled; the underlying structural-oddity observation this answer was built on is preserved above rather than deleted, since it still explains why this service needs different UI treatment from the other 24 selectable services.
+
+**Confidence:** Confirmed (client decision, 2026-08-16).
+
+**Files needing a follow-up pass, not yet done as of this entry:**
+
+* `service-flows/service-18-register-evaluation-details-certificate.md` — remove the "not resolved" provenance framing at the top; update to reflect confirmed status.
+* `services-overview.md` — remove the "provisionally kept... excluded from UI" language in the Row-to-Service Mapping section.
+* `navigation.md` — remove the section excluding Service #18 from the sidebar/catalogue.
+* `role-workflows.md` — add Service #18 to the Licensing cluster's shared journey.
+* `ui/screens/services-catalog.md` — remove the 7-of-8-selectable exclusion note; Licensing becomes 8 of 8 selectable.
+* `ui/screens/service-details.md` and a new atypical-flow screen (not yet designed) for Service #18's evaluation-company-decides shape.
+* `ui/screens/dashboard.md` — remove the Notes-section exclusion.
+* `roles-and-responsibilities.md` — update its own Open Questions item 1, which still describes this as unresolved.
 
 ### A3. Does the JOP category share Group B/C's escrow-Trustee mechanism?
 
@@ -104,15 +119,29 @@ Every Group D workflow goes directly from company submission to RERA audit (Comp
 
 ### B4. Should Model 2's pay-after-decision timing (#12–15) be normalized to pay-before-lodging?
 
-**Proposed: keep the sourced pay-after-decision timing as the default, flagged explicitly as a normalization candidate for the same reason Financial & Trust Institutions' #1, #12, and #18 were normalized.**
+**Confirmed 2026-08-16 (client decision) — normalized to pay-before-lodging, matching Financial & Trust Institutions' #1/#12/#18 precedent.**
 
-The parallel is close: Financial & Trust Institutions' Service #1 (Approval/Renewal) originally paid after RERA's decision, exactly like Group D's #12–15 do now, and the client chose to move it upfront on 2026-08-15, then extended the same normalization to #12/#18 on 2026-08-16 once their post-decision timing was found. Group D's four services are structurally the closest analogue anywhere in the project to what Financial & Trust Institutions' #1 looked like *before* that normalization.
+Payment for Services #12, #13, #14, and #15 now happens as part of submission, via the shared platform gateway, before RERA reviews the application — the same pattern used by the majority of fee-bearing services elsewhere in the project. This retires "Model 2 — Institution Fee Payment (pay after decision)" as a category in `payments.md`: no Group D service pays after RERA's decision any more.
 
-Proposing "keep as sourced" rather than "normalize pre-emptively" because the earlier normalizations were client decisions, not something inferred from source alone — this document doesn't get to decide the client wants Group D built the same way without being asked. But flagging it this explicitly, rather than leaving it as a routine payment-timing note, means the question is visible early rather than discovered mid-build the way it was for Group C.
+**This is a genuinely new decision, not a re-derivation** — row 59–62's own sourced sequence ("audit and acceptance; log in, select payment, pay") was correctly read the first time; the client has decided to build differently from what the source describes, the same framing Financial & Trust Institutions' equivalent corrections used for their own #1/#12/#18.
 
-**Confidence:** Medium on "keep as sourced" being the right default to build against; High on "this is a real candidate the client should be asked about directly," given the close precedent.
+> **Superseded framing (pre-2026-08-16).** Previously proposed: "keep the sourced pay-after-decision timing as the default... flagged explicitly as a normalization candidate." That was the right way to build *before* the client weighed in — a proposed default, not an assumption the answer was already known. The client has since confirmed the normalization directly.
 
-**If the client says normalize:** Model 2 folds into Model 3 (pay-then-output), and #12–15's service-flow files, `payments.md`, and any UI built in Phase 4 all need the same kind of multi-file correction Financial & Trust Institutions needed on 2026-08-16 — worth getting this answer *before* Phase 3 rather than after, unlike how it happened for Group C.
+**Confidence:** Confirmed (client decision, 2026-08-16).
+
+**Files needing a follow-up pass, not yet done as of this entry:**
+
+* `payments.md` — retire Model 2, fold #12–15 into an upfront-payment model (distinct from #24's pay-then-output Model 3, since #12–15 now pay *before* RERA review rather than as the last step before output).
+* `service-flows/service-12` through `service-15` — Sections 9, 12, 13, 20, 21 each need the same kind of correction Financial & Trust Institutions' #1/#12/#18 needed.
+* `role-workflows.md` — the Licensing cluster's shared-journey description still says "audit/acceptance → pay → receive output."
+* `ui/screens/submit-application.md` — Section 5's branching for #12–15 (payment skipped during submission, collected later) needs removing; these four services fold into the same submission-time payment step as #24.
+* `ui/screens/application-review.md` — Section 5 (Payment Confirmation) now applies to #12–15 as well as #24/#25/#26 online.
+* `ui/screens/application-details.md` — remove the "Currently with... payment due," the Payment Pending progress step, and the Complete Payment action, all built specifically for #12–15's old timing.
+* `ui/screens/applications.md` — remove or update the Awaiting Payment status card's #12–15-specific framing.
+* `ui/screens/notifications.md` — remove the Payment Due Priority Alert category, built specifically for this now-retired timing.
+* `ui/status-badges.md` — remove the Payment Pending application status.
+* `ui/validation-rules.md` — simplify the Payments section's four-model description; the submission-blocking rule no longer needs to carve out an exception for #12–15.
+* `shared-platform-features.md` — the "Features Considered and Not Built" Payment History note cites #12–15's payment-due tracking as a reason it might be needed; re-evaluate now that the scenario no longer exists.
 
 ### B5. Exact fee amounts
 
@@ -128,7 +157,7 @@ Proposing "keep as sourced" rather than "normalize pre-emptively" because the ea
 
 **Adopt D1 as-is** — the platform-core lifecycle (Draft → Submitted → Under Review → Information Requested → Returned for Correction → Approved → Rejected → Completed → Withdrawn → Expired) that Financial & Trust Institutions' D1 already established, with no Group D extension needed.
 
-Financial & Trust Institutions added a Group C extension (`Pending Internal Certification`, `Returned by Certifier`) because its mortgage/lease services source an internal certification gate. Per A5 above, Group D has no such gate anywhere — so Group D needs the platform core only, unextended. This is the first module in the project confirmed to need no module-specific extension at all.
+Financial & Trust Institutions added a Group C extension (`Pending Internal Certification`, `Returned by Certifier`) because its mortgage/lease services source an internal certification gate. Per A5 above, Group D has no such gate anywhere — so Group D needs the platform core only, unextended. **With B4's normalization, this is now true without exception** — the platform core needs no Group D extension at all, not even the narrower `Payment Pending` addition this module briefly carried for #12–15 during Phase 4.
 
 **Confidence:** High, adopted from D1 directly.
 
@@ -149,13 +178,11 @@ Financial & Trust Institutions added a Group C extension (`Pending Internal Cert
 | C. Platform-Wide | 2 | 2 | 0 |
 | **Total** | **12** | **12** | **1** |
 
-**One item flagged for direct client confirmation, distinct from B5's fee-amount question, which is expected to remain unanswerable from source alone:**
+**Both items previously flagged for direct client confirmation are now resolved (2026-08-16):**
 
-* **B4** — whether Group D's Licensing services (#12–15) should be normalized to pay-before-lodging, matching the precedent set by Financial & Trust Institutions' #1/#12/#18. Proposed answer is to build against the sourced timing and ask directly, rather than normalize pre-emptively or leave the question implicit until Phase 4 the way it happened for Group C.
+* ~~**B4**~~ — confirmed: Services #12–15 normalized to pay-before-lodging, matching Financial & Trust Institutions' #1/#12/#18 precedent.
+* ~~**A2**~~ — confirmed: Service #18 stays in Group D, to be wired into the UI in a Phase 4 follow-up pass.
 
-**Also flagged, lower priority:**
+**A4** remains flagged, lower priority, with a proposed answer this document is building against — the row-60 permit-bundling question is still reversible if the client says otherwise, and hasn't been raised directly the way A2 and B4 were.
 
-* **A2** — row 65's Group D vs. Group G provenance.
-* **A4** — row 60's single-service-with-a-type-field treatment.
-
-Neither A2 nor A4 blocks Phase 3 — both have a proposed answer this document is building against, and both are cleanly reversible if the client says otherwise.
+**Propagation is not yet complete for either resolved item** — both entries above carry a "Files needing a follow-up pass" checklist. Per the module's own established discipline (see Financial & Trust Institutions' three-pass `Approved — Awaiting Payment` history for what happens when this step is skipped), a decision recorded here is not the same as a decision executed everywhere it's referenced. Treat this document's Confirmed status as the record of the decision, not evidence the rest of the module already reflects it.
