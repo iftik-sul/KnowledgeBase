@@ -19,11 +19,13 @@ tags:
 
 Every vocabulary here is checked against the individual service-flow files' own Section 13 (Application Status Flow), not against a UI screen's filter dropdown values. **This distinction matters specifically because Financial & Trust Institutions built this exact mistake into its own `status-badges.md` on 2026-08-15 and needed a same-day multi-file correction to fix it** — see that module's own file for the full history. Building this module's vocabulary the correct way from the start, rather than risking the same error and correcting it later.
 
+> **Corrected 2026-08-16, by client decision (`open-questions.md` B4).** The `Payment Pending` application status, added specifically for Services #12–15's post-decision payment timing, is removed. Those four services now pay upfront, before lodging, the same as most fee-bearing services in the project.
+
 ## Application Status
 
 Used on: Submit Application, Application Review, Applications, Application Details, Dashboard.
 
-Per `open-questions.md` C1, Group D adopts the platform-core lifecycle (D1, established in Financial & Trust Institutions' `open-questions.md`) **unextended** — no `Pending Internal Certification` / `Returned by Certifier` states, since no Group D service sources an internal certification gate (`open-questions.md` A5).
+Per `open-questions.md` C1, Group D adopts the platform-core lifecycle (D1, established in Financial & Trust Institutions' `open-questions.md`) **unextended, without exception** — no `Pending Internal Certification` / `Returned by Certifier` states (no internal certification gate exists anywhere in Group D, A5), and, as of 2026-08-16, no `Payment Pending` addition either.
 
 | Status | Treatment | Meaning |
 | :---- | :---- | :---- |
@@ -33,12 +35,13 @@ Per `open-questions.md` C1, Group D adopts the platform-core lifecycle (D1, esta
 | Information Requested | Warning | RERA has raised a query |
 | Returned for Correction | Warning | Sent back to the company |
 | Approved | Success | RERA has approved |
-| **Payment Pending** | **Warning** | **Services #12–15 only — approved, payment now required before completion** |
 | Rejected | Error | Refused, with documented reason |
 | Completed | Success | Settled and output document issued |
 | Withdrawn | Neutral | Abandoned by the company |
 
-**Payment Pending is checked directly against Services #12, #13, #14, and #15's own Section 9 and Section 13** — each sources payment happening after acceptance, not before. This is a genuinely different situation from Financial & Trust Institutions' now-retired `Approved — Awaiting Payment` (which was normalized away by client decision on 2026-08-16): Group D's #12–15 have not been normalized, and nothing in this module's build has changed their sourced sequencing. If `open-questions.md` B4 resolves toward normalizing these four services, this status should be revisited and likely removed the same way Financial & Trust Institutions' was.
+**`Payment Pending` no longer appears in this table — see the corrected banner note above.** This module briefly carried the status during Phase 4, scoped specifically to Services #12–15's then-sourced post-decision payment timing. That timing was normalized on 2026-08-16 (`open-questions.md` B4), the same day Financial & Trust Institutions' own comparable `Approved — Awaiting Payment` status was retired for the same underlying reason (its own #12/#18 normalization) — two unrelated modules reaching the same status-removal outcome via the same mechanism, on the same day, coincidentally.
+
+**This module now has the simplest Application Status vocabulary of any documented so far** — the platform core, entirely unextended. No other module has achieved this: Financial & Trust Institutions needed its own Group C extension for internal certification; Individual User's vocabulary varies by service pattern.
 
 ## Jointly Owned Property Supervision Status
 
@@ -87,9 +90,10 @@ Used on: Applications (filter and column, not a record-level status badge in the
 | Value | Meaning |
 | :---- | :---- |
 | No Fee | 19 services — nothing to pay, ever |
-| Pending | Payment required before submission completes (#24, #25/#26 online) |
-| Awaiting Payment | Post-decision payment required (#12–15 only) |
+| Pending | Payment required as part of submission (#12–15, #24, #25/#26 online) |
 | Paid | Payment settled |
+
+**Corrected 2026-08-16 — `Awaiting Payment` (post-decision) removed.** With Services #12–15 normalized to pay before lodging, every fee-bearing service in this module now shows either `Pending` (during submission) or `Paid` (settled) — no service ever sits in an approved-but-unpaid intermediate state.
 
 This is a coarser, filter-level vocabulary layered over Application Status above, not a separate badge shown on every record — most Group D applications (the 19 no-fee services) never show a Payment State value at all beyond "No Fee."
 
