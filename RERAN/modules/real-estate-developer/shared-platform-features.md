@@ -11,6 +11,7 @@ derived_from:
   - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/modules/real-estate-developer/service-flows/service-01-register-initial-sale.md"
   - "RERAN/modules/real-estate-developer/service-flows/service-06-register-mortgage-linked-sale.md"
+  - "RERAN/modules/real-estate-developer/service-flows/service-08-activate-escrow-account.md"
   - "RERAN/modules/real-estate-developer/service-flows/service-10-withdraw-project-profit.md"
   - "RERAN/modules/real-estate-developer/service-flows/service-13-register-real-estate-project.md"
 tags:
@@ -30,8 +31,8 @@ tags:
 * [Feature #1 — Applications](service-flows/feature-01-applications.md) — the cross-cutting post-submission workspace: tracking, responding to RERA information requests, resubmitting after a return, downloading outputs. `applications.md` + `application-details.md` are the only screens covering anything post-submission — there was never a dedicated screen for tracking, responding, or resubmitting as separate things.
 * [Feature #2 — Projects](service-flows/feature-02-projects.md) — Services #13–19 (project registration, cancellation, subdivision, rename, re-registration, settlements, termination). Confirmed via service-13's `derived_from`.
 * [Feature #3 — Property Registrations](service-flows/feature-03-property-registrations.md) — Services #1–7 (initial sale, rent-to-own, usufruct, amendments, mortgage-linked sale, fee transfers). Confirmed via **two** services' `derived_from` (service-01 and service-06), not just one — the module's highest-volume domain workspace.
-* [Feature #4 — Escrow Management](service-flows/feature-04-escrow-management.md) — Services #8–9, #20–21 (escrow activation, transfer, mortgage deposit, bank guarantee cancellation). Confirmed via service-08's `derived_from`; the module's own README flags cardinality mismatches for #9, #20, #21 against this screen — the mapping is directionally right but not field-exact, flagged rather than resolved. Its Fund Release Status vocabulary is now the **canonical cross-module status** for all six developer escrow request types — see Cross-Module Resolution below.
-* [Feature #5 — Fund Release Request](service-flows/feature-05-fund-release-request.md) — Services #10, #12 (project profit withdrawal, receive escrow payment). Confirmed via service-10's `derived_from`. **Carries a genuinely unresolved UI mismatch, flagged at source and not resolved here**: the screen is shaped as a milestone/construction-draw request, and Service #10 (a margin distribution, not a milestone draw) is documented against it as the closest match, not a confirmed fit. Its detailed 9-stage tracker is now mapped onto Feature #4's canonical vocabulary — see Cross-Module Resolution below.
+* [Feature #4 — Escrow Management](service-flows/feature-04-escrow-management.md) — Services #8–9, #20–21 (escrow activation, transfer, mortgage deposit, bank guarantee cancellation). Confirmed via service-08's `derived_from`; the module's own README flags cardinality mismatches for #9, #20, #21 against this screen — the mapping is directionally right but not field-exact, flagged rather than resolved. **Status vocabulary corrected 2026-08-16** — see Cross-Module Correction below.
+* [Feature #5 — Fund Release Request](service-flows/feature-05-fund-release-request.md) — Services #10, #12 (project profit withdrawal, receive escrow payment). Confirmed via service-10's `derived_from`. **Carries a genuinely unresolved UI mismatch, flagged at source and not resolved here**: the screen is shaped as a milestone/construction-draw request, and Service #10 (a margin distribution, not a milestone draw) is documented against it as the closest match, not a confirmed fit. **Status vocabulary corrected 2026-08-16** — see Cross-Module Correction below.
 * [Feature #6 — Sales & Disclosures](service-flows/feature-06-sales-and-disclosures.md) — **resolved 2026-08-16, not a domain workspace tied to a numbered service.** Checked directly: Services #1 and #6 both cite Property Registrations in their own `derived_from`, not this screen — so this is a **compliance-tracking layer** (sale record + separate disclosure obligation, two lifecycles) running parallel to Property Registrations, the same shape as financial-trust-institutions' Compliance Reports feature. **Whether every Property Registrations sale requires a Sales & Disclosures filing is itself unresolved** — flagged as an open question in the document itself, not assumed.
 
 ## General Platform (6)
@@ -53,17 +54,19 @@ All six rebuilt 2026-08-15 from four role-based designs into one screen apiece, 
 | General Platform | 6 | Written |
 | **Total** | **12** | **12 of 12 written** |
 
-## Cross-Module Resolution: Escrow Status Vocabulary
+## Cross-Module Correction: Escrow Status Vocabulary
 
-**Resolved 2026-08-16, by client decision.** Three documents describe what should be the same underlying escrow-and-fund-release transactions once they leave the developer, and their status vocabularies previously didn't match. Resolved by adopting this module's own Escrow Management vocabulary as canonical across both modules:
+**Corrected 2026-08-16, superseding an earlier same-day resolution that was itself wrong.** The first pass adopted `No Request → Pending Approval → Under Review → Approved → Released` as canonical — this was taken from Escrow Management's own UI screen filter values, never checked against the individual service files it was meant to describe.
 
-**Canonical status:** `No Request → Pending Approval → Under Review → Approved → Released`, or `Returned` / `Rejected`.
+**Checked directly against all six escrow service files (#8, #9, #10, #12, #20, #21) — all six independently use the same sourced vocabulary:**
 
-Applied as follows:
+`Draft → Submitted → Trustee Review → RERA Escrow Audit → Approved → [service-specific terminal state]`, plus additional statuses `Information Requested / Returned / Rejected`. The terminal state varies by service: `Active` (#8), `Transferred` (#9), `Released` (#10, #12), `Deposited` (#20), `Cancelled` (#21).
 
-* **This module's Escrow Management (Feature #4)** already used this vocabulary — now declared canonical, no change needed.
-* **This module's Fund Release Request (Feature #5)** keeps its own detailed 9-stage progress tracker for its screen's own UI, but each stage now explicitly maps onto the canonical vocabulary — `Under Bank Review` and `Under RERA Review` both fall under canonical `Under Review`.
-* **Financial & Trust Institutions' Escrow Request Queue** is renamed to match: `Awaiting Assessment` → `Pending Approval`, `Under Assessment` → `Under Review`. This also closes that feature's own previous gap, where `Certified` was shown as a terminal status with nothing representing RERA's subsequent review — `Under Review` now explicitly continues through RERA's audit after the institution's Certify action, only becoming `Approved` once RERA decides and `Released` once funds move.
+**This is now the corrected canonical vocabulary, applied as follows:**
+
+* **This module's Escrow Management (Feature #4)** — corrected to use the sourced vocabulary; its own UI screen's filter values are retained as filter labels only, no longer treated as the status flow itself.
+* **This module's Fund Release Request (Feature #5)** — its 9-stage detailed tracker now maps onto the sourced vocabulary (`Trustee Review`, `RERA Escrow Audit`), not the incorrect one; its "Under Bank Review" label is also corrected — the reviewing party is the Account Trustee, not a bank.
+* **Financial & Trust Institutions' Escrow Request Queue** — corrected to the same sourced vocabulary, which fixes that feature's original gap (no status for RERA's post-certification review) more precisely than the first correction did: `RERA Escrow Audit` is now an explicit named stage, not an ambiguous continuation of a shared "Under Review."
 
 See Features #4 and #5's own Feature Overview sections, and financial-trust-institutions' `feature-04-escrow-request-queue.md`, for the full detail.
 
