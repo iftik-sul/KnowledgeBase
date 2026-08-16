@@ -9,6 +9,7 @@ updated: 2026-08-16
 derived_from:
   - "RERAN/modules/real-estate-developer/ui/screens/fund-release-request.md"
   - "RERAN/modules/real-estate-developer/service-flows/service-10-withdraw-project-profit.md"
+  - "RERAN/modules/real-estate-developer/service-flows/service-12-receive-escrow-payment.md"
   - "RERAN/modules/real-estate-developer/navigation.md"
 tags:
   - real-estate-developer
@@ -23,19 +24,19 @@ tags:
 
 ## 1. Feature Overview
 
-**Fund Release Request** is the operational workspace for preparing and submitting a milestone-based release request against a project escrow account — reached from Escrow Details (Feature #4), but tracked and processed as its own object with its own detailed progress tracker, engineer/quantity-surveyor verification, and bank-then-RERA review chain.
+**Fund Release Request** is the operational workspace for preparing and submitting a milestone-based release request against a project escrow account — reached from Escrow Details (Feature #4), but tracked and processed as its own object with its own detailed progress tracker, engineer/quantity-surveyor verification, and Trustee-then-RERA review chain.
 
-> **Cross-module status vocabulary — resolved 2026-08-16.** `No Request → Pending Approval → Under Review → Approved → Released` (Feature #4's Fund Release Status) is now the canonical cross-module status for Services #10/#12, matching financial-trust-institutions' Escrow Request Queue. This feature's own 9-stage tracker (Section 13) remains as the detailed progress view for this specific screen — it doesn't disappear — but now explicitly maps onto the canonical vocabulary: pre-submission stages (`Draft` through `Validation Passed`) fall under canonical `No Request`; `Submitted` marks the transition to `Pending Approval`; `Under Bank Review` and `Under RERA Review` are both sub-stages of canonical `Under Review` (the institution's assessment and RERA's subsequent audit, respectively — the same reconciliation applied on the institution's side); `Approved` and `Funds Released` map directly to their canonical counterparts.
+> **Cross-module status vocabulary — corrected 2026-08-16, superseding an earlier same-day resolution.** A first pass mapped this screen's own 9-stage tracker onto `No Request → Pending Approval → Under Review → Approved → Released`, taken from a UI screen's filter values. That was wrong: neither Service #10 nor Service #12's own file uses those terms. Both — verified directly — use `Draft → Submitted → Trustee Review → RERA Escrow Audit → Approved → Released`, with additional statuses `Information Requested / Returned / Rejected`, identical to the vocabulary sourced for the other four escrow services (Feature #4). **The screen's own "Under Bank Review" label is also corrected** — the source calls the reviewing party the **Account Trustee**, not a bank; "Bank Review" in the UI screen's own stage names appears to be the screen's own imprecision, not a sourced distinction. See Section 13 for the corrected mapping.
 
 ## 2. Purpose
 
-Give any developer user a complete workspace to specify a construction milestone, request the eligible release amount, upload supporting verification documents, respond to bank or RERA queries, and monitor the request through to funds released.
+Give any developer user a complete workspace to specify a construction milestone, request the eligible release amount, upload supporting verification documents, respond to Trustee or RERA queries, and monitor the request through to funds released.
 
 ## 3. Description
 
 The source documents only one variant of this screen, under the Escrow Liaison heading, with no second variant to reconcile — unlike every other domain workspace in this module. It is reachable and actionable by all four roles regardless. **A UI mismatch is flagged at source**, carried forward honestly rather than resolved by assumption: the screen is shaped as a milestone/construction-draw request (engineer and quantity-surveyor verification, percentage-of-completion tracking), and Service #10 (Project Profit Withdrawal — a margin distribution, not a milestone draw) is documented against it as the closest match, not a confirmed fit.
 
-The request moves through a nine-stage detailed tracker (Draft → Information Completed → Documents Uploaded → Validation Passed → Submitted → Under Bank Review → Under RERA Review → Approved → Funds Released), which now maps onto the canonical five-stage cross-module vocabulary — see Feature Overview. The system auto-calculates the maximum eligible release amount against the approved milestone schedule and current escrow balance, flagging any request that exceeds it.
+The request moves through a nine-stage detailed tracker (Draft → Information Completed → Documents Uploaded → Validation Passed → Submitted → Under Bank Review → Under RERA Review → Approved → Funds Released), which is this screen's own UI-layer progress view — see Section 13 for how it maps onto the sourced status vocabulary from Services #10 and #12's own files. The system auto-calculates the maximum eligible release amount against the approved milestone schedule and current escrow balance, flagging any request that exceeds it.
 
 ## 4. Used By
 
@@ -71,19 +72,19 @@ Engineer and Quantity Surveyor supporting documents are mandatory before submiss
 
 ## 8. Service Fee
 
-Set by the underlying service (#10 or #12) — see each service's own Section 8.
+**No RERA service fee, for either service** — confirmed directly against both Service #10 and Service #12's own files. Neither disburses funds via a fee-collecting mechanism; both instead disburse funds *to* the developer.
 
 ## 9. Payment Required
 
-Not a payment-collecting action itself — this feature releases funds *from* escrow rather than collecting a fee. Consult Service #10/#12's own Section 9 for whether either carries a separate RERA fee alongside the release.
+**No, for either service.** Not a payment-collecting action — this feature releases funds *from* escrow. Confirmed against both Service #10 and Service #12's own Section 9, not merely inferred.
 
 ## 10. Processing Authority
 
-**Bank review, then RERA review, in sequence** — distinct from most of this module's services, which go directly to RERA. Both are sub-stages of the canonical `Under Review` status (see Feature Overview). Any of the developer's four Group B roles may prepare and submit; no role restriction despite the source documenting only the Escrow Liaison's typical workflow.
+**Account Trustee** (Financial & Trust Institutions module) first, escalating to **RERA's Escrow Department** for final audit — the same two-stage chain used across all six escrow services (Feature #4), not a "bank" as the screen's own stage labels suggest. Any of the developer's four Group B roles may prepare and submit; no role restriction despite the source documenting only the Escrow Liaison's typical workflow.
 
 ## 11. Expected Processing Time
 
-Not given a single figure in source — spans two sequential review stages (bank, then RERA); see Service #10/#12's own Section 11 for whatever timing is sourced there.
+Sourced per service, as a waiting-time/service-delivery pair: Service #10 — 29/33 business hours; Service #12 — 29/28 business hours.
 
 ## 12. Processing Workflow
 
@@ -99,45 +100,49 @@ Validation Summary (escrow active, milestone eligible, amount within limit, both
 ↓
 Submit Request
 ↓
-Under Bank Review → Under RERA Review
+Account Trustee Reviews, Assesses Solvency, Uploads Assessment
 ↓
-Approved → Funds Released
+RERA Escrow Department Audits: Approve or Reject
+↓
+If Approved, Funds Released
 
 ## 13. Application Status Flow
 
-**Detailed tracker (this screen's own progress view):**
-Draft → Information Completed → Documents Uploaded → Validation Passed → Submitted → Under Bank Review → Under RERA Review → Approved → Funds Released
+**Corrected 2026-08-16.** Sourced directly from Service #10 and Service #12's own files, not from this screen's own UI stage labels:
 
-**Mapped onto the canonical cross-module vocabulary (resolved 2026-08-16):**
+Draft → Submitted → Trustee Review → RERA Escrow Audit → Approved → Released
 
-| Detailed stage | Canonical status |
+Additional statuses (both services): Information Requested, Returned, Rejected.
+
+**This screen's own 9-stage detailed tracker maps onto the sourced vocabulary as follows:**
+
+| Detailed tracker stage | Sourced status |
 | :---- | :---- |
-| Draft, Information Completed, Documents Uploaded, Validation Passed | No Request |
-| Submitted | Pending Approval |
-| Under Bank Review | Under Review *(institution's assessment)* |
-| Under RERA Review | Under Review *(RERA's audit, same canonical status)* |
+| Draft, Information Completed, Documents Uploaded, Validation Passed | Draft |
+| Submitted | Submitted |
+| Under Bank Review | Trustee Review *(the reviewing party is the Account Trustee, not a bank — screen-label correction)* |
+| Under RERA Review | RERA Escrow Audit |
 | Approved | Approved |
 | Funds Released | Released |
 
-Additional: Information Requested (from bank or RERA, via the Queries table) → Response Submitted → review resumes, staying within canonical `Under Review` throughout. **Approved or Funds Released requests become read-only** except for viewing/downloading — a lifecycle rule applying to every user equally, not a role restriction.
+**Superseded by this correction**: the previous mapping onto `No Request / Pending Approval / Under Review / Approved / Released`, which was itself taken from a different screen's UI filter values and never checked against Service #10 or #12's own files. Approved or Released requests remain read-only except for viewing/downloading — a lifecycle rule applying to every user equally, not a role restriction — unaffected by this correction.
 
 ## 14. Possible Outcomes
 
 * Funds Released
-* Additional Information Requested (bank or RERA)
+* Additional Information Requested (Trustee or RERA)
 * Request Returned / Rejected
 * Requested Amount Exceeds Eligible Limit *(flagged automatically, not blocking entry but requiring correction before submission)*
 
 ## 15. Output
 
-* Funds released to the developer, recorded against the escrow account's balance
-* Full Activity Timeline of the request, from creation through funds transferred
+Not specified in source for either service ("no doc" against each row) — each service's own Section 15 proposes an in-system disbursement confirmation record; needs client confirmation.
 
 ## 16. Related Features
 
-* Escrow Management *(Feature #4 — where this feature is reached from, via Escrow Details, and whose canonical status vocabulary this feature's detailed tracker now maps onto)*
+* Escrow Management *(Feature #4 — where this feature is reached from, via Escrow Details, and whose sourced status vocabulary this feature now shares)*
 * Applications *(Feature #1)*
-* Financial & Trust Institutions' Escrow Request Queue *(cross-module — the institution's side of this same transaction; **status vocabulary reconciled 2026-08-16**, see Feature Overview)*
+* Financial & Trust Institutions' Escrow Request Queue *(cross-module — the institution's side of this same transaction; **status vocabulary corrected 2026-08-16**, see Feature Overview)*
 
 ## 17. UI Screens
 
@@ -149,7 +154,7 @@ Additional: Information Requested (from bank or RERA, via the Queries table) →
 * Calculate Eligible Release Amount
 * Upload Documents
 * Validate Release Request (per Section 7's checks)
-* Submit to Bank Review, then RERA Review
+* Submit to Account Trustee Review, then RERA Escrow Audit
 * Respond to Queries
 * Record Funds Release
 * Send Notifications
@@ -168,22 +173,22 @@ Additional: Information Requested (from bank or RERA, via the Queries table) →
 * Any of the developer's four Group B roles can prepare and submit a fund release request.
 * Engineer and Quantity Surveyor verification documents are mandatory before submission.
 * The system flags a requested amount exceeding the eligible limit before allowing submission.
-* The request passes through Bank Review before RERA Review, in that order, both within canonical `Under Review`.
-* Approved or Funds Released requests are read-only for every user.
+* The request passes through Account Trustee review before RERA's escrow audit, in that order.
+* Approved or Released requests are read-only for every user.
 * The full Activity Timeline is recorded and immutable.
-* This feature's detailed tracker maps cleanly onto the canonical cross-module vocabulary at every point.
+* This feature's detailed tracker maps cleanly onto the sourced status vocabulary at every point.
 
 ## 21. Business Rules
 
 1. One fund release request is associated with a single construction milestone.
 2. The maximum eligible release amount is auto-calculated against the approved milestone schedule and current escrow balance.
 3. Engineer and Quantity Surveyor supporting documents are mandatory before submission.
-4. The request must pass Bank Review before entering RERA Review; both are sub-stages of canonical `Under Review`.
-5. Approved or Funds Released requests become read-only for every user, not role-dependent.
-6. All actions and communications are permanently recorded in the Activity Timeline for audit and regulatory compliance.
+4. The request must pass Account Trustee review before entering RERA's escrow audit.
+5. Approved or Released requests become read-only for every user, not role-dependent.
+6. Neither Service #10 nor Service #12 requires payment at any point.
+7. All actions and communications are permanently recorded in the Activity Timeline for audit and regulatory compliance.
 
 ## Open Questions
 
 1. **Genuinely unresolved, flagged at source**: is Service #10 (Project Profit Withdrawal) actually the right fit for this screen's milestone/construction-draw shape, or is this a structural mismatch needing its own resolution? Not assumed away.
-2. Expected processing time is not given a single sourced figure spanning both review stages — needs client confirmation.
-3. Same adoption question as Feature #1 — needs client confirmation.
+2. Same adoption question as Feature #1 — needs client confirmation.
