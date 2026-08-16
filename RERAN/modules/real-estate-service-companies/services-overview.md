@@ -8,6 +8,7 @@ derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/real-estate-service-companies/roles-and-responsibilities.md"
   - "RERAN/modules/real-estate-service-companies/shared-platform-features.md"
+  - "RERAN/modules/real-estate-service-companies/open-questions.md"
 tags:
   - real-estate-service-companies
   - services-overview
@@ -45,7 +46,7 @@ These services cover the firm's own licence, permits, professional practice card
 * Service #15 – Renew Professional Practice Card
 * Service #16 – Cancel Professional Practice Card
 * Service #17 – Amend Professional Practice Card
-* Service #18 – Register Real Estate Evaluation Details Certificate *(provenance flagged — see below; excluded from the module's UI as built)*
+* Service #18 – Register Real Estate Evaluation Details Certificate *(confirmed in Group D 2026-08-16 — see below; own screen not yet designed)*
 * Service #19 – Accreditation of Training Entities
 
 ### 3. Real Estate Rental Services
@@ -113,7 +114,7 @@ Every service file's frontmatter will carry a `source_type` field, per the house
 | 15 | 62 | Real Estate Licensing |
 | 16 | 63 | Real Estate Licensing |
 | 17 | 64 | Real Estate Licensing |
-| 18 | 65 | Real Estate Licensing *(provenance flagged — see below)* |
+| 18 | 65 | Real Estate Licensing *(confirmed 2026-08-16 — see below)* |
 | 19 | 66 | Real Estate Licensing |
 | 20 | 67 | Real Estate Rental |
 | 21 | 68 | Real Estate Rental |
@@ -123,13 +124,15 @@ Every service file's frontmatter will carry a `source_type` field, per the house
 | 25 | 57 | Real Estate Dispute |
 | 26 | 58 | Real Estate Dispute |
 
-**Row 65 provenance flag, carried from `roles-and-responsibilities.md`.** This row's own workflow text ("sign up and login via evaluation company option... make real estate evaluation") reads as a Valuer-facing service (Group G — Allied Professionals & Service Trustees), not a Brokerage service. It is provisionally kept in Group D's catalogue, matching the source table's own group assignment (D), but flagged for confirmation in `open-questions.md` before treating that assignment as settled. **As of Phase 4, this flag has a concrete consequence**: `navigation.md` excludes Service #18 from the module's built UI entirely — no catalogue entry, no submission wizard path, no dashboard reference — rather than building screens against a service that may move modules. If reassigned to Group G, this module's total would drop to 25 and Real Estate Licensing Services to 7 — noted here so the count is traceable either way; if confirmed to stay in Group D, Phase 4's UI package needs a follow-up pass to wire the service back in.
+**Row 65 provenance — resolved 2026-08-16 (client decision, `open-questions.md` A2).** This row's own workflow text ("sign up and login via evaluation company option... make real estate evaluation") still reads as a Valuer-facing service (Group G — Allied Professionals & Service Trustees), not a Brokerage service in its actual mechanics. **Ownership is now settled, not the underlying structural oddity**: the client has confirmed this stays in Group D, on the source table's own group assignment, rather than moving to an undocumented Group G module. The module's total remains 26; Real Estate Licensing Services remains 8.
+
+**What changed as a result:** the Phase 4 UI package excluded Service #18 entirely (`navigation.md`, `ui/screens/services-catalog.md`, `ui/screens/dashboard.md` all carried explicit exclusion notes pending this decision). Those exclusions are being corrected in a follow-up pass; Service #18 itself still has no designed screen, since its own atypical workflow (the evaluation company decides, not RERA) doesn't fit the shared Submit Application wizard every other service uses — see `service-flows/service-18-register-evaluation-details-certificate.md`'s own Open Questions for what's still genuinely unresolved now that ownership is settled.
 
 **Row 60 (Real Estate Permit Application) may bundle multiple permit sub-types.** Its channel column lists "Electronic, classified, billboard, and SMS advertisement permits" as distinct permit types under one row. Resolved provisionally in `open-questions.md` A4 as one service with a Permit Type field, and built that way in `ui/screens/submit-application.md` — Pattern A, not split into multiple services. Flagged as Medium confidence, reversible if wrong.
 
 ## Shared Platform Features
 
-**Populated as of Phase 5.** Derived bottom-up from the module's 12 built UI screens, not proposed by analogy to another module — see [shared-platform-features.md](shared-platform-features.md) for the full derivation and reasoning.
+**Populated as of Phase 5, corrected 2026-08-16 for two client decisions.** Derived bottom-up from the module's 12 built UI screens, not proposed by analogy to another module — see [shared-platform-features.md](shared-platform-features.md) for the full derivation and reasoning.
 
 **8 features**, fewer than Financial & Trust Institutions' 12 or Real Estate Developer's 13:
 
@@ -140,6 +143,8 @@ Every service file's frontmatter will carry a `source_type` field, per the house
 | General Platform | Dashboard, Documents, Notifications, Company Profile, Help & Support |
 
 The lower count is a direct consequence of what Group D's own source material does and doesn't contain — no internal certification gate, no Trustee-mediated escrow mechanism, no sourced recurring compliance-reporting obligation — not an indication the module is smaller or simpler than it is (26 services is comparable in scale to Financial & Trust Institutions' 18).
+
+**Payment timing for Services #12–15 (Real Estate Licensing Application, Permit, Issue Card, Renew Card) is normalized to pay-before-lodging, per `open-questions.md` B4 (client decision, 2026-08-16).** These four services now pay upfront, via the shared platform gateway, before RERA reviews the application — the same pattern used by most fee-bearing services across the project. See `payments.md` for the full model breakdown.
 
 ## The Difference
 
