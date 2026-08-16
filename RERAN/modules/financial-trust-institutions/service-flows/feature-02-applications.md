@@ -108,7 +108,9 @@ No additional fee for any of tracking, responding, or resubmitting — all form 
 
 ## 9. Payment Required
 
-**No**, for tracking, responding, or resubmitting. (Where the original application's payment model places payment after RERA's decision — Services #12, #18 — that timing is unaffected by activity in this feature.)
+**No**, for tracking, responding, or resubmitting.
+
+**Corrected 2026-08-16** — this section previously carried a parenthetical about Services #12/#18's payment timing falling after RERA's decision, and how that timing was unaffected by activity in this feature. The client has since normalized both services to pay before RERA's decision, the same as #13–#17 — there is no post-decision payment timing left anywhere in the module for this parenthetical to describe.
 
 ## 10. Processing Authority
 
@@ -144,8 +146,6 @@ Returned for Correction → Resubmitted → Under Review *(loop, via 3c)*
 ↓
 Approved / Rejected
 ↓
-Approved — Awaiting Payment *(Services #12 and #18 only)*
-↓
 Completed
 
 Possible additional statuses
@@ -153,7 +153,9 @@ Possible additional statuses
 * Pending Internal Certification / Returned by Certifier *(Services #3–#11 only — displayed here, acted on via Internal Certification Queue)*
 * Withdrawn
 
-**Status vocabulary genuinely differs by service** — only Services #3–#11 carry the internal-certification statuses, and only Services #12/#18 carry `Approved — Awaiting Payment`. See `services-overview.md`'s Application Status Vocabulary section and each service's own Section 13.
+**Corrected 2026-08-16** — `Approved — Awaiting Payment` (previously listed between Approved/Rejected and Completed, scoped to Services #12 and #18) is removed. Both services now pay at the counter before RERA's decision, the same as #13–#17; no Group C service reaches Approved with payment still outstanding. See [status-badges.md](../ui/status-badges.md#application-status) for the full history of this status.
+
+**Status vocabulary genuinely differs by service** — only Services #3–#11 carry the internal-certification statuses. See `services-overview.md`'s Application Status Vocabulary section and each service's own Section 13.
 
 ## 14. Possible Outcomes
 
