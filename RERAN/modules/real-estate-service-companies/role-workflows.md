@@ -20,7 +20,7 @@ The path any user of a Group D company account takes through the system, from lo
 
 **Proposed.** Group D's roles are described in the source; the post-login journey below is reconstructed from the 26 services this module documents, following the unified-access model from the start (`navigation.md`) rather than describing four separate role-bound journeys that would later need correcting into one.
 
-**Corrected 2026-08-16, twice, by client decision.** Two open questions this document previously deferred to are now resolved: **B4** — Services #12–15 pay upfront, before lodging, not after acceptance. **A2** — Service #18 stays in Group D and is included in the Licensing branch below, though its atypical evaluation-company-decides shape is called out explicitly rather than folded silently into the same pattern as #12–17.
+**Corrected 2026-08-16, three times, by client decision and by audit finding.** Two open questions this document previously deferred to are now resolved: **B4** — Services #12–15 pay upfront, before lodging, not after acceptance. **A2** — Service #18 stays in Group D and is included in the Licensing branch below, though its atypical evaluation-company-decides shape is called out explicitly rather than folded silently into the same pattern as #12–17. **Audit correction** — Service #11 is a third email-only service, alongside #6 and #19; this document's Notes previously counted only two.
 
 ---
 
@@ -39,7 +39,9 @@ View Dashboard
      registered property
    (No fee anywhere in this cluster — see `payments.md` Model 1. No internal
    certification gate and no Account Trustee step — every service routes
-   directly from company submission to RERA's Compliance & Escrow Auditor.)
+   directly from company submission to RERA's Compliance & Escrow Auditor.
+   Service #11 is email-only, matching Services #6 and #19's channel — see
+   Notes.)
 
    Licensing (#12–#19)
    Real Estate Licensing Application → Permit / Practice Card services, as needed
@@ -129,5 +131,5 @@ The smallest responsibility set of the four roles by service count, but not by a
 
 * **No internal certification loop exists anywhere in this module** (`open-questions.md` A5) — unlike Financial & Trust Institutions' mortgage/lease services, no Group D service routes through a company-side maker-checker gate before reaching RERA. Every service goes straight from `Submitted` to RERA review.
 * **No Account Trustee step exists in the JOP escrow-adjacent cluster** (`open-questions.md` A3) — despite the "escrow account" terminology in several service names, JOP's escrow services do not mirror Group B/C's Trustee-mediated mechanism. Do not build a Trustee-facing queue for this module unless A3 is revisited.
-* **Two services (#6, #19) are email-only**, with no portal-based journey step to describe — the highest count of any module documented so far (every other module has at most one email-only service).
+* **Three services (#6, #11, #19) are email-only**, with no portal-based journey step to describe — the highest count of any module documented so far (every other module has at most one email-only service). **Corrected 2026-08-16** — previously counted only #6 and #19; Service #11 was found during the same-day Phase 6 audit to also be email-only, its own Section 12 having originally carried a portal-style workflow inherited incorrectly from a cross-reference to Service #5.
 * **Service #18 is now part of this journey, per `open-questions.md` A2's 2026-08-16 client decision, but doesn't fit the standard journey shape.** Every other Licensing-cluster service is a company filing an application that RERA reviews and decides on. Service #18's own sourced workflow describes an evaluation company reviewing and deciding on a *customer's* valuation request — a structurally different transaction. It's included in the Licensing branch above for completeness, but the module's UI package needs its own screen treatment for this service rather than folding it into the shared Submit Application wizard alongside #12–#17.
