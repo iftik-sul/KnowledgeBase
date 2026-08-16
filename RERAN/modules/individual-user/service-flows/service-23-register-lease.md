@@ -4,7 +4,7 @@ module: individual-user
 type: service-flow
 status: current
 source_type: sourced
-updated: 2026-08-15
+updated: 2026-08-16
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_prd_v1.0.md"
   - "RERAN/reference/source-of-truth/RERAN_registration_flows.md"
@@ -200,7 +200,10 @@ Completed
 
 Upon successful completion, the system generates:
 
-* Electronic Contract Registration Certificate
+* Electronic Contract Registration Certificate  
+* Payment Receipt
+
+*(Added 2026-08-16 — this list previously lacked a Payment Receipt despite Section 20's Acceptance Criteria already stating "Payment receipt is generated after successful payment." Every other fee-bearing service in this module issues one; found during a full file-by-file audit.)*
 
 ## 16. Related Services
 
