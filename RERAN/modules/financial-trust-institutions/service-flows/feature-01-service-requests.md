@@ -91,7 +91,9 @@ Uses the fee defined by the selected service, which may be zero (Service #2 carr
 
 **Yes, where the selected service's payment model requires it — timing and payer vary by service, per [payments.md](../payments.md).**
 
-Two models: **Upfront Gateway Payment** (institution pays, before lodging — Services #1, #3–#11) and **Customer Payment at Counter** (customer pays, at time of service — Services #13–#17, sourced). Services #12 and #18 are a confirmed exception within the second model, paying *after* RERA's decision. This feature enforces whichever timing the selected service specifies.
+Two models: **Upfront Gateway Payment** (institution pays, before lodging — Services #1, #3–#11) and **Customer Payment at Counter** (customer pays, at the point of service, before RERA's decision — Services #12–#18). This feature enforces whichever timing the selected service specifies.
+
+**Corrected 2026-08-16** — this section previously described Services #12 and #18 as a confirmed exception paying *after* RERA's decision. The client has since normalized both to pay before RERA's decision, the same as #13–#17; the two payment models are now clean, without exception.
 
 ## 10. Processing Authority
 
