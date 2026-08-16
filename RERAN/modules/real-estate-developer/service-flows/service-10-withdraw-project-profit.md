@@ -5,14 +5,11 @@ type: service-flow
 status: draft
 contains_proposals: true
 source_type: sourced
-updated: 2026-08-15
+updated: 2026-08-16
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/real-estate-developer/navigation.md"
-  - "RERAN/modules/real-estate-developer/ui/screens/fund-release-request.md"
-  - "RERAN/modules/real-estate-developer/ui/screens/fund-release-request-details.md"
-  - "RERAN/modules/financial-trust-institutions/ui/screens/escrow-request-queue.md"
-  - "RERAN/modules/financial-trust-institutions/ui/screens/escrow-request-details.md"
+  - "RERAN/modules/real-estate-developer/service-flows/feature-13-profit-withdrawal-request.md"
 tags:
   - real-estate-developer
   - service-flow
@@ -28,7 +25,7 @@ tags:
 
 The **Project Profit Withdrawal** service allows a developer to request withdrawal of the developer's profit margin from a project's escrow account, distinct from a milestone-based construction fund release.
 
-> **UI mismatch — flagged, not resolved.** The nearest matching screen, `ui/screens/fund-release-request.md`, is shaped as a milestone/construction-draw request (engineer certification, Quantity Surveyor report, milestone percentage complete). Profit withdrawal is conceptually a post-completion or margin distribution, not a construction milestone draw, and the source row gives no field-level detail to confirm whether the existing form's milestone fields even apply. Documented against the closest existing screen with this distinction called out; not force-fit as identical.
+> **Resolved 2026-08-16, by client decision.** The UI mismatch flagged since this document was first written — this service was documented against `ui/screens/fund-release-request.md`, a screen shaped for milestone/construction-draw requests (engineer certification, Quantity Surveyor report, milestone percentage complete) — is now resolved. The client has confirmed profit withdrawal genuinely needs its own flow, distinct from milestone-based fund release. See [Feature #13 — Profit Withdrawal Request](feature-13-profit-withdrawal-request.md), a new feature built to this service's actual shape rather than borrowed from Service #12's screen.
 
 ## 2. Purpose
 
@@ -36,7 +33,7 @@ Allow a developer to draw down accumulated profit from a project's escrow accoun
 
 ## 3. Description
 
-The developer submits a profit withdrawal request against the project's escrow account. The request routes to the Account Trustee, who assesses project solvency and the basis for the withdrawal, uploads supporting assessment, and forwards to the RERA escrow department for audit. On approval, the withdrawal is released.
+The developer submits a profit withdrawal request against the project's escrow account, stating the basis for entitlement. The request routes to the Account Trustee, who assesses project solvency and the basis for the withdrawal, uploads supporting assessment, and forwards to RERA's Escrow Audit. On approval, the withdrawal is released.
 
 ## 4. Who Can Apply
 
@@ -59,7 +56,7 @@ That is a description of customary practice, not a restriction — the role reco
 
 ## 7. Required Documents
 
-> **Proposed** — not itemized in the source. Following the general escrow-request document pattern (Trustee assessment, supporting financials). Needs client confirmation.
+> **Proposed** — not itemized in the source. See Feature #13 for the full proposed list, reasoned from what a profit-entitlement claim needs to demonstrate.
 
 * Project Financial Statement Supporting the Withdrawal
 * Account Trustee Assessment (uploaded by the Trustee)
@@ -73,11 +70,11 @@ That is a description of customary practice, not a restriction — the role reco
 
 ## 9. Payment Required
 
-Not applicable — this service disburses funds to the developer rather than collecting a fee from them. **Proposed**: a processing fee may still apply per the standard fee schedule, in which case it would be charged per transaction through the shared platform payment gateway; needs client confirmation.
+**No.** This service disburses funds to the developer rather than collecting a fee from them.
 
 ## 10. Processing Authority
 
-**Account Trustee** (Financial & Trust Institutions module), escalating to the **RERA Escrow Department** for final audit.
+**Account Trustee** (Financial & Trust Institutions module), escalating to the **Compliance & Escrow Auditor** (RERA's Escrow Account Department) for final audit.
 
 ## 11. Expected Processing Time
 
@@ -85,13 +82,13 @@ Not applicable — this service disburses funds to the developer rather than col
 
 ## 12. Processing Workflow
 
-Log in to Real Estate Developers Portal
+Login to Real Estate Developers Portal
 ↓
-Select Escrow Account
+Open Profit Withdrawal Request *(Feature #13)*
 ↓
-Select "Request Project Profit Withdrawal"
+Select Escrow Account, State Basis for Entitlement, Enter Requested Amount
 ↓
-Enter Requested Amount and Basis
+Upload Supporting Documents
 ↓
 Submit Application
 ↓
@@ -99,7 +96,7 @@ Application Sent to Account Trustee
 ↓
 Account Trustee Assesses Solvency, Uploads Assessment
 ↓
-Escrow Account Department Audits: Approve or Reject
+Compliance & Escrow Auditor Audits: Approve or Reject
 ↓
 If Approved, Funds Released
 
@@ -136,13 +133,12 @@ Not specified in the source ("no doc" against this row). **Proposed**: an in-sys
 ## 16. Related Services
 
 * Service #8 – Escrow Account Activation
-* Service #12 – Receive Payment from Escrow Account
+* Service #12 – Receive Payment from Escrow Account *(sibling service, now on a separate feature — Fund Release Request, Feature #5 — since its milestone-verification shape genuinely fits that screen where this service's doesn't)*
 * Financial & Trust Institutions: [ui/screens/escrow-request-queue.md](../../financial-trust-institutions/ui/screens/escrow-request-queue.md) and [ui/screens/escrow-request-details.md](../../financial-trust-institutions/ui/screens/escrow-request-details.md) *(cross-module: the Account Trustee's side of this transaction)*
 
 ## 17. UI Screens
 
-* Fund Release Request *(closest match — see the mismatch note in Section 1)*
-* Fund Release Request Details
+**No screen currently exists.** Previously documented against Fund Release Request as the closest available match; now assigned to Feature #13 — Profit Withdrawal Request, itself unbuilt, proposed to this service's actual shape. See that feature's own Section 17.
 
 ## 18. API Requirements
 
@@ -173,6 +169,7 @@ Not specified in the source ("no doc" against this row). **Proposed**: an in-sys
 * System validates requested amount against available balance.
 * Trustee assessment and RERA escrow audit both precede release.
 * Approved withdrawals disburse funds and update the escrow account balance.
+* No construction-milestone verification (Engineer Certificate, Quantity Surveyor Report) is required — resolved 2026-08-16, this service is not a construction draw.
 * All activities are recorded in the audit log.
 
 ## 21. Business Rules
@@ -180,4 +177,9 @@ Not specified in the source ("no doc" against this row). **Proposed**: an in-sys
 1. Only an active escrow account with an available profit balance may be drawn against under this service.
 2. The Account Trustee's assessment must precede RERA's escrow audit.
 3. All submissions, Trustee assessments, audits, and disbursements must be permanently recorded in the audit trail.
-4. **Documented against the closest existing screen, not an exact match** — flagged for client confirmation of whether a dedicated profit-withdrawal form is needed.
+4. **Resolved 2026-08-16.** This service is documented against its own feature (#13), not force-fit to Fund Release Request's construction-draw shape.
+
+## Open Questions
+
+1. ~~Is this service's screen a genuine fit?~~ **Resolved 2026-08-16 — no; see Feature #13, a new proposed feature, not yet built.**
+2. What documentation genuinely constitutes sufficient "evidence of entitlement basis"? See Feature #13's own Open Questions.
