@@ -9,6 +9,10 @@ updated: 2026-08-16
 derived_from:
   - "RERAN/modules/real-estate-developer/ui/screens/escrow-management.md"
   - "RERAN/modules/real-estate-developer/navigation.md"
+  - "RERAN/modules/real-estate-developer/service-flows/service-08-activate-escrow-account.md"
+  - "RERAN/modules/real-estate-developer/service-flows/service-09-transfer-escrow-account.md"
+  - "RERAN/modules/real-estate-developer/service-flows/service-20-deposit-mortgage-into-escrow.md"
+  - "RERAN/modules/real-estate-developer/service-flows/service-21-cancel-bank-guarantee.md"
 tags:
   - real-estate-developer
   - shared-feature
@@ -26,7 +30,7 @@ tags:
 
 **Important distinction, stated explicitly in the source screen itself:** the balances shown here are the project escrow account's own balances — entirely separate from how RERA's service fees are paid (per-transaction, via the shared platform gateway, since 2026-08-15). A balance or debit on this screen is escrow, not fees.
 
-> **Cross-module status vocabulary — resolved 2026-08-16.** This feature's own Fund Release Status vocabulary — `No Request → Pending Approval → Under Review → Approved → Released` — is now the canonical cross-module vocabulary for all six developer escrow request types (Services #8/9/10/12/20/21), adopted by client decision. Financial & Trust Institutions' [Escrow Request Queue](../../financial-trust-institutions/service-flows/feature-04-escrow-request-queue.md) is updated to use these same terms — `Awaiting Assessment`/`Under Assessment` renamed to `Pending Approval`/`Under Review`, and `Under Review` now explicitly spans both the institution's own assessment and RERA's subsequent audit, closing the gap where that feature previously had no status for RERA's post-certification review. Fund Release Request (Feature #5)'s more granular 9-stage tracker maps onto this vocabulary rather than replacing it — see that feature's own Section 13.
+> **Cross-module status vocabulary — corrected 2026-08-16, superseding an earlier same-day resolution.** A first pass adopted `No Request → Pending Approval → Under Review → Approved → Released` as canonical, taken from this screen's own UI filter values. That was wrong: it was never checked against the six individual service files (#8, #9, #10, #12, #20, #21), all of which were written independently in an earlier PR and all of which — verified directly, all six — use `Draft → Submitted → Trustee Review → RERA Escrow Audit → Approved → [service-specific terminal state]`, with additional statuses `Information Requested / Returned / Rejected`. That vocabulary traces to the master source table; the one adopted in the first pass traced only to a UI screen's filter dropdown, one layer removed from source. **The sourced vocabulary is now canonical**, replacing the incorrect first resolution. See Section 13.
 
 ## 2. Purpose
 
@@ -34,7 +38,7 @@ List the organization's project escrow accounts and provide both the oversight v
 
 ## 3. Description
 
-Merged from two prior variants — an oversight screen and an operational workspace — that were asymmetric rather than parallel: the oversight variant had rich summary cards, a Fund Release Overview, and Escrow Analytics but almost no filtering; the operational variant had rich search/filter/sort and five row actions but no summary cards or analytics. The merge is mostly additive. Two separate status vocabularies apply — Escrow Status and Fund Release Status — kept distinct rather than conflated, the same pattern as Sales & Disclosures' two-lifecycle design.
+Merged from two prior variants — an oversight screen and an operational workspace — that were asymmetric rather than parallel: the oversight variant had rich summary cards, a Fund Release Overview, and Escrow Analytics but almost no filtering; the operational variant had rich search/filter/sort and five row actions but no summary cards or analytics. The merge is mostly additive. The screen's own UI carries a "Fund Release Status" filter with values (`No Request / Pending Approval / Under Review / Approved / Released / Returned / Rejected`) that turned out not to match any of the six sourced service files — retained here as a UI-layer filter set, but no longer treated as the authoritative status vocabulary. See Section 13.
 
 ## 4. Used By
 
@@ -47,7 +51,7 @@ Services #8–#9, #20–#21, confirmed via service-08's `derived_from`:
 
 The module's README flags cardinality mismatches for #9, #20, #21 against this screen — the mapping is directionally right but not field-exact; consult each service's own file for specifics.
 
-**Distinct from Fund Release Request (Feature #5)**, which covers Services #10 and #12 — milestone-based withdrawal and receipt, reached from this screen's Escrow Details but tracked as a separate object, now mapped onto the same canonical status vocabulary as this feature.
+**Distinct from Fund Release Request (Feature #5)**, which covers Services #10 and #12 — milestone-based withdrawal and receipt, reached from this screen's Escrow Details but tracked as a separate object, now using the same sourced status vocabulary as this feature.
 
 ## 5. Prerequisites
 
@@ -64,19 +68,19 @@ Varies by service — see each service's own Section 7.
 
 ## 8. Service Fee
 
-Set by the selected service (RERA fee, per transaction, via the shared platform gateway) — not to be confused with the escrow account's own balance, which is not a fee at all.
+Set by the selected service (RERA fee, per transaction, via the shared platform gateway) — not to be confused with the escrow account's own balance, which is not a fee at all. All six services checked directly (#8, #9, #10, #12, #20, #21) carry **no RERA service fee at all** — the source workflow for every one of them runs from submission through Trustee assessment to RERA's audit with no payment step anywhere.
 
 ## 9. Payment Required
 
-**Depends on the selected service.** Service #8 (Escrow Account Activation) is confirmed to carry **no RERA fee at all** — checked directly during the earlier planning phase of this rebuild. Do not assume uniformity across #8–#9, #20–#21; consult each service's own Section 9.
+**No, for any of the six services** — confirmed directly against all six individual service files, not just Service #8 as previously stated. None sources a payment step at any point in its workflow.
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor**, with cross-module coordination to Financial & Trust Institutions' Account Trustee for the escrow account's own management (see Related Features).
+**Account Trustee** (Financial & Trust Institutions module) first, escalating to **RERA's Escrow Department** for final audit — a fixed two-stage chain, sourced identically across all six services. Not RERA directly, and not a single "Compliance & Escrow Auditor" step as previously stated.
 
 ## 11. Expected Processing Time
 
-Set by the selected service — see its own Section 11.
+Set by the selected service, as a waiting-time/service-delivery pair (e.g. Service #8: 20/13 business hours; Service #9: 24/45 working hours; Service #20: 26/32 working hours; Service #21: 26/32 business hours) — see each service's own Section 11. Not uniform across the four services this feature covers.
 
 ## 12. Processing Workflow
 
@@ -88,40 +92,58 @@ Register Escrow Account *(or select an existing account)*
 ↓
 Complete Service-Specific Form (activation / transfer / mortgage deposit / bank guarantee cancellation)
 ↓
-Upload Required Documents
+Submit Application
 ↓
-Submit
+Account Trustee Reviews, Uploads Assessment
 ↓
-RERA Reviews, Coordinating with Account Trustee Where Applicable
+RERA Escrow Department Audits: Approve or Reject
 ↓
-Escrow Account Status Updated
+If Approved, Escrow Account Status Updated (per selected service's terminal state)
 
 ## 13. Application Status Flow
 
-**Escrow Status:** Pending Registration → Active → Suspended → Closed
+**Corrected 2026-08-16.** Sourced directly from all six individual service files (#8, #9, #10, #12, #20, #21), not from this screen's own UI filter values:
 
-**Fund Release Status** *(tracked separately, surfaced here but acted on via Feature #5)* — **the canonical cross-module vocabulary as of 2026-08-16**: No Request → Pending Approval → Under Review → Approved → Released, or → Returned / Rejected
+Draft
+↓
+Submitted
+↓
+Trustee Review
+↓
+RERA Escrow Audit
+↓
+Approved
+↓
+*Service-specific terminal state:*
 
-These two vocabularies are never conflated in filters, badges, or counts.
+| Service | Terminal state |
+| :---- | :---- |
+| #8 — Escrow Account Activation | Active |
+| #9 — Escrow Account Transfer | Transferred |
+| #20 — Depositing a Mortgage into an Escrow Account | Deposited |
+| #21 — Bank Guarantee Cancellation | Cancelled |
 
-**Cross-module reconciliation, resolved 2026-08-16**: financial-trust-institutions' Escrow Request Queue now uses this same vocabulary for its assessment phase, with `Under Review` spanning both the institution's assessment and RERA's subsequent audit — see that feature's own Section 13.
+Additional statuses (all six services): Information Requested, Returned, Rejected.
+
+**Superseded by this correction**: the screen's own UI filter set (`No Request / Pending Approval / Under Review / Approved / Released / Returned / Rejected`) and the "Escrow Status" (`Pending Registration → Active → Suspended → Closed`) / "Fund Release Status" split previously described here. Neither matches the sourced vocabulary above. The UI filter values may still be worth surfacing as filter options in an eventual build, but they are not this feature's status flow.
 
 ## 14. Possible Outcomes
 
 * Escrow Account Activated / Transferred
 * Mortgage Deposited into Escrow
 * Bank Guarantee Cancelled
-* Account Suspended / Closed
+* Additional Information Requested
+* Application Returned or Rejected
 
 ## 15. Output
 
-Varies by service — typically an account registration or transfer confirmation. See each service's own Section 15.
+Not specified in source for any of the four services ("no doc" against each row) — each service's own Section 15 proposes an in-system confirmation record; needs client confirmation.
 
 ## 16. Related Features
 
-* Fund Release Request *(Feature #5 — the milestone-based withdrawal/receipt flow reached from Escrow Details, Services #10/#12, mapped onto this feature's status vocabulary)*
+* Fund Release Request *(Feature #5 — the milestone-based withdrawal/receipt flow reached from Escrow Details, Services #10/#12, using the same sourced status vocabulary)*
 * Applications *(Feature #1)*
-* Financial & Trust Institutions' Escrow Request Queue and Trust Accounts *(cross-module — the Account Trustee's side of the same accounts; **status vocabulary reconciled 2026-08-16**, see Feature Overview)*
+* Financial & Trust Institutions' Escrow Request Queue and Trust Accounts *(cross-module — the Account Trustee's side of the same accounts; **status vocabulary corrected 2026-08-16**, see Feature Overview)*
 
 ## 17. UI Screens
 
@@ -133,37 +155,40 @@ Varies by service — typically an account registration or transfer confirmation
 * Retrieve Organization Escrow Accounts / Search / Filter
 * Retrieve Escrow Details, Fund Release Overview, Escrow Analytics
 * Submit Escrow Registration / Transfer / Deposit / Cancellation (per selected service)
+* Notify Account Trustee
+* Retrieve Trustee Assessment
+* Submit for RERA Escrow Audit
 * Send Notifications
 * Create Audit Log
 
 ## 19. Database Entities
 
 * Developer Company, Project, User
-* Escrow Account, Escrow Status, Fund Release *(cross-referenced with Feature #5)*
-* Financial Institution
-* Document, Application
-* Audit Log
+* Escrow Account, Application
+* Account Trustee, Bank Guarantee, Mortgage *(where relevant per service)*
+* Document, Notification, Audit Log
 
 ## 20. Acceptance Criteria
 
 * Any of the developer's four Group B roles can view, register, and act on any escrow account.
-* Escrow Status and Fund Release Status are never conflated in filters, badges, or counts.
-* Balances shown are always the escrow account's own, never a RERA-fee figure.
+* Every request routes through Account Trustee review before RERA's escrow audit — never directly to RERA.
+* No payment step is required for any of the four services this feature covers.
 * Row actions are governed by the account's own state, never by who is viewing.
 * All escrow activity is recorded in the audit log, including the acting user's role.
-* Fund Release Status uses the same terms as financial-trust-institutions' Escrow Request Queue for the same transaction types.
+* Status vocabulary matches the sourced individual service files, not the screen's own UI filter values.
 
 ## 21. Business Rules
 
 1. Any of the developer's four Group B roles may register or act on any escrow account — no per-user assignment scoping.
-2. Escrow Status and Fund Release Status are separate values with separate lifecycles.
-3. Balances on this screen are the project escrow account's own — never conflated with RERA service-fee payment, which moved to per-transaction gateway payment on 2026-08-15 and is unrelated.
-4. Row actions depend on the account's own state — a closed account takes no new release request, regardless of who asks.
+2. Every request passes through Account Trustee review, then RERA's escrow audit, in that order — sourced identically across all six escrow services.
+3. None of the four services this feature covers (#8, #9, #20, #21) requires payment at any point.
+4. Row actions depend on the account's own state — a closed or already-actioned request takes no duplicate action, regardless of who asks.
 5. All escrow activity is permanently recorded in the audit trail, including the acting user's role.
-6. Fund Release Status (`No Request → Pending Approval → Under Review → Approved → Released`, or `Returned`/`Rejected`) is the canonical cross-module vocabulary for Services #8/9/10/12/20/21, adopted 2026-08-16 — any future screen or document describing these transactions should use these terms.
+6. The status vocabulary (`Draft → Submitted → Trustee Review → RERA Escrow Audit → Approved → [service-specific terminal state]`, plus `Information Requested / Returned / Rejected`) is sourced from the individual service files and is authoritative — the screen's own UI filter values are not.
 
 ## Open Questions
 
 1. Whether "Escrow Balance" should mean gross balance or balance net of committed pending releases is flagged but unresolved — the source screen glosses both the same way; if the client intends the net reading, a second column would be needed.
 2. Cardinality mismatches for Services #9, #20, #21 against this screen are flagged in the module README but not resolved here — consult each service's own file.
-3. Same adoption question as Feature #1 — needs client confirmation.
+3. Whether the screen's own UI filter values (`No Request / Pending Approval / Under Review / Approved / Released`) should be retained as user-facing filter labels even though they don't match the sourced status names, or whether the UI should be updated to use the sourced names directly — a design decision, not resolved here.
+4. Same adoption question as Feature #1 — needs client confirmation.
