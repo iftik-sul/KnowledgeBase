@@ -3,7 +3,7 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-15
+updated: 2026-08-16
 derived_from:
   - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/modules/real-estate-developer/ui/screens/applications.md"
@@ -17,6 +17,8 @@ derived_from:
   - "RERAN/modules/real-estate-developer/ui/screens/help-and-support.md"
   - "RERAN/modules/real-estate-developer/ui/screens/notifications.md"
   - "RERAN/modules/real-estate-developer/ui/screens/reports.md"
+  - "RERAN/modules/real-estate-developer/service-flows/feature-04-escrow-management.md"
+  - "RERAN/modules/real-estate-developer/service-flows/feature-05-fund-release-request.md"
 tags:
   - real-estate-developer
   - ui-spec
@@ -32,6 +34,8 @@ The status vocabulary for this module.
 **Status badges vs. workflow stages.** This file covers the *status badge* shown on a record in a table or header (e.g. "Approved," "Rejected"). It does **not** cover the stage names used by the horizontal Progress Tracker component on form/detail screens, which describe a fixed pipeline of steps rather than a badge vocabulary.
 
 > **Corrected 2026-08-15, second pass.** This file previously reported six of eight categories below as unresolved "⚠ Conflict" between role variants, carried over unchanged from before the screen rebuild — even though every screen this file is `derived_from` had already been rebuilt into a single unified screen, several of which (`sales-and-disclosures.md`, `escrow-management.md`) explicitly link back here as the authoritative source for a resolved vocabulary this file wasn't actually providing. Only Project Status and Property Registration Status had been properly resolved. The other six are resolved below, using the rebuilt screens' own filter lists and row-action vocabularies where a screen stated one directly, and the same union-and-reconcile method used for Project Status where it didn't. Document Status remains genuinely unresolved — see that section — because the rebuilt `documents.md` explicitly says so, not because it was missed.
+
+> **Corrected again 2026-08-16 — Escrow Status and Fund Release Status were themselves superseded, and this file never caught up.** The "Resolved" vocabularies below for both categories were taken directly from `escrow-management.md`'s own UI filter list — which is exactly the mistake this file's 2026-08-15 correction was written to fix everywhere else. A later, independent audit (checking all six escrow service files — #8, #9, #10, #12, #20, #21 — directly against source) found that filter list does **not** match what those service files actually source. The genuinely sourced vocabulary, now the one `feature-04-escrow-management.md` and `feature-05-fund-release-request.md` use, is: `Draft → Submitted → Trustee Review → RERA Escrow Audit → Approved → [service-specific terminal state]`, plus additional statuses `Information Requested / Returned / Rejected`. See both sections below for the corrected vocabulary and how the old filter-list terms map onto it.
 
 ## Project Status
 
@@ -87,21 +91,27 @@ Used on [sales-and-disclosures.md](screens/sales-and-disclosures.md) and referen
 
 Used on [escrow-management.md](screens/escrow-management.md).
 
-**Resolved 2026-08-15, second pass — four states:**
+**Corrected 2026-08-16 — superseded the 2026-08-15 resolution below.** This category's actual, sourced status flow is the same one used across all six escrow services: `Draft → Submitted → Trustee Review → RERA Escrow Audit → Approved → Active` (the terminal state for escrow account activation specifically — see [service-08-activate-escrow-account.md](../service-flows/service-08-activate-escrow-account.md)), plus `Information Requested / Returned / Rejected`. This is what the **status badge** shown on an escrow account should reflect.
 
-`Pending Registration` · `Active` · `Suspended` · `Closed`
+**`escrow-management.md`'s own Filters section (`Pending Registration · Active · Suspended · Closed`) is retained as-is, as UI filter options** — those remain useful ways to narrow the account list — **but are not the sourced status flow**, and should not be read as such. "Pending Registration" spans everything from Draft through RERA Escrow Audit; "Suspended" and "Closed" describe account-lifecycle states after activation that the six-service status flow doesn't itself define and that need their own source or client confirmation if they're to be more than filter labels.
 
-> **How this was resolved.** `escrow-management.md`'s own rebuilt Filters section states this list directly: "Escrow Status — All · Pending Registration · Active · Suspended · Closed." This confirms the reading this file's first pass had already proposed but left unresolved pending the rebuild: the former Developer Principal / Director variant's "Milestone Under Review" and "Funds Released" states were an escrow-account-level conflation of fund-release activity that the operational variant correctly tracked as a separate status axis — see Fund Release Status below, not this one.
+> **Superseded 2026-08-15 pass, kept for the record.** That pass took the filter list itself (`Pending Registration · Active · Suspended · Closed`) as the resolved status badge vocabulary, reasoning that `escrow-management.md`'s own Filters section "states this list directly." That was the same mistake this file's earlier 2026-08-15 correction had just finished fixing elsewhere — treating a UI screen's own filter values as if they were the sourced status flow, rather than checking the underlying service files directly. See [feature-04-escrow-management.md](../service-flows/feature-04-escrow-management.md) for the full correction and source citation.
 
 ## Fund Release Status
 
 Used on [escrow-management.md](screens/escrow-management.md) and [escrow-details.md](screens/escrow-details.md).
 
-**Resolved 2026-08-15, second pass — seven states:**
+**Corrected 2026-08-16 — superseded the 2026-08-15 resolution below.** This category's actual, sourced status flow, checked directly against Services #10 and #12's own files, is: `Draft → Submitted → Trustee Review → RERA Escrow Audit → Approved → Released`, plus `Information Requested / Returned / Rejected`. This is what the **status badge** shown on a fund release request should reflect — and is also the vocabulary [feature-05-fund-release-request.md](../service-flows/feature-05-fund-release-request.md) and [feature-13-profit-withdrawal-request.md](../service-flows/feature-13-profit-withdrawal-request.md) now use.
 
-`No Request` · `Pending Approval` · `Under Review` · `Approved` · `Released` · `Returned` · `Rejected`
+**`escrow-management.md`'s own Filters section (`No Request · Pending Approval · Under Review · Approved · Released · Returned · Rejected`) is retained as-is, as UI filter options** — but is not the sourced status flow. Where the two vocabularies overlap (`Approved`, `Released`, `Returned`, `Rejected`), the terms happen to match; where they don't, the filter list's terms map onto the sourced flow as follows:
 
-> **How this was resolved.** `escrow-management.md`'s own rebuilt Filters section states this list directly: "Fund Release Status — All · No Request · Pending Approval · Under Review · Approved · Released · Returned · Rejected." This resolves the three-way disagreement this file's first pass recorded (Principal's 6 states with "Not Requested"; Escrow Liaison's 6-management-screen states with "No Request"; Escrow Liaison's 7-details-screen states with "Draft") in favour of the management screen's own filter list, which is now the single canonical source both screens link to. "Draft" (from the details-screen variant) is treated as a wording variant of "No Request" — a fund release that hasn't been requested yet — not a distinct state; if a genuine draft-in-progress state (a release request being prepared but not yet submitted) is needed, that is a new state to propose, not a merge of the old label.
+| Old filter term | Sourced status badge |
+| :---- | :---- |
+| No Request | *(not applicable — a request that doesn't yet exist has no status badge)* |
+| Pending Approval | Draft / Submitted, depending on whether it has been sent for review yet |
+| Under Review | Trustee Review or RERA Escrow Audit, depending on which stage the request has reached |
+
+> **Superseded 2026-08-15 pass, kept for the record.** That pass resolved this category the same way as Escrow Status above — taking `escrow-management.md`'s own Filters section as the resolved vocabulary, on the reasoning that it was "the single canonical source both screens link to." Same underlying mistake: a UI filter list, not a check against the six escrow service files' own sourced status flows. `fund-release-request.md`'s detailed 9-stage progress tracker (`Draft → ... → Under Bank Review → Under RERA Review → Approved → Funds Released`) is the UI screen's own step-by-step view and maps onto this corrected vocabulary the same way — see that screen's own file for the mapping, once corrected there.
 
 ### Milestone Verification Status
 
