@@ -32,7 +32,7 @@ This was the most structurally divergent screen in the module to rebuild: each o
 
 ## 4. Used By
 
-Not tied to any single numbered service — spans every domain workspace and the Applications feature.
+Not tied to any single numbered service — spans every domain workspace, including Profit Withdrawal Request, and the Applications feature.
 
 ## 5. Prerequisites
 
@@ -94,7 +94,7 @@ Generated report status: Processing → Completed / Failed / Expired — the one
 
 ## 16. Related Features
 
-* Projects, Property Registrations, Sales & Disclosures, Escrow Management, Fund Release Request, Applications, Documents — every report subject area corresponds to one of these features' own data.
+* Projects, Property Registrations, Sales & Disclosures, Escrow Management, Fund Release Request, Profit Withdrawal Request, Applications, Documents — every report subject area corresponds to one of these features' own data. *(Corrected 2026-08-16 — Profit Withdrawal Request, Feature #13, added; this list predated that feature's split from Fund Release Request.)*
 * Dashboard *(Portfolio Insights, Registration Insights, Escrow Analytics, and Sales Analytics all link out to the full report set here)*
 
 ## 17. UI Screens
