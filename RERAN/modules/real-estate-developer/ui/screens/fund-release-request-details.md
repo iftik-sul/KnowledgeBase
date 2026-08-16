@@ -3,7 +3,7 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-15
+updated: 2026-08-16
 derived_from:
   - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
@@ -21,9 +21,11 @@ The detail view of a single, already-submitted fund release request, opened from
 
 > **Corrected 2026-08-15, second pass.** Same pattern as [company-profile.md](company-profile.md) and [fund-release-request.md](fund-release-request.md): this screen's Access line already said "all four roles," but Purpose still described the workspace as provided "for the Escrow Liaison," and several actions were qualified with an unspecified "when permitted." Fixed below.
 
+> **Corrected 2026-08-16.** This screen's Approval Status fields and Activity Timeline previously named the reviewing party "Bank." The source names it the **Account Trustee**, not a bank — corrected below, matching [fund-release-request.md](fund-release-request.md) and [status-badges.md](../status-badges.md#fund-release-status). This correction had been recorded as made in [feature-05-fund-release-request.md](../../service-flows/feature-05-fund-release-request.md) on 2026-08-15 but was never actually applied to this screen file — found during a full file-by-file audit.
+
 ## Purpose
 
-Give any developer user a complete operational workspace to review and manage an existing fund release request throughout its approval lifecycle. Any user can monitor review progress, update eligible information while the request is editable, upload revised documents, respond to queries from the Financial Institution or RERA, review communication history, and track every activity related to the request — typically the Escrow Liaison in practice, but not exclusively.
+Give any developer user a complete operational workspace to review and manage an existing fund release request throughout its approval lifecycle. Any user can monitor review progress, update eligible information while the request is editable, upload revised documents, respond to queries from the Account Trustee or RERA, review communication history, and track every activity related to the request — typically the Escrow Liaison in practice, but not exclusively.
 
 ## Layout
 
@@ -59,7 +61,7 @@ Information Tabs
     ├─ Milestone Verification  
     ├─ Financial Information  
     ├─ Supporting Documents  
-    ├─ RERA / Bank Queries  
+    ├─ RERA / Trustee Queries  
     ├─ Communication History  
     └─ Activity Timeline
 
@@ -115,9 +117,11 @@ Displays the complete release request information.
 #### **Approval Status**
 
 * Submission Status  
-* Bank Review Status  
+* Trustee Review Status  
 * RERA Review Status  
 * Final Approval Status
+
+**Corrected 2026-08-16** — "Bank Review Status" renamed to "Trustee Review Status." See the correction note at the top of this file.
 
 ### Tab 2 — Milestone Verification
 
@@ -204,7 +208,7 @@ Displays every document submitted with the release request.
 * Download  
 * Upload Revised Version *(while the request is in an editable status — see Notes)*
 
-### Tab 5 — RERA / Bank Queries
+### Tab 5 — RERA / Trustee Queries
 
 Visible only when additional information has been requested.
 
@@ -213,7 +217,7 @@ Visible only when additional information has been requested.
 | Column | Description |
 | ----- | ----- |
 | Date | Request date |
-| Requested By | RERA / Financial Institution |
+| Requested By | RERA / Account Trustee |
 | Query | Requested clarification |
 | Due Date | Response deadline |
 | Status | Current status |
@@ -260,15 +264,17 @@ Displays a complete audit trail for the fund release request.
 * Draft created  
 * Request submitted  
 * Validation completed  
-* Bank review started  
+* Trustee review started  
 * Additional information requested  
 * Documents uploaded  
 * Response submitted  
-* Bank approved request  
+* Trustee approved request  
 * RERA review started  
 * RERA approved request  
 * Funds released  
 * Request completed
+
+**Corrected 2026-08-16** — "Bank review started" and "Bank approved request" renamed to Trustee, matching the correction above.
 
 Each activity displays:
 
@@ -309,7 +315,7 @@ Review fund release details
 ↓  
 Review approval progress and current status  
 ↓  
-Respond to RERA or Financial Institution queries (if requested)  
+Respond to RERA or Account Trustee queries (if requested)  
 ↓  
 Upload revised supporting documents or update request information (while editable)  
 ↓  
@@ -321,7 +327,8 @@ Track the approval workflow until the funds are released
 
 * This screen serves as the **operational detail page** for a single fund release request and is accessed from the **Fund Releases** tab within **Escrow Details** or directly from **Escrow Management**. Reachable and actionable by any developer user.
 * Any user may update request information and upload revised documents **only while the request is in an editable status** (such as **Draft**, **Returned**, or **Information Requested**). Once the request reaches **Approved** or **Funds Released**, it becomes **read-only** — a status/lifecycle rule that applies identically to every user, not a permission tier. **Corrected 2026-08-15, second pass** — clarified after the "(when permitted)" language elsewhere on this screen was found to imply an access gate that doesn't exist in this module.
-* All approval decisions by the **Financial Institution** and **RERA** are displayed as status updates and cannot be modified by the developer.  
+* All approval decisions by the **Account Trustee** and **RERA** are displayed as status updates and cannot be modified by the developer.  
 * Every response to queries, document upload, status change, and review action is automatically recorded in the **Activity Timeline** to maintain a complete audit trail for regulatory compliance.  
 * The system validates that any revised request continues to comply with the approved milestone, eligible release amount, and supporting document requirements before allowing a response or resubmission.  
 * The page follows the same **Details Screen** design pattern used throughout the Real Estate Developer Portal, ensuring a consistent user experience across operational modules.
+* **Terminology corrected 2026-08-16.** "Bank" was replaced with "Account Trustee" throughout this screen (Tab 1's Approval Status, Tab 5's queries table, Tab 7's activity examples, and this Notes section) — the source names the reviewing party as the Account Trustee, not a bank.
