@@ -3,7 +3,7 @@ project: RERAN
 module: financial-trust-institutions
 type: ui-spec
 status: draft
-updated: 2026-08-15
+updated: 2026-08-16
 contains_proposals: true
 derived_from:
   - "RERAN/modules/financial-trust-institutions/open-questions.md"
@@ -20,7 +20,7 @@ tags:
 
 The application vocabulary is the platform core proposed in answer D1 plus the Group C extension. It should be adopted platform-wide — FR-18's live dashboard and FR-19's cross-service reporting cannot be built over per-module vocabularies.
 
-> **Corrected 2026-08-15, twice in the same day.** This file had not been touched by any of the module's other corrections until the first pass today, which fixed a broken `service-request` link and a stale role-based-subsetting note, but **incorrectly removed `Approved — Awaiting Payment` and `Approval Expired` entirely**, on the strength of a services-overview.md claim that neither status applied to any Group C service. A fuller per-service audit later the same day found that claim itself was wrong: **`Approved — Awaiting Payment` genuinely applies to two services, #12 and #18**, where RERA's decision precedes the customer's counter payment (sourced, rows 38 and 45). This second pass restores that status with the correct, narrower scoping. `Approval Expired` remains correctly removed — no source or client decision gives either #12 or #18 an expiry window, and B3's 30-day figure has no natural application to a same-visit counter wait.
+> **Corrected 2026-08-16 — `Approved — Awaiting Payment` retired again, this time for real.** This file's history on this status is worth recording in full, since it changed direction three times in two days. **Pass 1 (2026-08-15)** removed the status entirely, on a `services-overview.md` claim that it applied to no Group C service. **Pass 2 (2026-08-15, later the same day)** restored it, scoped to Services #12 and #18, after a fuller per-service audit found those two genuinely sourced RERA's decision *before* the customer's counter payment — the one place the removal in Pass 1 was actually wrong. **Pass 3 (2026-08-16)** removes it again: the client has since reviewed that #12/#18 exception directly, confirmed it was an artefact of the source's original physical-counter process rather than intentional design, and decided to normalize both services to pay *before* RERA's decision — the same pattern #13–#17 already used. See [service-12](../service-flows/service-12-register-real-estate-fund-company.md) and [service-18](../service-flows/service-18-contract-cancellation.md) for the normalization itself. With that decision, `Approved — Awaiting Payment` no longer has a live scenario anywhere in Group C — Pass 1's conclusion turns out to be the durable one, reached the second time for a different, sounder reason (a client decision, not a missed audit).
 
 ---
 
@@ -37,14 +37,13 @@ Used on: [submit-application](../screens-unified/submit-application.md), applica
 | Under Review | Info | With the Compliance & Escrow Auditor |
 | Information Requested | Warning | RERAN has raised a query |
 | Returned for Correction | Warning | Sent back to the institution |
-| Approved — Awaiting Payment | Warning | Passed audit; fee not yet settled — **Services #12 and #18 only** |
 | Rejected | Error | Refused, with documented reason |
 | Completed | Success | Settled and output document issued |
 | Withdrawn | Neutral | Abandoned by the institution |
 
-**Corrected 2026-08-15 (second pass) — `Approved — Awaiting Payment` restored, scoped to Services #12 and #18 only.** Every other service either pays before lodging (#1, #3–#11), pays before RERA's decision at the point of service (#13–#17), or carries no fee at all (#2) — none of those sixteen services can be approved while payment is still pending. Only #12 (Registration of Real Estate Fund Companies, row 38) and #18 (Contract Cancellation, row 45) source RERA's decision *before* the counter payment step. See those two files' own Section 13 for the sourced sequence, and `services-overview.md`'s Application Status Vocabulary for the module-wide statement of this.
+**`Approved — Awaiting Payment` does not appear in this table — see the corrected banner note above.** Every one of the 18 services now either pays before lodging (#1, #3–#11), pays at the counter before RERA's decision (#13–#17, and now #12/#18 as well), or carries no fee at all (#2). No service reaches Approved while payment is still pending.
 
-**Removed, and correctly so — `Approval Expired`.** No source describes an expiry window for #12 or #18's approved-but-unpaid state, and `open-questions.md` B3's 30-calendar-day figure was written for a different scenario (a registered title left unregistered) that doesn't map onto a same-visit counter payment. This status has no live scenario anywhere in Group C.
+**Removed, and correctly so — `Approval Expired`.** No source describes an expiry window anywhere in Group C, and `open-questions.md` B3's 30-calendar-day figure was written for a different scenario that doesn't map onto any Group C service's payment model. This status has no live scenario anywhere in Group C.
 
 The two Group C extension statuses (`Pending Internal Certification`, `Returned by Certifier`) sit **before** Submitted. Where an institution has not enabled internal certification, neither appears.
 
