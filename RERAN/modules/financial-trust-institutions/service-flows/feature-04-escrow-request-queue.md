@@ -10,6 +10,8 @@ derived_from:
   - "RERAN/modules/financial-trust-institutions/ui/screens/escrow-request-queue.md"
   - "RERAN/modules/financial-trust-institutions/roles-and-responsibilities.md"
   - "RERAN/modules/financial-trust-institutions/open-questions.md"
+  - "RERAN/modules/real-estate-developer/service-flows/service-08-activate-escrow-account.md"
+  - "RERAN/modules/real-estate-developer/service-flows/service-10-withdraw-project-profit.md"
 tags:
   - financial-trust-institutions
   - shared-feature
@@ -22,17 +24,17 @@ tags:
 
 ## 1. Feature Overview
 
-The **Escrow Request Queue** is the institution-side counterpart to Group B's developer escrow services: a single queue of every developer-originated escrow request (account activation, account transfer, profit withdrawal, payment release, mortgage deposit, bank guarantee cancellation) awaiting the institution's assessment and certification, ordered by SLA urgency, before it is forwarded to RERA's escrow department.
+The **Escrow Request Queue** is the institution-side counterpart to Group B's developer escrow services: a single queue of every developer-originated escrow request (account activation, account transfer, profit withdrawal, payment release, mortgage deposit, bank guarantee cancellation) awaiting the institution's assessment, before it is forwarded to RERA's escrow department for final audit.
 
-> **Cross-module status vocabulary — resolved 2026-08-16.** This feature's status vocabulary is renamed to match the canonical cross-module vocabulary adopted for all six developer escrow request types (Services #8/9/10/12/20/21): `No Request → Pending Approval → Under Review → Approved → Released`, matching real-estate-developer's [Escrow Management](../../real-estate-developer/service-flows/feature-04-escrow-management.md). `Awaiting Assessment` → `Pending Approval`; `Under Assessment` → `Under Review`. This also closes this feature's own previous gap: `Under Review` now explicitly spans **both** the institution's own assessment and RERA's subsequent audit — a request stays `Under Review` after the institution's Certify action, through RERA's final audit, only moving to `Approved` once RERA decides and `Released` once funds actually move. Previously `Certified` was shown as the end state with no represented status for what happens after — see Section 13 for the full corrected flow.
+> **Cross-module status vocabulary — corrected 2026-08-16, superseding an earlier same-day resolution.** A first pass renamed this feature's statuses to `Pending Approval → Under Review → Approved → Released`, taken from a real-estate-developer UI screen's filter values. That was wrong on both sides: neither term traces to source. **All six individual escrow service files on the developer side** (Services #8, #9, #10, #12, #20, #21 — verified directly, all six) use `Draft → Submitted → Trustee Review → RERA Escrow Audit → Approved → [service-specific terminal state]`, with additional statuses `Information Requested / Returned / Rejected`. That is now the corrected canonical vocabulary. `Trustee Review` is this feature's own assessment stage — the institution's Certify action is what advances a request out of `Trustee Review` into `RERA Escrow Audit`, not into an ambiguous shared "Under Review." See Section 13.
 
 ## 2. Purpose
 
-Give the institution one place to triage, assess, and certify or return the six types of developer escrow requests, typically worked by the Account Trustee but reachable by any of the institution's four Group C roles.
+Give the institution one place to triage and assess the six types of developer escrow requests, typically worked by the Account Trustee but reachable by any of the institution's four Group C roles, before RERA's own audit.
 
 ## 3. Description
 
-Requests arrive from Group B's escrow services (Real Estate Developer module Services #8–#12, #20–#21) rather than originating inside this module. Any institution user assesses a request — checking requested amount against the trust account's available balance, reviewing the cited construction milestone where applicable — and either **certifies** it (an action, not a terminal status — the request continues under `Under Review` while RERA conducts its own audit) or returns it to the developer, or requests further information. Certification is a structured assessment with a solvency judgement inside it (per `open-questions.md` A3), not a document upload, so there is no bulk-certify action — the same reasoning applied to the Internal Certification Queue.
+Requests arrive from Group B's escrow services (Real Estate Developer module Services #8–#12, #20–#21) already at the `Trustee Review` stage — the developer-side `Draft` and `Submitted` stages happen before a request reaches this queue at all. Any institution user assesses a request — checking requested amount against the trust account's available balance, reviewing the cited construction milestone where applicable — and either **certifies** it (advancing the request to `RERA Escrow Audit`) or returns it to the developer, or requests further information. Certification is a structured assessment with a solvency judgement inside it (per `open-questions.md` A3), not a document upload, so there is no bulk-certify action — the same reasoning applied to the Internal Certification Queue.
 
 ## 4. Used By
 
@@ -46,7 +48,7 @@ Not one of the 18 numbered Group C services — this is the institution's side o
 ## 5. Prerequisites
 
 * User is logged into a verified institution account.
-* At least one escrow request has arrived from a developer.
+* At least one escrow request has arrived from a developer, already at `Trustee Review`.
 * The request's trust account is not Suspended or Flagged (both block certification).
 
 ## 6. Required Information
@@ -59,19 +61,19 @@ Uploaded assessment documentation, attached by the assessing user before certify
 
 ## 8. Service Fee
 
-Not sourced as a fee-bearing action for the institution — this is an assessment step, not a chargeable Group C service.
+Not sourced as a fee-bearing action for the institution — this is an assessment step, not a chargeable Group C service. Consistent with all six underlying developer services, none of which sources a payment step at any point.
 
 ## 9. Payment Required
 
-**No**, for the assessment itself. Where the underlying developer service disburses funds (e.g. Profit Withdrawal), that disbursement is the outcome of the request reaching `Released`, not a payment collected here.
+**No**, for the assessment itself, and confirmed **no** for any of the six underlying developer services at any point in their own sourced workflows.
 
 ## 10. Processing Authority
 
-**Any of the institution's four Group C roles**, unrestricted, for the institution's own assessment phase; **RERA**, for the subsequent audit that moves a request from `Under Review` to `Approved`. **Corrected 2026-08-15**: previously gated by an `escrow` permission scope held by the Account Trustee; the scope is retired. Typically worked by the Account Trustee in practice — not a restriction.
+**Any of the institution's four Group C roles**, unrestricted, for the `Trustee Review` stage; **RERA's Escrow Department**, for the subsequent `RERA Escrow Audit` that a Certify action advances a request into. **Corrected 2026-08-15**: previously gated by an `escrow` permission scope held by the Account Trustee; the scope is retired. Typically worked by the Account Trustee in practice — not a restriction.
 
 ## 11. Expected Processing Time
 
-**Sourced.** Answer A6 (confirmed 2026-08-15) reads the source's split SLA — "waiting time 20 business hours; service delivery 13 business hours" — as the institution's own window (waiting time) versus RERA's subsequent processing time (service delivery). The SLA countdown on this queue is built against the waiting-time figure, covering the institution's own portion of `Under Review`.
+**Sourced.** Answer A6 (confirmed 2026-08-15) reads the source's split SLA — "waiting time 20 business hours; service delivery 13 business hours" — as the institution's own window (waiting time, covering `Trustee Review`) versus RERA's subsequent processing time (service delivery, covering `RERA Escrow Audit`). The SLA countdown on this queue is built against the waiting-time figure.
 
 ## 12. Processing Workflow
 
@@ -81,60 +83,67 @@ Open Escrow Requests
 ↓
 Search / Filter / Sort (default: SLA urgency)
 ↓
-Assess a Request
+Assess a Request (status: Trustee Review)
 ↓
 Review Requested Amount vs. Trust Account Balance, Milestone Evidence
 ↓
-Certify (request stays `Under Review`, now with RERA's escrow department) **or** Return (to developer) **or** Request Information
+Certify (advances to RERA Escrow Audit) **or** Return (to developer) **or** Request Information
 ↓
 Record Removed from Active Queue on Certify/Return; Remains, Updated, on Information Request
 ↓
-*(after Certify)* RERA Audits → Approved → Released
+*(after Certify)* RERA Audits → Approved → *(service-specific terminal state)*
 
 ## 13. Application Status Flow
 
-**Canonical cross-module vocabulary (resolved 2026-08-16):**
+**Corrected 2026-08-16.** Sourced directly from all six individual developer service files (#8, #9, #10, #12, #20, #21), not from either module's own UI filter values:
 
-Pending Approval *(was Awaiting Assessment)*
+*(Developer-side, before this queue)* Draft → Submitted
 ↓
-Under Review *(was Under Assessment — institution's own assessment)*
+Trustee Review *(this feature's own assessment stage)*
 ↓
-Information Requested *(back to developer, loop, stays within Pending Approval/Under Review)*
+*(Certify action taken)*
 ↓
-*(Certify action taken — request remains Under Review, now with RERA)*
+RERA Escrow Audit
 ↓
-Under Review *(continues — RERA's own audit; same canonical status as the institution's assessment, not a separate one)*
+Approved
 ↓
-Approved *(RERA's decision)*
-↓
-Released *(funds transferred — the transaction's true terminal state)*
+*Service-specific terminal state:*
 
-*or* Returned → back to developer, at any point before Approved
+| Request type | Terminal state |
+| :---- | :---- |
+| Escrow Account Activation (#8) | Active |
+| Escrow Account Transfer (#9) | Transferred |
+| Project Profit Withdrawal (#10) | Released |
+| Receive Payment from Escrow Account (#12) | Released |
+| Depositing a Mortgage into Escrow (#20) | Deposited |
+| Bank Guarantee Cancellation (#21) | Cancelled |
 
-SLA state (Within window / Approaching breach / Breached) tracks alongside status, not as a replacement for it, and applies to the institution's own portion of `Under Review`.
+Additional statuses (all six): Information Requested, Returned, Rejected — either during `Trustee Review` or `RERA Escrow Audit`.
 
-**Gap closed 2026-08-16**: this vocabulary now represents RERA's post-certification review explicitly (`Under Review` continuing after Certify, then `Approved`, then `Released`), where the previous version stopped at `Certified` with nothing after it.
+SLA state (Within window / Approaching breach / Breached) tracks alongside status, not as a replacement for it, and applies to this feature's own `Trustee Review` window only.
+
+**Superseded by this correction**: the previous vocabulary (`Awaiting Assessment / Under Assessment / Certified` in the original version of this document, and `Pending Approval / Under Review / Approved / Released` in the first same-day correction). Neither traced to the sourced service files. This also fully closes the original gap this document flagged: RERA's post-certification review is now an explicit named stage (`RERA Escrow Audit`), not folded into an ambiguous continuation of an institution-side status.
 
 ## 14. Possible Outcomes
 
-* Request Approved and Released
+* Request Approved and reaches its terminal state (Active / Transferred / Released / Deposited / Cancelled, per type)
 * Request Returned to Developer
 * Information Requested from Developer
-* SLA Breached *(visibility only — does not block action, and applies only to the institution's own assessment window)*
+* SLA Breached *(visibility only — does not block action, and applies only to the `Trustee Review` window)*
 
 ## 15. Output
 
 * Certification decision, recorded with the acting user, their role, and a timestamp
-* On Certify: request continues under `Under Review`, now with RERA's escrow department for final audit
-* On RERA's decision: status updates to `Approved`, then `Released` once funds move
-* Remains visible under an Approved/Released filter for the institution's own record after leaving the active assessment queue
+* On Certify: request advances to `RERA Escrow Audit`
+* On RERA's decision: status updates to `Approved`, then its service-specific terminal state
+* Remains visible under a filtered view for the institution's own record after leaving the active `Trustee Review` queue
 
 ## 16. Related Features
 
 * Trust Accounts *(the account a request draws against — View Trust Account row action)*
 * Internal Certification Queue *(a structurally similar certify/return gate, for Services #3–#11 instead)*
 * Compliance Reports *(findings may reference escrow activity on a covered account)*
-* Real Estate Developer's Escrow Management and Fund Release Request *(cross-module — the developer's side of the same six request types; **status vocabulary reconciled 2026-08-16**, see Feature Overview)*
+* Real Estate Developer's Escrow Management and Fund Release Request *(cross-module — the developer's side of the same six request types; **status vocabulary corrected 2026-08-16**, see Feature Overview)*
 
 ## 17. UI Screens
 
@@ -148,7 +157,7 @@ SLA state (Within window / Approaching breach / Breached) tracks alongside statu
 * Retrieve Trust Account Balance
 * Submit Assessment / Certification Decision
 * Request Information from Developer
-* Update Request Status (through RERA's subsequent Approved/Released transitions)
+* Update Request Status (through RERA's subsequent Approved/terminal-state transitions)
 * Send Notifications
 * Create Audit Log
 
@@ -166,18 +175,18 @@ SLA state (Within window / Approaching breach / Breached) tracks alongside statu
 * A request against a Suspended or Flagged trust account cannot be certified.
 * A request cannot be certified by the same user who last returned it to the developer (return-cycle rule, unaffected by the unified-access correction).
 * No bulk certification exists.
-* Status vocabulary matches real-estate-developer's Escrow Management for the same transaction types.
+* Status vocabulary matches the sourced individual service files, not either module's own UI filter values.
 * All assessment activity is recorded in the audit log, including the acting user's role.
 
 ## 21. Business Rules
 
-1. Requests originate in the Real Estate Developer module; this feature never creates one.
+1. Requests originate in the Real Estate Developer module; this feature never creates one, and never sees the developer-side `Draft`/`Submitted` stages.
 2. Any of the institution's four Group C roles may assess and certify a request — not restricted to the Account Trustee by title.
 3. A request cannot be certified by the user who last returned it to the developer, preserving a second pair of eyes across the return cycle — this rule stands independently of the retired scope model.
 4. A Suspended or Flagged trust account blocks certification against it.
 5. Certification is a structured, per-request assessment; there is no bulk-certify action.
-6. Certify is an action, not a terminal status — the request remains `Under Review` through RERA's own subsequent audit.
-7. Status vocabulary (`No Request → Pending Approval → Under Review → Approved → Released`) is the canonical cross-module vocabulary for Services #8/9/10/12/20/21, adopted 2026-08-16 — matches real-estate-developer's Escrow Management and Fund Release Request.
+6. Certify is an action that advances a request from `Trustee Review` to `RERA Escrow Audit` — not a terminal status.
+7. The terminal state after `Approved` is service-specific (Active / Transferred / Released / Deposited / Cancelled), not a single uniform word.
 8. Every assessment, certification, and return is permanently recorded in the audit trail, including the acting user's role.
 
 ## Open Questions
