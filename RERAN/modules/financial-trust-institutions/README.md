@@ -3,7 +3,7 @@ project: RERAN
 module: financial-trust-institutions
 type: overview
 status: current
-updated: 2026-08-15
+updated: 2026-08-16
 contains_proposals: true
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
@@ -25,14 +25,14 @@ RERAN user Group C — banks, mortgage institutions, account trustees and auditi
 | :---- | :---: |
 | Roles | 4 |
 | Business Services | 18 |
-| Shared Platform Features | 17 |
-| UI Screens | 18 *(13 in `ui/screens/`, 5 in `ui/screens-unified/`)* |
+| Shared Platform Features | 12 |
+| UI Screens | 19 *(14 in `ui/screens/`, 5 in `ui/screens-unified/`)* |
 
 * [roles-and-responsibilities.md](roles-and-responsibilities.md) — Mortgage Officer, Institution Relationship Manager, Account Trustee, Auditing Bureau Officer. All four are attribution-only (2026-08-14 client decision): none gates access, and none owns a specific service (`open-questions.md` A4, 2026-08-15).
-* [services-overview.md](services-overview.md) — the 18 services, category breakdown, status vocabulary, and channels.
-* [payments.md](payments.md) — the two payer/timing models, payment artefacts, and the corrected pay-upfront, no-standing-account model. *(Corrected 2026-08-15 — previously "three payer/timing models"; B11 folded Service #1 into the upfront model and confirmed Service #2 carries no fee, leaving two models, not three. See `open-questions.md` B11.)*
-* [open-questions.md](open-questions.md) — **all 24 questions raised while documenting this module are now confirmed or resolved; 0 need client data.** *(Corrected 2026-08-15 — previously "23 questions... all confirmed or resolved"; B11 was added 2026-08-15 as a genuinely new client decision on Service #1/#2 payment timing, bringing the total to 24. See `open-questions.md`'s own Summary.)*
-* [ui/README.md](ui/README.md) — the UI specification package: 18 screens, shared components, validation rules, and status vocabularies. *(Added 2026-08-15 — this bullet previously didn't exist; see "UI Specifications" below for what changed.)*
+* [services-overview.md](services-overview.md) — the 18 services, category breakdown, the 12-feature shared-platform layer (rebuilt 2026-08-16 from actual built screens), status vocabulary, and channels.
+* [payments.md](payments.md) — **normalized 2026-08-16, by client decision**, to one payer/timing pattern: every fee-bearing service now pays before RERA's decision — upfront via the shared gateway (institution-paid) or at the point of service (customer-paid). This retires the previous exception where Services #12 and #18 paid after RERA's decision — confirmed to be an artefact of the source's original counter-based process, not intentional design.
+* [open-questions.md](open-questions.md) — **all 24 questions raised while documenting this module are now confirmed or resolved; 0 need client data.** *(Corrected 2026-08-15 — previously "23 questions... all confirmed or resolved"; B11 was added 2026-08-15 as a genuinely new client decision on Service #1/#2 payment timing, bringing the total to 24. See `open-questions.md`'s own Summary. Not re-verified against every decision made 2026-08-16 — see Known Source Gaps below.)*
+* [ui/README.md](ui/README.md) — the UI specification package: 19 screens, shared components, validation rules, and status vocabularies. *(Corrected 2026-08-16 — previously 18/13; `help-and-support.md` added, see below.)*
 
 ## Service Flows
 
@@ -42,7 +42,7 @@ RERAN user Group C — banks, mortgage institutions, account trustees and auditi
 | :---: | :---- | :---- |
 | 1 | [Approval / Renewal of Account Trustee & Auditing Company](service-flows/service-01-approval-renewal-account-trustee-auditing-company.md) | Institutional Approval |
 | 2 | [Cancellation of Account Trustee & Auditing Company](service-flows/service-02-cancellation-account-trustee-auditing-company.md) | Institutional Approval |
-| 3 | [Mortgage Registration](service-flows/service-03-mortgage-registration.md) | Mortgage |
+| 3 | [Mortgage Registration](service-flows/service-03-mortgage-registration.md) | Mortgage *(now the inbound side of Real Estate Developer Service #6's mortgage validation dependency — see its own file)* |
 | 4 | [Mortgage Amendment](service-flows/service-04-mortgage-amendment.md) | Mortgage |
 | 5 | [Mortgage Transfer](service-flows/service-05-mortgage-transfer.md) | Mortgage |
 | 6 | [Mortgage Release](service-flows/service-06-mortgage-release.md) | Mortgage |
@@ -51,13 +51,13 @@ RERAN user Group C — banks, mortgage institutions, account trustees and auditi
 | 9 | [Finance Lease Amendment](service-flows/service-09-finance-lease-amendment.md) | Finance Lease |
 | 10 | [Finance Lease Transfer](service-flows/service-10-finance-lease-transfer.md) | Finance Lease |
 | 11 | [Finance Lease Release](service-flows/service-11-finance-lease-release.md) | Finance Lease |
-| 12 | [Registration of Real Estate Fund Companies](service-flows/service-12-register-real-estate-fund-company.md) | Title & Ownership |
+| 12 | [Registration of Real Estate Fund Companies](service-flows/service-12-register-real-estate-fund-company.md) | Title & Ownership *(payment timing normalized 2026-08-16 — now pays before RERA's decision, not after)* |
 | 13 | [Sale Procedure (Heirs)](service-flows/service-13-sale-procedure-heirs.md) | Title & Ownership |
 | 14 | [Company Shares Sale](service-flows/service-14-company-shares-sale.md) | Title & Ownership |
 | 15 | [Updating Title Deed Information](service-flows/service-15-update-title-deed-information.md) | Title & Ownership |
 | 16 | [Split Ownership](service-flows/service-16-split-ownership.md) | Title & Ownership |
 | 17 | [Issuance of Title Deed](service-flows/service-17-issue-title-deed.md) | Title & Ownership |
-| 18 | [Contract Cancellation](service-flows/service-18-contract-cancellation.md) | Contract |
+| 18 | [Contract Cancellation](service-flows/service-18-contract-cancellation.md) | Contract *(payment timing normalized 2026-08-16 — now pays before RERA's decision, not after)* |
 
 All 18 carry `status: draft` and `contains_proposals: true` — each has genuinely sourced sections (workflow, channel, output, SLA, all traceable to `RERAN_service_flows_v2.md` rows 28–45) alongside proposed sections (required documents, and per-service business-rule inferences) marked inline. See each file's Open Questions section for what remains genuinely unresolved.
 
@@ -65,9 +65,9 @@ All 18 carry `status: draft` and `contains_proposals: true` — each has genuine
 
 **Written, not pending.** *(Corrected 2026-08-15 — this section previously read "Not yet written. Follows the service flows, per the project's derivation chain," which was accurate when this file was last touched but has been stale since the UI package was actually built; nobody updated this section as that work landed.)*
 
-Eighteen screens across two locations, described in full in [ui/README.md](ui/README.md):
+Nineteen screens across two locations, described in full in [ui/README.md](ui/README.md):
 
-* **`ui/screens/`** (13 files) — Dashboard, Applications, Application Details, Internal Certification Queue, Escrow Request Queue, Escrow Request Details, Trust Accounts, Compliance Reports, Payment History, Institution Profile, Documents, Notifications, and the Group G-operated Assisted Service Terminal.
+* **`ui/screens/`** (14 files, corrected 2026-08-16 — was 13) — Dashboard, Applications, Application Details, Internal Certification Queue, Escrow Request Queue, Escrow Request Details, Trust Accounts, Compliance Reports, Payment History, Institution Profile, Documents, Notifications, the Group G-operated Assisted Service Terminal, and Help & Support *(new 2026-08-16, by client decision — no source material, built at Claude's full discretion, deliberately narrower than real-estate-developer's version, see the screen's own Notes)*.
 * **`ui/screens-unified/`** (5 files) — Services Catalog, Service Details, Submit Application (the module's one canonical eighteen-service form, replacing the retired `service-request.md`), Application Review, and this folder's own README documenting how it maps against `ui/screens/`.
 
 Plus three shared reference documents: [ui/components.md](ui/components.md) (component library), [ui/validation-rules.md](ui/validation-rules.md) (validation patterns), and [ui/status-badges.md](ui/status-badges.md) (status vocabularies).
@@ -82,6 +82,14 @@ The internal certification gate is sourced for the mortgage and finance-lease li
 
 Where the gate does apply, it is an unrestricted action, not a scope or a fifth role: any of the institution's four Group C users may certify or return a filing, including the person who filed it, with the acting user and their role recorded in the audit trail. **Corrected 2026-08-14** — earlier versions of this document modelled certification as a "maker-checker permission scope" on the corporate account (A1/D2); permission scopes are retired module-wide per the client's unified-access decision. See [navigation.md#audit-trail-principle](navigation.md#audit-trail-principle) for the current model.
 
+## Cross-Module Work, 2026-08-16
+
+Several corrections and one new design decision touch both this module and Real Estate Developer, made and cross-linked the same day:
+
+* **Escrow status vocabulary corrected, twice.** This module's Escrow Request Queue and real-estate-developer's Escrow Management/Fund Release Request now share one sourced vocabulary (`Draft → Submitted → Trustee Review → RERA Escrow Audit → Approved → [service-specific terminal state]`), checked directly against all six underlying developer escrow service files rather than either module's own UI screen filter values. See `services-overview.md`'s Cross-Module Correction section.
+* **"RERA Escrow Audit" and this module's "Compliance & Escrow Auditor" confirmed to be the same regulatory role**, not two departments — verified against the master source table's Regulator/Approver column, which carries the identical value across both modules' relevant rows. See `services-overview.md`'s Cross-Module Clarification section.
+* **New dependency: Real Estate Developer Service #6 validates its mortgage reference against this module's Service #3 (Mortgage Registration)**, in real time, requiring a `Completed` match, with no pre-submission warning and no visibility on this module's own side — a five-part product decision, not a sourced requirement. See Service #3's own file.
+
 ## Platform Sub-systems
 
 The source names three for this group:
@@ -94,11 +102,11 @@ The source names three for this group:
 
 This module contains proposed content marked with `contains_proposals: true` in frontmatter and inline `> **Proposed**` blocks. The source material is incomplete for this group — in particular, two of the four roles have no documented post-login behaviour at all.
 
-**All 24 questions raised while documenting this module are now confirmed or resolved** in [open-questions.md](open-questions.md); those positions have been applied throughout the service flows, `services-overview.md`, `payments.md`, and the UI package. *(Corrected 2026-08-15 — previously "23 questions... now confirmed"; B11 added, see the Contents section above.)* Remaining open items — proposals not yet put to the client, as distinct from the closed question set above — are listed in each document's own To Confirm / Open Questions section:
+**All 24 questions raised while documenting this module are now confirmed or resolved** in [open-questions.md](open-questions.md); those positions have been applied throughout the service flows, `services-overview.md`, `payments.md`, and the UI package. *(Corrected 2026-08-15 — previously "23 questions... now confirmed"; B11 added, see the Contents section above. Not independently re-verified against every 2026-08-16 decision — see Known Source Gaps below.)* Remaining open items — proposals not yet put to the client, as distinct from the closed question set above — are listed in each document's own To Confirm / Open Questions section:
 
 * [roles-and-responsibilities.md](roles-and-responsibilities.md#to-confirm--summary) — 1 item genuinely still open as of 2026-08-15 (6 are resolved and kept for the record). *(Corrected 2026-08-15 — previously "4 genuinely still open"; the Dashboard rework (issue #50) resolved item 7, leaving only item 6 open.)*
-* [services-overview.md](services-overview.md#to-confirm) — 5 items.
-* [payments.md](payments.md#to-confirm--summary) — 4 items. *(Corrected 2026-08-15 — previously "6 items... not re-verified"; the B11 correction pass did update this section directly, resolving two more and leaving 4. No longer a stale caveat.)*
+* [services-overview.md](services-overview.md#to-confirm) — 5 items, as of 2026-08-16 (Staff Management, Help & Support, status vocabulary, and payment normalization all resolved that day; the Staff Management item was found to have been a misdiagnosed gap, not a genuine one — see that document's own Staff Management section).
+* [payments.md](payments.md#to-confirm--summary) — 4 items, though one (whether #12/#18's post-decision timing was intentional) is now resolved as of 2026-08-16 and should be checked directly rather than assumed current from this count alone.
 * Each of the 18 service-flow documents — its own Open Questions section, where something survived the answers doc genuinely unresolved.
 * [ui/screens-unified/submit-application.md](ui/screens-unified/submit-application.md#section-3--service-specific-details-dynamic) — the per-service field-layout classification (Pattern A/B/C) for all 18 services, fully resolved as of 2026-08-15; nothing open there either, but worth a direct link since it's a substantial piece of design reasoning that doesn't fit the "To Confirm" framing of the other documents.
 
@@ -108,7 +116,8 @@ When an item is confirmed, remove its `> **Proposed**` block and bump `updated`.
 
 * **Account Trustee and Auditing Bureau Officer own no numbered services.** Both have substantial described functions but appear in the service table only as participants in Group B's escrow workflow. Their Group C interface is reconstructed, not sourced.
 * **The "bank's internal auditor" in the mortgage workflow is modelled as a checker permission scope, not the Auditing Bureau Officer** (A1) — the Auditing Bureau Officer is an approved external firm auditing developer escrow, a different actor with different properties.
-* **The status vocabulary is now platform-wide core plus a Group C extension** (D1), rather than undefined for every user group.
+* **The status vocabulary is now platform-wide core plus a Group C extension** (D1), rather than undefined for every user group — **confirmed acceptable as written, 2026-08-16, by client decision.**
 * **No service in Group C is role-specific, for any of the 18 services** (A4, confirmed 2026-08-15, client decision).
 * **Row 38 (Service #12) and row 39 (Service #7) are transposed against file order** in the source workbook; the service flows follow the row-to-file mapping, not row sequence.
 * **Row 39 (Grant Property Mortgage) names "Payment receipts" as output**, which this document previously flagged as the one exception against every other mortgage row's "Fee balance" wording. Under the corrected payment model (`open-questions.md` B1, B9), there is no standing account and no "fee balance" artefact for any Group C service; row 39's "Payment receipts" is the terminology every service now follows, not an anomaly. See [payments.md](payments.md).
+* **This README, and several documents it links to, went stale on 2026-08-16 between successive rounds of correction** — a Staff Management feature was briefly documented as built when it never was (see `services-overview.md`'s own Staff Management section for the full correction), and this file's own Contents table sat at "17 features" for a full day after the module was rebuilt to 12. Neither error is unique to this module; treat any single document's counts as provisional until cross-checked against the actual repository state, not assumed current from its own `updated` date.
