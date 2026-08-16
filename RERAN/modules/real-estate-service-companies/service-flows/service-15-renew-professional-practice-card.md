@@ -27,13 +27,15 @@ tags:
 
 The **Renew Professional Practice Card** service renews an agent's existing practice card before or after its expiry, with **automatic approval** — the one Group D licensing service sourced as not requiring manual RERA review.
 
+> **Corrected 2026-08-16, by client decision (`open-questions.md` B4).** Same normalization as Services #12–#14 — payment now happens upfront, before submission, not after the automatic approval. With payment moved ahead of the (already-automatic, effectively instantaneous) approval, this service's workflow simplifies more than #12–#14's did: there is no longer a meaningful gap between payment and approval for a status to sit in.
+
 ## 2. Purpose
 
 Keep an agent's professional practice card current without requiring the same manual audit the original issuance (Service #14) goes through, since renewal presumes the agent's standing is already established.
 
 ## 3. Description
 
-The company signs up or logs in, fills in details, attaches documents, and sends the application; approval is automatic. The company then pays, and the renewed card becomes printable from the system.
+The company signs up or logs in, fills in details, attaches documents, and pays via the shared platform gateway; approval is automatic on submission, and the renewed card becomes printable from the system immediately.
 
 ## 4. Who Can Apply
 
@@ -45,6 +47,7 @@ Any of the company's four Group D roles — the platform does not gate this by r
 
 * An existing professional practice card (Service #14) to be renewed.
 * Required supporting documents are available.
+* Payment has been completed via the shared platform gateway before the application is lodged.
 
 ## 6. Required Information
 
@@ -69,9 +72,9 @@ Applicable according to the RERAN fee schedule.
 
 ## 9. Payment Required
 
-**Yes — after automatic approval, before the renewed card becomes printable.**
+**Yes — upfront, via the shared platform gateway, before the application is lodged and before automatic approval.**
 
-Sourced (row 62): "send (automatic approval); log in, select payment, pay; card printable from system." The approval step is automatic rather than manually audited, but payment still follows approval rather than preceding submission — the same Model 2 timing shape as Services #12–#14, just with an automated decision step. **Not folded into Open Question B4's normalization question by default**, since automatic approval changes the practical urgency of the timing question (there is no meaningful wait between submission and approval to distinguish from upfront payment) — but the sourced sequence itself is unchanged, and B4's answer, if it applies platform-wide to this cluster, would apply here too.
+**Corrected 2026-08-16, by client decision (`open-questions.md` B4)** — previously paid after automatic approval, before the renewed card became printable; now paid before submission. See `payments.md` Model 2.
 
 ## 10. Processing Authority
 
@@ -83,6 +86,8 @@ Sourced (row 62): "send (automatic approval); log in, select payment, pay; card 
 
 ## 12. Processing Workflow
 
+**Corrected 2026-08-16 — payment moved ahead of submission, by client decision.**
+
 Company User
 
 Sign Up / Log In
@@ -91,19 +96,11 @@ Fill Renewal Details
 ↓
 Attach Supporting Documents
 ↓
+Pay via Shared Platform Gateway *(moved ahead of submission, 2026-08-16)*
+↓
 Send Application Online
 ↓
 *(Automatic Approval)*
-
-↓
-
-Company User
-
-Log In
-↓
-Select Payment
-↓
-Pay Fees
 ↓
 Renewed Card Printable from System
 
@@ -111,24 +108,26 @@ Renewed Card Printable from System
 
 ## 13. Application Status Flow
 
+**Corrected 2026-08-16 — payment now precedes the automatic approval, by client decision.**
+
 Draft
-↓
-Submitted
-↓
-Approved *(automatic)*
 ↓
 Payment Pending
 ↓
 Payment Successful
 ↓
+Submitted
+↓
+Approved *(automatic)*
+↓
 Completed
 
 ### Additional Statuses
 
-* Payment Failed *(retryable)*
+* Payment Failed *(retryable, pre-lodging)*
 * Withdrawn
 
-**Note:** `Under Review`, `Information Requested`, and `Returned for Correction` are omitted from this service's status flow — sourced as automatic approval, with no manual review step described. `Rejected` is also omitted, since an automatically-approved application has no rejection path sourced. Both omissions are direct consequences of the automatic-approval reading; flagged for client confirmation that automatic truly means no rejection path exists, rather than an unsourced edge case.
+**Note:** `Under Review`, `Information Requested`, and `Returned for Correction` are still omitted, consistent with the sourced automatic-approval reading — unaffected by the payment-timing correction. `Rejected` remains omitted for the same reason given previously: an automatically-approved application has no rejection path sourced.
 
 ## 14. Possible Outcomes
 
@@ -138,7 +137,7 @@ Completed
 ## 15. Output
 
 * **Renewed E-Card** — sourced (row 62)
-* Payment Receipt
+* Payment Receipt — issued at checkout, before the application was lodged
 
 ## 16. Related Services
 
@@ -148,16 +147,22 @@ Completed
 
 ## 17. UI Screens
 
-Not yet built — Phase 4.
+* Services
+* Renew Professional Practice Card
+* Card Reference
+* Payment
+* Payment Successful
+* Application Submitted
+* Renewed Card Confirmation
 
 ## 18. API Requirements
 
 * Retrieve Existing Card Record
-* Submit Renewal Application
-* Auto-Approve Renewal
 * Calculate Renewal Fee
 * Initiate Payment
 * Verify Payment
+* Submit Renewal Application
+* Auto-Approve Renewal
 * Generate Renewed E-Card
 * Send Notifications
 
@@ -177,15 +182,16 @@ Not yet built — Phase 4.
 ## 20. Acceptance Criteria
 
 * A company can renew an existing practice card on an agent's behalf.
+* Payment is completed via the shared platform gateway before the application is lodged. *(Corrected 2026-08-16.)*
 * Renewal is automatically approved on submission, without a manual review step.
-* Payment is completed after automatic approval and before the renewed card is printable.
+* An application cannot be lodged until payment succeeds.
 * All activities are recorded in the audit log.
 
 ## 21. Business Rules
 
 1. Only an existing practice card (Service #14) may be renewed under this service.
-2. Renewal approval is automatic — sourced, no manual review step.
-3. Payment is required after approval and before the renewed card is printable.
+2. Payment is made via the shared platform gateway, upfront, before the application can be lodged. **Corrected 2026-08-16** — previously required after automatic approval.
+3. Renewal approval is automatic — sourced, no manual review step.
 4. Every renewal receives a unique application reference number.
 5. All submissions, payments, and notifications must be permanently recorded in the audit trail.
 

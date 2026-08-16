@@ -27,7 +27,7 @@ tags:
 
 The **Real Estate Permit Application** service issues advertisement permits to a licensed company — covering electronic, classified, billboard, and SMS advertisement types under one service, selected by a Permit Type field (`open-questions.md` A4), rather than four separate services.
 
-> **Payment timing — flagged, building against source (`open-questions.md` B4).** Same pay-after-acceptance shape as Service #12; see that file's note for the full reasoning.
+> **Corrected 2026-08-16, by client decision (`open-questions.md` B4).** Same normalization as Service #12 — payment now happens upfront, before lodging, not after acceptance.
 
 ## 2. Purpose
 
@@ -35,7 +35,7 @@ Give a licensed company a regulated path to obtain permits for its advertising a
 
 ## 3. Description
 
-The company signs up or logs in, selects the permit type, fills in details, attaches supporting documents, and sends the application. RERA audits and sends notice of acceptance; the company then pays, and receives the permit e-certificate through the Digital system.
+The company signs up or logs in, selects the permit type, fills in details, attaches supporting documents, pays via the shared platform gateway, and sends the application. RERA audits and, on acceptance, delivers the permit e-certificate through the Digital system.
 
 ## 4. Who Can Apply
 
@@ -47,6 +47,7 @@ Any of the company's four Group D roles — the platform does not gate this by r
 
 * The company holds a valid real estate licence (Service #12).
 * Required permit details and supporting documents are available.
+* Payment has been completed via the shared platform gateway before the application is lodged.
 
 ## 6. Required Information
 
@@ -76,9 +77,9 @@ Applicable according to the RERAN fee schedule. RERA sets this fee directly thro
 
 ## 9. Payment Required
 
-**Yes — after audit and acceptance, before the permit e-certificate is issued.**
+**Yes — upfront, via the shared platform gateway, before the application is lodged.**
 
-Sourced (row 60): "audit and acceptance; log in, select payment, pay; receive permit certificate via Digital system." Same Model 2 timing as Service #12. See Open Question B4.
+**Corrected 2026-08-16, by client decision (`open-questions.md` B4)** — previously paid after audit and acceptance; now paid before submission. See `payments.md` Model 2.
 
 ## 10. Processing Authority
 
@@ -92,6 +93,8 @@ No internal company-side certification gate exists for this service (`open-quest
 
 ## 12. Processing Workflow
 
+**Corrected 2026-08-16 — payment moved ahead of audit, by client decision.**
+
 Company User
 
 Sign Up / Log In
@@ -101,6 +104,8 @@ Select Permit Type
 Fill Advertisement Details
 ↓
 Attach Supporting Documents
+↓
+Pay via Shared Platform Gateway *(moved ahead of RERA's review, 2026-08-16)*
 ↓
 Send Application Online
 
@@ -112,25 +117,19 @@ Audit Application
 ↓
 Accept or Reject
 ↓
-Send Notice of Acceptance
-
-↓
-
-Company User
-
-Log In
-↓
-Select Payment
-↓
-Pay Fees
-↓
-Receive Permit e-Certificate via Digital System
+Deliver Permit e-Certificate via Digital System
 
 *Channel: All permit types — Land Department website (Digital system). Electronic, classified, billboard, and SMS advertisement permits specifically — also reachable via RERA App.*
 
 ## 13. Application Status Flow
 
+**Corrected 2026-08-16 — `Payment Pending` retired for this service, by client decision.**
+
 Draft
+↓
+Payment Pending
+↓
+Payment Successful
 ↓
 Submitted
 ↓
@@ -140,17 +139,13 @@ Information Requested
 ↓
 Returned for Correction
 ↓
-Accepted
-↓
-Payment Pending
-↓
-Payment Successful
+Approved
 ↓
 Completed
 
 ### Additional Statuses
 
-* Payment Failed *(retryable)*
+* Payment Failed *(retryable, pre-lodging)*
 * Rejected
 * Withdrawn
 
@@ -164,7 +159,7 @@ Completed
 ## 15. Output
 
 * **Permit e-Certificate** — sourced (row 60)
-* Payment Receipt
+* Payment Receipt — issued at checkout, before the application was lodged
 
 ## 16. Related Services
 
@@ -173,17 +168,27 @@ Completed
 
 ## 17. UI Screens
 
-Not yet built — Phase 4.
+* Services
+* Real Estate Permit Application
+* Permit Type Selection
+* Advertisement Details
+* Document Upload
+* Payment
+* Payment Successful
+* Application Review
+* Application Submitted
+* Application Details
+* Permit Confirmation
 
 ## 18. API Requirements
 
 * Validate Company Licence
 * Submit Permit Application
 * Upload Documents
-* Retrieve Application Status
 * Calculate Permit Fee
 * Initiate Payment
 * Verify Payment
+* Retrieve Application Status
 * Generate Permit e-Certificate
 * Send Notifications
 
@@ -203,19 +208,20 @@ Not yet built — Phase 4.
 
 * A licensed company can apply for any of the sourced permit types through one service.
 * System validates the company holds a valid licence before allowing the application.
-* Payment is completed after acceptance and before the certificate is issued — unless Open Question B4 is resolved toward normalization.
+* Payment is completed via the shared platform gateway before the application is lodged. *(Corrected 2026-08-16.)*
+* An application cannot be lodged or submitted for audit until payment succeeds.
 * All activities are recorded in the audit log.
 
 ## 21. Business Rules
 
 1. Only a licensed company (Service #12) may apply for a permit.
 2. All advertisement permit types are handled by this one service, differentiated by a Permit Type field — a design judgement (`open-questions.md` A4), not a sourced certainty.
-3. Payment is required after acceptance and before the certificate is issued.
+3. Payment is made via the shared platform gateway, upfront, before the application can be lodged. **Corrected 2026-08-16** — previously required after acceptance.
 4. Every application receives a unique application reference number.
 5. All submissions, reviews, payments, and notifications must be permanently recorded in the audit trail.
 
 ## Open Questions
 
-1. **Should this service's payment timing be normalized to pay-before-lodging?** See `open-questions.md` B4.
-2. **Whether the four advertisement permit types genuinely share one service or need splitting** — see `open-questions.md` A4. Medium confidence, reversible if wrong.
-3. **Exact fee amount, and whether it varies by permit type.** Client data.
+1. **Whether the four advertisement permit types genuinely share one service or need splitting** — see `open-questions.md` A4. Medium confidence, reversible if wrong.
+2. **Exact fee amount, and whether it varies by permit type.** Client data.
+3. **What happens to the fee on a rejected application.** Not addressed by any source document.

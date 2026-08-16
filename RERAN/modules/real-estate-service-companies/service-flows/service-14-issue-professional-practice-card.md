@@ -27,7 +27,7 @@ tags:
 
 The **Issue Professional Practice Card** service issues an official e-card to an agent working for a licensed real estate company, evidencing their professional standing to practice.
 
-> **Payment timing — flagged, building against source (`open-questions.md` B4).** Same pay-after-acceptance shape as Services #12/#13.
+> **Corrected 2026-08-16, by client decision (`open-questions.md` B4).** Same normalization as Services #12/#13 — payment now happens upfront, before lodging, not after acceptance.
 
 ## 2. Purpose
 
@@ -35,7 +35,7 @@ Give individual agents at a licensed company a regulated, verifiable credential 
 
 ## 3. Description
 
-The company signs up or logs in, fills in the agent's details, attaches supporting documents, and sends the application. RERA audits and sends notice of acceptance; the company then pays, and the card becomes printable from the system.
+The company signs up or logs in, fills in the agent's details, attaches supporting documents, pays via the shared platform gateway, and sends the application. RERA audits and, on acceptance, the card becomes printable from the system.
 
 ## 4. Who Can Apply
 
@@ -48,6 +48,7 @@ Any of the company's four Group D roles — the platform does not gate this by r
 * The company holds a valid real estate licence (Service #12).
 * The agent to be issued a card is identified and employed by the company.
 * Required supporting documents are available.
+* Payment has been completed via the shared platform gateway before the application is lodged.
 
 ## 6. Required Information
 
@@ -75,9 +76,9 @@ Applicable according to the RERAN fee schedule.
 
 ## 9. Payment Required
 
-**Yes — after audit and acceptance, before the card becomes printable.**
+**Yes — upfront, via the shared platform gateway, before the application is lodged.**
 
-Sourced (row 61): "audit and acceptance; log in, select payment, pay; card printable from system." Same Model 2 timing as Services #12/#13. See Open Question B4.
+**Corrected 2026-08-16, by client decision (`open-questions.md` B4)** — previously paid after audit and acceptance, before the card became printable; now paid before submission. See `payments.md` Model 2.
 
 ## 10. Processing Authority
 
@@ -91,6 +92,8 @@ No internal company-side certification gate exists for this service (`open-quest
 
 ## 12. Processing Workflow
 
+**Corrected 2026-08-16 — payment moved ahead of audit, by client decision.**
+
 Company User
 
 Sign Up / Log In
@@ -98,6 +101,8 @@ Sign Up / Log In
 Fill Agent Details
 ↓
 Attach Supporting Documents
+↓
+Pay via Shared Platform Gateway *(moved ahead of RERA's review, 2026-08-16)*
 ↓
 Send Application Online
 
@@ -109,23 +114,17 @@ Audit Application
 ↓
 Accept or Reject
 ↓
-Send Notice of Acceptance
-
-↓
-
-Company User
-
-Log In
-↓
-Select Payment
-↓
-Pay Fees
-↓
 Card Printable from System
 
 ## 13. Application Status Flow
 
+**Corrected 2026-08-16 — `Payment Pending` retired for this service, by client decision.**
+
 Draft
+↓
+Payment Pending
+↓
+Payment Successful
 ↓
 Submitted
 ↓
@@ -135,17 +134,13 @@ Information Requested
 ↓
 Returned for Correction
 ↓
-Accepted
-↓
-Payment Pending
-↓
-Payment Successful
+Approved
 ↓
 Completed
 
 ### Additional Statuses
 
-* Payment Failed *(retryable)*
+* Payment Failed *(retryable, pre-lodging)*
 * Rejected
 * Withdrawn
 
@@ -159,7 +154,7 @@ Completed
 ## 15. Output
 
 * **E-Card** — sourced (row 61), printable from the system rather than emailed
-* Payment Receipt
+* Payment Receipt — issued at checkout, before the application was lodged
 
 ## 16. Related Services
 
@@ -170,17 +165,26 @@ Completed
 
 ## 17. UI Screens
 
-Not yet built — Phase 4.
+* Services
+* Issue Professional Practice Card
+* Agent Information
+* Document Upload
+* Payment
+* Payment Successful
+* Application Review
+* Application Submitted
+* Application Details
+* Card Issued
 
 ## 18. API Requirements
 
 * Validate Company Licence
 * Submit Card Issuance Application
 * Upload Documents
-* Retrieve Application Status
 * Calculate Card Fee
 * Initiate Payment
 * Verify Payment
+* Retrieve Application Status
 * Generate E-Card
 * Send Notifications
 
@@ -200,19 +204,19 @@ Not yet built — Phase 4.
 
 * A licensed company can apply for a practice card on an agent's behalf.
 * System validates the company holds a valid licence before allowing the application.
-* Payment is completed after acceptance and before the card is printable — unless Open Question B4 is resolved toward normalization.
+* Payment is completed via the shared platform gateway before the application is lodged. *(Corrected 2026-08-16.)*
+* An application cannot be lodged or submitted for audit until payment succeeds.
 * All activities are recorded in the audit log.
 
 ## 21. Business Rules
 
 1. Only a licensed company (Service #12) may apply for a practice card on an agent's behalf.
-2. Payment is required after acceptance and before the card is printable.
+2. Payment is made via the shared platform gateway, upfront, before the application can be lodged. **Corrected 2026-08-16** — previously required after acceptance.
 3. Every application receives a unique application reference number.
 4. All submissions, reviews, payments, and notifications must be permanently recorded in the audit trail.
 
 ## Open Questions
 
-1. **Should this service's payment timing be normalized to pay-before-lodging?** See `open-questions.md` B4.
-2. **Required information and document lists are proposed, not sourced.** Needs client confirmation.
-3. **Card validity period** is not specified for issuance — Service #15 (Renewal) implies one exists, but the term itself is not sourced. Client data.
-4. **Exact fee amount.** Client data.
+1. **Required information and document lists are proposed, not sourced.** Needs client confirmation.
+2. **Card validity period** is not specified for issuance — Service #15 (Renewal) implies one exists, but the term itself is not sourced. Client data.
+3. **Exact fee amount.** Client data.
