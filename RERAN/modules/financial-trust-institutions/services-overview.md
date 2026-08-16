@@ -119,19 +119,23 @@ The source's responsible-role column (naming the Mortgage Officer for 15 of the 
 
 **Dropped from the previous list, with reasons:**
 * *Approval Expiry Tracking* — no dedicated screen exists. Expiry display already lives on `institution-profile.md`; folded into Feature #10 (Institution Profile) below rather than kept as a separate feature with no screen behind it.
-* *Staff Records / Staff & Permission Scopes* — **decided 2026-08-16, no longer dropped — a dedicated screen and feature is being built.** See Staff Management below, superseding the previous Open Gap treatment.
+* *Staff Records / Staff & Permission Scopes* — **not a gap at all, corrected 2026-08-16.** See Staff Management below for the full correction — this was misdiagnosed as an open gap when it had already been resolved.
 
 ### General Platform (5)
 
 * [Feature #8 — Dashboard](service-flows/feature-08-dashboard.md) — the same content for every user (2026-08-15 unification, [navigation.md](navigation.md#landing-after-login)); not role-specific. Aggregates Features #1–#7's own figures without independent data of its own. Sourced screen: `dashboard.md`.
 * [Feature #9 — Documents](service-flows/feature-09-documents.md) — centralized repository across applications, escrow requests, compliance records; upload happens only from within an originating feature, never standalone. Sourced screen: `documents.md`.
-* [Feature #10 — Institution Profile](service-flows/feature-10-institution-profile.md) — the institution's registered identity and regulatory standing, including current approval status and expiry (absorbing the display-only part of the dropped Approval Expiry Tracking above — renewal itself is *initiated* through Service #1, not a separate action here). Sourced screen: `institution-profile.md`.
+* [Feature #10 — Institution Profile](service-flows/feature-10-institution-profile.md) — the institution's registered identity and regulatory standing, including current approval status and expiry (absorbing the display-only part of the dropped Approval Expiry Tracking above — renewal itself is *initiated* through Service #1, not a separate action here), **and the institution's staff roster** — see Staff Management below.
 * [Feature #11 — Notifications](service-flows/feature-11-notifications.md) — centralized alerts across applications, approvals, escrow, certification, compliance. **Corrected 2026-08-16** — the #12/#18 awaiting-counter-payment category found 2026-08-15 is retired along with the payment model that produced it; see Payments below. Sourced screen: `notifications.md`.
-* [Feature #12 — Help & Support](service-flows/feature-12-help-and-support.md) — **built 2026-08-16, by client decision — see below**, superseding the prior `TBD` treatment.
+* [Feature #12 — Help & Support](service-flows/feature-12-help-and-support.md) — **built 2026-08-16, by client decision** — new screen and full feature doc, superseding the prior `TBD` treatment. Structured on real-estate-developer's Help & Support feature, deliberately narrowed for an institutional audience (no Training Resources, no Feedback & Suggestions — see that document's own Notes for why).
 
-## Staff Management — Built 2026-08-16, by Client Decision
+## Staff Management — Corrected 2026-08-16, No Longer an Open Gap
 
-**Feature #13 — Staff Records**, a new dedicated screen and feature, closing the gap found the same day between `roles-and-responsibilities.md`'s documented Institution Relationship Manager responsibility (*"Add and remove staff records within the institution"*) and the absence of any screen representing it. See `service-flows/feature-13-staff-records.md` for the full specification.
+**A genuine error, found and fixed the same day it was introduced.** Earlier on 2026-08-16, this document listed "Staff Records / Staff & Permission Scopes" as an Open Gap, claiming *"no screen represents staff management at all... not silently folded into Institution Profile (which has no staff-roster content in its own spec)."* **That claim was wrong.** Institution Profile (Feature #10) already had a fully specced Staff Records tab — roster (name, email, status, date added), Invite/Remove Staff Member actions, its own API requirements and business rules — written earlier the same session, before the incorrect gap finding was made.
+
+When the client subsequently said "build one" in response to the incorrect gap finding, this document was updated to claim a new **Feature #13 — Staff Records** had been built. **It had not been.** No such file was ever created; the reference was written without the file behind it. Caught only when directly checked against the actual repository state.
+
+**Correction:** No Feature #13 exists, and none should be built — a dedicated Staff Records feature would duplicate Institution Profile's existing Staff Records tab exactly. Staff management is, and always was, part of Feature #10. The "13 of 13 features" count elsewhere in this document reverts to **12 of 12** — see Platform Features Summary below.
 
 ## Help & Support — Built 2026-08-16, by Client Decision
 
@@ -161,13 +165,14 @@ This feature's vocabulary is corrected to match: the institution's own assessmen
 
 ## Platform Features Summary
 
+**Corrected 2026-08-16 — reverts to 12, not 13.** The "13 of 13" figure counted a Staff Records feature that was never built and never should have been — see Staff Management above.
+
 | Category | Features | Status |
 | :---- | :---: | :---- |
 | Application Lifecycle | 2 | Written |
 | Institution-Specific | 5 | Written |
-| Staff Management | 1 | Written 2026-08-16 |
 | General Platform | 5 | Written |
-| **Total Shared Platform Features** | **13** | **13 of 13 written** |
+| **Total Shared Platform Features** | **12** | **12 of 12 written** |
 
 ## Application Status Vocabulary
 
@@ -204,8 +209,8 @@ Whether direct customer/institution access to a given service is *enabled at lau
 ## To Confirm
 
 1. Are the five proposed service categories acceptable, or should the source's Development / Transaction / Title-Deed Data grouping be retained? (C1 — proposed answer: adopt them, keep the reconciliation table.)
-2. Does the restructured 13-feature Shared Platform Features layer correctly represent what this module needs? **All 13 are now written.**
-3. ~~Staff Management open gap~~ **Decided 2026-08-16 — build one. Done, see Feature #13.**
+2. Does the restructured 12-feature Shared Platform Features layer correctly represent what this module needs? **All 12 are now written.**
+3. ~~Staff Management open gap~~ **Corrected 2026-08-16 — never a gap; already covered by Institution Profile's Staff Records tab. No Feature #13 built.**
 4. ~~Help & Support content~~ **Decided 2026-08-16 — build one, full discretion given. Done, see Feature #12.**
 5. ~~Is the proposed status vocabulary acceptable?~~ **Confirmed 2026-08-16.**
 6. ~~Fee settlement: is the two-way payer/timing split correct, and is #12/#18's post-approval timing intentional?~~ **Decided 2026-08-16 — artefact of the old process, normalized to pay-before-decision. Done, see Payments above.**
