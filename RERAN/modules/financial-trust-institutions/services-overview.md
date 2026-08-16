@@ -115,23 +115,35 @@ The source's responsible-role column (naming the Mortgage Officer for 15 of the 
 * [Feature #4 — Escrow Request Queue](service-flows/feature-04-escrow-request-queue.md) — developer-originated requests (Real Estate Developer's escrow services, not one of Group C's own 18) awaiting assessment, certification, or return by any of the institution's four Group C roles. Sourced screens: `escrow-request-queue.md`, `escrow-request-details.md` (A2). SLA sourced via A6. **Status vocabulary corrected 2026-08-16, twice, plus terminology clarification** — see Cross-Module Correction and Cross-Module Clarification below.
 * [Feature #5 — Trust Accounts](service-flows/feature-05-trust-accounts.md) *(new)* — the institution's register of trust accounts under management, distinct from the intake queue above. Sourced directly from the Account Trustee's documented responsibility: *"Maintain the register of trust accounts under management"* (`roles-and-responsibilities.md`). Sourced screen: `trust-accounts.md`.
 * [Feature #6 — Compliance Reports](service-flows/feature-06-compliance-reports.md) *(new)* — the Auditing Bureau Officer's independent audit and reporting function: raising findings against trust accounts, opening/closing audit engagements, submitting RERA-defined compliance reports. Sourced directly from documented responsibilities: *"Prepare and submit independent compliance reports to RERA... Raise findings against trust accounts... Open and close audit engagements."* Sourced screen: `compliance-reports.md`.
-* [Feature #7 — Payment History](service-flows/feature-07-payment-history.md) — per-transaction payment records: receipts, amounts, service references, status, across three payment timings (upfront, at-counter-before-decision, at-counter-after-decision for #12/#18). Sourced screen: `payment-history.md`. **Corrected 2026-08-14** — previously "Settlement Account" (balance, top-up, ledger, low-balance alerting); that standing account is retired (`open-questions.md` B1) — see [payments.md](payments.md).
+* [Feature #7 — Payment History](service-flows/feature-07-payment-history.md) — per-transaction payment records: receipts, amounts, service references, status. Sourced screen: `payment-history.md`. **Corrected 2026-08-14** — previously "Settlement Account" (balance, top-up, ledger, low-balance alerting); that standing account is retired (`open-questions.md` B1) — see [payments.md](payments.md). **Payment model normalized 2026-08-16** — see Payments below; the "three payment timings" this feature previously described are now two.
 
 **Dropped from the previous list, with reasons:**
 * *Approval Expiry Tracking* — no dedicated screen exists. Expiry display already lives on `institution-profile.md`; folded into Feature #10 (Institution Profile) below rather than kept as a separate feature with no screen behind it.
-* *Staff Records / Staff & Permission Scopes* — see **Open Gap** below. Not folded into anything, because folding it in would misrepresent an actual documentation hole as resolved.
+* *Staff Records / Staff & Permission Scopes* — **decided 2026-08-16, no longer dropped — a dedicated screen and feature is being built.** See Staff Management below, superseding the previous Open Gap treatment.
 
 ### General Platform (5)
 
 * [Feature #8 — Dashboard](service-flows/feature-08-dashboard.md) — the same content for every user (2026-08-15 unification, [navigation.md](navigation.md#landing-after-login)); not role-specific. Aggregates Features #1–#7's own figures without independent data of its own. Sourced screen: `dashboard.md`.
 * [Feature #9 — Documents](service-flows/feature-09-documents.md) — centralized repository across applications, escrow requests, compliance records; upload happens only from within an originating feature, never standalone. Sourced screen: `documents.md`.
 * [Feature #10 — Institution Profile](service-flows/feature-10-institution-profile.md) — the institution's registered identity and regulatory standing, including current approval status and expiry (absorbing the display-only part of the dropped Approval Expiry Tracking above — renewal itself is *initiated* through Service #1, not a separate action here). Sourced screen: `institution-profile.md`.
-* [Feature #11 — Notifications](service-flows/feature-11-notifications.md) — centralized alerts across applications, approvals, escrow, certification, compliance, and (a genuinely new category found 2026-08-15) the #12/#18 awaiting-counter-payment state. Sourced screen: `notifications.md`.
-* [Feature #12 — Help & Support](service-flows/feature-12-help-and-support.md) — **largely `TBD`.** Named in [navigation.md](navigation.md)'s sidebar; no screen file exists anywhere in the module (`ui/screens/` and `ui/screens-unified/` both checked directly). Written honestly as a gap, not filled in with invented content — see the document itself for what's genuinely unknown versus presumed by convention with other modules.
+* [Feature #11 — Notifications](service-flows/feature-11-notifications.md) — centralized alerts across applications, approvals, escrow, certification, compliance. **Corrected 2026-08-16** — the #12/#18 awaiting-counter-payment category found 2026-08-15 is retired along with the payment model that produced it; see Payments below. Sourced screen: `notifications.md`.
+* [Feature #12 — Help & Support](service-flows/feature-12-help-and-support.md) — **built 2026-08-16, by client decision — see below**, superseding the prior `TBD` treatment.
 
-## Open Gap: Staff Management
+## Staff Management — Built 2026-08-16, by Client Decision
 
-**Found 2026-08-16, not resolved.** `roles-and-responsibilities.md` documents the Institution Relationship Manager's responsibility to *"Add and remove staff records within the institution"* — and `open-questions.md` A1/A5 both assume delegated staff exist under a corporate account. But no screen in `ui/screens/` or `ui/screens-unified/`, and no item in [navigation.md](navigation.md)'s sidebar, represents staff management at all. This is a genuine hole between a documented role responsibility and the built UI — not silently folded into Institution Profile (which has no staff-roster content in its own spec) and not invented as a new feature without a screen behind it, the same standard applied to Approval Expiry Tracking above, and to Help & Support's own honest `TBD` treatment. Needs a client decision: build a dedicated screen, or confirm this responsibility is out of scope for the current UI package.
+**Feature #13 — Staff Records**, a new dedicated screen and feature, closing the gap found the same day between `roles-and-responsibilities.md`'s documented Institution Relationship Manager responsibility (*"Add and remove staff records within the institution"*) and the absence of any screen representing it. See `service-flows/feature-13-staff-records.md` for the full specification.
+
+## Help & Support — Built 2026-08-16, by Client Decision
+
+**Feature #12** is no longer `TBD`. Built at Claude's discretion, by explicit client instruction, since no source material existed to derive it from. See `service-flows/feature-12-help-and-support.md` for the full specification — content is clearly marked as a proposed build, not sourced, throughout.
+
+## Payments — Normalized 2026-08-16, by Client Decision
+
+**Services #12 and #18's post-approval payment timing is confirmed to be an artefact of the source's counter-based process, not intentional design, and is normalized to pay-before-decision** — matching Services #13–#17's pattern, once digitized onto the shared platform gateway.
+
+This retires the two-way-model-with-an-exception structure documented since 2026-08-15: **all fee-bearing Group C services now pay before RERA's decision** — either upfront via the shared platform gateway (Services #1, #3–#11) or at the point of service, before RERA reviews, at the counter or online (Services #12–#18). Service #2 remains fee-free (confirmed 2026-08-15, `open-questions.md` B11) — unaffected by this normalization, since there was never a payment step to reorder.
+
+**Consequence for the status vocabulary below:** `Approved — Awaiting Payment` no longer occurs for any Group C service, including #12 and #18. The exception documented on 2026-08-15 (found via a per-service audit that specifically checked #12 and #18 against their own sourced workflow order) is now closed by this normalization rather than left standing. See [payments.md](payments.md) for the full corrected model and Services #12 and #18's own files for the corrected per-service timing.
 
 ## Cross-Module Correction: Escrow Status Vocabulary
 
@@ -153,35 +165,31 @@ This feature's vocabulary is corrected to match: the institution's own assessmen
 | :---- | :---: | :---- |
 | Application Lifecycle | 2 | Written |
 | Institution-Specific | 5 | Written |
-| General Platform | 5 | Written (Feature #12 largely `TBD` — no screen exists) |
-| **Total Shared Platform Features** | **12** | **12 of 12 written** |
-
-Open gap (not counted above): Staff Management — documented responsibility, no screen, no feature.
+| Staff Management | 1 | Written 2026-08-16 |
+| General Platform | 5 | Written |
+| **Total Shared Platform Features** | **13** | **13 of 13 written** |
 
 ## Application Status Vocabulary
 
-> **Proposed — superseded by `open-questions.md` D1.** The status vocabulary is now platform-wide core, with a Group C extension, rather than a status set defined from scratch for this module alone. Needs client confirmation of the specific list, though the platform-wide-core-plus-module-extension principle carries **High** confidence (FR-18/FR-19 require a live dashboard and configurable reports across all regulatory service areas, neither buildable over per-module vocabularies).
+> **Confirmed 2026-08-16, by client decision.** The platform-wide-core-plus-Group-C-extension vocabulary below is accepted as correct, superseding `open-questions.md` D1's open status.
 
 | Status | Meaning | Set by |
 | :---- | :---- | :---- |
 | Draft | Started, not submitted | Any of the institution's four Group C roles |
-| Pending Internal Certification *(Group C extension — services with an internal certification gate only)* | Awaiting certify-or-return by any of the institution's four Group C users *(corrected 2026-08-14 — not a "checker permission scope"; scopes are retired, see [navigation.md](navigation.md))* | Any Group C role, attributed in the audit trail |
-| Returned by Certifier *(Group C extension)* | Sent back internally for correction | Any Group C role, attributed in the audit trail *(corrected 2026-08-14 — not "Internal Certifier (checker permission scope)")* |
+| Pending Internal Certification *(Group C extension — services with an internal certification gate only)* | Awaiting certify-or-return by any of the institution's four Group C users | Any Group C role, attributed in the audit trail |
+| Returned by Certifier *(Group C extension)* | Sent back internally for correction | Any Group C role, attributed in the audit trail |
 | Submitted | In RERA's Transaction Audit queue | Internal Certifier, or the applicant directly where no internal gate applies |
 | Under Review | With the regulator | Compliance & Escrow Auditor |
 | Information Requested | RERA has raised a query | Compliance & Escrow Auditor |
 | Returned for Correction | Sent back to the applicant | Compliance & Escrow Auditor |
-| Approved — Awaiting Payment *(Services #12 and #18 only — see note below)* | Passed audit; fee not yet settled | Compliance & Escrow Auditor |
+| Approved | Passed audit | Compliance & Escrow Auditor |
 | Rejected | Refused with documented reason | Compliance & Escrow Auditor |
 | Completed | Settled and output document issued | Platform |
 | Withdrawn | Abandoned by the applicant | Applicant |
-| Expired *(does not occur for any Group C service — see note below)* | Approved but left unpaid for 30 calendar days (B3) | Platform |
 
-**Corrected 2026-08-15** — the "Set by" column for `Draft` previously read "Mortgage Officer / Institution Relationship Manager / Trustee Centre Operator," naming specific roles as if only they could start an application. Per the corrected A4, any of the institution's four Group C roles may do this; Trustee Centre Operator remains correct as the assisted-mode channel actor, unrelated to this correction.
+**Corrected 2026-08-16 — `Approved — Awaiting Payment` and `Expired` are removed, this time for all 18 services without exception.** Both existed only because Services #12 and #18 sourced payment after RERA's decision; that timing is now normalized to pay-before-decision (see Payments above), so nothing is ever approved while still awaiting payment, for any Group C service. This supersedes the 2026-08-15 correction, which found and preserved #12/#18 as a genuine exception — that exception is now closed by design decision rather than merely documented.
 
 `Pending Internal Certification` and `Returned by Certifier` apply only to services with a sourced two-gate pattern (Services #3–#11, the mortgage and finance-lease lifecycle). Services #1, #2, and #12–#18 do not carry them, since no internal institutional certification step is described in source for those rows — see each service flow's Application Status Flow section.
-
-**Corrected 2026-08-15, revised again same day after a fuller per-service audit — `Approved — Awaiting Payment` is not universally absent.** An earlier pass this same day claimed the status "no longer applies to any Group C service, including #1–#2," reasoning that #1 now pays upfront (B11) and #2 carries no fee, closing the last case where payment could follow approval. That reasoning is correct as far as it goes, but incomplete: it never checked Services #12–#18 individually against their own sourced workflow order. Doing so found that **Services #12 and #18 genuinely source payment *after* RERA's decision** (row 38 and row 45 respectively), while Services #13–#17 source payment *before* RERA's decision. So the status is accurate for exactly two of the eighteen services, not zero — see each of those two files' own Section 13 for the sourced sequence. `Expired` remains correctly absent everywhere: its only sourced basis, B3's "approved but unregistered" reasoning, was written for a registered-title, post-approval-payment context that doesn't describe #12/#18's short counter-payment window either.
 
 ## Channels
 
@@ -196,8 +204,8 @@ Whether direct customer/institution access to a given service is *enabled at lau
 ## To Confirm
 
 1. Are the five proposed service categories acceptable, or should the source's Development / Transaction / Title-Deed Data grouping be retained? (C1 — proposed answer: adopt them, keep the reconciliation table.)
-2. Does the restructured 12-feature Shared Platform Features layer (rebuilt 2026-08-16 from actual screens, replacing the earlier 17-feature list) correctly represent what this module needs? **All 12 are now written.**
-3. Staff Management open gap (new 2026-08-16): should a dedicated screen/feature be built, or is this responsibility out of scope for the current UI package?
-4. Help & Support (Feature #12): should a dedicated screen be built, and if so, what should it contain? Currently `TBD` — no screen exists anywhere in the module.
-5. Is the proposed status vocabulary (platform core + Group C extension, D1) acceptable, and is the specific status list correct?
-6. Fee settlement: is the corrected two-way payer/timing split (Upfront Gateway Payment / Customer Payment at Counter, with Service #2 fee-free — see `payments.md`) correct for all 18 services? **Also worth confirming with the client:** whether #12 and #18's post-approval payment timing is intentional design, or an artefact of the source's counter-based process that should be normalized to match #13–#17's pay-first pattern once digitized.
+2. Does the restructured 13-feature Shared Platform Features layer correctly represent what this module needs? **All 13 are now written.**
+3. ~~Staff Management open gap~~ **Decided 2026-08-16 — build one. Done, see Feature #13.**
+4. ~~Help & Support content~~ **Decided 2026-08-16 — build one, full discretion given. Done, see Feature #12.**
+5. ~~Is the proposed status vocabulary acceptable?~~ **Confirmed 2026-08-16.**
+6. ~~Fee settlement: is the two-way payer/timing split correct, and is #12/#18's post-approval timing intentional?~~ **Decided 2026-08-16 — artefact of the old process, normalized to pay-before-decision. Done, see Payments above.**
