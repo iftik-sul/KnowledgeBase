@@ -61,9 +61,11 @@ Illustration, message, and primary/secondary actions. Message and actions define
 
 ### Progress Tracker
 
-A horizontal stepper showing a record's position in its pipeline: `Draft → Submitted → RERA Review → Approved → Completed`, with a **Payment Pending** step inserted between Approved and Completed for Services #12–15 only. Used on Submit Application and Application Details.
+A horizontal stepper showing a record's position in its pipeline: `Draft → Submitted → RERA Review → Approved → Completed`. Used on Submit Application and Application Details.
 
-**This module needed no `Pending Internal Certification` step**, unlike Financial & Trust Institutions' equivalent component, since no Group D service sources an internal company-side certification gate (`open-questions.md` A5). The tracker here is simpler by one state than every other module's version, and that's a sourced fact, not an oversight.
+**Corrected 2026-08-16, by client decision (`open-questions.md` B4).** This component previously carried an additional **Payment Pending** step between Approved and Completed, scoped to Services #12–15's then-sourced post-decision payment timing. That timing is normalized as of 2026-08-16 — these four services now pay upfront, before lodging, resolving payment before `Submitted` rather than after `Approved`. The tracker is now a single four-stage definition, used identically for every service in the module.
+
+**This module needed no `Pending Internal Certification` step**, unlike Financial & Trust Institutions' equivalent component, since no Group D service sources an internal company-side certification gate (`open-questions.md` A5). **With both corrections, Group D's Progress Tracker is now the simplest of any module documented so far** — no internal-certification branch, and, as of 2026-08-16, no payment-timing branch either.
 
 ## Forms & Inputs
 
@@ -111,3 +113,7 @@ Included per the same "one definition per component, gathered from every mention
 
 * **Property Detail Panel** — Jointly Owned Property's own per-property drill-down, showing a property's full JOP history across all applicable services.
 * **Ticket List** — Help & Support's Support Tickets section.
+
+## Not Yet Designed
+
+**Service #18's own atypical screen.** Confirmed to stay in Group D (`open-questions.md` A2), but its sourced workflow — an evaluation company deciding on a customer's request, not a company filing an application RERA reviews — doesn't fit any component defined above. No new component is proposed here ahead of that screen's actual design, per this document's own opening principle: components are gathered from built screens, not templated in advance of them.
