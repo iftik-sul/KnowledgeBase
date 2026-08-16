@@ -4,7 +4,7 @@ module: individual-user
 type: ui-spec
 status: draft
 contains_proposals: true
-updated: 2026-08-15
+updated: 2026-08-16
 derived_from:
   - "RERAN/modules/individual-user/payments.md"
   - "RERAN/modules/individual-user/ui/README.md"
@@ -38,7 +38,7 @@ By service, application reference, date, and payment status (Successful, Failed,
 
 ### Section 2 — Payment List
 
-Each row: application reference, service name, amount, date, status, and a downloadable Payment Receipt. For fee-bearing services, this is the only per-transaction artefact this module issues — no "Fee Balance" running total exists here, since `payments.md`'s Payment Artefacts section concluded that term most plausibly means a single-transaction line, not a multi-transaction account balance.
+Each row: application reference, service name, amount, date, status, and a downloadable Payment Receipt. For fee-bearing services, this is the only per-transaction artefact this module issues — no "Fee Balance" concept exists anywhere in this module at all, confirmed directly by the client (`open-questions.md` C2, `payments.md`'s Payment Artefacts section). *(Corrected 2026-08-16 — this section previously described an earlier, superseded reading of `payments.md`: that "Fee Balance" "most plausibly means a single-transaction line," an inference from before the client's direct confirmation that no such concept exists at all, not even that narrower reading. This screen was never updated when `payments.md` was corrected the same day; found during a full file-by-file UI audit.)*
 
 ## Empty State
 
