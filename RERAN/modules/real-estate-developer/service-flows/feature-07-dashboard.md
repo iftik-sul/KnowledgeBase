@@ -33,7 +33,7 @@ Rebuilt 2026-08-15 from four structurally different role dashboards into one, ab
 
 ## 4. Used By
 
-Not tied to any single numbered service or feature — an aggregation layer over Features #1–#6.
+Not tied to any single numbered service or feature — an aggregation layer over Features #1–#6 and #13.
 
 ## 5. Prerequisites
 
@@ -61,7 +61,7 @@ No fee.
 
 ## 11. Expected Processing Time
 
-Immediate — real-time aggregation of Features #1–#6's own data.
+Immediate — real-time aggregation of Features #1–#6 and #13's own data.
 
 ## 12. Processing Workflow
 
@@ -75,7 +75,7 @@ Navigates to the Relevant Feature, Filtered Where Applicable
 
 ## 13. Application Status Flow
 
-Not applicable — this feature has no status of its own; it displays statuses owned by Features #1–#6.
+Not applicable — this feature has no status of its own; it displays statuses owned by Features #1–#6 and #13.
 
 ## 14. Possible Outcomes
 
@@ -88,7 +88,7 @@ No document or record is produced — a read-only aggregation and navigation lay
 
 ## 16. Related Features
 
-* Applications, Projects, Property Registrations, Escrow Management, Fund Release Request, Sales & Disclosures — every Focus Area links to one of these; this feature has no independent data source.
+* Applications, Projects, Property Registrations, Escrow Management, Fund Release Request, Profit Withdrawal Request, Sales & Disclosures — every Focus Area links to one of these; this feature has no independent data source. *(Corrected 2026-08-16 — Profit Withdrawal Request, Feature #13, added; this list predated that feature's split from Fund Release Request.)*
 
 ## 17. UI Screens
 
@@ -104,7 +104,7 @@ No document or record is produced — a read-only aggregation and navigation lay
 
 ## 19. Database Entities
 
-None of its own — reads from Project, Property Registration, Property Sale, Sales Disclosure, Escrow Account, Fund Release, Application, and Document entities owned by other features.
+None of its own — reads from Project, Property Registration, Property Sale, Sales Disclosure, Escrow Account, Fund Release, Profit Withdrawal Request, Application, and Document entities owned by other features.
 
 ## 20. Acceptance Criteria
 
