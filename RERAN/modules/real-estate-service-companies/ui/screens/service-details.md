@@ -8,6 +8,7 @@ updated: 2026-08-16
 derived_from:
   - "RERAN/modules/real-estate-service-companies/service-flows/"
   - "RERAN/modules/real-estate-service-companies/payments.md"
+  - "RERAN/modules/real-estate-service-companies/open-questions.md"
 tags:
   - real-estate-service-companies
   - ui-spec
@@ -21,6 +22,8 @@ tags:
 ## Purpose
 
 Give any company user everything they need to decide whether and how to apply for one specific service, before committing to the application form.
+
+> **Corrected 2026-08-16, twice, by client decision.** **B4** — Section 3's payment-timing description for Services #12–15 is corrected from "paid after decision" to "paid upfront." **A2** — this screen now renders for Service #18 too, though its Start Application action leads to a placeholder rather than Submit Application, since #18 has no designed wizard entry yet.
 
 ## Layout
 
@@ -57,7 +60,7 @@ The service's own Purpose and Description, drawn directly from the corresponding
 * **Fee** — "No fee" (19 services), or "Set by RERA, configuration-based" where a fee applies.
 * **When you pay** — one of four states, matching `payments.md` exactly:
   * "No fee for this service" (19 services)
-  * "Paid after your application is reviewed and accepted" (#12–#15)
+  * "Paid upfront, before your application is submitted" (#12–#15) — **corrected 2026-08-16**, previously "Paid after your application is reviewed and accepted"
   * "Paid before your output is delivered, as the final step of submission" (#24)
   * "Payment timing depends on channel — Service Center or online" (#25, #26)
 
@@ -75,7 +78,7 @@ A simplified version of the service's own Processing Workflow (Section 12). For 
 
 ## Empty State
 
-Not applicable — this screen only renders for one of the 25 selectable services.
+Not applicable — this screen renders for any of the module's 26 services.
 
 ## Reused Components
 
@@ -97,11 +100,15 @@ Services Catalog
 ↓
 Service Details
 └─ Start Application → Submit Application, pre-populated with this service selected
+    (or, for Service #18, a placeholder — see Notes)
 ```
 
 **For Services #6 and #19 (email-only):** the sticky action changes from "Start Application" to a static instructional note directing the user to the appropriate email address, matching the module's own service-flow files' description of these two channels. No wizard opens.
 
+**For Service #18:** the sticky action currently has nowhere designed to lead — see Notes.
+
 ## Notes
 
 * This screen is read-only and pre-application — it does not collect any data.
-* Services #6 and #19 are the only two in the catalogue where this screen doesn't lead into Submit Application at all.
+* Services #6 and #19 are two of the three services in the catalogue where this screen doesn't lead into Submit Application.
+* **Service #18 is the third — corrected 2026-08-16.** Previously excluded from the catalogue entirely pending its `open-questions.md` A2 provenance question; now confirmed to stay in Group D, so this screen renders for it, but Start Application has no designed destination yet. Until Service #18's own screen exists (see `ui/screens/submit-application.md`'s and `ui/screens/services-catalog.md`'s own Notes), this screen's Start Application button should show a "This service's dedicated interface is still being designed" state for #18 specifically.
