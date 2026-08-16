@@ -11,6 +11,7 @@ derived_from:
   - "RERAN/modules/real-estate-developer/service-flows/service-10-withdraw-project-profit.md"
   - "RERAN/modules/real-estate-developer/service-flows/service-12-receive-escrow-payment.md"
   - "RERAN/modules/real-estate-developer/navigation.md"
+  - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
 tags:
   - real-estate-developer
   - shared-feature
@@ -27,6 +28,8 @@ tags:
 **Fund Release Request** is the operational workspace for preparing and submitting a milestone-based release request against a project escrow account — reached from Escrow Details (Feature #4), but tracked and processed as its own object with its own detailed progress tracker, engineer/quantity-surveyor verification, and Trustee-then-RERA review chain.
 
 > **Cross-module status vocabulary — corrected 2026-08-16, superseding an earlier same-day resolution.** A first pass mapped this screen's own 9-stage tracker onto `No Request → Pending Approval → Under Review → Approved → Released`, taken from a UI screen's filter values. That was wrong: neither Service #10 nor Service #12's own file uses those terms. Both — verified directly — use `Draft → Submitted → Trustee Review → RERA Escrow Audit → Approved → Released`, with additional statuses `Information Requested / Returned / Rejected`, identical to the vocabulary sourced for the other four escrow services (Feature #4). **The screen's own "Under Bank Review" label is also corrected** — the source calls the reviewing party the **Account Trustee**, not a bank; "Bank Review" in the UI screen's own stage names appears to be the screen's own imprecision, not a sourced distinction. See Section 13 for the corrected mapping.
+
+> **Terminology clarified 2026-08-16.** "RERA Escrow Audit" (this feature's second review stage) and financial-trust-institutions' "Compliance & Escrow Auditor" are the **same regulatory role**. Confirmed against `RERAN_service_flows_v2.md`'s master Service Workflows table: this module's six escrow services (rows 8–12, 20–21, including Services #10 and #12 that this feature covers) and financial-trust-institutions' mortgage/lease services (rows 30–39) all carry the identical Regulator/Approver-column value **"Compliance & Escrow Auditor"** — one Group A role, not two departments. See Feature #4's own Feature Overview for the full source citation.
 
 ## 2. Purpose
 
@@ -80,7 +83,7 @@ Engineer and Quantity Surveyor supporting documents are mandatory before submiss
 
 ## 10. Processing Authority
 
-**Account Trustee** (Financial & Trust Institutions module) first, escalating to **RERA's Escrow Department** for final audit — the same two-stage chain used across all six escrow services (Feature #4), not a "bank" as the screen's own stage labels suggest. Any of the developer's four Group B roles may prepare and submit; no role restriction despite the source documenting only the Escrow Liaison's typical workflow.
+**Account Trustee** (Financial & Trust Institutions module) first, escalating to the **Compliance & Escrow Auditor** (RERA's Escrow Account Department) for final audit — the same two-stage chain used across all six escrow services (Feature #4), not a "bank" as the screen's own stage labels suggest, and the identical regulatory role financial-trust-institutions' mortgage/lease services use — see the terminology note under Feature Overview. Any of the developer's four Group B roles may prepare and submit; no role restriction despite the source documenting only the Escrow Liaison's typical workflow.
 
 ## 11. Expected Processing Time
 
@@ -102,7 +105,7 @@ Submit Request
 ↓
 Account Trustee Reviews, Assesses Solvency, Uploads Assessment
 ↓
-RERA Escrow Department Audits: Approve or Reject
+Compliance & Escrow Auditor Audits: Approve or Reject
 ↓
 If Approved, Funds Released
 
@@ -121,7 +124,7 @@ Additional statuses (both services): Information Requested, Returned, Rejected.
 | Draft, Information Completed, Documents Uploaded, Validation Passed | Draft |
 | Submitted | Submitted |
 | Under Bank Review | Trustee Review *(the reviewing party is the Account Trustee, not a bank — screen-label correction)* |
-| Under RERA Review | RERA Escrow Audit |
+| Under RERA Review | RERA Escrow Audit *(performed by the Compliance & Escrow Auditor — see the terminology note under Feature Overview)* |
 | Approved | Approved |
 | Funds Released | Released |
 
@@ -142,7 +145,7 @@ Not specified in source for either service ("no doc" against each row) — each 
 
 * Escrow Management *(Feature #4 — where this feature is reached from, via Escrow Details, and whose sourced status vocabulary this feature now shares)*
 * Applications *(Feature #1)*
-* Financial & Trust Institutions' Escrow Request Queue *(cross-module — the institution's side of this same transaction; **status vocabulary corrected 2026-08-16**, see Feature Overview)*
+* Financial & Trust Institutions' Escrow Request Queue *(cross-module — the institution's side of this same transaction; **status vocabulary corrected 2026-08-16, and the RERA-side approver confirmed to be the same Compliance & Escrow Auditor role in both modules**, see Feature Overview)*
 
 ## 17. UI Screens
 
@@ -154,7 +157,7 @@ Not specified in source for either service ("no doc" against each row) — each 
 * Calculate Eligible Release Amount
 * Upload Documents
 * Validate Release Request (per Section 7's checks)
-* Submit to Account Trustee Review, then RERA Escrow Audit
+* Submit to Account Trustee Review, then Compliance & Escrow Auditor's RERA Escrow Audit
 * Respond to Queries
 * Record Funds Release
 * Send Notifications
@@ -187,6 +190,7 @@ Not specified in source for either service ("no doc" against each row) — each 
 5. Approved or Released requests become read-only for every user, not role-dependent.
 6. Neither Service #10 nor Service #12 requires payment at any point.
 7. All actions and communications are permanently recorded in the Activity Timeline for audit and regulatory compliance.
+8. "RERA Escrow Audit" here and financial-trust-institutions' "Compliance & Escrow Auditor" are the same regulatory role, confirmed against the master source table.
 
 ## Open Questions
 
