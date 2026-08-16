@@ -26,6 +26,8 @@ tags:
 
 **Important distinction, stated explicitly in the source screen itself:** the balances shown here are the project escrow account's own balances — entirely separate from how RERA's service fees are paid (per-transaction, via the shared platform gateway, since 2026-08-15). A balance or debit on this screen is escrow, not fees.
 
+> **Cross-module status mismatch, found 2026-08-16, not resolved.** This feature's "Fund Release Status" vocabulary (Section 13) and financial-trust-institutions' [Escrow Request Queue](../../financial-trust-institutions/service-flows/feature-04-escrow-request-queue.md) — the institution's own side of these same six request types — do not use matching terms. `No Request / Pending Approval / Under Review / Approved / Released` here has no direct counterpart in the institution's `Awaiting Assessment / Under Assessment / Certified / Returned`. The institution's side also treats all six request types (#8/9/10/12/20/21) as one queue with one vocabulary, while this module splits them across this feature (#8/9/20/21) and the separate Fund Release Request feature (#10/12) with its own distinct 9-stage tracker. Not silently reconciled — flagged in both modules' overview docs pending a client or architecture decision on which vocabulary, if either as-is, should be authoritative.
+
 ## 2. Purpose
 
 List the organization's project escrow accounts and provide both the oversight view of escrow position and compliance, and the operational controls to register accounts, request fund releases, and coordinate with the Account Trustee.
@@ -102,6 +104,8 @@ Escrow Account Status Updated
 
 These two vocabularies are never conflated in filters, badges, or counts.
 
+**Known cross-module gap, see the note under Feature Overview above**: this vocabulary does not map cleanly onto financial-trust-institutions' own Escrow Request Queue status flow for the same transactions.
+
 ## 14. Possible Outcomes
 
 * Escrow Account Activated / Transferred
@@ -117,7 +121,7 @@ Varies by service — typically an account registration or transfer confirmation
 
 * Fund Release Request *(Feature #5 — the milestone-based withdrawal/receipt flow reached from Escrow Details, Services #10/#12)*
 * Applications *(Feature #1)*
-* Financial & Trust Institutions' Escrow Request Queue and Trust Accounts *(cross-module — the Account Trustee's side of the same accounts)*
+* Financial & Trust Institutions' Escrow Request Queue and Trust Accounts *(cross-module — the Account Trustee's side of the same accounts; **status vocabulary does not currently reconcile**, see Feature Overview)*
 
 ## 17. UI Screens
 
@@ -160,4 +164,5 @@ Varies by service — typically an account registration or transfer confirmation
 
 1. Whether "Escrow Balance" should mean gross balance or balance net of committed pending releases is flagged but unresolved — the source screen glosses both the same way; if the client intends the net reading, a second column would be needed.
 2. Cardinality mismatches for Services #9, #20, #21 against this screen are flagged in the module README but not resolved here — consult each service's own file.
-3. Same adoption question as Feature #1 — needs client confirmation.
+3. **Cross-module status vocabulary mismatch** (found 2026-08-16, detailed under Feature Overview) — needs a client or architecture decision on which side's vocabulary, if either as-is, should be authoritative.
+4. Same adoption question as Feature #1 — needs client confirmation.
