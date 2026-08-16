@@ -32,7 +32,7 @@ Rebuilt 2026-08-15 from four role-specific designs into one, for the same underl
 
 ## 4. Used By
 
-Not tied to any single numbered service — cuts across every domain workspace and general-platform feature.
+Not tied to any single numbered service — cuts across every domain workspace and general-platform feature, including Profit Withdrawal Request.
 
 ## 5. Prerequisites
 
@@ -89,7 +89,7 @@ Unread → Read → Archived. This is the one status vocabulary on this screen t
 
 ## 16. Related Features
 
-* Every other feature is a potential source: Applications, Projects, Property Registrations, Escrow Management, Fund Release Request, Sales & Disclosures, Documents, Company Profile.
+* Every other feature is a potential source: Applications, Projects, Property Registrations, Escrow Management, Fund Release Request, Profit Withdrawal Request, Sales & Disclosures, Documents, Company Profile. *(Corrected 2026-08-16 — Profit Withdrawal Request, Feature #13, added; this list predated that feature's split from Fund Release Request.)*
 
 ## 17. UI Screens
 
