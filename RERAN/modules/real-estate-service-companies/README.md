@@ -54,7 +54,7 @@ RERAN user Group D — licensed brokerages, jointly-owned-property (JOP) adminis
 | 8 | [Appoint Financial Auditor](service-flows/service-08-appoint-financial-auditor.md) | Jointly Owned Property |
 | 9 | [Appoint Audit Office for JOP Financial Accounts](service-flows/service-09-appoint-audit-office-financial-accounts.md) | Jointly Owned Property |
 | 10 | [Appoint Audit Office for JOP Budget Audit](service-flows/service-10-appoint-audit-office-budget-audit.md) | Jointly Owned Property |
-| 11 | [Approval / Renewal of Financial Auditing Company](service-flows/service-11-approval-renewal-financial-auditing-company.md) | Jointly Owned Property *(channel inconsistency flagged — see Known Source Gaps)* |
+| 11 | [Approval / Renewal of Financial Auditing Company](service-flows/service-11-approval-renewal-financial-auditing-company.md) | Jointly Owned Property *(email-only channel — corrected 2026-08-16, see Known Source Gaps)* |
 | 12 | [Real Estate Licensing Application](service-flows/service-12-real-estate-licensing-application.md) | Real Estate Licensing *(payment normalized 2026-08-16 — now pays upfront, before lodging)* |
 | 13 | [Real Estate Permit Application](service-flows/service-13-real-estate-permit-application.md) | Real Estate Licensing *(payment normalized 2026-08-16)* |
 | 14 | [Issue Professional Practice Card](service-flows/service-14-issue-professional-practice-card.md) | Real Estate Licensing *(payment normalized 2026-08-16)* |
@@ -73,13 +73,15 @@ RERAN user Group D — licensed brokerages, jointly-owned-property (JOP) adminis
 
 All 26 carry `status: draft` and `contains_proposals: true`. This module reconciles cleanly against source: 26 rows (46–71), no consolidation, no splitting — the cleanest reconciliation of any module in the project.
 
+**Three email-only services in total — the highest count of any module**: #6, #11, and #19. #11 was corrected 2026-08-16 to join this group; it previously carried a portal-style workflow inherited incorrectly from a Service #5 cross-reference.
+
 ## UI Specifications
 
 12 screens under [ui/screens/](ui/screens/): Dashboard, Services Catalog, Service Details, Submit Application, Application Review, Applications, Application Details, Jointly Owned Property (a dedicated register, matching Financial & Trust Institutions' Trust Accounts precedent), Documents, Notifications, Company Profile, and Help & Support.
 
 Plus three shared reference documents: [ui/components.md](ui/components.md), [ui/validation-rules.md](ui/validation-rules.md), and [ui/status-badges.md](ui/status-badges.md) — all derived from what the 12 screens actually contain, not templated in advance.
 
-**Field-layout patterns, checked service-by-service rather than assumed:** 21 of 25 wizard-eligible services use Pattern A (flat fields) — the highest single-pattern concentration of any module — with one Pattern B (Service #7) and one Pattern C (Service #17) exception. Two services (#6, #19) are email-only with no wizard at all — the highest email-only count of any module.
+**Field-layout patterns, checked service-by-service rather than assumed:** 21 of 25 wizard-eligible services use Pattern A (flat fields) — the highest single-pattern concentration of any module — with one Pattern B (Service #7) and one Pattern C (Service #17) exception. Three services (#6, #11, #19) are email-only with no wizard at all — the highest email-only count of any module.
 
 **Service #18 has no designed screen.** Its module ownership is confirmed (`open-questions.md` A2), but its own sourced workflow — an evaluation company deciding on a customer's request, not RERA reviewing a company's filing — doesn't fit the shared Submit Application wizard every other service uses. It's listed in the catalogue with a placeholder, per `ui/screens/services-catalog.md`'s own Notes.
 
@@ -112,8 +114,8 @@ Remaining open items are listed in each document's own Open Questions / To Confi
 
 ## Known Source Gaps
 
-* **Service #18's own workflow doesn't fit any other Group D service's shape.** Its acting party (an "evaluation company") accepts or rejects a customer's request directly, with no RERA review step described — the clearest structural anomaly in the module, and the reason it has no designed screen despite confirmed module ownership.
-* **Service #11's Section 12 workflow contradicts its own sourced email-only channel** (row 56 names only "Official email of the Jointly Owned Property," but the file's workflow text still describes portal-style sign-up) — found during the Phase 6 audit, 2026-08-16, not yet corrected. See that file's own Open Questions.
+* **Service #18's own workflow doesn't fit any other Group D service's shape.** Its acting party (an "evaluation company") accepts or rejects a customer's request directly, with no RERA review step described — the clearest structural anomaly in the module, and the reason it has no designed screen despite confirmed module ownership. Deliberately not built pending a decision on whether the service stays in Group D long-term or moves once Group G is documented.
+* ~~Service #11's Section 12 workflow contradicts its own sourced email-only channel~~ — **Resolved 2026-08-16.** Row 56 names an email-only channel; the file's Section 12 previously described portal-style sign-up, inherited uncorrected from a Service #5 cross-reference. Rewritten to match Services #6 and #19's email-based shape, propagated through Sections 4, 5, 10, 13, 16, 17, 18, 20, and 21.
 * **Row 65 (Service #18) and Row 60 (Service #13) both carry genuine ambiguity** the source table doesn't resolve: whether row 65 belongs to Group D or Group G (resolved by client decision to stay in Group D, `open-questions.md` A2), and whether row 60's four advertisement permit types are one service or several (proposed as one, `open-questions.md` A4, not yet put to the client).
 * **Whether Service #12 covers renewal at all** is unresolved — unlike Financial & Trust Institutions' comparably-shaped Service #1, row 59's own source text describes only a first-time application shape. Flagged in `ui/screens/company-profile.md`.
-* **This module's build history is unusually compressed** — every phase, plus a full Phase 6 audit correcting 21 files' stale Section 17 references, happened in a single session on 2026-08-16. Treat any cross-reference to "the module as originally built" with the understanding that the entire module was built and audited the same day; there is no earlier, differently-shaped version to reconcile against the way other modules occasionally need to.
+* **This module's build history is unusually compressed** — every phase, plus a full Phase 6 audit correcting 21 files' stale Section 17 references and a genuine channel inconsistency in Service #11, happened in a single session on 2026-08-16. Treat any cross-reference to "the module as originally built" with the understanding that the entire module was built and audited the same day; there is no earlier, differently-shaped version to reconcile against the way other modules occasionally need to.
