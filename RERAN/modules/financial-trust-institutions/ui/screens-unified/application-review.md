@@ -3,8 +3,8 @@ project: RERAN
 module: financial-trust-institutions
 type: ui-spec
 status: draft
-updated: 2026-08-15
 contains_proposals: true
+updated: 2026-08-16
 derived_from:
   - "RERAN/modules/financial-trust-institutions/service-flows/"
   - "RERAN/modules/financial-trust-institutions/payments.md"
@@ -101,5 +101,5 @@ Application Review
 
 ## Notes
 
-* **This screen's natural reading is a review step inside the submission wizard, not a persistent post-submission record view.** That distinction was the source of the low-confidence mapping in issue #50's original catalogue pass, where this name was tentatively compared against `applications.md` (a searchable list) and `application-details.md` (a submitted record's full history). Written fresh, this screen is neither — it exists only between "finished filling out the form" and "submitted," and has no role once a record exists in the Applications list. A submitted record's ongoing status, certification, and audit trail are [application-details.md](../screens/application-details.md)'s job, in the existing 13-screen set, not this one's.
+* **This screen's natural reading is a review step inside the submission wizard, not a persistent post-submission record view.** That distinction was the source of the low-confidence mapping in issue #50's original catalogue pass, where this name was tentatively compared against `applications.md` (a searchable list) and `application-details.md` (a submitted record's full history). Written fresh, this screen is neither — it exists only between "finished filling out the form" and "submitted," and has no role once a record exists in the Applications list. A submitted record's ongoing status, certification, and audit trail are [application-details.md](../screens/application-details.md)'s job, in the existing 14-screen set, not this one's.
 * Where a service routes to internal certification after submission (#3–#11, sourced), this screen's confirmation should say so explicitly — "Submitted for internal certification" rather than a generic "Submitted" — so a filer isn't surprised the record doesn't go straight to RERA.
