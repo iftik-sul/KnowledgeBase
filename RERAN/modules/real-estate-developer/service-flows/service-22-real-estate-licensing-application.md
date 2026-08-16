@@ -5,7 +5,7 @@ type: service-flow
 status: draft
 contains_proposals: true
 source_type: sourced
-updated: 2026-08-15
+updated: 2026-08-16
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/real-estate-developer/navigation.md"
@@ -164,7 +164,9 @@ Not currently represented in the 19-screen UI set. **Proposed** minimum surface:
 * System validates required company information and documents.
 * Approved applications issue a license and a Developer Self Registration username.
 * All activities are recorded in the audit log.
-* Payment is completed after the notice of acceptance and before the notice of registration is issued.
+* Payment is completed after the notice of acceptance and before the license is issued.
+
+*(Corrected 2026-08-16 — this bullet previously said "before the notice of registration is issued." This service issues a license, not a registration; found during a full file-by-file audit.)*
 
 ## 21. Business Rules
 
