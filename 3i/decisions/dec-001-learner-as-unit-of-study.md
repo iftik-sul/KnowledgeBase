@@ -2,32 +2,32 @@
 project: 3i
 type: decision
 status: current
-updated: 2026-08-16
+updated: 2026-08-18
 id: 3I-DEC-001
 tags: [decision, data-model]
 ---
 
-# Learner Is the Universal Unit of Study
+# Learner Is the Unit of Study
 
 ## Context
 
-The obvious modelling choice in an LMS is to hang enrolment, progress, submissions, and certificates off `User`. That works only while every studying party is also an account holder.
+The obvious modelling choice is to hang enrolment, progress, submissions, and certificates off the account. That works only while every studying party is also an account holder.
 
-3i breaks that assumption immediately. A guardian holds one account and may carry several children as learner profiles beneath it. Those children study, submit, and earn certificates, but they are not users — they do not authenticate, and under the age gate they must not.
+3i breaks that immediately. An account may carry up to six learner profiles (FR-FAM-02). A profile has no email address and no credentials (FR-FAM-03) — it studies, submits, and earns certificates without ever authenticating. Under-13 learners cannot hold an account by any route (FR-AUTH-03).
 
 ## Decision
 
-**`Learner` is the entity that studies.** Every record describing study — enrolment, progress, attempt, submission, grade, certificate — references `Learner`, never `User`.
+**The learner profile is the entity that studies.** Every record describing study — enrolment, progress, attempt, submission, grade, certificate, attendance — references the profile, never the account.
 
-`User` models an authenticating party. An independent adult learner has both a `User` and a `Learner`; a child has a `Learner` with no `User`; a guardian may have a `User` with no `Learner` of their own.
+The account is the authenticating and billing party. Profile selection happens after account login, via a picker (FR-FAM-04).
 
 ## Consequences
 
-- Every query in the study path filters on learner, not on the authenticated user. Authorisation becomes a separate question: *may this user act for this learner?*
-- Guardians switching between children is a change of learner context, not a change of session. This must not be modelled as impersonation.
-- An independent adult and a supervised child are the same shape downstream. No feature needs to branch on which it is.
-- Migrating an ageing-out child to their own `User` attaches an account to an existing `Learner`. Study history is untouched, because it never referenced the account.
+- Every query in the study path filters on profile, not on the authenticated account. Authorisation becomes a separate question: may this account act for this profile?
+- Switching between children is a change of profile context, not of session. It must not be modelled as impersonation.
+- The billing contact is separable from the account identity, and defaults to the guardian where minor profiles exist (FR-BILL-05). Three parties — payer, account holder, learner — may be three different people.
+- An adult studying alone and a supervised child are the same shape downstream. No feature branches on which it is.
 
 ## Cost
 
-Any code written against `User` in the study path is wrong even when it happens to work for adult learners in testing, because the adult case is the one where the two entities coincide. This is the failure mode to watch for in review.
+Every account has at least one profile, including an adult studying alone. That case is the one where account and profile coincide, so code written against the account will pass testing and fail for families. This is the specific regression to watch for in review.
