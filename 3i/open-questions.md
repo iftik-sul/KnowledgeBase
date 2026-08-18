@@ -24,14 +24,6 @@ FR-BILL-02 forbids any purchase surface in the apps. FR-NOT-06 forbids purchase 
 
 Qualifies for the same treatment as [age-and-safeguarding.md](age-and-safeguarding.md): documented once at project root, linked from the three modules, never restated. Should be written **before** the Commerce phase.
 
-### OQ-10 — PIN attempt rate limiting
-
-[3I-DEC-018](decisions/dec-018-profile-pin-mandatory-guardian-controlled.md) makes the 4-digit profile PIN mandatory. Four digits is ten thousand combinations — trivially brute-forced by a determined sibling on a shared family tablet, which is precisely the threat the PIN exists to stop.
-
-FR-AUTH-09's pattern (five failed attempts, 15-minute lockout, progressive delay) is the obvious model to reuse, but nothing currently requires it for the profile picker. It needs to become a requirement rather than a suggestion inside a decision record.
-
-Blocks: the profile picker screen.
-
 ### OQ-11 — Minimum sessions before an attendance certificate
 
 [3I-DEC-021](decisions/dec-021-attendance-measured-against-sessions-delivered.md) measures attendance against sessions **delivered**. A course cancelled after one session of ten therefore issues certificates to whoever attended that one session, since 70% of one is one.
@@ -61,6 +53,9 @@ There is no urgency. If nothing is built, a profile reaching 13 simply stays a p
 | **OQ-06** Chat history on deletion | [3I-DEC-016](decisions/dec-016-deletion-removes-content-retains-record.md) — content removed, moderation record retained |
 | **OQ-07** Per-seat price quotable | Unblocked by DEC-009. Now a client ask, below |
 | **OQ-08** Inactive profiles and the cap | [3I-DEC-014](decisions/dec-014-cap-counts-active-profiles-only.md) — cap counts active and never-activated only |
+| **OQ-10** PIN attempt rate limiting | [3I-DEC-022](decisions/dec-022-pin-lockout-and-dob-correction-notification.md) — matches FR-AUTH-09 exactly |
+
+**`identity-and-access` is now fully specified.** With OQ-10 resolved, every item that was blocking the module is closed. OQ-09 (app-store-compliance) and OQ-11 (attendance floor) remain open but sit outside this module.
 
 ---
 
@@ -91,12 +86,12 @@ It is entirely possible the tool the institute chooses does not permit the stude
 
 ## Change Request Backlog
 
-Seven decisions now change the baseline rather than interpret it. Listed in [decisions/README.md](decisions/README.md#scope-changes-against-srd-v20). Worth raising as one change request rather than seven, since several interact — the cap, the seat model, and the PIN all touch the same profile lifecycle.
+Eight decisions now change the baseline rather than interpret it. Listed in [decisions/README.md](decisions/README.md#scope-changes-against-srd-v20). Worth raising as one change request rather than eight, since several interact — the cap, the seat model, the PIN, and the DOB-correction notification all touch the same profile lifecycle.
 
 ---
 
 ## Baseline Approval
 
-SRD v2.0 is **verbally approved only**, recorded as `approval: verbal` in its frontmatter. §21.3 measures change requests against an approved baseline; with seven changes now queued, that matters more than it did.
+SRD v2.0 is **verbally approved only**, recorded as `approval: verbal` in its frontmatter. §21.3 measures change requests against an approved baseline; with eight changes now queued, that matters more than it did.
 
 Raised and noted. No action requested.
