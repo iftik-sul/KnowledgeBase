@@ -24,7 +24,7 @@ One file per decision: context, decision, consequences, cost. A decision is neve
 | [3I-DEC-006](dec-006-question-bank-isolation.md) | Question bank isolation is enforced at the query layer, returning 404 | current | QB |
 | [3I-DEC-007](dec-007-rbac-without-hardcoded-roles.md) | No hard-coded role checks; new roles are data, not code | current | RBAC |
 | [3I-DEC-008](dec-008-ageing-up-at-13.md) | A profile reaching 13 is offered its own account | draft | AUTH, FAM |
-| [3I-DEC-009](dec-009-seats-as-account-pool.md) | A seat is a permanent, non-transferable grant to one profile; six-profile cap removed | current | BILL, ENR, FAM |
+| [3I-DEC-009](dec-009-seats-as-account-pool.md) | A seat is a permanent, non-transferable grant to one profile | current | BILL, ENR, FAM |
 | [3I-DEC-010](dec-010-waiver-covers-all-seats.md) | A waiver applies to the whole subscription, seats included | current | WAV |
 | [3I-DEC-011](dec-011-attendance-certificate-without-exam.md) | A course with no final exam yields attendance certificates only | current | CERT |
 | [3I-DEC-012](dec-012-chat-history-on-profile-deletion.md) | Profile deletion removes that profile's chat messages | draft | CHAT, FAM |
@@ -39,7 +39,8 @@ Some decisions here are not interpretations of the baseline — they change it, 
 | ID | Changes |
 | :---- | :---- |
 | [3I-DEC-008](dec-008-ageing-up-at-13.md) | Adds a feature not in the baseline: a profile reaching 13 is offered its own account |
-| [3I-DEC-009](dec-009-seats-as-account-pool.md) | Removes FR-FAM-02's six-profile cap |
+
+Two decisions sit close to this line without crossing it. [3I-DEC-009](dec-009-seats-as-account-pool.md) reinterprets what FR-FAM-06's rate limit counts as a "change" and introduces an inactive-profile state the baseline does not describe, but adds no feature and removes no constraint. [3I-DEC-012](dec-012-chat-history-on-profile-deletion.md) contradicts FR-CHAT-14 outright and will become a scope change if adopted as decided.
 
 ## Provenance
 
