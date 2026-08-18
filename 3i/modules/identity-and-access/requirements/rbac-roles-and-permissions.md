@@ -24,11 +24,11 @@ Baseline §4. Five requirements — the smallest set in this module and the one 
 | :---- | :---- |
 | **Admin** | Full platform control. Single role at launch |
 | **Instructor** | Creates and manages own courses, batches, questions, exams. Grades and marks attendance |
-| **Account holder** | Manages profiles, subscription, enrolments. May also be a learner |
+| **Member** | Manages profiles, subscription, enrolments. May also be a learner. Renamed from the baseline's "Account holder" — [3I-DEC-017](/3i/decisions/dec-017-account-holder-renamed-member.md) |
 
-Three roles ship. **Admin** is the single *administrative* role — sub-admin roles and the wider permission matrix are deferred (§23 item 5), with the RBAC foundation built.
+Three roles ship. **Admin** is the single *administrative* role — sub-admin roles and the wider permission matrix are deferred (§23 item 5), with the RBAC foundation built. **No admin UI for role management is planned at launch**; FR-RBAC-04's "no code change" requirement is satisfied by roles being data, and creating one at this stage is a database operation rather than a screen.
 
-Role and learner status are orthogonal: an account holder may also be a learner.
+Role and learner status are orthogonal: a Member may also be a learner.
 
 ---
 
@@ -80,4 +80,5 @@ Anyone implementing a generic permission middleware needs to know that `assessme
 | :---- | :---- |
 | Data model | [3I-IDA-DM-001](../data-model.md) |
 | Question bank exception | [3I-DEC-006](/3i/decisions/dec-006-question-bank-isolation.md) |
+| Role renamed to Member | [3I-DEC-017](/3i/decisions/dec-017-account-holder-renamed-member.md) |
 | Audit logging of admin actions | NFR-09 |
