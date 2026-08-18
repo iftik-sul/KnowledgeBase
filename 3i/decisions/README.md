@@ -37,6 +37,7 @@ One file per decision: context, decision, consequences, cost. A decision is neve
 | [3I-DEC-019](dec-019-safeguarding-strings-exempt-from-ai-translation.md) | Safeguarding strings bypass AI translation | current | LOC, AUTH, CHAT |
 | [3I-DEC-020](dec-020-guardian-on-behalf-chat-retained.md) | Guardian-on-behalf chat participation is retained | current | CHAT |
 | [3I-DEC-021](dec-021-attendance-measured-against-sessions-delivered.md) | Attendance is measured against sessions delivered | current | CERT, INST, BAT |
+| [3I-DEC-022](dec-022-pin-lockout-and-dob-correction-notification.md) | PIN lockout matches FR-AUTH-09; DOB corrections notify the guardian on chat-eligibility change | current | AUTH, FAM, NOT |
 
 **`deferred`** marks a decision taken but consciously parked — not to be built or documented until approved. **`superseded`** marks a reversed decision, retained for its reasoning and never a basis for implementation.
 
@@ -53,13 +54,14 @@ These change the baseline rather than interpret it. Each requires a change reque
 | [3I-DEC-018](dec-018-profile-pin-mandatory-guardian-controlled.md) | FR-FAM-03's optional PIN becomes mandatory |
 | [3I-DEC-019](dec-019-safeguarding-strings-exempt-from-ai-translation.md) | Carves an exemption out of FR-LOC-02 |
 | [3I-DEC-021](dec-021-attendance-measured-against-sessions-delivered.md) | Reinterprets FR-CERT-02's denominator; adds a WWCC scheduling constraint |
+| [3I-DEC-022](dec-022-pin-lockout-and-dob-correction-notification.md) | Adds a new trigger to FR-NOT-01's notification list |
 
-Seven items. Worth raising as a single change request rather than seven, since several interact.
+Eight items. Worth raising as a single change request rather than eight, since several interact — the cap, PIN, and device scaling all touch the same profile/seat lifecycle.
 
 [3I-DEC-017](dec-017-account-holder-renamed-member.md) sits near this line without crossing it: it renames a role label without changing behaviour, but the repository and FR-RBAC-02 now disagree on one word.
 
 ## Provenance
 
-Decisions 001–007 derive from SRD v2.0 and cite the requirement codes that fix them. Decisions 008–021 were taken in review on 2026-08-18 and are **not in the baseline**.
+Decisions 001–007 derive from SRD v2.0 and cite the requirement codes that fix them. Decisions 008–022 were taken in review on 2026-08-18 and are **not in the baseline**.
 
 The client supplied no written material, so no decision here cites a client document. None exists.
