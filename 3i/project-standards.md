@@ -2,7 +2,7 @@
 project: 3i
 type: standard
 status: draft
-updated: 2026-08-16
+updated: 2026-08-18
 tags:
   - standard
   - meta
@@ -10,56 +10,114 @@ tags:
 
 # 3i Project Standards
 
-This document declares 3i's vocabulary under the repository-wide rules in [/documentation-standards.md](/documentation-standards.md). Where the two differ, the repository standards win; this document only fills in what they leave to each project.
+This document declares 3i's vocabulary under the repository-wide rules in [/documentation-standards.md](/documentation-standards.md). Where the two differ, the repository standards win.
 
-**Status is `draft`.** The module partition below is proposed, not confirmed. Everything downstream — document IDs, folder paths, cross references — depends on it, so it is marked draft until reviewed. Do not assign document IDs from this table before it reaches `current`.
-
----
-
-## What a Module Means Here
-
-RERAN partitions by user group, because a regulatory platform's natural seam is the stakeholder. 3i does not have that seam: a single learner touches catalogue, delivery, assessment, and certification in one sitting, and a guardian touches billing and communication on that same learner's behalf. Partitioning by user group would put the same subsystem in four folders.
-
-**A module in 3i is a functional area** — a subsystem with its own entities, its own rules, and a boundary that a developer can hold in their head.
-
-| Module folder | Covers | Abbrev. | Status |
-| :---- | :---- | :---: | :---- |
-| `identity-and-access` | Registration, authentication, age gating, guardian accounts, learner profiles, RBAC | IDA | Not started |
-| `catalogue` | Courses, subjects, curriculum structure, enrolment | CAT | Not started |
-| `learning-delivery` | Lessons, video delivery, materials, progress tracking | LDL | Not started |
-| `assessment` | Question bank, quizzes, examinations, grading | ASM | Not started |
-| `certification` | Certificate issuance, verification, retention | CRT | Not started |
-| `communication` | Chat rooms, guardian participation, moderation, notifications | COM | Not started |
-| `billing` | Subscriptions, seats, checkout, waivers, invoicing | BIL | Not started |
-| `administration` | Admin console, operational reporting, institute configuration | ADM | Not started |
-| `platform` | Cross-cutting architecture, infrastructure, integrations, NFRs | PLT | Not started |
-
-Abbreviations are for document IDs (`3I-IDA-REQ-001`). The project prefix in an ID is `3I`, uppercase, even though the folder name is `3i`.
-
-`platform` is deliberately last and deliberately thin. It holds only what genuinely belongs to no single functional area — deployment topology, shared NFRs, third-party integration contracts. It is not a drawer for anything hard to place. A document that could live in a real module belongs in that module.
-
-### Status Vocabulary
-
-The status column describes which stages of the derivation chain a module has reached, not how complete any one stage is. A module whose files exist but are thin placeholders is described as *drafted*, not *complete*.
+**Status is `draft`: the module partition is not settled.** Document IDs must not be assigned from the table below until it reaches `current`, because an ID does not change when a file moves.
 
 ---
 
-## Stage Folders
+## Input Kinds
 
-3i's derivation chain:
+3i has no `reference/source-of-truth/`. The client supplied nothing in writing — the entire requirement set was gathered verbally and expanded by us. Creating the folder would breach the repository rule against empty folders and imply evidence that does not exist.
+
+SRD v2.0 is not source of truth and is not discovery either. It is our document, but it is also the fixed, change-controlled baseline that defines scope. It lives in:
 
 ```
-reference/discovery/  →  requirements/  →  ui/
+reference/baseline/
 ```
 
-3i has no `reference/source-of-truth/` at present. The client did not supply written specifications; requirements were captured by us through structured clarification rounds and consolidated into an SRD. Under the repository standard on input kinds, that material is discovery, not source of truth — it records our interpretation, not the client's words. If the institute later supplies written material of its own, `source-of-truth/` is created then.
+Vendor-authored, client-approved, frozen, versioned. Corrections go through §21.3 change control, not through edits. A superseded version keeps `status: superseded` and stays in place.
+
+This category is repository-wide, not a 3i quirk — see `/documentation-standards.md`.
+
+---
+
+## Derivation Chain
+
+```
+reference/baseline/  →  modules/  →  ui/
+```
+
+The baseline is the parent of every requirement document. Nothing sits above it.
+
+---
+
+## Requirement Numbering
+
+**The SRD's requirement codes are canonical.** Format is `FR-<CODE>-<nn>` — `FR-AUTH-03`, `FR-CHAT-07`, `FR-BILL-02` — and `NFR-<nn>` for non-functional requirements, which are unprefixed and run in a single series to 32.
+
+A requirement number is never reassigned, renumbered, or reused, including after deprecation. When a requirement is split across documents, every resulting file carries the original code.
+
+This matters more here than elsewhere: the SRD is client-facing. A code quoted in a client meeting and a code in this repository must mean the same thing.
+
+Requirements proposed by us with no SRD entry take a `P-nn` number in a project-wide proposed list, exactly as RERAN handles proposed services. They enter the `FR-` series only when the client accepts them and the SRD is revised under §21.3.
+
+### The 19 Requirement Codes
+
+| Code | Area | Count |
+| :---- | :---- | ----: |
+| AUTH | Registration and authentication | 13 |
+| FAM | Family accounts and learner profiles | 10 |
+| RBAC | Roles and permissions | 5 |
+| INST | Instructor onboarding | 7 |
+| CRS | Course catalogue and management | 12 |
+| MAT | Course materials and video delivery | 15 |
+| BAT | Batches and live sessions | 7 |
+| ENR | Enrolment, waitlist and age gating | 7 |
+| QB | Question bank | 7 |
+| EX | Examinations | 8 |
+| CERT | Certificates | 9 |
+| BILL | Subscriptions and billing | 8 |
+| WAV | Waivers | 9 |
+| REF | Refunds | 5 |
+| CHAT | Group chat and moderation | 15 |
+| NOT | Notifications | 8 |
+| CMS | Content management and public site | 7 |
+| REP | Reports and exports | 5 |
+| LOC | Localisation | 6 |
+
+---
+
+## Modules — NOT YET DECIDED
+
+A module in 3i is a **functional area** owning one or more requirement codes. The code in an ID stays the SRD's; the folder is ours.
+
+The partition below is **proposed and awaiting review**. It is recorded here so the reasoning is not lost, not because it is agreed.
+
+| Proposed module | Owns | FRs |
+| :---- | :---- | ----: |
+| `identity-and-access` | AUTH, RBAC, FAM | 28 |
+| `commerce` | BILL, WAV, REF | 22 |
+| `communication` | CHAT, NOT | 23 |
+| `materials` | MAT | 15 |
+| `assessment` | QB, EX | 15 |
+| `learning-delivery` | BAT, ENR | 14 |
+| `catalogue` | CRS | 12 |
+| `certification` | CERT | 9 |
+| `instructors` | INST | 7 |
+| `public-site` | CMS | 7 |
+| `localisation` | LOC | 6 |
+| `reporting` | REP | 5 |
+| `platform` | — | 32 NFRs |
+
+Three judgement calls worth reviewing rather than accepting silently:
+
+1. **AUTH, RBAC and FAM merged.** §3 is titled "read this first" and defines Account and Learner as one model. Splitting it across folders would fracture the thing the baseline says governs every other section.
+2. **CMS and REP kept apart** despite both being administrative in feel. A public SEO site and admin analytics share no entities. Merging them would create the junk drawer this document warns against.
+3. **LOC as its own module** rather than a cross-cutting note. FR-LOC-04 requires full RTL layout mirroring across web and both mobile apps — that needs real UI documentation, not a paragraph in an NFR file.
+
+The delivery phases in §21.1 are **not** a partition. They are temporal, and Hardening is not a subsystem. Documentation is never organised by phase.
+
+---
+
+## Module Folder Shape
 
 ```
 modules/<module-name>/
 ├── README.md                    # module index
 ├── data-model.md                # entities owned by this module
 ├── requirements/
-│   └── fr-NNN-<name>.md
+│   └── <code>-<name>.md
 └── ui/
     ├── README.md                # role × screen matrix
     ├── components.md
@@ -70,41 +128,48 @@ modules/<module-name>/
 
 A module is not required to have every stage.
 
-### `data-model.md`
-
-Entities are documented in the module that **owns** them, once. A module that reads another module's entity links to it rather than restating its fields. Where ownership is genuinely shared, the entity is documented in the module that writes it, and the reading module records the read in its own `data-model.md` with a link.
+Entities are documented in the module that **owns** them, once. A module that reads another module's entity links to it rather than restating its fields.
 
 ---
 
 ## The `ui/` Stage
 
-The same many-to-many rule that governs RERAN's UI stage applies here: screens and requirements cross, and a screen such as Video Player or Checkout appears under several requirements.
+Screens and requirements cross — a screen such as Checkout or Video Player serves several requirements.
 
-**Rules:**
-
-1. **One file per distinct screen**, in `ui/screens/`. Never one file per role-screen pair.
-2. **Role differences go inside the screen file**, under a `## Role Variations` section. A dashboard that differs for learner, guardian, instructor, and admin is one file with four variations.
-3. **Shared logic is documented once** and linked — `components.md`, `validation-rules.md`.
-4. **`ui/README.md` carries the role × screen matrix.** This is the index that makes a missing screen visible.
-5. **Screens link back to the requirements they satisfy**, and requirement documents list the screens that realise them.
-6. **`figma:` frontmatter** on a screen file records the design generated from it.
+1. **One file per distinct screen.** Never one file per role-screen pair.
+2. **Role differences go inside the screen file**, under `## Role Variations`.
+3. **Shared logic documented once** and linked — `components.md`, `validation-rules.md`.
+4. **`ui/README.md` carries the role × screen matrix**, which is what makes a missing screen visible.
+5. **Screens cite the requirement codes they satisfy**, and requirement documents list the screens realising them.
+6. **`figma:` frontmatter** records the design generated from a screen file.
 
 ### Accessibility
 
-Every screen document states its colour contrast pairs explicitly. This is not decoration: a near-black background carrying navy text shipped once on this project and was caught late. Contrast belongs in the specification, where it can be reviewed, not in the design tool, where it is discovered.
+NFR-12 requires WCAG 2.2 Level AA with 4.5:1 contrast. Every screen document states its contrast pairs explicitly. A near-black background carrying navy text shipped once on this project and was caught late — contrast belongs in the specification, where it is reviewable, not in the design tool, where it is discovered.
+
+RTL is not a rendering concern. FR-LOC-04 requires navigation, alignment, icon direction, and progress indicators to mirror for Arabic and Urdu. Every screen document states its RTL behaviour.
+
+---
+
+## Cross-Cutting Documents
+
+Some rules span every module. They are documented **once**, at project root, and linked — never restated, because restated rules go stale silently.
+
+| Document | Why it cannot live in a module |
+| :---- | :---- |
+| [age-and-safeguarding.md](age-and-safeguarding.md) | Age rules sit in AUTH, FAM, CRS, ENR, CHAT and INST simultaneously |
+| [decisions/](decisions/README.md) | The consequential decisions constrain several modules at once |
+| [open-questions.md](open-questions.md) | Tracks unresolved items across the whole project |
 
 ---
 
 ## Additional Document Types
 
-Beyond the base types in the repository standards, 3i uses:
-
 | Type | Purpose |
 | :---- | :---- |
-| `functional-requirement` | A group of numbered SRD requirements for one module, with acceptance criteria |
+| `functional-requirement` | A group of SRD requirements for one module, with acceptance criteria |
 | `compliance` | Analysis of a legal or platform-policy constraint and what it forces |
 | `integration` | Contract with a third-party service — Stripe, Bunny Stream, SES |
-| `delivery-phase` | One phase of the nine-phase delivery sequence |
 
 ---
 
@@ -112,32 +177,18 @@ Beyond the base types in the repository standards, 3i uses:
 
 | Location | Pattern | Example |
 | :---- | :---- | :---- |
-| `requirements/` | `fr-NNN-<name>.md` | `fr-042-guardian-chat-participation.md` |
+| `reference/baseline/` | `srd-v<version>.md` | `srd-v2.0.md` |
+| `requirements/` | `<code>-<name>.md` | `chat-moderation.md` |
 | `ui/screens/` | `<screen-name>.md` | `checkout.md` |
 | `decisions/` | `dec-NNN-<name>.md` | `dec-001-learner-as-unit-of-study.md` |
-| module root | `<document-name>.md` | `data-model.md` |
 
 ---
 
-## Requirement Numbering
+## Decisions
 
-**SRD v2.0's numbers are canonical.** A requirement's number is assigned by the SRD and is never reassigned, renumbered, or reused — including after a requirement is deprecated. When a requirement is split across module documents, every resulting file carries the original number.
+Decision IDs take the form `3I-DEC-NNN`, omitting the module segment of the repository's format. A cross-cutting decision has no single module, and inventing one to satisfy the format would misfile it permanently.
 
-Where a requirement is proposed by us and has no SRD entry, it takes a `P-NN` number in a project-wide proposed list, exactly as RERAN handles proposed services. It enters the `FR-NNN` series only when the client accepts it and the SRD is revised.
-
-This matters more here than the equivalent rule does elsewhere, because the SRD is a client-facing artefact. A requirement number quoted in a client meeting and a requirement number in this repository must mean the same thing.
-
----
-
-## The `decisions/` Folder
-
-3i keeps a project-root `decisions/` folder holding one file per recorded decision, indexed by [decisions/README.md](decisions/README.md).
-
-Decisions live at project root rather than inside modules because the consequential ones cross module boundaries — the guardian-account model constrains identity, communication, and billing simultaneously. Filing such a decision under one module would hide it from the other two.
-
-Decision IDs take the form `3I-DEC-NNN`, omitting the module segment of the repository's `<PROJECT>-<MODULE>-<TYPE>-<NNN>` format. A cross-cutting decision has no single module, and inventing one to satisfy the format would misfile the decision permanently — an ID does not change when a file moves, which is the whole point of having one.
-
-A decision file records context, the decision, and its consequences. It is never edited to reflect a change of mind: a reversed decision gets `status: superseded` and a new file that cites it under `supersedes`. The reasoning that was wrong is as useful as the reasoning that was right.
+A decision is never edited to reflect a change of mind. A reversed decision gets `status: superseded` and a new file citing it under `supersedes`.
 
 ---
 
@@ -145,5 +196,6 @@ A decision file records context, the decision, and its consequences. It is never
 
 | Exception | Reason |
 | :---- | :---- |
-| No `reference/source-of-truth/` folder | The client supplied no written specifications. Creating the folder empty would breach the repository rule against empty folders and imply evidence that does not exist. |
-| Project-root `decisions/` folder | The repository structure defines `reference/` and `modules/` only. Cross-cutting decisions belong to no single module; RERAN sets the precedent for project-root documents with `module-roadmap.md`. |
+| No `reference/source-of-truth/` | The client supplied nothing in writing. Verified 2026-08-18, not assumed. |
+| `reference/baseline/` | New input kind — vendor-authored, client-approved, change-controlled. Now repository-wide. |
+| Project-root cross-cutting documents | Rules spanning six modules belong in none of them. RERAN sets the precedent with `module-roadmap.md`. |
