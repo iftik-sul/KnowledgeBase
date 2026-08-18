@@ -1,7 +1,7 @@
 ---
 project: 3i
 type: standard
-status: draft
+status: current
 updated: 2026-08-18
 tags:
   - standard
@@ -12,7 +12,7 @@ tags:
 
 This document declares 3i's vocabulary under the repository-wide rules in [/documentation-standards.md](/documentation-standards.md). Where the two differ, the repository standards win.
 
-**Status is `draft`: the module partition is not settled.** Document IDs must not be assigned from the table below until it reaches `current`, because an ID does not change when a file moves.
+The module partition was settled on 2026-08-18. Document IDs may now be assigned from the table below.
 
 ---
 
@@ -78,33 +78,45 @@ Requirements proposed by us with no SRD entry take a `P-nn` number in a project-
 
 ---
 
-## Modules — NOT YET DECIDED
+## Modules
 
 A module in 3i is a **functional area** owning one or more requirement codes. The code in an ID stays the SRD's; the folder is ours.
 
-The partition below is **proposed and awaiting review**. It is recorded here so the reasoning is not lost, not because it is agreed.
+Settled 2026-08-18. Thirteen modules, covering all 19 requirement codes and the 32 NFRs.
 
-| Proposed module | Owns | FRs |
-| :---- | :---- | ----: |
-| `identity-and-access` | AUTH, RBAC, FAM | 28 |
-| `commerce` | BILL, WAV, REF | 22 |
-| `communication` | CHAT, NOT | 23 |
-| `materials` | MAT | 15 |
-| `assessment` | QB, EX | 15 |
-| `learning-delivery` | BAT, ENR | 14 |
-| `catalogue` | CRS | 12 |
-| `certification` | CERT | 9 |
-| `instructors` | INST | 7 |
-| `public-site` | CMS | 7 |
-| `localisation` | LOC | 6 |
-| `reporting` | REP | 5 |
-| `platform` | — | 32 NFRs |
+| Module | Abbrev. | Owns | FRs |
+| :---- | :---: | :---- | ----: |
+| `identity-and-access` | IDA | AUTH, RBAC, FAM | 28 |
+| `communication` | CMN | CHAT, NOT | 23 |
+| `commerce` | CMR | BILL, WAV, REF | 22 |
+| `materials` | MTL | MAT | 15 |
+| `assessment` | ASM | QB, EX | 15 |
+| `learning-delivery` | LDL | BAT, ENR | 14 |
+| `catalogue` | CAT | CRS | 12 |
+| `certification` | CRT | CERT | 9 |
+| `instructors` | INS | INST | 7 |
+| `public-site` | PUB | CMS | 7 |
+| `localisation` | LCL | LOC | 6 |
+| `reporting` | RPT | REP | 5 |
+| `platform` | PLT | — | 32 NFRs |
 
-Three judgement calls worth reviewing rather than accepting silently:
+**Module abbreviations are a separate namespace from requirement codes.** `MTL` is the module; `MAT` is the requirement code it owns. None of the thirteen abbreviations collides with any of the nineteen codes, deliberately — a document ID and a requirement code appearing in the same sentence must be unambiguous.
 
-1. **AUTH, RBAC and FAM merged.** §3 is titled "read this first" and defines Account and Learner as one model. Splitting it across folders would fracture the thing the baseline says governs every other section.
-2. **CMS and REP kept apart** despite both being administrative in feel. A public SEO site and admin analytics share no entities. Merging them would create the junk drawer this document warns against.
-3. **LOC as its own module** rather than a cross-cutting note. FR-LOC-04 requires full RTL layout mirroring across web and both mobile apps — that needs real UI documentation, not a paragraph in an NFR file.
+### Reasoning
+
+Three calls worth recording, because a later reader will otherwise wonder:
+
+1. **AUTH, RBAC and FAM merged into one module.** §3 of the baseline is titled "read this first" and defines Account and Learner as a single model. Splitting it across folders would fracture the thing the baseline says governs every other section. This is the largest module at 28 requirements, and that is correct — it is the load-bearing one.
+2. **CMS and REP kept apart** despite both feeling administrative. A public SEO site and admin analytics share no entities. Merging them would create exactly the junk drawer this document warns against.
+3. **LOC as its own module** rather than a cross-cutting note. FR-LOC-04 requires full RTL layout mirroring across web and both mobile apps, which needs real UI documentation rather than a paragraph in an NFR file.
+
+### `platform`
+
+Holds what genuinely belongs to no functional area: the 32 NFRs, deployment topology, capacity baseline (§20.2), and integration contracts for Stripe, Bunny Stream, and AWS SES.
+
+It is not a drawer for anything hard to place. A document that could live in a real module belongs in that module.
+
+### Not a partition
 
 The delivery phases in §21.1 are **not** a partition. They are temporal, and Hardening is not a subsystem. Documentation is never organised by phase.
 
@@ -158,8 +170,11 @@ Some rules span every module. They are documented **once**, at project root, and
 | Document | Why it cannot live in a module |
 | :---- | :---- |
 | [age-and-safeguarding.md](age-and-safeguarding.md) | Age rules sit in AUTH, FAM, CRS, ENR, CHAT and INST simultaneously |
+| `app-store-compliance.md` — **not yet written** | The no-purchase-surface rule spans BILL, NOT and the NFRs at once |
 | [decisions/](decisions/README.md) | The consequential decisions constrain several modules at once |
 | [open-questions.md](open-questions.md) | Tracks unresolved items across the whole project |
+
+**On app store compliance.** FR-BILL-02 forbids any purchase surface in the apps, FR-NOT-06 forbids purchase prompts in push notifications, and NFR-15 through NFR-21 govern the multiplatform-services submission model, registration being web-first, and the 13+ age rating. That is one rule enforced in three modules — `commerce`, `communication`, and `platform` — and §22.3 names store rejection under Guideline 3.1.1 as the highest-uncertainty item in the entire plan. It is the second concern that qualifies for the same treatment as safeguarding, and it should be written before the Commerce phase rather than during it.
 
 ---
 
@@ -184,9 +199,17 @@ Some rules span every module. They are documented **once**, at project root, and
 
 ---
 
-## Decisions
+## Document IDs
 
-Decision IDs take the form `3I-DEC-NNN`, omitting the module segment of the repository's format. A cross-cutting decision has no single module, and inventing one to satisfy the format would misfile it permanently.
+**Format:** `3I-<MODULE>-<TYPE>-<NNN>` — for example, `3I-IDA-REQ-001`, `3I-CMN-UI-004`.
+
+Numbers are assigned sequentially within a project-module-type combination and are never reused, even after deprecation. An ID does not change when a file is renamed or moved.
+
+Cross-cutting documents omit the module segment: `3I-DEC-001`. A cross-cutting decision has no single module, and inventing one to satisfy the format would misfile it permanently.
+
+---
+
+## Decisions
 
 A decision is never edited to reflect a change of mind. A reversed decision gets `status: superseded` and a new file citing it under `supersedes`.
 
