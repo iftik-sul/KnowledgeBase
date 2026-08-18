@@ -22,28 +22,27 @@ Thirteen modules proposed in [project-standards.md](project-standards.md#modules
 
 ---
 
+## Resolved
+
+### ~~OQ-02 — What a seat actually is~~ — Resolved as [3I-DEC-009](decisions/dec-009-seats-as-account-pool.md)
+
+A seat is a permanent, non-transferable enrolment grant to one profile — the study-slot reading, not viewing-slot. FR-AUTH-12's concurrency cap is satisfied automatically as a consequence, not enforced separately. A seat cannot be reassigned between profiles; cancelling deactivates the profile (history preserved) and reactivation requires a fresh payment. The six-profile cap (FR-FAM-02) is removed as part of this decision — **a scope change requiring a change request under §21.3.**
+
+This also resolves the seat side of [OQ-05](#oq-05--ageing-up-at-13) below.
+
+---
+
 ## Blocking Commerce (Phase 2)
-
-### OQ-02 — What a seat actually is
-
-Agreed that seats are an account-level pool rather than being tied to a named profile. Two readings remain, and the commercial difference is large.
-
-| Reading | Effect | Family of four needs |
-| :---- | :---- | :---- |
-| **Study slot** | Only *n* profiles may be enrolled at all | 4 seats |
-| **Viewing slot** | All 6 may enrol and study; only *n* may watch at once | 1–2 seats |
-
-FR-ENR-01 requires "an active subscription with an available seat for that learner", which points at the study-slot reading. FR-AUTH-12 caps concurrent video streams by purchased seats, which points at the viewing-slot reading. Both are in the baseline.
-
-Also undefined: whether a seat can be reassigned between profiles, and any cooldown on doing so. §22.3 risk 5 already names seat sharing as a risk.
-
-Blocks: billing, enrolment, the upgrade prompt in FR-BILL-04, and the per-seat price the client owes.
 
 ### OQ-03 — Devices versus seats
 
-FR-AUTH-11 caps devices at 3 per account. FR-AUTH-12 caps concurrent streams by seats purchased, up to 6. A family buying 5 seats cannot use them from 3 devices.
+FR-AUTH-11 caps devices at 3 per account. With the six-profile cap removed by DEC-009, an account could now have far more than 6 active seats in principle, though each is still a real monthly cost. A family running several active seats still cannot use them from 3 devices.
 
 Proposed: keep both limits, apply whichever is lower, and **raise the device allowance as seats are added** rather than holding it flat at 3. Not yet agreed. Selling a seat that cannot be used is the failure to avoid.
+
+### OQ-07 — Per-seat price, now that the seat model is settled
+
+With seats defined as permanent per-profile grants rather than shared viewing slots, the client's outstanding per-seat price (§22.2 item 1) can now actually be quoted against a concrete model — a family of four genuinely needs four seats, not one or two. This was blocked by OQ-02; it no longer is. Chasing this price is now the more useful next ask than it was before.
 
 ---
 
@@ -67,12 +66,12 @@ Separately, a WWCC expiry should never cause this. FR-INST-03 already gives 60 d
 
 Agreed that a learner profile reaching 13 is offered their own account. **This is not in SRD v2.0** and is therefore new scope requiring a change request.
 
-Undefined:
+The seat mechanism is now resolved — see [3I-DEC-009](decisions/dec-009-seats-as-account-pool.md) and [3I-DEC-008](decisions/dec-008-ageing-up-at-13.md). Still undefined:
 
-- Does the new account consume a family seat, or free one?
+- Who pays for the new standalone account — the teenager, or does the guardian's payment carry over? Commercial question, not yet decided.
 - Who holds the chat toggle afterwards — FR-FAM-08 gives it to the guardian for a 13–17 profile, but FR-AUTH-05 only captures a guardian email for a standalone 13–17 account
-- What if the learner declines and stays a profile until 18?
-- What migrates — progress, enrolments, certificates — and what does FR-FAM-05's permanent name lock mean once the learner controls their own account?
+- What if the learner declines and stays a profile until 18? Now clearly supported — the profile simply remains active with its seat, no forced transition.
+- Should the new standalone account show the old profile's history, or start blank? The history itself is preserved regardless (DEC-009); this is about what the new account surfaces.
 
 ### OQ-06 — Chat history on profile deletion
 
@@ -84,6 +83,8 @@ Agreed that deleting a profile removes its chat messages. Two problems.
 
 Proposed: remove message **content**, retain the moderation record. Not yet agreed.
 
+Note: this question is about profile *deletion*, which remains a distinct, harsher action from the seat *cancellation* defined in DEC-009. Cancelling a seat does not delete the profile or touch its chat history at all — only an explicit deletion does. Worth confirming these stay two clearly separate actions in whatever is built, since they now sit close together conceptually.
+
 ---
 
 ## Client Dependencies (§22.2)
@@ -92,7 +93,7 @@ None confirmed as received.
 
 | # | Item | Needed by | Note |
 | :---: | :---- | :---- | :---- |
-| 1 | Per-seat price | Commerce | Also blocked by OQ-02 |
+| 1 | Per-seat price | Commerce | **Unblocked** — see OQ-07. Now the priority ask |
 | 2 | GST treatment for overseas learners | Commerce | From their accountant |
 | 3 | Privacy policy, terms, refund policy | Launch | From their lawyer |
 | 4 | WWCC position | Instructor onboarding | From their lawyer |
