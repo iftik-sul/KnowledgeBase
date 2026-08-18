@@ -10,10 +10,13 @@ This repository is designed to be AI-friendly, making it easy for AI assistants 
 
 ## Projects
 
-- **RERAN** — active. See [RERAN/README.md](RERAN/README.md) and [RERAN/module-roadmap.md](RERAN/module-roadmap.md).
-- ERP, SkudX, 3i, LoyaltyPoints, OstadLagbo, FindYourClone — reserved placeholders. Not yet active; each real client engagement gets its own project folder when work begins (ERP in particular is a sample folder, not a specific client).
+- **RERAN** — active. Regulatory platform. See [RERAN/README.md](RERAN/README.md) and [RERAN/module-roadmap.md](RERAN/module-roadmap.md).
+- **3i** — active. Subscription learning platform for Islamic studies, serving learners from age five. See [3i/README.md](3i/README.md) and [3i/age-and-safeguarding.md](3i/age-and-safeguarding.md).
+- ERP, SkudX, LoyaltyPoints, OstadLagbo, FindYourClone — reserved placeholders. Not yet active; each real client engagement gets its own project folder when work begins (ERP in particular is a sample folder, not a specific client).
 
 Each project maintains its own documentation while following the same documentation standards.
+
+Projects differ in how they are documented, and those differences are declared rather than assumed. RERAN partitions by user group and works from client-supplied documents; 3i partitions by functional area and works from a baseline we wrote, because the client supplied nothing in writing. See [documentation-standards.md](documentation-standards.md#input-kinds) and each project's `project-standards.md`.
 
 ## Future Vision
 

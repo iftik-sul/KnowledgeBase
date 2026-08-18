@@ -2,7 +2,7 @@
 project: KnowledgeBase
 type: standard
 status: current
-updated: 2026-08-09
+updated: 2026-08-18
 tags:
   - standard
   - meta
@@ -51,6 +51,7 @@ KnowledgeBase/
     ├── project-standards.md       # This project's module definition and vocabulary
     ├── reference/                 # Inputs — material this project was built from
     │   ├── source-of-truth/       # Supplied by the client, frozen
+    │   ├── baseline/              # Written by us, approved by the client, change-controlled
     │   └── discovery/             # Captured by us from meetings and discussion
     └── modules/
         └── <module-name>/
@@ -62,6 +63,8 @@ One project folder per system. Two systems for two different clients are two pro
 
 Project folder names are UPPERCASE for acronyms (`RERAN`) and PascalCase otherwise (`LoyaltyPoints`).
 
+A project uses whichever `reference/` subfolders it actually has material for. None of the three is mandatory.
+
 ---
 
 ## Folder Standards
@@ -69,6 +72,7 @@ Project folder names are UPPERCASE for acronyms (`RERAN`) and PascalCase otherwi
 | Folder | Contains | Editable | Authoritative |
 |---|---|---|---|
 | `reference/source-of-truth/` | Material supplied by the client, converted to Markdown but not rewritten | No | No — provenance only |
+| `reference/baseline/` | A specification written by us and approved by the client as the agreed scope | No — changes go through change control | Yes — for scope, not for implementation |
 | `reference/discovery/` | Requirements we captured ourselves from meetings and discussion | Yes | No — superseded by module docs |
 | `modules/` | Documents written from the inputs, structured for development use | Yes | Yes |
 | `<PROJECT>/README.md` | Project overview and index | Yes | Yes |
@@ -76,11 +80,12 @@ Project folder names are UPPERCASE for acronyms (`RERAN`) and PascalCase otherwi
 **Rules:**
 
 1. `source-of-truth/` is read-only once committed. Corrections are never applied to these files; they record what the client actually supplied.
-2. `discovery/` is editable, because it records our understanding rather than the client's words. When understanding changes, the file changes. Never present a discovery document as something the client wrote.
-3. `modules/` is where all interpretation, restructuring, clarification, and consolidation lives. Development works from `modules/` only.
-4. A module partitions the project along its natural axis — user groups, functional areas, subsystems, whichever the project declares. Never along document type.
-5. Every module folder contains a `README.md` listing its documents and their status.
-6. No empty folders. A folder is created when its first document exists.
+2. `baseline/` is read-only in the same way, but for a different reason. A baseline is the agreed definition of scope, so an untracked edit silently moves the line between delivery and change request. Revisions produce a new version through the project's change-control process; they never overwrite.
+3. `discovery/` is editable, because it records our understanding rather than the client's words. When understanding changes, the file changes. Never present a discovery document as something the client wrote.
+4. `modules/` is where all interpretation, restructuring, clarification, and consolidation lives. Development works from `modules/` only.
+5. A module partitions the project along its natural axis — user groups, functional areas, subsystems, whichever the project declares. Never along document type.
+6. Every module folder contains a `README.md` listing its documents and their status.
+7. No empty folders. A folder is created when its first document exists.
 
 ---
 
@@ -89,21 +94,47 @@ Project folder names are UPPERCASE for acronyms (`RERAN`) and PascalCase otherwi
 Not every project starts with client documents. Some start with a conversation.
 
 - **Client-supplied material** → `reference/source-of-truth/`. Frozen, versioned by the client's own version numbers, never edited.
+- **A specification we wrote and the client approved** → `reference/baseline/`. Frozen, versioned by us, revised only through change control.
 - **Our own requirement capture** → `reference/discovery/`. Meeting notes, requirement summaries, and understandings written up after discussion. Edited freely as understanding sharpens.
 
 The distinction matters because a frozen folder full of our own reconstructions is a rule nobody can follow. Keeping them apart means `source-of-truth/` stays trustworthy as evidence, and `discovery/` stays honest about being our interpretation.
 
-Both are inputs. Neither is authoritative for development — that is always `modules/`.
+### Why `baseline/` exists separately
+
+An engagement where the client supplies nothing written still produces a document that governs delivery. That document fits neither of the other two folders.
+
+It is not source of truth: we wrote it, and filing our own reasoning as client evidence would let us cite ourselves as proof of what was asked for. That is exactly the confusion the source-of-truth rule prevents.
+
+It is not discovery either: discovery is editable and explicitly never a final word, whereas a baseline defines what is in scope, carries acceptance criteria, and is the thing a change request is measured against. Filing it somewhere labelled non-authoritative would be wrong in the opposite direction.
+
+**The test is authorship and standing together.** Client wrote it → `source-of-truth/`. We wrote it and the client agreed to it as scope → `baseline/`. We wrote it and it is our current understanding → `discovery/`.
+
+A project may hold all three. Where a baseline was derived from client material, its `derived_from` cites that material.
+
+### Approval
+
+A baseline document records how it was approved, in the `approval` frontmatter field:
+
+| Value | Meaning |
+|---|---|
+| `written` | The client confirmed the baseline in writing. Cite the document under `derived_from` or store it in `source-of-truth/` |
+| `verbal` | Agreed in conversation only |
+| `pending` | Issued, not yet agreed |
+
+`verbal` and `pending` are recorded rather than hidden. A baseline is the instrument a change request is measured against, so whether it is actually agreed is a fact the repository should state plainly instead of leaving to assumption.
+
+All three are inputs. None is authoritative for **how** the system is built — that is always `modules/`.
 
 ---
 
 ## Stage Folders and the Derivation Chain
 
-Documentation is produced in stages, each derived from the one before. A project declares its own chain in `project-standards.md`. Two examples:
+Documentation is produced in stages, each derived from the one before. A project declares its own chain in `project-standards.md`. Three examples:
 
 ```
 RERAN:  source-of-truth  →  service-flows/  →  ui/
 ERP:    discovery        →  process-flows/  →  ui/
+3i:     baseline         →  requirements/   →  ui/
 ```
 
 Stage folders live inside a module. Their names are the project's own; the ordering is what matters.
@@ -127,7 +158,7 @@ The folder path already carries the project, module, and stage, so filenames do 
 
 Where a project numbers its documents for ordering, the number leads: `service-06-register-property-sale.md`.
 
-**Exception — `source-of-truth/`:** client files keep a version suffix, since multiple versions coexist by design (`prd-v1.0.md`, `service-flows-v2.md`). If the client's original filename carries meaning, preserve it in the `original_filename` frontmatter field rather than in the filename.
+**Exception — `source-of-truth/` and `baseline/`:** files in both keep a version suffix, since multiple versions coexist by design (`prd-v1.0.md`, `service-flows-v2.md`, `srd-v2.0.md`). If the client's original filename carries meaning, preserve it in the `original_filename` frontmatter field rather than in the filename.
 
 ---
 
@@ -141,6 +172,8 @@ Where a project numbers its documents for ordering, the number leads: `service-0
 6. **Explicit terms over pronouns.** Write "the developer submits the application," not "they submit it" — a chunk retrieved in isolation has no antecedent.
 7. **No screenshots as the only source of a rule.** If an image carries information, transcribe it into text beneath the image.
 8. **Define acronyms on first use in each file**, not once per project.
+
+A `source-of-truth/` or `baseline/` document may exceed the 50 KB target. Those files are frozen artefacts and are never split, because splitting would change what was supplied or agreed.
 
 ---
 
@@ -174,6 +207,14 @@ received: 2026-07-22
 original_filename: RERAN Service Flows (Final) v2.docx
 ```
 
+**Required additionally in `baseline/` files:**
+
+```yaml
+version: "2.0"
+approval: verbal
+approved: 2026-08-04
+```
+
 **Optional:**
 
 ```yaml
@@ -195,6 +236,9 @@ owner: Iftikher
 | `updated` | `YYYY-MM-DD` | Last meaningful content change |
 | `derived_from` | Repo-relative paths | The immediate parent(s) this was written from |
 | `received` | `YYYY-MM-DD` | When the client supplied this file |
+| `version` | String | The baseline's own version number |
+| `approval` | `written`, `verbal`, `pending` | How the client agreed to this baseline |
+| `approved` | `YYYY-MM-DD` | When approval was given. Omit when `pending` |
 | `figma` | URL | Design generated from this specification |
 
 ---
@@ -207,6 +251,7 @@ Every project may use these base types:
 |---|---|
 | `overview` | Project or module summary and index |
 | `standard` | Meta-documentation such as this file |
+| `baseline` | An approved specification defining agreed scope |
 | `requirements` | What the system must do |
 | `ui-spec` | Screen or interface specification |
 | `data-model` | Entities, fields, relationships |
@@ -228,6 +273,7 @@ Projects declare additional types in their `project-standards.md` — RERAN adds
 |---|---|
 | Editing a module document | Edit in place, bump `updated`, commit with a descriptive message |
 | Client sends a revised document | Add as a new file with the client's version suffix; set the previous file's `status: superseded` |
+| A baseline is revised through change control | Add as a new file with the next version suffix; set the previous file's `status: superseded`. Never edit in place |
 | A module document is replaced by a restructured one | New file sets `supersedes:`; old file sets `status: superseded` |
 | A feature is dropped | `status: deprecated`, file stays for history |
 
@@ -244,6 +290,8 @@ Optional but recommended for anything referenced from a ticket, a spec, or anoth
 **Format:** `<PROJECT>-<MODULE>-<TYPE>-<NNN>` — for example, `RERAN-IU-FLOW-001`.
 
 Module abbreviations are declared in `project-standards.md`. Numbers are assigned sequentially within a project-module-type combination and are never reused, even after deprecation. An ID, once assigned, does not change when the file is renamed or moved. That is the point of having one.
+
+A document belonging to no single module — a cross-cutting rule or a project-wide decision — omits the module segment: `3I-DEC-001`. Inventing a module to satisfy the format would misfile it permanently.
 
 ---
 
@@ -270,11 +318,16 @@ See [Register Property Sale](/RERAN/modules/individual-user/service-flows/servic
 When two documents disagree, resolve in this order:
 
 1. **`modules/` with `status: current`** — authoritative for all development work.
-2. **`reference/source-of-truth/` with `status: current`** — authoritative for what the client requested, but not for how it is built.
-3. **`reference/discovery/`** — our own capture; useful context, never a final word.
-4. **Anything with `status: superseded` or `deprecated`** — historical only, never a basis for implementation.
+2. **`reference/baseline/` with `status: current`** — authoritative for what is in scope and what acceptance means, but not for how it is built.
+3. **`reference/source-of-truth/` with `status: current`** — authoritative for what the client requested.
+4. **`reference/discovery/`** — our own capture; useful context, never a final word.
+5. **Anything with `status: superseded` or `deprecated`** — historical only, never a basis for implementation.
+
+A baseline sits above source-of-truth because it is later and agreed: it records what was settled, where source-of-truth records what was originally asked. Where the two conflict on scope, the baseline governs and the conflict is worth recording, since it usually means a request was consciously dropped or changed.
 
 **The working rule:** if a module document contradicts a client source document, that is a flag, not a fallback. It means either the source was interpreted deliberately — in which case the reasoning belongs in the module document — or the module drifted and needs correcting. Do not silently prefer one; record the resolution.
+
+A module document that contradicts the **baseline** is a different matter. That is scope drift, and it is resolved through change control rather than by editing either document.
 
 Material outside this repository — chat threads, email, verbal agreements, meeting recordings — has no standing until it is written into a document here.
 
@@ -286,19 +339,21 @@ This repository is intended to be consumed by AI assistants through indexing, re
 
 **For retrieval and indexing:**
 
-1. Index `reference/` and `modules/`, but answer from `modules/`. Input documents are provenance, cited only when the question is specifically about what was originally supplied or discussed.
+1. Index `reference/` and `modules/`, but answer from `modules/`. Input documents are provenance, cited only when the question is specifically about what was originally supplied, agreed, or discussed.
 2. Filter on `status`. Never answer from `superseded` or `deprecated` content without labelling it as historical.
 3. Chunk on heading boundaries. Attach `project`, `module`, `type`, and file path to every chunk so citations resolve to a location, not just a document.
 4. Prefer smaller, well-scoped files over large ones. This is the reason for the 50 KB guidance in Markdown Standards.
+5. Questions about scope — whether something is included, what acceptance requires — are answered from `baseline/` where one exists, not from `modules/`.
 
 **For assistants generating or editing documentation:**
 
-1. Write new documents into `modules/`. Never write into `source-of-truth/`.
+1. Write new documents into `modules/`. Never write into `source-of-truth/` or `baseline/`.
 2. Populate complete frontmatter, including `derived_from` citing the immediate parent stage.
 3. Read the project's `project-standards.md` before creating files in that project.
 4. When a request cannot be answered from repository content, say so rather than inferring. An invented business rule that reads plausibly is worse than a gap.
 5. Cite the file path for every substantive claim drawn from the repository.
 6. When restructuring, preserve every rule from the original. Restructuring changes organization, never content — content changes are a separate, deliberate commit.
+7. Never file a document we wrote under `source-of-truth/`, however closely it reflects what the client wants. If it needs to be frozen and it is ours, it is a baseline.
 
 **For assistants writing code from this repository:**
 
