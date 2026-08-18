@@ -35,10 +35,10 @@ This category is repository-wide, not a 3i quirk — see `/documentation-standar
 ## Derivation Chain
 
 ```
-reference/baseline/  →  modules/  →  ui/
+reference/baseline/  →  modules/  →  ui/  →  implementation-spec
 ```
 
-The baseline is the parent of every requirement document. Nothing sits above it.
+The baseline is the parent of every requirement document. Nothing sits above it. `implementation-spec` documents sit last in the chain — they translate an already-settled module (requirements plus any amending decisions) into build detail for a developer, and cite the requirements/UI documents they implement rather than restating them.
 
 ---
 
@@ -128,6 +128,7 @@ The delivery phases in §21.1 are **not** a partition. They are temporal, and Ha
 modules/<module-name>/
 ├── README.md                    # module index
 ├── data-model.md                # entities owned by this module
+├── backend-spec.md              # optional — implementation-spec type, added once build begins
 ├── requirements/
 │   └── <code>-<name>.md
 └── ui/
@@ -185,6 +186,7 @@ Some rules span every module. They are documented **once**, at project root, and
 | `functional-requirement` | A group of SRD requirements for one module, with acceptance criteria |
 | `compliance` | Analysis of a legal or platform-policy constraint and what it forces |
 | `integration` | Contract with a third-party service — Stripe, Bunny Stream, SES |
+| `implementation-spec` | Developer-facing build detail for one module — schema, endpoints, middleware. Sits below `requirements` and `ui-spec` in the derivation chain: it translates *what* a module must do into *how* it is built, and cites the requirements/decisions it implements rather than restating them. First used in [3I-IDA-IMPL-001](modules/identity-and-access/backend-spec.md) |
 
 ---
 
@@ -196,12 +198,13 @@ Some rules span every module. They are documented **once**, at project root, and
 | `requirements/` | `<code>-<name>.md` | `chat-moderation.md` |
 | `ui/screens/` | `<screen-name>.md` | `checkout.md` |
 | `decisions/` | `dec-NNN-<name>.md` | `dec-001-learner-as-unit-of-study.md` |
+| module root, `implementation-spec` | `backend-spec.md` (or `frontend-spec.md` when written) | `3i/modules/identity-and-access/backend-spec.md` |
 
 ---
 
 ## Document IDs
 
-**Format:** `3I-<MODULE>-<TYPE>-<NNN>` — for example, `3I-IDA-REQ-001`, `3I-CMN-UI-004`.
+**Format:** `3I-<MODULE>-<TYPE>-<NNN>` — for example, `3I-IDA-REQ-001`, `3I-CMN-UI-004`, `3I-IDA-IMPL-001`.
 
 Numbers are assigned sequentially within a project-module-type combination and are never reused, even after deprecation. An ID does not change when a file is renamed or moved.
 
