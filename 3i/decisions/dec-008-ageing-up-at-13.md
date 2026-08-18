@@ -23,14 +23,20 @@ The baseline does not say what happens. A learner could remain a profile until 1
 
 **This is not in SRD v2.0 and is therefore new scope requiring a change request under §21.3.** It is recorded here as a decision because it has been taken, not because it is authorised to build.
 
+## Seat Mechanism — Resolved by 3I-DEC-009
+
+The seat question below is answered now that [3I-DEC-009](dec-009-seats-as-account-pool.md) is settled. The 13-year-old's family profile is deactivated by cancelling its seat, which preserves its history without deleting it (per DEC-009 point 3). The guardian's family subscription frees that seat's cost. The teenager's new standalone account is a separate subscription entirely — not paid for out of the family plan — activated the same way any new account is: no free trial, they pay for their own access from day one.
+
+This does not resolve *whether* the family should stop paying and the teenager start paying, only that the mechanism for a guardian to release the family seat exists cleanly. Whether ageing up should default to "guardian cancels, teenager pays independently" versus "guardian keeps paying for the teenager's new account" is still open and is a commercial question, not a technical one.
+
 ## Unresolved
 
 Recorded in [OQ-05](../open-questions.md#oq-05--ageing-up-at-13):
 
-- Does the new account consume a family seat, or free one? Depends on [3I-DEC-009](dec-009-seats-as-account-pool.md).
+- Who pays for the new standalone account — the teenager, or does the guardian's payment method carry over? Not yet decided.
 - Who holds the chat toggle afterwards? FR-FAM-08 gives it to the guardian for a 13–17 *profile*; FR-AUTH-05 captures only a guardian email for a standalone 13–17 *account*. The permission has no defined handover.
-- What if the learner declines? A profile that stays a profile until 18 must remain fully supported.
-- What migrates — progress, enrolments, certificates — and what does FR-FAM-05's permanent name lock mean once the learner controls their own account?
+- What if the learner declines? A profile that stays a profile until 18 must remain fully supported — and now clearly remains active-with-a-seat rather than being forced through any transition.
+- What migrates — progress, enrolments, certificates — and what does FR-FAM-05's permanent name lock mean once the learner controls their own account? The old profile keeps its history regardless (DEC-009), so this is really about whether the *new* account should show that history or start blank.
 
 ## Cost
 
