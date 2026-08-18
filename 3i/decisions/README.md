@@ -24,7 +24,7 @@ One file per decision: context, decision, consequences, cost. A decision is neve
 | [3I-DEC-006](dec-006-question-bank-isolation.md) | Question bank isolation is enforced at the query layer, returning 404 | current | QB |
 | [3I-DEC-007](dec-007-rbac-without-hardcoded-roles.md) | No hard-coded role checks; new roles are data, not code | current | RBAC |
 | [3I-DEC-008](dec-008-ageing-up-at-13.md) | A profile reaching 13 is offered its own account | draft | AUTH, FAM |
-| [3I-DEC-009](dec-009-seats-as-account-pool.md) | Seats are an account-level pool, not tied to a profile | draft | BILL, ENR |
+| [3I-DEC-009](dec-009-seats-as-account-pool.md) | A seat is a permanent, non-transferable grant to one profile; six-profile cap removed | current | BILL, ENR, FAM |
 | [3I-DEC-010](dec-010-waiver-covers-all-seats.md) | A waiver applies to the whole subscription, seats included | current | WAV |
 | [3I-DEC-011](dec-011-attendance-certificate-without-exam.md) | A course with no final exam yields attendance certificates only | current | CERT |
 | [3I-DEC-012](dec-012-chat-history-on-profile-deletion.md) | Profile deletion removes that profile's chat messages | draft | CHAT, FAM |
@@ -32,8 +32,17 @@ One file per decision: context, decision, consequences, cost. A decision is neve
 
 `draft` marks a decision taken but carrying an unresolved consequence recorded in [../open-questions.md](../open-questions.md). It is not a weaker decision — it is one whose downstream effects are not yet specified.
 
+## Scope Changes Against SRD v2.0
+
+Some decisions here are not interpretations of the baseline — they change it, and each requires a change request under §21.3 before being built:
+
+| ID | Changes |
+| :---- | :---- |
+| [3I-DEC-008](dec-008-ageing-up-at-13.md) | Adds a feature not in the baseline: a profile reaching 13 is offered its own account |
+| [3I-DEC-009](dec-009-seats-as-account-pool.md) | Removes FR-FAM-02's six-profile cap |
+
 ## Provenance
 
-Decisions 001–007 are derived from SRD v2.0 and cite the requirement codes that fix them. Decisions 008–013 were taken in review on 2026-08-18 and are **not in the baseline**; those that change scope require a change request under §21.3.
+Decisions 001–007 are derived from SRD v2.0 and cite the requirement codes that fix them. Decisions 008–013 were taken in review on 2026-08-18 and are **not in the baseline**; those that change scope are listed above.
 
 The client supplied no written material, so no decision here cites a client document. None exists.
