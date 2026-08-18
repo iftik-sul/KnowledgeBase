@@ -10,106 +10,57 @@ tags:
 
 # Open Questions
 
-Unresolved items. Each blocks something specific. Resolved items move to [decisions/](decisions/README.md) and are removed from here.
+Unresolved items. Each blocks something specific. Resolved items move to [decisions/](decisions/README.md).
+
+---
+
+## Open
+
+### OQ-09 — `app-store-compliance.md` not yet written
+
+FR-BILL-02 forbids any purchase surface in the apps. FR-NOT-06 forbids purchase prompts in push notifications. NFR-15 through NFR-21 govern the multiplatform-services submission model, web-first registration, and the 13+ age rating. One rule enforced across `commerce`, `communication`, and `platform`.
+
+§22.3 risk 1 names store rejection under Guideline 3.1.1 as **the highest-uncertainty item in the entire plan**, with 1–2 weeks of review buffer budgeted.
+
+Qualifies for the same treatment as [age-and-safeguarding.md](age-and-safeguarding.md): documented once at project root, linked from the three modules, never restated. Should be written **before** the Commerce phase.
+
+### OQ-10 — PIN attempt rate limiting
+
+[3I-DEC-018](decisions/dec-018-profile-pin-mandatory-guardian-controlled.md) makes the 4-digit profile PIN mandatory. Four digits is ten thousand combinations — trivially brute-forced by a determined sibling on a shared family tablet, which is precisely the threat the PIN exists to stop.
+
+FR-AUTH-09's pattern (five failed attempts, 15-minute lockout, progressive delay) is the obvious model to reuse, but nothing currently requires it for the profile picker. It needs to become a requirement rather than a suggestion inside a decision record.
+
+Blocks: the profile picker screen.
+
+### OQ-11 — Minimum sessions before an attendance certificate
+
+[3I-DEC-021](decisions/dec-021-attendance-measured-against-sessions-delivered.md) measures attendance against sessions **delivered**. A course cancelled after one session of ten therefore issues certificates to whoever attended that one session, since 70% of one is one.
+
+A floor — a minimum number of sessions before any certificate is issued — would fix it. Not decided, because it is a question about what the institute wants a certificate to mean rather than a technical call.
+
+---
+
+## Deferred
+
+### OQ-05 — Ageing up at 13
+
+Agreed 2026-08-18 to **defer entirely**. No UI is to be documented until a change request is approved — building screens for unapproved scope is how change requests quietly stop happening.
+
+There is no urgency. If nothing is built, a profile reaching 13 simply stays a profile, and FR-FAM-08's guardian toggle governs their chat access correctly. The no-op behaviour is compliant. See [3I-DEC-008](decisions/dec-008-ageing-up-at-13.md).
 
 ---
 
 ## Resolved
 
-### ~~OQ-01 — Module partition~~ — Settled 2026-08-18
-
-Thirteen modules, recorded in [project-standards.md](project-standards.md#modules). All 19 requirement codes and the 32 NFRs are covered. Module abbreviations assigned for document IDs, chosen not to collide with any requirement code. `project-standards.md` is now `current`, so document IDs may be assigned and `modules/` may be populated.
-
-Raised in the same pass: `app-store-compliance.md` is needed as a second cross-cutting document. See OQ-09.
-
-### ~~OQ-02 — What a seat actually is~~ — Resolved as [3I-DEC-009](decisions/dec-009-seats-as-account-pool.md)
-
-A seat is a permanent, non-transferable enrolment grant to one profile — the study-slot reading, not viewing-slot. FR-AUTH-12's concurrency cap is satisfied automatically as a consequence, not enforced separately. A seat cannot be reassigned between profiles; cancelling deactivates the profile (history preserved) and reactivation requires a fresh payment. FR-FAM-02's six-profile cap is retained.
-
-This also resolves the seat side of [OQ-05](#oq-05--ageing-up-at-13) below, and raises [OQ-08](#oq-08--do-inactive-profiles-count-against-the-six-profile-cap).
-
----
-
-## Blocking Documentation
-
-### OQ-09 — `app-store-compliance.md` not yet written
-
-FR-BILL-02 forbids any purchase surface in the apps. FR-NOT-06 forbids purchase prompts in push notifications. NFR-15 through NFR-21 govern the multiplatform-services submission model, web-first registration, and the 13+ age rating. That is one rule enforced across `commerce`, `communication`, and `platform`.
-
-§22.3 risk 1 names store rejection under Guideline 3.1.1 as **the highest-uncertainty item in the entire plan**, with 1–2 weeks of review buffer budgeted.
-
-It qualifies for the same treatment as [age-and-safeguarding.md](age-and-safeguarding.md): documented once at project root, linked from the three modules, never restated. Should be written before the Commerce phase rather than during it.
-
----
-
-## Blocking Commerce (Phase 2)
-
-### OQ-07 — Per-seat price, now that the seat model is settled
-
-With seats defined as permanent per-profile grants rather than shared viewing slots, the client's outstanding per-seat price (§22.2 item 1) can now be quoted against a concrete model — a family of four genuinely needs four seats, not one or two. This was blocked by OQ-02; it no longer is. **This is now the priority client ask.**
-
-### OQ-08 — Do inactive profiles count against the six-profile cap?
-
-[3I-DEC-009](decisions/dec-009-seats-as-account-pool.md) introduces a profile state the baseline does not have: inactive but preserved. FR-FAM-02 caps profiles at six. The interaction is unresolved.
-
-If inactive profiles occupy cap slots, a guardian who has cycled through six children's profiles over several years has a full account, and **the only way to add a seventh is to delete one** — destroying that child's progress and exam results (FR-FAM-10), with only snapshotted certificates surviving. Forcing a parent to erase one child's learning history to enrol another is a bad outcome to arrive at by accident.
-
-Three options, none chosen:
-
-| Option | Effect |
+| Was | Now |
 | :---- | :---- |
-| Count only **active** profiles against the cap | Six paying seats maximum; inactive history accumulates freely |
-| Raise the cap | Defers the problem rather than solving it |
-| Keep as-is, make the deletion consequence explicit in the UI | Cheapest, but the parent still loses history |
-
-Blocks: the guardian dashboard (FR-FAM-09), profile picker (FR-FAM-04), and the seat purchase prompt (FR-BILL-04).
-
-### OQ-03 — Devices versus seats
-
-FR-AUTH-11 caps devices at 3 per account. FR-AUTH-12 caps concurrent streams by seats purchased, up to the six-profile ceiling. A family buying 5 seats cannot use them from 3 devices.
-
-Proposed: keep both limits, apply whichever is lower, and **raise the device allowance as seats are added** rather than holding it flat at 3. Not yet agreed. Selling a seat that cannot be used is the failure to avoid.
-
----
-
-## Blocking Assessment (Phase 5)
-
-### OQ-04 — Attendance threshold after a dismissed course
-
-Agreed that a course is dismissed when its instructor is suspended or their WWCC expires mid-delivery.
-
-FR-CERT-02 requires ≥70% of sessions attended. If a course ends early, no learner can reach 70% of the originally scheduled sessions, so nobody receives a certificate regardless of attendance.
-
-Proposed: measure against **sessions actually delivered**, not sessions scheduled. Not yet agreed.
-
-Separately, a WWCC expiry should never cause this. FR-INST-03 already gives 60 days' warning, so the system should refuse to schedule sessions beyond an instructor's expiry date — converting a mid-course collapse into a scheduling error caught months earlier. Not in the baseline; would be a change request.
-
----
-
-## Requiring Change Control (§21.3)
-
-### OQ-05 — Ageing up at 13
-
-Agreed that a learner profile reaching 13 is offered their own account. **This is not in SRD v2.0** and is therefore new scope requiring a change request.
-
-The seat mechanism is now resolved — see [3I-DEC-009](decisions/dec-009-seats-as-account-pool.md) and [3I-DEC-008](decisions/dec-008-ageing-up-at-13.md). Still undefined:
-
-- Who pays for the new standalone account — the teenager, or does the guardian's payment carry over? Commercial question, not yet decided.
-- Who holds the chat toggle afterwards — FR-FAM-08 gives it to the guardian for a 13–17 profile, but FR-AUTH-05 only captures a guardian email for a standalone 13–17 account
-- What if the learner declines and stays a profile until 18? Now clearly supported — the profile simply remains active with its seat, no forced transition.
-- Should the new standalone account show the old profile's history, or start blank? The history itself is preserved regardless (DEC-009); this is about what the new account surfaces.
-
-### OQ-06 — Chat history on profile deletion
-
-Agreed that deleting a profile removes its chat messages. Two problems.
-
-**It contradicts the baseline.** FR-CHAT-14 retains messages on account deletion and anonymises authorship to "Deleted user". A 15-year-old may exist as either an account or a profile, so identical conduct would be preserved or erased depending on which they happen to be.
-
-**It destroys safeguarding evidence.** FR-CHAT-09 and FR-CHAT-10 require moderation actions and reports to be logged and reportable. If a reported message is deleted with the profile, the record of the report and the action taken loses its subject.
-
-Proposed: remove message **content**, retain the moderation record. Not yet agreed.
-
-This now matters more than it did. With the six-profile cap retained and inactive profiles possibly occupying slots (OQ-08), deletion becomes the routine way to free a slot rather than a rare action — so whatever deletion does to chat history will happen often, not occasionally.
+| **OQ-01** Module partition | Thirteen modules, [project-standards.md](project-standards.md#modules) |
+| **OQ-02** What a seat is | [3I-DEC-009](decisions/dec-009-seats-as-account-pool.md) — permanent, non-transferable enrolment grant |
+| **OQ-03** Devices versus seats | [3I-DEC-015](decisions/dec-015-device-allowance-scales-with-seats.md) — seats plus two, floor of three |
+| **OQ-04** Attendance after dismissal | [3I-DEC-021](decisions/dec-021-attendance-measured-against-sessions-delivered.md) — measured on sessions delivered, plus a WWCC scheduling guard |
+| **OQ-06** Chat history on deletion | [3I-DEC-016](decisions/dec-016-deletion-removes-content-retains-record.md) — content removed, moderation record retained |
+| **OQ-07** Per-seat price quotable | Unblocked by DEC-009. Now a client ask, below |
+| **OQ-08** Inactive profiles and the cap | [3I-DEC-014](decisions/dec-014-cap-counts-active-profiles-only.md) — cap counts active and never-activated only |
 
 ---
 
@@ -119,7 +70,7 @@ None confirmed as received.
 
 | # | Item | Needed by | Note |
 | :---: | :---- | :---- | :---- |
-| 1 | Per-seat price | Commerce | **Unblocked** — see OQ-07. Now the priority ask |
+| 1 | Per-seat price | Commerce | **Priority.** Now quotable against a concrete seat model |
 | 2 | GST treatment for overseas learners | Commerce | From their accountant |
 | 3 | Privacy policy, terms, refund policy | Launch | From their lawyer |
 | 4 | WWCC position | Instructor onboarding | From their lawyer |
@@ -127,6 +78,8 @@ None confirmed as received.
 | 6 | Cloud, Bunny, Stripe, SES accounts | Foundation | **Open now** — no cost to sit idle |
 | 7 | Apple and Google developer accounts | Mobile | **Open now** — store review is the least predictable item |
 | 8 | Live-class tool choice | Learning | See below |
+
+**A ninth dependency now exists.** [3I-DEC-019](decisions/dec-019-safeguarding-strings-exempt-from-ai-translation.md) requires named human sign-off on roughly a dozen safeguarding strings in each of five languages, before launch. The institute has native speakers; this is an afternoon of their time, not a translation budget. But it is a launch gate, and it is on them.
 
 ### On item 8
 
@@ -136,8 +89,14 @@ It is entirely possible the tool the institute chooses does not permit the stude
 
 ---
 
+## Change Request Backlog
+
+Seven decisions now change the baseline rather than interpret it. Listed in [decisions/README.md](decisions/README.md#scope-changes-against-srd-v20). Worth raising as one change request rather than seven, since several interact — the cap, the seat model, and the PIN all touch the same profile lifecycle.
+
+---
+
 ## Baseline Approval
 
-SRD v2.0 is **verbally approved only**. §21.3 measures change requests against an approved baseline; without written approval there is no line between a change and a misunderstanding. §22.3 risk 7 already names contested "done" as a risk, mitigated by acceptance criteria and the 10-day window — both of which assume the baseline itself is agreed.
+SRD v2.0 is **verbally approved only**, recorded as `approval: verbal` in its frontmatter. §21.3 measures change requests against an approved baseline; with seven changes now queued, that matters more than it did.
 
 Raised and noted. No action requested.
