@@ -29,25 +29,27 @@ One file per decision: context, decision, consequences, cost. A decision is neve
 | [3I-DEC-011](dec-011-attendance-certificate-without-exam.md) | A course with no final exam yields attendance certificates only | current | n/a — interpretation | CERT |
 | [3I-DEC-012](dec-012-chat-history-on-profile-deletion.md) | ~~Profile deletion removes chat messages~~ | **superseded** by 016 | n/a | CHAT, FAM |
 | [3I-DEC-013](dec-013-instructor-removal-dismisses-course.md) | Losing an instructor mid-course dismisses the course | current | n/a — interpretation | INST, BAT |
-| [3I-DEC-014](dec-014-cap-counts-active-profiles-only.md) | The cap counts active and never-activated profiles only | current | **pending — hard-ask** | FAM, BILL |
-| [3I-DEC-015](dec-015-device-allowance-scales-with-seats.md) | Device allowance is seats plus two, floor of three | current | **pending — hard-ask** | AUTH |
-| [3I-DEC-016](dec-016-deletion-removes-content-retains-record.md) | Deletion removes message content, retains the moderation record | current | **pending — hard-ask** | CHAT, FAM |
+| [3I-DEC-014](dec-014-cap-counts-active-profiles-only.md) | The cap counts active and never-activated profiles only | current | **approved — proceed to build** | FAM, BILL |
+| [3I-DEC-015](dec-015-device-allowance-scales-with-seats.md) | Device allowance is seats plus two, floor of three | current | **approved — proceed to build** | AUTH |
+| [3I-DEC-016](dec-016-deletion-removes-content-retains-record.md) | Deletion removes message content, retains the moderation record | current | **approved — proceed to build** | CHAT, FAM |
 | [3I-DEC-017](dec-017-account-holder-renamed-member.md) | The account holder role is renamed `Member` | current | n/a — label only | RBAC |
-| [3I-DEC-018](dec-018-profile-pin-mandatory-guardian-controlled.md) | Profile PIN is mandatory and guardian-controlled | current | pending — proceed unless objected | FAM |
-| [3I-DEC-019](dec-019-safeguarding-strings-exempt-from-ai-translation.md) | Safeguarding strings bypass AI translation | current | pending — proceed unless objected | LOC, AUTH, CHAT |
+| [3I-DEC-018](dec-018-profile-pin-mandatory-guardian-controlled.md) | Profile PIN is mandatory and guardian-controlled | current | **approved — proceed to build** | FAM |
+| [3I-DEC-019](dec-019-safeguarding-strings-exempt-from-ai-translation.md) | Safeguarding strings bypass AI translation | current | **approved — proceed to build** | LOC, AUTH, CHAT |
 | [3I-DEC-020](dec-020-guardian-on-behalf-chat-retained.md) | Guardian-on-behalf chat participation is retained | current | n/a — interpretation | CHAT |
-| [3I-DEC-021](dec-021-attendance-measured-against-sessions-delivered.md) | Attendance is measured against sessions delivered | current | pending — proceed unless objected | CERT, INST, BAT |
-| [3I-DEC-022](dec-022-pin-lockout-and-dob-correction-notification.md) | PIN lockout matches FR-AUTH-09; DOB corrections notify the guardian on chat-eligibility change | current | pending — proceed unless objected | AUTH, FAM, NOT |
+| [3I-DEC-021](dec-021-attendance-measured-against-sessions-delivered.md) | Attendance is measured against sessions delivered | current | **approved — proceed to build** | CERT, INST, BAT |
+| [3I-DEC-022](dec-022-pin-lockout-and-dob-correction-notification.md) | PIN lockout matches FR-AUTH-09; DOB corrections notify the guardian on chat-eligibility change | current | **approved — proceed to build** | AUTH, FAM, NOT |
 
 **`deferred`** marks a decision taken but consciously parked — not to be built or documented until approved. **`superseded`** marks a reversed decision, retained for its reasoning and never a basis for implementation.
 
-**`current` and "pending sign-off" are not in tension.** `status: current` means this repository's authoritative position, ready to build from. The **client sign-off** column is a separate axis: whether the *client* has agreed to the scope change under §21.3. A decision can be fully specified and internally approved while still awaiting the client's yes — that is the normal state for anything in the change request below, and it should not be read as unsettled or half-finished documentation.
+**On the "client sign-off" column, updated 2026-08-18:** all seven previously-pending items (014, 015, 016, 018, 019, 021, 022) are now marked **approved — proceed to build**, on the basis that Saitama holds effective decision authority on the client's behalf for this engagement. This is a project-level operating assumption recorded here for traceability, not a claim that the institute's own §21.3 written-approval process has been formally exercised. If that assumption changes — if the institute later needs to review these seven items directly — the affected code and documents are identifiable via this table and the [scope-changes list](#change-request--7-items-two-tiers) below, which is retained as the record of what was changed and why.
 
-## Change Request — 7 Items, Two Tiers
+[3I-DEC-008](dec-008-ageing-up-at-13.md) remains **deferred**, not approved. It was not part of the seven-item batch and has not been raised — see [OQ-05](/3i/open-questions.md#oq-05--ageing-up-at-13).
 
-Internally approved 2026-08-18. Sent to the client as one consolidated request rather than seven separate ones, split by how it is framed:
+## Change Request — 7 Items, Two Tiers (Historical Record)
 
-**Tier 1 — explicit written sign-off requested, with the risk of not approving stated plainly:**
+Internally approved 2026-08-18, and subsequently treated as approved for build purposes the same day per the note above. Retained here as the record of what was proposed, the reasoning, and the risk framing — useful if the institute is ever asked to review these directly, and as documentation of why each piece of behaviour differs from SRD v2.0.
+
+**Tier 1 — carried the most risk if not approved:**
 
 | ID | Ask |
 | :---- | :---- |
@@ -55,21 +57,21 @@ Internally approved 2026-08-18. Sent to the client as one consolidated request r
 | [3I-DEC-015](dec-015-device-allowance-scales-with-seats.md) | Device allowance scales with seats — risk framing: a flat 3-device cap against 6 purchasable seats may not survive an Australian Consumer Law challenge |
 | [3I-DEC-016](dec-016-deletion-removes-content-retains-record.md) | Profile deletion retains the moderation record — risk framing: without this, a guardian can erase evidence of a reported safety incident |
 
-**Tier 2 — proceeding on this basis unless the client objects:**
+**Tier 2 — lower-stakes, expected routine approval:**
 
 | ID | Ask |
 | :---- | :---- |
 | [3I-DEC-018](dec-018-profile-pin-mandatory-guardian-controlled.md) | Mandatory guardian-set PIN |
-| [3I-DEC-019](dec-019-safeguarding-strings-exempt-from-ai-translation.md) | Human sign-off on ~12 safeguarding strings per language — framed as a small task owed by the client, not a design objection |
-| [3I-DEC-021](dec-021-attendance-measured-against-sessions-delivered.md) | Attendance measured on sessions delivered, plus the WWCC scheduling guard — raised **together with [OQ-11](/3i/open-questions.md#oq-11--minimum-sessions-before-an-attendance-certificate)**, since the client is likely to ask whether one delivered session should really be enough to qualify |
+| [3I-DEC-019](dec-019-safeguarding-strings-exempt-from-ai-translation.md) | Human sign-off on ~12 safeguarding strings per language — a small task owed by the client, not a design objection. **This item still requires the institute's actual participation** (native-speaker sign-off) regardless of build-approval status, and is not satisfied by the operating assumption above |
+| [3I-DEC-021](dec-021-attendance-measured-against-sessions-delivered.md) | Attendance measured on sessions delivered, plus the WWCC scheduling guard — [OQ-11](/3i/open-questions.md#oq-11--minimum-sessions-before-an-attendance-certificate) (minimum sessions before a certificate) remains genuinely open and is not resolved by this approval |
 | [3I-DEC-022](dec-022-pin-lockout-and-dob-correction-notification.md) | PIN lockout matching FR-AUTH-09; guardian notified when an admin DOB correction changes chat eligibility |
 
-**On #22 / item 7 specifically:** "admin" here is the single seeded platform Admin role (FR-RBAC-02) — the same role that already approves instructors, moderates chat, and approves under-13 courses. Not a separate system-administrator tier, and not something a Member can do to their own child's profile — FR-FAM-07 makes date of birth explicitly non-editable by the account holder. Confirmed in review 2026-08-18; worth stating in the client-facing document since "admin" is otherwise ambiguous out of context.
+**On #22 / item 7:** "admin" is the single seeded platform Admin role (FR-RBAC-02), not a separate system-administrator tier, and not something a Member can do to their own child's profile — FR-FAM-07 makes date of birth explicitly non-editable by the account holder.
 
-[3I-DEC-017](dec-017-account-holder-renamed-member.md) is intentionally not on this list — it is an internal label change with no behavioural effect, and does not need client sign-off, only note that our documentation and FR-RBAC-02 now use different words for the same role.
+[3I-DEC-017](dec-017-account-holder-renamed-member.md) was not part of this batch — internal label change only, no client-facing behaviour to approve.
 
 ## Provenance
 
-Decisions 001–007 derive from SRD v2.0 and cite the requirement codes that fix them. Decisions 008–022 were taken in review on 2026-08-18 and are **not in the baseline**.
+Decisions 001–007 derive from SRD v2.0 and cite the requirement codes that fix them. Decisions 008–022 were taken in review on 2026-08-18 and are **not in the baseline**. Seven of them (014–016, 018–019, 021–022) are approved for build per the note above; one (008) remains deferred.
 
 The client supplied no written material, so no decision here cites a client document. None exists.
