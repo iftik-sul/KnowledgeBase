@@ -29,9 +29,11 @@ Lookup for the target profile, current date of birth, new date of birth, require
 
 ## Behaviour
 
-**This is the single highest-leverage safeguarding control surface in the module**, precisely because everywhere else treats the field as immutable. A correction here can change a profile's chat access (FR-FAM-08), catalogue visibility (FR-CRS-10), and enrolment eligibility (FR-ENR-03) all at once, silently, from the learner's perspective — they simply find themselves able or unable to do things they could not before.
+**This is the single highest-leverage safeguarding control surface in the module**, precisely because everywhere else treats the field as immutable. A correction here can change a profile's chat access (FR-FAM-08), catalogue visibility (FR-CRS-10), and enrolment eligibility (FR-ENR-03) all at once.
 
-On save: age-derived state recalculates everywhere that reads date of birth — chat access, catalogue filtering, age band badge. If the correction changes chat eligibility (e.g. corrects an 11-year-old's DOB to reveal they are actually 13), that change should be visible to the guardian, not merely take effect invisibly at next login.
+On save: age-derived state recalculates everywhere that reads date of birth — chat access, catalogue filtering, age band badge.
+
+**If the correction changes chat eligibility, the guardian is notified** — [3I-DEC-022](/3i/decisions/dec-022-pin-lockout-and-dob-correction-notification.md). Routed through the standard notification channel (FR-NOT-01–08): push and email, addressed to the account holder, the profile named in the body — e.g. *"Aisha's date of birth has been updated, which has changed her chat access."* Not triggered when the correction leaves eligibility unchanged (an under-13 correction that stays under 13, for instance).
 
 The reason is recorded permanently and should appear in the admin audit log (NFR-09), given the surface's leverage.
 
