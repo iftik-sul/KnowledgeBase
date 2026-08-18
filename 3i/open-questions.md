@@ -26,23 +26,39 @@ Thirteen modules proposed in [project-standards.md](project-standards.md#modules
 
 ### ~~OQ-02 — What a seat actually is~~ — Resolved as [3I-DEC-009](decisions/dec-009-seats-as-account-pool.md)
 
-A seat is a permanent, non-transferable enrolment grant to one profile — the study-slot reading, not viewing-slot. FR-AUTH-12's concurrency cap is satisfied automatically as a consequence, not enforced separately. A seat cannot be reassigned between profiles; cancelling deactivates the profile (history preserved) and reactivation requires a fresh payment. The six-profile cap (FR-FAM-02) is removed as part of this decision — **a scope change requiring a change request under §21.3.**
+A seat is a permanent, non-transferable enrolment grant to one profile — the study-slot reading, not viewing-slot. FR-AUTH-12's concurrency cap is satisfied automatically as a consequence, not enforced separately. A seat cannot be reassigned between profiles; cancelling deactivates the profile (history preserved) and reactivation requires a fresh payment. FR-FAM-02's six-profile cap is retained.
 
-This also resolves the seat side of [OQ-05](#oq-05--ageing-up-at-13) below.
+This also resolves the seat side of [OQ-05](#oq-05--ageing-up-at-13) below, and raises [OQ-08](#oq-08--do-inactive-profiles-count-against-the-six-profile-cap).
 
 ---
 
 ## Blocking Commerce (Phase 2)
 
-### OQ-03 — Devices versus seats
-
-FR-AUTH-11 caps devices at 3 per account. With the six-profile cap removed by DEC-009, an account could now have far more than 6 active seats in principle, though each is still a real monthly cost. A family running several active seats still cannot use them from 3 devices.
-
-Proposed: keep both limits, apply whichever is lower, and **raise the device allowance as seats are added** rather than holding it flat at 3. Not yet agreed. Selling a seat that cannot be used is the failure to avoid.
-
 ### OQ-07 — Per-seat price, now that the seat model is settled
 
-With seats defined as permanent per-profile grants rather than shared viewing slots, the client's outstanding per-seat price (§22.2 item 1) can now actually be quoted against a concrete model — a family of four genuinely needs four seats, not one or two. This was blocked by OQ-02; it no longer is. Chasing this price is now the more useful next ask than it was before.
+With seats defined as permanent per-profile grants rather than shared viewing slots, the client's outstanding per-seat price (§22.2 item 1) can now be quoted against a concrete model — a family of four genuinely needs four seats, not one or two. This was blocked by OQ-02; it no longer is. **This is now the priority client ask.**
+
+### OQ-08 — Do inactive profiles count against the six-profile cap?
+
+[3I-DEC-009](decisions/dec-009-seats-as-account-pool.md) introduces a profile state the baseline does not have: inactive but preserved. FR-FAM-02 caps profiles at six. The interaction is unresolved.
+
+If inactive profiles occupy cap slots, a guardian who has cycled through six children's profiles over several years has a full account, and **the only way to add a seventh is to delete one** — destroying that child's progress and exam results (FR-FAM-10), with only snapshotted certificates surviving. Forcing a parent to erase one child's learning history to enrol another is a bad outcome to arrive at by accident.
+
+Three options, none chosen:
+
+| Option | Effect |
+| :---- | :---- |
+| Count only **active** profiles against the cap | Six paying seats maximum; inactive history accumulates freely |
+| Raise the cap | Defers the problem rather than solving it |
+| Keep as-is, make the deletion consequence explicit in the UI | Cheapest, but the parent still loses history |
+
+Blocks: the guardian dashboard (FR-FAM-09), profile picker (FR-FAM-04), and the seat purchase prompt (FR-BILL-04).
+
+### OQ-03 — Devices versus seats
+
+FR-AUTH-11 caps devices at 3 per account. FR-AUTH-12 caps concurrent streams by seats purchased, up to the six-profile ceiling. A family buying 5 seats cannot use them from 3 devices.
+
+Proposed: keep both limits, apply whichever is lower, and **raise the device allowance as seats are added** rather than holding it flat at 3. Not yet agreed. Selling a seat that cannot be used is the failure to avoid.
 
 ---
 
@@ -83,7 +99,7 @@ Agreed that deleting a profile removes its chat messages. Two problems.
 
 Proposed: remove message **content**, retain the moderation record. Not yet agreed.
 
-Note: this question is about profile *deletion*, which remains a distinct, harsher action from the seat *cancellation* defined in DEC-009. Cancelling a seat does not delete the profile or touch its chat history at all — only an explicit deletion does. Worth confirming these stay two clearly separate actions in whatever is built, since they now sit close together conceptually.
+This now matters more than it did. With the six-profile cap retained and inactive profiles possibly occupying slots (OQ-08), deletion becomes the routine way to free a slot rather than a rare action — so whatever deletion does to chat history will happen often, not occasionally.
 
 ---
 
