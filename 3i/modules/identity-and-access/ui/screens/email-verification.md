@@ -1,0 +1,37 @@
+---
+project: 3i
+module: identity-and-access
+type: ui-spec
+status: current
+updated: 2026-08-18
+id: 3I-IDA-UI-004
+derived_from:
+  - 3i/reference/baseline/srd-v2.0.md
+tags:
+  - ui
+  - registration
+---
+
+# Screen: Email Verification
+
+Satisfies: FR-AUTH-06
+
+---
+
+## Purpose
+
+Shown after registration and after any email change, until the address is confirmed. Blocks enrolment, checkout, and chat while pending (FR-AUTH-06).
+
+## Behaviour
+
+A verification link is emailed on account creation and on any subsequent email change. This screen shows pending state with a resend option (rate-limited — not specified in the baseline, default to one resend per 60 seconds pending client input).
+
+**On an email change**, the account's prior verified state is preserved until the new address confirms — the account does not drop to a blocked state mid-change. This screen in that context reads as "confirm your new email" rather than "your account is unverified", since the two situations carry very different urgency.
+
+## Role Variations
+
+Shown to any role — Member, Instructor, Admin — whenever their email is unverified. Content is otherwise identical across roles; only the destination after successful verification differs (returns to wherever the person was headed before the block).
+
+## Contrast and RTL
+
+Standard, 4.5:1 (NFR-12). Full RTL mirroring (FR-LOC-04).
