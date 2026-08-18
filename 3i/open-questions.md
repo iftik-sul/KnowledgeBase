@@ -14,21 +14,31 @@ Unresolved items. Each blocks something specific. Resolved items move to [decisi
 
 ---
 
-## Blocking Documentation
-
-### OQ-01 — Module partition
-
-Thirteen modules proposed in [project-standards.md](project-standards.md#modules--not-yet-decided), deferred for later decision. Until settled, no document IDs can be assigned and `modules/` cannot be populated. Cheap to change now; expensive once files exist and cross-link.
-
----
-
 ## Resolved
+
+### ~~OQ-01 — Module partition~~ — Settled 2026-08-18
+
+Thirteen modules, recorded in [project-standards.md](project-standards.md#modules). All 19 requirement codes and the 32 NFRs are covered. Module abbreviations assigned for document IDs, chosen not to collide with any requirement code. `project-standards.md` is now `current`, so document IDs may be assigned and `modules/` may be populated.
+
+Raised in the same pass: `app-store-compliance.md` is needed as a second cross-cutting document. See OQ-09.
 
 ### ~~OQ-02 — What a seat actually is~~ — Resolved as [3I-DEC-009](decisions/dec-009-seats-as-account-pool.md)
 
 A seat is a permanent, non-transferable enrolment grant to one profile — the study-slot reading, not viewing-slot. FR-AUTH-12's concurrency cap is satisfied automatically as a consequence, not enforced separately. A seat cannot be reassigned between profiles; cancelling deactivates the profile (history preserved) and reactivation requires a fresh payment. FR-FAM-02's six-profile cap is retained.
 
 This also resolves the seat side of [OQ-05](#oq-05--ageing-up-at-13) below, and raises [OQ-08](#oq-08--do-inactive-profiles-count-against-the-six-profile-cap).
+
+---
+
+## Blocking Documentation
+
+### OQ-09 — `app-store-compliance.md` not yet written
+
+FR-BILL-02 forbids any purchase surface in the apps. FR-NOT-06 forbids purchase prompts in push notifications. NFR-15 through NFR-21 govern the multiplatform-services submission model, web-first registration, and the 13+ age rating. That is one rule enforced across `commerce`, `communication`, and `platform`.
+
+§22.3 risk 1 names store rejection under Guideline 3.1.1 as **the highest-uncertainty item in the entire plan**, with 1–2 weeks of review buffer budgeted.
+
+It qualifies for the same treatment as [age-and-safeguarding.md](age-and-safeguarding.md): documented once at project root, linked from the three modules, never restated. Should be written before the Commerce phase rather than during it.
 
 ---
 
