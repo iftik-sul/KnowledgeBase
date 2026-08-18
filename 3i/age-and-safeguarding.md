@@ -13,7 +13,7 @@ tags:
 
 **This is the authoritative statement of every age-dependent rule in 3i.** Modules link here. They do not restate these rules, because a restated rule goes stale silently and a stale rule here is a safeguarding failure rather than a defect.
 
-The rules are scattered across six requirement codes in the baseline — AUTH, FAM, CRS, ENR, CHAT, INST — and no single section of SRD v2.0 states them together. This document does.
+The rules are scattered across six requirement codes in the baseline — AUTH, FAM, CRS, ENR, CHAT, INST — and no single section of SRD v2.0 states them together. This document does. It also carries the safeguarding-relevant decisions taken in review that go beyond the baseline.
 
 ---
 
@@ -44,13 +44,30 @@ Under-13 independent accounts are explicitly out of scope (§23 item 19). The fa
 
 ## 3. Learner Profiles
 
-- Maximum **6 profiles** per account (FR-FAM-02).
+- Maximum **6 profiles** per account (FR-FAM-02) — but see the note below on what counts.
 - A profile has **no email address and no credentials** (FR-FAM-03).
 - Profile date of birth is set at creation and is **not user-editable**. Corrections go through admin (FR-FAM-07).
-- Profile creation and deletion are rate-limited to **2 changes per 30 days** (FR-FAM-06).
 - A profile name **locks permanently once a certificate has been issued** to it (FR-FAM-05).
+- Chat access is **derived** from profile age, never stored as a permission (FR-FAM-08). See §6.
 
 The non-editable date of birth is a safeguarding control, not a convenience. It is what prevents a chat restriction being lifted by editing a field.
+
+### Profile PIN — mandatory, guardian-controlled
+
+[3I-DEC-018](decisions/dec-018-profile-pin-mandatory-guardian-controlled.md) makes the PIN in FR-FAM-03 **mandatory**, not optional, and specifies it fully:
+
+- **The guardian sets it**, never the learner. A child choosing their own PIN defeats its purpose.
+- **The guardian resets it from the dashboard.** No learner-facing or email recovery path — a profile has no email address.
+- **Every profile requires one**, including the account holder's own.
+- Switching profiles requires the PIN.
+
+This exists because chat access is derived per-profile from age. Without a PIN, the profile picker is the only barrier between a young child and an older sibling's chat access, and the picker is one tap. **[OQ-10](open-questions.md#oq-10--pin-attempt-rate-limiting) is open on rate limiting** — a 4-digit PIN is ten thousand combinations, and the picker needs a lockout of the same shape as FR-AUTH-09 or the control is nominal.
+
+### The six-profile cap — what counts
+
+[3I-DEC-014](decisions/dec-014-cap-counts-active-profiles-only.md): the cap counts **active** and **never-activated** profiles only. A cancelled (inactive) profile — history preserved, per [3I-DEC-009](decisions/dec-009-seats-as-account-pool.md) — sits outside the cap as archive.
+
+Profile creation and deletion are rate-limited under FR-FAM-06, but the limit's scope has also changed: it applies to **activation and cancellation**, the paid actions, not to free profile creation.
 
 ---
 
@@ -94,6 +111,10 @@ Live sessions are unaffected — meeting links are distributed by email as well 
 
 Both exclusions above are recorded in the baseline as child-safety design decisions, not as deferred features. They are not candidates for later addition without a safeguarding review.
 
+**Guardian-on-behalf participation is confirmed, not incidental.** [3I-DEC-020](decisions/dec-020-guardian-on-behalf-chat-retained.md) reaffirmed FR-CHAT-06 and FR-CHAT-07 after review considered and rejected removing them. Removing them would leave under-13 courses with a room nobody could post in — the child has no access and the guardian would have none either — and would strand FR-BAT-02's meeting-link distribution, which posts to the room as well as by email.
+
+**On profile deletion, message content is removed but the moderation record is retained.** [3I-DEC-016](decisions/dec-016-deletion-removes-content-retains-record.md), superseding an earlier decision that removed messages outright: the body is tombstoned and authorship anonymised to "Deleted learner", matching FR-CHAT-14's treatment of account deletion — but reports (FR-CHAT-10) and moderation actions (FR-CHAT-09) against the message survive. Deleting the evidence that a report was raised and acted upon protects nobody.
+
 §22.3 risk 2: multilingual profanity filtering is expected to produce false positives on religious vocabulary. Tuning time is budgeted and admin override on filtered messages is provided.
 
 ---
@@ -105,6 +126,8 @@ Both exclusions above are recorded in the baseline as child-safety design decisi
 - An instructor whose WWCC has expired **cannot be assigned to, or continue teaching, any course tagged under 18** (FR-INST-04).
 - Applications require admin approval before the instructor role is granted (FR-INST-02).
 - WWCC data is private-bucket only (NFR-10).
+
+**The platform refuses to schedule sessions beyond an instructor's WWCC expiry date.** [3I-DEC-021](decisions/dec-021-attendance-measured-against-sessions-delivered.md): FR-INST-03's 60-day alert becomes actionable rather than informational, turning a mid-course collapse into a scheduling error caught months earlier. Where a course is dismissed regardless — instructor suspension, expiry, or otherwise, per [3I-DEC-013](decisions/dec-013-instructor-removal-dismisses-course.md) — attendance certificates are measured against sessions actually delivered, not sessions originally scheduled, so a learner who attended everything held is not penalised for the institute's disruption.
 
 The client's legal position on WWCC is outstanding (§22.2 item 4) and is needed before instructor onboarding is built.
 
@@ -118,6 +141,8 @@ The client's legal position on WWCC is outstanding (§22.2 item 4) and is needed
 
 Note the tension worth holding: the store rating is 13+ and marketing addresses parents, while the platform teaches five-year-olds. That is coherent — the account holder is an adult and the apps are companions — but it means any change making the apps child-facing invalidates both the rating and the self-assessment.
 
+See also [open-questions.md](open-questions.md#oq-09--app-store-compliancemd-not-yet-written): the no-purchase-surface rule spanning FR-BILL-02, FR-NOT-06, and NFR-15–21 has no cross-cutting document of its own yet, and §22.3 names store rejection as the highest-uncertainty item in the entire plan.
+
 ---
 
 ## 9. Privacy
@@ -130,9 +155,29 @@ Note the tension worth holding: the store rating is 13+ and marketing addresses 
 
 ---
 
-## 10. Open
+## 10. Safeguarding Strings — Exempt From AI Translation
 
-See [open-questions.md](open-questions.md). The safeguarding-relevant items are:
+[3I-DEC-019](decisions/dec-019-safeguarding-strings-exempt-from-ai-translation.md): FR-LOC-02 makes UI translation AI-generated by default. A defined set is exempted, because a mistranslation in these specific strings causes harm rather than mere confusion, and fails silently to the people least able to report it.
 
-- **Ageing up at 13** — agreed the learner is offered their own account. Not in the baseline; requires a change request under §21.3, and the chat permission handover is undefined.
-- **Chat history on profile deletion** — agreed messages are removed, which conflicts with FR-CHAT-14 and would destroy moderation evidence.
+| String | Requirement |
+| :---- | :---- |
+| Under-13 registration block message | FR-AUTH-03 |
+| Guardian notification on 13–17 registration | FR-AUTH-05 |
+| Safety contact copy, in-app and on the website | FR-CHAT-15 |
+| Profile deletion confirmation | FR-FAM-10, §6 above |
+| Filtered-message notice | FR-CHAT-11 |
+| Report-a-message flow copy | FR-CHAT-10 |
+
+Each requires named human sign-off per language before launch — the institute has native Arabic, Urdu, and Bangla speakers available, and this is a launch gate on their side (see [open-questions.md](open-questions.md) client dependency 9).
+
+---
+
+## 11. Open
+
+See [open-questions.md](open-questions.md) for full detail. Safeguarding-relevant items still open:
+
+- **[OQ-10](open-questions.md#oq-10--pin-attempt-rate-limiting)** — the mandatory PIN needs a lockout; none is specified yet.
+- **[OQ-11](open-questions.md#oq-11--minimum-sessions-before-an-attendance-certificate)** — whether a minimum number of delivered sessions should gate an attendance certificate, since the current rule allows one session out of ten scheduled to qualify.
+- **[OQ-09](open-questions.md#oq-09--app-store-compliancemd-not-yet-written)** — the app-store no-purchase-surface rule has no consolidated document yet, unlike this one.
+
+**Deferred, not open:** ageing up at 13 ([3I-DEC-008](decisions/dec-008-ageing-up-at-13.md)) is consciously parked pending a change request. No UI is documented for it until approved.
