@@ -4,7 +4,7 @@ module: financial-trust-institutions
 type: service-flow
 status: draft
 contains_proposals: true
-updated: 2026-08-16
+updated: 2026-08-19
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
   - "RERAN/modules/financial-trust-institutions/services-overview.md"
@@ -108,7 +108,9 @@ Applicable according to the RERAN fee schedule.
 
 Paid upfront by the institution via the shared platform payment gateway, before the application is lodged — not deducted from a standing account, and not paid by the borrower. **Corrected 2026-08-14** — this service was previously described as Institution Account Debit, deducted after RERA approval; that model is retired. See [payments.md](../payments.md) and `open-questions.md` B1 for the corrected pipeline.
 
-This differs from the individual-user pay-then-submit model: here, submission is free; the fee is settled only once RERA has approved the transaction, per the platform's Lodge → Validate → Audit → **Pay** → Issue pipeline.
+This matches the individual-user pay-then-submit model rather than differing from it: the fee settles at checkout, before the application is lodged, per the platform's Pay → Lodge → Validate → Audit → Issue pipeline.
+
+> **Corrected 2026-08-19.** This section previously carried a second paragraph stating that "submission is free; the fee is settled only once RERA has approved the transaction," describing a Lodge → Validate → Audit → **Pay** → Issue pipeline. That paragraph was left behind by the 2026-08-14 correction, which rewrote the first paragraph but not the second — leaving the two contradicting each other within the same section, and the stale one contradicting Sections 5, 12, 13, 20 and Business Rule 4 as well. A non-propagation drift, found 2026-08-19 during a module-wide payment-text audit.
 
 ## 10. Processing Authority
 
