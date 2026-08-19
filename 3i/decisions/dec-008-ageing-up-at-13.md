@@ -1,11 +1,13 @@
 ---
 project: 3i
 type: decision
-status: draft
+status: deprecated
 updated: 2026-08-18
 id: 3I-DEC-008
-tags: [decision, identity, scope-change]
+tags: [decision, identity, scope-change, deprecated]
 ---
+
+> **Retired 2026-08-18.** [3I-DEC-023](dec-023-no-standalone-accounts-under-18.md) removed the standalone account this decision proposed granting. The idea of offering an ageing-up path at any age has been dropped, not re-framed. This file is kept for history, per the repository's rule that a dropped feature is marked `deprecated` rather than deleted. Nothing below is active or should be built against.
 
 # A Profile Reaching 13 Is Offered Its Own Account
 
