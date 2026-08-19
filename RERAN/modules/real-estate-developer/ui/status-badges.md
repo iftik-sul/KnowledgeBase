@@ -3,7 +3,7 @@ project: RERAN
 module: real-estate-developer
 type: ui-spec
 status: current
-updated: 2026-08-16
+updated: 2026-08-19
 derived_from:
   - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/modules/real-estate-developer/ui/screens/applications.md"
@@ -17,8 +17,10 @@ derived_from:
   - "RERAN/modules/real-estate-developer/ui/screens/help-and-support.md"
   - "RERAN/modules/real-estate-developer/ui/screens/notifications.md"
   - "RERAN/modules/real-estate-developer/ui/screens/reports.md"
+  - "RERAN/modules/real-estate-developer/ui/screens/payment-history.md"
   - "RERAN/modules/real-estate-developer/service-flows/feature-04-escrow-management.md"
   - "RERAN/modules/real-estate-developer/service-flows/feature-05-fund-release-request.md"
+  - "RERAN/modules/financial-trust-institutions/ui/screens/payment-history.md"
 tags:
   - real-estate-developer
   - ui-spec
@@ -158,3 +160,9 @@ Reported as three separate, unreconciled lists. Resolving this needs a client de
 ### Report Generation Status
 
 [reports.md](screens/reports.md) — the processing state of a generated report file: `Processing` · `Completed` · `Failed` · `Expired` (4 states). No conflict, unaffected by this pass.
+
+### Payment Status
+
+**Added 2026-08-19**, for [payment-history.md](screens/payment-history.md). Follows the same vocabulary as Group C's [payment-history.md](../../financial-trust-institutions/ui/screens/payment-history.md), since both modules settle RERA service fees through the same shared platform gateway and the same transaction lifecycle applies: `Successful` · `Failed` · `Refund Requested` · `Refunded` (4 states).
+
+This is a genuinely new vocabulary, not a resolution of a source conflict — RED's source material never described a consolidated payment view, so there was no prior vocabulary to reconcile against. Adopted from Group C on the reasoning that the underlying payment mechanism (shared gateway, per-transaction, no standing account) is identical between the two modules; flagged for client confirmation the same as the rest of `payment-history.md`.

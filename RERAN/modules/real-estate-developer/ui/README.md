@@ -3,7 +3,7 @@ project: RERAN
 module: real-estate-developer
 type: overview
 status: current
-updated: 2026-08-15
+updated: 2026-08-19
 derived_from:
   - "RERAN/modules/real-estate-developer/navigation.md"
   - "RERAN/reference/source-of-truth/RERAN_service_flows_v2.md"
@@ -16,9 +16,11 @@ tags:
 
 # Real Estate Developer UI Specifications
 
-19 distinct screens, each documented once and identical for every user. The source material documented 49 role-scoped screen instances — the same 7 screens repeated for every role. Those per-role designs have been retired and rebuilt into 19 unified screens.
+20 distinct screens, each documented once and identical for every user. The source material documented 49 role-scoped screen instances — the same 7 screens repeated for every role. Those per-role designs have been retired and rebuilt into 19 unified screens, plus one new screen (Payment History) added 2026-08-19 with no source-material equivalent to retire.
 
 > **Corrected and rebuilt 2026-08-15 (issue #58).** Reconciled against two client decisions: the unified-access model (no role or permission-scope gating; role is audit-trail attribution only) and the corrected payment model (RERA service fees are paid per transaction through the shared platform payment gateway; no standing or pre-funded fee account). The Role × Screen Matrix is removed and the role-filtered sidebars replaced by one shared sidebar. **The 15 multi-variant screens have since been rebuilt as unified screens** — the per-role designs are retired, not merged in place. See [Per-Role Content Variants — Resolved](#per-role-content-variants--resolved).
+
+> **Added 2026-08-19.** [Payment History](screens/payment-history.md) added to the sidebar and screen index, between Applications and Documents. RED previously had no consolidated payment view — see [navigation.md](../navigation.md) for the sidebar change and the screen file itself for the full spec. `contains_proposals: true` on that screen — two services' fee amounts (#25, #27) are proposed, not sourced.
 
 ## Screen Access
 
@@ -39,7 +41,7 @@ The **Role × Screen Matrix** this document previously carried is removed rather
 | [sales-and-disclosures.md](screens/sales-and-disclosures.md) | [sales-and-disclosure-details.md](screens/sales-and-disclosure-details.md) |
 | [escrow-management.md](screens/escrow-management.md) | [escrow-details.md](screens/escrow-details.md) |
 | [fund-release-request.md](screens/fund-release-request.md) | [fund-release-request-details.md](screens/fund-release-request-details.md) |
-| [company-profile.md](screens/company-profile.md) | |
+| [company-profile.md](screens/company-profile.md) | [payment-history.md](screens/payment-history.md) |
 
 **Resolved:** the open question this section used to carry — the Role Permission Matrix granting the Sales & Disclosure Officer Documents access that no Documents list screen provided — is answered by the unified model. The misplaced source fragment was merged into [documents.md](screens/documents.md); see [../README.md](../README.md#open-questions).
 
@@ -69,7 +71,7 @@ The client has since decided. **All 15 multi-variant screens have been rebuilt**
 | [escrow-management.md](screens/escrow-management.md) | 2 | 446 | 209 |
 | [projects.md](screens/projects.md) | 2 | 372 | 186 |
 
-The four screens that never had variants — [company-profile.md](screens/company-profile.md), [fund-release-request.md](screens/fund-release-request.md), [fund-release-request-details.md](screens/fund-release-request-details.md), [property-registration-details.md](screens/property-registration-details.md) — needed no rebuild.
+The four screens that never had variants — [company-profile.md](screens/company-profile.md), [fund-release-request.md](screens/fund-release-request.md), [fund-release-request-details.md](screens/fund-release-request-details.md), [property-registration-details.md](screens/property-registration-details.md) — needed no rebuild. [payment-history.md](screens/payment-history.md), added 2026-08-19, is new and never had a variant either.
 
 ### The technique
 
@@ -102,7 +104,7 @@ Two questions are deliberately **still open**: whether "Task Cards" and "Task Li
 
 ## Escrow Content Is Out Of Scope For The Payment Correction
 
-The escrow screens show balances, milestone schedules and fund-release amounts. Those belong to the developer's **project escrow account** — a regulated holding account, and a real product feature — not to any RERA-fee account. The move to per-transaction gateway payment for RERA's service fees does not touch them. See the note at the top of [escrow-management.md](screens/escrow-management.md).
+The escrow screens show balances, milestone schedules and fund-release amounts. Those belong to the developer's **project escrow account** — a regulated holding account, and a real product feature — not to any RERA-fee account. The move to per-transaction gateway payment for RERA's service fees does not touch them. See the note at the top of [escrow-management.md](screens/escrow-management.md). [payment-history.md](screens/payment-history.md), added 2026-08-19, covers only RERA's own service fees, for the same reason — fund disbursements and escrow balances stay in Escrow Management and Fund Release Request.
 
 ## Shared Documentation
 
