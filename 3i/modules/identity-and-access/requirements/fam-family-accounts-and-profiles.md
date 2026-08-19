@@ -27,16 +27,16 @@ This is where the platform's approach to children actually lives. A guardian hol
 | **FR-FAM-01** | Only a Member aged **18+** may create learner profiles |
 | **FR-FAM-02** | Maximum **6 learner profiles** per account, counting active and never-activated only |
 | **FR-FAM-03** | A profile carries display name, date of birth, optional avatar, and a **mandatory** 4-digit PIN. It has **no email address and no credentials** |
-| **FR-FAM-04** | Profile selection occurs after account login via a profile picker, which now requires the profile's PIN |
+| **FR-FAM-04** | Profile selection occurs after account login via a profile picker, which requires the profile's PIN |
 | **FR-FAM-06** | **Activation and cancellation** are rate-limited to **2 changes per 30 days** |
 
-**FR-FAM-01 is now simpler than it once was.** Every Account is 18+ — [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md) removed the 13–17 standalone account entirely. This requirement was previously read as excluding a real 13–17 standalone account from creating profiles; there is no such account left to exclude. The gate remains as a consistency check (an Account's own date of birth must resolve to 18+), but it no longer distinguishes between two live account shapes. The role that manages profiles is called **Member**, not "account holder" — [3I-DEC-017](/3i/decisions/dec-017-account-holder-renamed-member.md).
+The role that manages profiles is called **Member** — [3I-DEC-017](/3i/decisions/dec-017-account-holder-renamed-member.md).
 
-**FR-FAM-02's cap is retained, with what it counts settled.** [3I-DEC-014](/3i/decisions/dec-014-cap-counts-active-profiles-only.md): the cap counts **active and never-activated** profiles. A cancelled profile — inactive, history preserved — sits outside the cap as archive. Reactivating one returns it to the count.
+**FR-FAM-02's cap counts active and never-activated profiles.** [3I-DEC-014](/3i/decisions/dec-014-cap-counts-active-profiles-only.md): a cancelled profile — inactive, history preserved — sits outside the cap as archive. Reactivating one returns it to the count.
 
-**FR-FAM-03's PIN is now mandatory**, not optional. [3I-DEC-018](/3i/decisions/dec-018-profile-pin-mandatory-guardian-controlled.md): set by the guardian at creation, never by the learner; reset only from the guardian dashboard, since a profile has no email; required on every profile including the Member's own. Rate limiting on picker attempts is resolved — [3I-DEC-022](/3i/decisions/dec-022-pin-lockout-and-dob-correction-notification.md), matching FR-AUTH-09 exactly.
+**FR-FAM-03's PIN is mandatory.** [3I-DEC-018](/3i/decisions/dec-018-profile-pin-mandatory-guardian-controlled.md): set by the guardian at creation, never by the learner; reset only from the guardian dashboard, since a profile has no email; required on every profile including the Member's own. Rate limiting on picker attempts matches FR-AUTH-09 exactly — [3I-DEC-022](/3i/decisions/dec-022-pin-lockout-and-dob-correction-notification.md).
 
-**FR-FAM-06's scope has been narrowed by decision.** The rate limit now applies to **activation and cancellation**, not to profile creation. Creating a profile is free, touches no seat, and is untracked against the limit; only the paid, seat-consequential actions are throttled. The baseline's own wording is "profile creation and deletion" — the divergence is deliberate and must be stated wherever this is implemented.
+**FR-FAM-06 rate-limits activation and cancellation**, not profile creation. Creating a profile is free, touches no seat, and is untracked against the limit; only the paid, seat-consequential actions are throttled.
 
 ---
 
@@ -63,8 +63,6 @@ These two are safeguarding and integrity controls, not conveniences.
 
 Derived, never stored. A stored permission can drift from the age it was derived from; a derived one cannot.
 
-**Unaffected by [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md).** This toggle was always about a profile's age, never about whether that person could also have held a standalone account — removing the standalone path changes nothing here.
-
 Full chat rules are in [age-and-safeguarding.md](/3i/age-and-safeguarding.md) and the `communication` module. Note that an under-13 learner has no route into a room at all — the guardian participates on their behalf, displayed as *"Fatima (guardian of Aisha)"* (FR-CHAT-06). Guardian-on-behalf participation was reviewed and reaffirmed — [3I-DEC-020](/3i/decisions/dec-020-guardian-on-behalf-chat-retained.md).
 
 ---
@@ -75,11 +73,9 @@ Full chat rules are in [age-and-safeguarding.md](/3i/age-and-safeguarding.md) an
 | :---- | :---- |
 | **FR-FAM-09** | The guardian dashboard shows per-profile progress, enrolments, attendance, **exam results** (not answers), and certificates |
 
-This dashboard represents **four** profile states, not the baseline's two: never activated, active, inactive (cancelled), and deleted. Never-activated and active count toward the six-profile cap; inactive and deleted do not, though they must remain visibly distinct from each other since one preserves history and one destroys it.
+This dashboard represents **four** profile states: never activated, active, inactive (cancelled), and deleted. Never-activated and active count toward the six-profile cap; inactive and deleted do not, though they must remain visibly distinct from each other since one preserves history and one destroys it.
 
-The dashboard shows results, not exam answers — a guardian sees that a 16-year-old passed or failed and their score, not their written responses. Settled in review, 2026-08-18.
-
-Formerly blocked by OQ-08; resolved by [3I-DEC-014](/3i/decisions/dec-014-cap-counts-active-profiles-only.md).
+The dashboard shows results, not exam answers — a guardian sees that a 16-year-old passed or failed and their score, not their written responses.
 
 ---
 
@@ -89,17 +85,15 @@ Formerly blocked by OQ-08; resolved by [3I-DEC-014](/3i/decisions/dec-014-cap-co
 | :---- | :---- |
 | **FR-FAM-10** | Deleting a profile removes progress, enrolments, and exam results. **Issued certificates remain valid and publicly verifiable** |
 
-Deletion is the destructive action. Seat cancellation is not — it deactivates a profile while preserving everything, including chat history. **The two must remain visibly distinct in every interface**, since they now sit close together and only one is irreversible.
+Deletion is the destructive action. Seat cancellation is not — it deactivates a profile while preserving everything, including chat history. **The two must remain visibly distinct in every interface**, since they sit close together and only one is irreversible.
 
-**What deletion does to chat history is resolved.** [3I-DEC-016](/3i/decisions/dec-016-deletion-removes-content-retains-record.md): message content is removed and authorship anonymised to "Deleted learner", matching FR-CHAT-14's treatment of account deletion — but reports and moderation actions against the message are retained, so a safeguarding record cannot be erased by deleting the profile that authored it. Supersedes an earlier decision recorded (superseded) at [3I-DEC-012](/3i/decisions/dec-012-chat-history-on-profile-deletion.md).
+**On profile deletion, chat message content is removed but the moderation record is retained.** [3I-DEC-016](/3i/decisions/dec-016-deletion-removes-content-retains-record.md): message content is removed and authorship anonymised to "Deleted learner", matching FR-CHAT-14's treatment of account deletion — but reports and moderation actions against the message are retained, so a safeguarding record cannot be erased by deleting the profile that authored it.
 
 ---
 
 ## Acceptance Criteria
 
-From §6, with one criterion superseded by decision.
-
-1. ~~A 17-year-old standalone account cannot create profiles.~~ **Superseded.** [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md) removed the 17-year-old standalone account entirely, so this criterion is untestable as written — there is no such account to construct and test against. Replaced by: **a registration attempt with a date of birth under 18 is refused, by any route, with no account created.**
+1. A registration attempt with a date of birth under 18 is refused, by any route, with no account created.
 2. A **seventh active or never-activated profile is refused** — an inactive archive profile does not count toward this.
 3. A renamed profile is refused once a certificate exists, **with the reason shown**.
 4. After profile deletion, the **certificate verification URL still resolves correctly**.
@@ -115,9 +109,8 @@ Criterion 4 is the one most likely to fail late. It requires the certificate to 
 | Data model | [3I-IDA-DM-001](../data-model.md) |
 | Registration and the age gate | [3I-IDA-REQ-001](auth-registration-and-authentication.md) |
 | Age rules | [age-and-safeguarding.md](/3i/age-and-safeguarding.md) |
-| No standalone accounts under 18 | [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md) |
 | Seats and activation | [3I-DEC-009](/3i/decisions/dec-009-seats-as-account-pool.md) |
-| The cap, resolved | [3I-DEC-014](/3i/decisions/dec-014-cap-counts-active-profiles-only.md) |
+| The cap | [3I-DEC-014](/3i/decisions/dec-014-cap-counts-active-profiles-only.md) |
 | Mandatory PIN | [3I-DEC-018](/3i/decisions/dec-018-profile-pin-mandatory-guardian-controlled.md) |
 | Deletion and chat history | [3I-DEC-016](/3i/decisions/dec-016-deletion-removes-content-retains-record.md) |
 | Certificate snapshotting | [3I-DEC-005](/3i/decisions/dec-005-denormalised-certificates.md) |
