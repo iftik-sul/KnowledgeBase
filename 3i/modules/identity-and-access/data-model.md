@@ -27,13 +27,12 @@ A login identity. Owns credentials, billing relationship, devices, notification 
 | First name, last name | FR-AUTH-01 |
 | Email | Unique. Verification mandatory before enrolment, checkout, or chat (FR-AUTH-06) |
 | Password hash | Argon2id (FR-AUTH-08) |
-| Date of birth | Real date, not an age checkbox (FR-AUTH-02). Determines account type |
+| Date of birth | Real date, not an age checkbox (FR-AUTH-02). Determines eligibility to hold an account at all |
 | Locale | One of five (FR-LOC-01). Drives notification and email language (FR-NOT-05) |
-| Guardian name, guardian email | **Only for 13–17 standalone accounts** (FR-AUTH-05) |
 | Social identity | Google or Apple (FR-AUTH-07). DOB still captured on first login |
 | TOTP secret | Optional, admin accounts only (FR-RBAC-05) |
 
-**Account type is derived from date of birth, not stored as a flag.** Under 13 cannot exist as an account at all (FR-AUTH-03). 13–17 is a standalone student. 18+ is an adult account holder.
+**Every Account is 18+. There is no other kind.** [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md) removed the 13–17 standalone account entirely — under-18 registration is refused outright, with no account of any shape created. **`guardianName` and `guardianEmail` fields, previously carried for FR-AUTH-05's standalone-teen path, are removed from this model.** They served no other purpose and have no remaining reader.
 
 **Email changes require re-verification**, following the same mandatory-verification rule as FR-AUTH-06 applies at registration. An account with an unverified new email retains its prior verified state until the new address is confirmed — it does not drop to unverified mid-change.
 
@@ -58,7 +57,9 @@ A person who studies. Owns enrolments, progress, attendance, exam attempts, and 
 
 A learner profile has **no email address and no credentials** (FR-FAM-03). It is selected after account login via a profile picker (FR-FAM-04), which now requires the profile's PIN to enter.
 
-**Chat access is derived from age, never stored as a permission:** under 13 is permanently off; 13–17 is a guardian-controlled toggle (FR-FAM-08). Deriving rather than storing is deliberate — a stored flag can be edited, and the non-editable date of birth is the safeguarding control.
+**Every learner under 18 is a profile. There is no other route onto the platform for a minor.** [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md) removed the standalone 13–17 account, so a Learner record is now how *every* person under 18 is represented, without exception.
+
+**Chat access is derived from age, never stored as a permission:** under 13 is permanently off; 13–17 is a guardian-controlled toggle (FR-FAM-08). Deriving rather than storing is deliberate — a stored flag can be edited, and the non-editable date of birth is the safeguarding control. **This distinction is unaffected by DEC-023** — it was always about age, not account type, and remains exactly as it was.
 
 ### PIN — mandatory, guardian-set, guardian-reset
 
@@ -68,7 +69,7 @@ A learner profile has **no email address and no credentials** (FR-FAM-03). It is
 - Reset only from the **guardian dashboard** — no learner-facing or email recovery, since a profile has no email.
 - Required on **every** profile, including the account holder's own.
 
-Rate limiting on entry attempts is **not yet specified** — [OQ-10](/3i/open-questions.md#oq-10--pin-attempt-rate-limiting). A 4-digit PIN is ten thousand combinations; without a lockout comparable to FR-AUTH-09, the control is nominal.
+Rate limiting on entry attempts matches FR-AUTH-09 exactly — [3I-DEC-022](/3i/decisions/dec-022-pin-lockout-and-dob-correction-notification.md).
 
 ### Activation state — introduced by decision, not by the baseline
 
@@ -127,7 +128,7 @@ Concurrent video streams are limited to purchased seats, minimum one (FR-AUTH-12
 | Hashed session identifier | FR-AUTH-04 |
 | Timestamp | |
 
-Recorded when a date of birth indicates under 13 (FR-AUTH-03), so that a retry with an amended birth year is identifiable as a retry rather than appearing as a fresh attempt.
+Recorded when a date of birth indicates under 18 (FR-AUTH-03 as extended by [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md)), so that a retry with an amended birth year is identifiable as a retry rather than appearing as a fresh attempt. The threshold widened from 13 to 18 when the standalone-teen path was removed — the mechanism itself is unchanged.
 
 This exists purely as a safeguarding control. It holds no personal data — only a hash — and should not be repurposed as general analytics.
 
