@@ -23,7 +23,7 @@ Handed to the developer building this module. Stack: **Node.js, Express, Prisma,
 
 Every model, field, and endpoint below cites the FR code or decision it implements. Where this document adds detail the requirements documents don't specify (exact status codes, field types), that detail is this document's own judgement call, not a restatement of something already decided elsewhere — flag anything that looks wrong rather than assuming it's settled.
 
-All eight scope-change decisions (014–016, 018–019, 021–023) are approved for build — [3I-DEC register](/3i/decisions/README.md). Build to the amended behaviour throughout, not the original baseline text. **[3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md) is reflected throughout this revision** — the standalone 13–17 account no longer exists anywhere in this schema or endpoint set.
+Build to the amended behaviour throughout, not the original baseline text — [decision register](/3i/decisions/README.md).
 
 ---
 
@@ -43,9 +43,7 @@ enum SocialProvider {
   APPLE
 }
 
-// Every Account is 18+. There is no other kind — 3I-DEC-023 removed the
-// 13-17 standalone account entirely. FR-AUTH-03 (as extended by DEC-023):
-// under-18 is never persisted as an Account at all, by any route.
+// FR-AUTH-03: under-18 is never persisted as an Account at all, by any route.
 model Account {
   id              String    @id @default(uuid())
   firstName       String
@@ -85,9 +83,7 @@ enum ProfileState {
   DELETED
 }
 
-// Every person under 18 is represented here, with no exception — there is
-// no standalone-account alternative (3I-DEC-023). A Learner may also
-// represent the account holder themselves, if they study.
+// A Learner may also represent the account holder themselves, if they study.
 model Learner {
   id            String       @id @default(uuid())
   accountId     String
@@ -198,8 +194,7 @@ model DeviceChangeLog {
   @@index([accountId, changedAt])
 }
 
-// FR-AUTH-04 as extended by 3I-DEC-023: threshold widened from under-13
-// to under-18. No personal data, hash only. Not analytics — do not repurpose.
+// FR-AUTH-04: no personal data, hash only. Not analytics — do not repurpose.
 model BlockedRegistrationAttempt {
   id           String   @id @default(uuid())
   sessionHash  String
@@ -226,23 +221,19 @@ model AdminAuditLog {
 
 **Not modelled here, owned elsewhere:** the Stripe seat/subscription record (`commerce`), the Learner-to-enrolment/certificate relations (`learning-delivery`, `certification`), chat message tombstoning (`communication` — but see §4 below for the deletion cascade contract).
 
-**Migration note if a `guardianName` / `guardianEmail` / `guardianNotifiedAt` set of columns already exists from an earlier pass of this schema:** those fields belonged to FR-AUTH-05, removed by [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md). Drop them — nothing reads them under the current model.
-
 ---
 
 ## 2. Auth Endpoints
 
 ### `POST /auth/register`
 
-FR-AUTH-01–02, FR-AUTH-06, as extended by [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md).
+FR-AUTH-01–02, FR-AUTH-06.
 
 1. Validate fields. Compute age from `dateOfBirth`.
-2. **Age < 18:** do not create an Account. Insert `BlockedRegistrationAttempt` with a hashed session identifier (FR-AUTH-04). Return `403` with the neutral, sign-off-gated message from [3I-DEC-019](/3i/decisions/dec-019-safeguarding-strings-exempt-from-ai-translation.md) — do not hard-code English text here; pull from the exempt string set, per locale. **There is no branch inside this block for 13–17 versus younger** — every age under 18 is treated identically at this step.
+2. **Age < 18:** do not create an Account. Insert `BlockedRegistrationAttempt` with a hashed session identifier (FR-AUTH-04). Return `403` with the neutral, sign-off-gated message from [3I-DEC-019](/3i/decisions/dec-019-safeguarding-strings-exempt-from-ai-translation.md) — do not hard-code English text here; pull from the exempt string set, per locale.
 3. **Age 18+:** create Account normally. No guardian fields exist on this route at all.
 4. Hash password with Argon2id (FR-AUTH-08), run breach check via k-anonymity (send only the SHA-1 prefix, never the password), send verification email.
 5. Response: `201`, account is unverified (`emailVerified: false`).
-
-**This endpoint is simpler than an earlier revision of this document described.** A prior version had a three-way branch (under-13 blocked, 13–17 created with guardian capture, 18+ created normally) reflecting FR-AUTH-05, which [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md) has since removed. If you're implementing against an older copy of this spec, discard the middle branch entirely.
 
 ### `POST /auth/register/social/callback`
 
@@ -296,7 +287,7 @@ De-authorise. Insert a `DeviceChangeLog` row only if this delete is paired with 
 
 FR-FAM-01–03.
 
-Gate: caller's own `Account.dateOfBirth` must resolve to 18+ (true of every Account under [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md), but check explicitly rather than assuming — an account row existing at all should already guarantee this). Count existing Learners in `NEVER_ACTIVATED` or `ACTIVE` state for this account; refuse with `403` if already 6 ([3I-DEC-014](/3i/decisions/dec-014-cap-counts-active-profiles-only.md)) — the error body should be distinguishable from a seat-unavailable error (different `code` field), since a Member conflating the two will file the wrong support ticket.
+Gate: caller's own `Account.dateOfBirth` must resolve to 18+ — check explicitly rather than assuming; an account row existing at all should already guarantee this, but the check is cheap and worth having. Count existing Learners in `NEVER_ACTIVATED` or `ACTIVE` state for this account; refuse with `403` if already 6 ([3I-DEC-014](/3i/decisions/dec-014-cap-counts-active-profiles-only.md)) — the error body should be distinguishable from a seat-unavailable error (different `code` field), since a Member conflating the two will file the wrong support ticket.
 
 Requires `pinHash` set on creation (hash a guardian-supplied 4-digit PIN with the same algorithm as passwords — Argon2id is fine for 4 digits despite the small keyspace, since lockout is the real defence, not hash cost).
 
@@ -383,7 +374,6 @@ Permission key: something narrow like `identity.correct_dob` rather than a blank
 | Item | Status |
 | :---- | :---- |
 | OQ-11 — minimum sessions before an attendance certificate | Open, not this module's concern directly, but touches the same `learning-delivery`/`certification` boundary this module's delete cascade interacts with |
-| DEC-008 (ageing up) is stale | [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md) removed the standalone account DEC-008 proposed granting to a 13-year-old. Do not build anything against DEC-008 as written — see the [decision register](/3i/decisions/README.md) |
 | Device swap vs. remove distinction (§3 above) | My interpretation, not confirmed — verify before shipping |
 | Chat cascade: sync vs. async on profile delete (§4 above) | Developer's implementation choice; state it explicitly |
 | Safeguarding string sign-off | The exempt strings referenced in §2 do not exist as translated, signed-off copy yet — [3I-DEC-019](/3i/decisions/dec-019-safeguarding-strings-exempt-from-ai-translation.md). Backend can ship with English placeholders; do not localise these particular strings via the normal AI pipeline even as a stopgap |
