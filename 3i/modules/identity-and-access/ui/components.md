@@ -47,9 +47,3 @@ Used on: [Guardian dashboard](screens/guardian-dashboard.md), [Profile picker](s
 Four states, per [3I-IDA-DM-001](../data-model.md): Active, Never activated, Inactive (Cancelled), Deleted.
 
 **Inactive and Deleted must be visually distinct, not variants of the same "greyed out" treatment.** One preserves every record; the other destroys most of them. A guardian scanning the dashboard should not need to open a profile to know which kind of gone it is.
-
----
-
-## Removed: Guardian Notification Banner
-
-**This component is retired**, not documented. It supported [Registration — 13–17 standalone](/3i/decisions/dec-023-no-standalone-accounts-under-18.md), which [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md) removed along with the screen it appeared on. Nothing in the current fourteen-screen set uses it. Left as a heading here, rather than deleted silently, so a reader who remembers this component from an earlier pass finds an explanation instead of a gap.
