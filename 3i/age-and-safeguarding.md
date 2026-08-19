@@ -15,6 +15,8 @@ tags:
 
 The rules are scattered across six requirement codes in the baseline — AUTH, FAM, CRS, ENR, CHAT, INST — and no single section of SRD v2.0 states them together. This document does. It also carries the safeguarding-relevant decisions taken in review that go beyond the baseline.
 
+**Per [3I-DEC-023](decisions/dec-023-no-standalone-accounts-under-18.md): the 13–17 standalone account no longer exists.** Every learner under 18 is a profile, with no exception. Where this document previously described a three-way age split (under 13 / 13–17 / 18+) for account eligibility, it is now two-way (under 18 / 18+). The 13–17 chat toggle described in §6 is unaffected — it was always about age, not account type.
+
 ---
 
 ## 1. What Age Determines
@@ -23,21 +25,20 @@ Age is not a profile attribute. It determines whether an account may exist, who 
 
 | Age | Account | Chat | Enrolment authority |
 | :---- | :---- | :---- | :---- |
-| **Under 13** | **Cannot register by any route** (FR-AUTH-03). Exists only as a learner profile under a guardian account | **Permanently none** (FR-FAM-08, FR-CHAT-06). Guardian participates on their behalf | Guardian enrols (FR-ENR-02) |
-| **13–17** | May register standalone, **or** exist as a profile | Guardian-controlled toggle (FR-FAM-08, FR-CHAT-08) | Guardian approval by default; guardian toggle permits self-enrolment (FR-ENR-02) |
+| **Under 18** | **Cannot register by any route** (FR-AUTH-03, widened by [3I-DEC-023](decisions/dec-023-no-standalone-accounts-under-18.md)). Exists only as a learner profile under a guardian account | Under 13: **permanently none** (FR-FAM-08, FR-CHAT-06), guardian participates on their behalf. 13–17: guardian-controlled toggle (FR-FAM-08, FR-CHAT-08) | Under 13: guardian enrols. 13–17: guardian approval by default, guardian toggle permits self-enrolment (FR-ENR-02) |
 | **18+** | Full account. **Only 18+ may create learner profiles** (FR-FAM-01) | Unrestricted | Self-enrols |
 
-Under-13 independent accounts are explicitly out of scope (§23 item 19). The family account model replaces them.
+Under-13 independent accounts were already out of scope (§23 item 19). [3I-DEC-023](decisions/dec-023-no-standalone-accounts-under-18.md) extends that exclusion to the full under-18 range — the family account model is now the only way anyone under 18 reaches the platform, not just under-13s.
 
 ---
 
 ## 2. Registration
 
 - Date of birth is a **real date entry, not an age checkbox** (FR-AUTH-02).
-- An under-13 date of birth **blocks registration by any route, including social login** (FR-AUTH-03, acceptance criteria §5).
-- The block message is neutral and does not disclose the threshold in a way that invites retry (FR-AUTH-03).
+- An under-18 date of birth **blocks registration by any route, including social login** (FR-AUTH-03 as widened by [3I-DEC-023](decisions/dec-023-no-standalone-accounts-under-18.md); acceptance criteria §5).
+- The block message is neutral and does not disclose the threshold in a way that invites retry (FR-AUTH-03). **The copy must read naturally for a 17-year-old, not only a young child** — the audience widened along with the threshold, and the original wording was written with a much younger person in mind.
 - Blocked attempts are recorded against a hashed session identifier, so a retry with an amended birth year is identifiable as a retry (FR-AUTH-04).
-- A 13–17 registration additionally captures **guardian name and guardian email**, and sends the guardian an automatic notification naming the institute and linking to the privacy policy (FR-AUTH-05).
+- **There is no standalone registration path for any age under 18.** FR-AUTH-05's guardian name/email capture and automatic notification are removed entirely — [3I-DEC-023](decisions/dec-023-no-standalone-accounts-under-18.md). It existed to support a 13–17 self-registered account, which no longer exists.
 - Social login still requires date of birth capture on first login (FR-AUTH-07).
 
 ---
@@ -52,7 +53,7 @@ Under-13 independent accounts are explicitly out of scope (§23 item 19). The fa
 
 The non-editable date of birth is a safeguarding control, not a convenience. It is what prevents a chat restriction being lifted by editing a field.
 
-### Profile PIN — mandatory, guardian-controlled
+### Profile PIN — mandatory, guardian-controlled, lockout resolved
 
 [3I-DEC-018](decisions/dec-018-profile-pin-mandatory-guardian-controlled.md) makes the PIN in FR-FAM-03 **mandatory**, not optional, and specifies it fully:
 
@@ -61,7 +62,7 @@ The non-editable date of birth is a safeguarding control, not a convenience. It 
 - **Every profile requires one**, including the account holder's own.
 - Switching profiles requires the PIN.
 
-This exists because chat access is derived per-profile from age. Without a PIN, the profile picker is the only barrier between a young child and an older sibling's chat access, and the picker is one tap. **[OQ-10](open-questions.md#oq-10--pin-attempt-rate-limiting) is open on rate limiting** — a 4-digit PIN is ten thousand combinations, and the picker needs a lockout of the same shape as FR-AUTH-09 or the control is nominal.
+This exists because chat access is derived per-profile from age. Without a PIN, the profile picker is the only barrier between a young child and an older sibling's chat access, and the picker is one tap. **PIN lockout is resolved** — [3I-DEC-022](decisions/dec-022-pin-lockout-and-dob-correction-notification.md): matches FR-AUTH-09 exactly, five failed attempts, 15-minute lockout, progressive delay, per-IP rate limiting.
 
 ### The six-profile cap — what counts
 
@@ -110,6 +111,8 @@ Live sessions are unaffected — meeting links are distributed by email as well 
 - A **safety contact** is published in-app and on the website (FR-CHAT-15).
 
 Both exclusions above are recorded in the baseline as child-safety design decisions, not as deferred features. They are not candidates for later addition without a safeguarding review.
+
+**This 13–17 chat toggle is unaffected by [3I-DEC-023](decisions/dec-023-no-standalone-accounts-under-18.md).** It was always derived from the profile's age, never from whether that person also could have held a standalone account. Removing the standalone path changes nothing about who can toggle chat for a 13–17 profile — the guardian always could, and still can.
 
 **Guardian-on-behalf participation is confirmed, not incidental.** [3I-DEC-020](decisions/dec-020-guardian-on-behalf-chat-retained.md) reaffirmed FR-CHAT-06 and FR-CHAT-07 after review considered and rejected removing them. Removing them would leave under-13 courses with a room nobody could post in — the child has no access and the guardian would have none either — and would strand FR-BAT-02's meeting-link distribution, which posts to the room as well as by email.
 
@@ -161,14 +164,15 @@ See also [open-questions.md](open-questions.md#oq-09--app-store-compliancemd-not
 
 | String | Requirement |
 | :---- | :---- |
-| Under-13 registration block message | FR-AUTH-03 |
-| Guardian notification on 13–17 registration | FR-AUTH-05 |
+| Under-18 registration block message (widened from under-13) | FR-AUTH-03, [3I-DEC-023](decisions/dec-023-no-standalone-accounts-under-18.md) |
 | Safety contact copy, in-app and on the website | FR-CHAT-15 |
 | Profile deletion confirmation | FR-FAM-10, §6 above |
 | Filtered-message notice | FR-CHAT-11 |
 | Report-a-message flow copy | FR-CHAT-10 |
 
-Each requires named human sign-off per language before launch — the institute has native Arabic, Urdu, and Bangla speakers available, and this is a launch gate on their side (see [open-questions.md](open-questions.md) client dependency 9).
+**"Guardian notification on 13–17 registration" is removed from this set.** That string supported FR-AUTH-05, which no longer exists — there is nothing left to translate or sign off for a registration path that was removed.
+
+Each remaining string requires named human sign-off per language before launch — the institute has native Arabic, Urdu, and Bangla speakers available, and this is a launch gate on their side (see [open-questions.md](open-questions.md) client dependency 9).
 
 ---
 
@@ -176,8 +180,9 @@ Each requires named human sign-off per language before launch — the institute 
 
 See [open-questions.md](open-questions.md) for full detail. Safeguarding-relevant items still open:
 
-- **[OQ-10](open-questions.md#oq-10--pin-attempt-rate-limiting)** — the mandatory PIN needs a lockout; none is specified yet.
 - **[OQ-11](open-questions.md#oq-11--minimum-sessions-before-an-attendance-certificate)** — whether a minimum number of delivered sessions should gate an attendance certificate, since the current rule allows one session out of ten scheduled to qualify.
 - **[OQ-09](open-questions.md#oq-09--app-store-compliancemd-not-yet-written)** — the app-store no-purchase-surface rule has no consolidated document yet, unlike this one.
 
-**Deferred, not open:** ageing up at 13 ([3I-DEC-008](decisions/dec-008-ageing-up-at-13.md)) is consciously parked pending a change request. No UI is documented for it until approved.
+**PIN attempt rate limiting is resolved**, not open — [3I-DEC-022](decisions/dec-022-pin-lockout-and-dob-correction-notification.md). An earlier version of this document listed it as open; that was stale and has been corrected here.
+
+**Ageing up is stale, not merely deferred.** [3I-DEC-008](decisions/dec-008-ageing-up-at-13.md) proposed offering a 13-year-old profile its own standalone account. [3I-DEC-023](decisions/dec-023-no-standalone-accounts-under-18.md) removed standalone accounts under 18 entirely, so DEC-008 now describes a feature with nowhere left to attach — it cannot be approved into existence as written, regardless of client sign-off. It needs re-framing around age 18 or retiring outright; tracked in [open-questions.md](open-questions.md), not resolved here.
