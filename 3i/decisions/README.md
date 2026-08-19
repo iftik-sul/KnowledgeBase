@@ -10,7 +10,7 @@ tags:
 
 # 3i Decision Register
 
-One file per decision: context, decision, consequences, cost. A decision is never edited to reflect a change of mind — it is superseded.
+One file per decision: context, decision, consequences, cost. A decision is never edited to reflect a change of mind — it is superseded or deprecated, and the file stays for history.
 
 ## Index
 
@@ -23,7 +23,7 @@ One file per decision: context, decision, consequences, cost. A decision is neve
 | [3I-DEC-005](dec-005-denormalised-certificates.md) | Certificates are snapshotted at issue | current | n/a — interpretation | CERT |
 | [3I-DEC-006](dec-006-question-bank-isolation.md) | Question bank isolation at the query layer, returning 404 | current | n/a — interpretation | QB |
 | [3I-DEC-007](dec-007-rbac-without-hardcoded-roles.md) | No hard-coded role checks; new roles are data, not code | current | n/a — interpretation | RBAC |
-| [3I-DEC-008](dec-008-ageing-up-at-13.md) | ~~A profile reaching 13 is offered its own account~~ | **stale — see note below** | not raised | AUTH, FAM |
+| [3I-DEC-008](dec-008-ageing-up-at-13.md) | ~~A profile reaching 13 is offered its own account~~ | **deprecated** — idea dropped, see 023 | n/a | AUTH, FAM |
 | [3I-DEC-009](dec-009-seats-as-account-pool.md) | A seat is a permanent, non-transferable grant to one profile | current | n/a — interpretation | BILL, ENR, FAM |
 | [3I-DEC-010](dec-010-waiver-covers-all-seats.md) | A waiver applies to the whole subscription, seats included | current | n/a — interpretation | WAV |
 | [3I-DEC-011](dec-011-attendance-certificate-without-exam.md) | A course with no final exam yields attendance certificates only | current | n/a — interpretation | CERT |
@@ -40,15 +40,9 @@ One file per decision: context, decision, consequences, cost. A decision is neve
 | [3I-DEC-022](dec-022-pin-lockout-and-dob-correction-notification.md) | PIN lockout matches FR-AUTH-09; DOB corrections notify the guardian on chat-eligibility change | current | **approved — proceed to build** | AUTH, FAM, NOT |
 | [3I-DEC-023](dec-023-no-standalone-accounts-under-18.md) | No standalone accounts under 18 — every minor is a guardian profile | current | **approved — proceed to build** | AUTH, FAM |
 
-**`deferred`** marks a decision taken but consciously parked — not to be built or documented until approved. **`superseded`** marks a reversed decision, retained for its reasoning and never a basis for implementation.
+**`deferred`** marks a decision taken but consciously parked. **`superseded`** marks a reversed decision, replaced by a specific successor. **`deprecated`** marks a decision whose entire premise no longer applies and is not being replaced — the idea itself was dropped, not redirected. All three keep the file for history; none are rewritten.
 
-**On the "client sign-off" column, updated 2026-08-18:** all eight decisions carrying client-facing scope changes (014–016, 018–019, 021–023) are marked **approved — proceed to build**, on the basis that Saitama holds effective decision authority on the client's behalf for this engagement. This is a project-level operating assumption recorded here for traceability, not a claim that the institute's own §21.3 written-approval process has been formally exercised. If that assumption changes, the affected code and documents are identifiable via this table and the [scope-changes list](#change-request--8-items-two-tiers) below.
-
-### 3I-DEC-008 is stale, not merely deferred
-
-[3I-DEC-023](dec-023-no-standalone-accounts-under-18.md) removed the standalone-account concept DEC-008 proposed offering to a 13-year-old profile. **DEC-008 as written describes a feature that no longer has anywhere to attach.** It cannot be approved into existence even if raised with the client, because the thing it would grant — a standalone teen account — has been eliminated by a later decision.
-
-This is not resolved by marking it superseded, because nothing has replaced it with an equivalent decision at a different age. It is tracked as an open item in [open-questions.md](/3i/open-questions.md) pending a choice between re-framing it around age 18 or retiring it outright. Do not build against DEC-008 in its current form.
+**On the "client sign-off" column, updated 2026-08-18:** all eight decisions carrying client-facing scope changes (014–016, 018–019, 021–023) are marked **approved — proceed to build**, on the basis that Saitama holds effective decision authority on the client's behalf for this engagement. This is a project-level operating assumption recorded here for traceability, not a claim that the institute's own §21.3 written-approval process has been formally exercised.
 
 ## Change Request — 8 Items, Two Tiers (Historical Record)
 
@@ -61,14 +55,14 @@ Internally approved 2026-08-18, and subsequently treated as approved for build p
 | [3I-DEC-014](dec-014-cap-counts-active-profiles-only.md) | Cap counts active + never-activated only, not the flat 6 in FR-FAM-02 |
 | [3I-DEC-015](dec-015-device-allowance-scales-with-seats.md) | Device allowance scales with seats — risk framing: a flat 3-device cap against 6 purchasable seats may not survive an Australian Consumer Law challenge |
 | [3I-DEC-016](dec-016-deletion-removes-content-retains-record.md) | Profile deletion retains the moderation record — risk framing: without this, a guardian can erase evidence of a reported safety incident |
-| [3I-DEC-023](dec-023-no-standalone-accounts-under-18.md) | **No standalone accounts under 18, at all.** Reverses FR-AUTH-05 outright rather than amending it — the largest single scope change in the project. Risk framing: the standalone path had no guardian verification of any kind; removing it closes that gap but eliminates independent accounts for near-adult teenagers entirely. Flag this to the client distinctly from the rest of the batch, not folded in silently |
+| [3I-DEC-023](dec-023-no-standalone-accounts-under-18.md) | No standalone accounts under 18, at all. Reverses FR-AUTH-05 outright rather than amending it — the largest single scope change in the project. Flag this to the client distinctly from the rest of the batch, not folded in silently |
 
 **Tier 2 — lower-stakes, expected routine approval:**
 
 | ID | Ask |
 | :---- | :---- |
 | [3I-DEC-018](dec-018-profile-pin-mandatory-guardian-controlled.md) | Mandatory guardian-set PIN |
-| [3I-DEC-019](dec-019-safeguarding-strings-exempt-from-ai-translation.md) | Human sign-off on ~12 safeguarding strings per language — a small task owed by the client, not a design objection. **This item still requires the institute's actual participation** (native-speaker sign-off) regardless of build-approval status, and is not satisfied by the operating assumption above |
+| [3I-DEC-019](dec-019-safeguarding-strings-exempt-from-ai-translation.md) | Human sign-off on safeguarding strings per language — a small task owed by the client, not a design objection. **This item still requires the institute's actual participation** (native-speaker sign-off) regardless of build-approval status, and is not satisfied by the operating assumption above |
 | [3I-DEC-021](dec-021-attendance-measured-against-sessions-delivered.md) | Attendance measured on sessions delivered, plus the WWCC scheduling guard — [OQ-11](/3i/open-questions.md#oq-11--minimum-sessions-before-an-attendance-certificate) (minimum sessions before a certificate) remains genuinely open and is not resolved by this approval |
 | [3I-DEC-022](dec-022-pin-lockout-and-dob-correction-notification.md) | PIN lockout matching FR-AUTH-09; guardian notified when an admin DOB correction changes chat eligibility |
 
@@ -78,6 +72,6 @@ Internally approved 2026-08-18, and subsequently treated as approved for build p
 
 ## Provenance
 
-Decisions 001–007 derive from SRD v2.0 and cite the requirement codes that fix them. Decisions 008–023 were taken in review on 2026-08-18 and are **not in the baseline**. Eight of them (014–016, 018–019, 021–023) are approved for build per the note above; one (008) is stale and needs re-framing or retirement.
+Decisions 001–007 derive from SRD v2.0 and cite the requirement codes that fix them. Decisions 008–023 were taken in review on 2026-08-18 and are **not in the baseline**. Eight of them (014–016, 018–019, 021–023) are approved for build per the note above; one (008) is deprecated.
 
 The client supplied no written material, so no decision here cites a client document. None exists.
