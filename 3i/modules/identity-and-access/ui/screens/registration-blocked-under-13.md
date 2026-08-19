@@ -13,23 +13,27 @@ tags:
   - safeguarding
 ---
 
-# Screen: Registration Blocked — Under 13
+# Screen: Registration Blocked — Under 18
 
-Satisfies: FR-AUTH-03, FR-AUTH-04
+Satisfies: FR-AUTH-03, FR-AUTH-04, as extended by [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md)
+
+**Renamed from "Under 13."** [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md) removed the 13–17 standalone registration path entirely, so this screen's trigger widened from "under 13" to "under 18." The screen's content and behaviour are otherwise unchanged — the same redirect now simply catches a wider age range.
 
 ---
 
 ## Purpose
 
-Reached when date of birth on [Registration — Adult](registration-adult.md) resolves to under 13, via any route including [Social login — DOB capture](social-login-dob-capture.md).
+Reached when date of birth on [Registration — Adult](registration-adult.md) resolves to **any age under 18**, via any route including [Social login — DOB capture](social-login-dob-capture.md).
 
 ## Content
 
 **The block message is in the exempt string set** — [3I-DEC-019](/3i/decisions/dec-019-safeguarding-strings-exempt-from-ai-translation.md). It bypasses AI translation and requires named human sign-off per language before launch.
 
-The message must be **neutral and not disclose the age threshold in a way that invites retry** (FR-AUTH-03). It should not say "you must be 13 or older" or similar — that teaches the specific number to amend a birth year against. A general statement that the account cannot be created, with a pointer toward the family account model, is the target shape; exact wording is the sign-off owners' call per language, not fixed here.
+The message must be **neutral and not disclose the age threshold in a way that invites retry** (FR-AUTH-03's principle, now applied at the 18 threshold as well). It should not say "you must be 18" or similar — that teaches the specific number to amend a birth year against. A general statement that the account cannot be created, with a pointer toward the family account model, is the target shape; exact wording is the sign-off owners' call per language, not fixed here.
 
-Offers a path toward [Registration — Adult](registration-adult.md) framed as "if you are a parent or guardian, you can create an account for your child" — this is the intended redirect, not an afterthought, since the family account model is how a genuine under-13 learner reaches the platform.
+**Wording should read naturally for a 17-year-old, not just a young child.** The original copy was written with a 6-to-12-year-old in mind. A near-adult being redirected to "ask your parent to make an account" needs a tone that doesn't read as condescending — this is worth explicit attention during the sign-off pass, since it's a new audience for this screen that didn't exist before DEC-023.
+
+Offers a path toward [Registration — Adult](registration-adult.md) framed as "if you are a parent or guardian, you can create an account for your child" — this is the intended redirect, not an afterthought, since the family account model is now the **only** way anyone under 18 reaches the platform.
 
 ## Behaviour
 
