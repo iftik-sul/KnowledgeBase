@@ -18,6 +18,8 @@ Role × screen matrix. Every screen in this module, and who sees it.
 
 **The learner profile is not a matrix column.** It does not log in and holds no permissions of its own — it is a **context** selected inside a Member's authenticated session, not a separate authenticated role. Screens that vary by which profile is active are marked accordingly rather than given a column.
 
+**Per [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md):** the standalone 13–17 registration screen is removed. No learner under 18 has an independent login of any kind — every minor reaches the platform as a profile under a verified adult account.
+
 ---
 
 ## Roles
@@ -36,8 +38,7 @@ Role × screen matrix. Every screen in this module, and who sees it.
 | Screen | Public | Member | Instructor | Admin |
 | :---- | :---: | :---: | :---: | :---: |
 | [Registration — adult](screens/registration-adult.md) | ● | | | |
-| [Registration — 13–17 standalone](screens/registration-standalone-teen.md) | ● | | | |
-| [Registration blocked — under 13](screens/registration-blocked-under-13.md) | ● | | | |
+| [Registration blocked — under 18](screens/registration-blocked-under-13.md) | ● | | | |
 | [Email verification](screens/email-verification.md) | ● | ● | ● | ● |
 | [Login](screens/login.md) | ● | | | |
 | [Social login — DOB capture](screens/social-login-dob-capture.md) | ● | | | |
@@ -51,13 +52,13 @@ Role × screen matrix. Every screen in this module, and who sees it.
 | [Admin — DOB correction](screens/admin-dob-correction.md) | | | | ● |
 | [Admin — TOTP setup](screens/admin-totp-setup.md) | | | | ● |
 
-Fifteen screens. No role management screen — [3I-DEC-017](/3i/decisions/dec-017-account-holder-renamed-member.md) confirms role assignment is a database operation at launch, not a UI.
+**Fourteen screens**, down from fifteen — the standalone-teen registration screen ([formerly 3I-IDA-UI-002](/3i/decisions/dec-023-no-standalone-accounts-under-18.md)) is removed, not merely deprecated, since it has no successor and no reason to exist under the current model. No role management screen — [3I-DEC-017](/3i/decisions/dec-017-account-holder-renamed-member.md) confirms role assignment is a database operation at launch, not a UI.
 
 ---
 
 ## Screens Deliberately Not Documented
 
-**Ageing-up at 13** has no screen anywhere in this index. [3I-DEC-008](/3i/decisions/dec-008-ageing-up-at-13.md) is deferred pending a change request under §21.3. Documenting a screen for unapproved scope would make it look built when it is not authorised — the no-op (a profile simply stays a profile past 13) requires no new screen at all.
+**Ageing-up at 13** has no screen anywhere in this index. [3I-DEC-008](/3i/decisions/dec-008-ageing-up-at-13.md) is deferred pending a change request under §21.3. **This item's relevance has changed since it was first raised** — it originally asked whether a 13-year-old *profile* should be offered a *standalone* account. Under [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md), standalone accounts under 18 no longer exist at all, so DEC-008 as originally framed cannot be built even if approved. It should be re-raised as a question about ageing up at 18, not 13, or retired outright — flagged in [open-questions.md](/3i/open-questions.md).
 
 ---
 
@@ -74,4 +75,4 @@ Fifteen screens. No role management screen — [3I-DEC-017](/3i/decisions/dec-01
 
 | Item | Blocks |
 | :---- | :---- |
-| [OQ-10](/3i/open-questions.md#oq-10--pin-attempt-rate-limiting) | [Profile picker](screens/profile-picker.md) — lockout behaviour on repeated wrong PINs is not yet specified. The screen is documented with the gap named rather than guessed at |
+| None currently. | The last open item, PIN attempt rate limiting, was resolved by [3I-DEC-022](/3i/decisions/dec-022-pin-lockout-and-dob-correction-notification.md) |
