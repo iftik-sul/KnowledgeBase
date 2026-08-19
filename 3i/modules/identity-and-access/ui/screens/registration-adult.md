@@ -16,11 +16,13 @@ tags:
 
 Satisfies: FR-AUTH-01, FR-AUTH-02, FR-AUTH-06, FR-AUTH-07, FR-AUTH-08
 
+**Per [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md): this is now the only account-creation path in the platform.** There is no longer a 13–17 branch. Date of birth resolves to exactly two outcomes: 18+ continues here, anything under 18 redirects to [Registration blocked — under 18](registration-blocked-under-13.md).
+
 ---
 
 ## Purpose
 
-The registration form for a date of birth resolving to 18+. The default path — no guardian fields, no block.
+The single registration form. Anyone completing it successfully becomes a full adult account holder — whether or not they ever add a child profile is irrelevant to what gets created here.
 
 ## Fields
 
@@ -28,9 +30,14 @@ First name, last name, email, password, date of birth, locale (FR-AUTH-01). See 
 
 Social login (Google, Apple) offered as an alternative entry point — selecting it skips password entry but still requires date of birth on first login, routing to [Social login — DOB capture](social-login-dob-capture.md) rather than this form directly.
 
+**No guardian fields exist anywhere on this screen.** [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md) removed the concept of a self-declared, unverified guardian entirely — every guardian relationship on the platform now exists only between a verified adult account and a profile created beneath it via [Profile create/edit](profile-create-edit.md).
+
 ## Behaviour
 
-Date of birth is evaluated on submit, before any other field is validated further, since it determines which of the three registration paths the person is actually on. An 18+ result proceeds to account creation and triggers [Email verification](email-verification.md); a 13–17 result redirects to [Registration — 13–17 standalone](registration-standalone-teen.md) rather than continuing on this screen; an under-13 result redirects to [Registration blocked — under 13](registration-blocked-under-13.md).
+Date of birth is evaluated on submit, before any other field is validated further, since it determines the only fork this screen has:
+
+- **18+** → proceeds to account creation, triggers [Email verification](email-verification.md).
+- **Under 18, any age** → redirects to [Registration blocked — under 18](registration-blocked-under-13.md). No account is created, no data from this form is retained beyond what FR-AUTH-04 already requires for the blocked-attempt record.
 
 ## Role Variations
 
