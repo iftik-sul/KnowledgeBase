@@ -30,23 +30,6 @@ Qualifies for the same treatment as [age-and-safeguarding.md](age-and-safeguardi
 
 A floor — a minimum number of sessions before any certificate is issued — would fix it. Not decided, because it is a question about what the institute wants a certificate to mean rather than a technical call.
 
-### OQ-12 — Ageing up: re-frame around 18, or retire
-
-[3I-DEC-008](decisions/dec-008-ageing-up-at-13.md) proposed offering a 13-year-old profile its own standalone account. [3I-DEC-023](decisions/dec-023-no-standalone-accounts-under-18.md) removed standalone accounts under 18 entirely — DEC-008 now describes a feature with nowhere left to attach. It cannot be approved into existence as written, regardless of client sign-off.
-
-Two ways to resolve, neither chosen yet:
-
-1. **Re-frame around 18** — a profile reaching 18 is offered its own standalone account, which is now the only age at which that transition could exist.
-2. **Retire outright** — if ageing out at 18 is considered obvious enough not to need a dedicated decision (an 18-year-old is simply eligible to register their own account the normal way, same as anyone else turning 18).
-
-Blocks: nothing currently, since DEC-008 was never built against. Worth resolving before it's forgotten and someone builds toward the stale version by mistake.
-
----
-
-## Deferred
-
-None currently. **OQ-05 (ageing up at 13) has moved to OQ-12 above**, re-scoped from "deferred pending approval" to "needs re-framing," since the thing it was deferred *toward* no longer exists. See [3I-DEC-023](decisions/dec-023-no-standalone-accounts-under-18.md).
-
 ---
 
 ## Resolved
@@ -62,7 +45,7 @@ None currently. **OQ-05 (ageing up at 13) has moved to OQ-12 above**, re-scoped 
 | **OQ-08** Inactive profiles and the cap | [3I-DEC-014](decisions/dec-014-cap-counts-active-profiles-only.md) — cap counts active and never-activated only |
 | **OQ-10** PIN attempt rate limiting | [3I-DEC-022](decisions/dec-022-pin-lockout-and-dob-correction-notification.md) — matches FR-AUTH-09 exactly |
 
-**`identity-and-access` is fully specified, with one open item.** [OQ-12](#oq-12--ageing-up-re-frame-around-18-or-retire) is the only thing genuinely unresolved against this module. Everything else that was blocking it is closed. OQ-09 (app-store-compliance) and OQ-11 (attendance floor) remain open but sit outside this module.
+**`identity-and-access` is fully specified.** No open items remain against this module. OQ-09 (app-store-compliance) and OQ-11 (attendance floor) remain open but sit outside it.
 
 ---
 
@@ -81,7 +64,7 @@ None confirmed as received.
 | 7 | Apple and Google developer accounts | Mobile | **Open now** — store review is the least predictable item |
 | 8 | Live-class tool choice | Learning | See below |
 
-**A ninth dependency now exists.** [3I-DEC-019](decisions/dec-019-safeguarding-strings-exempt-from-ai-translation.md) requires named human sign-off on the safeguarding strings, in each of five languages, before launch — now roughly ten strings rather than a dozen, since the guardian-notification string was removed along with FR-AUTH-05 ([3I-DEC-023](decisions/dec-023-no-standalone-accounts-under-18.md)). The institute has native speakers; this is an afternoon of their time, not a translation budget. But it is a launch gate, and it is on them.
+**A ninth dependency exists.** [3I-DEC-019](decisions/dec-019-safeguarding-strings-exempt-from-ai-translation.md) requires named human sign-off on the safeguarding strings, in each of five languages, before launch. The institute has native speakers; this is an afternoon of their time, not a translation budget. But it is a launch gate, and it is on them.
 
 ### On item 8
 
@@ -93,7 +76,7 @@ It is entirely possible the tool the institute chooses does not permit the stude
 
 ## Change Request Backlog
 
-Eight decisions now change the baseline rather than interpret it. Listed in [decisions/README.md](decisions/README.md#scope-changes-against-srd-v20). [3I-DEC-023](decisions/dec-023-no-standalone-accounts-under-18.md) is the largest of the eight — it reverses FR-AUTH-05 outright rather than amending it — and should be raised distinctly from the rest, not folded into a single undifferentiated batch.
+Eight decisions now change the baseline rather than interpret it. Listed in [decisions/README.md](decisions/README.md#scope-changes-against-srd-v20). [3I-DEC-023](decisions/dec-023-no-standalone-accounts-under-18.md) is the largest of the eight and should be raised distinctly from the rest, not folded into a single undifferentiated batch.
 
 ---
 
