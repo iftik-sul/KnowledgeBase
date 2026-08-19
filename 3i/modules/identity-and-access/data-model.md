@@ -32,7 +32,7 @@ A login identity. Owns credentials, billing relationship, devices, notification 
 | Social identity | Google or Apple (FR-AUTH-07). DOB still captured on first login |
 | TOTP secret | Optional, admin accounts only (FR-RBAC-05) |
 
-**Every Account is 18+. There is no other kind.** [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md) removed the 13–17 standalone account entirely — under-18 registration is refused outright, with no account of any shape created. **`guardianName` and `guardianEmail` fields, previously carried for FR-AUTH-05's standalone-teen path, are removed from this model.** They served no other purpose and have no remaining reader.
+**Every Account is 18+.** Under-18 registration is refused outright, with no account of any shape created.
 
 **Email changes require re-verification**, following the same mandatory-verification rule as FR-AUTH-06 applies at registration. An account with an unverified new email retains its prior verified state until the new address is confirmed — it does not drop to unverified mid-change.
 
@@ -55,11 +55,11 @@ A person who studies. Owns enrolments, progress, attendance, exam attempts, and 
 | Account | Owning account. Maximum 6 **active or never-activated** learners per account (FR-FAM-02 as amended by [3I-DEC-014](/3i/decisions/dec-014-cap-counts-active-profiles-only.md)) |
 | Activation state | See below — **not in the baseline** |
 
-A learner profile has **no email address and no credentials** (FR-FAM-03). It is selected after account login via a profile picker (FR-FAM-04), which now requires the profile's PIN to enter.
+A learner profile has **no email address and no credentials** (FR-FAM-03). It is selected after account login via a profile picker (FR-FAM-04), which requires the profile's PIN to enter.
 
-**Every learner under 18 is a profile. There is no other route onto the platform for a minor.** [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md) removed the standalone 13–17 account, so a Learner record is now how *every* person under 18 is represented, without exception.
+**Every learner under 18 is a profile.** There is no other route onto the platform for a minor.
 
-**Chat access is derived from age, never stored as a permission:** under 13 is permanently off; 13–17 is a guardian-controlled toggle (FR-FAM-08). Deriving rather than storing is deliberate — a stored flag can be edited, and the non-editable date of birth is the safeguarding control. **This distinction is unaffected by DEC-023** — it was always about age, not account type, and remains exactly as it was.
+**Chat access is derived from age, never stored as a permission:** under 13 is permanently off; 13–17 is a guardian-controlled toggle (FR-FAM-08). Deriving rather than storing is deliberate — a stored flag can be edited, and the non-editable date of birth is the safeguarding control.
 
 ### PIN — mandatory, guardian-set, guardian-reset
 
@@ -84,9 +84,9 @@ The baseline describes only two states: a profile exists, or it is deleted (FR-F
 
 A seat is permanently bound to the profile it activates and is never reassigned. Reactivation requires a fresh payment and returns the profile to Active, which re-counts it toward the cap.
 
-**Inactive and deleted must remain visibly distinct in every interface.** They sit close together conceptually and one preserves history while the other destroys it — including chat history, where deletion now removes message content but retains the moderation record ([3I-DEC-016](/3i/decisions/dec-016-deletion-removes-content-retains-record.md)).
+**Inactive and deleted must remain visibly distinct in every interface.** They sit close together conceptually and one preserves history while the other destroys it — including chat history, where deletion removes message content but retains the moderation record ([3I-DEC-016](/3i/decisions/dec-016-deletion-removes-content-retains-record.md)).
 
-**Cap resolved:** [3I-DEC-014](/3i/decisions/dec-014-cap-counts-active-profiles-only.md). Never-activated and active count; inactive sits outside the cap as archive.
+**Cap:** [3I-DEC-014](/3i/decisions/dec-014-cap-counts-active-profiles-only.md). Never-activated and active count; inactive sits outside the cap as archive.
 
 ---
 
@@ -128,7 +128,7 @@ Concurrent video streams are limited to purchased seats, minimum one (FR-AUTH-12
 | Hashed session identifier | FR-AUTH-04 |
 | Timestamp | |
 
-Recorded when a date of birth indicates under 18 (FR-AUTH-03 as extended by [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md)), so that a retry with an amended birth year is identifiable as a retry rather than appearing as a fresh attempt. The threshold widened from 13 to 18 when the standalone-teen path was removed — the mechanism itself is unchanged.
+Recorded when a date of birth indicates under 18 (FR-AUTH-03), so that a retry with an amended birth year is identifiable as a retry rather than appearing as a fresh attempt.
 
 This exists purely as a safeguarding control. It holds no personal data — only a hash — and should not be repurposed as general analytics.
 
