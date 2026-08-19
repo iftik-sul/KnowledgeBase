@@ -50,8 +50,6 @@ Four states, per [3I-IDA-DM-001](../data-model.md): Active, Never activated, Ina
 
 ---
 
-## Guardian Notification Banner
+## Removed: Guardian Notification Banner
 
-Used on: [Registration — 13–17 standalone](screens/registration-standalone-teen.md) (confirmation state).
-
-Confirms to the registering teenager that a notification has been sent to their named guardian, without showing the guardian's email in full (partial mask, e.g. `f***@example.com`) to avoid exposing it to anyone glancing at the teenager's screen.
+**This component is retired**, not documented. It supported [Registration — 13–17 standalone](/3i/decisions/dec-023-no-standalone-accounts-under-18.md), which [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md) removed along with the screen it appeared on. Nothing in the current fourteen-screen set uses it. Left as a heading here, rather than deleted silently, so a reader who remembers this component from an earlier pass finds an explanation instead of a gap.
