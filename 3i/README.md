@@ -2,7 +2,7 @@
 project: 3i
 type: overview
 status: current
-updated: 2026-08-18
+updated: 2026-08-20
 tags:
   - project
   - overview
@@ -27,7 +27,7 @@ Scope is fixed by **SRD v2.0**, which supersedes `3i_2nd_phase_requirements_fina
 | Functional requirements | 162, across 19 requirement codes |
 | Non-functional requirements | 32 |
 | Explicit exclusions | 21 |
-| Client dependencies outstanding | 8 |
+| Client dependencies outstanding | 7 (of 8 — per-seat pricing received 2026-08-20) |
 | Change control | §21.3 — written approval before work begins |
 | Acceptance | Per module, 10 working-day client review window. No separate UAT phase |
 
@@ -37,14 +37,16 @@ The document closes with: anything not described in it is not in scope.
 
 | Item | Value |
 | :---- | :---- |
-| Plans | Monthly AUD $9.99, annual AUD $99.99, GST-inclusive, auto-renewing |
-| Included | One learner seat |
-| Additional seats | Per-seat monthly charge — **price not yet confirmed** |
+| Pricing | **Two tiers, by learner age** — no flat subscription fee. Every seat, including the first, is priced by its occupant's tier ([3I-DEC-024](decisions/dec-024-two-tier-age-based-seat-pricing.md)) |
+| Adult seat (18+) | AUD $9.99/month, AUD $99.99/year, GST-inclusive, auto-renewing |
+| Under-18 seat | AUD $5.99/month, AUD $49.99/year, GST-inclusive, auto-renewing |
 | Maximum profiles | 6 per account |
 | Free trial | None |
 | Payment rail | Stripe, **web checkout only** |
 | Refunds | 14-day self-service on first payment; renewals at admin discretion |
-| Waivers | Four fixed tiers — 25%, 50%, 75%, 100% |
+| Waivers | Four fixed tiers — 25%, 50%, 75%, 100%, applied to the whole subscription across both seat tiers |
+
+Total charge is the sum across both tiers at one billing cadence chosen for the whole account — a family with 2 adult and 2 child profiles pays AUD $31.96/month or AUD $299.96/year. A learner turning 18 reprices from the under-18 tier to the adult tier at the account's next renewal, never mid-cycle. See [modules/commerce/README.md](modules/commerce/README.md) for the full model.
 
 The mobile apps carry **no purchase surface of any kind** — no prices, no buttons, no links, no text directing users to pay elsewhere (FR-BILL-02, NFR-15–21). §22.3 names app store rejection under Guideline 3.1.1 as the highest-uncertainty item in the plan.
 

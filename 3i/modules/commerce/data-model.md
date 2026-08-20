@@ -16,7 +16,7 @@ tags:
 
 Entities owned by this module. Other modules reference these; they do not restate them.
 
-**The seat/Learner split.** `identity-and-access` owns the `Learner` record and its four-state activation lifecycle (never-activated, active, inactive, deleted). This module owns the **Subscription** that funds activation and the **seat quantity** as a Stripe line item. Activating a profile is a write from this module into `identity-and-access`'s state machine, not a field this module duplicates. See [3I-IDA-DM-001](/3i/modules/identity-and-access/data-model.md#activation-state--introduced-by-decision-not-by-the-baseline).
+**The seat/Learner split.** `identity-and-access` owns the `Learner` record and its four-state activation lifecycle (never-activated, active, inactive, deleted). This module owns the **Subscription** that funds activation and the **seat quantities** as Stripe subscription line items. Activating a profile is a write from this module into `identity-and-access`'s state machine, not a field this module duplicates. See [3I-IDA-DM-001](/3i/modules/identity-and-access/data-model.md#activation-state--introduced-by-decision-not-by-the-baseline).
 
 ---
 
@@ -26,18 +26,32 @@ Entities owned by this module. Other modules reference these; they do not restat
 | :---- | :---- |
 | Account | Owning account. One subscription per account |
 | Stripe subscription ID | Source of truth lives in Stripe; this is a mirror for querying |
-| Plan | Monthly or annual (FR-BILL-01 defaults; §14.1) |
-| Seat quantity | Stripe quantity (FR-BILL-04). One seat included; additional seats are a per-seat charge |
+| Cadence | Monthly or annual. Chosen once at first seat activation, shared by both subscription items — Stripe does not support mixed intervals within one subscription |
 | Status | Active, past due, suspended, cancelled — mirrors Stripe subscription status |
 | Current period end | Renewal date |
 | Waiver | Nullable reference to an active **Waiver** (below) |
-| Price snapshot | GST-inclusive, stored in integer cents (FR-BILL-07) |
 
 **Access is granted from Stripe webhooks only, never a client-side success redirect** (FR-BILL-03). Webhook handling is signature-verified and idempotent — see **WebhookEvent** below.
 
-**Seat count changes are billing events, not profile events.** Adding a profile beyond purchased seats prompts a seat purchase (FR-BILL-04); the resulting Stripe quantity change is what activates the corresponding `Learner` in `identity-and-access`. Cancelling a seat is the same relationship in reverse: it deactivates the bound `Learner`, it does not touch this Subscription's plan.
-
 Failed payments use Stripe Smart Retries plus a platform email sequence; access is suspended at final failure (FR-BILL-06) — this is a `status` transition on this record, driven by webhook, never by a scheduled job guessing at Stripe's retry state.
+
+### SubscriptionItem — two-tier seat pricing
+
+**Introduced by [3I-DEC-024](/3i/decisions/dec-024-two-tier-age-based-seat-pricing.md), replacing a single flat `seatQuantity` field.** A Subscription has up to two SubscriptionItems, one per tier:
+
+| Field | Notes |
+| :---- | :---- |
+| Subscription | Owning subscription |
+| Tier | `adult` or `minor` |
+| Stripe price ID | One of four Stripe Price objects — `price_seat_adult_monthly`, `price_seat_adult_annual`, `price_seat_minor_monthly`, `price_seat_minor_annual` |
+| Quantity | Stripe quantity for this item. Zero-quantity items are removed, not retained |
+| Price snapshot | GST-inclusive, stored in integer cents (FR-BILL-07). Four possible values, one per tier × cadence combination |
+
+**A learner's tier is set by age at the moment of activation**, read from the Learner's date of birth (FR-FAM-07, not user-editable). Activating a profile increments the matching item's quantity, creating that item if the account has no seat of that tier yet. Deactivating decrements it; if both items reach zero, the Subscription is cancelled entirely.
+
+**Seat activation prorates immediately** — Stripe's standard mid-cycle proration. **Seat cancellation runs to the end of the current paid period**, matching the no-refund-on-cancellation pattern elsewhere in the baseline (FR-BAT-05) — the Learner stays active until the period ends rather than losing access instantly.
+
+**Ageing from minor to adult reprices at the next renewal, not mid-cycle.** A scheduled process compares each active minor-tier seat's Learner DOB against today and, where it now indicates 18+, moves that unit of quantity from the minor item to the adult item effective at the Subscription's next renewal — mirroring FR-WAV-03's no-mid-cycle-proration principle for waivers rather than inventing a new billing behaviour. This process is new infrastructure with no baseline precedent; see the decision's cost section.
 
 ---
 
@@ -58,11 +72,11 @@ Failed payments use Stripe Smart Retries plus a platform email sequence; access 
 | Field | Notes |
 | :---- | :---- |
 | Stripe event ID | Unique. The idempotency key (FR-BILL-03) |
-| Type | `checkout.session.completed`, `invoice.paid`, `invoice.payment_failed`, `customer.subscription.updated`, etc. |
+| Type | `checkout.session.completed`, `invoice.paid`, `invoice.payment_failed`, `customer.subscription.updated`, `subscription_schedule.updated` (ageing-up reprice), etc. |
 | Signature verified | Boolean. Unverified events are rejected before processing |
 | Processed at | Null until successfully applied |
 
-**Every access-granting or access-revoking change to a Subscription or a Learner's activation state must trace back to a row here.** A support ticket that asks "why does this account have access" should always resolve to a specific webhook event, not to an assumption about what the client-side checkout flow returned.
+**Every access-granting or access-revoking change to a Subscription, a SubscriptionItem quantity, or a Learner's activation state must trace back to a row here.** A support ticket that asks "why does this account have access, and at which tier" should always resolve to a specific webhook event, not to an assumption about what the client-side checkout flow returned.
 
 ---
 
@@ -73,7 +87,7 @@ Failed payments use Stripe Smart Retries plus a platform email sequence; access 
 | Requester | Account (always the billing contact — an adult) |
 | Written explanation | FR-WAV-01 |
 | Evidence files | Optional. Private bucket, never CDN-cached, accessed only via short-lived signed URLs, every access logged (FR-WAV-07) |
-| Tier | One of four fixed values: 25%, 50%, 75%, 100% (FR-WAV-02) |
+| Tier | One of four fixed discount values: 25%, 50%, 75%, 100% (FR-WAV-02) — **not** the same "tier" as a SubscriptionItem's adult/minor tier; this field is the discount percentage |
 | Status | Pending, approved, revoked, expired |
 | Reviewer | Admin account |
 | Decision date | |
@@ -81,7 +95,7 @@ Failed payments use Stripe Smart Retries plus a platform email sequence; access 
 | Expiry date | 12 months from effective date (FR-WAV-04) |
 | Revocation reason | Nullable. Set only on admin revocation (FR-WAV-05) |
 
-**Applies to the whole subscription, additional seats included** — [3I-DEC-010](/3i/decisions/dec-010-waiver-covers-all-seats.md). Implemented as a Stripe coupon on the subscription, which discounts every line naturally rather than requiring bespoke seats-excluded logic. Seats added during a waived period inherit the discount for the remainder of that period.
+**Applies to the whole subscription, across both seat tiers** — [3I-DEC-010](/3i/decisions/dec-010-waiver-covers-all-seats.md). Implemented as a Stripe coupon on the subscription, which discounts every line item naturally — including both the adult and minor SubscriptionItems — rather than requiring bespoke per-tier logic. Seats added during a waived period, of either tier, inherit the discount for the remainder of that period.
 
 **A 100% waiver is a live subscription with a 100% discount, not a flagged free account** (FR-WAV-06). Admin-created free accounts are a separate mechanism this data model does not cover.
 
@@ -111,15 +125,15 @@ The published refund policy states that Australian Consumer Law guarantees apply
 
 | Module | Reads |
 | :---- | :---- |
-| `identity-and-access` | Subscription status — determines whether a Learner may be activated |
+| `identity-and-access` | Subscription status — determines whether a Learner may be activated, and at which tier |
 | `learning-delivery` | Subscription status, seat availability — gates enrolment (FR-ENR-01) |
 | `communication` | Waiver/Subscription status is **not** read for chat access — chat is age-derived, never billing-derived |
-| `platform` | Stripe integration contract; the Subscription and WebhookEvent records are the primary consumers of that contract |
-| `reporting` | Subscription, Waiver, Refund — revenue, churn, and waivers-granted reports (FR-REP-01) |
+| `platform` | Stripe integration contract; the Subscription, SubscriptionItem, and WebhookEvent records are the primary consumers of that contract |
+| `reporting` | Subscription, SubscriptionItem, Waiver, Refund — revenue, churn, and waivers-granted reports, now broken out by seat tier (FR-REP-01) |
 
 ## Referenced
 
 | Entity | Owned by | Read here |
 | :---- | :---- | :---- |
 | Account | `identity-and-access` | Owner of Subscription; identity of BillingContact absent an override |
-| Learner | `identity-and-access` | Target of seat activation/deactivation; never duplicated here |
+| Learner | `identity-and-access` | Target of seat activation/deactivation and the tier read from its date of birth; never duplicated here |

@@ -2,7 +2,7 @@
 project: 3i
 type: overview
 status: current
-updated: 2026-08-18
+updated: 2026-08-20
 tags:
   - decision
   - index
@@ -39,10 +39,17 @@ One file per decision: context, decision, consequences, cost. A decision is neve
 | [3I-DEC-021](dec-021-attendance-measured-against-sessions-delivered.md) | Attendance is measured against sessions delivered | current | **approved — proceed to build** | CERT, INST, BAT |
 | [3I-DEC-022](dec-022-pin-lockout-and-dob-correction-notification.md) | PIN lockout matches FR-AUTH-09; DOB corrections notify the guardian on chat-eligibility change | current | **approved — proceed to build** | AUTH, FAM, NOT |
 | [3I-DEC-023](dec-023-no-standalone-accounts-under-18.md) | No standalone accounts under 18 — every minor is a guardian profile | current | **approved — proceed to build** | AUTH, FAM |
+| [3I-DEC-024](dec-024-two-tier-age-based-seat-pricing.md) | Two-tier, age-based seat pricing — two Stripe subscription items per account, not one flat quantity | current | **approved — proceed to build** | BILL |
 
 **`deferred`** marks a decision taken but consciously parked. **`superseded`** marks a reversed decision, replaced by a specific successor. **`deprecated`** marks a decision whose entire premise no longer applies and is not being replaced — the idea itself was dropped, not redirected. All three keep the file for history; none are rewritten.
 
 **On the "client sign-off" column, updated 2026-08-18:** all eight decisions carrying client-facing scope changes (014–016, 018–019, 021–023) are marked **approved — proceed to build**, on the basis that Saitama holds effective decision authority on the client's behalf for this engagement. This is a project-level operating assumption recorded here for traceability, not a claim that the institute's own §21.3 written-approval process has been formally exercised.
+
+**3I-DEC-024, added 2026-08-20, follows the same basis** — the two-tier pricing figures were supplied directly by Saitama, and the seat/payment architecture built on top of them is marked approved on the same operating assumption as the batch above, not as part of it.
+
+## Scope Changes Against SRD v2.0
+
+Every decision below changes what the baseline document says rather than merely interpreting an ambiguity in it. Nine items now, not eight — see the historical record below for the original 2026-08-18 batch, and 3I-DEC-024 as the item added since.
 
 ## Change Request — 8 Items, Two Tiers (Historical Record)
 
@@ -70,8 +77,16 @@ Internally approved 2026-08-18, and subsequently treated as approved for build p
 
 [3I-DEC-017](dec-017-account-holder-renamed-member.md) was not part of this batch — internal label change only, no client-facing behaviour to approve.
 
+## Change Item Added Since — 3I-DEC-024
+
+| ID | Ask |
+| :---- | :---- |
+| [3I-DEC-024](dec-024-two-tier-age-based-seat-pricing.md) | Two-tier age-based seat pricing replaces the baseline's single flat "additional seat" price. Confirmed directly by Saitama 2026-08-20 alongside the seat/payment architecture built on it |
+
+Not part of the 2026-08-18 batch — raised and resolved separately, on 2026-08-20, once the client supplied the actual pricing figures.
+
 ## Provenance
 
-Decisions 001–007 derive from SRD v2.0 and cite the requirement codes that fix them. Decisions 008–023 were taken in review on 2026-08-18 and are **not in the baseline**. Eight of them (014–016, 018–019, 021–023) are approved for build per the note above; one (008) is deprecated.
+Decisions 001–007 derive from SRD v2.0 and cite the requirement codes that fix them. Decisions 008–024 were taken outside the baseline: 008–023 in review on 2026-08-18, and 024 on 2026-08-20 once pricing was confirmed. Nine of them (014–016, 018–019, 021–024) are approved for build per the notes above; one (008) is deprecated.
 
 The client supplied no written material, so no decision here cites a client document. None exists.

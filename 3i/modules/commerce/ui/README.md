@@ -34,9 +34,13 @@ tags:
 
 **The mobile column is the one to get wrong carefully.** Every ❌ in that column is FR-BILL-02 and NFR-18 in effect, not an oversight — a mobile screen in this module should never grow a price, a button, or a link back to any of the web screens above. See [OQ-09](/3i/open-questions.md#oq-09--app-store-compliancemd-not-yet-written).
 
+## Checkout — two-tier itemisation requirement
+
+Per [3I-DEC-024](/3i/decisions/dec-024-two-tier-age-based-seat-pricing.md), Checkout must show a **live itemised total broken out by tier** as profiles are added to the cart — e.g. "2 adult seats × $9.99 = $19.98, 2 child seats × $5.99 = $11.98, total $31.96/mo" — not a single flat figure. This is a concrete constraint on the eventual screen file, recorded here ahead of it being written.
+
 ## Pending
 
-Individual screen files (`ui/screens/<screen-name>.md`), `components.md`, and `validation-rules.md` are not yet written. Each screen file, once created, must state its WCAG 2.2 AA contrast pairs (NFR-12) and its RTL behaviour (FR-LOC-04) per the repository standard — Checkout and Billing Portal in particular involve dense tabular pricing data, which is exactly the kind of layout the standard's contrast warning is aimed at.
+Individual screen files (`ui/screens/<screen-name>.md`), `components.md`, and `validation-rules.md` are not yet written. Each screen file, once created, must state its WCAG 2.2 AA contrast pairs (NFR-12) and its RTL behaviour (FR-LOC-04) per the repository standard — Checkout and Billing Portal in particular involve dense tabular pricing data, now across two tiers, which is exactly the kind of layout the standard's contrast warning is aimed at.
 
 ## Related
 
