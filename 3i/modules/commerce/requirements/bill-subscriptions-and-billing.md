@@ -110,6 +110,7 @@ Suspension is a `Subscription.status` transition triggered by a webhook (`invoic
 3. A fourth device registration, a seat cancellation, a tier reprice at renewal, and a failed-payment suspension are each traceable to a specific webhook event or admin action in the audit log.
 4. A checkout with 2 adult and 2 minor seats totals AUD $31.96/month or AUD $299.96/year exactly, matching the stored integer-cent values with GST included.
 5. A minor-tier seat's Learner turning 18 does not change that period's invoice; the next renewal reflects the adult-tier price.
+6. Four profiles activated on four different dates converge onto a single shared renewal date — set by the first activation on the account — with each later activation producing a one-time prorated charge rather than its own billing cycle.
 
 ---
 

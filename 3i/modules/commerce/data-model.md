@@ -27,11 +27,14 @@ Entities owned by this module. Other modules reference these; they do not restat
 | Account | Owning account. One subscription per account |
 | Stripe subscription ID | Source of truth lives in Stripe; this is a mirror for querying |
 | Cadence | Monthly or annual. Chosen once at first seat activation, shared by both subscription items — Stripe does not support mixed intervals within one subscription |
+| Billing anchor date | **Set once, by whichever seat activates first on this account.** Every subsequent seat, at any tier, prorates in against this same anchor rather than starting its own cycle — [3I-DEC-024](/3i/decisions/dec-024-two-tier-age-based-seat-pricing.md#worked-example--four-profiles-four-join-dates-one-anchor). Reset only if the subscription is fully cancelled (both items reach zero) and later restarted |
 | Status | Active, past due, suspended, cancelled — mirrors Stripe subscription status |
-| Current period end | Renewal date |
+| Current period end | Renewal date, derived from the anchor |
 | Waiver | Nullable reference to an active **Waiver** (below) |
 
 **Access is granted from Stripe webhooks only, never a client-side success redirect** (FR-BILL-03). Webhook handling is signature-verified and idempotent — see **WebhookEvent** below.
+
+**There is one renewal date per account, not one per seat.** A profile activated mid-cycle is charged a one-time prorated amount for the remainder of the current period, then folds into the same renewal date as every other seat on the account — regardless of tier or join date. See the worked four-profile example in [3I-DEC-024](/3i/decisions/dec-024-two-tier-age-based-seat-pricing.md#worked-example--four-profiles-four-join-dates-one-anchor).
 
 Failed payments use Stripe Smart Retries plus a platform email sequence; access is suspended at final failure (FR-BILL-06) — this is a `status` transition on this record, driven by webhook, never by a scheduled job guessing at Stripe's retry state.
 

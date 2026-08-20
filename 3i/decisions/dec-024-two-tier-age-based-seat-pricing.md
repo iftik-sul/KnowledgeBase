@@ -20,7 +20,7 @@ Client confirmed per-seat pricing 2026-08-20, resolving §22.2 dependency #1 and
 
 The adult tier matches the SRD's existing base plan price exactly. That is the tell: the base price was always describing the cost of one adult seat, not a separate flat subscription fee with a free first seat bundled in. The "included seat" language in §14.1 is reinterpreted accordingly — there is no bundled free seat. Every seat, including the first, is priced by its occupant's tier.
 
-Alongside the price, the client asked the real operating question: how is payment calculated and maintained across a mixed cart — for example, 2 adult profiles and 2 children profiles under one account.
+Alongside the price, the client asked the real operating question: how is payment calculated and maintained across a mixed cart — for example, 2 adult profiles and 2 children profiles under one account, and, in a follow-up, four profiles joining on four different dates.
 
 ## Decision
 
@@ -40,12 +40,33 @@ Alongside the price, the client asked the real operating question: how is paymen
 
 7. **A waiver coupon still applies to the whole subscription** ([3I-DEC-010](dec-010-waiver-covers-all-seats.md)) — Stripe percentage-off coupons discount every line item automatically, so the two-tier split needs no additional waiver logic.
 
+8. **The subscription has one renewal anchor, set by whichever seat activates first on that account.** Every seat added afterward — any tier, any date — is prorated for the remainder of the current period and then folds into that same shared renewal date. There is no per-seat billing anniversary.
+
+### Worked example — four profiles, four join dates, one anchor
+
+An account with adult A activating 13 Jan, adult B activating 21 Feb, minor D activating 3 Mar, and minor C activating 28 Mar, all monthly:
+
+| Date | Event | Effect |
+| :---- | :---- | :---- |
+| 13 Jan | A (adult) activates | Subscription created. **Anchor = 13th of every month.** Full charge $9.99 |
+| 13 Feb | Renewal | Adult qty 1 → $9.99 |
+| 21 Feb | B (adult) activates | Mid-cycle (13 Feb–13 Mar period). Adult qty → 2. **Prorated charge** for the 20 remaining days — not a new subscription, not a new anchor |
+| 3 Mar | D (minor) activates | Still inside the 13 Feb–13 Mar period. Minor item created, qty 1. **Prorated charge** for the 10 remaining days |
+| 13 Mar | Renewal | Adult qty 2 × $9.99 + minor qty 1 × $5.99 = $25.97 |
+| 28 Mar | C (minor) activates | Mid-cycle (13 Mar–13 Apr period). Minor qty → 2. **Prorated charge** for the 16 remaining days |
+| 13 Apr onward | Steady state | Adult qty 2 × $9.99 + minor qty 2 × $5.99 = **$31.96/month**, every seat renewing together regardless of original join date |
+
+This converges to the same $31.96 monthly figure as the earlier 2-adult/2-minor example — join order and join date only affect the one-time prorated amount charged at activation; the ongoing steady-state charge depends only on final tier composition.
+
+**If an account's seats are ever all cancelled to zero, the Stripe subscription is cancelled** (item 4 above), and the next seat activated after that starts an entirely new anchor date — it does not inherit the old one.
+
 ## Consequences
 
-- **FR-BILL-04 and FR-BILL-07 are amended.** "Seat count is a Stripe quantity" (singular) becomes two quantities, one per tier, on one subscription.
-- **[3I-CMR-DM-001](/3i/modules/commerce/data-model.md)'s Subscription entity changes** from a single `seatQuantity` field to two tier-scoped quantities. Updated in the same change as this decision.
-- **The client's own example checks out cleanly:** 2 adult + 2 minor seats → monthly $9.99×2 + $5.99×2 = $31.96; annual $99.99×2 + $49.99×2 = $299.96.
+- **FR-BILL-04 and FR-BILL-07 are amended.** "Seat count is a Stripe quantity" (singular) becomes two quantities, one per tier, on one subscription, sharing one renewal anchor.
+- **[3I-CMR-DM-001](/3i/modules/commerce/data-model.md)'s Subscription entity changes** from a single `seatQuantity` field to two tier-scoped quantities plus an explicit anchor date. Updated in the same change as this decision.
+- **The client's own examples check out cleanly:** 2 adult + 2 minor seats joining together → monthly $9.99×2 + $5.99×2 = $31.96; the same household joining on four staggered dates converges to the identical $31.96 steady state, differing only in the one-off prorated charges along the way.
 - **Checkout must show a live itemised total**, split by tier, as profiles are added to the cart — not a single flat figure. Noted against the Checkout screen in [ui/README.md](/3i/modules/commerce/ui/README.md).
+- **Billing history / invoices must clearly label prorated line items as partial-period charges**, distinct from full-period renewal charges — a guardian looking at their first few invoices after adding seats mid-cycle should not mistake a prorated amount for the ongoing price.
 - Revenue reporting (FR-REP-01) now has two seat-price dimensions to break out instead of one flat per-seat figure.
 
 ## Cost / Open Items Introduced By This Decision
