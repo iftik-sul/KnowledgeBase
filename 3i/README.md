@@ -2,7 +2,7 @@
 project: 3i
 type: overview
 status: current
-updated: 2026-08-20
+updated: 2026-08-23
 tags:
   - project
   - overview
@@ -25,7 +25,7 @@ Scope is fixed by **SRD v2.0**, which supersedes `3i_2nd_phase_requirements_fina
 | | |
 | :---- | :---- |
 | Functional requirements | 162, across 19 requirement codes |
-| Non-functional requirements | 32 |
+| Non-functional requirements | **31** (corrected 2026-08-23 — previously misstated as 32; direct count against §20.3–20.8 gives NFR-01–NFR-31) |
 | Explicit exclusions | 21 |
 | Client dependencies outstanding | 7 (of 8 — per-seat pricing received 2026-08-20) |
 | Change control | §21.3 — written approval before work begins |
