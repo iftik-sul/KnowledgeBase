@@ -16,7 +16,7 @@ tags:
 
 The module that turns a family account into a paying subscription, and unwinds that relationship cleanly when a waiver, a refund, or a cancellation applies.
 
-**Module status: scaffolding.** This README, the data model, and the three requirements documents are written. UI stage is a stub pending Figma work. One cross-cutting document this module depends on does not yet exist — see below.
+**Module status: complete.** README, data model, all three requirements documents, and the full nine-screen UI spec are written. The one cross-cutting dependency this module needed — [app-store-compliance.md](/3i/app-store-compliance.md) — now exists.
 
 ## Scope
 
@@ -66,7 +66,7 @@ A waiver discounts the **whole subscription**, across both tiers ([3I-DEC-010](/
 | [requirements/bill-subscriptions-and-billing.md](requirements/bill-subscriptions-and-billing.md) | 3I-CMR-REQ-001 | current |
 | [requirements/wav-waivers.md](requirements/wav-waivers.md) | 3I-CMR-REQ-002 | current |
 | [requirements/ref-refunds.md](requirements/ref-refunds.md) | 3I-CMR-REQ-003 | current |
-| [ui/README.md](ui/README.md) | 3I-CMR-UI-000 | stub — role × screen matrix only, screens pending Figma |
+| [ui/README.md](ui/README.md) | 3I-CMR-UI-000 | current — full 9-screen role × screen matrix |
 
 ## Rules Defined Elsewhere
 
@@ -79,12 +79,7 @@ This module does not restate these. It links.
 | Waiver single-profile cap, chosen at application | [3I-DEC-025](/3i/decisions/dec-025-waiver-single-profile-cap.md) |
 | Every account is 18+; every minor is a guardian profile, never a billing party | [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md) |
 | Device allowance scaling with seats | [3I-DEC-015](/3i/decisions/dec-015-device-allowance-scales-with-seats.md) |
-
-## Dependency: `app-store-compliance.md`
-
-**Not yet written.** FR-BILL-02 forbids any purchase surface in the mobile apps; FR-NOT-06 forbids purchase prompts in push; NFR-15–21 govern the multiplatform-services submission model. This is one rule enforced across `commerce`, `communication`, and `platform` — tracked as [OQ-09](/3i/open-questions.md#oq-09--app-store-compliancemd-not-yet-written).
-
-§22.3 names app store rejection under Guideline 3.1.1 as the highest-uncertainty item in the entire plan. Per project-standards, this cross-cutting document should exist **before** commerce build begins, not during it — it is not required to scaffold this module's requirements, but it should land before `bill-subscriptions-and-billing.md` moves from requirements to a backend spec.
+| No purchase surface in the mobile apps | [app-store-compliance.md](/3i/app-store-compliance.md) |
 
 ## Delivery
 
@@ -95,11 +90,9 @@ Phase 2, Commerce (§21.1) — Stripe, seats, subscriptions, waivers, refunds. S
 | Item | Blocks | Note |
 | :---- | :---- | :---- |
 | GST treatment for overseas learners | Invoice line-item logic | From the client's accountant |
-| `app-store-compliance.md` | Backend spec for FR-BILL-02 / NFR-15–21 | See above |
 | Seat cancellation running to period-end vs. prorated refund | Backend spec for FR-BILL-04 | Assumed, not yet confirmed — see [3I-DEC-024](/3i/decisions/dec-024-two-tier-age-based-seat-pricing.md#cost--open-items-introduced-by-this-decision) |
-| Auto-deactivation UX on waiver approval | Waiver screens | No per-profile confirmation step before deactivation — flagged in [3I-DEC-025](/3i/decisions/dec-025-waiver-single-profile-cap.md#cost--open-items-introduced-by-this-decision) as worth checking once designed |
 
-**Per-seat price is resolved** — see [3I-DEC-024](/3i/decisions/dec-024-two-tier-age-based-seat-pricing.md). **The waiver seat-stacking exposure is resolved** — see [3I-DEC-025](/3i/decisions/dec-025-waiver-single-profile-cap.md). No requirement in this module is otherwise unresolved.
+Both resolved: **per-seat price** ([3I-DEC-024](/3i/decisions/dec-024-two-tier-age-based-seat-pricing.md)), **the waiver seat-stacking exposure** ([3I-DEC-025](/3i/decisions/dec-025-waiver-single-profile-cap.md)), and **`app-store-compliance.md`** (now written — see [ui/README.md](ui/README.md)). The two items above are the only things left, and both are external inputs — a client dependency and a one-line confirmation — not gaps in the specification itself.
 
 ## Change Requests Owed to the Client
 

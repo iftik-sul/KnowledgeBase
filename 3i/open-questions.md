@@ -16,14 +16,6 @@ Unresolved items. Each blocks something specific. Resolved items move to [decisi
 
 ## Open
 
-### OQ-09 — `app-store-compliance.md` not yet written
-
-FR-BILL-02 forbids any purchase surface in the apps. FR-NOT-06 forbids purchase prompts in push notifications. NFR-15 through NFR-21 govern the multiplatform-services submission model, web-first registration, and the 13+ age rating. One rule enforced across `commerce`, `communication`, and `platform`.
-
-§22.3 risk 1 names store rejection under Guideline 3.1.1 as **the highest-uncertainty item in the entire plan**, with 1–2 weeks of review buffer budgeted.
-
-Qualifies for the same treatment as [age-and-safeguarding.md](age-and-safeguarding.md): documented once at project root, linked from the three modules, never restated. Should have been written before the Commerce phase began — commerce scaffolding has now started ahead of it; treat this as overdue rather than upcoming.
-
 ### OQ-11 — Minimum sessions before an attendance certificate
 
 [3I-DEC-021](decisions/dec-021-attendance-measured-against-sessions-delivered.md) measures attendance against sessions **delivered**. A course cancelled after one session of ten therefore issues certificates to whoever attended that one session, since 70% of one is one.
@@ -47,9 +39,10 @@ A floor — a minimum number of sessions before any certificate is issued — wo
 | **OQ-06** Chat history on deletion | [3I-DEC-016](decisions/dec-016-deletion-removes-content-retains-record.md) — content removed, moderation record retained |
 | **OQ-07** Per-seat price quotable | **Fully resolved 2026-08-20** — [3I-DEC-024](decisions/dec-024-two-tier-age-based-seat-pricing.md). Two tiers: adult $9.99/mo, $99.99/yr; under-18 $5.99/mo, $49.99/yr |
 | **OQ-08** Inactive profiles and the cap | [3I-DEC-014](decisions/dec-014-cap-counts-active-profiles-only.md) — cap counts active and never-activated only |
+| **OQ-09** `app-store-compliance.md` not yet written | **Resolved 2026-08-20** — [app-store-compliance.md](app-store-compliance.md) now exists, consolidating FR-BILL-02, FR-NOT-06, and NFR-15–21 in one place, linked from `commerce`, `communication`, and `platform` |
 | **OQ-10** PIN attempt rate limiting | [3I-DEC-022](decisions/dec-022-pin-lockout-and-dob-correction-notification.md) — matches FR-AUTH-09 exactly |
 
-**`identity-and-access` is fully specified.** No open items remain against this module. `commerce` has one open item (OQ-12, minor) and one blocking dependency it inherited (OQ-09). OQ-09 and OQ-11 remain open and sit outside both modules.
+**`identity-and-access` and `commerce` are both fully specified.** No open items remain against either module directly. `commerce` carries one minor cross-cutting item (OQ-12) and one external client dependency (GST treatment, §22.2 item 2) — neither is a gap in the specification itself. OQ-11 remains open and sits outside both modules.
 
 ---
 
@@ -78,12 +71,12 @@ It is entirely possible the tool the institute chooses does not permit the stude
 
 ## Change Request Backlog
 
-Nine decisions now change the baseline rather than interpret it — the original eight plus [3I-DEC-024](decisions/dec-024-two-tier-age-based-seat-pricing.md), added 2026-08-20. Listed in [decisions/README.md](decisions/README.md#scope-changes-against-srd-v20). [3I-DEC-023](decisions/dec-023-no-standalone-accounts-under-18.md) remains the largest single item and should still be raised distinctly from the rest.
+Ten decisions now change the baseline rather than interpret it — the original eight plus [3I-DEC-024](decisions/dec-024-two-tier-age-based-seat-pricing.md) and [3I-DEC-025](decisions/dec-025-waiver-single-profile-cap.md), both added 2026-08-20. Listed in [decisions/README.md](decisions/README.md#scope-changes-against-srd-v20). [3I-DEC-023](decisions/dec-023-no-standalone-accounts-under-18.md) remains the largest single item and should still be raised distinctly from the rest.
 
 ---
 
 ## Baseline Approval
 
-SRD v2.0 is **verbally approved only**, recorded as `approval: verbal` in its frontmatter. §21.3 measures change requests against an approved baseline; with nine changes now queued, that matters more than it did.
+SRD v2.0 is **verbally approved only**, recorded as `approval: verbal` in its frontmatter. §21.3 measures change requests against an approved baseline; with ten changes now queued, that matters more than it did.
 
 Raised and noted. No action requested.
