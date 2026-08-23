@@ -3,7 +3,7 @@ project: 3i
 module: identity-and-access
 type: data-model
 status: current
-updated: 2026-08-18
+updated: 2026-08-20
 id: 3I-IDA-DM-001
 derived_from:
   - 3i/reference/baseline/srd-v2.0.md
@@ -50,16 +50,32 @@ A person who studies. Owns enrolments, progress, attendance, exam attempts, and 
 | :---- | :---- |
 | Display name | **Locks permanently once a certificate is issued** (FR-FAM-05). Admin may unlock with a recorded reason |
 | Date of birth | Set at creation, **not user-editable** (FR-FAM-07). Corrections go through admin |
+| Tier | `Adult` or `Minor`. **Stored, not derived** — see below |
 | Avatar | Optional |
 | PIN | **Mandatory**, 4-digit, guardian-set (FR-FAM-03 as amended by [3I-DEC-018](/3i/decisions/dec-018-profile-pin-mandatory-guardian-controlled.md)) |
-| Account | Owning account. Maximum 6 **active or never-activated** learners per account (FR-FAM-02 as amended by [3I-DEC-014](/3i/decisions/dec-014-cap-counts-active-profiles-only.md)) |
+| Account | Owning account. Maximum 6 **active or never-activated** learners per account (FR-FAM-02 as amended by [3I-DEC-014](/3i/decisions/dec-014-cap-counts-active-profiles-only.md)) — capped to **1** while the account holds an active waiver ([3I-DEC-025](/3i/decisions/dec-025-waiver-single-profile-cap.md)) |
 | Activation state | See below — **not in the baseline** |
 
 A learner profile has **no email address and no credentials** (FR-FAM-03). It is selected after account login via a profile picker (FR-FAM-04), which requires the profile's PIN to enter.
 
 **Every learner under 18 is a profile.** There is no other route onto the platform for a minor.
 
-**Chat access is derived from age, never stored as a permission:** under 13 is permanently off; 13–17 is a guardian-controlled toggle (FR-FAM-08). Deriving rather than storing is deliberate — a stored flag can be edited, and the non-editable date of birth is the safeguarding control.
+**Chat access is derived from age, never stored as a permission:** under 13 is permanently off; 13–17 is a guardian-controlled toggle (FR-FAM-08). Deriving rather than storing is deliberate — a stored flag can be edited, and the non-editable date of birth is the safeguarding control. **Tier, below, is the one exception to "derive, don't store"** — the reason is billing timing, not safeguarding, and doesn't weaken this principle.
+
+### Tier — Adult or Minor, stored, not derived
+
+**Introduced 2026-08-20, alongside [3I-DEC-024](/3i/decisions/dec-024-two-tier-age-based-seat-pricing.md) (two-tier seat pricing) and [3I-DEC-025](/3i/decisions/dec-025-waiver-single-profile-cap.md) (waiver single-profile cap).** Not in the baseline; both commerce decisions depend on it existing.
+
+| Value | Meaning |
+| :---- | :---- |
+| `Adult` | 18 and over. Priced on the adult SubscriptionItem when active — [3I-CMR-DM-001](/3i/modules/commerce/data-model.md#subscriptionitem--two-tier-seat-pricing) |
+| `Minor` | Under 18. Priced on the minor SubscriptionItem when active |
+
+**Why stored rather than computed live from date of birth:** [3I-DEC-024](/3i/decisions/dec-024-two-tier-age-based-seat-pricing.md) requires ageing up from Minor to Adult to reprice **at the account's next renewal, not the instant someone turns 18** — no mid-cycle surprise charge. If tier were only ever calculated on the fly from `dateOfBirth`, that calculation would flip to Adult the moment the birthday passed, with no way to hold the old price until renewal. Storing the value, and updating it deliberately, is what makes the no-mid-cycle-reprice rule enforceable.
+
+**Set at profile creation**, from the learner's age on that date. **Updated only by the ageing-up scheduled process** described in the commerce data model — never recalculated live, never touched by any other code path. Whoever implements profile creation and seat activation should treat this as a plain stored field to set once and leave alone, not a value to keep in sync with `dateOfBirth` on every read.
+
+**`identity-and-access` owns this field**, consistent with owning `Learner` generally — `commerce` reads it to decide which SubscriptionItem a seat's quantity belongs to, and to run the ageing-up job, but does not duplicate it.
 
 ### PIN — mandatory, guardian-set, guardian-reset
 
@@ -86,7 +102,7 @@ A seat is permanently bound to the profile it activates and is never reassigned.
 
 **Inactive and deleted must remain visibly distinct in every interface.** They sit close together conceptually and one preserves history while the other destroys it — including chat history, where deletion removes message content but retains the moderation record ([3I-DEC-016](/3i/decisions/dec-016-deletion-removes-content-retains-record.md)).
 
-**Cap:** [3I-DEC-014](/3i/decisions/dec-014-cap-counts-active-profiles-only.md). Never-activated and active count; inactive sits outside the cap as archive.
+**Cap:** [3I-DEC-014](/3i/decisions/dec-014-cap-counts-active-profiles-only.md). Never-activated and active count; inactive sits outside the cap as archive. **Reduced to 1 while a waiver is active** — [3I-DEC-025](/3i/decisions/dec-025-waiver-single-profile-cap.md); profiles other than the one named in the waiver request are auto-deactivated on approval, following this same Active → Inactive transition, not a separate mechanism.
 
 ---
 
@@ -143,7 +159,7 @@ Entities here are read across the project. Those modules link to this document r
 | `learning-delivery` | Learner — enrolment, waitlist, attendance |
 | `assessment` | Learner — exam attempts and grades |
 | `certification` | Learner — name snapshotted at issue ([3I-DEC-005](/3i/decisions/dec-005-denormalised-certificates.md)) |
-| `commerce` | Account — subscription, seats; Learner — seat binding, activation state |
+| `commerce` | Account — subscription, seats; Learner — seat binding, activation state, and **tier** (drives which SubscriptionItem a seat's quantity belongs to) |
 | `communication` | Account — chat participation; Learner — age-derived access |
 | `catalogue` | Learner — age-filtered catalogue (FR-CRS-10) |
 | `instructors` | Account — instructor role assignment |
