@@ -1,13 +1,15 @@
 ---
 project: 3i
 type: decision
-status: draft
-updated: 2026-08-18
+status: current
+updated: 2026-08-23
 id: 3I-DEC-013
 tags: [decision, instructors, batches]
 ---
 
 # Losing an Instructor Mid-Course Dismisses the Course
+
+> **Status corrected 2026-08-23** — this file's frontmatter read `status: draft` despite the decisions register having listed it as `current` since 2026-08-18, and despite [3I-DEC-021](dec-021-attendance-measured-against-sessions-delivered.md) having resolved the "Unresolved" section below the same day it was written. Flagged and fixed while scaffolding `learning-delivery`, which depends on both. No content below is changed, only the status and this notice.
 
 ## Context
 
@@ -21,20 +23,20 @@ Two events remove an instructor mid-delivery: admin suspension (FR-INST-07), and
 
 FR-INST-07 already sets the surrounding behaviour: published courses become suspended, enrolled learners retain access to completed materials and may join a future batch. No refund is triggered, since access is subscription-based (FR-BAT-05).
 
-## Unresolved
+## Resolved (was "Unresolved")
 
-Recorded in [OQ-04](../open-questions.md#oq-04--attendance-threshold-after-a-dismissed-course).
+**Resolved by [3I-DEC-021](dec-021-attendance-measured-against-sessions-delivered.md), 2026-08-18, the same day this decision was drafted.** The question below was live for only a few hours within the same review session:
 
-FR-CERT-02 requires ≥70% of sessions attended. A course ending early makes 70% of the *scheduled* sessions unreachable, so a learner with perfect attendance across every session actually held receives nothing.
+~~FR-CERT-02 requires ≥70% of sessions attended. A course ending early makes 70% of the *scheduled* sessions unreachable, so a learner with perfect attendance across every session actually held receives nothing.~~
 
-Proposed: measure against sessions **delivered**, not scheduled. Not yet agreed.
+~~Proposed: measure against sessions **delivered**, not scheduled. Not yet agreed.~~
 
-## The WWCC case should not arise
+DEC-021 agreed exactly that proposal, and additionally implemented this decision's own "WWCC case should not arise" suggestion below as a real scheduling constraint, not just a recommendation.
 
-FR-INST-03 gives admin 60 days' notice before expiry. The platform should refuse to schedule sessions beyond an instructor's WWCC expiry date, which turns a mid-course collapse into a scheduling error caught months earlier.
+## The WWCC Case — Implemented
 
-That is not in the baseline and would be a change request. It is the cheaper fix by a wide margin: a batch's sessions are all known at creation (FR-BAT-01), so the check is a date comparison at schedule time.
+FR-INST-03 gives admin 60 days' notice before expiry. [3I-DEC-021](dec-021-attendance-measured-against-sessions-delivered.md) makes this actionable: **the platform refuses to schedule a session dated past an instructor's WWCC expiry.** A batch's sessions are all known at creation (FR-BAT-01), so this is a date comparison at schedule time — see [learning-delivery's data model](/3i/modules/learning-delivery/data-model.md#the-wwcc-scheduling-guard) for where this check actually lives.
 
 ## Cost
 
-As it stands, the safeguarding control that protects children — blocking an expired-check instructor — is also what destroys a cohort's certificates. Those should not be the same event.
+As it stood before DEC-021, the safeguarding control that protects children — blocking an expired-check instructor — was also what destroyed a cohort's certificates. DEC-021 is what stops those being the same event.

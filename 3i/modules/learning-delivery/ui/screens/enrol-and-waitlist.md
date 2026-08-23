@@ -1,0 +1,48 @@
+---
+project: 3i
+module: learning-delivery
+type: ui-spec
+status: current
+updated: 2026-08-23
+id: 3I-LDL-UI-001
+derived_from:
+  - 3i/reference/baseline/srd-v2.0.md
+tags:
+  - ui
+  - enrolment
+---
+
+# Screen: Enrol & Waitlist
+
+Satisfies: FR-ENR-01, FR-ENR-02, FR-ENR-03, FR-ENR-04, FR-ENR-05, FR-ENR-06, FR-ENR-07
+
+---
+
+## Purpose
+
+Enrol a profile into a course (and, for batch-based courses, a specific batch), including the age-gate check and override, and manage the resulting waitlist state if the batch is full.
+
+## Access Gate
+
+Member. Reached from [Course Detail](/3i/modules/catalogue/ui/screens/course-detail.md)'s enrolment call-to-action.
+
+## Contents
+
+- Which profile is enrolling (implicit if only one qualifies, same single-profile-skip principle as [3I-DEC-026](/3i/decisions/dec-026-single-profile-skips-picker.md), applied here rather than restated as a new decision).
+- For `Online Class`/`Mixed` courses: batch selection, if more than one is open.
+- If the profile's age doesn't meet the course's `minimumAge` but is within 2 years: the override option, requiring **explicit separate confirmation** (see [validation-rules.md](../validation-rules.md#age-gate-and-override)) — absent entirely if the gap exceeds 2 years or the course is `18+`.
+- If the target batch is at capacity: waitlist join instead of direct enrolment, with the [Waitlist Position Badge](../components.md#waitlist-position-badge).
+
+## Behaviour
+
+**No seat purchase happens here** if the profile already has an active seat — enrolling in a second course consumes nothing further (FR-ENR-01, see [README.md](../README.md#one-seat-many-courses)). If the profile has **no** active seat, this screen routes to [Pricing / Plan Selection](/3i/modules/commerce/ui/screens/pricing-plan-selection.md) instead of enrolling directly — enrolment cannot proceed without an active profile.
+
+**Once waitlisted**, this screen (or a notification linking back to it) is where a promoted `offered`-status learner accepts within the 48-hour window — see [validation-rules.md](../validation-rules.md#waitlist-promotion-window).
+
+## Role Variations
+
+Member only.
+
+## Contrast and RTL
+
+Standard, 4.5:1 (NFR-12). Full RTL mirroring (FR-LOC-04).
