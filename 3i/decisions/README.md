@@ -17,7 +17,7 @@ One file per decision: context, decision, consequences, cost. A decision is neve
 | ID | Decision | Status | Client sign-off | Codes |
 | :---- | :---- | :---- | :---- | :---- |
 | [3I-DEC-001](dec-001-learner-as-unit-of-study.md) | `Learner` is the unit of study, not `Account` | current | n/a — interpretation | AUTH, FAM |
-| [3I-DEC-002](dec-002-under-13-family-accounts.md) | Under-13s exist only as profiles under a guardian account | **stale — see note below** | n/a — interpretation | AUTH, FAM, CHAT |
+| [3I-DEC-002](dec-002-under-13-family-accounts.md) | ~~Under-13s exist only as profiles; 13–17 may go standalone~~ | **superseded** (13–17 portion) by 023 | n/a | AUTH, FAM, CHAT |
 | [3I-DEC-003](dec-003-web-only-stripe-checkout.md) | Checkout is web-only; the apps carry no purchase surface | current | n/a — interpretation | BILL |
 | [3I-DEC-004](dec-004-bunny-stream-video-hosting.md) | Video is hosted on Bunny Stream | current | n/a — interpretation | MAT |
 | [3I-DEC-005](dec-005-denormalised-certificates.md) | Certificates are snapshotted at issue | current | n/a — interpretation | CERT |
@@ -44,9 +44,9 @@ One file per decision: context, decision, consequences, cost. A decision is neve
 | [3I-DEC-026](dec-026-single-profile-skips-picker.md) | A Member with exactly one profile skips the picker's tile-selection step | current | n/a — UX interpretation | FAM |
 | [3I-DEC-027](dec-027-guardian-reviews-on-behalf.md) | Guardian submits ratings/reviews on behalf of under-13 profiles | current | n/a — interpretation, extends 020 | CRS |
 
-**Note on 3I-DEC-002, flagged 2026-08-23, not yet resolved:** this decision's "13–17 is different... may hold a standalone account" content directly contradicts [3I-DEC-023](dec-023-no-standalone-accounts-under-18.md), which removed all standalone under-18 accounts. Per this project's own rule, a decision is never edited to reflect a change of mind — DEC-002 should be marked `superseded` by DEC-023 (or a new decision citing both), not silently left as `current` with stale content. Flagged here as an open correction, not yet actioned, so as not to violate the decisions register's own append-only discipline without deliberate handling. Its *first* paragraph (under-13s are profiles only) remains entirely correct and is unaffected.
-
 **`deferred`** marks a decision taken but consciously parked. **`superseded`** marks a reversed decision, replaced by a specific successor. **`deprecated`** marks a decision whose entire premise no longer applies and is not being replaced — the idea itself was dropped, not redirected. All three keep the file for history; none are rewritten.
+
+**On 3I-DEC-002:** only its 13–17-standalone-account content is superseded by DEC-023. Its under-13-is-profile-only content remains correct and is now also stated directly in DEC-023 itself — see [3I-DEC-002](dec-002-under-13-family-accounts.md)'s superseded notice for the full explanation of what changed and what didn't.
 
 **On the "client sign-off" column, updated 2026-08-18:** all eight decisions carrying client-facing scope changes (014–016, 018–019, 021–023) are marked **approved — proceed to build**, on the basis that Saitama holds effective decision authority on the client's behalf for this engagement. This is a project-level operating assumption recorded here for traceability, not a claim that the institute's own §21.3 written-approval process has been formally exercised. 024 and 025 follow the same basis per the commerce-module work; 026 and 027 are UX/safeguarding interpretation only and need no such sign-off.
 
@@ -91,6 +91,6 @@ Neither was part of the 2026-08-18 batch — both raised and resolved separately
 
 ## Provenance
 
-Decisions 001–007 derive from SRD v2.0 and cite the requirement codes that fix them. Decisions 008–027 were taken outside the baseline: 008–023 in review on 2026-08-18, 024–025 on 2026-08-20 once pricing was confirmed, 026 on 2026-08-23, and 027 on 2026-08-23 alongside the `catalogue` module scaffold. Twelve of them (014–016, 018–019, 021–027) are approved for build or need no formal sign-off per the notes above; one (008) is deprecated; one (002) is flagged stale and unresolved, see the note above.
+Decisions 001–007 derive from SRD v2.0 and cite the requirement codes that fix them. Decisions 008–027 were taken outside the baseline: 008–023 in review on 2026-08-18, 024–025 on 2026-08-20 once pricing was confirmed, and 026–027 on 2026-08-23. Twelve of them (014–016, 018–019, 021–027) are approved for build or need no formal sign-off per the notes above; one (008) is deprecated; one (002) is partially superseded, per the note above.
 
 The client supplied no written material, so no decision here cites a client document. None exists.

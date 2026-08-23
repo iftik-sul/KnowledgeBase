@@ -1,14 +1,20 @@
 ---
 project: 3i
 type: decision
-status: current
-updated: 2026-08-18
+status: superseded
+updated: 2026-08-23
 id: 3I-DEC-002
 tags: [decision, compliance, safeguarding]
 supersedes: dec-002-guardian-held-accounts.md
 ---
 
 # Under-13s Exist Only as Profiles
+
+> **Partially superseded by [3I-DEC-023](dec-023-no-standalone-accounts-under-18.md) on 2026-08-23.**
+>
+> Retained for history. Not a basis for implementation for the 13–17 band.
+>
+> This decision's "Under-13" section — that under-13 learners exist only as profiles under a guardian account — remains correct and is now also stated directly in DEC-023. Its **"13–17 is different... may hold a standalone account"** section is wrong: DEC-023 removed standalone accounts for everyone under 18, so a 13–17 learner is a guardian profile exactly like a younger one, with no standalone-login shape remaining. Flagged 2026-08-23 during the `catalogue` module scaffold, when the contradiction surfaced while checking guardian-attribution precedent; corrected here rather than left silently wrong.
 
 ## Context
 
@@ -37,3 +43,5 @@ The 13–17 band supports two different shapes for the same person, and they do 
 ## Correction
 
 An earlier version of this decision stated that children never hold accounts. That is true under 13 and false for 13–17, who may log in. The error came from writing before reading §3 of the baseline.
+
+**Second correction, 2026-08-23:** the "13–17 is different" section above describes a standalone-account shape [3I-DEC-023](dec-023-no-standalone-accounts-under-18.md) later removed entirely. See the superseded notice at the top of this file.

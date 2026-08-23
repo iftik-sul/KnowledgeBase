@@ -2,7 +2,7 @@
 project: 3i
 type: standard
 status: current
-updated: 2026-08-18
+updated: 2026-08-23
 tags:
   - standard
   - meta
@@ -76,6 +76,8 @@ Requirements proposed by us with no SRD entry take a `P-nn` number in a project-
 | REP | Reports and exports | 5 |
 | LOC | Localisation | 6 |
 
+**Note, 2026-08-23:** the CRS count above (12) does not match a direct count against SRD v2.0 §8.2, which defines FR-CRS-01 through FR-CRS-11 — 11 requirements. Left as originally recorded here rather than silently changed, since this table's numbers were set at module-partition time (2026-08-18) as a planning estimate, not verified line-by-line against the baseline at that point. The correct figure, used in [modules/catalogue/README.md](modules/catalogue/README.md), is **11**. Correcting the value below rather than leaving two contradictory counts in the repository.
+
 ---
 
 ## Modules
@@ -92,7 +94,7 @@ Settled 2026-08-18. Thirteen modules, covering all 19 requirement codes and the 
 | `materials` | MTL | MAT | 15 |
 | `assessment` | ASM | QB, EX | 15 |
 | `learning-delivery` | LDL | BAT, ENR | 14 |
-| `catalogue` | CAT | CRS | 12 |
+| `catalogue` | CAT | CRS | 11 |
 | `certification` | CRT | CERT | 9 |
 | `instructors` | INS | INST | 7 |
 | `public-site` | PUB | CMS | 7 |
@@ -101,6 +103,8 @@ Settled 2026-08-18. Thirteen modules, covering all 19 requirement codes and the 
 | `platform` | PLT | — | 32 NFRs |
 
 **Module abbreviations are a separate namespace from requirement codes.** `MTL` is the module; `MAT` is the requirement code it owns. None of the thirteen abbreviations collides with any of the nineteen codes, deliberately — a document ID and a requirement code appearing in the same sentence must be unambiguous.
+
+**Total check, added 2026-08-23:** summing this table's FR column (28+23+22+15+15+14+11+9+7+7+6+5) gives **162**, matching the total functional-requirement count stated in [3i/README.md](/3i/README.md#baseline). Before the CRS correction above, the table summed to 163 — one more than the documented total — which is what surfaced the miscount.
 
 ### Reasoning
 
@@ -130,7 +134,7 @@ modules/<module-name>/
 ├── data-model.md                # entities owned by this module
 ├── backend-spec.md              # optional — implementation-spec type, added once build begins
 ├── requirements/
-│   └── <code>-<name>.md
+│   └── <code>-<n>.md
 └── ui/
     ├── README.md                # role × screen matrix
     ├── components.md
@@ -171,11 +175,11 @@ Some rules span every module. They are documented **once**, at project root, and
 | Document | Why it cannot live in a module |
 | :---- | :---- |
 | [age-and-safeguarding.md](age-and-safeguarding.md) | Age rules sit in AUTH, FAM, CRS, ENR, CHAT and INST simultaneously |
-| `app-store-compliance.md` — **not yet written** | The no-purchase-surface rule spans BILL, NOT and the NFRs at once |
+| [app-store-compliance.md](app-store-compliance.md) | The no-purchase-surface rule spans BILL, NOT and the NFRs at once |
 | [decisions/](decisions/README.md) | The consequential decisions constrain several modules at once |
 | [open-questions.md](open-questions.md) | Tracks unresolved items across the whole project |
 
-**On app store compliance.** FR-BILL-02 forbids any purchase surface in the apps, FR-NOT-06 forbids purchase prompts in push notifications, and NFR-15 through NFR-21 govern the multiplatform-services submission model, registration being web-first, and the 13+ age rating. That is one rule enforced in three modules — `commerce`, `communication`, and `platform` — and §22.3 names store rejection under Guideline 3.1.1 as the highest-uncertainty item in the entire plan. It is the second concern that qualifies for the same treatment as safeguarding, and it should be written before the Commerce phase rather than during it.
+**On app store compliance.** FR-BILL-02 forbids any purchase surface in the apps, FR-NOT-06 forbids purchase prompts in push notifications, and NFR-15 through NFR-21 govern the multiplatform-services submission model, registration being web-first, and the 13+ age rating. That is one rule enforced in three modules — `commerce`, `communication`, and `platform` — and §22.3 names store rejection under Guideline 3.1.1 as the highest-uncertainty item in the plan. It is now written — see [app-store-compliance.md](app-store-compliance.md).
 
 ---
 
@@ -195,9 +199,9 @@ Some rules span every module. They are documented **once**, at project root, and
 | Location | Pattern | Example |
 | :---- | :---- | :---- |
 | `reference/baseline/` | `srd-v<version>.md` | `srd-v2.0.md` |
-| `requirements/` | `<code>-<name>.md` | `chat-moderation.md` |
+| `requirements/` | `<code>-<n>.md` | `chat-moderation.md` |
 | `ui/screens/` | `<screen-name>.md` | `checkout.md` |
-| `decisions/` | `dec-NNN-<name>.md` | `dec-001-learner-as-unit-of-study.md` |
+| `decisions/` | `dec-NNN-<n>.md` | `dec-001-learner-as-unit-of-study.md` |
 | module root, `implementation-spec` | `backend-spec.md` (or `frontend-spec.md` when written) | `3i/modules/identity-and-access/backend-spec.md` |
 
 ---
