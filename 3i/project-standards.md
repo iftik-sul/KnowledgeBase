@@ -44,7 +44,7 @@ The baseline is the parent of every requirement document. Nothing sits above it.
 
 ## Requirement Numbering
 
-**The SRD's requirement codes are canonical.** Format is `FR-<CODE>-<nn>` — `FR-AUTH-03`, `FR-CHAT-07`, `FR-BILL-02` — and `NFR-<nn>` for non-functional requirements, which are unprefixed and run in a single series to 32.
+**The SRD's requirement codes are canonical.** Format is `FR-<CODE>-<nn>` — `FR-AUTH-03`, `FR-CHAT-07`, `FR-BILL-02` — and `NFR-<nn>` for non-functional requirements, which are unprefixed and run in a single series to 31.
 
 A requirement number is never reassigned, renumbered, or reused, including after deprecation. When a requirement is split across documents, every resulting file carries the original code.
 
@@ -59,8 +59,8 @@ Requirements proposed by us with no SRD entry take a `P-nn` number in a project-
 | AUTH | Registration and authentication | 13 |
 | FAM | Family accounts and learner profiles | 10 |
 | RBAC | Roles and permissions | 5 |
-| INST | Instructor onboarding | 7 |
-| CRS | Course catalogue and management | 12 |
+| INST | Instructor onboarding | 7 (6 in effect — [3I-DEC-029](decisions/dec-029-no-instructor-storage-quota.md) drops FR-INST-05) |
+| CRS | Course catalogue and management | 11 |
 | MAT | Course materials and video delivery | 15 |
 | BAT | Batches and live sessions | 7 |
 | ENR | Enrolment, waitlist and age gating | 7 |
@@ -76,7 +76,7 @@ Requirements proposed by us with no SRD entry take a `P-nn` number in a project-
 | REP | Reports and exports | 5 |
 | LOC | Localisation | 6 |
 
-**Note, 2026-08-23:** the CRS count above (12) does not match a direct count against SRD v2.0 §8.2, which defines FR-CRS-01 through FR-CRS-11 — 11 requirements. Left as originally recorded here rather than silently changed, since this table's numbers were set at module-partition time (2026-08-18) as a planning estimate, not verified line-by-line against the baseline at that point. The correct figure, used in [modules/catalogue/README.md](modules/catalogue/README.md), is **11**. Correcting the value below rather than leaving two contradictory counts in the repository.
+CRS is corrected to 11 here directly (was recorded as 12 at module-partition time, 2026-08-18, before being verified line-by-line against the baseline — corrected 2026-08-23, matching [modules/catalogue/README.md](modules/catalogue/README.md)).
 
 ---
 
@@ -84,7 +84,7 @@ Requirements proposed by us with no SRD entry take a `P-nn` number in a project-
 
 A module in 3i is a **functional area** owning one or more requirement codes. The code in an ID stays the SRD's; the folder is ours.
 
-Settled 2026-08-18. Thirteen modules, covering all 19 requirement codes and the 32 NFRs.
+Settled 2026-08-18. Thirteen modules, covering all 19 requirement codes and the 31 NFRs. **All thirteen are now fully specified** (as of 2026-08-23) — see each module's own README for status.
 
 | Module | Abbrev. | Owns | FRs |
 | :---- | :---: | :---- | ----: |
@@ -96,15 +96,15 @@ Settled 2026-08-18. Thirteen modules, covering all 19 requirement codes and the 
 | `learning-delivery` | LDL | BAT, ENR | 14 |
 | `catalogue` | CAT | CRS | 11 |
 | `certification` | CRT | CERT | 9 |
-| `instructors` | INS | INST | 7 |
+| `instructors` | INS | INST | 7 baseline, 6 in effect |
 | `public-site` | PUB | CMS | 7 |
 | `localisation` | LCL | LOC | 6 |
 | `reporting` | RPT | REP | 5 |
-| `platform` | PLT | — | 32 NFRs |
+| `platform` | PLT | — | 31 NFRs |
 
 **Module abbreviations are a separate namespace from requirement codes.** `MTL` is the module; `MAT` is the requirement code it owns. None of the thirteen abbreviations collides with any of the nineteen codes, deliberately — a document ID and a requirement code appearing in the same sentence must be unambiguous.
 
-**Total check, added 2026-08-23:** summing this table's FR column (28+23+22+15+15+14+11+9+7+7+6+5) gives **162**, matching the total functional-requirement count stated in [3i/README.md](/3i/README.md#baseline). Before the CRS correction above, the table summed to 163 — one more than the documented total — which is what surfaced the miscount.
+**Total check:** summing this table's FR column (28+23+22+15+15+14+11+9+7+7+6+5) gives **162**, matching the total functional-requirement count stated in [3i/README.md](/3i/README.md#baseline). This includes `instructors`' full baseline 7, since [3I-DEC-029](decisions/dec-029-no-instructor-storage-quota.md) drops one requirement's *effect*, not its baseline existence — the 162 total is a count against SRD v2.0 as written, unaffected by decisions made after it.
 
 ### Reasoning
 
@@ -116,7 +116,7 @@ Three calls worth recording, because a later reader will otherwise wonder:
 
 ### `platform`
 
-Holds what genuinely belongs to no functional area: the 32 NFRs, deployment topology, capacity baseline (§20.2), and integration contracts for Stripe, Bunny Stream, and AWS SES.
+Holds what genuinely belongs to no functional area: the 31 NFRs, deployment topology, capacity baseline (§20.2), and integration contracts for Stripe, Bunny Stream, and AWS SES.
 
 It is not a drawer for anything hard to place. A document that could live in a real module belongs in that module.
 
@@ -189,7 +189,7 @@ Some rules span every module. They are documented **once**, at project root, and
 | :---- | :---- |
 | `functional-requirement` | A group of SRD requirements for one module, with acceptance criteria |
 | `compliance` | Analysis of a legal or platform-policy constraint and what it forces |
-| `integration` | Contract with a third-party service — Stripe, Bunny Stream, SES |
+| `integration` | Contract with a third-party service — Stripe, Bunny Stream, SES. First used in `platform`'s [integrations/](modules/platform/integrations/stripe.md) |
 | `implementation-spec` | Developer-facing build detail for one module — schema, endpoints, middleware. Sits below `requirements` and `ui-spec` in the derivation chain: it translates *what* a module must do into *how* it is built, and cites the requirements/decisions it implements rather than restating them. First used in [3I-IDA-IMPL-001](modules/identity-and-access/backend-spec.md) |
 
 ---

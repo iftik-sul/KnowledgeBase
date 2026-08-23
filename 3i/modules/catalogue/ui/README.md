@@ -57,6 +57,6 @@ Six screens.
 
 | Item | Blocks |
 | :---- | :---- |
-| None against this module's own screens. | |
+| None. | |
 
-**Three forward references remain open against modules not yet built** — `instructors`, `materials`, `learning-delivery` — flagged in [data-model.md](../data-model.md#forward-references) and [README.md](../README.md#open-against-this-module) rather than repeated here. They affect what a screen can *show* (e.g. instructor name, upcoming-batch filter) but not this module's own specification.
+**All forward references this module originally carried are resolved** (2026-08-23) — `instructors`, `materials`, and `learning-delivery` are all real, built modules now. See [data-model.md](../data-model.md#forward-references--all-resolved-2026-08-23).

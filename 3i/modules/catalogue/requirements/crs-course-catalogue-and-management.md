@@ -59,7 +59,7 @@ This is the same six-band system already defined for learner profiles — [Age B
 | :---- | :---- |
 | **FR-CRS-07** | Catalogue search covers title, summary, description, and instructor name, using PostgreSQL full-text search with trigram fuzzy matching |
 
-Instructor name is searched by reference to the `instructors` module (not yet built — see [data-model.md](../data-model.md#forward-references)); the search index itself can be built against Course's own fields today and extended once instructor records exist.
+Instructor name is searched by reference to `instructors`' `InstructorProfile` — a real reference now.
 
 ---
 
@@ -70,7 +70,7 @@ Instructor name is searched by reference to the `instructors` module (not yet bu
 | **FR-CRS-08** | Filters: category, course type, level, age band, minimum rating, language, has upcoming batch |
 | **FR-CRS-09** | Sort: relevance, newest, most enrolled, highest rated, title A–Z |
 
-"Has upcoming batch" and "most enrolled" both read from `learning-delivery` (not yet built). Both filters/sorts are specified here against the Course entity's eventual join to Batch and Enrolment; neither can be implemented before that module exists, and both should be treated as no-op (or simply hidden) filter options until it does, rather than silently returning wrong results.
+"Has upcoming batch" and "most enrolled" both read from `learning-delivery`, a real reference now.
 
 ---
 
@@ -92,7 +92,7 @@ The enrolment-override path (FR-ENR-04, guardian may override upward by up to 2 
 | :---- | :---- |
 | **FR-CRS-11** | Learners may rate a course 1–5 with an optional written review, once per course, only after enrolment. Admin may hide a review |
 
-**Amended by [3I-DEC-027](/3i/decisions/dec-027-guardian-reviews-on-behalf.md):** for an under-13 profile, the guardian submits on the profile's behalf, displayed with the same guardian-attribution format used in chat. The one-review-per-course limit is keyed to the learner profile, not the submitting account. The enrolment check this requirement depends on reads from `learning-delivery` (not yet built) — see [data-model.md](../data-model.md#forward-references).
+**Amended by [3I-DEC-027](/3i/decisions/dec-027-guardian-reviews-on-behalf.md):** for an under-13 profile, the guardian submits on the profile's behalf, displayed with the same guardian-attribution format used in chat. The one-review-per-course limit is keyed to the learner profile, not the submitting account. The enrolment check this requirement depends on reads from `learning-delivery`, a real reference now.
 
 ---
 
@@ -116,4 +116,4 @@ The enrolment-override path (FR-ENR-04, guardian may override upward by up to 2 
 | Age bands, reused from | [Age Band Badge](/3i/modules/identity-and-access/ui/components.md#age-band-badge) |
 | Guardian-on-behalf reviews | [3I-DEC-027](/3i/decisions/dec-027-guardian-reviews-on-behalf.md) |
 | Guardian-on-behalf pattern origin | [3I-DEC-020](/3i/decisions/dec-020-guardian-on-behalf-chat-retained.md) |
-| Enrolment override (not this module's concern) | FR-ENR-04, `learning-delivery` (not yet built) |
+| Enrolment override | FR-ENR-04, `learning-delivery` |

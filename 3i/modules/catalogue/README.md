@@ -24,7 +24,7 @@ The module that turns an instructor's course into something a learner can find, 
 | :---- | :---- | ----: |
 | CRS | Course catalogue and management | 11 |
 
-**Correction against project-standards.md:** that document's module table lists CRS at 12 FRs. Counting FR-CRS-01 through FR-CRS-11 directly against §8.2 of the baseline gives 11. Flagged here rather than silently followed either way — project-standards.md should be corrected to 11 in a small follow-up edit.
+**Correction against project-standards.md, applied 2026-08-23:** that document's module table previously listed CRS at 12 FRs; corrected to 11 in the same pass that fixed this discrepancy, matching a direct count of FR-CRS-01 through FR-CRS-11 against §8.2 of the baseline.
 
 No decisions existed against CRS before this module was scaffolded. One new decision accompanies it: [3I-DEC-027](/3i/decisions/dec-027-guardian-reviews-on-behalf.md) (guardian submits ratings/reviews for under-13 profiles).
 
@@ -36,7 +36,7 @@ No decisions existed against CRS before this module was scaffolded. One new deci
 | **Online Class** | Live sessions only, delivered in batches |
 | **Mixed** | Materials plus live batch sessions |
 
-This module owns the **Course** record itself — its metadata, age tagging, publication state, search, and filtering. It does **not** own the materials attached to a course (`materials`, not yet built) or the batches scheduling its live sessions (`learning-delivery`, not yet built). A course can exist and be catalogued before either of those modules is built against it; the publish gate (FR-CRS-03) is the one place this module has to ask a question of a module that doesn't exist yet — see [data-model.md](data-model.md#forward-references) for how that's handled.
+This module owns the **Course** record itself — its metadata, age tagging, publication state, search, and filtering. It does **not** own the materials attached to a course (`materials`) or the batches scheduling its live sessions (`learning-delivery`) — both real, built modules now, not forward references. See [data-model.md](data-model.md#forward-references) for the (now entirely resolved) history of how this module's dependency on them was handled while they didn't yet exist.
 
 ## The Age Gate
 
@@ -73,10 +73,8 @@ Phase 3, Catalogue (§21.1) — courses, materials, Bunny integration, catalogue
 | Course `level` field has no defined value set in the baseline | Defaulted to Beginner / Intermediate / Advanced — a reasonable placeholder, not confirmed with the client |
 | Course `language` field — unclear whether limited to the platform's 5 UI locales | Modelled as free text for now, since a course could reasonably be taught in a language the platform UI doesn't otherwise support (e.g. Qur'anic Arabic recitation delivered to an English-locale account). Flagged, not decided |
 | Category taxonomy | Simple flat, admin-managed list — confirmed direction, no fixed values yet |
-| `instructorId` on Course | Forward-references the `instructors` module (INST), not yet built. See [data-model.md](data-model.md#forward-references) |
-| Publish gate's material/batch check | Forward-references `materials` and `learning-delivery`, neither yet built. See [data-model.md](data-model.md#forward-references) |
 
-None of the above block this module's own specification — they are dependencies on modules still to come, flagged plainly rather than assumed silently, per the same treatment `commerce` gave its dependency on `identity-and-access`.
+**Resolved 2026-08-23:** `instructorId` on Course, and the publish gate's material/batch check, were both originally forward-referenced here pending `instructors`, `materials`, and `learning-delivery`. All three now exist — see [data-model.md](data-model.md#forward-references).
 
 ## Change Requests Owed to the Client
 
