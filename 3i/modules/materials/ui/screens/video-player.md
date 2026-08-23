@@ -25,7 +25,7 @@ Stream a video material via a short-expiry signed Bunny Stream URL, tracking cum
 
 ## Access Gate
 
-Member with a qualifying enrolment (forward-referenced, fails closed — see [ui/README.md](README.md#blocked)). **The signed URL is issued per learner, not per session** — [3I-DEC-004](/3i/decisions/dec-004-bunny-stream-video-hosting.md): a failure here is a signing failure tied to the active learner profile's entitlement, not a generic "are you logged in" check.
+Member with a qualifying enrolment, checked directly against `learning-delivery`'s `Enrolment` record. **The signed URL is issued per learner, not per session** — [3I-DEC-004](/3i/decisions/dec-004-bunny-stream-video-hosting.md): a failure here is a signing failure tied to the active learner profile's entitlement, not a generic "are you logged in" check.
 
 ## Contents
 

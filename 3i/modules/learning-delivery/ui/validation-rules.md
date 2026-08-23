@@ -30,4 +30,4 @@ On [Enrol \& Waitlist](screens/enrol-and-waitlist.md): an `offered`-status Enrol
 
 ## WWCC Scheduling Guard
 
-On [Batch Schedule / Manage](screens/batch-schedule-manage.md): no session date may fall past the instructor's WWCC expiry ([3I-DEC-021](/3i/decisions/dec-021-attendance-measured-against-sessions-delivered.md)). Forward-referenced to `instructors` — until that module exists, this validation should fail closed (refuse the whole batch, not just the offending session) rather than silently accept an unchecked date, per the same fail-closed principle used elsewhere for forward references.
+On [Batch Schedule / Manage](screens/batch-schedule-manage.md): no session date may fall past the instructor's WWCC expiry ([3I-DEC-021](/3i/decisions/dec-021-attendance-measured-against-sessions-delivered.md)), checked live against `instructors`' `InstructorProfile.wwccExpiryDate`. A single offending session refuses the whole batch, not just that session.

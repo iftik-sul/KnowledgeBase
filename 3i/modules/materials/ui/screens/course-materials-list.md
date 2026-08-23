@@ -24,7 +24,7 @@ The ordered list of every material in a course — a learner's entry point into 
 
 ## Access Gate
 
-Member, with a learner profile active and a qualifying enrolment on the course (forward-referenced to `learning-delivery` — fails closed until that module exists, per [ui/README.md](README.md#blocked)). Instructor sees the same list, view-only, for courses they own (management happens on [Material Upload / Manage](material-upload-manage.md) instead).
+Member, with a learner profile active and a qualifying enrolment on the course, checked directly against `learning-delivery`'s `Enrolment` record. Instructor sees the same list, view-only, for courses they own (management happens on [Material Upload / Manage](material-upload-manage.md) instead).
 
 ## Contents
 

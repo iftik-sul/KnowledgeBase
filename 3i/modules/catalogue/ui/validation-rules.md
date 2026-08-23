@@ -24,7 +24,7 @@ On [Course create / edit](screens/course-create-edit.md): `minimumAge` has **no 
 
 ## Publish Gate
 
-On [Course create / edit](screens/course-create-edit.md): the **Publish** action is disabled (not hidden — an instructor should see the action exists and understand why it's unavailable) until all three publish-gate conditions are met: age tag present, thumbnail uploaded, and at least one material or batch exists (FR-CRS-03). See [data-model.md](../data-model.md#publish-gate) for the full status-transition table. The two content-existence checks are forward-referenced to `materials` and `learning-delivery` — until those modules exist, this gate condition cannot actually be evaluated and should be treated as **not satisfied** (fail closed, never fail open) rather than skipped.
+On [Course create / edit](screens/course-create-edit.md): the **Publish** action is disabled (not hidden — an instructor should see the action exists and understand why it's unavailable) until all three publish-gate conditions are met: age tag present, thumbnail uploaded, and at least one material or batch exists (FR-CRS-03). See [data-model.md](../data-model.md#publish-gate) for the full status-transition table. The two content-existence checks read live from `materials` and `learning-delivery`.
 
 ## Category Requirement
 

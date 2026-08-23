@@ -26,7 +26,7 @@ Satisfies: FR-MAT-08, FR-MAT-10, FR-MAT-11, FR-MAT-12, FR-MAT-13, FR-MAT-14, FR-
 
 ## Access Gate
 
-Mobile (Flutter) only. Member with a qualifying enrolment (forward-referenced, fails closed).
+Mobile (Flutter) only. Member with a qualifying enrolment, checked directly against `learning-delivery`'s `Enrolment` record.
 
 ## Contents
 

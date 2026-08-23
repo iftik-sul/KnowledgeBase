@@ -24,7 +24,7 @@ In-browser rendering of a document, or playback of an audio material, with no do
 
 ## Access Gate
 
-Member with a qualifying enrolment (forward-referenced, fails closed — see [ui/README.md](README.md#blocked)).
+Member with a qualifying enrolment, checked directly against `learning-delivery`'s `Enrolment` record.
 
 ## Contents
 

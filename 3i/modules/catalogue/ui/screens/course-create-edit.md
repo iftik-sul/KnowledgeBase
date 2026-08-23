@@ -25,7 +25,7 @@ An instructor creates a new course or edits an existing one, and publishes it on
 
 ## Access Gate
 
-Instructor only, and only for courses they own (`Course.instructorId`, forward-referenced — see [data-model.md](../data-model.md#forward-references)). An instructor cannot see or edit another instructor's course, consistent with FR-INST-06's one-instructor-per-course ownership model.
+Instructor only, and only for courses they own (`Course.instructorId`, a real reference to `instructors`' `InstructorProfile`). An instructor cannot see or edit another instructor's course, consistent with FR-INST-06's one-instructor-per-course ownership model.
 
 ## Fields
 
@@ -39,7 +39,7 @@ Title, summary, description, learning outcomes, thumbnail upload, category (requ
 
 **Publish** is disabled until the full [Publish Gate](../validation-rules.md#publish-gate) passes: age tag, thumbnail, and at least one material or batch. On a `draft` with `minimumAge` \< 13, Publish moves the course to `pending_review` (FR-CRS-04) rather than `published` directly — the instructor sees this distinction stated plainly ("submitted for review" vs. "published"), not just a generic success message.
 
-**Materials and batches are not managed from this screen** — they belong to `materials` and `learning-delivery` respectively (neither built yet). This screen only checks whether at least one exists, for the publish gate; the instructor navigates elsewhere to actually add them.
+**Materials and batches are not managed from this screen** — they belong to `materials` and `learning-delivery` respectively. This screen only checks whether at least one exists, for the publish gate; the instructor navigates elsewhere to actually add them.
 
 ## Role Variations
 

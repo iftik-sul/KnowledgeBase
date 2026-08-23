@@ -25,7 +25,7 @@ An instructor uploads, reorders, edits, and deletes materials within a course th
 
 ## Access Gate
 
-Instructor only, and only for courses they own (`Course.instructorId`, owned by `catalogue`, forward-referenced from that module to `instructors`).
+Instructor only, and only for courses they own (`Course.instructorId`, owned by `catalogue`, a real reference to `instructors`' `InstructorProfile`).
 
 ## Contents
 
