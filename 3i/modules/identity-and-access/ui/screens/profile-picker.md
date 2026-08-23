@@ -38,7 +38,7 @@ On correct PIN, enters the profile's study context. On the family's only never-a
 
 ## Role Variations
 
-Member only. Not shown to a Member with exactly one profile, who skips straight to that profile's PIN pad instead — [3I-DEC-024](/3i/decisions/dec-024-single-profile-skips-picker.md), see also [Login](login.md).
+Member only. Not shown to a Member with exactly one profile, who skips straight to that profile's PIN pad instead — [3I-DEC-026](/3i/decisions/dec-026-single-profile-skips-picker.md), see also [Login](login.md).
 
 ## Contrast and RTL
 
