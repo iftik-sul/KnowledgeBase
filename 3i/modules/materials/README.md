@@ -32,9 +32,9 @@ One existing decision applies directly: [3I-DEC-004](/3i/decisions/dec-004-bunny
 
 **Does not own:**
 
-- The **Course** a material belongs to — that's `catalogue`, real now (not a forward reference; `catalogue` was built specifically to unblock this module).
-- **Quiz/exam completion**, despite FR-CERT-03 listing it alongside video/audio/document completion. A submitted exam attempt already carries its own submitted state in `assessment`'s `ExamAttempt` record (not yet built) — duplicating that as a `MaterialProgress` row here would create two sources of truth for the same fact. See [data-model.md](data-model.md#quizexam-completion-is-not-a-materialprogress-row).
-- **Course-level progress** ("this learner is 60% through this course") — that's an aggregation over enrolment and every material/exam in the course, which is `learning-delivery`'s concern once it exists, not something this module computes or stores.
+- The **Course** a material belongs to — that's `catalogue`, a real reference.
+- **Quiz/exam completion**, despite FR-CERT-03 listing it alongside video/audio/document completion. A submitted exam attempt already carries its own submitted state in `assessment`'s `ExamAttempt` record — duplicating that as a `MaterialProgress` row here would create two sources of truth for the same fact. See [data-model.md](data-model.md#quizexam-completion-is-not-a-materialprogress-row).
+- **Course-level progress** ("this learner is 60% through this course") — that's an aggregation over enrolment and every material/exam in the course, `learning-delivery`'s concern, computed there.
 
 ## The Access Model
 
@@ -67,8 +67,8 @@ Phase 3, Catalogue (§21.1) — the baseline's phase table groups `catalogue` an
 | Item | Note |
 | :---- | :---- |
 | Document completion: continuous 30s view vs. cumulative across sessions | FR-CERT-03 says "opened in the viewer for ≥30 seconds" without specifying continuous-vs-cumulative. Modelled as continuous (a single viewing session reaching 30s), the more literal reading — flagged, not confirmed |
-| Enrolment/entitlement check gating video and offline access | Forward-references `learning-delivery` (ENR, not yet built). See [data-model.md](data-model.md#forward-references) |
-| Quiz/exam completion feed for certificates | Forward-references `assessment` (not yet built). Not a gap in this module — explicitly out of scope for it, see above |
+
+**Resolved 2026-08-23:** the enrolment/entitlement check gating video and offline access, and the quiz/exam completion feed for certificates, were both originally forward-referenced here pending `learning-delivery` and `assessment`. Both now exist and are real references — see [data-model.md](data-model.md#forward-references).
 
 ## Change Requests Owed to the Client
 

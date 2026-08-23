@@ -25,7 +25,7 @@ Submit a 1–5 rating and optional written review for a course, once per enrolle
 
 ## Access Gate
 
-Member only, and only reachable for a profile with a qualifying enrolment on this course (forward-referenced to `learning-delivery`, not yet built — until it exists, this entry point cannot actually be gated and should be treated as **absent**, fail-closed, per [validation-rules.md](../validation-rules.md#publish-gate)'s same fail-closed principle). Not reachable a second time for a profile that has already reviewed this course — the entry point becomes "edit your review" instead, not a second submission form.
+Member only, and only reachable for a profile with a qualifying enrolment on this course, checked directly against `learning-delivery`'s `Enrolment` record. Not reachable a second time for a profile that has already reviewed this course — the entry point becomes "edit your review" instead, not a second submission form.
 
 ## Fields
 

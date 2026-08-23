@@ -94,6 +94,6 @@ FR-MAT-13's three wipe triggers (revalidation failure, subscription lapse, devic
 | :---- | :---- |
 | Data model | [3I-MTL-DM-001](../data-model.md) |
 | Video hosting decision, learner-context signing rule | [3I-DEC-004](/3i/decisions/dec-004-bunny-stream-video-hosting.md) |
-| Certificate completion thresholds this module feeds | FR-CERT-02, FR-CERT-03 — `certification` (not yet built) |
+| Certificate completion thresholds this module feeds | FR-CERT-02, FR-CERT-03, `certification` |
 | Course a material belongs to | `catalogue` |
-| Enrolment gating access (forward-referenced) | `learning-delivery` (not yet built) |
+| Enrolment gating access | `learning-delivery` |

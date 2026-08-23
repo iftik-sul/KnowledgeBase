@@ -55,6 +55,6 @@ Five screens. **No admin-specific screen** — per FR-MAT-09, materials aren't i
 
 | Item | Blocks |
 | :---- | :---- |
-| None against this module's own screens. | |
+| None. | |
 
-**One forward reference remains open** — the enrolment/entitlement check gating access to [Video Player](screens/video-player.md), [Document / Audio Viewer](screens/document-audio-viewer.md), and [Mobile Offline Manager](screens/mobile-offline-manager.md), which reads from `learning-delivery` (not yet built). See [data-model.md](../data-model.md#forward-references). Each affected screen fails closed until that module exists — no material plays without a confirmed enrolment check succeeding.
+**The enrolment/entitlement check gating access to [Video Player](screens/video-player.md), [Document / Audio Viewer](screens/document-audio-viewer.md), and [Mobile Offline Manager](screens/mobile-offline-manager.md) was originally forward-referenced pending `learning-delivery`.** That module is real and built now — see [data-model.md](../data-model.md#forward-references--resolved-2026-08-23).

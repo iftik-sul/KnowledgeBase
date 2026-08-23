@@ -22,7 +22,7 @@ Entities owned by this module. Other modules reference these; they do not restat
 
 | Field | Notes |
 | :---- | :---- |
-| Course | FK to `catalogue` Course — real reference, not forward. Materials are ordered within a course (FR-MAT-01) |
+| Course | FK to `catalogue` Course — real reference. Materials are ordered within a course (FR-MAT-01) |
 | Type | `video`, `document`, `audio`, or `external_link` (FR-MAT-01) |
 | Order | Integer, position within the course |
 | Title | |
@@ -96,16 +96,14 @@ See [requirements](requirements/mat-course-materials-and-video-delivery.md#offli
 
 ---
 
-## Forward References
+## Forward References — Resolved (2026-08-23)
 
-Two places this module reads from a module that doesn't exist yet:
+This module was originally scaffolded before `learning-delivery` existed. Both dependencies originally flagged here are now real:
 
-| Reference | Reads from | Module status |
-| :---- | :---- | :---- |
-| Video/offline access gate — "does this Learner have an active enrolment on this Material's Course" | `learning-delivery` (ENR) | Not yet built |
-| Concurrent stream limit (FR-AUTH-12, limited to purchased seats) | `commerce` — **already built**, not forward-referenced. Included here for completeness since it's easy to assume this module owns stream-count enforcement when it actually just reads `commerce`'s seat count | Built |
-
-Only the enrolment check is a genuine forward reference. Until `learning-delivery` exists, this module's access-gate logic should be treated as **not satisfiable** (fail closed — no video plays without a confirmed enrolment) rather than skipped, same principle `catalogue` applied to its own forward references.
+| Reference | Resolved by |
+| :---- | :---- |
+| Video/offline access gate — "does this Learner have an active enrolment on this Material's Course" | `learning-delivery`'s `Enrolment` |
+| Concurrent stream limit (FR-AUTH-12, limited to purchased seats) | `commerce` — already built when this module was scaffolded, included here for completeness since it's easy to assume this module owns stream-count enforcement when it actually just reads `commerce`'s seat count |
 
 ---
 
@@ -125,3 +123,4 @@ Only the enrolment check is a genuine forward reference. Until `learning-deliver
 | Learner | `identity-and-access` | Subject of MaterialProgress and OfflineDownload |
 | Device | `identity-and-access` | Subject of OfflineDownload; device de-authorisation triggers the local wipe |
 | Subscription | `commerce` | Concurrent stream limit and offline-wipe-on-lapse both read subscription/seat status |
+| Enrolment | `learning-delivery` | Video/offline access gate |

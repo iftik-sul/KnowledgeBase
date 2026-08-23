@@ -30,9 +30,9 @@ Public, for any `published` course. A `draft`, `pending_review`, `suspended`, or
 
 - Title, summary, description, learning outcomes, category, type, level, language (FR-CRS-01).
 - **Full numeric age range** (`minimumAge`–`maximumAge`), not just the band — the one place on the platform this precision is shown, since [Course Card](../components.md#course-card) only shows the band.
-- Instructor name and bio (forward-referenced to `instructors`; shows a placeholder until that module exists).
+- Instructor name and bio, read from `instructors`' `InstructorProfile`.
 - Average rating and the list of `visible`-status Reviews, each showing the reviewer's display name — self-submitted reviews show the learner's own name; guardian-submitted reviews show the guardian-attribution format per [3I-DEC-027](/3i/decisions/dec-027-guardian-reviews-on-behalf.md).
-- Enrolment call-to-action — the actual enrolment flow lives in `learning-delivery` (not yet built); this screen links out to it rather than duplicating it.
+- Enrolment call-to-action — the actual enrolment flow lives in `learning-delivery`; this screen links out to it rather than duplicating it.
 
 ## Role Variations
 
