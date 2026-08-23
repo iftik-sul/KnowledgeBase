@@ -26,18 +26,18 @@ The module that turns a family account into a paying subscription, and unwinds t
 | WAV | Waivers | 9 |
 | REF | Refunds | 5 |
 
-Twenty-two baseline requirements, plus three decisions that amend them ([3I-DEC-009](/3i/decisions/dec-009-seats-as-account-pool.md), [3I-DEC-010](/3i/decisions/dec-010-waiver-covers-all-seats.md), [3I-DEC-024](/3i/decisions/dec-024-two-tier-age-based-seat-pricing.md)) — all scope changes requiring §21.3 sign-off.
+Twenty-two baseline requirements, plus four decisions that amend them ([3I-DEC-009](/3i/decisions/dec-009-seats-as-account-pool.md), [3I-DEC-010](/3i/decisions/dec-010-waiver-covers-all-seats.md), [3I-DEC-024](/3i/decisions/dec-024-two-tier-age-based-seat-pricing.md), [3I-DEC-025](/3i/decisions/dec-025-waiver-single-profile-cap.md)) — all scope changes requiring §21.3 sign-off.
 
 ## Commercial Model
 
 | Item | Value |
 | :---- | :---- |
 | Pricing | **Two tiers, by learner age** — see below. No flat subscription fee; every seat, including the first, is priced by its occupant's tier ([3I-DEC-024](/3i/decisions/dec-024-two-tier-age-based-seat-pricing.md)) |
-| Maximum profiles | 6 per account |
+| Maximum profiles | 6 per account — capped to **1** while a waiver is active ([3I-DEC-025](/3i/decisions/dec-025-waiver-single-profile-cap.md)) |
 | Free trial | None |
 | Payment rail | Stripe, **web checkout only** |
 | Refunds | 14-day self-service on first payment; renewals at admin discretion |
-| Waivers | Four fixed tiers — 25%, 50%, 75%, 100%, applied to the whole subscription across both seat tiers |
+| Waivers | Four fixed tiers — 25%, 50%, 75%, 100%, applied to the whole subscription across both seat tiers, capped to one profile for the duration |
 
 ### Seat Pricing
 
@@ -56,7 +56,7 @@ This module owns the **Subscription** and its **two seat quantities** (adult tie
 
 A learner's tier is read from their date of birth at the moment of activation. Turning 18 reprices the seat from minor to adult tier at the account's **next renewal**, never mid-cycle — the same no-proration principle already applied to waivers.
 
-A waiver discounts the **whole subscription**, across both tiers — a family of six on a 100% waiver receives a genuinely zero invoice regardless of the adult/minor mix ([3I-DEC-010](/3i/decisions/dec-010-waiver-covers-all-seats.md)).
+A waiver discounts the **whole subscription**, across both tiers ([3I-DEC-010](/3i/decisions/dec-010-waiver-covers-all-seats.md)) — but caps the account to the **one profile named in the waiver request**, auto-deactivating any others on approval ([3I-DEC-025](/3i/decisions/dec-025-waiver-single-profile-cap.md)). A 100% waiver on that one profile is a genuinely zero invoice; it no longer scales with household size the way an uncapped waiver would.
 
 ## Documents
 
@@ -76,6 +76,7 @@ This module does not restate these. It links.
 | :---- | :---- |
 | The seat as an enrolment grant, and the four-state profile lifecycle | [3I-DEC-009](/3i/decisions/dec-009-seats-as-account-pool.md), [3I-DEC-014](/3i/decisions/dec-014-cap-counts-active-profiles-only.md) |
 | Two-tier age-based seat pricing and the ageing-up reprice rule | [3I-DEC-024](/3i/decisions/dec-024-two-tier-age-based-seat-pricing.md) |
+| Waiver single-profile cap, chosen at application | [3I-DEC-025](/3i/decisions/dec-025-waiver-single-profile-cap.md) |
 | Every account is 18+; every minor is a guardian profile, never a billing party | [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md) |
 | Device allowance scaling with seats | [3I-DEC-015](/3i/decisions/dec-015-device-allowance-scales-with-seats.md) |
 
@@ -96,9 +97,10 @@ Phase 2, Commerce (§21.1) — Stripe, seats, subscriptions, waivers, refunds. S
 | GST treatment for overseas learners | Invoice line-item logic | From the client's accountant |
 | `app-store-compliance.md` | Backend spec for FR-BILL-02 / NFR-15–21 | See above |
 | Seat cancellation running to period-end vs. prorated refund | Backend spec for FR-BILL-04 | Assumed, not yet confirmed — see [3I-DEC-024](/3i/decisions/dec-024-two-tier-age-based-seat-pricing.md#cost--open-items-introduced-by-this-decision) |
+| Auto-deactivation UX on waiver approval | Waiver screens | No per-profile confirmation step before deactivation — flagged in [3I-DEC-025](/3i/decisions/dec-025-waiver-single-profile-cap.md#cost--open-items-introduced-by-this-decision) as worth checking once designed |
 
-**Per-seat price is resolved** — see [3I-DEC-024](/3i/decisions/dec-024-two-tier-age-based-seat-pricing.md). No requirement in this module is otherwise unresolved.
+**Per-seat price is resolved** — see [3I-DEC-024](/3i/decisions/dec-024-two-tier-age-based-seat-pricing.md). **The waiver seat-stacking exposure is resolved** — see [3I-DEC-025](/3i/decisions/dec-025-waiver-single-profile-cap.md). No requirement in this module is otherwise unresolved.
 
 ## Change Requests Owed to the Client
 
-Three decisions in this module change SRD v2.0 rather than interpret it — the seat-as-permanent-grant model, waiver-covers-all-seats, and two-tier age-based pricing. All three are part of the consolidated change request under §21.3 — full list in [decisions/README.md](/3i/decisions/README.md#scope-changes-against-srd-v20).
+Four decisions in this module change SRD v2.0 rather than interpret it — the seat-as-permanent-grant model, waiver-covers-all-seats, two-tier age-based pricing, and the waiver single-profile cap. All four are part of the consolidated change request under §21.3 — full list in [decisions/README.md](/3i/decisions/README.md#scope-changes-against-srd-v20).

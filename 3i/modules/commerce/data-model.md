@@ -89,6 +89,7 @@ Failed payments use Stripe Smart Retries plus a platform email sequence; access 
 | :---- | :---- |
 | Requester | Account (always the billing contact — an adult) |
 | Written explanation | FR-WAV-01 |
+| Covered profile | **The one Learner this waiver is for**, named in the request itself — [3I-DEC-025](/3i/decisions/dec-025-waiver-single-profile-cap.md). Not editable after submission short of a fresh request |
 | Evidence files | Optional. Private bucket, never CDN-cached, accessed only via short-lived signed URLs, every access logged (FR-WAV-07) |
 | Tier | One of four fixed discount values: 25%, 50%, 75%, 100% (FR-WAV-02) — **not** the same "tier" as a SubscriptionItem's adult/minor tier; this field is the discount percentage |
 | Status | Pending, approved, revoked, expired |
@@ -100,9 +101,11 @@ Failed payments use Stripe Smart Retries plus a platform email sequence; access 
 
 **Applies to the whole subscription, across both seat tiers** — [3I-DEC-010](/3i/decisions/dec-010-waiver-covers-all-seats.md). Implemented as a Stripe coupon on the subscription, which discounts every line item naturally — including both the adult and minor SubscriptionItems — rather than requiring bespoke per-tier logic. Seats added during a waived period, of either tier, inherit the discount for the remainder of that period.
 
+**While a waiver is active, its account is capped at the one covered profile** — [3I-DEC-025](/3i/decisions/dec-025-waiver-single-profile-cap.md). On approval, every other profile on the account is automatically deactivated in the same action that activates the waiver — not a separate step, not a pending state. Deactivated profiles follow the standard deactivation pattern (history preserved, reactivatable later at full price). Creating a second profile is blocked outright for the duration. On revocation or expiry, the cap lifts and the account reverts to the normal six-profile limit.
+
 **A 100% waiver is a live subscription with a 100% discount, not a flagged free account** (FR-WAV-06). Admin-created free accounts are a separate mechanism this data model does not cover.
 
-**Evidence files are automatically deleted 12 months after the decision** (FR-WAV-08), independent of whether the waiver itself is later revoked early. The audit trail (requester, submission, reviewer, decision, tier, effective and expiry dates, revocation and reason — FR-WAV-09) persists after the evidence file is purged; only the file goes.
+**Evidence files are automatically deleted 12 months after the decision** (FR-WAV-08), independent of whether the waiver itself is later revoked early. The audit trail (requester, submission, reviewer, decision, tier, effective and expiry dates, revocation and reason — FR-WAV-09) persists after the evidence file is purged; only the file goes. **The covered profile and any auto-deactivated profiles are part of this same audit trail.**
 
 ---
 
