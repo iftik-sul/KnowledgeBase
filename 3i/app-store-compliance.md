@@ -15,7 +15,7 @@ tags:
 
 §22.3 risk 1 names app store rejection under Guideline 3.1.1 as **the highest-uncertainty item in the entire plan**, with 1–2 weeks of review buffer budgeted. This document exists to make that risk something the team can check against, rather than something everyone individually remembers not to break.
 
-Referenced from [OQ-09](open-questions.md#oq-09--app-store-compliancemd-not-yet-written), which this document resolves.
+Referenced from [OQ-09](open-questions.md#resolved), which this document resolves.
 
 ---
 
@@ -78,6 +78,6 @@ A short, deliberately blunt list, because these are the mistakes most likely to 
 
 ## 7. Open
 
-None against this document itself. It resolves [OQ-09](open-questions.md#oq-09--app-store-compliancemd-not-yet-written) in full.
+None against this document itself. It resolves [OQ-09](open-questions.md#resolved) in full.
 
 One item raised while writing it, not yet decided: whether the neutral status string (§3 above) should join the safeguarding-strings exempt-from-AI-translation set ([3I-DEC-019](decisions/dec-019-safeguarding-strings-exempt-from-ai-translation.md)), given how easily a mistranslation could turn "neutral" into "urgent." Worth a quick decision before that string is actually written, not a blocker to this document.

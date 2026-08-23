@@ -32,7 +32,7 @@ Bio (free text), area of expertise, CV upload, WWCC number, issuing state, WWCC 
 
 ## Behaviour
 
-Submission creates an [InstructorApplication](../data-model.md#instructorapplication) with `status = pending` and notifies admin (see [Admin Application Review](admin-application-review.md)). **No immediate role change** — the Member remains whatever they were until admin approves.
+Submission creates an [InstructorApplication](../../data-model.md#instructorapplication) with `status = pending` and notifies admin (see [Admin Application Review](admin-application-review.md)). **No immediate role change** — the Member remains whatever they were until admin approves.
 
 If this Account has a prior `rejected` application, submitting a new one is simply another row — no special "reapplying" framing is needed structurally, though the screen may reasonably show the applicant their own prior rejection reason as context.
 

@@ -11,7 +11,7 @@ tags: [decision, certification, scope-change]
 
 ## Context
 
-[3I-DEC-021](dec-021-attendance-measured-against-sessions-delivered.md) measures an individual learner's attendance against sessions **delivered**, not scheduled — correct on its own terms, but it left a gap recorded as [OQ-11](../open-questions.md#oq-11--minimum-sessions-before-an-attendance-certificate): a batch cancelled after 1 of 10 planned sessions still lets a learner who attended that one session receive a certificate, since 70% of one is one.
+[3I-DEC-021](dec-021-attendance-measured-against-sessions-delivered.md) measures an individual learner's attendance against sessions **delivered**, not scheduled — correct on its own terms, but it left a gap recorded as [OQ-11](../open-questions.md#resolved): a batch cancelled after 1 of 10 planned sessions still lets a learner who attended that one session receive a certificate, since 70% of one is one.
 
 Separately, `Mixed` courses (materials **and** sessions) raised a question the baseline never addresses at all: FR-CERT-02 only defines attendance eligibility for "batch courses" (sessions) and "regular courses" (materials) — it's silent on a course with both.
 
@@ -62,7 +62,7 @@ A learner who did everything right — completed every material in a Mixed cours
 
 | | |
 | :---- | :---- |
-| Resolves | [OQ-11](/3i/open-questions.md#oq-11--minimum-sessions-before-an-attendance-certificate) |
+| Resolves | [OQ-11](/3i/open-questions.md#resolved) |
 | Sits alongside | [3I-DEC-021](dec-021-attendance-measured-against-sessions-delivered.md) |
 | Data model | [3I-CRT-DM-001](/3i/modules/certification/data-model.md) |
 | Requirements | [3I-CRT-REQ-001](/3i/modules/certification/requirements/cert-certificates.md) |

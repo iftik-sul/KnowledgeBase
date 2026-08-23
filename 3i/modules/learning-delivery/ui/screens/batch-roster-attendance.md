@@ -33,7 +33,7 @@ A [Session Row](../components.md#session-row) selector, and for the selected ses
 
 ## Behaviour
 
-Attendance is **saved per session independently** — marking session 3 does not touch or require session 1 or 2's records, and the instructor can mark sessions in any order, not strictly sequentially. Once a session's status is `delivered` (past its scheduled time, per [data-model.md](../data-model.md#session)), its roster remains editable — the baseline doesn't specify a lock-after-N-days rule, so attendance can be corrected retroactively without a time limit, a reasonable default rather than a confirmed one.
+Attendance is **saved per session independently** — marking session 3 does not touch or require session 1 or 2's records, and the instructor can mark sessions in any order, not strictly sequentially. Once a session's status is `delivered` (past its scheduled time, per [data-model.md](../../data-model.md#session)), its roster remains editable — the baseline doesn't specify a lock-after-N-days rule, so attendance can be corrected retroactively without a time limit, a reasonable default rather than a confirmed one.
 
 ## Role Variations
 

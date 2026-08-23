@@ -37,7 +37,7 @@ Public. Behaviour changes based on whether a learner profile is active in the se
 
 **No learner profile active (public browsing, or a Member who hasn't entered a profile context):** every published course is shown, unfiltered by age. The age band still displays on each card — it's informational here, not a filter.
 
-**A learner profile active:** the grid is hard-filtered to courses whose age range includes that learner's current age. This is not a sort weight and not a "recommended" signal — a course outside the range is **absent**, not deprioritised. No banner or message explains the absence; a filtered-out course simply isn't part of the result set, the same way an under-13 profile's catalogue silently excludes 18+ content rather than showing it greyed out with an explanation (consistent with how [validation-rules.md](../../identity-and-access/ui/validation-rules.md) treats other guardian-relevant absences as absent-not-disabled).
+**A learner profile active:** the grid is hard-filtered to courses whose age range includes that learner's current age. This is not a sort weight and not a "recommended" signal — a course outside the range is **absent**, not deprioritised. No banner or message explains the absence; a filtered-out course simply isn't part of the result set, the same way an under-13 profile's catalogue silently excludes 18+ content rather than showing it greyed out with an explanation (consistent with how [validation-rules.md](../../../identity-and-access/ui/validation-rules.md) treats other guardian-relevant absences as absent-not-disabled).
 
 ## Role Variations
 

@@ -49,4 +49,4 @@ An inactive profile still exists, so it presumably still counts against the six.
 
 So the guardian's only route to a new profile is to destroy an old child's learning history. That is a bad position to put a parent in, and it is a direct product of combining a hard cap with a preserve-forever inactive state.
 
-Three ways out, none yet chosen: count only *active* profiles against the cap; raise the cap; or accept it and make the deletion consequence very explicit in the UI. Recorded in [OQ-08](../open-questions.md#oq-08--do-inactive-profiles-count-against-the-six-profile-cap).
+Three ways out, none yet chosen: count only *active* profiles against the cap; raise the cap; or accept it and make the deletion consequence very explicit in the UI. Recorded in [OQ-08](../open-questions.md#resolved).

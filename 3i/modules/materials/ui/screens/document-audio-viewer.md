@@ -34,7 +34,7 @@ Member with a qualifying enrolment, checked directly against `learning-delivery`
 
 ## Behaviour
 
-**Document completion timing is continuous, not cumulative** — per [data-model.md](../data-model.md#materialprogress), the viewer must remain open for 30 continuous seconds in one sitting; closing at 29 seconds and reopening later does not carry a partial count forward. This is a judgement call on an ambiguous requirement, flagged as such in the data model — not a hard baseline guarantee.
+**Document completion timing is continuous, not cumulative** — per [data-model.md](../../data-model.md#materialprogress), the viewer must remain open for 30 continuous seconds in one sitting; closing at 29 seconds and reopening later does not carry a partial count forward. This is a judgement call on an ambiguous requirement, flagged as such in the data model — not a hard baseline guarantee.
 
 **Audio, like video, accumulates progress across sessions** and never regresses once a percentage is earned.
 

@@ -31,7 +31,7 @@ Instructor only, for batches they own.
 
 Per-session **Reschedule** action (new date/time, [Session Row](../components.md#session-row)-based) and a batch-level **Cancel Batch** action, styled and confirmed as a harder action than a single reschedule since it affects every remaining session and every enrolled learner at once.
 
-A **meeting link field** per upcoming session, which on save triggers posting to the batch's chat room and by email (FR-BAT-02) — both channels, not a choice between them; see [requirements](../requirements/bat-batches-and-live-sessions.md#meeting-links) for why both matter.
+A **meeting link field** per upcoming session, which on save triggers posting to the batch's chat room and by email (FR-BAT-02) — both channels, not a choice between them; see [requirements](../../requirements/bat-batches-and-live-sessions.md#meeting-links) for why both matter.
 
 ## Behaviour
 

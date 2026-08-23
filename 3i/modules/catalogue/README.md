@@ -36,7 +36,7 @@ No decisions existed against CRS before this module was scaffolded. One new deci
 | **Online Class** | Live sessions only, delivered in batches |
 | **Mixed** | Materials plus live batch sessions |
 
-This module owns the **Course** record itself — its metadata, age tagging, publication state, search, and filtering. It does **not** own the materials attached to a course (`materials`) or the batches scheduling its live sessions (`learning-delivery`) — both real, built modules now, not forward references. See [data-model.md](data-model.md#forward-references) for the (now entirely resolved) history of how this module's dependency on them was handled while they didn't yet exist.
+This module owns the **Course** record itself — its metadata, age tagging, publication state, search, and filtering. It does **not** own the materials attached to a course (`materials`) or the batches scheduling its live sessions (`learning-delivery`) — both real, built modules now, not forward references. See [data-model.md](data-model.md#forward-references--all-resolved-2026-08-23) for the (now entirely resolved) history of how this module's dependency on them was handled while they didn't yet exist.
 
 ## The Age Gate
 
@@ -74,7 +74,7 @@ Phase 3, Catalogue (§21.1) — courses, materials, Bunny integration, catalogue
 | Course `language` field — unclear whether limited to the platform's 5 UI locales | Modelled as free text for now, since a course could reasonably be taught in a language the platform UI doesn't otherwise support (e.g. Qur'anic Arabic recitation delivered to an English-locale account). Flagged, not decided |
 | Category taxonomy | Simple flat, admin-managed list — confirmed direction, no fixed values yet |
 
-**Resolved 2026-08-23:** `instructorId` on Course, and the publish gate's material/batch check, were both originally forward-referenced here pending `instructors`, `materials`, and `learning-delivery`. All three now exist — see [data-model.md](data-model.md#forward-references).
+**Resolved 2026-08-23:** `instructorId` on Course, and the publish gate's material/batch check, were both originally forward-referenced here pending `instructors`, `materials`, and `learning-delivery`. All three now exist — see [data-model.md](data-model.md#forward-references--all-resolved-2026-08-23).
 
 ## Change Requests Owed to the Client
 

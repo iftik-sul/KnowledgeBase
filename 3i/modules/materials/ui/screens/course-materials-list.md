@@ -33,7 +33,7 @@ Ordered [Material List Item](../components.md#material-list-item)s, one per mate
 ## Role Variations
 
 **Member:** entry point into content, with per-item progress shown.
-**Instructor:** identical list, view-only, no progress indicators (an instructor's own consumption isn't tracked — [data-model.md](../data-model.md#materialprogress) is learner-scoped).
+**Instructor:** identical list, view-only, no progress indicators (an instructor's own consumption isn't tracked — [data-model.md](../../data-model.md#materialprogress) is learner-scoped).
 
 ## Contrast and RTL
 

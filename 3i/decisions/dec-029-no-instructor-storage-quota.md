@@ -33,7 +33,7 @@ Not recorded beyond the confirmation itself — this is a client/product decisio
 
 - **`InstructorProfile`** ([3I-INS-DM-001](/3i/modules/instructors/data-model.md)) drops `storageQuotaBytes` and `storageUsed` entirely — not set to unlimited, genuinely absent as fields.
 - **`materials`' upload validation** needed no change, since the enforcement this decision removes the need for was never built there in the first place — the flagged gap is closed by removing what it was tracking, not by finishing it.
-- **[Admin Instructor Management](/3i/modules/instructors/ui/screens/admin-instructor-management.md)** loses its storage-quota display and edit control; the [Storage Usage Bar](/3i/modules/instructors/ui/components.md#storage-usage-bar) component is removed.
+- **[Admin Instructor Management](/3i/modules/instructors/ui/screens/admin-instructor-management.md)** loses its storage-quota display and edit control; the [Storage Usage Bar](/3i/modules/instructors/ui/components.md) component is removed.
 - `reporting`'s instructor activity report (FR-REP-01) no longer has a storage dimension to report on — it never listed one explicitly, so no correction needed there.
 
 ## Cost

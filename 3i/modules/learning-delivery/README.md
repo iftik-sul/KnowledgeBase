@@ -72,7 +72,7 @@ What this module resolved for other modules when it was built:
 
 See each module's own data-model "Forward References" section for the consumer-side detail; this module doesn't restate it.
 
-**This module's own dependencies — on `instructors`, `assessment`, and `communication` — are resolved too, as of 2026-08-23**, once those three modules were built. See [data-model.md](data-model.md#forward-references).
+**This module's own dependencies — on `instructors`, `assessment`, and `communication` — are resolved too, as of 2026-08-23**, once those three modules were built. See [data-model.md](data-model.md#forward-references--resolved-2026-08-23).
 
 ## Open Against This Module
 

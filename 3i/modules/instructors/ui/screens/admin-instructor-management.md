@@ -37,9 +37,9 @@ A searchable list of every `InstructorProfile`, each showing the [WWCC Status Ba
 
 ## Behaviour
 
-**Suspend** (FR-INST-07) triggers the same course-suspension consequence [data-model.md](../data-model.md#fr-inst-04-enforcement--what-cannot-continue-teaching-actually-does) describes for automatic WWCC-expiry suspension — both write to the same `Course.status = suspended` transition in `catalogue`, distinguished by `suspensionReason`. This screen shows both kinds distinctly, not as one undifferentiated "suspended" list, so an admin can tell at a glance whether a suspension was their own action or an automatic consequence of an expired WWCC.
+**Suspend** (FR-INST-07) triggers the same course-suspension consequence [data-model.md](../../data-model.md#fr-inst-04-enforcement--what-cannot-continue-teaching-actually-does) describes for automatic WWCC-expiry suspension — both write to the same `Course.status = suspended` transition in `catalogue`, distinguished by `suspensionReason`. This screen shows both kinds distinctly, not as one undifferentiated "suspended" list, so an admin can tell at a glance whether a suspension was their own action or an automatic consequence of an expired WWCC.
 
-**Reinstate** clears `suspendedAt`/`suspensionReason` on the `InstructorProfile` but does **not** automatically republish any of the instructor's suspended courses (see [data-model.md](../data-model.md#re-approval-after-suspension)) — each needs separate review from [Admin Course Management](/3i/modules/catalogue/ui/screens/admin-course-management.md).
+**Reinstate** clears `suspendedAt`/`suspensionReason` on the `InstructorProfile` but does **not** automatically republish any of the instructor's suspended courses (see [data-model.md](../../data-model.md#re-approval-after-suspension)) — each needs separate review from [Admin Course Management](/3i/modules/catalogue/ui/screens/admin-course-management.md).
 
 ## Role Variations
 

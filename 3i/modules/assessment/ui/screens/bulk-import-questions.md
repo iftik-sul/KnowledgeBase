@@ -28,7 +28,7 @@ Instructor or Admin. Imported questions land in the uploader's own scope — `in
 
 ## Contents
 
-- **Download template** — the exact column spec from [requirements](../requirements/qb-question-bank.md#bulk-import), pre-filled with one or two example rows per question type.
+- **Download template** — the exact column spec from [requirements](../../requirements/qb-question-bank.md#bulk-import), pre-filled with one or two example rows per question type.
 - Optional **course** selector, applied to the whole batch (not per-row).
 - File upload (CSV or Excel only — **no docx**, see [README.md](/3i/modules/assessment/README.md#two-ways-questions-get-in)).
 - **Preview \& Validate** step: a table of every row with a pass/fail indicator, and a full error list (row, column, message) for anything that failed (see [validation-rules.md](../validation-rules.md#csv-import-row-validation)).

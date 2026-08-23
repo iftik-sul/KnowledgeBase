@@ -67,6 +67,6 @@ This is CMS copy on the public refund-policy page (part of the fixed page set, F
 | :---- | :---- |
 | Data model | [3I-CMR-DM-001](../data-model.md) |
 | Certificate snapshotting | [3I-DEC-005](/3i/decisions/dec-005-denormalised-certificates.md) |
-| Refund policy copy — client dependency | §22.2 item 3, [open-questions.md](/3i/open-questions.md#client-dependencies-§222) |
+| Refund policy copy — client dependency | §22.2 item 3, [open-questions.md](/3i/open-questions.md#client-dependencies-222) |
 | Subscriptions and billing | [3I-CMR-REQ-001](bill-subscriptions-and-billing.md) |
 | Waivers | [3I-CMR-REQ-002](wav-waivers.md) |

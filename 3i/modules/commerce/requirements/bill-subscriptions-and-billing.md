@@ -27,7 +27,7 @@ Baseline §14.1–14.2. Eight requirements, two amended by decision — [3I-DEC-
 
 **FR-BILL-02 is the requirement that makes the store-submission strategy work**, and it is enforced in three places at once — this module, `communication` (FR-NOT-06, no purchase prompts in push), and `platform` (NFR-15–21, the multiplatform-services model itself). It should not be treated as satisfied by simply omitting a "Subscribe" button; NFR-18 requires an account without an active subscription to see a neutral status message and a support email address only, with no URL, no price, and no call to action of any kind. This applies regardless of how many tiers or seats the underlying subscription has — the mobile status screen never breaks the itemised total down by tier either.
 
-**This is exactly the requirement [`app-store-compliance.md`](/3i/open-questions.md#oq-09--app-store-compliancemd-not-yet-written) is meant to consolidate.** That document does not yet exist. Until it does, the mobile "subscription status" screen in this module's UI stage should be treated as provisional — written against FR-BILL-02 and NFR-18 directly, and revisited once the cross-cutting document lands.
+**This is exactly the requirement [`app-store-compliance.md`](/3i/open-questions.md#resolved) is meant to consolidate.** That document does not yet exist. Until it does, the mobile "subscription status" screen in this module's UI stage should be treated as provisional — written against FR-BILL-02 and NFR-18 directly, and revisited once the cross-cutting document lands.
 
 ---
 
@@ -122,6 +122,6 @@ Suspension is a `Subscription.status` transition triggered by a webhook (`invoic
 | Seat as enrolment grant | [3I-DEC-009](/3i/decisions/dec-009-seats-as-account-pool.md) |
 | Two-tier age-based pricing | [3I-DEC-024](/3i/decisions/dec-024-two-tier-age-based-seat-pricing.md) |
 | No standalone minors — billing contact is always an adult | [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md) |
-| App store compliance (not yet written) | [OQ-09](/3i/open-questions.md#oq-09--app-store-compliancemd-not-yet-written) |
+| App store compliance (not yet written) | [OQ-09](/3i/open-questions.md#resolved) |
 | Waivers | [3I-CMR-REQ-002](wav-waivers.md) |
 | Refunds | [3I-CMR-REQ-003](ref-refunds.md) |

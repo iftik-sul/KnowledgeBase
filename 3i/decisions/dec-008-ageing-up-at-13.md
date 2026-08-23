@@ -33,7 +33,7 @@ This does not resolve *whether* the family should stop paying and the teenager s
 
 ## Unresolved
 
-Recorded in [OQ-05](../open-questions.md#oq-05--ageing-up-at-13):
+Recorded in [OQ-05](../open-questions.md#resolved):
 
 - Who pays for the new standalone account — the teenager, or does the guardian's payment method carry over? Not yet decided.
 - Who holds the chat toggle afterwards? FR-FAM-08 gives it to the guardian for a 13–17 *profile*; FR-AUTH-05 captures only a guardian email for a standalone 13–17 *account*. The permission has no defined handover.

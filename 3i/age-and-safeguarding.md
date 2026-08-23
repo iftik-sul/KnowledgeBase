@@ -175,4 +175,4 @@ Each requires named human sign-off per language before launch — the institute 
 
 See [open-questions.md](open-questions.md) for full detail. Safeguarding-relevant items still open:
 
-- **[OQ-11](open-questions.md#oq-11--minimum-sessions-before-an-attendance-certificate)** — whether a minimum number of delivered sessions should gate an attendance certificate, since the current rule allows one session out of ten scheduled to qualify.
+- **[OQ-11](open-questions.md#resolved)** — whether a minimum number of delivered sessions should gate an attendance certificate, since the current rule allows one session out of ten scheduled to qualify.

@@ -27,7 +27,7 @@ Registration collapses to two outcomes, not three:
 | **18+** | Account created normally |
 | **Under 18 — any age** | Registration is refused. Redirected toward creating a family account instead |
 
-The 13–17-specific redirect screen (formerly [Screen 2 / 3I-IDA-UI-002](modules/identity-and-access/ui/screens/registration-standalone-teen.md)) is **removed entirely** — it no longer has a reason to exist, since 13–17 now follows exactly the same path as under-13: redirect to family registration.
+The 13–17-specific redirect screen (formerly "Screen 2 / 3I-IDA-UI-002" (`registration-standalone-teen.md`)) is **removed entirely** — it no longer has a reason to exist, since 13–17 now follows exactly the same path as under-13: redirect to family registration.
 
 **What is unaffected:** the 13–17 chat toggle (FR-FAM-08) stays exactly as it was. A 13–17 profile still gets a guardian-controlled toggle; a younger profile still doesn't. That distinction was never about account type — it was always about age, and it still is.
 
@@ -48,7 +48,7 @@ The real cost, stated plainly: a 17-year-old six months from turning 18 has **no
 - **`Account` no longer needs `guardianName` / `guardianEmail` fields.** Those existed solely to support FR-AUTH-05. Removing them is a schema simplification, not a loss — no other feature reads them.
 - **Registration branches on one threshold (18), not two (13 and 18).** Screen 1 and the redirect screen (formerly under-13-only) now share identical logic for anyone under 18.
 - **The guardian-notification-on-registration behaviour is gone.** There is no longer any point where an unverified guardian email receives an automated email from a teen's own registration attempt — because that registration attempt never reaches account creation.
-- Everywhere in this repository that says "13–17 may register standalone" is now wrong and needs correcting: [age-and-safeguarding.md](../age-and-safeguarding.md), the module README, [3I-IDA-DM-001](modules/identity-and-access/data-model.md), [3I-IDA-REQ-001](modules/identity-and-access/requirements/auth-registration-and-authentication.md), the UI index and screens, and [backend-spec.md](modules/identity-and-access/backend-spec.md).
+- Everywhere in this repository that says "13–17 may register standalone" is now wrong and needs correcting: [age-and-safeguarding.md](../age-and-safeguarding.md), the module README, [3I-IDA-DM-001](../modules/identity-and-access/data-model.md), [3I-IDA-REQ-001](../modules/identity-and-access/requirements/auth-registration-and-authentication.md), the UI index and screens, and [backend-spec.md](../modules/identity-and-access/backend-spec.md).
 
 ## Cost
 

@@ -33,7 +33,7 @@ Current WWCC number, issuing state, expiry date (read-only display, with the [WW
 
 ## Behaviour
 
-Saving a renewed WWCC updates `InstructorProfile` directly — no new [InstructorApplication](../data-model.md#instructorapplication) is created, and no admin approval step gates it, since this is credential upkeep on an already-approved instructor, not a new bid for the role ([data-model.md](../data-model.md#wwcc-renewal)). The pending 60-day alert state clears automatically once the new expiry date is far enough out.
+Saving a renewed WWCC updates `InstructorProfile` directly — no new [InstructorApplication](../../data-model.md#instructorapplication) is created, and no admin approval step gates it, since this is credential upkeep on an already-approved instructor, not a new bid for the role ([data-model.md](../../data-model.md#wwcc-renewal)). The pending 60-day alert state clears automatically once the new expiry date is far enough out.
 
 **Renewing does not automatically republish any course suspended by an earlier expiry** — the instructor sees this stated plainly ("your WWCC is now current; suspended courses need admin review before they can republish") rather than assuming renewal alone fixes everything downstream.
 

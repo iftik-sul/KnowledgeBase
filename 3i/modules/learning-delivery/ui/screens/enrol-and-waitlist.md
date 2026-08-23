@@ -35,7 +35,7 @@ Member. Reached from [Course Detail](/3i/modules/catalogue/ui/screens/course-det
 
 ## Behaviour
 
-**No seat purchase happens here** if the profile already has an active seat — enrolling in a second course consumes nothing further (FR-ENR-01, see [README.md](../README.md#one-seat-many-courses)). If the profile has **no** active seat, this screen routes to [Pricing / Plan Selection](/3i/modules/commerce/ui/screens/pricing-plan-selection.md) instead of enrolling directly — enrolment cannot proceed without an active profile.
+**No seat purchase happens here** if the profile already has an active seat — enrolling in a second course consumes nothing further (FR-ENR-01, see [README.md](../../README.md#one-seat-many-courses)). If the profile has **no** active seat, this screen routes to [Pricing / Plan Selection](/3i/modules/commerce/ui/screens/pricing-plan-selection.md) instead of enrolling directly — enrolment cannot proceed without an active profile.
 
 **Once waitlisted**, this screen (or a notification linking back to it) is where a promoted `offered`-status learner accepts within the 48-hour window — see [validation-rules.md](../validation-rules.md#waitlist-promotion-window).
 

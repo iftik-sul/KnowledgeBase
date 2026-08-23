@@ -68,7 +68,7 @@ Phase 3, Catalogue (§21.1) — the baseline's phase table groups `catalogue` an
 | :---- | :---- |
 | Document completion: continuous 30s view vs. cumulative across sessions | FR-CERT-03 says "opened in the viewer for ≥30 seconds" without specifying continuous-vs-cumulative. Modelled as continuous (a single viewing session reaching 30s), the more literal reading — flagged, not confirmed |
 
-**Resolved 2026-08-23:** the enrolment/entitlement check gating video and offline access, and the quiz/exam completion feed for certificates, were both originally forward-referenced here pending `learning-delivery` and `assessment`. Both now exist and are real references — see [data-model.md](data-model.md#forward-references).
+**Resolved 2026-08-23:** the enrolment/entitlement check gating video and offline access, and the quiz/exam completion feed for certificates, were both originally forward-referenced here pending `learning-delivery` and `assessment`. Both now exist and are real references — see [data-model.md](data-model.md#forward-references--resolved-2026-08-23).
 
 ## Change Requests Owed to the Client
 

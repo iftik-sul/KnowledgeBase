@@ -14,7 +14,7 @@ tags:
 
 # Data Retention Periods
 
-What [NFR-26](requirements/plt-non-functional-requirements.md#privacy-and-compliance-2027) asks for: a documented retention period for every category of personal data the platform stores. Compiled here, once, across every module — not scattered as a per-module afterthought, since the whole point of NFR-26 is that someone can answer "how long do you keep X" without hunting through thirteen modules' worth of documents.
+What [NFR-26](requirements/plt-non-functional-requirements.md#privacy-and-compliance-207) asks for: a documented retention period for every category of personal data the platform stores. Compiled here, once, across every module — not scattered as a per-module afterthought, since the whole point of NFR-26 is that someone can answer "how long do you keep X" without hunting through thirteen modules' worth of documents.
 
 Three honesty levels below, marked explicitly rather than blended together: **baseline-specified** (the SRD or an existing decision states the period), **reasonable default** (this document proposes one, flagged as unconfirmed), and **genuinely unspecified** (no period exists anywhere yet, flagged as needing real input rather than a silently invented number).
 
@@ -63,6 +63,6 @@ CMS content (`public-site`'s Pages and BlogPosts) is institute-authored, not per
 
 | | |
 | :---- | :---- |
-| The requirement this document satisfies | [NFR-26](requirements/plt-non-functional-requirements.md#privacy-and-compliance-2027) |
+| The requirement this document satisfies | [NFR-26](requirements/plt-non-functional-requirements.md#privacy-and-compliance-207) |
 | Payment records dependency | [open-questions.md](/3i/open-questions.md), §22.2 item 3 |
 | WWCC dependency | [open-questions.md](/3i/open-questions.md), §22.2 item 4 |
