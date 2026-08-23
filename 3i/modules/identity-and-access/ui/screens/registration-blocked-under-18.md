@@ -11,6 +11,7 @@ tags:
   - ui
   - registration
   - safeguarding
+figma: null
 ---
 
 # Screen: Registration Blocked — Under 18

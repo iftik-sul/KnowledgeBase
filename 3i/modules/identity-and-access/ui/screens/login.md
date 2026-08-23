@@ -3,13 +3,14 @@ project: 3i
 module: identity-and-access
 type: ui-spec
 status: current
-updated: 2026-08-18
+updated: 2026-08-23
 id: 3I-IDA-UI-005
 derived_from:
   - 3i/reference/baseline/srd-v2.0.md
 tags:
   - ui
   - authentication
+figma: null
 ---
 
 # Screen: Login
@@ -28,7 +29,7 @@ Five failed attempts trigger a 15-minute lockout with progressive delay and per-
 
 **No phone or OTP option anywhere on this screen** (FR-AUTH-13) — email and password, or social, are the only two paths.
 
-Successful login for a Member with more than one learner profile routes to [Profile picker](profile-picker.md). A Member with exactly one profile (themself, if they study, or their sole child) may skip the picker — not specified in the baseline; a reasonable default, confirm with client.
+Successful login for a Member with more than one learner profile routes to [Profile picker](profile-picker.md). A Member with exactly one profile (themself, if they study, or their sole child) skips the picker's tile-selection step and lands directly on that profile's PIN pad — [3I-DEC-024](/3i/decisions/dec-024-single-profile-skips-picker.md).
 
 ## Role Variations
 

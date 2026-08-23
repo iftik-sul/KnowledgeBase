@@ -10,6 +10,7 @@ derived_from:
 tags:
   - ui
   - authentication
+figma: null
 ---
 
 # Screen: Password Reset

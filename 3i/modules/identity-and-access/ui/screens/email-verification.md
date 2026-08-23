@@ -10,6 +10,7 @@ derived_from:
 tags:
   - ui
   - registration
+figma: null
 ---
 
 # Screen: Email Verification

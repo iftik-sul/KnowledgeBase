@@ -10,6 +10,7 @@ derived_from:
 tags:
   - ui
   - admin
+figma: null
 ---
 
 # Screen: Admin — Profile Name Unlock

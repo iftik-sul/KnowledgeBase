@@ -10,6 +10,7 @@ derived_from:
 tags:
   - ui
   - devices
+figma: null
 ---
 
 # Screen: Device Management

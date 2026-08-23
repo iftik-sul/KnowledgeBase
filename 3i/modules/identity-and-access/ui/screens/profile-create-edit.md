@@ -3,7 +3,7 @@ project: 3i
 module: identity-and-access
 type: ui-spec
 status: current
-updated: 2026-08-18
+updated: 2026-08-23
 id: 3I-IDA-UI-009
 derived_from:
   - 3i/reference/baseline/srd-v2.0.md
@@ -11,6 +11,7 @@ tags:
   - ui
   - profiles
   - safeguarding
+figma: null
 ---
 
 # Screen: Profile Create / Edit
@@ -25,7 +26,7 @@ Create a new learner profile, or edit an existing one within the limits of what 
 
 ## Access Gate
 
-Only reachable by a Member whose own date of birth indicates 18+ (FR-FAM-01). A 13–17 standalone account never sees the entry point — the "Add profile" affordance is **absent**, not disabled, per [validation-rules.md](../validation-rules.md#guardian-age-gate-for-profile-creation).
+Only reachable by a Member (FR-FAM-01) — and every Member is, by construction, 18+ ([3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md)), so no separate age check gates this screen beyond "is this an authenticated Member". The "Add profile" affordance is simply **absent** from any context where no authenticated Member session exists, per [validation-rules.md](../validation-rules.md#guardian-age-gate-for-profile-creation).
 
 ## Fields — Create
 

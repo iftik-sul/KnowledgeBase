@@ -3,7 +3,7 @@ project: 3i
 module: identity-and-access
 type: ui-spec
 status: current
-updated: 2026-08-18
+updated: 2026-08-23
 id: 3I-IDA-UI-008
 derived_from:
   - 3i/reference/baseline/srd-v2.0.md
@@ -38,7 +38,7 @@ On correct PIN, enters the profile's study context. On the family's only never-a
 
 ## Role Variations
 
-Member only. Not shown to a Member with exactly one profile — see [Login](login.md).
+Member only. Not shown to a Member with exactly one profile, who skips straight to that profile's PIN pad instead — [3I-DEC-024](/3i/decisions/dec-024-single-profile-skips-picker.md), see also [Login](login.md).
 
 ## Contrast and RTL
 

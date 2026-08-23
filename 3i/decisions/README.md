@@ -2,7 +2,7 @@
 project: 3i
 type: overview
 status: current
-updated: 2026-08-18
+updated: 2026-08-23
 tags:
   - decision
   - index
@@ -39,6 +39,7 @@ One file per decision: context, decision, consequences, cost. A decision is neve
 | [3I-DEC-021](dec-021-attendance-measured-against-sessions-delivered.md) | Attendance is measured against sessions delivered | current | **approved — proceed to build** | CERT, INST, BAT |
 | [3I-DEC-022](dec-022-pin-lockout-and-dob-correction-notification.md) | PIN lockout matches FR-AUTH-09; DOB corrections notify the guardian on chat-eligibility change | current | **approved — proceed to build** | AUTH, FAM, NOT |
 | [3I-DEC-023](dec-023-no-standalone-accounts-under-18.md) | No standalone accounts under 18 — every minor is a guardian profile | current | **approved — proceed to build** | AUTH, FAM |
+| [3I-DEC-024](dec-024-single-profile-skips-picker.md) | A Member with exactly one profile skips the picker's tile-selection step | current | n/a — UX interpretation | FAM |
 
 **`deferred`** marks a decision taken but consciously parked. **`superseded`** marks a reversed decision, replaced by a specific successor. **`deprecated`** marks a decision whose entire premise no longer applies and is not being replaced — the idea itself was dropped, not redirected. All three keep the file for history; none are rewritten.
 
@@ -72,6 +73,6 @@ Internally approved 2026-08-18, and subsequently treated as approved for build p
 
 ## Provenance
 
-Decisions 001–007 derive from SRD v2.0 and cite the requirement codes that fix them. Decisions 008–023 were taken in review on 2026-08-18 and are **not in the baseline**. Eight of them (014–016, 018–019, 021–023) are approved for build per the note above; one (008) is deprecated.
+Decisions 001–007 derive from SRD v2.0 and cite the requirement codes that fix them. Decisions 008–023 were taken in review on 2026-08-18 and are **not in the baseline**. Nine of them (014–016, 018–019, 021–024) touch the module without needing formal client sign-off or are already approved per the note above; one (008) is deprecated.
 
 The client supplied no written material, so no decision here cites a client document. None exists.
