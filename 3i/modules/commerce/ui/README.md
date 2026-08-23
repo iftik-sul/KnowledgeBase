@@ -1,8 +1,8 @@
 ---
 project: 3i
 module: commerce
-type: ui-index
-status: draft
+type: ui-spec
+status: current
 updated: 2026-08-20
 id: 3I-CMR-UI-000
 derived_from:
@@ -11,41 +11,56 @@ derived_from:
   - requirements/ref-refunds.md
 tags:
   - ui
-  - commerce
+  - matrix
 ---
 
 # Commerce — UI Index
 
-**Status: stub.** Screens are not yet individually specified — this records the role × screen matrix so a missing screen is visible, ahead of Figma work. Follows the shape in [project-standards.md](/3i/project-standards.md#the-ui-stage).
+Role × screen matrix. Every screen in this module, and who sees it.
 
-## Role × Screen Matrix
+---
 
-| Screen | Member | Admin | Mobile (Flutter) |
-| :---- | :---: | :---: | :---: |
-| Pricing / plan selection | ✅ web only | — | ❌ no purchase surface (FR-BILL-02) |
-| Checkout | ✅ web only, Stripe-hosted | — | ❌ |
-| Seat management | ✅ | ✅ (all accounts) | ❌ |
-| Billing portal (payment method, cancellation) | ✅ via Stripe Customer Portal | ✅ (all accounts) | ❌ |
-| Subscription status (neutral, no CTA) | — | — | ✅ NFR-18 — status + support email only |
-| Waiver request form | ✅ | — | ❌ |
-| Waiver admin review | — | ✅ | — |
-| Refund request (self-service, ≤14 days) | ✅ web | — | ❌ |
-| Refund admin action (renewal, discretionary) | — | ✅ | — |
+## Roles
 
-**The mobile column is the one to get wrong carefully.** Every ❌ in that column is FR-BILL-02 and NFR-18 in effect, not an oversight — a mobile screen in this module should never grow a price, a button, or a link back to any of the web screens above. See [OQ-09](/3i/open-questions.md#oq-09--app-store-compliancemd-not-yet-written).
-
-## Checkout — two-tier itemisation requirement
-
-Per [3I-DEC-024](/3i/decisions/dec-024-two-tier-age-based-seat-pricing.md), Checkout must show a **live itemised total broken out by tier** as profiles are added to the cart — e.g. "2 adult seats × $9.99 = $19.98, 2 child seats × $5.99 = $11.98, total $31.96/mo" — not a single flat figure. This is a concrete constraint on the eventual screen file, recorded here ahead of it being written.
-
-## Pending
-
-Individual screen files (`ui/screens/<screen-name>.md`), `components.md`, and `validation-rules.md` are not yet written. Each screen file, once created, must state its WCAG 2.2 AA contrast pairs (NFR-12) and its RTL behaviour (FR-LOC-04) per the repository standard — Checkout and Billing Portal in particular involve dense tabular pricing data, now across two tiers, which is exactly the kind of layout the standard's contrast warning is aimed at.
-
-## Related
-
-| | |
+| Column | Who |
 | :---- | :---- |
-| Module overview | [README.md](../README.md) |
-| Requirements | [bill](../requirements/bill-subscriptions-and-billing.md), [wav](../requirements/wav-waivers.md), [ref](../requirements/ref-refunds.md) |
-| UI stage rules | [project-standards.md](/3i/project-standards.md#the-ui-stage) |
+| **Member** | The renamed Account holder role — [3I-DEC-017](/3i/decisions/dec-017-account-holder-renamed-member.md) |
+| **Admin** | |
+| **Mobile (Flutter)** | Not a role — a platform column, since this module's mobile behaviour is a single deliberate exception rather than a per-role variation |
+
+---
+
+## Matrix
+
+| Screen | Member | Admin | Mobile |
+| :---- | :---: | :---: | :---: |
+| [Pricing / plan selection](screens/pricing-plan-selection.md) | ● (web) | | ❌ |
+| [Checkout](screens/checkout.md) | ● (web) | | ❌ |
+| [Seat management](screens/seat-management.md) | ● (web) | ● | ❌ |
+| [Billing portal redirect](screens/billing-portal-redirect.md) | ● (web) | ● | ❌ |
+| [Subscription status (mobile)](screens/subscription-status-mobile.md) | | | ● |
+| [Waiver request form](screens/waiver-request-form.md) | ● (web) | | ❌ |
+| [Waiver admin review](screens/waiver-admin-review.md) | | ● | |
+| [Refund request](screens/refund-request.md) | ● (web) | | ❌ |
+| [Refund admin action](screens/refund-admin-action.md) | | ● | |
+
+Nine screens. **The ❌ column is FR-BILL-02 and NFR-18 in effect, not an oversight** — every screen in this module except Subscription Status is deliberately absent from mobile. See [app-store-compliance.md](/3i/app-store-compliance.md).
+
+---
+
+## Shared
+
+| Document | Covers |
+| :---- | :---- |
+| [components.md](components.md) | Itemised total by tier, tier badge, Stripe-hosted redirect button |
+| [validation-rules.md](validation-rules.md) | Waiver covered-profile selection, refund window check, money formatting |
+
+---
+
+## Blocked
+
+| Item | Blocks |
+| :---- | :---- |
+| None. | |
+
+Resolved since the previous stub version of this document: [app-store-compliance.md](/3i/app-store-compliance.md) now exists, so the mobile Subscription Status screen above is written against a settled cross-cutting rule rather than a provisional one.
