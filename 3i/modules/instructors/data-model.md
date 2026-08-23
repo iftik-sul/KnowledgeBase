@@ -47,9 +47,9 @@ Entities owned by this module. Other modules reference these; they do not restat
 | WWCC number, issuing state | Current values — may differ from the originating application if renewed since (see WWCC Renewal below) |
 | WWCC expiry date | **The field [3I-DEC-021](/3i/decisions/dec-021-attendance-measured-against-sessions-delivered.md)'s scheduling guard and FR-INST-04's teaching block both read.** Real, queryable, kept current — not a one-time snapshot from the application |
 | WWCC expiry alert sent at | Nullable. Set when the 60-day alert (FR-INST-03) fires, so the same instructor's imminent expiry doesn't re-alert admin daily. Cleared on renewal |
-| Storage quota | Bytes. Default 50 GB (FR-INST-05), admin-adjustable per instructor |
-| Storage used | Computed, not stored — sum of upload sizes across every Material this instructor owns in `materials`, read live rather than kept as a running counter that could drift |
 | Suspended at, suspension reason | Nullable. Set by admin action (FR-INST-07) or, distinctly, by automatic WWCC-expiry enforcement (FR-INST-04) — both use the same fields, but the two triggers are logged differently; see FR-INST-04 Enforcement below |
+
+**No storage quota field exists** — [3I-DEC-029](/3i/decisions/dec-029-no-instructor-storage-quota.md) drops FR-INST-05 entirely. An instructor's uploads are bounded only by `materials`' ordinary per-file size limits (FR-MAT-02), with no further cap across everything they own.
 
 **Created once, on first approval.** Subsequent approvals after a suspension (see Re-approval) update this same row rather than creating a second one — there is exactly one `InstructorProfile` per Account, ever, matching the one-Account-one-identity principle this module is built around.
 
@@ -84,7 +84,6 @@ None. Every field this module needs — Account, Course, Batch — is already bu
 | :---- | :---- |
 | `catalogue` | InstructorProfile — `Course.instructorId` resolves here; FR-CRS-07's instructor-name search; FR-INST-04's course-creation-time check |
 | `learning-delivery` | InstructorProfile — `Batch.instructorId`; `wwccExpiryDate` for the scheduling guard ([3I-DEC-021](/3i/decisions/dec-021-attendance-measured-against-sessions-delivered.md)) |
-| `materials` | InstructorProfile — `storageQuotaBytes`, for upload-time enforcement (see [README.md](README.md#open-against-this-module) — not yet added to `materials`' own validation rules) |
 | `reporting` | InstructorApplication, InstructorProfile — instructor activity reports (FR-REP-01) |
 
 ## Referenced
@@ -93,4 +92,3 @@ None. Every field this module needs — Account, Course, Batch — is already bu
 | :---- | :---- | :---- |
 | Account | `identity-and-access` | The identity every InstructorApplication and InstructorProfile is keyed to |
 | Course | `catalogue` | Target of the age-tag check at creation, and of automatic suspension on WWCC expiry |
-| Material | `materials` | Summed for `storageUsed`'s live computation |

@@ -15,13 +15,13 @@ tags:
 
 # Screen: Admin Instructor Management
 
-Satisfies: FR-INST-03, FR-INST-04, FR-INST-05, FR-INST-07
+Satisfies: FR-INST-03, FR-INST-04, FR-INST-07
 
 ---
 
 ## Purpose
 
-Admin oversight of every approved instructor — WWCC status, storage quota, and suspension.
+Admin oversight of every approved instructor — WWCC status and suspension.
 
 ## Access Gate
 
@@ -29,7 +29,9 @@ Admin only.
 
 ## Contents
 
-A searchable list of every `InstructorProfile`, each showing the [WWCC Status Badge](../components.md#wwcc-status-badge) and [Storage Usage Bar](../components.md#storage-usage-bar). Selecting an instructor opens detail with: quota (editable, FR-INST-05), WWCC number/state/expiry (view-only here — renewal is instructor-initiated, see [WWCC Renewal](wwcc-renewal.md)), and a **Suspend** / **Reinstate** action.
+A searchable list of every `InstructorProfile`, each showing the [WWCC Status Badge](../components.md#wwcc-status-badge). Selecting an instructor opens detail with: WWCC number/state/expiry (view-only here — renewal is instructor-initiated, see [WWCC Renewal](wwcc-renewal.md)), and a **Suspend** / **Reinstate** action.
+
+**No storage quota control exists on this screen** — [3I-DEC-029](/3i/decisions/dec-029-no-instructor-storage-quota.md) removed the per-instructor quota this screen originally would have let admin adjust.
 
 **Instructors flagged `Expiring Soon`** (within the 60-day window, FR-INST-03) are surfaced prominently — not buried in an alphabetical list — since this is the screen the alert is actually actionable from.
 

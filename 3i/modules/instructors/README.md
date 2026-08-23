@@ -22,9 +22,9 @@ The module that turns an applicant into an approved instructor, keeps their Work
 
 | Code | Area | FRs |
 | :---- | :---- | ----: |
-| INST | Instructor onboarding | 7 |
+| INST | Instructor onboarding | 7 baseline, 6 in effect — [3I-DEC-029](/3i/decisions/dec-029-no-instructor-storage-quota.md) drops FR-INST-05 |
 
-Two existing decisions apply directly: [3I-DEC-013](/3i/decisions/dec-013-instructor-removal-dismisses-course.md) (losing an instructor mid-course dismisses the course) and [3I-DEC-021](/3i/decisions/dec-021-attendance-measured-against-sessions-delivered.md) (the WWCC scheduling guard this module's data now makes real). No new decisions were needed to scaffold this module.
+Three decisions apply directly: [3I-DEC-013](/3i/decisions/dec-013-instructor-removal-dismisses-course.md) (losing an instructor mid-course dismisses the course), [3I-DEC-021](/3i/decisions/dec-021-attendance-measured-against-sessions-delivered.md) (the WWCC scheduling guard this module's data now makes real), and [3I-DEC-029](/3i/decisions/dec-029-no-instructor-storage-quota.md) (no per-instructor storage quota, confirmed 2026-08-23).
 
 ## Instructor Is a Role Held By an Account, Not a Separate Identity
 
@@ -34,7 +34,7 @@ So the `InstructorProfile` this module owns is a **1:1 extension of `identity-an
 
 ## What This Fixes
 
-Three requirements depend on a real, queryable WWCC expiry date — not just data captured once at application time and left inert:
+Two requirements depend on a real, queryable WWCC expiry date — not just data captured once at application time and left inert:
 
 - **FR-INST-03** — the 60-day admin alert needs something to check on a schedule.
 - **FR-INST-04** — blocking an expired-WWCC instructor from under-18 courses needs a live field to check at course-creation and at the moment expiry actually passes.
@@ -78,9 +78,10 @@ Phase 1, Foundation (§21.1) in the baseline's own sequencing — though this pr
 | Item | Note |
 | :---- | :---- |
 | WWCC legal position | **Outstanding client dependency, §22.2 item 4**, from the institute's lawyer. This module is fully specified without it — the data model and enforcement logic don't depend on the legal analysis — but it may inform exactly what "WWCC" means for interstate or overseas instructors, which this spec doesn't attempt to resolve |
-| Storage-quota enforcement lives partly outside this module | FR-INST-05's 50GB quota is a field this module owns (`InstructorProfile.storageQuotaBytes`), but **enforcing it at upload time is `materials`' responsibility**, not something this module's own screens do. `materials`' existing upload validation ([3I-MTL-UI-VAL](/3i/modules/materials/ui/validation-rules.md)) does not yet reference it — flagged here as an addition that module will need, not a change to anything already decided there |
 | Who updates WWCC on renewal | Not specified in the baseline. Modelled as instructor-initiated (their own credential to keep current), landing directly on `InstructorProfile` without requiring a fresh application — reasonable default, not confirmed |
+
+**Resolved 2026-08-23:** the storage-quota enforcement gap flagged when this module was first scaffolded is closed — not by building the missing `materials`-side enforcement, but by [3I-DEC-029](/3i/decisions/dec-029-no-instructor-storage-quota.md) confirming no quota exists to enforce.
 
 ## Change Requests Owed to the Client
 
-None. Nothing in this module amends or reverses the baseline.
+[3I-DEC-029](/3i/decisions/dec-029-no-instructor-storage-quota.md) reverses FR-INST-05 outright and needs §21.3 sign-off, the same tier as [3I-DEC-023](/3i/decisions/dec-023-no-standalone-accounts-under-18.md). Not yet added to [decisions/README.md](/3i/decisions/README.md#scope-changes-against-srd-v20)'s scope-changes table — handled in the same pass as this correction.

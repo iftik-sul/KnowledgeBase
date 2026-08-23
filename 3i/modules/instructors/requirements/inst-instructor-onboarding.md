@@ -14,7 +14,7 @@ tags:
 
 # Instructor Onboarding
 
-Baseline §7. Seven requirements, none amended by decision — [3I-DEC-013](/3i/decisions/dec-013-instructor-removal-dismisses-course.md) and [3I-DEC-021](/3i/decisions/dec-021-attendance-measured-against-sessions-delivered.md) specify consequences of losing an instructor without changing what any FR-INST requirement itself says.
+Baseline §7. Seven requirements as originally stated; **FR-INST-05 is dropped** by [3I-DEC-029](/3i/decisions/dec-029-no-instructor-storage-quota.md), leaving six in effect. [3I-DEC-013](/3i/decisions/dec-013-instructor-removal-dismisses-course.md) and [3I-DEC-021](/3i/decisions/dec-021-attendance-measured-against-sessions-delivered.md) specify consequences of losing an instructor without changing what any other FR-INST requirement itself says.
 
 ---
 
@@ -40,13 +40,13 @@ Full mechanism — including the two distinct enforcement moments (creation-time
 
 ---
 
-## Storage
+## Storage — Dropped
 
 | ID | Requirement |
 | :---- | :---- |
-| **FR-INST-05** | Each instructor has a **50 GB storage quota**, adjustable by admin |
+| ~~**FR-INST-05**~~ | ~~Each instructor has a 50 GB storage quota, adjustable by admin~~ |
 
-The quota field lives on `InstructorProfile` (this module); **enforcing it at upload time is `materials`' responsibility** — see [README.md](../README.md#open-against-this-module) for the cross-module note. This module owns the number, not the enforcement point.
+**Reversed by [3I-DEC-029](/3i/decisions/dec-029-no-instructor-storage-quota.md), confirmed 2026-08-23.** No per-instructor storage quota exists in any form — not a field, not enforcement, not a display. An instructor's uploads are bounded only by `materials`' ordinary per-file size limits (FR-MAT-02).
 
 ---
 
@@ -78,6 +78,7 @@ Uses the exact same course-suspension mechanism FR-INST-04's automatic enforceme
 4. Suspending an instructor (admin-initiated) does not delete learner progress or issued certificates.
 5. A course-creation attempt for an under-18-tagged course by an instructor with an already-expired WWCC is refused, naming the expiry date.
 6. Renewing a WWCC clears the pending 60-day alert state and does not, on its own, automatically republish any course suspended by the earlier expiry — each requires its own admin review.
+7. No screen, field, or validation anywhere in this module references a storage quota.
 
 ---
 
@@ -88,4 +89,5 @@ Uses the exact same course-suspension mechanism FR-INST-04's automatic enforceme
 | Data model | [3I-INS-DM-001](../data-model.md) |
 | Safeguarding reasoning | [age-and-safeguarding.md §7](/3i/age-and-safeguarding.md#7-instructors) |
 | Course dismissal, WWCC scheduling guard | [3I-DEC-013](/3i/decisions/dec-013-instructor-removal-dismisses-course.md), [3I-DEC-021](/3i/decisions/dec-021-attendance-measured-against-sessions-delivered.md) |
+| Storage quota removal | [3I-DEC-029](/3i/decisions/dec-029-no-instructor-storage-quota.md) |
 | Course ownership field | `catalogue` |
