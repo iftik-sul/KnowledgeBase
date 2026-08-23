@@ -42,4 +42,4 @@ Web only. Member (their own account) or Admin (any account, for support purposes
 
 ## Contrast and RTL
 
-Standard, 4.5:1 (NFR-12). Full RTL mirroring (FR-LOC-04) — dense tabular pricing data, flagged in [ui/README.md](../README.md#checkout--two-tier-itemisation-requirement) as a layout worth extra contrast-review attention.
+Standard, 4.5:1 (NFR-12). Full RTL mirroring (FR-LOC-04) — this screen's dense tabular pricing data (per-profile seat state alongside the itemised total) is worth extra contrast-review attention given how much information sits close together.

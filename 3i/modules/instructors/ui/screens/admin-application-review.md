@@ -33,7 +33,7 @@ A queue of `pending`-status [InstructorApplication](../data-model.md#instructora
 
 ## Behaviour
 
-**Approve** grants the Instructor role and creates (or reactivates, per [data-model.md](../data-model.md#re-approval-after-suspension)) the Account's `InstructorProfile`, seeded from this application's WWCC fields and the default 50 GB quota (FR-INST-05).
+**Approve** grants the Instructor role and creates (or reactivates, per [data-model.md](../data-model.md#re-approval-after-suspension)) the Account's `InstructorProfile`, seeded from this application's WWCC fields. **No storage quota is seeded or set** — [3I-DEC-029](/3i/decisions/dec-029-no-instructor-storage-quota.md) removed the per-instructor quota entirely; approval carries no quota-related step of any kind.
 
 **Reject** notifies the applicant with the recorded reason (FR-INST-02) and leaves the Account's role unchanged — they may submit a new application at any time, with no cooldown specified in the baseline.
 
