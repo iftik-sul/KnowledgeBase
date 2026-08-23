@@ -81,7 +81,9 @@ NFR-12 is the requirement every single screen document across every module alrea
 | **NFR-26** | Documented **retention periods** for every personal data category |
 | **NFR-27** | A written **social media minimum age self-assessment**, reviewed by the client's lawyer, **re-run whenever social features change** |
 
-NFR-24's account deletion is `identity-and-access`'s territory (profile/account deletion already fully specified there) — this requirement is the umbrella that module's existing behaviour already satisfies. NFR-26's retention periods should be documented per personal-data category across every module that stores personal data — not yet compiled into a single project-wide table; flagged as a natural follow-up activity rather than a gap in any individual module's own spec.
+NFR-24's account deletion is `identity-and-access`'s territory (profile/account deletion already fully specified there) — this requirement is the umbrella that module's existing behaviour already satisfies.
+
+**NFR-26 is fully compiled in [data-retention.md](../data-retention.md)**, 2026-08-23 — not restated here. That document is honest about which periods come from the baseline, which are this project's own reasonable defaults, and which are genuinely unresolved pending legal input (payment records, WWCC data) rather than inventing numbers for categories with real legal weight.
 
 ---
 
@@ -105,6 +107,7 @@ NFR-28 applies to `public-site`'s server-rendered pages specifically (FR-CMS-04 
 3. A waiver evidence file, an instructor CV, and a report export are all unreachable by direct URL — signed-URL access only, in every case.
 4. The consent banner defaults to every non-essential category off; enabling analytics is an explicit opt-in action, not a default.
 5. A public course page's Largest Contentful Paint stays under 2.5 seconds on a throttled mobile connection in testing.
+6. A waiver evidence file is inaccessible (deleted) 12 months after its decision date, with the surrounding audit trail still intact.
 
 ---
 
@@ -114,4 +117,5 @@ NFR-28 applies to `public-site`'s server-rendered pages specifically (FR-CMS-04 
 | :---- | :---- |
 | Data model | [3I-PLT-DM-001](../data-model.md) |
 | App store compliance, fully specified elsewhere | [app-store-compliance.md](/3i/app-store-compliance.md) |
+| Data retention periods (NFR-26) | [data-retention.md](../data-retention.md) |
 | Integration contracts | [integrations/stripe.md](../integrations/stripe.md), [integrations/bunny-stream.md](../integrations/bunny-stream.md), [integrations/aws-ses.md](../integrations/aws-ses.md) |

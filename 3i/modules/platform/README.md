@@ -16,7 +16,7 @@ tags:
 
 The module that holds what genuinely belongs to no functional area — the 31 non-functional requirements, and the integration contracts with Stripe, Bunny Stream, and AWS SES that every other module's third-party dependency ultimately rests on.
 
-**Module status: complete.** README, data model, the NFR requirements document, three integration contracts, and the UI stage are written. **This is the last of the thirteen modules — the project's module partition is now fully specified.**
+**Module status: complete.** README, data model, the NFR requirements document, a dedicated data-retention document, three integration contracts, and the UI stage are written. **This is the last of the thirteen modules — the project's module partition is now fully specified.**
 
 ## Scope
 
@@ -42,6 +42,7 @@ NFR-09 ("audit logging of all administrative and financial actions") has been **
 | :---- | :---- | :---- |
 | [data-model.md](data-model.md) | 3I-PLT-DM-001 | current |
 | [requirements/plt-non-functional-requirements.md](requirements/plt-non-functional-requirements.md) | 3I-PLT-REQ-001 | current |
+| [data-retention.md](data-retention.md) | 3I-PLT-RET-001 | current — the full NFR-26 compilation, added 2026-08-23 |
 | [integrations/stripe.md](integrations/stripe.md) | 3I-PLT-INT-001 | current |
 | [integrations/bunny-stream.md](integrations/bunny-stream.md) | 3I-PLT-INT-002 | current |
 | [integrations/aws-ses.md](integrations/aws-ses.md) | 3I-PLT-INT-003 | current |
@@ -67,7 +68,10 @@ None. This is the last module; nothing remains for it to wait on.
 
 ## Open Against This Module
 
-None.
+| Item | Note |
+| :---- | :---- |
+| Payment/invoice record retention period | [data-retention.md](data-retention.md) flags this as genuinely unspecified, tied to §22.2 item 3 (legal copy dependency) — Australian tax law likely sets a real minimum this project has no authority to guess at |
+| WWCC data retention period | Same document, tied to §22.2 item 4 (WWCC legal position dependency) |
 
 ## Change Requests Owed to the Client
 

@@ -16,7 +16,9 @@ Unresolved items. Each blocks something specific. Resolved items move to [decisi
 
 ## Open
 
-None against `identity-and-access`, `commerce`, `catalogue`, `materials`, `learning-delivery`, `assessment`, or `certification`. See each module's own "Open Against This Module" section for smaller flagged items (implementation defaults, external client dependencies) that don't rise to project-wide open questions.
+**None.** Every project-wide open question has been resolved. All thirteen modules — `identity-and-access`, `commerce`, `catalogue`, `materials`, `learning-delivery`, `assessment`, `certification`, `instructors`, `communication`, `public-site`, `localisation`, `reporting`, `platform` — are fully specified, and the module partition itself is complete.
+
+What remains is not open *questions* but **outstanding external dependencies** (below) and small **module-local flags** — implementation defaults or genuinely unspecified baseline details — documented in each module's own "Open Against This Module" section rather than escalated here, since none of them block anything project-wide.
 
 ---
 
@@ -33,9 +35,9 @@ None against `identity-and-access`, `commerce`, `catalogue`, `materials`, `learn
 | **OQ-08** Inactive profiles and the cap | [3I-DEC-014](decisions/dec-014-cap-counts-active-profiles-only.md) — cap counts active and never-activated only |
 | **OQ-09** `app-store-compliance.md` not yet written | [app-store-compliance.md](app-store-compliance.md) — written, consolidating FR-BILL-02, FR-NOT-06, and NFR-15–21 |
 | **OQ-10** PIN attempt rate limiting | [3I-DEC-022](decisions/dec-022-pin-lockout-and-dob-correction-notification.md) — matches FR-AUTH-09 exactly |
-| **OQ-11** Minimum sessions before an attendance certificate | **Resolved 2026-08-23** — [3I-DEC-028](decisions/dec-028-session-delivery-floor-attendance-eligibility.md): a batch-level floor (≥70% of scheduled sessions delivered) gates attendance-certificate eligibility entirely, fails closed, and extends to gate the whole course for `Mixed` courses too |
-
-**Seven modules are now fully specified**: `identity-and-access`, `commerce`, `catalogue`, `materials`, `learning-delivery`, `assessment`, `certification`. No project-wide open questions remain unresolved.
+| **OQ-11** Minimum sessions before an attendance certificate | [3I-DEC-028](decisions/dec-028-session-delivery-floor-attendance-eligibility.md) — a batch-level floor (≥70% of scheduled sessions delivered) gates attendance-certificate eligibility, fails closed, extends to gate the whole course for `Mixed` courses |
+| **OQ-12** Instructor storage — whether a quota exists at all | **Resolved 2026-08-23** — [3I-DEC-029](decisions/dec-029-no-instructor-storage-quota.md): no per-instructor storage quota exists. FR-INST-05 dropped outright |
+| **OQ-13** NFR-26 retention periods, uncompiled | **Resolved 2026-08-23** — [platform/data-retention.md](modules/platform/data-retention.md) compiles every personal-data category across all thirteen modules, honestly marking baseline-specified, reasonable-default, and genuinely-unresolved periods separately |
 
 ---
 
@@ -45,8 +47,8 @@ None against `identity-and-access`, `commerce`, `catalogue`, `materials`, `learn
 | :---: | :---- | :---- | :---- |
 | ~~1~~ | ~~Per-seat price~~ | ~~Commerce~~ | **Received 2026-08-20** — [3I-DEC-024](decisions/dec-024-two-tier-age-based-seat-pricing.md) |
 | 2 | GST treatment for overseas learners | Commerce | From their accountant |
-| 3 | Privacy policy, terms, refund policy | Launch | From their lawyer |
-| 4 | WWCC position | Instructor onboarding | From their lawyer |
+| 3 | Privacy policy, terms, refund policy — **also now the source for payment-record retention** (see [platform/data-retention.md](modules/platform/data-retention.md)) | Launch | From their lawyer |
+| 4 | WWCC position — **also now the source for WWCC data retention** (see [platform/data-retention.md](modules/platform/data-retention.md)) | Instructor onboarding | From their lawyer |
 | 5 | Certificate design assets | Certification | Template, seal, signature — blocks certificate PDF rendering, not this module's specification |
 | 6 | Cloud, Bunny, Stripe, SES accounts | Foundation | **Open now** — no cost to sit idle |
 | 7 | Apple and Google developer accounts | Mobile | **Open now** — store review is the least predictable item |
@@ -64,12 +66,22 @@ It is entirely possible the tool the institute chooses does not permit the stude
 
 ## Change Request Backlog
 
-Eleven decisions now change the baseline rather than interpret it — the original eight, plus [3I-DEC-024](decisions/dec-024-two-tier-age-based-seat-pricing.md), [3I-DEC-025](decisions/dec-025-waiver-single-profile-cap.md), and [3I-DEC-028](decisions/dec-028-session-delivery-floor-attendance-eligibility.md). Listed in [decisions/README.md](decisions/README.md#scope-changes-against-srd-v20) — that table has not yet been updated to include 024/025/028 explicitly; worth a follow-up pass. [3I-DEC-023](decisions/dec-023-no-standalone-accounts-under-18.md) remains the largest single item and should still be raised distinctly from the rest.
+**Thirteen decisions now change the baseline rather than interpret it.** Full list, with what each one changes, in [decisions/README.md](decisions/README.md#scope-changes-against-srd-v20) — updated 2026-08-23 to include everything through [3I-DEC-029](decisions/dec-029-no-instructor-storage-quota.md). [3I-DEC-023](decisions/dec-023-no-standalone-accounts-under-18.md) remains the largest single item and should still be raised distinctly from the rest.
+
+---
+
+## Documentation Housekeeping (Resolved 2026-08-23)
+
+Three small follow-up items, flagged across earlier sessions and never circled back to, closed out in this pass:
+
+- `decisions/README.md`'s Scope Changes table was updated to list all thirteen scope-changing decisions explicitly, rather than the earlier "ten items, see historical record" summary that had gone stale.
+- This document (`open-questions.md`) itself was stale — still stated "seven modules fully specified" after six more had been completed. Corrected.
+- [3I-DEC-029](decisions/dec-029-no-instructor-storage-quota.md) closed the `instructors`–`materials` storage-quota enforcement gap by removing the requirement it would have enforced, rather than building the missing enforcement.
 
 ---
 
 ## Baseline Approval
 
-SRD v2.0 is **verbally approved only**, recorded as `approval: verbal` in its frontmatter. §21.3 measures change requests against an approved baseline; with eleven changes now queued, that matters more than it did.
+SRD v2.0 is **verbally approved only**, recorded as `approval: verbal` in its frontmatter. §21.3 measures change requests against an approved baseline; with thirteen changes now queued, that matters more than it did.
 
 Raised and noted. No action requested.
