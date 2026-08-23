@@ -24,7 +24,7 @@ The module that owns everything a search engine crawls and everything a visitor 
 | :---- | :---- | ----: |
 | CMS | Content management and public site | 7 |
 
-No existing decisions touch CMS — this is the first module besides `catalogue` to be scaffolded with a completely clean slate against the decision register. One new operating note, not a decision: **all content editing is done by the existing single Admin role** (FR-RBAC-02), confirmed 2026-08-23 — "super admin" in conversation refers to that same role, not a new tier. Sub-admin roles remain out of scope (§23 item 5), unchanged.
+No existing decisions touch CMS — this is one of two modules (alongside `catalogue`) scaffolded with a completely clean slate against the decision register. One new operating note, not a decision: **all content editing is done by the existing single Admin role** (FR-RBAC-02), confirmed 2026-08-23 — "super admin" in conversation refers to that same role, not a new tier. Sub-admin roles remain out of scope (§23 item 5), unchanged.
 
 ## A Fixed Set, Not a Page Builder
 
@@ -55,11 +55,11 @@ This module does not restate these. It links.
 
 ## Delivery
 
-Phase 7, Surface (§21.1) — CMS, blog, SEO, reports, exports, admin panel. This module is the CMS/blog/SEO third of that phase; `reporting` (not yet built) covers reports and exports.
+Phase 7, Surface (§21.1) — CMS, blog, SEO, reports, exports, admin panel. This module is the CMS/blog/SEO third of that phase; `reporting` covers reports and exports.
 
 ## Forward References
 
-None that block this module. It reads `catalogue`'s published Course data for FR-CMS-05's `Course` structured-data type — already built, not forward-referenced.
+None. It reads `catalogue`'s published Course data for FR-CMS-05's `Course` structured-data type — a real reference.
 
 ## Open Against This Module
 

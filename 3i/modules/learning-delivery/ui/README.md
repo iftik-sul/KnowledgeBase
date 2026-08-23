@@ -54,6 +54,6 @@ Four screens.
 
 | Item | Blocks |
 | :---- | :---- |
-| None against this module's own screens. | |
+| None. | |
 
-**Two forward references remain open** against modules not yet built — `instructorId`/WWCC expiry (`instructors`) and meeting-link chat distribution (`communication`). Neither blocks this module's own screens; see [data-model.md](../data-model.md#forward-references).
+**Both forward references this module's screens originally carried are resolved** (2026-08-23) — `instructorId`/WWCC expiry (`instructors`) and meeting-link chat distribution (`communication`) are both real, built modules now. See [data-model.md](../data-model.md#forward-references--resolved-2026-08-23).

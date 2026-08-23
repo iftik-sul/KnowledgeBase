@@ -16,7 +16,7 @@ tags:
 
 The module that turns a purchased seat into an actual enrolled learner, schedules and runs the live sessions a batch-based course depends on, and tracks who showed up.
 
-**Module status: complete.** README, data model, both requirements documents, and the full UI stage are written. This module also **resolves every forward reference** left open by `catalogue` and `materials` — both can now read a real Enrolment and Batch record instead of a flagged placeholder.
+**Module status: complete.** README, data model, both requirements documents, and the full UI stage are written. This module also **resolved every forward reference `catalogue` and `materials` had open at the time** — both can now read a real Enrolment and Batch record instead of a flagged placeholder. (`catalogue`'s separate dependency on `instructors` was resolved later, by `instructors` itself — not by this module.)
 
 ## Scope
 
@@ -61,9 +61,9 @@ Phase 4, Learning (§21.1) — enrolment, progress, batches, attendance, waitlis
 
 ## Forward References Resolved
 
-This module's arrival closes out every forward reference `catalogue` and `materials` had open:
+What this module resolved for other modules when it was built:
 
-| Consumer | Reference | Now resolved by |
+| Consumer | Reference | Resolved by |
 | :---- | :---- | :---- |
 | `catalogue` | Publish gate's "at least one batch" check | `Batch` |
 | `catalogue` | `Review` submission's enrolment check | `Enrolment` |
@@ -72,12 +72,13 @@ This module's arrival closes out every forward reference `catalogue` and `materi
 
 See each module's own data-model "Forward References" section for the consumer-side detail; this module doesn't restate it.
 
+**This module's own dependencies — on `instructors`, `assessment`, and `communication` — are resolved too, as of 2026-08-23**, once those three modules were built. See [data-model.md](data-model.md#forward-references).
+
 ## Open Against This Module
 
 | Item | Note |
 | :---- | :---- |
 | Fate of an expired 48-hour waitlist offer (FR-ENR-07) | Baseline says the offer "passes to the next in line" but not what happens to the learner who let it lapse. Modelled as: removed from the waitlist entirely, must re-add to try again — a reasonable default, not confirmed |
-| `instructorId` on Batch, and WWCC expiry date for the scheduling guard | Forward-references `instructors` (INST), not yet built |
 
 ## Change Requests Owed to the Client
 

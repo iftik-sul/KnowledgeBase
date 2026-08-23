@@ -104,9 +104,9 @@ The baseline states these outcomes but not the detection mechanism. Modelled her
 
 ---
 
-## Forward References
+## Forward References — Resolved (2026-08-23)
 
-None that block this module. `certification` (not yet built) will read `ExamAttempt`'s pass/fail and submission state once it exists — this module is the producer of that fact, not a consumer of anything unbuilt.
+This module was originally scaffolded before `certification` existed. `certification`'s `Certificate` now reads `ExamAttempt`'s pass/fail and submission state directly — this module is the producer of that fact, `certification` the consumer.
 
 ---
 

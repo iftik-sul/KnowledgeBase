@@ -55,15 +55,17 @@ This module does not restate these. It links.
 
 ## Delivery
 
-Phase 5, Assessment (§21.1) — question bank, exams, grading, certificates. This module covers the question-bank/exam half; `certification` (not yet built) covers the certificate half.
+Phase 5, Assessment (§21.1) — question bank, exams, grading, certificates. This module covers the question-bank/exam half; `certification` covers the certificate half.
 
-## Forward References
+## Forward References — Resolved (2026-08-23)
 
-| Reference | Reads from | Module status |
-| :---- | :---- | :---- |
-| Certificate eligibility reading exam completion | `certification` (not yet built) reads `ExamAttempt` from this module | Not yet built — this module is the producer, not the consumer, so nothing here is blocked |
+This module was originally scaffolded before `certification` existed:
 
-This is the same relationship `materials`' `MaterialProgress` has with `certification` — this module exposes the fact (an attempt submitted, its pass/fail state), and the certificate-issuing module reads it once it exists.
+| Reference | Resolved by |
+| :---- | :---- |
+| Certificate eligibility reading exam completion | `certification`'s `Certificate` reads `ExamAttempt` from this module |
+
+Same relationship `materials`' `MaterialProgress` has with `certification` — this module exposes the fact (an attempt submitted, its pass/fail state), and the certificate-issuing module reads it.
 
 ## Open Against This Module
 

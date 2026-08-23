@@ -107,4 +107,4 @@ A deliberate baseline exclusion, not a gap — nothing in this module's screens 
 | :---- | :---- |
 | Data model | [3I-ASM-DM-001](../data-model.md) |
 | Question bank | [3I-ASM-REQ-001](qb-question-bank.md) |
-| Certificate eligibility (reads this module's output) | `certification` (not yet built) |
+| Certificate eligibility (reads this module's output) | `certification` |

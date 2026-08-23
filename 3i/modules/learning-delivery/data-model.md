@@ -23,7 +23,7 @@ Entities owned by this module. Other modules reference these; they do not restat
 | Field | Notes |
 | :---- | :---- |
 | Course | FK to `catalogue` Course. Only meaningful for `Online Class` or `Mixed` course types — a `Regular` course never has a Batch |
-| Instructor | FK, forward-referenced to `instructors` — mirrors `Course.instructorId`'s own forward reference in `catalogue` |
+| Instructor | FK to `instructors`' `InstructorProfile` — real reference, resolved 2026-08-23. Mirrors `Course.instructorId` |
 | Name | |
 | Capacity | Maximum enrolled learners (FR-BAT-01) |
 | Number of classes | Session count, set at creation |
@@ -33,7 +33,7 @@ Entities owned by this module. Other modules reference these; they do not restat
 
 ### The WWCC Scheduling Guard
 
-[3I-DEC-021](/3i/decisions/dec-021-attendance-measured-against-sessions-delivered.md): **no Session may be created with a date past the owning instructor's WWCC expiry date.** Enforced at batch creation, since every session's date is known up front (FR-BAT-01) — this is a validation on the whole set of sessions being created, not a check that could pass at creation and later fail. Forward-referenced to `instructors` for the actual expiry date field; until that module exists, this guard cannot be evaluated and should fail closed (refuse batch creation entirely) rather than skip the check silently.
+[3I-DEC-021](/3i/decisions/dec-021-attendance-measured-against-sessions-delivered.md): **no Session may be created with a date past the owning instructor's WWCC expiry date.** Enforced at batch creation, since every session's date is known up front (FR-BAT-01) — this is a validation on the whole set of sessions being created, not a check that could pass at creation and later fail. Reads `instructors`' `InstructorProfile.wwccExpiryDate` — a real, queryable field, not a forward reference.
 
 ---
 
@@ -48,7 +48,7 @@ Entities owned by this module. Other modules reference these; they do not restat
 
 **"Delivered" is what [3I-DEC-021](/3i/decisions/dec-021-attendance-measured-against-sessions-delivered.md)'s attendance denominator counts against**, not "scheduled." A session moves to `delivered` once its scheduled time has passed and it wasn't cancelled — not a manual instructor action, since requiring the instructor to remember to mark a routine session as "delivered" is a step that will be forgotten, and the fact of a session having happened is knowable from the clock alone. **Rescheduling** (FR-BAT-04) updates `scheduledAt` on the existing Session record rather than creating a new one, so its identity — and any attendance already recorded against it — is preserved.
 
-**Meeting link distribution** (FR-BAT-02: posted to the batch's chat room, and by email) is a `communication`-module action triggered by this record, not something this module implements itself — `learning-delivery` owns the Session and its scheduled time; `communication` (not yet built) owns actually sending the link out.
+**Meeting link distribution** (FR-BAT-02: posted to the batch's chat room, and by email) is a `communication`-module action triggered by this record, not something this module implements itself — `learning-delivery` owns the Session and its scheduled time; `communication` owns actually sending the link out.
 
 ---
 
@@ -71,7 +71,7 @@ Entities owned by this module. Other modules reference these; they do not restat
 | Field | Notes |
 | :---- | :---- |
 | Learner | FK |
-| Course | FK to `catalogue` Course — real reference, not forward |
+| Course | FK to `catalogue` Course — real reference |
 | Batch | FK, **nullable**. Set only for `Online Class`/`Mixed` courses; null for `Regular` |
 | Enrolled by | FK to `identity-and-access` Account — the guardian or the learner themselves, per enrolment authority (FR-ENR-02) |
 | Status | `active`, `waitlisted`, `offered`, `cancelled`, `expired` — see below |
@@ -109,19 +109,19 @@ Entities owned by this module. Other modules reference these; they do not restat
 
 ## Course-Level Progress — Computed, Not Stored
 
-"This learner is 60% through this course" is **not a stored field anywhere** — it's computed by aggregating `materials`' `MaterialProgress` records and `assessment`'s exam-attempt completion (forward-referenced, `assessment` not yet built) across every Material and exam belonging to the Enrolment's Course. Same principle as `catalogue`'s derived age band and `materials`' derived completion flags: a value with multiple contributing sources is computed at read time, never duplicated into a field that could drift out of sync with what actually happened.
+"This learner is 60% through this course" is **not a stored field anywhere** — it's computed by aggregating `materials`' `MaterialProgress` records and `assessment`'s exam-attempt completion across every Material and exam belonging to the Enrolment's Course. Same principle as `catalogue`'s derived age band and `materials`' derived completion flags: a value with multiple contributing sources is computed at read time, never duplicated into a field that could drift out of sync with what actually happened.
 
 ---
 
-## Forward References
+## Forward References — Resolved (2026-08-23)
 
-| Reference | Reads from | Module status |
-| :---- | :---- | :---- |
-| `Batch.instructorId`, WWCC expiry for the scheduling guard | `instructors` (INST) | Not yet built |
-| Course-level progress's exam-completion component | `assessment` (QB, EX) | Not yet built |
-| Meeting-link distribution (FR-BAT-02) | `communication` (CHAT, NOT) | Not yet built |
+This module was originally scaffolded before `instructors`, `assessment`, and `communication` existed. All three are now real:
 
-None block this module's own specification — each is a downstream consumer of a Session/Enrolment fact this module already owns and exposes.
+| Reference | Resolved by |
+| :---- | :---- |
+| `Batch.instructorId`, WWCC expiry for the scheduling guard | `instructors`' `InstructorProfile` |
+| Course-level progress's exam-completion component | `assessment`'s `ExamAttempt` |
+| Meeting-link distribution (FR-BAT-02) | `communication` |
 
 ---
 
@@ -144,3 +144,5 @@ None block this module's own specification — each is a downstream consumer of 
 | Learner | `identity-and-access` | Age for the gate; subject of Enrolment and AttendanceRecord |
 | Account | `identity-and-access` | Enrolment authority (who enrolled, who approved an override) |
 | Subscription | `commerce` | FR-ENR-01's seat-availability check |
+| InstructorProfile | `instructors` | `Batch.instructorId`, WWCC scheduling guard |
+| ExamAttempt | `assessment` | Course-level progress's exam-completion component |
