@@ -2,7 +2,7 @@
 project: 3i
 type: standard
 status: current
-updated: 2026-08-18
+updated: 2026-08-23
 tags:
   - safeguarding
   - age-gating
@@ -111,6 +111,8 @@ Both exclusions above are recorded in the baseline as child-safety design decisi
 
 **Guardian-on-behalf participation is confirmed, not incidental.** [3I-DEC-020](decisions/dec-020-guardian-on-behalf-chat-retained.md) reaffirmed FR-CHAT-06 and FR-CHAT-07 after review considered and rejected removing them. Removing them would leave under-13 courses with a room nobody could post in — the child has no access and the guardian would have none either — and would strand FR-BAT-02's meeting-link distribution, which posts to the room as well as by email.
 
+**The same guardian-on-behalf pattern now extends beyond chat.** [3I-DEC-027](decisions/dec-027-guardian-reviews-on-behalf.md) applies it to course ratings/reviews (FR-CRS-11): a guardian submits on an under-13 profile's behalf, with the same *"Fatima (guardian of Aisha)"* attribution.
+
 **On profile deletion, message content is removed but the moderation record is retained.** [3I-DEC-016](decisions/dec-016-deletion-removes-content-retains-record.md): the body is tombstoned and authorship anonymised to "Deleted learner", matching FR-CHAT-14's treatment of account deletion — but reports (FR-CHAT-10) and moderation actions (FR-CHAT-09) against the message survive. Deleting the evidence that a report was raised and acted upon protects nobody.
 
 §22.3 risk 2: multilingual profanity filtering is expected to produce false positives on religious vocabulary. Tuning time is budgeted and admin override on filtered messages is provided.
@@ -139,7 +141,7 @@ The client's legal position on WWCC is outstanding (§22.2 item 4) and is needed
 
 Note the tension worth holding: the store rating is 13+ and marketing addresses parents, while the platform teaches five-year-olds. That is coherent — the account holder is an adult and the apps are companions — but it means any change making the apps child-facing invalidates both the rating and the self-assessment.
 
-See also [open-questions.md](open-questions.md#oq-09--app-store-compliancemd-not-yet-written): the no-purchase-surface rule spanning FR-BILL-02, FR-NOT-06, and NFR-15–21 has no cross-cutting document of its own yet, and §22.3 names store rejection as the highest-uncertainty item in the entire plan.
+The no-purchase-surface rule spanning FR-BILL-02, FR-NOT-06, and NFR-15–21 is fully consolidated in [app-store-compliance.md](app-store-compliance.md), resolving what was OQ-09.
 
 ---
 
@@ -174,4 +176,3 @@ Each requires named human sign-off per language before launch — the institute 
 See [open-questions.md](open-questions.md) for full detail. Safeguarding-relevant items still open:
 
 - **[OQ-11](open-questions.md#oq-11--minimum-sessions-before-an-attendance-certificate)** — whether a minimum number of delivered sessions should gate an attendance certificate, since the current rule allows one session out of ten scheduled to qualify.
-- **[OQ-09](open-questions.md#oq-09--app-store-compliancemd-not-yet-written)** — the app-store no-purchase-surface rule has no consolidated document yet, unlike this one.
