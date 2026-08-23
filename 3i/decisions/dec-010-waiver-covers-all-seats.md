@@ -2,7 +2,7 @@
 project: 3i
 type: decision
 status: current
-updated: 2026-08-18
+updated: 2026-08-20
 id: 3I-DEC-010
 tags: [decision, billing, waivers]
 ---
@@ -26,6 +26,6 @@ Waivers are approved at four fixed tiers — 25%, 50%, 75%, 100% (FR-WAV-02). A 
 
 ## Cost
 
-The exposure is a family on 100% adding five seats at no cost. There is no cap on this beyond the six-profile limit. If that matters commercially, the control is a seat limit on waived accounts — which would be new scope, not a variation of this decision.
+**Resolved by [3I-DEC-025](dec-025-waiver-single-profile-cap.md), 2026-08-20.** The exposure originally recorded here — a family on 100% adding five more seats at no cost, with only the six-profile limit as a ceiling — is closed by capping any waived account to one profile, chosen at application time, for the duration of the waiver.
 
-Admin may revoke a waiver at any time, with the account holder notified and full price resuming at the next billing date (FR-WAV-05). That is the existing safety valve.
+Admin may revoke a waiver at any time, with the account holder notified and full price resuming at the next billing date (FR-WAV-05). That remains the safety valve for the waiver itself; the profile cap is what removes the seat-stacking exposure specifically.

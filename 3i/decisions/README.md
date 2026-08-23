@@ -43,11 +43,15 @@ One file per decision: context, decision, consequences, cost. A decision is neve
 | [3I-DEC-025](dec-025-waiver-single-profile-cap.md) | Waiver caps the account to one profile, chosen at application, auto-deactivated on approval | current | **approved — proceed to build** | WAV, FAM |
 | [3I-DEC-026](dec-026-single-profile-skips-picker.md) | A Member with exactly one profile skips the picker's tile-selection step | current | n/a — UX interpretation | FAM |
 
-**Note on 024/025/026:** 024 and 025 originate from PR #66 (`3i/commerce-module`, the `commerce` module scaffold) and are listed here in anticipation of that PR merging into `main`; their decision files themselves live on that branch until it does. 026 was originally misallocated as 024 directly on `main` before that PR's existing claim on 024/025 was discovered, and was renumbered the same day — see [3I-DEC-026](dec-026-single-profile-skips-picker.md#note) for the correction record.
-
 **`deferred`** marks a decision taken but consciously parked. **`superseded`** marks a reversed decision, replaced by a specific successor. **`deprecated`** marks a decision whose entire premise no longer applies and is not being replaced — the idea itself was dropped, not redirected. All three keep the file for history; none are rewritten.
 
-**On the "client sign-off" column, updated 2026-08-18:** all eight decisions carrying client-facing scope changes (014–016, 018–019, 021–023) are marked **approved — proceed to build**, on the basis that Saitama holds effective decision authority on the client's behalf for this engagement. This is a project-level operating assumption recorded here for traceability, not a claim that the institute's own §21.3 written-approval process has been formally exercised. 024 and 025 follow the same basis per the commerce-module PR; 026 is UX interpretation only and needs no such sign-off.
+**On the "client sign-off" column, updated 2026-08-18:** all eight decisions carrying client-facing scope changes (014–016, 018–019, 021–023) are marked **approved — proceed to build**, on the basis that Saitama holds effective decision authority on the client's behalf for this engagement. This is a project-level operating assumption recorded here for traceability, not a claim that the institute's own §21.3 written-approval process has been formally exercised.
+
+**3I-DEC-024 and 3I-DEC-025, both added 2026-08-20, follow the same basis** — worked out directly with Saitama in the same session, and marked approved on the same operating assumption as the batch above, not as part of it. **3I-DEC-026, added 2026-08-23, is UX interpretation only and needs no such sign-off** — noted here rather than in the scope-changes table below since it doesn't change what the baseline says.
+
+## Scope Changes Against SRD v2.0
+
+Every decision below changes what the baseline document says rather than merely interpreting an ambiguity in it. Ten items — see the historical record below for the original 2026-08-18 batch, and 3I-DEC-024 / 3I-DEC-025 as the items added since. 3I-DEC-026 is not in this table: it interprets a silence in FR-FAM-04 rather than changing baseline behaviour.
 
 ## Change Request — 8 Items, Two Tiers (Historical Record)
 
@@ -75,17 +79,17 @@ Internally approved 2026-08-18, and subsequently treated as approved for build p
 
 [3I-DEC-017](dec-017-account-holder-renamed-member.md) was not part of this batch — internal label change only, no client-facing behaviour to approve.
 
-## Change Items From the Commerce Module (PR #66) — 3I-DEC-024 and 3I-DEC-025
+## Change Items Added Since — 3I-DEC-024 and 3I-DEC-025
 
 | ID | Ask |
 | :---- | :---- |
 | [3I-DEC-024](dec-024-two-tier-age-based-seat-pricing.md) | Two-tier age-based seat pricing replaces the baseline's single flat "additional seat" price. Confirmed directly by Saitama 2026-08-20 alongside the seat/payment architecture built on it |
 | [3I-DEC-025](dec-025-waiver-single-profile-cap.md) | Waiver caps the account to one profile — chosen at application, auto-deactivated on approval — closing the seat-stacking exposure DEC-010 originally left open |
 
-Both raised and resolved on 2026-08-20, in direct response to a client question about the pricing/seat mechanics, as part of the `commerce` module scaffold (PR #66, not yet merged to `main` as of this entry).
+Neither was part of the 2026-08-18 batch — both raised and resolved separately, on 2026-08-20, in direct response to a client question about the pricing/seat mechanics.
 
 ## Provenance
 
-Decisions 001–007 derive from SRD v2.0 and cite the requirement codes that fix them. Decisions 008–026 were taken outside the baseline: 008–023 in review on 2026-08-18, 024–025 on 2026-08-20 once pricing was confirmed (via PR #66), and 026 on 2026-08-23. Eleven of them (014–016, 018–019, 021–026) are approved for build or need no formal sign-off per the notes above; one (008) is deprecated.
+Decisions 001–007 derive from SRD v2.0 and cite the requirement codes that fix them. Decisions 008–026 were taken outside the baseline: 008–023 in review on 2026-08-18, 024–025 on 2026-08-20 once pricing was confirmed, and 026 on 2026-08-23. Eleven of them (014–016, 018–019, 021–026) are approved for build or need no formal sign-off per the notes above; one (008) is deprecated.
 
 The client supplied no written material, so no decision here cites a client document. None exists.
