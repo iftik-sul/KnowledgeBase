@@ -2,7 +2,7 @@
 project: 3i
 type: standard
 status: current
-updated: 2026-08-23
+updated: 2026-08-24
 tags:
   - standard
   - meta
@@ -160,9 +160,11 @@ Screens and requirements cross — a screen such as Checkout or Video Player ser
 5. **Screens cite the requirement codes they satisfy**, and requirement documents list the screens realising them.
 6. **`figma:` frontmatter** records the design generated from a screen file.
 
+Visual tokens (color, type, spacing, radius, elevation) are never restated per screen or per module — every screen document draws from the single project-wide reference at [design-system.md](design-system.md).
+
 ### Accessibility
 
-NFR-12 requires WCAG 2.2 Level AA with 4.5:1 contrast. Every screen document states its contrast pairs explicitly. A near-black background carrying navy text shipped once on this project and was caught late — contrast belongs in the specification, where it is reviewable, not in the design tool, where it is discovered.
+NFR-12 requires WCAG 2.2 Level AA with 4.5:1 contrast. Every screen document states its contrast pairs explicitly. A near-black background carrying navy text shipped once on this project and was caught late — contrast belongs in the specification, where it is reviewable, not in the design tool, where it is discovered. [design-system.md](design-system.md) documents the pre-verified pairings; a screen introducing a new pairing must check it before it ships.
 
 RTL is not a rendering concern. FR-LOC-04 requires navigation, alignment, icon direction, and progress indicators to mirror for Arabic and Urdu. Every screen document states its RTL behaviour.
 
@@ -176,6 +178,7 @@ Some rules span every module. They are documented **once**, at project root, and
 | :---- | :---- |
 | [age-and-safeguarding.md](age-and-safeguarding.md) | Age rules sit in AUTH, FAM, CRS, ENR, CHAT and INST simultaneously |
 | [app-store-compliance.md](app-store-compliance.md) | The no-purchase-surface rule spans BILL, NOT and the NFRs at once |
+| [design-system.md](design-system.md) | Visual tokens (color, type, spacing, radius, elevation) are shared by every module's `ui/` stage — restating them per module would drift silently |
 | [decisions/](decisions/README.md) | The consequential decisions constrain several modules at once |
 | [open-questions.md](open-questions.md) | Tracks unresolved items across the whole project |
 
