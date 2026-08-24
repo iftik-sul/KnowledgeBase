@@ -46,12 +46,13 @@ One file per decision: context, decision, consequences, cost. A decision is neve
 | [3I-DEC-028](dec-028-session-delivery-floor-attendance-eligibility.md) | A batch-level session-delivery floor gates attendance-certificate eligibility; resolves OQ-11 | current | **approved — proceed to build** | CERT |
 | [3I-DEC-029](dec-029-no-instructor-storage-quota.md) | No per-instructor storage quota — FR-INST-05 dropped | current | **approved — proceed to build** | INST |
 | [3I-DEC-030](dec-030-account-type-selector-is-copy-only.md) | Account Type Selector at registration entry is copy-only, not a new account type | current | n/a — UX interpretation | AUTH |
+| [3I-DEC-031](dec-031-persistent-account-menu-entry-to-guardian-dashboard.md) | A persistent account menu is the single entry point to Guardian Dashboard, reachable pre-PIN and from any authenticated screen | current | n/a — UX interpretation | AUTH, FAM |
 
 **`deferred`** marks a decision taken but consciously parked. **`superseded`** marks a reversed decision, replaced by a specific successor. **`deprecated`** marks a decision whose entire premise no longer applies and is not being replaced — the idea itself was dropped, not redirected. All three keep the file for history; none are rewritten.
 
 **On 3I-DEC-002:** only its 13–17-standalone-account content is superseded by DEC-023. Its under-13-is-profile-only content remains correct and is now also stated directly in DEC-023 itself — see [3I-DEC-002](dec-002-under-13-family-accounts.md)'s superseded notice for the full explanation of what changed and what didn't.
 
-**On the "client sign-off" column, updated 2026-08-18:** all eight decisions carrying client-facing scope changes (014–016, 018–019, 021–023) are marked **approved — proceed to build**, on the basis that Saitama holds effective decision authority on the client's behalf for this engagement. This is a project-level operating assumption recorded here for traceability, not a claim that the institute's own §21.3 written-approval process has been formally exercised. 024, 025, 028, and 029 follow the same basis; 026, 027, and 030 are UX/safeguarding interpretation only and need no such sign-off.
+**On the "client sign-off" column, updated 2026-08-18:** all eight decisions carrying client-facing scope changes (014–016, 018–019, 021–023) are marked **approved — proceed to build**, on the basis that Saitama holds effective decision authority on the client's behalf for this engagement. This is a project-level operating assumption recorded here for traceability, not a claim that the institute's own §21.3 written-approval process has been formally exercised. 024, 025, 028, and 029 follow the same basis; 026, 027, 030, and 031 are UX/safeguarding interpretation only and need no such sign-off.
 
 ## Scope Changes Against SRD v2.0
 
@@ -72,7 +73,7 @@ Every decision below changes what the baseline document says rather than merely 
 | [3I-DEC-028](dec-028-session-delivery-floor-attendance-eligibility.md) | New session-delivery floor gates attendance-certificate eligibility, resolving OQ-11 and settling `Mixed`-course behaviour the baseline left silent |
 | [3I-DEC-029](dec-029-no-instructor-storage-quota.md) | FR-INST-05's storage quota is dropped entirely |
 
-3I-DEC-026, 3I-DEC-027, and 3I-DEC-030 are not in this table: all three interpret a baseline silence or presentation layer (single-profile picker skip; guardian-submitted reviews; registration entry-point copy) rather than changing stated baseline behaviour.
+3I-DEC-026, 3I-DEC-027, 3I-DEC-030, and 3I-DEC-031 are not in this table: all four interpret a baseline silence or navigation/presentation layer (single-profile picker skip; guardian-submitted reviews; registration entry-point copy; account-menu navigation) rather than changing stated baseline behaviour.
 
 ## Change Request — 8 Items, Two Tiers (Historical Record)
 
@@ -113,6 +114,6 @@ None were part of the 2026-08-18 batch — all four raised and resolved separate
 
 ## Provenance
 
-Decisions 001–007 derive from SRD v2.0 and cite the requirement codes that fix them. Decisions 008–030 were taken outside the baseline: 008–023 in review on 2026-08-18, 024–025 on 2026-08-20 once pricing was confirmed, 026–029 on 2026-08-23, and 030 on 2026-08-24. Fifteen of them (014–016, 018–019, 021–030) are approved for build or need no formal sign-off per the notes above; one (008) is deprecated; one (002) is partially superseded, per the note above.
+Decisions 001–007 derive from SRD v2.0 and cite the requirement codes that fix them. Decisions 008–031 were taken outside the baseline: 008–023 in review on 2026-08-18, 024–025 on 2026-08-20 once pricing was confirmed, 026–029 on 2026-08-23, and 030–031 on 2026-08-24. Fifteen of them (014–016, 018–019, 021–030) are approved for build or need no formal sign-off per the notes above, plus 031 on the same UX-interpretation basis; one (008) is deprecated; one (002) is partially superseded, per the note above.
 
 The client supplied no written material, so no decision here cites a client document. None exists.
