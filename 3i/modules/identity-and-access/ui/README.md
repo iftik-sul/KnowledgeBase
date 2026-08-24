@@ -36,6 +36,7 @@ Role × screen matrix. Every screen in this module, and who sees it.
 
 | Screen | Public | Member | Instructor | Admin | Mobile |
 | :---- | :---: | :---: | :---: | :---: | :---: |
+| [Account type selector](screens/account-type-selector.md) | ● | | | | ● |
 | [Registration — adult](screens/registration-adult.md) | ● | | | | ● |
 | [Registration blocked — under 18](screens/registration-blocked-under-18.md) | ● | | | | ● |
 | [Email verification](screens/email-verification.md) | ● | ● | ● | ● | ● |
@@ -51,7 +52,7 @@ Role × screen matrix. Every screen in this module, and who sees it.
 | [Admin — DOB correction](screens/admin-dob-correction.md) | | | | ● | |
 | [Admin — TOTP setup](screens/admin-totp-setup.md) | | | | ● | |
 
-Fourteen screens, eleven in scope for mobile — see [mobile-scope.md](/3i/mobile-scope.md#2-scope-by-module) for the reasoning. No role management screen — [3I-DEC-017](/3i/decisions/dec-017-account-holder-renamed-member.md) confirms role assignment is a database operation at launch, not a UI.
+Fifteen screens, twelve in scope for mobile — see [mobile-scope.md](/3i/mobile-scope.md#2-scope-by-module) for the reasoning. No role management screen — [3I-DEC-017](/3i/decisions/dec-017-account-holder-renamed-member.md) confirms role assignment is a database operation at launch, not a UI.
 
 ---
 

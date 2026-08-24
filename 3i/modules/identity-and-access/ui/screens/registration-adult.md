@@ -3,7 +3,7 @@ project: 3i
 module: identity-and-access
 type: ui-spec
 status: current
-updated: 2026-08-18
+updated: 2026-08-24
 id: 3I-IDA-UI-001
 derived_from:
   - 3i/reference/baseline/srd-v2.0.md
@@ -25,11 +25,22 @@ The single account-creation path in the platform. Date of birth resolves to exac
 
 The single registration form. Anyone completing it successfully becomes a full adult account holder — whether or not they ever add a child profile is irrelevant to what gets created here.
 
+Reached from [Account Type Selector](account-type-selector.md), which sets which of the two copy variants below is shown. **The form itself — fields, validation, the date-of-birth gate — is identical either way.** Only the headline and subtext differ — see [3I-DEC-030](/3i/decisions/dec-030-account-type-selector-is-copy-only.md).
+
+## Copy Variants
+
+| | Variant A — "For myself" | Variant B — "For my family" |
+| :---- | :---- | :---- |
+| Headline | "Create your account" | "Start your family's learning journey" |
+| Subtext | "Start learning Islamic studies at your own pace." | "Create your account, then add your children or teens once you're signed up." |
+
+Both variants share one field layout and one underlying account type — documented together in this table so the two copy sets cannot drift out of sync with each other over time, not to describe two different forms.
+
 ## Fields
 
 First name, last name, email, password, date of birth, locale (FR-AUTH-01). See [validation-rules.md](../validation-rules.md) for field-level rules.
 
-Social login (Google, Apple) offered as an alternative entry point — selecting it skips password entry but still requires date of birth on first login, routing to [Social login — DOB capture](social-login-dob-capture.md) rather than this form directly.
+Social login (Google, Apple) offered as an alternative entry point — selecting it skips password entry but still requires date of birth on first login, routing to [Social login — DOB capture](social-login-dob-capture.md) rather than this form directly. That screen is neutral regardless of which card was chosen on [Account Type Selector](account-type-selector.md) — the copy variant does not carry through to it.
 
 **No guardian fields exist anywhere on this screen.** Every guardian relationship on the platform exists only between a verified adult account and a profile created beneath it via [Profile create/edit](profile-create-edit.md).
 
@@ -39,6 +50,8 @@ Date of birth is evaluated on submit, before any other field is validated furthe
 
 - **18+** → proceeds to account creation, triggers [Email verification](email-verification.md).
 - **Under 18, any age** → redirects to [Registration blocked — under 18](registration-blocked-under-18.md). No account is created, no data from this form is retained beyond what FR-AUTH-04 already requires for the blocked-attempt record.
+
+This fork applies identically regardless of which copy variant was shown — the card chosen on [Account Type Selector](account-type-selector.md) carries no exemption of any kind.
 
 ## Role Variations
 
