@@ -3,7 +3,7 @@ project: 3i
 module: identity-and-access
 type: ui-spec
 status: current
-updated: 2026-08-18
+updated: 2026-08-24
 id: 3I-IDA-UI-COMP
 derived_from:
   - 3i/reference/baseline/srd-v2.0.md
@@ -47,3 +47,17 @@ Used on: [Guardian dashboard](screens/guardian-dashboard.md), [Profile picker](s
 Four states, per [3I-IDA-DM-001](../data-model.md): Active, Never activated, Inactive (Cancelled), Deleted.
 
 **Inactive and Deleted must be visually distinct, not variants of the same "greyed out" treatment.** One preserves every record; the other destroys most of them. A guardian scanning the dashboard should not need to open a profile to know which kind of gone it is.
+
+---
+
+## Account Menu
+
+Used on: [Profile picker](screens/profile-picker.md) (before PIN entry), and in the header chrome of every authenticated screen across every module — [3I-DEC-031](/3i/decisions/dec-031-persistent-account-menu-entry-to-guardian-dashboard.md).
+
+A persistent, always-visible affordance, not tied to which profile is currently active. Its only action in this module's scope is routing to [Guardian dashboard](screens/guardian-dashboard.md).
+
+**This is the one component in this file whose footprint extends outside `identity-and-access`.** It is documented here because it routes to this module's own screen, mirroring how `localisation`'s Locale Switcher is documented in that module's own `components.md` despite being global chrome — see [localisation/ui/README.md](/3i/modules/localisation/ui/README.md#shared). Every module's authenticated screens carry this affordance in their header; it is not restated per module.
+
+**Access rule: any authenticated Member, regardless of which profile is active or whether any profile is currently PIN-locked.** This is the point of the component — see [3I-DEC-031](/3i/decisions/dec-031-persistent-account-menu-entry-to-guardian-dashboard.md) for why a Member must always be able to reach billing and PIN resets even if every profile on the account is locked out.
+
+**Contrast (NFR-12) and RTL (FR-LOC-04):** standard requirements apply; icon and label position mirror in Arabic and Urdu, consistent with the header chrome it sits within.

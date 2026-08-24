@@ -3,7 +3,7 @@ project: 3i
 module: identity-and-access
 type: ui-spec
 status: current
-updated: 2026-08-18
+updated: 2026-08-24
 id: 3I-IDA-UI-010
 derived_from:
   - 3i/reference/baseline/srd-v2.0.md
@@ -22,6 +22,8 @@ Satisfies: FR-FAM-09
 ## Purpose
 
 The Member's overview of every profile on the account — all four states, not just the active ones.
+
+**Reached via the [Account Menu](../components.md#account-menu)** — present in the header of [Profile picker](profile-picker.md) before any PIN is entered, and in the header chrome of every authenticated screen across the platform, per [3I-DEC-031](/3i/decisions/dec-031-persistent-account-menu-entry-to-guardian-dashboard.md). Access is gated only on an authenticated Member session — **never** on a PIN, and never tied to which profile (if any) is currently active. A Member locked out of every profile's PIN still reaches this screen normally.
 
 ## Content
 

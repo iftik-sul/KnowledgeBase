@@ -3,7 +3,7 @@ project: 3i
 module: identity-and-access
 type: ui-spec
 status: current
-updated: 2026-08-23
+updated: 2026-08-24
 id: 3I-IDA-UI-008
 derived_from:
   - 3i/reference/baseline/srd-v2.0.md
@@ -27,6 +27,8 @@ Shown after Member login when the account has more than one profile. Selecting a
 ## Content
 
 A tile per **active or never-activated** profile, using the [Age Band Badge](../components.md#age-band-badge) and display name. **Inactive and deleted profiles do not appear here** — they are reached only from [Guardian dashboard](guardian-dashboard.md), never from the picker, since the picker is a study-entry surface and those states cannot study.
+
+An [Account Menu](../components.md#account-menu) affordance sits in this screen's header, reachable **before any PIN is entered** — per [3I-DEC-031](/3i/decisions/dec-031-persistent-account-menu-entry-to-guardian-dashboard.md), it routes directly to [Guardian dashboard](guardian-dashboard.md) for seat management, PIN resets, and profile deletion, without requiring a profile to be selected first. A Member locked out of every profile's PIN still reaches account-level actions through this menu.
 
 ## Behaviour
 
