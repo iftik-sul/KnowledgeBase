@@ -23,7 +23,7 @@ Satisfies: FR-FAM-09
 
 The Member's overview of every profile on the account — all four states, not just the active ones.
 
-**Reached via the [Account Menu](../components.md#account-menu)** — present in the header of [Profile picker](profile-picker.md) before any PIN is entered, and in the header chrome of every authenticated screen across the platform, per [3I-DEC-031](/3i/decisions/dec-031-persistent-account-menu-entry-to-guardian-dashboard.md). Access is gated only on an authenticated Member session — **never** on a PIN, and never tied to which profile (if any) is currently active. A Member locked out of every profile's PIN still reaches this screen normally.
+**Reached from [Account Settings](account-settings.md)' "Family & profiles" section** — itself reached via the [Account Menu](../components.md#account-menu), present in the header of [Profile picker](profile-picker.md) before any PIN is entered, and in the header chrome of every authenticated screen across the platform, per [3I-DEC-031](/3i/decisions/dec-031-persistent-account-menu-entry-to-guardian-dashboard.md) and [3I-DEC-032](/3i/decisions/dec-032-account-settings-hub.md). Access is gated only on an authenticated Member session — **never** on a PIN, and never tied to which profile (if any) is currently active. A Member locked out of every profile's PIN still reaches this screen normally.
 
 ## Content
 
@@ -45,6 +45,8 @@ Actions available per card, gated by state:
 | Never activated | Edit, reset PIN, activate (purchase seat), delete |
 | Inactive | Reactivate (purchase seat), delete |
 | Deleted | None — view certificates only |
+
+**"Activate," "Reactivate," and "Cancel seat" all route to [Seat Management](/3i/modules/commerce/ui/screens/seat-management.md), scoped to the profile clicked from** — per [3I-DEC-032](/3i/decisions/dec-032-account-settings-hub.md). This screen does not duplicate Seat Management's cancellation-confirmation copy or its add-seat path to Pricing / Plan Selection; it hands off rather than re-implementing.
 
 **Cancel and Delete are visually and textually distinct actions**, never the same button with different confirmation copy. Cancel preserves everything; Delete is the destructive path detailed in [Profile deletion confirmation](profile-deletion-confirmation.md).
 

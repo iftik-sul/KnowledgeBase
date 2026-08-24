@@ -44,15 +44,17 @@ Role × screen matrix. Every screen in this module, and who sees it.
 | [Social login — DOB capture](screens/social-login-dob-capture.md) | ● | | | | ● |
 | [Password reset](screens/password-reset.md) | ● | | | | ● |
 | [Profile picker](screens/profile-picker.md) | | ● | | | ● |
+| [Account settings](screens/account-settings.md) | | ● | ● | ● | ● |
+| [Login \& security](screens/login-security.md) | | ● | ● | ● | ● |
 | [Profile create / edit](screens/profile-create-edit.md) | | ● | | | ● |
 | [Guardian dashboard](screens/guardian-dashboard.md) | | ● | | | ● |
 | [Profile deletion confirmation](screens/profile-deletion-confirmation.md) | | ● | | | ● |
-| [Device management](screens/device-management.md) | | ● | | | ● |
+| [Device management](screens/device-management.md) | | ● | ● | ● | ● |
 | [Admin — profile name unlock](screens/admin-name-unlock.md) | | | | ● | |
 | [Admin — DOB correction](screens/admin-dob-correction.md) | | | | ● | |
 | [Admin — TOTP setup](screens/admin-totp-setup.md) | | | | ● | |
 
-Fifteen screens, twelve in scope for mobile — see [mobile-scope.md](/3i/mobile-scope.md#2-scope-by-module) for the reasoning. No role management screen — [3I-DEC-017](/3i/decisions/dec-017-account-holder-renamed-member.md) confirms role assignment is a database operation at launch, not a UI.
+Seventeen screens, fourteen in scope for mobile — see [mobile-scope.md](/3i/mobile-scope.md#2-scope-by-module) for the reasoning. [Account settings](screens/account-settings.md) and [Login \& security](screens/login-security.md) added 2026-08-24 per [3I-DEC-032](/3i/decisions/dec-032-account-settings-hub.md), closing the gap where Device Management had no documented entry point and Guardian Dashboard's seat actions pointed at an unnamed screen. No role management screen — [3I-DEC-017](/3i/decisions/dec-017-account-holder-renamed-member.md) confirms role assignment is a database operation at launch, not a UI.
 
 ---
 
@@ -60,7 +62,7 @@ Fifteen screens, twelve in scope for mobile — see [mobile-scope.md](/3i/mobile
 
 | Document | Covers |
 | :---- | :---- |
-| [components.md](components.md) | The PIN pad, and elements reused across two or more screens |
+| [components.md](components.md) | The PIN pad, Account Menu, and elements reused across two or more screens |
 | [validation-rules.md](validation-rules.md) | Field-level validation shared across registration and profile forms |
 
 ---

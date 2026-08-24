@@ -3,7 +3,7 @@ project: 3i
 module: identity-and-access
 type: ui-spec
 status: current
-updated: 2026-08-18
+updated: 2026-08-24
 id: 3I-IDA-UI-012
 derived_from:
   - 3i/reference/baseline/srd-v2.0.md
@@ -22,6 +22,8 @@ Satisfies: FR-AUTH-11
 ## Purpose
 
 Lists registered devices on the account; allows de-authorisation.
+
+**Reached from [Account Settings](account-settings.md)' "Devices" section** — per [3I-DEC-032](/3i/decisions/dec-032-account-settings-hub.md). Previously undocumented: this screen existed with no stated route to it.
 
 ## Content
 
