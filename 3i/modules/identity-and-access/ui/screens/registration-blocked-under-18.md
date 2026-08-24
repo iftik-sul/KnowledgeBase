@@ -3,7 +3,7 @@ project: 3i
 module: identity-and-access
 type: ui-spec
 status: current
-updated: 2026-08-18
+updated: 2026-08-24
 id: 3I-IDA-UI-003
 derived_from:
   - 3i/reference/baseline/srd-v2.0.md
@@ -22,7 +22,7 @@ Satisfies: FR-AUTH-03, FR-AUTH-04
 
 ## Purpose
 
-Reached when date of birth on [Registration — Adult](registration-adult.md) resolves to any age under 18, via any route including [Social login — DOB capture](social-login-dob-capture.md).
+Reached when date of birth on [Registration — Adult](registration-adult.md) resolves to any age under 18, via any route including [Account Type Selector](account-type-selector.md) → either copy variant, or [Social login — DOB capture](social-login-dob-capture.md).
 
 ## Content
 
@@ -32,7 +32,7 @@ The message must be **neutral and not disclose the age threshold in a way that i
 
 **Wording must read naturally across the full age range this screen serves** — from a young child's guardian reading on their behalf, to a near-adult teenager reading it themselves. A tone that only suits a young child will read as condescending to a 17-year-old.
 
-Offers a path toward [Registration — Adult](registration-adult.md) framed as "if you are a parent or guardian, you can create an account for your child" — this is the intended redirect, not an afterthought, since the family account model is the only way anyone under 18 reaches the platform.
+Offers a path **directly to [Registration — Adult](registration-adult.md), Variant B ("For my family") copy** — not routed back through [Account Type Selector](account-type-selector.md) first. Whoever reaches this screen has already stated their situation by getting here; sending them through a selector whose only job is to establish what they've already established would be a redundant extra step. Framed as "if you are a parent or guardian, you can create an account for your child" — this is the intended redirect, not an afterthought, since the family account model is the only way anyone under 18 reaches the platform.
 
 ## Behaviour
 
