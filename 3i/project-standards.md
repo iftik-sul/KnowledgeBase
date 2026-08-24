@@ -156,7 +156,7 @@ Screens and requirements cross — a screen such as Checkout or Video Player ser
 1. **One file per distinct screen.** Never one file per role-screen pair.
 2. **Role differences go inside the screen file**, under `## Role Variations`.
 3. **Shared logic documented once** and linked — `components.md`, `validation-rules.md`.
-4. **`ui/README.md` carries the role × screen matrix**, which is what makes a missing screen visible.
+4. **`ui/README.md` carries the role × screen matrix**, which is what makes a missing screen visible. It also carries a **`Mobile (Flutter)`** column marking which screens are in scope for the native app — see [mobile-scope.md](mobile-scope.md) for the project-wide reasoning; modules do not restate it.
 5. **Screens cite the requirement codes they satisfy**, and requirement documents list the screens realising them.
 6. **`figma:` frontmatter** records the design generated from a screen file.
 
@@ -179,6 +179,7 @@ Some rules span every module. They are documented **once**, at project root, and
 | [age-and-safeguarding.md](age-and-safeguarding.md) | Age rules sit in AUTH, FAM, CRS, ENR, CHAT and INST simultaneously |
 | [app-store-compliance.md](app-store-compliance.md) | The no-purchase-surface rule spans BILL, NOT and the NFRs at once |
 | [design-system.md](design-system.md) | Visual tokens (color, type, spacing, radius, elevation) are shared by every module's `ui/` stage — restating them per module would drift silently |
+| [mobile-scope.md](mobile-scope.md) | Which screens are native Flutter screens cuts across all thirteen modules — the scope decision and its reasoning belong in one place |
 | [decisions/](decisions/README.md) | The consequential decisions constrain several modules at once |
 | [open-questions.md](open-questions.md) | Tracks unresolved items across the whole project |
 

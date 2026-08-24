@@ -3,7 +3,7 @@ project: 3i
 module: certification
 type: ui-spec
 status: current
-updated: 2026-08-23
+updated: 2026-08-24
 id: 3I-CRT-UI-000
 derived_from:
   - requirements/cert-certificates.md
@@ -25,18 +25,19 @@ Role × screen matrix. Every screen in this module, and who sees it.
 | **Public** | No session — the verification page requires none (FR-CERT-07) |
 | **Member** | Viewing a profile's own issued certificates |
 | **Admin** | |
+| **Mobile (Flutter)** | Not a role — a platform column marking which screens are in scope for the native app. See [mobile-scope.md](/3i/mobile-scope.md) |
 
 ---
 
 ## Matrix
 
-| Screen | Public | Member | Admin |
-| :---- | :---: | :---: | :---: |
-| [Certificate detail / download](screens/certificate-detail-download.md) | | ● | |
-| [Public verification page](screens/public-verification-page.md) | ● | | |
-| [Admin certificate management](screens/admin-certificate-management.md) | | | ● |
+| Screen | Public | Member | Admin | Mobile |
+| :---- | :---: | :---: | :---: | :---: |
+| [Certificate detail / download](screens/certificate-detail-download.md) | | ● | | ● |
+| [Public verification page](screens/public-verification-page.md) | ● | | | |
+| [Admin certificate management](screens/admin-certificate-management.md) | | | ● | |
 
-Three screens. **No certificate-issuance screen exists** — issuance is automatic, triggered by eligibility being newly met (see [data-model.md](../data-model.md#when-eligibility-is-checked)); there is no learner-initiated "claim" action and no instructor-initiated "grant" action anywhere in the baseline.
+Three screens, one in scope for mobile — see [mobile-scope.md](/3i/mobile-scope.md#2-scope-by-module). The public verification page stays a browser-accessed link (e.g. opened by an employer) rather than a native screen. **No certificate-issuance screen exists** — issuance is automatic, triggered by eligibility being newly met (see [data-model.md](../data-model.md#when-eligibility-is-checked)); there is no learner-initiated "claim" action and no instructor-initiated "grant" action anywhere in the baseline.
 
 ---
 

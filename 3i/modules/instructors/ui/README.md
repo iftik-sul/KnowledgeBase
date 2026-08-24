@@ -3,7 +3,7 @@ project: 3i
 module: instructors
 type: ui-spec
 status: current
-updated: 2026-08-23
+updated: 2026-08-24
 id: 3I-INS-UI-000
 derived_from:
   - requirements/inst-instructor-onboarding.md
@@ -25,19 +25,20 @@ Role × screen matrix. Every screen in this module, and who sees it.
 | **Member** | Applying to become an instructor — the same Account, before the role is granted |
 | **Instructor** | Managing their own WWCC and storage status once approved |
 | **Admin** | |
+| **Mobile (Flutter)** | Not a role — a platform column marking which screens are in scope for the native app. See [mobile-scope.md](/3i/mobile-scope.md) |
 
 ---
 
 ## Matrix
 
-| Screen | Member | Instructor | Admin |
-| :---- | :---: | :---: | :---: |
-| [Instructor application](screens/instructor-application.md) | ● | | |
-| [Admin application review](screens/admin-application-review.md) | | | ● |
-| [Admin instructor management](screens/admin-instructor-management.md) | | | ● |
-| [WWCC renewal](screens/wwcc-renewal.md) | | ● | |
+| Screen | Member | Instructor | Admin | Mobile |
+| :---- | :---: | :---: | :---: | :---: |
+| [Instructor application](screens/instructor-application.md) | ● | | | ● |
+| [Admin application review](screens/admin-application-review.md) | | | ● | |
+| [Admin instructor management](screens/admin-instructor-management.md) | | | ● | |
+| [WWCC renewal](screens/wwcc-renewal.md) | | ● | | ● |
 
-Four screens.
+Four screens, two in scope for mobile — see [mobile-scope.md](/3i/mobile-scope.md#3-decisions-worth-recording) for why both document-capture screens (application and renewal) are included together.
 
 ---
 

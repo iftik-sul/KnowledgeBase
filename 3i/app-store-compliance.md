@@ -2,7 +2,7 @@
 project: 3i
 type: standard
 status: current
-updated: 2026-08-20
+updated: 2026-08-24
 tags:
   - commerce
   - mobile
@@ -34,7 +34,7 @@ This is not satisfied by simply omitting a Subscribe button. It means:
 
 Apple Guideline 3.1.1 (In-App Purchase) requires that if an app unlocks content or functionality with real-world payment, that payment must go through Apple's IAP system — Apple takes a commission. Google Play has an equivalent policy for digital goods.
 
-3i avoids this by keeping the apps **read-only companions**: the paid relationship is established and managed entirely on the web, and the apps consume access that already exists. This is the multiplatform-services model (NFR-15–21) — it is why FR-BILL-01 puts all purchase, plan-change, and cancellation functionality on the web, and why [3I-DEC-003](decisions/dec-003-web-only-stripe-checkout.md) made that call early rather than discovering it at submission.
+3i avoids this by keeping **all purchase, plan-change, and cancellation actions exclusively on the web** — not by keeping the apps read-only in general. Registration, profile management, learning, exams, and chat are native app functionality (see [mobile-scope.md](mobile-scope.md) for the full scope); only the paid relationship itself is established and managed entirely on the web, with the apps consuming access that already exists once it's paid for. This is the multiplatform-services model (NFR-15–21) — it is why FR-BILL-01 puts all purchase, plan-change, and cancellation functionality on the web, and why [3I-DEC-003](decisions/dec-003-web-only-stripe-checkout.md) made that call early rather than discovering it at submission.
 
 **The moment any purchase surface appears in the apps, this model breaks** and the fallback is Apple/Google's in-app purchase system — a different payment integration, a different cut of revenue, and a different Stripe/App Store reconciliation problem than anything currently designed for.
 

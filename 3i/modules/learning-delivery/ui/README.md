@@ -3,7 +3,7 @@ project: 3i
 module: learning-delivery
 type: ui-spec
 status: current
-updated: 2026-08-23
+updated: 2026-08-24
 id: 3I-LDL-UI-000
 derived_from:
   - requirements/bat-batches-and-live-sessions.md
@@ -25,19 +25,20 @@ Role × screen matrix. Every screen in this module, and who sees it.
 | :---- | :---- |
 | **Member** | The renamed Account holder role — [3I-DEC-017](/3i/decisions/dec-017-account-holder-renamed-member.md), enrolling on behalf of a profile or themselves |
 | **Instructor** | The owning instructor of the batch/course |
+| **Mobile (Flutter)** | Not a role — a platform column marking which screens are in scope for the native app. See [mobile-scope.md](/3i/mobile-scope.md) |
 
 ---
 
 ## Matrix
 
-| Screen | Member | Instructor |
-| :---- | :---: | :---: |
-| [Enrol \& waitlist](screens/enrol-and-waitlist.md) | ● | |
-| [Batch schedule / manage](screens/batch-schedule-manage.md) | | ● |
-| [Batch roster \& attendance](screens/batch-roster-attendance.md) | | ● |
-| [Batch reschedule / cancel](screens/batch-reschedule-cancel.md) | | ● |
+| Screen | Member | Instructor | Mobile |
+| :---- | :---: | :---: | :---: |
+| [Enrol \& waitlist](screens/enrol-and-waitlist.md) | ● | | ● |
+| [Batch schedule / manage](screens/batch-schedule-manage.md) | | ● | |
+| [Batch roster \& attendance](screens/batch-roster-attendance.md) | | ● | ● |
+| [Batch reschedule / cancel](screens/batch-reschedule-cancel.md) | | ● | |
 
-Four screens.
+Four screens, two in scope for mobile — see [mobile-scope.md](/3i/mobile-scope.md#2-scope-by-module).
 
 ---
 
