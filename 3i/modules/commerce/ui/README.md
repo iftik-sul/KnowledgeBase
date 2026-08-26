@@ -3,12 +3,10 @@ project: 3i
 module: commerce
 type: ui-spec
 status: current
-updated: 2026-08-20
+updated: 2026-08-26
 id: 3I-CMR-UI-000
 derived_from:
-  - requirements/bill-subscriptions-and-billing.md
-  - requirements/wav-waivers.md
-  - requirements/ref-refunds.md
+  - 3i/reference/baseline/srd-v2.0.md
 tags:
   - ui
   - matrix
@@ -16,51 +14,20 @@ tags:
 
 # Commerce — UI Index
 
-Role × screen matrix. Every screen in this module, and who sees it.
+Role × screen matrix.
 
----
+**Admin-only screens in this module are provisional — see [3I-DEC-033](/3i/decisions/dec-033-admin-instructor-surface-provisional.md).** [Waiver Admin Review](screens/waiver-admin-review.md) and [Refund Admin Action](screens/refund-admin-action.md) are built and confirmed against the current design system but will need revisiting once a separate admin/instructor portal design exists. This does not affect [Seat Management](screens/seat-management.md) or [Billing Portal Redirect](screens/billing-portal-redirect.md), which are primarily Member-facing screens Admin also uses for support.
 
-## Roles
+| Screen | Member | Admin |
+| :---- | :---: | :---: |
+| [Pricing / Plan Selection](screens/pricing-plan-selection.md) | ● | |
+| [Checkout](screens/checkout.md) | ● | |
+| [Seat Management](screens/seat-management.md) | ● | ● |
+| [Billing Portal Redirect](screens/billing-portal-redirect.md) | ● | ● |
+| [Subscription Status (mobile)](screens/subscription-status-mobile.md) | ● | |
+| [Waiver Request Form](screens/waiver-request-form.md) | ● | |
+| [Waiver Admin Review](screens/waiver-admin-review.md) ⚠ provisional | | ● |
+| [Refund Request](screens/refund-request.md) | ● | |
+| [Refund Admin Action](screens/refund-admin-action.md) ⚠ provisional | | ● |
 
-| Column | Who |
-| :---- | :---- |
-| **Member** | The renamed Account holder role — [3I-DEC-017](/3i/decisions/dec-017-account-holder-renamed-member.md) |
-| **Admin** | |
-| **Mobile (Flutter)** | Not a role — a platform column, since this module's mobile behaviour is a single deliberate exception rather than a per-role variation |
-
----
-
-## Matrix
-
-| Screen | Member | Admin | Mobile |
-| :---- | :---: | :---: | :---: |
-| [Pricing / plan selection](screens/pricing-plan-selection.md) | ● (web) | | ❌ |
-| [Checkout](screens/checkout.md) | ● (web) | | ❌ |
-| [Seat management](screens/seat-management.md) | ● (web) | ● | ❌ |
-| [Billing portal redirect](screens/billing-portal-redirect.md) | ● (web) | ● | ❌ |
-| [Subscription status (mobile)](screens/subscription-status-mobile.md) | | | ● |
-| [Waiver request form](screens/waiver-request-form.md) | ● (web) | | ❌ |
-| [Waiver admin review](screens/waiver-admin-review.md) | | ● | |
-| [Refund request](screens/refund-request.md) | ● (web) | | ❌ |
-| [Refund admin action](screens/refund-admin-action.md) | | ● | |
-
-Nine screens. **The ❌ column is FR-BILL-02 and NFR-18 in effect, not an oversight** — every screen in this module except Subscription Status is deliberately absent from mobile. See [app-store-compliance.md](/3i/app-store-compliance.md).
-
----
-
-## Shared
-
-| Document | Covers |
-| :---- | :---- |
-| [components.md](components.md) | Itemised total by tier, tier badge, Stripe-hosted redirect button |
-| [validation-rules.md](validation-rules.md) | Waiver covered-profile selection, refund window check, money formatting |
-
----
-
-## Blocked
-
-| Item | Blocks |
-| :---- | :---- |
-| None. | |
-
-Resolved since the previous stub version of this document: [app-store-compliance.md](/3i/app-store-compliance.md) now exists, so the mobile Subscription Status screen above is written against a settled cross-cutting rule rather than a provisional one.
+Nine screens. Web-only except Subscription Status — see [mobile-scope.md](/3i/mobile-scope.md#2-scope-by-module).

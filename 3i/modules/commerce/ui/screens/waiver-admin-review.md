@@ -3,7 +3,7 @@ project: 3i
 module: commerce
 type: ui-spec
 status: current
-updated: 2026-08-20
+updated: 2026-08-26
 id: 3I-CMR-UI-007
 derived_from:
   - 3i/reference/baseline/srd-v2.0.md
@@ -14,6 +14,8 @@ tags:
 ---
 
 # Screen: Waiver Admin Review
+
+> **⚠ Provisional — see [3I-DEC-033](/3i/decisions/dec-033-admin-instructor-surface-provisional.md).** This screen's Figma design was completed and confirmed against the current learner-facing design system, but the admin/instructor portal will use a separate, not-yet-specified visual design. Do not treat the existing Figma work as final — it will need revisiting, not just extending, once that direction exists. The spec below is unaffected and remains current.
 
 Satisfies: FR-WAV-02, FR-WAV-05, FR-WAV-07, FR-WAV-09
 

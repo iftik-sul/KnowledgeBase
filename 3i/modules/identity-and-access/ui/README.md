@@ -3,7 +3,7 @@ project: 3i
 module: identity-and-access
 type: ui-spec
 status: current
-updated: 2026-08-24
+updated: 2026-08-26
 id: 3I-IDA-UI-000
 derived_from:
   - 3i/reference/baseline/srd-v2.0.md
@@ -17,6 +17,8 @@ tags:
 Role × screen matrix. Every screen in this module, and who sees it.
 
 **The learner profile is not a matrix column.** It does not log in and holds no permissions of its own — it is a **context** selected inside a Member's authenticated session, not a separate authenticated role. Screens that vary by which profile is active are marked accordingly rather than given a column.
+
+**The three admin-only screens in this module are paused — see [3I-DEC-033](/3i/decisions/dec-033-admin-instructor-surface-provisional.md).** No Figma design work should be produced against them until the admin/instructor portal's own design direction is set.
 
 ---
 
@@ -50,11 +52,11 @@ Role × screen matrix. Every screen in this module, and who sees it.
 | [Guardian dashboard](screens/guardian-dashboard.md) | | ● | | | ● |
 | [Profile deletion confirmation](screens/profile-deletion-confirmation.md) | | ● | | | ● |
 | [Device management](screens/device-management.md) | | ● | ● | ● | ● |
-| [Admin — profile name unlock](screens/admin-name-unlock.md) | | | | ● | |
-| [Admin — DOB correction](screens/admin-dob-correction.md) | | | | ● | |
-| [Admin — TOTP setup](screens/admin-totp-setup.md) | | | | ● | |
+| [Admin — profile name unlock](screens/admin-name-unlock.md) ⚠ paused | | | | ● | |
+| [Admin — DOB correction](screens/admin-dob-correction.md) ⚠ paused | | | | ● | |
+| [Admin — TOTP setup](screens/admin-totp-setup.md) ⚠ paused | | | | ● | |
 
-Seventeen screens, fourteen in scope for mobile — see [mobile-scope.md](/3i/mobile-scope.md#2-scope-by-module) for the reasoning. [Account settings](screens/account-settings.md) and [Login \& security](screens/login-security.md) added 2026-08-24 per [3I-DEC-032](/3i/decisions/dec-032-account-settings-hub.md), closing the gap where Device Management had no documented entry point and Guardian Dashboard's seat actions pointed at an unnamed screen. No role management screen — [3I-DEC-017](/3i/decisions/dec-017-account-holder-renamed-member.md) confirms role assignment is a database operation at launch, not a UI.
+Seventeen screens, fourteen in scope for mobile — see [mobile-scope.md](/3i/mobile-scope.md#2-scope-by-module) for the reasoning. No role management screen — [3I-DEC-017](/3i/decisions/dec-017-account-holder-renamed-member.md) confirms role assignment is a database operation at launch, not a UI.
 
 ---
 
@@ -71,4 +73,4 @@ Seventeen screens, fourteen in scope for mobile — see [mobile-scope.md](/3i/mo
 
 | Item | Blocks |
 | :---- | :---- |
-| None. | |
+| [3I-DEC-033](/3i/decisions/dec-033-admin-instructor-surface-provisional.md) | Figma design work on the three ⚠-marked admin screens above |
