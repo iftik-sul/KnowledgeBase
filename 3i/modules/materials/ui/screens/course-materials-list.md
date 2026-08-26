@@ -3,7 +3,7 @@ project: 3i
 module: materials
 type: ui-spec
 status: current
-updated: 2026-08-23
+updated: 2026-08-26
 id: 3I-MTL-UI-001
 derived_from:
   - 3i/reference/baseline/srd-v2.0.md
@@ -21,6 +21,8 @@ Satisfies: FR-MAT-01
 ## Purpose
 
 The ordered list of every material in a course — a learner's entry point into course content.
+
+**Reached from [Course Detail](/3i/modules/catalogue/ui/screens/course-detail.md)'s "Go to course" CTA**, shown once a qualifying enrolment exists — see [3I-DEC-035](/3i/decisions/dec-035-course-detail-cta-three-states.md). If the Member has more than one profile with a qualifying enrolment on the same course, a profile-selection step (same pattern as [Rate \& Review](/3i/modules/catalogue/ui/screens/rate-and-review.md)'s) resolves which profile's materials and progress to show before this screen loads; if only one profile qualifies, that resolution is implicit.
 
 ## Access Gate
 

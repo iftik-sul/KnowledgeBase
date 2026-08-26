@@ -34,13 +34,17 @@ Public, for any `published` course. A `draft`, `pending_review`, `suspended`, or
 - Average rating and the list of `visible`-status Reviews, each showing the reviewer's display name — self-submitted reviews show the learner's own name; guardian-submitted reviews show the guardian-attribution format per [3I-DEC-027](/3i/decisions/dec-027-guardian-reviews-on-behalf.md).
 - Enrolment call-to-action — the actual enrolment flow lives in `learning-delivery`; this screen links out to it rather than duplicating it.
 
-### Enrolment CTA — Authenticated vs. Unauthenticated
+### Enrolment CTA — Three States
 
-Per [3I-DEC-034](/3i/decisions/dec-034-login-preserves-course-intent.md):
+Per [3I-DEC-034](/3i/decisions/dec-034-login-preserves-course-intent.md) and [3I-DEC-035](/3i/decisions/dec-035-course-detail-cta-three-states.md):
 
-**With an active session:** the CTA routes directly to [Enrol & Waitlist](/3i/modules/learning-delivery/ui/screens/enrol-and-waitlist.md) for this course.
+| State | Button reads | Destination |
+| :---- | :---- | :---- |
+| No active session | (per DEC-034) | [Login](/3i/modules/identity-and-access/ui/screens/login.md), carrying a reference to this course. On success, lands on [Enrol \& Waitlist](/3i/modules/learning-delivery/ui/screens/enrol-and-waitlist.md) for this course. **Registering instead of logging in drops the course reference** — lands on Guardian Dashboard with zero profiles, same as any new registration |
+| Session active, no qualifying enrolment on this course | "View enrolment options" | [Enrol \& Waitlist](/3i/modules/learning-delivery/ui/screens/enrol-and-waitlist.md), directly |
+| Session active, a qualifying enrolment already exists | "Go to course" | [Course Materials List](/3i/modules/materials/ui/screens/course-materials-list.md) — **not** back into enrolment |
 
-**With no session:** the CTA routes to [Login](/3i/modules/identity-and-access/ui/screens/login.md), carrying a reference to this specific course. On successful login, the visitor lands on Enrol & Waitlist for this course, not a generic post-login destination. **If the visitor registers instead of logging in, no course reference is carried forward** — they land on Guardian Dashboard with zero profiles, same as any other new registration, and return to this course on their own once ready to enrol.
+**The enrolled-state check is at the Member level**, across any of the Member's profiles — not tied to whichever profile is currently active in the session, same check [Rate \& Review](rate-and-review.md) already performs. Resolving which specific profile's materials to open follows the same logic as Rate & Review's profile selection: implicit if only one profile qualifies, a selection step if more than one does.
 
 ### Review Display — Inline Preview + Full List Modal
 
