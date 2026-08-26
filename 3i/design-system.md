@@ -2,7 +2,7 @@
 project: 3i
 type: standard
 status: current
-updated: 2026-08-24
+updated: 2026-08-26
 tags:
   - design-system
   - ui
@@ -73,7 +73,7 @@ Derived from a Figma audit of the initial design exploration (5 main screens: la
 | Token | Hex | Usage |
 | :---- | :---- | :---- |
 | `error-600` | `#DC2626` | **Error text** — validation messages, destructive-action labels |
-| `error-500` | `#EF4444` | Error **icons and borders only** (non-text elements need 3:1, not 4.5:1) |
+| `error-500` | `#EF4444` | Error **icons and borders only** (non-text elements need 3:1, not 4.5:1). **Second confirmed use, 2026-08-26:** the filled state of the wishlist heart icon on Course Card (`catalogue/components.md`) — a deliberate second role for this token, the same reuse pattern already established for `blue-700`, not a semantic leak. The wishlist heart is unrelated to error states; it reuses this red purely because red is the conventional color for a "saved" heart, and this is the only red already in the palette |
 | `error-500 @ 8%` | `#EF4444` at 8% | Error tint background |
 
 ### Contrast Rule (binding — NFR-12)
