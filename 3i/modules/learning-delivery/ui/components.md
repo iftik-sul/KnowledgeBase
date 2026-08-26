@@ -3,7 +3,7 @@ project: 3i
 module: learning-delivery
 type: ui-spec
 status: current
-updated: 2026-08-23
+updated: 2026-08-26
 id: 3I-LDL-UI-COMP
 derived_from:
   - 3i/reference/baseline/srd-v2.0.md
@@ -20,9 +20,11 @@ Documented once here. Screens link to this file rather than restating.
 
 ## Session Row
 
-Used on: [Batch Schedule / Manage](screens/batch-schedule-manage.md), [Batch Roster \& Attendance](screens/batch-roster-attendance.md), [Batch Reschedule / Cancel](screens/batch-reschedule-cancel.md).
+Used on: [Batch Schedule / Manage](screens/batch-schedule-manage.md), [Batch Roster \& Attendance](screens/batch-roster-attendance.md), [Batch Reschedule / Cancel](screens/batch-reschedule-cancel.md), and [Course Detail](/3i/modules/catalogue/ui/screens/course-detail.md)'s Class Schedule section (`catalogue`, cross-module reuse — added 2026-08-26).
 
-One row per Session: date/time, status (`scheduled` / `delivered` / `cancelled`), and a context-appropriate action — mark attendance (roster view), reschedule (reschedule view), or nothing (read-only in the plain schedule view). A `delivered` session's row is visually distinct from `scheduled`, since "has this already happened" is the single fact [3I-DEC-021](/3i/decisions/dec-021-attendance-measured-against-sessions-delivered.md)'s attendance denominator depends on and it should be legible at a glance, not inferred from the date alone.
+One row per Session: date/time, status (`scheduled` / `delivered` / `cancelled`), and a context-appropriate action — mark attendance (roster view), reschedule (reschedule view), or **nothing** (read-only). **Course Detail uses the read-only variant** — no status badge, no action, since a pre-enrolment visitor has no attendance or reschedule concern; only date, time, and duration are shown. A `delivered` session's row is visually distinct from `scheduled` on the instructor-facing variants, since "has this already happened" is the single fact [3I-DEC-021](/3i/decisions/dec-021-attendance-measured-against-sessions-delivered.md)'s attendance denominator depends on and it should be legible at a glance, not inferred from the date alone — this distinction doesn't apply to the read-only Course Detail variant, where every session is necessarily still upcoming.
+
+**Times are always displayed in the viewer's local time zone**, converted automatically from the stored UTC/server time — never a fixed timezone label the learner has to mentally convert. No timezone selector exists anywhere; this is handled transparently.
 
 ## Waitlist Position Badge
 
