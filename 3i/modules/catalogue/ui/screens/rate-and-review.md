@@ -3,7 +3,7 @@ project: 3i
 module: catalogue
 type: ui-spec
 status: current
-updated: 2026-08-23
+updated: 2026-08-26
 id: 3I-CAT-UI-006
 derived_from:
   - 3i/reference/baseline/srd-v2.0.md
@@ -22,6 +22,12 @@ Satisfies: FR-CRS-11
 ## Purpose
 
 Submit a 1–5 rating and optional written review for a course, once per enrolled learner profile.
+
+## Presentation — Modal Over Course Detail, Not a Separate Page
+
+Not specified in FR-CRS-11; added here as a reasonable default, not confirmed with the client, matching how [Course Detail](course-detail.md)'s review list is a modal for the same reason. Rate & Review opens as a modal overlaying [Course Detail](course-detail.md) when its entry point is clicked — it does **not** navigate to a separate full page, and carries **no site header or navigation chrome of its own** (no logo, no nav links, no Account Menu repeated inside it). The underlying Course Detail page stays visible, dimmed, behind the modal, same overlay treatment as the Reviews Modal.
+
+**On mobile (Flutter — this screen is in scope per [mobile-scope.md](/3i/mobile-scope.md)):** a full-screen modal/sheet is the native equivalent of this same in-context presentation, not a literal overlay-with-visible-backdrop — the web/mobile difference here is standard platform convention, not a behavioural difference worth its own decision.
 
 ## Access Gate
 
@@ -47,4 +53,4 @@ Member only.
 
 ## Contrast and RTL
 
-Standard, 4.5:1 (NFR-12). Full RTL mirroring (FR-LOC-04).
+Standard, 4.5:1 (NFR-12). Full RTL mirroring (FR-LOC-04). Modal close-button position mirrors, consistent with the Reviews Modal.
