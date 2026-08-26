@@ -66,7 +66,7 @@ Derived from a Figma audit of the initial design exploration (5 main screens: la
 | Token | Hex | Usage |
 | :---- | :---- | :---- |
 | `blue-600` | `#2563BA` | Hyperlink text (non-CTA links) |
-| `blue-700` | `#2D6CDF` | Focus ring stroke — inputs, PIN pad |
+| `blue-700` | `#2D6CDF` | **Dual role, confirmed deliberate:** focus ring stroke (inputs, PIN pad) **and** the checked/selected-state fill for checkboxes and selectable pills (e.g. Filter Panel's checkboxes and age-band pills). White text/checkmark on this fill clears 4.5:1. Confirmed 2026-08-24 rather than left as an unreviewed drift — see Filter Panel's build in `catalogue/components.md`. `green-600` remains the token for primary actions (buttons); `blue-700` covers focus **and** selection, not primary action |
 
 ### Semantic
 
@@ -235,7 +235,9 @@ This is additional to, not a replacement for, the PIN Pad's own "large touch tar
 
 ## 8. Componentisation Status
 
-**Nothing in the source Figma file is componentised** — every element is a raw frame. Any future screen work should build proper Figma components/instances from this token set rather than continuing as raw frames, both for design consistency and because it's what makes a Flutter port of the same system tractable later.
+**Updated 2026-08-24.** The source Figma file originally had zero componentisation — every element was a raw frame. That is no longer the current state of the working file: `identity-and-access` (PIN Pad, Age Band Badge, Profile State Indicator, Account Menu), `commerce` (Itemised Total, Tier Badge, Stripe-Hosted Redirect Button), and `catalogue` (Course Card, Filter Panel) have all had their shared components built as real Figma main components/component sets, confirmed against spec before being reused across screens. Any component built from here forward should follow the same pattern: main component or component set, never a raw frame, checked against its module's `components.md` before screens start consuming it as an instance.
+
+A proper **Figma Color Styles library**, generated directly from §1's tokens, was added 2026-08-24 so every future component/screen prompt references a named style rather than a hex value retyped from this document each time — see §10.
 
 ---
 
@@ -250,3 +252,11 @@ Carried forward from the source audit, unresolved:
 - **Tablet breakpoint**: see §3.
 
 None of these block adopting the token set above — they block specific screens that use them, and should be resolved screen-by-screen as those screens get built.
+
+---
+
+## 10. Figma Color Styles Library
+
+A saved Figma Color Style exists for every token in §1, named to match the token names in this document exactly (e.g. a style literally named `navy-900`, not "Dark Blue" or similar). This closes the gap where every prompt kit up to 2026-08-24 retyped hex values from this table by hand — a real, if so-far-uneventful, drift risk every time this document and a prompt's Block A could silently disagree.
+
+**Going forward, prompt kits should reference style names, not hex values,** wherever the Figma AI tooling in use can consume a named style directly. Where a prompt must still state a hex value explicitly (e.g. for tooling that can't reference styles), it must match this table exactly — this document remains the source of truth either way.
