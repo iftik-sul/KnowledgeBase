@@ -3,7 +3,7 @@ project: 3i
 module: materials
 type: ui-spec
 status: current
-updated: 2026-08-23
+updated: 2026-08-26
 id: 3I-MTL-UI-002
 derived_from:
   - 3i/reference/baseline/srd-v2.0.md
@@ -32,6 +32,15 @@ Member with a qualifying enrolment, checked directly against `learning-delivery`
 Adaptive-bitrate HLS playback (FR-MAT-04), [Caption Toggle](../components.md#caption-toggle) defaulting on (FR-MAT-06), standard playback controls, and a [Progress Indicator](../components.md#progress-indicator) reflecting cumulative watch percentage.
 
 **No download button anywhere on web** (FR-MAT-07) — not hidden behind a permission check, structurally absent from the web build. On mobile, a download affordance appears instead, leading into the offline-protection flow — see [Mobile Offline Manager](mobile-offline-manager.md).
+
+### Below-Player Tabs — Two, Not Five
+
+Not specified in the fifteen FR-MAT requirements; added here as a reasonable default, not confirmed with the client. **Overview** and **Notes** only:
+
+- **Overview** — a short lesson-specific description/summary, distinct from Course Detail's course-level description (which stays at the course level, not repeated here).
+- **Notes** — a timestamped note-taking area: free-text input with a "Save note" action, defaulting the timestamp to the video's current playback position, and a list of the learner's own previously-saved notes for this lesson, each showing its timestamp and a relative save time.
+
+**Resources, Q&A, and Transcript were considered and deliberately excluded** — Q&A specifically because it would either duplicate `communication`'s existing chat/moderation infrastructure or require building a second, separate safeguarding system from scratch; neither was worth the added scope for this pass. If any of the three are wanted later, that's a new decision, not an oversight to quietly restore.
 
 ## Behaviour
 
