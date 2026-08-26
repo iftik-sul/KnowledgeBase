@@ -3,7 +3,7 @@ project: 3i
 module: catalogue
 type: ui-spec
 status: current
-updated: 2026-08-23
+updated: 2026-08-26
 id: 3I-CAT-UI-002
 derived_from:
   - 3i/reference/baseline/srd-v2.0.md
@@ -34,10 +34,20 @@ Public, for any `published` course. A `draft`, `pending_review`, `suspended`, or
 - Average rating and the list of `visible`-status Reviews, each showing the reviewer's display name — self-submitted reviews show the learner's own name; guardian-submitted reviews show the guardian-attribution format per [3I-DEC-027](/3i/decisions/dec-027-guardian-reviews-on-behalf.md).
 - Enrolment call-to-action — the actual enrolment flow lives in `learning-delivery`; this screen links out to it rather than duplicating it.
 
+### Review Display — Inline Preview + Full List Modal
+
+Not specified in the eleven FR-CRS requirements; added here as a reasonable default, not confirmed with the client, matching how pagination on [Catalogue Browse](catalogue-browse.md) is flagged the same way.
+
+**Inline on the page:** the 2 most recent `visible`-status reviews only, not the full list — a course with dozens of reviews should not make the page itself unboundedly long.
+
+**The review count next to the average rating (e.g. "(24 reviews)") is a clickable trigger**, not static text. Clicking it opens a **modal** containing every `visible`-status review, in a scrollable list, without navigating away from Course Detail. The modal does not paginate internally — it scrolls, since a review list is bounded per-course and unlikely to reach a size where pagination inside a modal is warranted (unlike Catalogue Browse's platform-wide, 140+-result list, which does paginate).
+
+Both the inline preview and the modal apply the same self-submitted/guardian-attribution display rule per review — the modal is not a simplified or stripped-down view, it's the same review cards shown at full list length.
+
 ## Role Variations
 
 None for viewing — identical for Public and Member. An enrolled Member additionally sees a **Rate \& review** entry point once their enrolment qualifies (see [Rate \& Review](rate-and-review.md)); a non-enrolled visitor does not see that entry point at all, rather than seeing it disabled.
 
 ## Contrast and RTL
 
-Standard, 4.5:1 (NFR-12). Full RTL mirroring (FR-LOC-04).
+Standard, 4.5:1 (NFR-12). Full RTL mirroring (FR-LOC-04). The review modal's scroll direction and close-button position also mirror for Arabic and Urdu.
