@@ -46,6 +46,7 @@ Role × screen matrix. Every screen in this module, and who sees it.
 | [Social login — DOB capture](screens/social-login-dob-capture.md) | ● | | | | ● |
 | [Password reset](screens/password-reset.md) | ● | | | | ● |
 | [Profile picker](screens/profile-picker.md) | | ● | | | ● |
+| [Learner dashboard](screens/learner-dashboard.md) | | ● | | | ● |
 | [Account settings](screens/account-settings.md) | | ● | ● | ● | ● |
 | [Login \& security](screens/login-security.md) | | ● | ● | ● | ● |
 | [Profile create / edit](screens/profile-create-edit.md) | | ● | | | ● |
@@ -56,7 +57,7 @@ Role × screen matrix. Every screen in this module, and who sees it.
 | [Admin — DOB correction](screens/admin-dob-correction.md) ⚠ paused | | | | ● | |
 | [Admin — TOTP setup](screens/admin-totp-setup.md) ⚠ paused | | | | ● | |
 
-Seventeen screens, fourteen in scope for mobile — see [mobile-scope.md](/3i/mobile-scope.md#2-scope-by-module) for the reasoning. No role management screen — [3I-DEC-017](/3i/decisions/dec-017-account-holder-renamed-member.md) confirms role assignment is a database operation at launch, not a UI.
+Eighteen screens, fifteen in scope for mobile — see [mobile-scope.md](/3i/mobile-scope.md#2-scope-by-module) for the reasoning. No role management screen — [3I-DEC-017](/3i/decisions/dec-017-account-holder-renamed-member.md) confirms role assignment is a database operation at launch, not a UI.
 
 ---
 

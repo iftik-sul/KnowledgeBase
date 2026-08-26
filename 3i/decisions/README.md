@@ -51,12 +51,13 @@ One file per decision: context, decision, consequences, cost. A decision is neve
 | [3I-DEC-033](dec-033-admin-instructor-surface-provisional.md) | The entire admin/instructor surface is provisional pending a separate portal design, including already-confirmed commerce admin screens | current | n/a — design-sequencing | — |
 | [3I-DEC-034](dec-034-login-preserves-course-intent.md) | Login preserves which course a visitor was trying to enrol in via return-to redirect; registration does not | current | n/a — UX interpretation | AUTH, CRS, ENR |
 | [3I-DEC-035](dec-035-course-detail-cta-three-states.md) | Course Detail's enrolment CTA has three states, not two — an enrolled viewer goes to Course Materials List, not back into enrolment | current | n/a — UX interpretation | CRS, MAT |
+| [3I-DEC-036](dec-036-learner-dashboard.md) | Learner Dashboard is the profile-level study context landing screen, resolving the wishlist-viewing and PIN-entry-destination gaps together | current | n/a — UX interpretation | AUTH, CRS |
 
 **`deferred`** marks a decision taken but consciously parked. **`superseded`** marks a reversed decision, replaced by a specific successor. **`deprecated`** marks a decision whose entire premise no longer applies and is not being replaced — the idea itself was dropped, not redirected. All three keep the file for history; none are rewritten.
 
 **On 3I-DEC-002:** only its 13–17-standalone-account content is superseded by DEC-023. Its under-13-is-profile-only content remains correct and is now also stated directly in DEC-023 itself — see [3I-DEC-002](dec-002-under-13-family-accounts.md)'s superseded notice for the full explanation of what changed and what didn't.
 
-**On the "client sign-off" column, updated 2026-08-18:** all eight decisions carrying client-facing scope changes (014–016, 018–019, 021–023) are marked **approved — proceed to build**, on the basis that Saitama holds effective decision authority on the client's behalf for this engagement. This is a project-level operating assumption recorded here for traceability, not a claim that the institute's own §21.3 written-approval process has been formally exercised. 024, 025, 028, and 029 follow the same basis; 026, 027, 030–032, and 034–035 are UX/safeguarding interpretation only and need no such sign-off; 033 is an internal design-sequencing call with no client-facing behaviour to approve.
+**On the "client sign-off" column, updated 2026-08-18:** all eight decisions carrying client-facing scope changes (014–016, 018–019, 021–023) are marked **approved — proceed to build**, on the basis that Saitama holds effective decision authority on the client's behalf for this engagement. This is a project-level operating assumption recorded here for traceability, not a claim that the institute's own §21.3 written-approval process has been formally exercised. 024, 025, 028, and 029 follow the same basis; 026, 027, 030–032, and 034–036 are UX/safeguarding interpretation only and need no such sign-off; 033 is an internal design-sequencing call with no client-facing behaviour to approve.
 
 ## Scope Changes Against SRD v2.0
 
@@ -77,7 +78,7 @@ Every decision below changes what the baseline document says rather than merely 
 | [3I-DEC-028](dec-028-session-delivery-floor-attendance-eligibility.md) | New session-delivery floor gates attendance-certificate eligibility, resolving OQ-11 and settling `Mixed`-course behaviour the baseline left silent |
 | [3I-DEC-029](dec-029-no-instructor-storage-quota.md) | FR-INST-05's storage quota is dropped entirely |
 
-3I-DEC-026, 027, 030–033, and 034–035 are not in this table: none changes stated baseline behaviour — each interprets a baseline silence, a navigation/presentation layer, or (033) a design-sequencing call with no requirements impact at all.
+3I-DEC-026, 027, 030–033, and 034–036 are not in this table: none changes stated baseline behaviour — each interprets a baseline silence, a navigation/presentation layer, or (033) a design-sequencing call with no requirements impact at all.
 
 ## Change Request — 8 Items, Two Tiers (Historical Record)
 
@@ -118,6 +119,6 @@ None were part of the 2026-08-18 batch — all four raised and resolved separate
 
 ## Provenance
 
-Decisions 001–007 derive from SRD v2.0 and cite the requirement codes that fix them. Decisions 008–035 were taken outside the baseline: 008–023 in review on 2026-08-18, 024–025 on 2026-08-20 once pricing was confirmed, 026–029 on 2026-08-23, 030–032 on 2026-08-24, and 033–035 on 2026-08-26. Nineteen of them (014–016, 018–019, 021–032, 034–035) are approved for build or need no formal sign-off per the notes above, plus 033 on the same internal-sequencing basis; one (008) is deprecated; one (002) is partially superseded, per the note above.
+Decisions 001–007 derive from SRD v2.0 and cite the requirement codes that fix them. Decisions 008–036 were taken outside the baseline: 008–023 in review on 2026-08-18, 024–025 on 2026-08-20 once pricing was confirmed, 026–029 on 2026-08-23, 030–032 on 2026-08-24, and 033–036 on 2026-08-26. Twenty of them (014–016, 018–019, 021–032, 034–036) are approved for build or need no formal sign-off per the notes above, plus 033 on the same internal-sequencing basis; one (008) is deprecated; one (002) is partially superseded, per the note above.
 
 The client supplied no written material, so no decision here cites a client document. None exists.

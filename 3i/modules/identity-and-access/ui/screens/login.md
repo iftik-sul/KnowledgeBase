@@ -31,9 +31,9 @@ Five failed attempts trigger a 15-minute lockout with progressive delay and per-
 
 ### Post-Login Routing
 
-**Default (no course reference):** a Member with more than one learner profile routes to [Profile picker](profile-picker.md). A Member with exactly one profile (themself, if they study, or their sole child) skips the picker's tile-selection step and lands directly on that profile's PIN pad — [3I-DEC-026](/3i/decisions/dec-026-single-profile-skips-picker.md).
+**Default (no course reference):** a Member with more than one learner profile routes to [Profile picker](profile-picker.md). A Member with exactly one profile (themself, if they study, or their sole child) skips the picker's tile-selection step and lands directly on that profile's PIN pad, then [Learner Dashboard](learner-dashboard.md) on success — [3I-DEC-026](/3i/decisions/dec-026-single-profile-skips-picker.md), [3I-DEC-036](/3i/decisions/dec-036-learner-dashboard.md).
 
-**With a course reference (arrived via [Course Detail](/3i/modules/catalogue/ui/screens/course-detail.md)'s enrolment CTA):** per [3I-DEC-034](/3i/decisions/dec-034-login-preserves-course-intent.md), the same profile-selection step happens first — this is not bypassed — but once it completes, the Member lands on [Enrol & Waitlist](/3i/modules/learning-delivery/ui/screens/enrol-and-waitlist.md) for that specific course, instead of Profile Picker's or the PIN pad's own default destination.
+**With a course reference (arrived via [Course Detail](/3i/modules/catalogue/ui/screens/course-detail.md)'s enrolment CTA):** per [3I-DEC-034](/3i/decisions/dec-034-login-preserves-course-intent.md), the same profile-selection step happens first — this is not bypassed — but once it completes, the Member lands on [Enrol & Waitlist](/3i/modules/learning-delivery/ui/screens/enrol-and-waitlist.md) for that specific course, instead of [Learner Dashboard](learner-dashboard.md).
 
 **"Don't have an account? Register" does not carry a course reference forward** — registering drops it entirely, per [3I-DEC-034](/3i/decisions/dec-034-login-preserves-course-intent.md)'s scoping.
 

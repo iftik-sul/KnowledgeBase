@@ -3,7 +3,7 @@ project: 3i
 module: identity-and-access
 type: ui-spec
 status: current
-updated: 2026-08-24
+updated: 2026-08-26
 id: 3I-IDA-UI-008
 derived_from:
   - 3i/reference/baseline/srd-v2.0.md
@@ -22,7 +22,7 @@ Satisfies: FR-FAM-04
 
 ## Purpose
 
-Shown after Member login when the account has more than one profile. Selecting a profile enters that profile's study context for the session.
+Shown after Member login when the account has more than one profile. Selecting a profile enters that profile's study context for the session — [Learner Dashboard](learner-dashboard.md), per [3I-DEC-036](/3i/decisions/dec-036-learner-dashboard.md).
 
 ## Content
 
@@ -36,7 +36,7 @@ Selecting a tile prompts the [PIN Pad](../components.md#pin-pad) component — *
 
 **PIN lockout matches FR-AUTH-09 exactly** — [3I-DEC-022](/3i/decisions/dec-022-pin-lockout-and-dob-correction-notification.md): five failed attempts trigger a 15-minute lockout, with progressive delay and per-IP rate limiting. Same shape as password lockout, not a separate bespoke pattern. During lockout, the tile shows a countdown rather than accepting further PIN entry, consistent with how [Login](login.md) handles the same state.
 
-On correct PIN, enters the profile's study context. On the family's only never-activated profile with no active seat available for anyone, the picker instead routes toward seat purchase (FR-BILL-04) — covered fully in `commerce`.
+On correct PIN, enters [Learner Dashboard](learner-dashboard.md) for that profile. On the family's only never-activated profile with no active seat available for anyone, the picker instead routes toward seat purchase (FR-BILL-04) — covered fully in `commerce`.
 
 ## Role Variations
 

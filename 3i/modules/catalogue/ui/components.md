@@ -36,16 +36,14 @@ Not specified in the eleven FR-CRS requirements; added here as a reasonable defa
 
 ### Wishlist Toggle
 
-Not specified in the eleven FR-CRS requirements; added here as a new feature, not yet fully specified. A circular icon button overlaid on the top-right corner of the card's thumbnail image: an outline heart when not wishlisted, a filled `error-500` heart when wishlisted — see [design-system.md §1](/3i/design-system.md#semantic) for why this token, ordinarily reserved for error icons/borders, is deliberately reused here rather than introducing a new red.
+Not specified in the eleven FR-CRS requirements; added here as a new feature. A circular icon button overlaid on the top-right corner of the card's thumbnail image: an outline heart when not wishlisted, a filled `error-500` heart when wishlisted — see [design-system.md §1](/3i/design-system.md#semantic) for why this token, ordinarily reserved for error icons/borders, is deliberately reused here rather than introducing a new red.
 
-**Available to both active and inactive subscribers** — a Member's wishlist is not gated on holding a currently-paid seat. **Present on every card regardless of enrollment state**, including already-enrolled courses, for now — whether wishlisting an already-enrolled course is meaningful, and whether the heart should hide once enrolled, is unresolved.
+**Confirmed behaviour, 2026-08-26:**
+- **Requires an authenticated session** — not available to a fully public, unregistered visitor.
+- **Scoped per learner profile**, matching the Enrolled Indicator's own scoping above, not per Member account.
+- **Viewed from [Learner Dashboard](/3i/modules/identity-and-access/ui/screens/learner-dashboard.md)**'s Wishlist section — per [3I-DEC-036](/3i/decisions/dec-036-learner-dashboard.md), which introduced that screen specifically to give this toggle somewhere to be viewed from.
 
-**Genuinely open, not yet decided:**
-- Whether wishlisting requires any authenticated session at all, or is available to a fully public, unregistered visitor (in which case it would need to persist somewhere before an account exists).
-- Whether a wishlist is scoped per learner profile (like the Enrolled indicator above) or per Member account.
-- Where a saved wishlist is actually viewed — a dedicated "My Wishlist" screen does not exist yet anywhere in this module's screen list.
-
-None of this blocks the component's visual design, which is confirmed — it blocks writing the actual behavior into this document with confidence, and should be resolved before [Catalogue Browse](screens/catalogue-browse.md) or any other screen documents wishlist *behavior*, not just the toggle's appearance.
+**Still open:** whether the heart should hide once a course is enrolled (currently shown on every card regardless of enrollment state, for the sake of the component build) — unresolved, not blocking.
 
 ## Filter Panel
 

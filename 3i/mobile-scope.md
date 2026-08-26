@@ -2,7 +2,7 @@
 project: 3i
 type: standard
 status: current
-updated: 2026-08-24
+updated: 2026-08-26
 tags:
   - mobile
   - cross-cutting
@@ -13,7 +13,7 @@ tags:
 
 **This is the authoritative record of which screens exist as native Flutter mobile screens, and why.** Module `ui/README.md` files add a `Mobile (Flutter)` column to their role × screen matrix and link here rather than restating the reasoning — see [documentation-standards.md](/documentation-standards.md) on why a restated rule goes stale silently.
 
-34 of the project's 70 documented screens are in scope for Flutter. The remaining 36 are web-only — either admin/instructor desk-work never intended for a phone, or (for `commerce`) deliberately excluded under [app-store-compliance.md](app-store-compliance.md).
+35 of the project's 71 documented screens are in scope for Flutter. The remaining 36 are web-only — either admin/instructor desk-work never intended for a phone, or (for `commerce`) deliberately excluded under [app-store-compliance.md](app-store-compliance.md).
 
 ---
 
@@ -27,7 +27,7 @@ Each remaining screen was assessed against one question: **does this action plau
 
 | Module | Mobile | Total | Which screens |
 | :---- | ----: | ----: | :---- |
-| `identity-and-access` | 14 | 17 | All except the 3 admin-only screens (name unlock, DOB correction, TOTP setup) |
+| `identity-and-access` | 15 | 18 | All except the 3 admin-only screens (name unlock, DOB correction, TOTP setup) |
 | `commerce` | 1 | 9 | Subscription status only — see [app-store-compliance.md](app-store-compliance.md) |
 | `catalogue` | 3 | 6 | Catalogue browse, Course detail, Rate & review |
 | `materials` | 4 | 5 | All except Material upload/manage (instructor authoring) |
@@ -40,9 +40,9 @@ Each remaining screen was assessed against one question: **does this action plau
 | `localisation` | 0 | 2 | None — admin-only |
 | `reporting` | 0 | 2 | None — admin-only |
 | `platform` | 0 | 1 | None — admin-only |
-| **Total** | **34** | **70** | |
+| **Total** | **35** | **71** | |
 
-`identity-and-access`'s totals rose again on 2026-08-24 (15→17, 12→14) when [Account Settings](modules/identity-and-access/ui/screens/account-settings.md) and [Login & Security](modules/identity-and-access/ui/screens/login-security.md) were added — see [3I-DEC-032](decisions/dec-032-account-settings-hub.md).
+`identity-and-access`'s totals rose again on 2026-08-26 (17→18, 14→15) when [Learner Dashboard](modules/identity-and-access/ui/screens/learner-dashboard.md) was added — see [3I-DEC-036](decisions/dec-036-learner-dashboard.md).
 
 ## 3. Decisions Worth Recording
 
@@ -57,7 +57,7 @@ A few of these were genuine tradeoffs, not obvious calls, and are worth keeping 
 ## 4. What This Does Not Change
 
 - **FR-BILL-02 and the no-purchase-surface rule are unaffected.** Registration reaching mobile does not reopen commerce — checkout, plan changes, and cancellation stay exclusively web, per [app-store-compliance.md](app-store-compliance.md).
-- **The 34/70 split is a scope decision, not a design-priority order.** It says which screens eventually need a Flutter design; it says nothing about which get built first.
+- **The 35/71 split is a scope decision, not a design-priority order.** It says which screens eventually need a Flutter design; it says nothing about which get built first.
 
 ## 5. Open
 
