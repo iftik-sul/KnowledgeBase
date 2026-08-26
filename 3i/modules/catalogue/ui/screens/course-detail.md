@@ -34,6 +34,14 @@ Public, for any `published` course. A `draft`, `pending_review`, `suspended`, or
 - Average rating and the list of `visible`-status Reviews, each showing the reviewer's display name — self-submitted reviews show the learner's own name; guardian-submitted reviews show the guardian-attribution format per [3I-DEC-027](/3i/decisions/dec-027-guardian-reviews-on-behalf.md).
 - Enrolment call-to-action — the actual enrolment flow lives in `learning-delivery`; this screen links out to it rather than duplicating it.
 
+### Enrolment CTA — Authenticated vs. Unauthenticated
+
+Per [3I-DEC-034](/3i/decisions/dec-034-login-preserves-course-intent.md):
+
+**With an active session:** the CTA routes directly to [Enrol & Waitlist](/3i/modules/learning-delivery/ui/screens/enrol-and-waitlist.md) for this course.
+
+**With no session:** the CTA routes to [Login](/3i/modules/identity-and-access/ui/screens/login.md), carrying a reference to this specific course. On successful login, the visitor lands on Enrol & Waitlist for this course, not a generic post-login destination. **If the visitor registers instead of logging in, no course reference is carried forward** — they land on Guardian Dashboard with zero profiles, same as any other new registration, and return to this course on their own once ready to enrol.
+
 ### Review Display — Inline Preview + Full List Modal
 
 Not specified in the eleven FR-CRS requirements; added here as a reasonable default, not confirmed with the client, matching how pagination on [Catalogue Browse](catalogue-browse.md) is flagged the same way.

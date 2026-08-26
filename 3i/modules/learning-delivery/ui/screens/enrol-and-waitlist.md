@@ -3,7 +3,7 @@ project: 3i
 module: learning-delivery
 type: ui-spec
 status: current
-updated: 2026-08-23
+updated: 2026-08-26
 id: 3I-LDL-UI-001
 derived_from:
   - 3i/reference/baseline/srd-v2.0.md
@@ -24,7 +24,12 @@ Enrol a profile into a course (and, for batch-based courses, a specific batch), 
 
 ## Access Gate
 
-Member. Reached from [Course Detail](/3i/modules/catalogue/ui/screens/course-detail.md)'s enrolment call-to-action.
+Member. Reached two ways — see [3I-DEC-034](/3i/decisions/dec-034-login-preserves-course-intent.md):
+
+1. **Directly** from [Course Detail](/3i/modules/catalogue/ui/screens/course-detail.md)'s enrolment call-to-action, when the visitor already has an active session.
+2. **Via [Login](/3i/modules/identity-and-access/ui/screens/login.md)'s return-to redirect**, when the visitor clicked the same CTA with no session — they land here immediately after authenticating (and completing profile selection), rather than at a generic post-login destination.
+
+Not reachable at all from Registration — a newly-registered Member lands on Guardian Dashboard with zero profiles, and returns to a course's Enrol & Waitlist screen on their own once a profile and seat exist.
 
 ## Contents
 
