@@ -21,7 +21,7 @@ Planned modules:
 | Module | Abbrev. | Covers |
 |---|---|---|
 | `registration-and-verification` | REG | Role selection, phone/email verification, account creation for both roles, onboarding, identity-document submission |
-| `ostad-profile` | PRO | The Ostad profile: personal info, skills, education, experience, portfolio, statistics |
+| `ostad-profile` | OSP | The Ostad profile: personal info, skills, education, experience, portfolio, statistics |
 | `shagred-profile` | SGP | The Shagred profile: account basics, coarse location, Ostad history, and its strict visibility rules |
 | `map-discovery` | MAP | Location capture (GPS/manual pin), map browsing, nearby search, profile viewing |
 | `contact-and-offers` | OFR | Shagred→Ostad contact, offer lifecycle, take/decline, communication handoff |
