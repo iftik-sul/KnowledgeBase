@@ -12,11 +12,12 @@ This repository is designed to be AI-friendly, making it easy for AI assistants 
 
 - **RERAN** — active. Regulatory platform. See [RERAN/README.md](RERAN/README.md) and [RERAN/module-roadmap.md](RERAN/module-roadmap.md).
 - **3i** — active. Subscription learning platform for Islamic studies, serving learners from age five. See [3i/README.md](3i/README.md) and [3i/age-and-safeguarding.md](3i/age-and-safeguarding.md).
-- ERP, SkudX, LoyaltyPoints, OstadLagbo, FindYourClone — reserved placeholders. Not yet active; each real client engagement gets its own project folder when work begins (ERP in particular is a sample folder, not a specific client).
+- **OstadLagbo** — active. Bangladesh-first, map-based marketplace for finding local skill teachers. See [OstadLagbo/README.md](OstadLagbo/README.md) and [OstadLagbo/project-standards.md](OstadLagbo/project-standards.md).
+- ERP, SkudX, LoyaltyPoints, FindYourClone — reserved placeholders. Not yet active; each real client engagement gets its own project folder when work begins (ERP in particular is a sample folder, not a specific client).
 
 Each project maintains its own documentation while following the same documentation standards.
 
-Projects differ in how they are documented, and those differences are declared rather than assumed. RERAN partitions by user group and works from client-supplied documents; 3i partitions by functional area and works from a baseline we wrote, because the client supplied nothing in writing. See [documentation-standards.md](documentation-standards.md#input-kinds) and each project's `project-standards.md`.
+Projects differ in how they are documented, and those differences are declared rather than assumed. RERAN partitions by user group and works from client-supplied documents; 3i partitions by functional area and works from a baseline we wrote, because the client supplied nothing in writing. OstadLagbo partitions by functional area and works from founder-authored baselines, because it is an internal project with no external client. See [documentation-standards.md](documentation-standards.md#input-kinds) and each project's `project-standards.md`.
 
 ## Future Vision
 
