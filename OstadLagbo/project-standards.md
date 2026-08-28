@@ -26,7 +26,7 @@ Planned modules:
 | `map-discovery` | MAP | Location capture (GPS/manual pin), map browsing, nearby search, profile viewing |
 | `contact-and-offers` | OFR | Shagred→Ostad contact, offer lifecycle, take/decline, communication handoff |
 | `admin-review` | ADM | Verification queue, approval workflow, verified badge, moderation |
-| `ratings-and-trust` | TRU | Ratings, reviews, trust signals, profile completion, safety reporting |
+| `ratings-and-trust` | RNT | Ratings, reviews, trust signals, profile completion, safety reporting |
 
 Shagred **account creation** (phone, password, OTP) is documented in `registration-and-verification`; the Shagred **profile** — its fields, Ostad history, and who may view it — is documented in `shagred-profile`. Module folders are created when their first document exists.
 
