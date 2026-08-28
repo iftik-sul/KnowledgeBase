@@ -20,14 +20,15 @@ Planned modules:
 
 | Module | Abbrev. | Covers |
 |---|---|---|
-| `registration-and-verification` | REG | Role selection, phone/email verification, onboarding, identity-document submission |
+| `registration-and-verification` | REG | Role selection, phone/email verification, account creation for both roles, onboarding, identity-document submission |
 | `ostad-profile` | PRO | The Ostad profile: personal info, skills, education, experience, portfolio, statistics |
+| `shagred-profile` | SGP | The Shagred profile: account basics, coarse location, Ostad history, and its strict visibility rules |
 | `map-discovery` | MAP | Location capture (GPS/manual pin), map browsing, nearby search, profile viewing |
 | `contact-and-offers` | OFR | Shagred→Ostad contact, offer lifecycle, take/decline, communication handoff |
 | `admin-review` | ADM | Verification queue, approval workflow, verified badge, moderation |
 | `ratings-and-trust` | TRU | Ratings, reviews, trust signals, profile completion, safety reporting |
 
-Module folders are created when their first document exists.
+Shagred **account creation** (phone, password, OTP) is documented in `registration-and-verification`; the Shagred **profile** — its fields, Ostad history, and who may view it — is documented in `shagred-profile`. Module folders are created when their first document exists.
 
 ## Derivation chain
 
