@@ -1,9 +1,10 @@
 ---
 project: OstadLagbo
 type: meeting-note
-status: current
-updated: 2026-08-28
+status: superseded
+updated: 2026-08-29
 owner: Iftikher
+superseded_by: /OstadLagbo/modules/shagred-profile/requirements/shagred-profile-requirements.md
 tags:
   - shagred-profile
   - decisions
@@ -11,7 +12,9 @@ tags:
 
 # Discovery Note — Shagred Profile Decisions (2026-08-28)
 
-Decisions made by the founder in the planning discussion of 2026-08-28, recorded here so they carry standing until the `shagred-profile` (SGP) requirements document is written. That requirements document supersedes this note when it exists.
+**Superseded on 2026-08-29 by [OL-SGP-REQ-001](/OstadLagbo/modules/shagred-profile/requirements/shagred-profile-requirements.md), which is now authoritative for the Shagred profile.** Retained as a dated record of the original decisions.
+
+Decisions made by the founder in the planning discussion of 2026-08-28, recorded here so they carried standing until the `shagred-profile` (SGP) requirements document was written.
 
 ## Decided
 
@@ -26,7 +29,7 @@ Decisions made by the founder in the planning discussion of 2026-08-28, recorded
 5. **Visibility rule:** a Shagred profile is never browsable, searchable, or shown on the map. It is visible to exactly one audience: an Ostad who has received that Shagred's offer, and only while the offer or the resulting relationship exists.
 6. **No baseline revision.** The founder ruled these elaborations do not require an `mvp-scope-v1.1`; the baseline never enumerated Shagred profile fields.
 
-## Not yet decided
+## Resolved since (now in OL-SGP-REQ-001)
 
-- Whether a Shagred can hide or remove entries from their own private Ostad history view.
-- What an Ostad sees of a Shagred profile after a relationship ends or an offer expires (current working assumption: visibility lapses).
+- A Shagred cannot hide or remove entries from their own private Ostad history — it is a fixed record.
+- Ostad visibility into a Shagred profile lapses when an offer expires or is declined, and persists after acceptance.
