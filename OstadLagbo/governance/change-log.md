@@ -13,6 +13,7 @@ Records every founder-approved change to the MVP scope baseline. Newest first. E
 
 | ID | Date | Change | Rationale | Absorbed in |
 |---|---|---|---|---|
+| CL-009 | 2026-08-30 | **In-app support ticket system added** (`support` module, SUP): Help & Support screen, categorized tickets with private threads and one screenshot, suspension-screen appeal path; admin support queue (ADM-22) | Users need help and appeals in-app; email-only support excludes many Bangladeshi users; ToS §7's appeal promise needs a door | **Pending baseline v1.2** (batched before Execution); SUP-01…06, ADM-22 |
 | CL-008 | 2026-08-30 | **Address model revised for both roles:** manual street-address text plus Thana, District, Division, and Postal Code from dropdowns; replaces Division→District→Upazila/Thana→Area. Ostads keep the map pin; Shagreds gain structured address (replacing District+Area coarse location) | Cleaner, dataset-backed address structure; postal code adds locatability without coordinates | Baseline v1.1 §2; OSP-02, SGP-01/02, REG-08 |
 | CL-007 | 2026-08-30 | Ostad may post one public reply per review | Fairness — an Ostad's livelihood shouldn't carry unanswered criticism | v1.1 §6; RNT-04 |
 | CL-006 | 2026-08-30 | Chat content fixed to text + voice notes (no images/documents/video) | Voice-note culture fit; lower storage and moderation surface | v1.1 §4; OFR-05 |
@@ -24,4 +25,4 @@ Records every founder-approved change to the MVP scope baseline. Newest first. E
 
 ## Process note
 
-Changes CL-001 through CL-007 were approved during the requirements sessions before this log existed; they are recorded here retroactively and consolidated into baseline v1.1, restoring the baseline as the single truthful answer to scope questions. From v1.1 onward, no scope change is implemented before its entry appears here.
+Changes CL-001 through CL-007 were approved during the requirements sessions before this log existed; they are recorded here retroactively and consolidated into baseline v1.1, restoring the baseline as the single truthful answer to scope questions. From v1.1 onward, no scope change is implemented before its entry appears here. Baseline v1.2 will be issued before the Execution phase begins, absorbing CL-009 and any further planning-stage changes together.
