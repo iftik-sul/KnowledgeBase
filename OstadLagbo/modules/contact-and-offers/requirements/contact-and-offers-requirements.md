@@ -34,7 +34,7 @@ Declined, expired, and withdrawn all lapse profile visibility per SGP-05. Termin
 
 ## OFR-03 Notifications
 
-Push notifications (baseline §7): Ostad — offer received, and a **pending-expiry reminder** (proposed: day 5 of 7, engineering default); Shagred — offer accepted, offer declined; both — new chat message (suppressed while that chat is open on-screen). Every push has an in-app counterpart (offer inbox states, chat badges) so a denied-notifications user misses nothing permanently.
+Push notifications (baseline §7): Ostad — offer received, and a **pending-expiry reminder** (proposed: day 5 of 7, engineering default); Shagred — offer accepted, offer declined; both — new chat message (suppressed while that chat is open on-screen). Every push has an in-app counterpart (offer inbox states, chat badges) so a denied-notifications user misses nothing permanently. No per-category notification preferences exist in the MVP; users control notifications at the OS level only (CL-015).
 
 ## OFR-04 Acceptance effects
 
@@ -44,9 +44,9 @@ Acceptance atomically: opens the 1:1 chat; **reveals phone numbers mutually, and
 
 ## OFR-05 Chat
 
-One chat thread per connection. Content: **text messages and voice notes** — no images, documents, or video in MVP. Voice notes are capped (proposed 2 minutes) and compressed client-side before upload, consistent with the platform's storage cost posture. Messages persist server-side (moderation evidence, risk R-03) and deliver across devices; offline recipients get push per OFR-03. Message states: sent / delivered / read (proposed as engineering-standard). Chats have no expiry — the thread persists for the life of the relationship.
+One chat thread per connection. Content: **text messages and voice notes** — no images, documents, or video in MVP. Voice notes are capped (proposed 2 minutes) and compressed client-side before upload, consistent with the platform's storage cost posture. Messages persist server-side (moderation evidence, risk R-03) and deliver across devices; offline recipients get push per OFR-03. Message states: sent / delivered / read (proposed as engineering-standard). Chats have no expiry — the thread persists for the life of the relationship. Messages can never be deleted or edited by users — chat history is moderation evidence (CL-015).
 
-**Acceptance:** a 2-minute-plus voice note cannot be sent; messages survive reinstall and device switch; no attachment type beyond voice exists in UI or API.
+**Acceptance:** a 2-minute-plus voice note cannot be sent; messages survive reinstall and device switch; no attachment type beyond voice exists in UI or API; no message edit or delete action exists in UI or API.
 
 ## OFR-06 Ending and freezing
 
@@ -70,4 +70,4 @@ Each role has an offers screen (CL-012). **Shagred — sent offers:** every offe
 
 ## Proposed technical defaults summary
 
-Offer text cap, expiry-reminder day, voice-note duration cap and codec, message-state mechanics, and report-context window are engineering defaults, changeable without founder re-approval. The offer caps (1 per pair, 5 global), the lifecycle states, 7-day expiry, immediate re-offer policy, mutual reveal timing and contents, text+voice-only chat, block-as-termination, the paused-Ostad refusal, and report-only admin access change only with founder approval.
+Offer text cap, expiry-reminder day, voice-note duration cap and codec, message-state mechanics, and report-context window are engineering defaults, changeable without founder re-approval. The offer caps (1 per pair, 5 global), the lifecycle states, 7-day expiry, immediate re-offer policy, mutual reveal timing and contents, text+voice-only chat, message immutability, block-as-termination, the paused-Ostad refusal, and report-only admin access change only with founder approval.
