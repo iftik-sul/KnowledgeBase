@@ -5,13 +5,13 @@ type: requirements
 status: current
 updated: 2026-08-30
 id: OL-OFR-REQ-001
-derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.0.md
+derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.1.md
 owner: Iftikher
 ---
 
 # Contact & Offers — Requirements
 
-Derived from MVP Scope Baseline v1.0 §4. Governs the offer lifecycle, the in-app chat, phone reveal, and their notifications. Shagred-profile visibility follows SGP-05; reporting and blocking are created in `ratings-and-trust`; report handling in `admin-review`; connection analytics in ADM-12.
+Derived from MVP Scope Baseline v1.1 §4. Governs the offer lifecycle, the in-app chat, phone reveal, and their notifications. Shagred-profile visibility follows SGP-05; reporting and blocking are created in `ratings-and-trust`; report handling in `admin-review`; connection analytics in ADM-12.
 
 ## OFR-01 Sending an offer
 

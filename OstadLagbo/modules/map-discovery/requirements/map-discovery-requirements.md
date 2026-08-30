@@ -3,15 +3,15 @@ project: OstadLagbo
 module: map-discovery
 type: requirements
 status: current
-updated: 2026-08-29
+updated: 2026-08-30
 id: OL-MAP-REQ-001
-derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.0.md
+derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.1.md
 owner: Iftikher
 ---
 
 # Map Discovery — Requirements
 
-Derived from MVP Scope Baseline v1.0 §3, extended by founder decision (2026-08-29) with gender filtering, shareable profile links, and favorites. Governs Ostad location capture, the discovery map, filtering and search, and guest access. Profile content is governed by `ostad-profile`; the fuzzy matcher is shared with OSP-04; contact actions by `contact-and-offers`; analytics obligations by ADM-12/14.
+Derived from MVP Scope Baseline v1.1 §3. Governs Ostad location capture, the discovery map, filtering and search, and guest access. Profile content is governed by `ostad-profile`; the fuzzy matcher is shared with OSP-04; contact actions by `contact-and-offers`; analytics obligations by ADM-12/14.
 
 ## MAP-01 Ostad location capture
 
