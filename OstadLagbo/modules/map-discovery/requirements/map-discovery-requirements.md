@@ -48,9 +48,9 @@ Two filters, combinable with search and radius under AND semantics:
 
 ## MAP-06 Keyword search
 
-Keyword search matches **fixed category names and Ostads' free-text skill names only** — never headlines, about text, or personal names. Matching uses the same fuzzy algorithm as OSP-04, so "gitar" finds Guitar-category Ostads and misspelled skill names still hit. Search composes with radius and filters.
+Keyword search matches **fixed category names — in English and via their Bangla aliases (ADM-11, CL-013) — and Ostads' free-text skill names, matched in whichever script they were entered** — never headlines, about text, or personal names. Matching uses the same fuzzy algorithm as OSP-04 per script, so "gitar" and "গিটার" both find Guitar-category Ostads, and misspelled skill names still hit. Search composes with radius and filters.
 
-**Acceptance:** a term present only in an Ostad's about text yields no match; misspellings within edit-distance of a category or skill name do match.
+**Acceptance:** a term present only in an Ostad's about text yields no match; misspellings within edit-distance of a category, alias, or skill name do match; a Bangla-script query resolves to its aliased category.
 
 ## MAP-07 Shareable profile links
 
@@ -76,8 +76,8 @@ No user's live position — Shagred or guest — is ever transmitted for storage
 
 ## MAP-11 Instrumentation obligations
 
-This module emits the events ADM-12/13/14 require: map sessions (guest and registered separately), profile views from pins, searches and filter applications with result counts — **including zero and low-result events tagged with category/keyword, gender filter, and map area** — radius changes, share taps, share-link opens, and favorite adds/removes. These events exist from first release.
+This module emits the events ADM-12/13/14 require: map sessions (guest and registered separately), profile views from pins, searches and filter applications with result counts — **including zero and low-result events tagged with category/keyword, script, gender filter, and map area** — radius changes, share taps, share-link opens, and favorite adds/removes. These events exist from first release.
 
 ## Proposed technical defaults summary
 
-Default center, radius default/range, cluster thresholds, rate limits, viewport caps, deep-link mechanics, and the map provider are engineering defaults — with one recorded constraint: provider choice must respect the bootstrap cost posture (free or free-tier-viable at MVP scale; e.g., OpenStreetMap-based rendering avoids per-load billing). Everything else — exact pins, the consent statement, guest access boundaries, pins-only presentation, the filter set, search scope, favorites privacy, and the no-stored-user-location rule — changes only with founder approval.
+Default center, radius default/range, cluster thresholds, rate limits, viewport caps, deep-link mechanics, and the map provider are engineering defaults — with one recorded constraint: provider choice must respect the bootstrap cost posture (free or free-tier-viable at MVP scale; e.g., OpenStreetMap-based rendering avoids per-load billing). Everything else — exact pins, the consent statement, guest access boundaries, pins-only presentation, the filter set, cross-script search scope, favorites privacy, and the no-stored-user-location rule — changes only with founder approval.
