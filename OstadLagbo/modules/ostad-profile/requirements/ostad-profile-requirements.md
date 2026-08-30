@@ -3,15 +3,15 @@ project: OstadLagbo
 module: ostad-profile
 type: requirements
 status: current
-updated: 2026-08-29
+updated: 2026-08-30
 id: OL-OSP-REQ-001
-derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.0.md
+derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.1.md
 owner: Iftikher
 ---
 
 # Ostad Profile — Requirements
 
-Derived from MVP Scope Baseline v1.0 §2. Defines every field of the Ostad profile, its validation, and its visibility. Capture flow is governed by `registration-and-verification` (REG-09, REG-10); location capture by `map-discovery`; re-review triggers by `admin-review`; rating aggregation by `ratings-and-trust`.
+Derived from MVP Scope Baseline v1.1 §2. Defines every field of the Ostad profile, its validation, and its visibility. Capture flow is governed by `registration-and-verification` (REG-09, REG-10); location capture by `map-discovery`; re-review triggers by `admin-review`; rating aggregation by `ratings-and-trust`.
 
 ## Visibility classes
 
@@ -34,9 +34,9 @@ Legal names must match the identity document; mismatch is grounds for admin chan
 
 ## OSP-02 Address
 
-Division → District → Upazila/Thana → Area as dependent dropdowns from a Bangladesh administrative dataset, plus a free-text full address line. **Public:** District and Area. **Internal:** full address line, Division and Upazila shown publicly only as part of District/Area context. (The exact map pin is public by baseline §3; the street-address text still stays internal.)
+The Ostad provides a manual street-address text line plus **Thana, District, Division, and Postal Code, each selected from dropdown lists** on a Bangladesh administrative dataset (Division → District → Thana cascading; postal code list filtered by the selection — dataset and cascade mechanics are engineering defaults shared with SGP-02). **Public:** Division, District, Thana, and Postal Code (the exact map pin is already public per baseline §3, so these add no exposure). **Internal:** the street-address text line.
 
-**Acceptance:** dropdowns cascade correctly; public profile and APIs expose only District and Area as text.
+**Acceptance:** dropdowns cascade correctly; the street line never appears on any public surface or API response.
 
 ## OSP-03 Professional information
 
@@ -84,6 +84,8 @@ Public: identity-verification status, admin-approval status, verified badge (gra
 All fields are editable by the Ostad at any time. Edits to **key fields** — legal names, identity documents, skills — return the profile to review per baseline §5, remaining discoverable with the last approved version until re-approved. All other edits publish immediately. Field-level change tracking must make the diff visible to admin review.
 
 **Acceptance:** editing a skill triggers re-review and the public profile keeps showing the prior approved skill set until approval; editing the About publishes instantly.
+
+Non-key-field edits publishing without review is a deliberate trade-off: post-approval abuse of freely-editable fields (display name, headline, about, portfolio) is moderated reactively through reports (RNT-07) and admin action, not preemptively.
 
 ## Proposed technical defaults summary
 
