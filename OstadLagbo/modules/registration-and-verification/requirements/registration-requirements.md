@@ -25,9 +25,9 @@ A visitor registering must choose exactly one role: Ostad or Shagred. The role i
 
 ## REG-02 Phone registration and OTP
 
-Registration requires a Bangladeshi mobile number, verified by OTP before the account is created. Proposed defaults: 6-digit OTP, 5-minute expiry, resend allowed after 60 seconds, maximum 5 OTP requests per number per 24 hours, maximum 5 wrong attempts per OTP before it is invalidated. One account per phone number per role is not enforced — one account per phone number, full stop.
+Registration requires a Bangladeshi mobile number, verified by OTP before the account is created. Proposed defaults: 6-digit OTP, 5-minute expiry, resend allowed after 60 seconds, maximum 5 OTP requests per number per 24 hours, maximum 5 wrong attempts per OTP before it is invalidated. One account per phone number per role is not enforced — one account per phone number, full stop. A registration attempt with a phone number belonging to an account inside its 30-day deletion window is routed to **account recovery** (log in to restore) rather than refused or duplicated (CL-015).
 
-**Acceptance:** unverified numbers never produce accounts; rate limits verifiably block the 6th request in 24h; a phone number in use cannot register a second account.
+**Acceptance:** unverified numbers never produce accounts; rate limits verifiably block the 6th request in 24h; a phone number in use cannot register a second account; a deletion-window number routes to recovery, never to a new account.
 
 ## REG-03 Password and date-of-birth gate
 
