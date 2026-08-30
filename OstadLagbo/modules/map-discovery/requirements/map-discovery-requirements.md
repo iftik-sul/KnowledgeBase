@@ -21,15 +21,15 @@ During onboarding stage 4 (REG-09) and afterward from profile editing, an Ostad 
 
 ## MAP-02 The discovery map
 
-The map shows every approved, non-suspended Ostad as a pin at exact stored coordinates — **pins only; no list view exists in the MVP**. The view centers on the user's live GPS position when permitted, else on a default city center (engineering default: Dhaka), supports free pan and zoom anywhere in Bangladesh, and provides a **recenter-to-me button** whenever GPS is available. Tapping a pin opens a preview card — profile photo, display name, verified badge, headline, average rating and review count, distance from map center — and tapping the card opens the full public profile.
+The map shows every approved, non-suspended, **non-paused (OSP-11)** Ostad as a pin at exact stored coordinates — **pins only; no list view exists in the MVP**. The view centers on the user's live GPS position when permitted, else on a default city center (engineering default: Dhaka), supports free pan and zoom anywhere in Bangladesh, and provides a **recenter-to-me button** whenever GPS is available. Tapping a pin opens a preview card — profile photo, display name, verified badge, headline, average rating and review count, distance from map center — and tapping the card opens the full public profile.
 
-**Acceptance:** pending, rejected, and suspended Ostads never render a pin; recenter returns to live position in one tap; denied GPS still yields a fully usable map.
+**Acceptance:** pending, rejected, suspended, and paused Ostads never render a pin; recenter returns to live position in one tap; denied GPS still yields a fully usable map.
 
 ## MAP-03 Guest browsing
 
-The map, search, filters, and full public Ostad profiles are available **without an account**. Any contact action — sending an offer, favoriting, or anything requiring identity — routes a guest to registration/login and returns them to the same screen afterward. Guest sessions are instrumented as their own segment (guest→registration conversion feeds ADM-13). Scraping resistance — viewport query caps, request rate limits — is an engineering default obligation accompanying guest access.
+The map, search, filters, and full public Ostad profiles are available **without an account**. The Privacy Policy and Terms of Service are reachable from the guest map screen without registration (REG-13). Any contact action — sending an offer, favoriting, or anything requiring identity — routes a guest to registration/login and returns them to the same screen afterward. Guest sessions are instrumented as their own segment (guest→registration conversion feeds ADM-13). Scraping resistance — viewport query caps, request rate limits — is an engineering default obligation accompanying guest access.
 
-**Acceptance:** a fresh install reaches a browsable map with zero registration steps; no guest path reaches offer composition; the guest→register→same-screen flow survives the round trip.
+**Acceptance:** a fresh install reaches a browsable map with zero registration steps; both legal documents open for a guest; no guest path reaches offer composition; the guest→register→same-screen flow survives the round trip.
 
 ## MAP-04 Radius and empty states
 
@@ -54,7 +54,7 @@ Keyword search matches **fixed category names and Ostads' free-text skill names 
 
 ## MAP-07 Shareable profile links
 
-Every public Ostad profile has a **Share** action producing a deep link. Opening the link on a device with the app lands directly on that profile — including for guests, per MAP-03; without the app it resolves to the store listing (engineering default: deferred deep link so the profile still opens after install). Share events are instrumented per MAP-11.
+Every public Ostad profile has a **Share** action producing a deep link. Opening the link on a device with the app lands directly on that profile — including for guests, per MAP-03; without the app it resolves to the store listing (engineering default: deferred deep link so the profile still opens after install). A link to a paused profile opens it with the not-accepting notice per OSP-11. Share events are instrumented per MAP-11.
 
 **Acceptance:** link → installed app → correct profile, as guest and as registered user; link → no app → store.
 

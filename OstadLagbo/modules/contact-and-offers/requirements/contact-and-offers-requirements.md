@@ -15,9 +15,9 @@ Derived from MVP Scope Baseline v1.1 §4. Governs the offer lifecycle, the in-ap
 
 ## OFR-01 Sending an offer
 
-A registered Shagred sends an offer from an Ostad's profile as a **free-text message** (proposed cap 500 characters). Constraints: **one pending offer per Shagred→Ostad pair** at a time, and **a global cap of 5 pending offers** per Shagred across all Ostads — sending a 6th is refused with a clear message until one resolves. Sending grants the Ostad visibility of the Shagred's profile per SGP-05. Ostads cannot initiate contact with Shagreds by any path.
+A registered Shagred sends an offer from an Ostad's profile as a **free-text message** (proposed cap 500 characters). Constraints: **one pending offer per Shagred→Ostad pair** at a time, and **a global cap of 5 pending offers** per Shagred across all Ostads — sending a 6th is refused with a clear message until one resolves. Offers cannot be sent to a paused Ostad (OSP-11) — the action is disabled in UI and refused by the server. Sending grants the Ostad visibility of the Shagred's profile per SGP-05. Ostads cannot initiate contact with Shagreds by any path.
 
-**Acceptance:** the 6th simultaneous pending offer is refused; a second pending offer to the same Ostad is impossible; no Ostad-initiated contact surface exists.
+**Acceptance:** the 6th simultaneous pending offer is refused; a second pending offer to the same Ostad is impossible; a paused Ostad cannot receive a new offer by any path; no Ostad-initiated contact surface exists.
 
 ## OFR-02 Offer lifecycle
 
@@ -38,9 +38,9 @@ Push notifications (baseline §7): Ostad — offer received, and a **pending-exp
 
 ## OFR-04 Acceptance effects
 
-Acceptance atomically: opens the 1:1 chat; **reveals phone numbers mutually** — each party sees the other's verified number in the chat header/details; makes profile visibility durable per SGP-05; records the **connection** with timestamp (the ADM-12 success unit); notifies the Shagred. The offer text becomes the first message in the thread for context. The reveal is by nature irreversible — a number seen is seen — and the acceptance confirmation states that the Ostad's/Shagred's number will be shared.
+Acceptance atomically: opens the 1:1 chat; **reveals phone numbers mutually, and verified email addresses mutually where present (CL-011)** — each party sees the other's verified contact details in the chat header/details; makes profile visibility durable per SGP-05; records the **connection** with timestamp (the ADM-12 success unit); notifies the Shagred. The offer text becomes the first message in the thread for context. The reveal is by nature irreversible — a number seen is seen — and the acceptance confirmation states that contact details will be shared.
 
-**Acceptance:** both numbers visible to both parties immediately after acceptance and never before; the connection event is recorded exactly once per acceptance.
+**Acceptance:** both parties' phone numbers (and verified emails where present) are visible to each other immediately after acceptance and never before; the connection event is recorded exactly once per acceptance.
 
 ## OFR-05 Chat
 
@@ -62,6 +62,12 @@ Chat is private between its two participants. Admin access to chat content happe
 
 This module emits the ADM-12/13 events: offers sent / accepted / declined / expired / withdrawn with response times, connections, messages and voice notes sent, phone reveals, and per-pair connection uniqueness. These events exist from first release.
 
+## OFR-09 Offer inboxes
+
+Each role has an offers screen (CL-012). **Shagred — sent offers:** every offer with its live state (pending with days remaining, accepted, declined, expired, withdrawn), tap-through to the Ostad profile, and a withdraw action on pending items. **Ostad — received offers:** pending offers first with days remaining and take/decline actions, then resolved history. Badge counts follow the notification principle (OFR-03).
+
+**Acceptance:** every offer state renders correctly in both inboxes; withdraw works from the sent list; accept and decline work from the received list.
+
 ## Proposed technical defaults summary
 
-Offer text cap, expiry-reminder day, voice-note duration cap and codec, message-state mechanics, and report-context window are engineering defaults, changeable without founder re-approval. The offer caps (1 per pair, 5 global), the lifecycle states, 7-day expiry, immediate re-offer policy, mutual reveal timing, text+voice-only chat, block-as-termination, and report-only admin access change only with founder approval.
+Offer text cap, expiry-reminder day, voice-note duration cap and codec, message-state mechanics, and report-context window are engineering defaults, changeable without founder re-approval. The offer caps (1 per pair, 5 global), the lifecycle states, 7-day expiry, immediate re-offer policy, mutual reveal timing and contents, text+voice-only chat, block-as-termination, the paused-Ostad refusal, and report-only admin access change only with founder approval.
