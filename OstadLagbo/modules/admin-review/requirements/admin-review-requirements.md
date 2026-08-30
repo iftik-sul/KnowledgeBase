@@ -56,7 +56,7 @@ A read-only view of blocking activity: accounts most blocked, recent blocks. Hea
 ## E. Content and taxonomy
 
 ### ADM-11 Skill-category management
-Create, rename, deactivate categories; per-category usage counts shown. In-use categories cannot be deleted, only deactivated — hidden from new selection while existing profiles keep them until their next skill edit. Renames propagate immediately. No operation can strand a profile with a nonexistent category.
+Create, rename, deactivate categories. Each category carries an English name and an admin-managed **Bangla name/alias**, used for cross-script matching in the typeahead and keyword search (OSP-04, MAP-06; CL-013); per-category usage counts shown. In-use categories cannot be deleted, only deactivated — hidden from new selection while existing profiles keep them until their next skill edit. Renames (either script) propagate immediately. No operation can strand a profile with a nonexistent category.
 
 ## F. Analytics and business intelligence
 
