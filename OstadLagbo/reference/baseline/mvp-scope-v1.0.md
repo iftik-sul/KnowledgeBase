@@ -1,16 +1,19 @@
 ---
 project: OstadLagbo
 type: baseline
-status: current
-updated: 2026-08-28
+status: superseded
+updated: 2026-08-30
 version: "1.0"
 approval: written
 approved: 2026-08-28
 id: OL-BAS-001
+superseded_by: /OstadLagbo/reference/baseline/mvp-scope-v1.1.md
 owner: Iftikher
 ---
 
 # MVP Scope Baseline — v1.0
+
+**Superseded on 2026-08-30 by [MVP Scope Baseline v1.1](/OstadLagbo/reference/baseline/mvp-scope-v1.1.md), which consolidates the scope extensions of the requirements sessions (change log CL-001…CL-008) and the revised address model. Retained unchanged below as the approved record of 2026-08-28.**
 
 ## Purpose and standing
 
