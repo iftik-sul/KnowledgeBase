@@ -26,7 +26,7 @@ Dashboard home shows KPI cards — pending reviews, open reports, Ostads by stat
 All Ostad submissions — first submissions and key-field re-reviews — enter one queue, oldest first. Each item opens a review screen showing the complete profile, identity documents and selfie beside the claimed legal names and DOB, and, for re-reviews, a field-level diff against the last approved version. Nothing submitted can bypass the queue.
 
 ### ADM-03 Identity verification gate
-The reviewer explicitly marks identity **passed** or **failed**. Approval is impossible while identity is not passed — the approve action must not be available in that state, in UI or API. Consequently every live Ostad holds the verified badge. Failed identity leads to request-changes (fixable: blurry image, name mismatch) or reject.
+The reviewer explicitly marks identity **passed** or **failed**. Approval is impossible while identity is not passed — the approve action must not be available in that state, in UI or API. Consequently every live Ostad holds the verified badge. Failed identity leads to request-changes (fixable: blurry image, name mismatch) or reject. **A submission whose ID number matches another active account is automatically flagged on the review screen and cannot be approved until the duplicate is resolved (REG-10, CL-012).**
 
 ### ADM-04 Verdicts
 **Approve** (discoverable + badge, timestamp and reviewer recorded) · **Request changes** (mandatory written note) · **Reject** (mandatory written reason). Each verdict notifies the Ostad by push and in-app status (REG-11); verdict history is retained per account and neither note nor reason can be empty.
@@ -74,7 +74,7 @@ The connection — an accepted offer — is the platform's success unit and is t
 - **Growth:** new registrations by role, approvals, and connections as daily/weekly series.
 - **Activation:** share of new Shagreds sending ≥1 offer within 7 days; share of new Ostads reaching approval within 14 days; median time from Ostad registration to approval.
 - **Retention:** returning users per week by role; repeat Shagreds (≥2 connections); Ostads receiving repeat offers.
-- **Dormancy:** approved Ostads with no activity in 30 days; Shagreds inactive since first week.
+- **Dormancy:** approved Ostads with no activity in 30 days (distinguishing paused per OSP-11 from inactive); Shagreds inactive since first week.
 
 ### ADM-14 Demand intelligence
 Where demand outruns supply — the recruitment compass:
