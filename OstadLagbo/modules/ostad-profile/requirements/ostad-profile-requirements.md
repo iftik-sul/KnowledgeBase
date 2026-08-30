@@ -46,9 +46,9 @@ Headline (max 80 chars), About (max 1,000 chars), Occupation, Years of experienc
 
 Skill categories come from a **fixed, admin-managed category list**; skill names within a category are free text. An Ostad selects 1–5 category+skill entries, each with level (Beginner / Intermediate / Expert) and years of experience.
 
-**Fuzzy category matching (hard requirement):** category entry is a typeahead that matches misspelled and partial input to the fixed list — e.g., "gitar" → Guitar, "cooking clas" → Cooking — using edit-distance or equivalent fuzzy matching. Free-text category creation is impossible; if no match satisfies the Ostad, they pick the nearest category and put specifics in the skill name. The same matching serves Shagred keyword search (see `map-discovery`).
+**Fuzzy category matching (hard requirement):** category entry is a typeahead that matches misspelled and partial input **in both English and Bangla** to the fixed list — e.g., "gitar" → Guitar, "cooking clas" → Cooking, and "গিটার" → Guitar via the category's Bangla alias (ADM-11, CL-013) — using edit-distance or equivalent fuzzy matching per script. Free-text category creation is impossible; if no match satisfies the Ostad, they pick the nearest category and put specifics in the skill name. The same matching serves Shagred keyword search (see `map-discovery`).
 
-**Acceptance:** common misspellings of every category resolve to it in the typeahead; no path creates a category outside the admin list.
+**Acceptance:** common misspellings of every category resolve to it in the typeahead in both scripts; no path creates a category outside the admin list.
 
 ## OSP-05 Education
 
@@ -93,6 +93,12 @@ An approved Ostad can **pause their visibility** from a profile setting — effe
 
 **Acceptance:** toggling pause removes/restores the map pin within one request cycle; a paused profile opened by deep link shows the notice and no enabled offer action; an already-received pending offer can still be accepted while paused.
 
+## OSP-12 Ostad insights (system, private)
+
+A private insights screen for the Ostad (CL-014): **profile view counts** (7- and 30-day), **offers received by outcome** (pending, accepted, declined, expired), and **total connections** — sourced from the same instrumentation that feeds ADM-12 and MAP-11. Counts only, never identities: who viewed, favorited, or browsed is never shown, preserving the Shagred-invisibility principle (SGP). Visible only to the Ostad themselves.
+
+**Acceptance:** insight counts match admin analytics for the same account and period; no endpoint exposes viewer identities to any Ostad.
+
 ## Proposed technical defaults summary
 
-Character caps, image/document size limits, video resolution, completion formula, and the Bangladesh address dataset choice are engineering defaults, changeable without founder re-approval. Field inventory, visibility classes, the one-video-45s rule, taxonomy structure, fuzzy matching, the visibility-pause semantics, and re-review triggers change only with founder approval.
+Character caps, image/document size limits, video resolution, completion formula, insight refresh cadence, and the Bangladesh address dataset choice are engineering defaults, changeable without founder re-approval. Field inventory, visibility classes, the one-video-45s rule, taxonomy structure, cross-script fuzzy matching, the visibility-pause semantics, counts-only insights, and re-review triggers change only with founder approval.
