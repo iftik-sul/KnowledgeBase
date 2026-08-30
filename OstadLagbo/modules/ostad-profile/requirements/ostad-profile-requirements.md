@@ -87,6 +87,12 @@ All fields are editable by the Ostad at any time. Edits to **key fields** — le
 
 Non-key-field edits publishing without review is a deliberate trade-off: post-approval abuse of freely-editable fields (display name, headline, about, portfolio) is moderated reactively through reports (RNT-07) and admin action, not preemptively.
 
+## OSP-11 Visibility pause
+
+An approved Ostad can **pause their visibility** from a profile setting — effective immediately, reversible anytime, no admin involvement (change log CL-010). While paused: the Ostad disappears from the map, search, and category results (MAP-02) and cannot receive new offers (OFR-01); existing chats continue, pending offers already received remain actionable, and the profile stays reachable by deep link and favorites, showing "not currently accepting offers" with the offer action disabled. Pause state is instrumented so ADM-13 dormancy distinguishes paused from inactive.
+
+**Acceptance:** toggling pause removes/restores the map pin within one request cycle; a paused profile opened by deep link shows the notice and no enabled offer action; an already-received pending offer can still be accepted while paused.
+
 ## Proposed technical defaults summary
 
-Character caps, image/document size limits, video resolution, completion formula, and the Bangladesh address dataset choice are engineering defaults, changeable without founder re-approval. Field inventory, visibility classes, the one-video-45s rule, taxonomy structure, fuzzy matching, and re-review triggers change only with founder approval.
+Character caps, image/document size limits, video resolution, completion formula, and the Bangladesh address dataset choice are engineering defaults, changeable without founder re-approval. Field inventory, visibility classes, the one-video-45s rule, taxonomy structure, fuzzy matching, the visibility-pause semantics, and re-review triggers change only with founder approval.

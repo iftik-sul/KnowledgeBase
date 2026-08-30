@@ -45,9 +45,9 @@ Reviews and replies are reportable by any registered viewer. Report resolution f
 
 ## RNT-07 Reporting
 
-Any registered user can report an **Ostad profile**; chat participants can report **messages** (cited messages flow to admin per OFR-07); registered viewers can report **reviews and replies**. Guests cannot report (registration routes per MAP-03). A report carries a category — proposed set: *Fake profile / Inappropriate content / Harassment / Scam or fraud / Safety concern / Other* — and free-text detail (required for Other). Reports enter ADM-07's queue; the reporter's identity is never revealed to the reported account.
+Any registered user can report an **Ostad profile**; an Ostad who holds or previously held a Shagred's offer can report that **Shagred profile** (CL-012); chat participants can report **messages** (cited messages flow to admin per OFR-07); registered viewers can report **reviews and replies**. Guests cannot report (registration routes per MAP-03). A report carries a category — proposed set: *Fake profile / Inappropriate content / Harassment / Scam or fraud / Safety concern / Other* — and free-text detail (required for Other). Reports enter ADM-07's queue; the reporter's identity is never revealed to the reported account.
 
-**Acceptance:** every reportable surface has a report action; reporter anonymity holds in every user-facing response.
+**Acceptance:** every reportable surface has a report action, including a Shagred profile viewed by its offer's recipient; reporter anonymity holds in every user-facing response.
 
 ## RNT-08 Blocking
 
