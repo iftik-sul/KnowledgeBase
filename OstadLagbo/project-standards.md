@@ -27,6 +27,7 @@ Modules:
 | `contact-and-offers` | OFR | Shagred→Ostad contact, offer lifecycle, take/decline, communication handoff |
 | `admin-review` | ADM | Verification queue, approval workflow, verified badge, moderation, admin panel |
 | `ratings-and-trust` | RNT | Ratings, reviews, trust signals, reporting, blocking |
+| `support` | SUP | In-app help: Help & Support screen, categorized ticket threads, suspension appeals; tickets handled in the admin panel (ADM-22) |
 
 Shagred **account creation** (phone, password, OTP) is documented in `registration-and-verification`; the Shagred **profile** — its fields, Ostad history, and who may view it — is documented in `shagred-profile`. Module folders are created when their first document exists.
 

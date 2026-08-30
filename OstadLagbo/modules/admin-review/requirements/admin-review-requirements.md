@@ -11,14 +11,14 @@ owner: Iftikher
 
 # Admin Review & Dashboard — Requirements
 
-Derived from MVP Scope Baseline v1.1 §5: a full administrative control panel — review, moderation, user management, business analytics, communication, and compliance tooling all ship in the MVP. Report *creation* and blocking are governed by `ratings-and-trust`; profile fields by `ostad-profile` / `shagred-profile`.
+Derived from MVP Scope Baseline v1.1 §5: a full administrative control panel — review, moderation, user management, business analytics, communication, compliance tooling, and support all ship in the MVP. Report *creation* and blocking are governed by `ratings-and-trust`; profile fields by `ostad-profile` / `shagred-profile`.
 
 The dashboard is a separate web application, English-only, desktop-oriented, and is the **only** interface holding these powers — none exist in the Flutter app.
 
 ## A. Overview
 
 ### ADM-01 Overview screen
-Dashboard home shows KPI cards — pending reviews, open reports, Ostads by status, total Shagreds, suspended accounts, new registrations (today / 7 days), offers sent and **connections made** (7 days) — each linking to its filtered view, plus a recent-activity feed (registrations, submissions, reports).
+Dashboard home shows KPI cards — pending reviews, open reports, Ostads by status, total Shagreds, suspended accounts, new registrations (today / 7 days), offers sent and **connections made** (7 days), open support tickets — each linking to its filtered view, plus a recent-activity feed (registrations, submissions, reports).
 
 ## B. Review management
 
@@ -83,7 +83,7 @@ Where demand outruns supply — the recruitment compass:
 - Profile views and offers concentrated on few Ostads (supply shortage signal in a category/area).
 
 ### ADM-15 Quality and operations
-Ratings distribution and trend; review-submission rate among connections; reports per 100 weekly-active users; actual review turnaround vs. the 48h target; report resolution time; suspension and reinstatement counts.
+Ratings distribution and trend; review-submission rate among connections; reports per 100 weekly-active users; actual review turnaround vs. the 48h target; report resolution time; suspension and reinstatement counts; support ticket volume by category, resolution time, and reopen rate (SUP-06).
 
 ## G. Communication
 
@@ -93,7 +93,7 @@ Admin composes push broadcasts to a segment — all users, all Ostads, or all Sh
 ## H. Operations and compliance
 
 ### ADM-17 Audit log
-Every admin action — verdicts, identity marks, warns, suspensions, reinstatements, category changes, report resolutions, content removals, broadcasts, and each viewing of identity documents — writes to an **append-only** audit log: actor, action, target, timestamp. The dashboard provides a searchable, filterable viewer (by actor, action type, target, date range). Entries cannot be edited or deleted from any interface. (Risk R-02 mitigation.)
+Every admin action — verdicts, identity marks, warns, suspensions, reinstatements, category changes, report resolutions, content removals, support replies and resolutions, broadcasts, and each viewing of identity documents — writes to an **append-only** audit log: actor, action, target, timestamp. The dashboard provides a searchable, filterable viewer (by actor, action type, target, date range). Entries cannot be edited or deleted from any interface. (Risk R-02 mitigation.)
 
 ### ADM-18 Identity-data retention tools
 Dashboard tooling to execute the retention policy: view identity-document storage status per account, and purge identity documents of deleted accounts per policy schedule. Purges are themselves audit-logged. (Makes R-02's "retention and deletion policy" operational.)
@@ -108,6 +108,11 @@ Admin accounts are provisioned manually (no registration path), authenticate wit
 
 ### ADM-21 Platform configuration (read-only)
 A settings page displaying current platform values — offer expiry days, radius limits, portfolio limits, OTP parameters — read-only in MVP; changing them is an engineering deployment. Editable configuration is post-MVP.
+
+## J. Support
+
+### ADM-22 Support queue
+Tickets created per the `support` module (SUP-02) arrive in a third queue: filterable by state (open / resolved) and category, with **Appeal**-category tickets flagged and sorted first. Opening a ticket shows the thread, the user's account context (linking to ADM-10 detail), and the attachment if present. Admin actions: **reply** (push-notifies the user, per SUP-03) and **resolve** (requires a closing reply). Reopened tickets return to the queue marked reopened. All replies and resolutions are audit-logged (ADM-17).
 
 ## Operational notes (non-binding)
 
