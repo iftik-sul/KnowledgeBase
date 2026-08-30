@@ -73,9 +73,13 @@ Ostad onboarding is a fixed sequence of stages, in this order: **1 Personal info
 
 ## REG-10 Identity document capture
 
-Stage 2 collects: document type (NID or passport), ID number, front image, back image (NID only), and a selfie. Images are captured by camera or gallery upload. The stage states plainly that documents are seen only by admin review and never shown publicly. **An ID number already associated with another active account is flagged at submission; approval is blocked until the duplicate is resolved (ADM-03).**
+Stage 2 collects: document type — **NID, passport, or driving licence** (CL-017) — ID number, and document images **per type: NID front + back · passport photo page · driving licence front + back** (image requirements are per-type rules, so adding a document type never restructures the flow). Document images may be captured by camera or gallery upload.
 
-**Acceptance:** NID requires both images; passport requires one; selfie is always required; the privacy statement is displayed on the stage; a duplicate ID number cannot reach approval.
+The **verification selfie is live in-app camera capture only — no gallery path exists — taken holding the identity document beside the face** (CL-017). This gives review a three-way check: live face ↔ document photo ↔ document in hand. On-screen guidance shows correct framing with retake support.
+
+The stage states plainly that documents are seen only by admin review and never shown publicly. An ID number already associated with another active account is flagged at submission; approval is blocked until the duplicate is resolved (ADM-03).
+
+**Acceptance:** each document type enforces exactly its required images; the selfie cannot be supplied from the gallery or files by any path; the privacy statement is displayed on the stage; a duplicate ID number cannot reach approval.
 
 ## REG-11 Submission and pending state
 
@@ -95,4 +99,4 @@ Registration requires explicit acceptance of the Terms of Service and Privacy Po
 
 ## Proposed technical defaults summary
 
-OTP 6 digits / 5 min / resend 60s / 5 per number per day / 5 attempts · password min 8 chars, letter + number · login lockout 5 fails per 15 min · sessions persistent, multi-device. These are engineering defaults, changeable without founder re-approval; everything else in this document changes only with founder approval.
+OTP 6 digits / 5 min / resend 60s / 5 per number per day / 5 attempts · password min 8 chars, letter + number · login lockout 5 fails per 15 min · sessions persistent, multi-device · selfie framing guidance mechanics. These are engineering defaults, changeable without founder re-approval; everything else in this document — including the accepted document types, per-type image rules, and the live-selfie-holding-document method — changes only with founder approval.
