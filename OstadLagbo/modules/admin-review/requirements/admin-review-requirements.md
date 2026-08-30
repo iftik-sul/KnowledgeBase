@@ -5,13 +5,13 @@ type: requirements
 status: current
 updated: 2026-08-30
 id: OL-ADM-REQ-001
-derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.0.md
+derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.1.md
 owner: Iftikher
 ---
 
 # Admin Review & Dashboard — Requirements
 
-Derived from MVP Scope Baseline v1.0 §5, expanded by founder decision (2026-08-29) to a full administrative control panel: review, moderation, user management, business analytics, communication, and compliance tooling all ship in the MVP. Report *creation* and blocking are governed by `ratings-and-trust`; profile fields by `ostad-profile` / `shagred-profile`.
+Derived from MVP Scope Baseline v1.1 §5: a full administrative control panel — review, moderation, user management, business analytics, communication, and compliance tooling all ship in the MVP. Report *creation* and blocking are governed by `ratings-and-trust`; profile fields by `ostad-profile` / `shagred-profile`.
 
 The dashboard is a separate web application, English-only, desktop-oriented, and is the **only** interface holding these powers — none exist in the Flutter app.
 
@@ -43,7 +43,7 @@ Per baseline §5 / OSP-10: key-field edits create a re-review item while the pub
 Reports (created per `ratings-and-trust`) form a second queue: reporter, reported account, category, detail, and the reported content including cited chat messages. Actions: **dismiss** (optional note) / **warn** (message delivered to the account) / **suspend** (ADM-08) / **remove content** (for reports targeting a review or reply, per RNT-06). Every report reaches a recorded resolution; open/resolved status is tracked.
 
 ### ADM-08 Suspension and warnings
-Admin can warn or suspend any account with a recorded reason. Suspended accounts cannot log in beyond a suspension-notice screen; a suspended Ostad leaves map and search immediately; their chats freeze. Suspension is reversible, and reinstatement restores prior state including approval. User-initiated deletion (REG-12) is separate.
+Admin can warn or suspend any account with a recorded reason. Suspended accounts cannot log in beyond a suspension-notice screen; a suspended Ostad leaves map and search immediately; their chats freeze. Suspension is reversible, and reinstatement restores prior state including approval. Offers pending to or from a suspended account cannot be acted on while the suspension stands; their expiry clocks continue to run. User-initiated deletion (REG-12) is separate.
 
 ### ADM-09 Block overview
 A read-only view of blocking activity: accounts most blocked, recent blocks. Heavily-blocked accounts are a moderation signal; action goes through the account detail (ADM-10), not this view.
