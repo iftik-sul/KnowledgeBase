@@ -37,7 +37,7 @@ At registration the user sets a password (minimum 8 characters, at least one let
 
 ## REG-04 Optional email
 
-Email may be added at registration or later from settings. An added email must be verified by a link or code before it is marked verified. Unverified emails are stored but never displayed as verified and never used for account recovery. An email address may be linked to only one account; adding an email already verified elsewhere is refused.
+Email may be added at registration or later from settings. An added email must be verified by a link or code before it is marked verified. Unverified emails are stored but never displayed as verified and never used for account recovery. An email address may be linked to only one account; adding an email already verified elsewhere is refused. A verified email is revealed mutually on offer acceptance where present, per OFR-04.
 
 **Acceptance:** verified flag only after confirmed verification; recovery flows ignore unverified emails; a verified email cannot be attached to a second account.
 
@@ -47,11 +47,11 @@ Login is phone + password. Sessions persist until logout (no forced expiry in MV
 
 **Acceptance:** correct credentials log in on Android and iOS; lockout engages and releases as specified.
 
-## REG-06 Password reset
+## REG-06 Password reset and change
 
-Reset is via OTP to the account's verified phone number, then a new password. The same OTP rate limits as REG-02 apply.
+Reset is via OTP to the account's verified phone number, then a new password. The same OTP rate limits as REG-02 apply. A logged-in user may also change their password from settings by providing the current password; all other sessions are invalidated on change.
 
-**Acceptance:** reset works with phone access alone; old password is invalidated immediately on reset.
+**Acceptance:** reset works with phone access alone; old password is invalidated immediately on reset or change; logged-in change requires the current password.
 
 ## REG-07 Phone number change
 
@@ -73,9 +73,9 @@ Ostad onboarding is a fixed sequence of stages, in this order: **1 Personal info
 
 ## REG-10 Identity document capture
 
-Stage 2 collects: document type (NID or passport), ID number, front image, back image (NID only), and a selfie. Images are captured by camera or gallery upload. The stage states plainly that documents are seen only by admin review and never shown publicly.
+Stage 2 collects: document type (NID or passport), ID number, front image, back image (NID only), and a selfie. Images are captured by camera or gallery upload. The stage states plainly that documents are seen only by admin review and never shown publicly. **An ID number already associated with another active account is flagged at submission; approval is blocked until the duplicate is resolved (ADM-03).**
 
-**Acceptance:** NID requires both images; passport requires one; selfie is always required; the privacy statement is displayed on the stage.
+**Acceptance:** NID requires both images; passport requires one; selfie is always required; the privacy statement is displayed on the stage; a duplicate ID number cannot reach approval.
 
 ## REG-11 Submission and pending state
 
@@ -86,6 +86,12 @@ Completing stage 6 submits the profile for admin review and sets the account to 
 ## REG-12 Platform rules inherited
 
 18+ applies to both roles (REG-03). Push notification enrollment is requested during onboarding (delivery rules per `contact-and-offers`). Self-service account deletion exists in settings for both roles; deletion of identity data follows the retention policy (see risk R-02).
+
+## REG-13 Consent capture
+
+Registration requires explicit acceptance of the Terms of Service and Privacy Policy (unchecked-by-default consent action) before an account is created; the accepted **document versions and timestamp are recorded** per account. When either document changes materially, users receive an in-app notice before the change takes effect (as both documents promise); continued use after notice is recorded against the new version. The Privacy Policy and Terms are also reachable **without an account** from the guest map screen (see MAP-03), satisfying app-store requirements.
+
+**Acceptance:** no account exists without a recorded consent version; a material policy change produces an in-app notice; a guest can open both documents without registering.
 
 ## Proposed technical defaults summary
 
