@@ -3,15 +3,15 @@ project: OstadLagbo
 module: registration-and-verification
 type: requirements
 status: current
-updated: 2026-08-28
+updated: 2026-08-30
 id: OL-REG-REQ-001
-derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.0.md
+derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.1.md
 owner: Iftikher
 ---
 
 # Registration & Verification — Requirements
 
-Derived from MVP Scope Baseline v1.0 §1 and §7. Governs account creation, authentication, and Ostad onboarding through submission for review. Admin-side review is governed by the `admin-review` module; profile field definitions by `ostad-profile` and `shagred-profile`.
+Derived from MVP Scope Baseline v1.1 §1 and §7. Governs account creation, authentication, and Ostad onboarding through submission for review. Admin-side review is governed by the `admin-review` module; profile field definitions by `ostad-profile` and `shagred-profile`.
 
 ## Actors
 
@@ -37,9 +37,9 @@ At registration the user sets a password (minimum 8 characters, at least one let
 
 ## REG-04 Optional email
 
-Email may be added at registration or later from settings. An added email must be verified by a link or code before it is marked verified. Unverified emails are stored but never displayed as verified and never used for account recovery.
+Email may be added at registration or later from settings. An added email must be verified by a link or code before it is marked verified. Unverified emails are stored but never displayed as verified and never used for account recovery. An email address may be linked to only one account; adding an email already verified elsewhere is refused.
 
-**Acceptance:** verified flag only after confirmed verification; recovery flows ignore unverified emails.
+**Acceptance:** verified flag only after confirmed verification; recovery flows ignore unverified emails; a verified email cannot be attached to a second account.
 
 ## REG-05 Login and sessions
 
@@ -61,9 +61,9 @@ A logged-in user may change their phone number by verifying an OTP on the **new*
 
 ## REG-08 Shagred onboarding
 
-After registration a Shagred provides display name (required) and may add profile basics per the `shagred-profile` module. They then land on the map. No identity verification is collected from Shagreds in the MVP.
+After registration a Shagred provides display name (required) and address (street line plus Thana, District, Division, and Postal Code dropdowns, per SGP-02), and may add profile basics per the `shagred-profile` module. They then land on the map. No identity verification is collected from Shagreds in the MVP.
 
-**Acceptance:** a Shagred can go from app install to viewing the map with only: role, phone+OTP, password, DOB, display name.
+**Acceptance:** a Shagred can go from app install to viewing the map with only: role, phone+OTP, password, DOB, display name, address.
 
 ## REG-09 Ostad onboarding wizard
 
