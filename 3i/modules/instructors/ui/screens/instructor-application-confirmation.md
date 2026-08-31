@@ -25,7 +25,7 @@ Shown exactly once, immediately after the [Email Verification](/3i/modules/ident
 
 ## Access Gate
 
-Reached only as the direct next step after successful email verification for an Account whose registration also created a `pending` `InstructorApplication` in the same action. Not reachable by navigating here directly, and not shown again on any later login.
+Reached only as the direct next step after successful email verification for an Account whose registration also created a `pending` `InstructorApplication` in the same action. Not reachable by navigating here directly, and not shown again on any later login — [Instructor Application Status](instructor-application-status.md) is the screen for every login after this first one, per [3I-DEC-041](/3i/decisions/dec-041-role-context-switch.md).
 
 ## Contents
 
@@ -34,11 +34,11 @@ Confirms two things at once, since both happened in the same moment for this pat
 - Email verified — the account is now fully active, same as any other Member's.
 - Teaching application received and under review — stating plainly that this is a separate, ongoing process from the account itself, with no promised timeline (none is specified in the baseline).
 
-A single acknowledgement action ("Continue") proceeds to [Guardian Dashboard](/3i/modules/identity-and-access/ui/screens/guardian-dashboard.md) — the same landing point any new registration reaches, per [3I-DEC-040](/3i/decisions/dec-040-instructor-registration-confirmation-screen.md). No instructor-specific content is shown here beyond this one confirmation — the account genuinely works like any other Member's from this point until admin approval.
+A single acknowledgement action ("Continue") proceeds to **[Instructor Application Status](instructor-application-status.md)** — updated per [3I-DEC-041](/3i/decisions/dec-041-role-context-switch.md); the original version of this spec routed to Guardian Dashboard, which read as a mismatch for someone who just registered specifically to teach.
 
 ## Behaviour
 
-This screen introduces **no persistent state elsewhere** — it is not repeated, and no ongoing "application pending" indicator is added to Account Settings or anywhere else by this screen's existence. If the applicant wants to check their status later, no such view currently exists (a gap, not resolved here).
+This screen introduces no persistent state of its own — it is not repeated. Ongoing visibility into the pending application is now handled by [Instructor Application Status](instructor-application-status.md), reached on every subsequent login rather than being absent, per [3I-DEC-041](/3i/decisions/dec-041-role-context-switch.md).
 
 ## Role Variations
 

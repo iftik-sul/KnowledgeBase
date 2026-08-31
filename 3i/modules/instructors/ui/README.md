@@ -37,12 +37,13 @@ Role × screen matrix. Every screen in this module, and who sees it.
 | :---- | :---: | :---: | :---: | :---: |
 | [Instructor application](screens/instructor-application.md) | ● | | | ● |
 | [Instructor application confirmation](screens/instructor-application-confirmation.md) | ● | | | ● |
+| [Instructor application status](screens/instructor-application-status.md) | ● | | | ● |
 | [Instructor dashboard](screens/instructor-dashboard.md) | | ● | | ● |
 | [Admin application review](screens/admin-application-review.md) ⚠ paused | | | ● | |
 | [Admin instructor management](screens/admin-instructor-management.md) ⚠ paused | | | ● | |
 | [WWCC renewal](screens/wwcc-renewal.md) | | ● | | ● |
 
-Six screens, four in scope for mobile — see [mobile-scope.md](/3i/mobile-scope.md#3-decisions-worth-recording). Instructor Application Confirmation added to mobile scope 2026-08-26, since it's a direct continuation of the mobile-in-scope registration path.
+Seven screens, five in scope for mobile — see [mobile-scope.md](/3i/mobile-scope.md#3-decisions-worth-recording). Instructor Application Status added to mobile scope 2026-08-26, same reasoning as its one-time counterpart.
 
 ---
 

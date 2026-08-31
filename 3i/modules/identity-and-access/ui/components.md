@@ -3,7 +3,7 @@ project: 3i
 module: identity-and-access
 type: ui-spec
 status: current
-updated: 2026-08-24
+updated: 2026-08-26
 id: 3I-IDA-UI-COMP
 derived_from:
   - 3i/reference/baseline/srd-v2.0.md
@@ -54,7 +54,9 @@ Four states, per [3I-IDA-DM-001](../data-model.md): Active, Never activated, Ina
 
 Used on: [Profile picker](screens/profile-picker.md) (before PIN entry), and in the header chrome of every authenticated screen across every module — [3I-DEC-031](/3i/decisions/dec-031-persistent-account-menu-entry-to-guardian-dashboard.md).
 
-A persistent, always-visible affordance, not tied to which profile is currently active. Opens a small dropdown with two items: **"Manage account"**, which routes to [Account Settings](screens/account-settings.md) — not directly to Guardian Dashboard, per [3I-DEC-032](/3i/decisions/dec-032-account-settings-hub.md) — and **"Log out"**.
+A persistent, always-visible affordance, not tied to which profile is currently active. Opens a small dropdown with items: **"Manage account"**, which routes to [Account Settings](screens/account-settings.md) — not directly to Guardian Dashboard, per [3I-DEC-032](/3i/decisions/dec-032-account-settings-hub.md) — and **"Log out"**.
+
+**Role-context switch, added [3I-DEC-041](/3i/decisions/dec-041-role-context-switch.md):** for an Account that holds more than one usable context — currently only Member and approved Instructor are modelled this way, per [3I-DEC-041](/3i/decisions/dec-041-role-context-switch.md) — an additional menu item appears: **"Switch to Member view"** or **"Switch to Instructor view"**, whichever the Account is *not* currently in. Absent entirely for an Account holding only one context — not shown disabled, not present at all. This is a session-level context switch, not a role change or a second account, the same principle already established for the active-learner-profile pattern elsewhere in this module. **Admin is deliberately excluded** from this switch — the Admin portal is a separate, still-paused surface, not part of this context system.
 
 **This is the one component in this file whose footprint extends outside `identity-and-access`.** It is documented here because it routes into this module, mirroring how `localisation`'s Locale Switcher is documented in that module's own `components.md` despite being global chrome — see [localisation/ui/README.md](/3i/modules/localisation/ui/README.md#shared). Every module's authenticated screens carry this affordance in their header; it is not restated per module.
 
