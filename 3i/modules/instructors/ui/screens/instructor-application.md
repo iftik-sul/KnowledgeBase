@@ -14,8 +14,6 @@ tags:
 
 # Screen: Instructor Application
 
-> **⚠ Provisional — see [3I-DEC-033](/3i/decisions/dec-033-admin-instructor-surface-provisional.md).** This screen (in both entry forms below) is paused for visual design pending the separate admin/instructor portal direction. The behaviour and data flow documented here are settled and current — only the Figma work is deferred.
-
 Satisfies: FR-INST-01, FR-INST-03
 
 ---
@@ -40,6 +38,8 @@ Any Account not already holding the Instructor role — either just-created via 
 ## Behaviour
 
 Submission creates an [InstructorApplication](../../data-model.md#instructorapplication) with `status = pending` and notifies admin (see [Admin Application Review](admin-application-review.md)). **A Notification is also sent to the applicant** confirming their application is under review (`communication`, FR-NOT) — added per [3I-DEC-038](/3i/decisions/dec-038-instructor-registration-account-works-normally.md), previously undocumented.
+
+**For Path 1 specifically, submission is followed by [Email Verification](/3i/modules/identity-and-access/ui/screens/email-verification.md), then [Instructor Application Confirmation](instructor-application-confirmation.md)** — a one-time screen confirming both the verified email and the pending application together — [3I-DEC-040](/3i/decisions/dec-040-instructor-registration-confirmation-screen.md). **Path 2 has no such confirmation screen** — the account already exists and is already verified, so only the application-submitted notification applies.
 
 **No immediate role change, and critically — for path 1 — no account restriction either.** The account works exactly like any other Member's once email-verified: full login, full ordinary platform access. Only instructor-specific capability (the instructor dashboard, course-creation tools) stays locked until approval. This is a deliberate choice, not an oversight — [3I-DEC-038](/3i/decisions/dec-038-instructor-registration-account-works-normally.md) considered and rejected a fully-locked pending-account state.
 

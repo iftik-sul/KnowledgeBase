@@ -16,7 +16,7 @@ tags:
 
 Role × screen matrix. Every screen in this module, and who sees it.
 
-**Only the two Admin-facing screens below remain paused for visual design** — [3I-DEC-033](/3i/decisions/dec-033-admin-instructor-surface-provisional.md), narrowed by [3I-DEC-039](/3i/decisions/dec-039-instructor-self-service-unpaused.md) to Admin-role screens specifically. Instructor Application, WWCC Renewal, and the new Instructor Dashboard are all unpaused, designable now using the standard system.
+**Only the two Admin-facing screens below remain paused for visual design** — [3I-DEC-033](/3i/decisions/dec-033-admin-instructor-surface-provisional.md), narrowed by [3I-DEC-039](/3i/decisions/dec-039-instructor-self-service-unpaused.md) to Admin-role screens specifically. Everything else is unpaused, designable now using the standard system.
 
 ---
 
@@ -36,12 +36,13 @@ Role × screen matrix. Every screen in this module, and who sees it.
 | Screen | Member | Instructor | Admin | Mobile |
 | :---- | :---: | :---: | :---: | :---: |
 | [Instructor application](screens/instructor-application.md) | ● | | | ● |
+| [Instructor application confirmation](screens/instructor-application-confirmation.md) | ● | | | ● |
 | [Instructor dashboard](screens/instructor-dashboard.md) | | ● | | ● |
 | [Admin application review](screens/admin-application-review.md) ⚠ paused | | | ● | |
 | [Admin instructor management](screens/admin-instructor-management.md) ⚠ paused | | | ● | |
 | [WWCC renewal](screens/wwcc-renewal.md) | | ● | | ● |
 
-Five screens, three in scope for mobile — see [mobile-scope.md](/3i/mobile-scope.md#3-decisions-worth-recording) for why the document-capture screens (application and renewal) are included; Instructor Dashboard added to mobile scope 2026-08-26 as a general browsing/overview screen, consistent with Guardian and Learner Dashboard both being mobile-in-scope.
+Six screens, four in scope for mobile — see [mobile-scope.md](/3i/mobile-scope.md#3-decisions-worth-recording). Instructor Application Confirmation added to mobile scope 2026-08-26, since it's a direct continuation of the mobile-in-scope registration path.
 
 ---
 
@@ -49,7 +50,7 @@ Five screens, three in scope for mobile — see [mobile-scope.md](/3i/mobile-sco
 
 | Document | Covers |
 | :---- | :---- |
-| [components.md](components.md) | WWCC Status Badge, Storage Usage Bar |
+| [components.md](components.md) | WWCC Status Badge |
 | [validation-rules.md](validation-rules.md) | WWCC field validation, rejection-reason requirement |
 
 ---
