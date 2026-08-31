@@ -7,6 +7,8 @@ id: 3I-DEC-033
 tags: [decision, design-system, admin-portal, scope]
 ---
 
+> **Partially narrowed by [3I-DEC-039](dec-039-instructor-self-service-unpaused.md), 2026-08-26.** This decision's pause now applies to **Admin-role screens only**, across every module. Instructor-role self-service screens (applying, managing own courses/batches, a personal dashboard) originally swept in here are unpaused — see 3I-DEC-039 for the full narrowed scope and reasoning. This file's content below is otherwise unchanged and remains the record of the original, broader decision.
+
 # The Admin/Instructor Surface Is Provisional Pending a Separate Portal Design
 
 ## Context

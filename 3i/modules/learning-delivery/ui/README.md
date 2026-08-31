@@ -3,7 +3,7 @@ project: 3i
 module: learning-delivery
 type: ui-spec
 status: current
-updated: 2026-08-24
+updated: 2026-08-26
 id: 3I-LDL-UI-000
 derived_from:
   - requirements/bat-batches-and-live-sessions.md
@@ -16,6 +16,8 @@ tags:
 # Learning Delivery — UI Index
 
 Role × screen matrix. Every screen in this module, and who sees it.
+
+**All screens in this module are Instructor- or Member-role self-service — none are paused.** Confirmed explicitly by [3I-DEC-039](/3i/decisions/dec-039-instructor-self-service-unpaused.md); this module was never covered by [3I-DEC-033](/3i/decisions/dec-033-admin-instructor-surface-provisional.md)'s original scope, and DEC-039 removes any ambiguity rather than leaving it unstated.
 
 ---
 

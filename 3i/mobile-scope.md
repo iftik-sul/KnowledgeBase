@@ -13,7 +13,7 @@ tags:
 
 **This is the authoritative record of which screens exist as native Flutter mobile screens, and why.** Module `ui/README.md` files add a `Mobile (Flutter)` column to their role × screen matrix and link here rather than restating the reasoning — see [documentation-standards.md](/documentation-standards.md) on why a restated rule goes stale silently.
 
-35 of the project's 71 documented screens are in scope for Flutter. The remaining 36 are web-only — either admin/instructor desk-work never intended for a phone, or (for `commerce`) deliberately excluded under [app-store-compliance.md](app-store-compliance.md).
+36 of the project's 72 documented screens are in scope for Flutter. The remaining 36 are web-only — either admin/instructor desk-work never intended for a phone, or (for `commerce`) deliberately excluded under [app-store-compliance.md](app-store-compliance.md).
 
 ---
 
@@ -34,15 +34,15 @@ Each remaining screen was assessed against one question: **does this action plau
 | `assessment` | 2 | 7 | Take exam, Exam result |
 | `learning-delivery` | 2 | 4 | Enrol & waitlist, Batch roster & attendance |
 | `certification` | 1 | 3 | Certificate detail/download |
-| `instructors` | 2 | 4 | WWCC renewal, Instructor application |
+| `instructors` | 3 | 5 | WWCC renewal, Instructor application, Instructor dashboard (added 2026-08-26) |
 | `communication` | 5 | 7 | Chat room, Report message, Notification centre, Notification preferences, Instructor room management |
 | `public-site` | 0 | 3 | None — marketing/SEO content, served as crawlable web pages |
 | `localisation` | 0 | 2 | None — admin-only |
 | `reporting` | 0 | 2 | None — admin-only |
 | `platform` | 0 | 1 | None — admin-only |
-| **Total** | **35** | **71** | |
+| **Total** | **36** | **72** | |
 
-`identity-and-access`'s totals rose again on 2026-08-26 (17→18, 14→15) when [Learner Dashboard](modules/identity-and-access/ui/screens/learner-dashboard.md) was added — see [3I-DEC-036](decisions/dec-036-learner-dashboard.md).
+`instructors`' totals rose on 2026-08-26 (4→5, 2→3) when Instructor Dashboard was added — see [3I-DEC-039](decisions/dec-039-instructor-self-service-unpaused.md).
 
 ## 3. Decisions Worth Recording
 
@@ -57,7 +57,7 @@ A few of these were genuine tradeoffs, not obvious calls, and are worth keeping 
 ## 4. What This Does Not Change
 
 - **FR-BILL-02 and the no-purchase-surface rule are unaffected.** Registration reaching mobile does not reopen commerce — checkout, plan changes, and cancellation stay exclusively web, per [app-store-compliance.md](app-store-compliance.md).
-- **The 35/71 split is a scope decision, not a design-priority order.** It says which screens eventually need a Flutter design; it says nothing about which get built first.
+- **The 36/72 split is a scope decision, not a design-priority order.** It says which screens eventually need a Flutter design; it says nothing about which get built first.
 
 ## 5. Open
 
