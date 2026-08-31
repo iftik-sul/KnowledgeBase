@@ -3,7 +3,7 @@ project: 3i
 module: instructors
 type: ui-spec
 status: current
-updated: 2026-08-24
+updated: 2026-08-26
 id: 3I-INS-UI-000
 derived_from:
   - requirements/inst-instructor-onboarding.md
@@ -15,6 +15,8 @@ tags:
 # Instructors — UI Index
 
 Role × screen matrix. Every screen in this module, and who sees it.
+
+**[Instructor Application](screens/instructor-application.md) is paused for visual design — see [3I-DEC-033](/3i/decisions/dec-033-admin-instructor-surface-provisional.md), extended to this module by [3I-DEC-038](/3i/decisions/dec-038-instructor-registration-account-works-normally.md).** Its behaviour and data flow are settled and current; only Figma work is deferred.
 
 ---
 
@@ -33,7 +35,7 @@ Role × screen matrix. Every screen in this module, and who sees it.
 
 | Screen | Member | Instructor | Admin | Mobile |
 | :---- | :---: | :---: | :---: | :---: |
-| [Instructor application](screens/instructor-application.md) | ● | | | ● |
+| [Instructor application](screens/instructor-application.md) ⚠ paused | ● | | | ● |
 | [Admin application review](screens/admin-application-review.md) | | | ● | |
 | [Admin instructor management](screens/admin-instructor-management.md) | | | ● | |
 | [WWCC renewal](screens/wwcc-renewal.md) | | ● | | ● |
@@ -55,4 +57,4 @@ Four screens, two in scope for mobile — see [mobile-scope.md](/3i/mobile-scope
 
 | Item | Blocks |
 | :---- | :---- |
-| None. | |
+| [3I-DEC-033](/3i/decisions/dec-033-admin-instructor-surface-provisional.md) | Figma design work on Instructor Application |
