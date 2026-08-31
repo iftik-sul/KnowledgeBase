@@ -42,6 +42,15 @@ Not reachable at all from Registration — a newly-registered Member lands on Gu
 
 **No seat purchase happens here** if the profile already has an active seat — enrolling in a second course consumes nothing further (FR-ENR-01, see [README.md](../../README.md#one-seat-many-courses)). If the profile has **no** active seat, this screen routes to [Pricing / Plan Selection](/3i/modules/commerce/ui/screens/pricing-plan-selection.md) instead of enrolling directly — enrolment cannot proceed without an active profile.
 
+**On successful confirmation** — per [3I-DEC-037](/3i/decisions/dec-037-online-class-post-enrolment-routing.md), the same destination "Go to course" would later use on [Course Detail](/3i/modules/catalogue/ui/screens/course-detail.md):
+
+| Course type | Lands on |
+| :---- | :---- |
+| Regular | [Course Materials List](/3i/modules/materials/ui/screens/course-materials-list.md) |
+| Online Class / Mixed (batch-based) | The enrolled batch's [Chat Room](/3i/modules/communication/ui/screens/chat-room.md) |
+
+No separate confirmation or "success" screen sits between this one and that destination — confirming enrolment takes the Member straight there.
+
 **Once waitlisted**, this screen (or a notification linking back to it) is where a promoted `offered`-status learner accepts within the 48-hour window — see [validation-rules.md](../validation-rules.md#waitlist-promotion-window).
 
 ## Role Variations

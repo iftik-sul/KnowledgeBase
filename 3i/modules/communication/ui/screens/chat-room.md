@@ -3,7 +3,7 @@ project: 3i
 module: communication
 type: ui-spec
 status: current
-updated: 2026-08-23
+updated: 2026-08-26
 id: 3I-CMN-UI-001
 derived_from:
   - 3i/reference/baseline/srd-v2.0.md
@@ -23,6 +23,8 @@ Satisfies: FR-CHAT-01, FR-CHAT-02, FR-CHAT-03, FR-CHAT-04, FR-CHAT-05, FR-CHAT-0
 
 The room itself — real-time group chat scoped to a course or batch, with guardian-only mode engaging automatically where the course's age tag calls for it.
 
+**For a batch-scoped room (Online Class/Mixed courses), this is also the destination for both a just-completed enrolment and every later "Go to course" click from [Course Detail](/3i/modules/catalogue/ui/screens/course-detail.md)** — [3I-DEC-037](/3i/decisions/dec-037-online-class-post-enrolment-routing.md). A course-scoped room with no batch attached (if one exists outside the batch-per-Online-Class-course pattern) has no such role.
+
 ## Access Gate
 
 Member with a qualifying enrolment on the room's course/batch. **Under-13 profiles have no access of their own** (FR-CHAT-06) — the guardian's own Member session participates instead, with every message they send on the child's behalf carrying the [Guardian Attribution Tag](../components.md#guardian-attribution-tag). 13–17 profiles participate directly, subject to the guardian toggle (FR-CHAT-08). Instructor sees the same room for any course/batch they own, with moderation actions available (see [Instructor Room Management](instructor-room-management.md)).
@@ -33,7 +35,15 @@ Real-time [Message Bubble](../components.md#message-bubble) stream over WebSocke
 
 **Guardian-only mode is visually stated on the room**, not just enforced silently — a guardian entering a room derived from an under-13 course tag should see plainly that every other visible participant is also an adult, since that's the actual safety property FR-CHAT-07 provides.
 
-A **closed** room ([Instructor Room Management](instructor-room-management.md)) renders identically except the composer is replaced with a "this room is closed" notice — history remains fully visible (FR-CHAT-13).
+### Next Session Info Bar — Batch-Scoped Rooms Only
+
+Not specified in the baseline FR-CHAT requirements; added per [3I-DEC-037](/3i/decisions/dec-037-online-class-post-enrolment-routing.md). A persistent bar, pinned above the message stream (not part of the scrollable history): **"Next session: [date, time]"**, read from the batch's next upcoming `Session` record, shown in the viewer's local time zone — same silent-conversion principle as [Session Row](/3i/modules/learning-delivery/ui/components.md#session-row).
+
+**Only appears on rooms scoped to a `Batch`.** A course-level room with no batch attached shows nothing here — there's no session to schedule. If the batch has no remaining upcoming sessions (course concluded), the bar is absent entirely rather than showing stale or past-tense information.
+
+This is where the instructor's meeting link, posted ahead of each session per [`learning-delivery/data-model.md`](/3i/modules/learning-delivery/data-model.md#session), actually surfaces — as an ordinary message in the stream below this bar, not as a separate mechanism. The info bar tells a learner *when*; the message stream is where the *link itself* appears once the instructor posts it.
+
+A **closed** room ([Instructor Room Management](instructor-room-management.md)) renders identically except the composer is replaced with a "this room is closed" notice — history remains fully visible (FR-CHAT-13). The next-session bar is also absent on a closed room, for the same reason as a concluded batch.
 
 ## Behaviour
 
@@ -46,4 +56,4 @@ Every send passes through the server-side filter before reaching anyone else (FR
 
 ## Contrast and RTL
 
-Standard, 4.5:1 (NFR-12). Full RTL mirroring (FR-LOC-04): message alignment, composer layout, and timestamp positioning all mirror.
+Standard, 4.5:1 (NFR-12). Full RTL mirroring (FR-LOC-04): message alignment, composer layout, timestamp positioning, and the next-session info bar all mirror.
