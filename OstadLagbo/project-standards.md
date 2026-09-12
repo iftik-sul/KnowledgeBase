@@ -39,7 +39,7 @@ reference/baseline/  →  requirements/  →  data-model/ + api/  →  ui/
 
 - `baseline/` — founder-approved scope specification.
 - `requirements/` — what each module must do, with acceptance criteria.
-- `data-model/` and `api/` — entities and endpoint contracts derived from requirements. Both cite the requirements document as `derived_from`. The cross-cutting [Data Model Overview](/OstadLagbo/data-model-overview.md) at project root declares conventions and entity ownership.
+- `data-model/` and `api/` — entities and endpoint contracts derived from requirements. Both cite the requirements document as `derived_from`. The cross-cutting [Data Model Overview](/OstadLagbo/data-model-overview.md) at project root declares conventions, the entity ownership map, and the authorization model.
 - `ui/` — screen specifications derived from requirements (and citing relevant data-model/api documents where behavior depends on them).
 
 `derived_from` cites the immediate parent, per base standards.
@@ -67,8 +67,9 @@ Declared in addition to the base types:
 | `terms-of-service` | User-facing platform terms | `governance/` |
 | `incident-response` | Safety, breach, and crisis handling process | `governance/` |
 | `build-plan` | Sequencing of approved scope into build slices with gates | `governance/` |
+| `glossary` | Canonical term definitions for the whole project | project root |
 
-User-facing legal documents (`privacy-policy`, `terms-of-service`) carry a `legal_review` frontmatter field (`pending` until reviewed by a Bangladesh-qualified lawyer). Dated planning reviews use the base `meeting-note` type with a `planning-review` tag.
+User-facing legal documents (`privacy-policy`, `terms-of-service`) carry a `legal_review` frontmatter field (`pending` until reviewed by a Bangladesh-qualified lawyer). Dated planning reviews use the base `meeting-note` type with a `planning-review` tag. Non-functional requirements use the base `requirements` type at project root (`OL-NFR-001`), since they cut across every module rather than belonging to one.
 
 ## Declared exception: `governance/`
 
@@ -76,8 +77,8 @@ OstadLagbo adds a top-level `governance/` folder for project-management lifecycl
 
 ## Document IDs
 
-Project abbreviation: **OL**. Format per base standards: `OL-<MODULE>-<TYPE>-<NNN>` using the module abbreviations above. Governance and other cross-cutting documents omit the module segment (e.g., `OL-CHR-001`, `OL-RET-001`, `OL-BLD-001`).
+Project abbreviation: **OL**. Format per base standards: `OL-<MODULE>-<TYPE>-<NNN>` using the module abbreviations above. Governance and other cross-cutting documents omit the module segment (e.g., `OL-CHR-001`, `OL-RET-001`, `OL-BLD-001`, `OL-NFR-001`, `OL-GLS-001`).
 
 ## AI agent notes
 
-A development AI works from `modules/` with `status: current`, answers scope questions from `reference/baseline/` read together with the change log's pending entries, builds in the slice order of `governance/build-sequence.md`, and treats `governance/` as context about authority, process, and policy. Retention behavior in data models and tooling must honor `governance/data-retention-policy.md`. Gaps are raised, never invented, per the base AI guidelines.
+A development AI works from `modules/` with `status: current`, answers scope questions from `reference/baseline/` read together with the change log's pending entries, builds in the slice order of `governance/build-sequence.md`, honors `non-functional-requirements.md` for every module, resolves undefined terms via `glossary.md`, and treats `governance/` as context about authority, process, and policy. Access-control implementation follows the authorization model in `data-model-overview.md`. Retention behavior in data models and tooling must honor `governance/data-retention-policy.md`. Gaps are raised, never invented, per the base AI guidelines.

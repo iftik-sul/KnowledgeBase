@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: data-model
 status: current
-updated: 2026-08-30
+updated: 2026-09-12
 id: OL-DM-001
 derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.1.md
 owner: Iftikher
@@ -58,6 +58,24 @@ The index and rulebook for the data-model layer. Every entity in the system is o
 3. **Approved vs. pending truth (OSP-10/ADM-06):** the public always reads the last *approved* profile revision; pending edits live separately until verdict. The model, not the UI, enforces this.
 4. **No coordinates outside `ostad_profile`.** The schema contains exactly one lat/long pair in the entire system (SGP-02/MAP-10 made structural).
 5. **Blocks are checked, not copied:** a single `block` record drives chat freeze, visibility severance, offer refusal, and discovery hiding — modules query it; they don't mirror it.
+
+## Authorization model
+
+OstadLagbo uses **static role-based access, not data-driven RBAC**, deliberately. There are exactly four actors — guest, Shagred, Ostad, admin — role is permanent at registration (REG-01), and MVP admins hold one fixed full-permission tier (ADM-20). Building role/permission tables for four fixed, non-configurable roles is machinery without a customer; each role's permissions are fixed in application code instead.
+
+**The real access-control complexity in this platform is relationship- and state-based, not role-based**, and is enforced through a **single centralized policy layer** — one module every other module calls into, so no access rule is ever implemented twice or drifts between endpoints. The canonical rules that layer enforces:
+
+| Rule | Source | Structural mechanism |
+|---|---|---|
+| A Shagred profile is visible to an Ostad only while an offer is pending or a connection exists | SGP-05 | Query joins through live `offer`/`connection` state, never a standing grant |
+| A chat thread is readable only by its two participants | OFR-07 | `chat_thread` carries exactly two participant IDs; no third-party read path |
+| A block severs chat, visibility, offers, and discovery in both directions | RNT-08 | Every affected query checks `block` before returning data (rule 5, above) |
+| A paused Ostad is excluded from discovery and cannot receive new offers, but existing relationships continue | OSP-11 | `ostad_profile.paused_at` checked at discovery and offer-creation time only, not at relationship read time |
+| A pending Ostad has full app access but is not discoverable | REG-11 | `review_case`/approval status gates discovery queries, not authentication |
+| Admin reads chat content only when a report cites it, and every read is audit-logged | OFR-07, ADM-17 | No general chat-browse query exists in the admin surface; the only read path originates from a `report` record and writes an audit entry as a side effect |
+| Non-key-field profile edits publish instantly; key-field edits require approval before going public | OSP-10 | Public reads join through `profile_revision.status = approved` only (rule 3) |
+
+**Post-MVP evolution:** when the founder adds team members and admin role tiers become necessary (already marked post-MVP in ADM-20), that is the point data-driven RBAC is introduced — scoped to the admin panel, where multiple tiers actually exist to justify it. The relationship/state policy layer for end-user access is not expected to need this evolution, since its complexity is inherent to the product, not to organizational growth.
 
 ## Document sequence
 
