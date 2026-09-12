@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: standard
 status: current
-updated: 2026-08-30
+updated: 2026-09-12
 tags:
   - standard
   - meta
@@ -39,7 +39,7 @@ reference/baseline/  →  requirements/  →  data-model/ + api/  →  ui/
 
 - `baseline/` — founder-approved scope specification.
 - `requirements/` — what each module must do, with acceptance criteria.
-- `data-model/` and `api/` — entities and endpoint contracts derived from requirements. Both cite the requirements document as `derived_from`.
+- `data-model/` and `api/` — entities and endpoint contracts derived from requirements. Both cite the requirements document as `derived_from`. The cross-cutting [Data Model Overview](/OstadLagbo/data-model-overview.md) at project root declares conventions and entity ownership.
 - `ui/` — screen specifications derived from requirements (and citing relevant data-model/api documents where behavior depends on them).
 
 `derived_from` cites the immediate parent, per base standards.
@@ -66,17 +66,18 @@ Declared in addition to the base types:
 | `privacy-policy` | User-facing privacy disclosure (PDPA 2026) | `governance/` |
 | `terms-of-service` | User-facing platform terms | `governance/` |
 | `incident-response` | Safety, breach, and crisis handling process | `governance/` |
+| `build-plan` | Sequencing of approved scope into build slices with gates | `governance/` |
 
-User-facing legal documents (`privacy-policy`, `terms-of-service`) carry a `legal_review` frontmatter field (`pending` until reviewed by a Bangladesh-qualified lawyer).
+User-facing legal documents (`privacy-policy`, `terms-of-service`) carry a `legal_review` frontmatter field (`pending` until reviewed by a Bangladesh-qualified lawyer). Dated planning reviews use the base `meeting-note` type with a `planning-review` tag.
 
 ## Declared exception: `governance/`
 
-OstadLagbo adds a top-level `governance/` folder for project-management lifecycle documents (charter, stakeholder register, risk register, change log, policies, status reports). These are neither input material (`reference/`) nor development documentation (`modules/`), so the base structure has no home for them. Governance documents are editable, carry full frontmatter, and are authoritative for project authority, process, and policy — never for implementation, which remains `modules/`.
+OstadLagbo adds a top-level `governance/` folder for project-management lifecycle documents (charter, stakeholder register, risk register, change log, policies, build plan, planning reviews, status reports). These are neither input material (`reference/`) nor development documentation (`modules/`), so the base structure has no home for them. Governance documents are editable, carry full frontmatter, and are authoritative for project authority, process, and policy — never for implementation, which remains `modules/`.
 
 ## Document IDs
 
-Project abbreviation: **OL**. Format per base standards: `OL-<MODULE>-<TYPE>-<NNN>` using the module abbreviations above. Governance and other cross-cutting documents omit the module segment (e.g., `OL-CHR-001`, `OL-RET-001`).
+Project abbreviation: **OL**. Format per base standards: `OL-<MODULE>-<TYPE>-<NNN>` using the module abbreviations above. Governance and other cross-cutting documents omit the module segment (e.g., `OL-CHR-001`, `OL-RET-001`, `OL-BLD-001`).
 
 ## AI agent notes
 
-A development AI works from `modules/` with `status: current`, answers scope questions from `reference/baseline/`, and treats `governance/` as context about authority, process, and policy. Retention behavior in data models and tooling must honor `governance/data-retention-policy.md`. Gaps are raised, never invented, per the base AI guidelines.
+A development AI works from `modules/` with `status: current`, answers scope questions from `reference/baseline/` read together with the change log's pending entries, builds in the slice order of `governance/build-sequence.md`, and treats `governance/` as context about authority, process, and policy. Retention behavior in data models and tooling must honor `governance/data-retention-policy.md`. Gaps are raised, never invented, per the base AI guidelines.
