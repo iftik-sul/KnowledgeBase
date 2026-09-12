@@ -3,7 +3,7 @@ project: OstadLagbo
 module: admin-review
 type: requirements
 status: current
-updated: 2026-08-30
+updated: 2026-09-12
 id: OL-ADM-REQ-001
 derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.1.md
 owner: Iftikher
@@ -102,7 +102,7 @@ Dashboard tooling to execute the retention policy: view identity-document storag
 Usage view: OTP volume by day, per-number rate-limit hits, estimated spend. Read-only; limits themselves are engineering config. (Risk R-08.)
 
 ### ADM-20 Admin accounts and access
-Admin accounts are provisioned manually (no registration path), authenticate with email + password under REG-05 lockout rules. All admins currently hold full permission; role tiers are post-MVP. Admin sessions expire after 24 hours of inactivity.
+Admin accounts are provisioned manually (no registration path), authenticate with email + password **plus a TOTP second factor** (CL-018; NFR-05) under REG-05 lockout rules. All admins currently hold full permission; role tiers are post-MVP. Admin sessions expire after 24 hours of inactivity.
 
 ## I. Settings
 
