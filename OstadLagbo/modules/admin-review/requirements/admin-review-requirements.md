@@ -3,7 +3,7 @@ project: OstadLagbo
 module: admin-review
 type: requirements
 status: current
-updated: 2026-09-12
+updated: 2026-09-13
 id: OL-ADM-REQ-001
 derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.1.md
 owner: Iftikher
@@ -42,8 +42,12 @@ Per baseline §5 / OSP-10: key-field edits create a re-review item while the pub
 ### ADM-07 Reports queue
 Reports (created per `ratings-and-trust`) form a second queue: reporter, reported account, category, detail, and the reported content including cited chat messages. Actions: **dismiss** (optional note) / **warn** (message delivered to the account) / **suspend** (ADM-08) / **remove content** (for reports targeting a review or reply, per RNT-06). Every report reaches a recorded resolution; open/resolved status is tracked.
 
-### ADM-08 Suspension and warnings
-Admin can warn or suspend any account with a recorded reason. Suspended accounts cannot log in beyond a suspension-notice screen; a suspended Ostad leaves map and search immediately; their chats freeze. Suspension is reversible, and reinstatement restores prior state including approval. Offers pending to or from a suspended account cannot be acted on while the suspension stands; their expiry clocks continue to run. User-initiated deletion (REG-12) is separate.
+### ADM-08 Warnings, suspension, and termination
+Admin can **warn** or **suspend** any account with a recorded internal reason and, for warnings, a user-facing message. Suspended accounts cannot log in beyond a suspension-notice screen; a suspended Ostad leaves map and search immediately; their chats freeze. Suspension is reversible, and reinstatement restores prior state including approval. Offers pending to or from a suspended account cannot be acted on while the suspension stands; their expiry clocks continue to run. User-initiated deletion (REG-12) is separate.
+
+**Termination (CL-019):** admin can **terminate** an account for fraud, safety violations, or ban-worthy conduct, with a recorded internal reason and a mandatory user-facing message stating the ban and the right to appeal. A terminated account is suspended (if not already) and enters a **30-day appeal window** during which it may create and follow an appeal ticket (SUP-04) and do nothing else; a successful appeal is a reinstatement, which cancels the termination. At the end of the window the account purges under the retention policy's banned-account exception (OL-RET-001): ID-number hash, phone, legal name, and violation records retained while the ban stands, so the person cannot re-register. Termination is the only route by which a suspended account leaves the platform — suspended users cannot self-delete.
+
+**Acceptance:** a terminated account can appeal and cannot do anything else; reinstatement within the window fully restores the account; after the window, registration with the banned phone or identity document is refused.
 
 ### ADM-09 Block overview
 A read-only view of blocking activity: accounts most blocked, recent blocks. Heavily-blocked accounts are a moderation signal; action goes through the account detail (ADM-10), not this view.
@@ -51,7 +55,7 @@ A read-only view of blocking activity: accounts most blocked, recent blocks. Hea
 ## D. User management
 
 ### ADM-10 User directories and account detail
-**Ostad list:** every Ostad, filterable by status (draft / pending / changes requested / rejected / approved / suspended), searchable by name, phone, ID number, District, and skill category, sortable by registration and submission date. **Shagred list:** filterable by status, searchable by name and phone. Each row opens an **account detail view**: full profile including internal fields, verdict history, report history (as reporter and reported), audit entries touching the account, and applicable actions (verdicts where a review is open; warn / suspend / reinstate always). Privacy rules in SGP/OSP restrict users, never admin review; every identity-document view is audit-logged (ADM-17). Any account is findable by phone in one search.
+**Ostad list:** every Ostad, filterable by status (draft / pending / changes requested / rejected / approved / suspended / terminated), searchable by name, phone, ID number, District, and skill category, sortable by registration and submission date. **Shagred list:** filterable by status, searchable by name and phone. Each row opens an **account detail view**: full profile including internal fields, verdict history, report history (as reporter and reported), audit entries touching the account, and applicable actions (verdicts where a review is open; warn / suspend / reinstate / terminate always). Privacy rules in SGP/OSP restrict users, never admin review; every identity-document view is audit-logged (ADM-17). Any account is findable by phone in one search.
 
 ## E. Content and taxonomy
 
@@ -83,20 +87,20 @@ Where demand outruns supply — the recruitment compass:
 - Profile views and offers concentrated on few Ostads (supply shortage signal in a category/area).
 
 ### ADM-15 Quality and operations
-Ratings distribution and trend; review-submission rate among connections; reports per 100 weekly-active users; actual review turnaround vs. the 48h target; report resolution time; suspension and reinstatement counts; support ticket volume by category, resolution time, and reopen rate (SUP-06).
+Ratings distribution and trend; review-submission rate among connections; reports per 100 weekly-active users; actual review turnaround vs. the 48h target; report resolution time; suspension, termination, and reinstatement counts; appeals pending beyond 7 days; support ticket volume by category, resolution time, and reopen rate (SUP-06).
 
 ## G. Communication
 
 ### ADM-16 Broadcast notifications
-Admin composes push broadcasts to a segment — all users, all Ostads, or all Shagreds — with title and body. Broadcasts are recorded (content, segment, sender, timestamp, recipient count). No per-user targeting beyond segments in MVP; warn messages (ADM-08) remain the individual channel.
+Admin composes push broadcasts to a segment — all users, all Ostads, or all Shagreds — with title and body **in both English and Bangla** (CL-016); each recipient receives the version matching their chosen language. Broadcasts are recorded (content, segment, sender, timestamp, recipient count). No per-user targeting beyond segments in MVP; warn messages (ADM-08) remain the individual channel.
 
 ## H. Operations and compliance
 
 ### ADM-17 Audit log
-Every admin action — verdicts, identity marks, warns, suspensions, reinstatements, category changes, report resolutions, content removals, support replies and resolutions, broadcasts, and each viewing of identity documents — writes to an **append-only** audit log: actor, action, target, timestamp. The dashboard provides a searchable, filterable viewer (by actor, action type, target, date range). Entries cannot be edited or deleted from any interface. (Risk R-02 mitigation.)
+Every admin action — verdicts, identity marks, warns, suspensions, reinstatements, terminations, category changes, report resolutions, content removals, support replies and resolutions, broadcasts, and each viewing of identity documents — writes to an **append-only** audit log: actor, action, target, timestamp. The dashboard provides a searchable, filterable viewer (by actor, action type, target, date range). Entries cannot be edited or deleted from any interface. (Risk R-02 mitigation.)
 
 ### ADM-18 Identity-data retention tools
-Dashboard tooling to execute the retention policy: view identity-document storage status per account, and purge identity documents of deleted accounts per policy schedule. Purges are themselves audit-logged. (Makes R-02's "retention and deletion policy" operational.)
+Dashboard tooling to execute the retention policy: view identity-document storage status per account, and purge identity documents of deleted and terminated accounts per policy schedule. Purges are themselves audit-logged. (Makes R-02's "retention and deletion policy" operational.)
 
 ### ADM-19 SMS/OTP monitor
 Usage view: OTP volume by day, per-number rate-limit hits, estimated spend. Read-only; limits themselves are engineering config. (Risk R-08.)
@@ -116,4 +120,4 @@ Tickets created per the `support` module (SUP-02) arrive in a third queue: filte
 
 ## Operational notes (non-binding)
 
-Target first-verdict turnaround: 48 hours while the founder is sole reviewer. This dashboard is a full product surface (see risk R-06): build with managed services and standard libraries throughout; the audit log and this document keep every admin role transferable (risk R-05). Revenue metrics are absent by design — payments are out of MVP scope; when monetization enters scope, section F gains a revenue group via change request.
+Target first-verdict turnaround: 48 hours while the founder is sole reviewer; appeal tickets are answered within the 30-day termination window without exception. This dashboard is a full product surface (see risk R-06): build with managed services and standard libraries throughout; the audit log and this document keep every admin role transferable (risk R-05). Revenue metrics are absent by design — payments are out of MVP scope; when monetization enters scope, section F gains a revenue group via change request.
