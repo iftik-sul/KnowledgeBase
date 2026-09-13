@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: retention-policy
 status: current
-updated: 2026-08-30
+updated: 2026-09-13
 id: OL-RET-001
 approved: 2026-08-30
 owner: Iftikher
@@ -27,27 +27,32 @@ Bangladesh's Personal Data Protection Act, 2026 (in force April 2026) governs th
 
 Account deletion is self-service (REG-12). On request: the account **deactivates immediately** — invisible on all surfaces, unusable, chats closed per OFR-06. A **30-day recovery window** follows: logging in restores the account fully. At day 30 without recovery, **permanent purge** executes per the schedule below. This mirrors established marketplace practice (Uber's deletion model) and satisfies PDPA erasure rights.
 
+**Admin termination (CL-019)** follows the same 30-day rhythm from the other direction: a terminated account stays suspended for 30 days — during which it may appeal, and nothing else — then purges under the banned-account exception below. There is no recovery by login; reinstatement is an admin decision on the appeal.
+
 ## Retention schedule
 
 | Data category | While account lives | On deletion |
 |---|---|---|
-| Identity documents (NID/passport images, selfie) | Retained encrypted; admin-review access only | **Purged at day 30** with the account |
-| ID number (NID or passport number) | Retained | Retained **12 months after deletion** solely for abuse and safety investigations — a report filed against a deleted account within this window can still be traced to a real identity — then purged |
+| Identity documents (NID/passport/licence images, selfie) | Retained encrypted; admin-review access only | **Purged at day 30** with the account |
+| ID number (NID, passport, or licence number) | Retained | Retained **12 months after deletion** solely for abuse and safety investigations — a report filed against a deleted account within this window can still be traced to a real identity — then purged |
 | Account & profile data (names, photos, address, profile content) | Retained | Purged at day 30 |
+| Consent records (accepted document versions and timestamps) | Retained | **Retained 3 years after purge** as proof of lawful basis under the PDPA, alongside the account tombstone; then purged |
 | Abandoned Ostad onboarding drafts (incl. uploaded documents) | — | Purged after **90 days of draft inactivity**, with prior notice |
-| Chat messages & voice notes | Life of the relationship; one party's deletion anonymizes their side, the other keeps history (OFR-06) | Full thread purge **90 days after both parties are gone** |
+| Chat messages & voice notes | Life of the relationship; one party's deletion freezes the thread, the other keeps history (OFR-06) | Full thread purge **90 days after both parties are gone** |
 | Reviews & ratings | Persist | Anonymized ("Former Shagred"), persist with aggregate weight (RNT-05) |
 | Connection records (accepted offers) | Persist | Anonymized; Ostad-history entries show "deleted account" (SGP-03) |
-| Offers (declined / expired / withdrawn) | Retained 12 months for analytics, then aggregate-only | Purged at day 30 |
+| Offers (declined / expired / withdrawn) | Retained 12 months for analytics, then aggregate-only | Purged at day 30 when either party purges |
 | Reports & moderation records | Retained | **2 years after resolution**; longer under legal hold |
+| Support tickets | Retained | **2 years after resolution**; abandoned non-appeal tickets auto-resolve after 90 days of inactivity so the clock starts |
 | Admin audit log | Append-only, **3-year rolling retention** | Unaffected by user deletion (accountability record) |
 | OTP codes / OTP request logs | Minutes / **90 days** | — |
+| Push device tokens | Retained while the device session lives | Revoked at logout, suspension, or deletion request; purged with the account |
 | User-linked analytics events | **24 months**, then aggregate-only | De-linked at day 30 |
 | Backups | Standard cycles | Deleted data ages out of all backups within **90 days** of purge |
 
 ## Banned-account exception
 
-When an account is suspended for fraud, safety violations, or ban-worthy conduct and is deleted (by the user or the platform), the platform retains the minimum needed to prevent re-registration and document the conduct: **ID-number hash, phone number, legal name, and the records of the violating behavior** — for as long as the ban stands. Everything else purges on schedule. This mirrors industry practice of retaining data relating to fraudulent behavior and the data needed to prevent platform re-access.
+When an account is **terminated by admin** (CL-019) for fraud, safety violations, or ban-worthy conduct, the platform retains the minimum needed to prevent re-registration and document the conduct: **ID-number hash, phone number, legal name, and the records of the violating behavior** — for as long as the ban stands. Everything else purges on schedule at the end of the 30-day appeal window. This mirrors industry practice of retaining data relating to fraudulent behavior and the data needed to prevent platform re-access.
 
 ## Legal hold
 
@@ -59,7 +64,7 @@ The MVP processes no payments, so no tax/financial record retention applies. Whe
 
 ## Operational obligations
 
-ADM-18 tooling implements: day-30 purge automation, the 12-month ID-number purge, draft-inactivity purge, both-parties-gone chat purge, banned-account minimal retention, and legal-hold flags. Purges are audit-logged. Hosting and backup architecture must honor the 90-day backup age-out and the PDPA's data-residency rules for restricted-category data (engineering + legal checkpoint before infrastructure selection).
+ADM-18 tooling implements: day-30 purge automation (self-service and termination paths), the 12-month ID-number purge, the 3-year consent-record purge, draft-inactivity purge, both-parties-gone chat purge, banned-account minimal retention, storage-object deletion in the same operation as the referencing row (with orphan sweeps), and legal-hold flags. Purges are audit-logged. Hosting and backup architecture must honor the 90-day backup age-out and the PDPA's data-residency rules for restricted-category data (engineering + legal checkpoint before infrastructure selection).
 
 ## Review
 

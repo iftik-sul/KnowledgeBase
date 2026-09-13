@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: change-log
 status: current
-updated: 2026-09-12
+updated: 2026-09-13
 id: OL-CHG-001
 owner: Iftikher
 ---
@@ -13,6 +13,7 @@ Records every founder-approved change to the MVP scope baseline. Newest first. E
 
 | ID | Date | Change | Rationale | Absorbed in |
 |---|---|---|---|---|
+| CL-019 | 2026-09-13 | **Admin account termination:** a `terminate` moderation action that bans an account — it stays suspended for a 30-day appeal window (rule 7: appeal is the only write path), then purges with the retention policy's banned-account exception (ID-number hash, phone, legal name, violation records retained while the ban stands). Suspended users cannot self-delete, so without this action a banned account would sit suspended forever | Surfaced by the cross-layer data-model review: OL-RET-001 promised banned-account retention that no model or requirement could execute | **Pending baseline v1.2** (batched); ADM-08, OL-ADM-DM-001, OL-REG-DM-001, OL-RET-001 |
 | CL-018 | 2026-09-12 | **Admin dashboard requires a TOTP second factor** in addition to email + password | The panel holds identity documents and chat evidence; a single stolen password must not open it (NFR-05) | **Pending baseline v1.2** (batched); ADM-20, NFR-05 |
 | CL-017 | 2026-08-30 | **Identity verification hardened:** driving licence accepted alongside NID and passport; document image requirements become per-type rules (NID front+back · passport photo page · licence front+back); the verification selfie is **live in-app capture only, holding the identity document beside the face** — gallery upload for the selfie is eliminated | The gallery-upload selfie defeated verification's purpose (anyone could upload the card owner's photo); the holding-the-document method gives admin review a three-way face↔photo↔document check at zero ML cost; licence widens the funnel | **Pending baseline v1.2** (batched); REG-10, OL-REG-DM-001 |
 | CL-016 | 2026-08-30 | **Bilingual MVP:** the app ships with full English **and Bangla** UI from launch, replacing "English-first, Bangla post-MVP." Localization architecture from the first commit (all strings externalized, per-locale files, Bangla rendering tested); language chosen at first launch and switchable in settings; English is the source language for specs, Bangla copy authored by the founder; Bangla versions of the Privacy Policy and Terms of Service required at launch. The admin web dashboard remains English-only. | Both languages are core to the market: seed supply (tutors, tradespeople) and guardians need Bangla for onboarding, consent comprehension (PDPA), and trust; a Bangla-first brand with an English-only interface is a mixed message. Founder authors Bangla directly and the AI-driven build maintains dual locale files cheaply, removing the usual simultaneous-launch costs. | **Pending baseline v1.2** (batched); baseline §7, all `ui/` documents when produced |
@@ -34,4 +35,4 @@ Records every founder-approved change to the MVP scope baseline. Newest first. E
 
 ## Process note
 
-Changes CL-001 through CL-007 were approved during the requirements sessions before this log existed; they are recorded here retroactively and consolidated into baseline v1.1, restoring the baseline as the single truthful answer to scope questions. From v1.1 onward, no scope change is implemented before its entry appears here. Baseline v1.2 will be issued before the Execution phase begins, absorbing CL-009 through CL-018 and any further planning-stage changes together, after which a scope freeze applies for the build (OL-BLD-001, principle 4).
+Changes CL-001 through CL-007 were approved during the requirements sessions before this log existed; they are recorded here retroactively and consolidated into baseline v1.1, restoring the baseline as the single truthful answer to scope questions. From v1.1 onward, no scope change is implemented before its entry appears here. Baseline v1.2 will be issued before the Execution phase begins, absorbing CL-009 through CL-019 and any further planning-stage changes together, after which a scope freeze applies for the build (OL-BLD-001, principle 4).
