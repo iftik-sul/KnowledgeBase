@@ -22,7 +22,9 @@ The index and rulebook for the data-model layer. Every entity in the system is o
 - **Bilingual data:** fields carrying both scripts are explicit pairs (`*_en`, `*_bn`); collation and search behavior per CL-013.
 - **Retention encoding (OL-RET-001):** deletion is a designed operation, not a row drop. Standard fields where applicable: `deleted_at` (deactivation moment), `purge_at` (scheduled hard-purge), `anonymized` (flag for persist-anonymized records), `legal_hold` (suspends purging). Every model document ends with a **retention behavior** section mapping its entities to the policy schedule.
 - **Instrumentation:** analytics events are not entities here; they flow to the analytics store per each module's instrumentation requirement. Only *queryable product data* is modeled.
-- **Predicates over flags:** where a rule depends on live state elsewhere (discoverability, visibility, duplicate identity), model documents define it as a **query-time predicate** stated once, not a stored flag that can go stale. Established by OSP-DM (discoverability), SGP-DM (permitted-Ostad visibility), ADM-DM (duplicate-ID check).
+- **Predicates over flags:** where a rule depends on live state elsewhere (discoverability, visibility, duplicate identity, thread writability, reopen windows), model documents define it as a **query-time predicate** stated once, not a stored flag that can go stale. Established by OSP-DM (discoverability), SGP-DM (permitted-Ostad visibility), ADM-DM (duplicate-ID check), OFR-DM (thread writability), SUP-DM (reopen window).
+- **Tombstone references:** purged accounts persist as tombstone rows (REG-DM), so foreign references from persisting records (connections, ratings, reports, tickets, blocks during the window) remain valid rather than being nulled. Display uses captured snapshots.
+- **Deliberate denormalization:** copying a value across entities is permitted only where an invariant cannot otherwise be expressed, and must be labeled as such in the defining document. Instances: `connection` party ids (survive offer purge), `rating` party ids (pair uniqueness), `report.reported_account_id` (single-table admin reads).
 
 ## Entity ownership map
 
@@ -42,15 +44,15 @@ The index and rulebook for the data-model layer. Every entity in the system is o
 | `admin_area` (Division → District → Thana → postal code; en + bn) | ADM | OSP, SGP |
 | `review_case` (review episode record; not the gate) | ADM | OSP (via profile_revision), REG (via identity_document) |
 | `admin_account`, `admin_session`, `admin_audit_entry` | ADM | all admin actions |
-| `moderation_action` (warn/suspend/reinstate) | ADM | REG (suspension ref), RNT, OFR |
+| `moderation_action` (warn/suspend/reinstate) | ADM | REG (suspension ref), RNT, OFR, SUP (appeals) |
 | `broadcast` | ADM | — |
 | `favorite` | MAP | — |
-| `offer` | OFR | SGP (visibility), RNT (eligibility), ADM |
+| `offer` | OFR | SGP (visibility), RNT (eligibility, report eligibility), ADM |
 | `connection` | OFR | RNT (rating rights), SGP (history), OSP (insights) |
-| `chat_thread`, `chat_message` (text or voice ref) | OFR | ADM (report context) |
+| `chat_thread`, `chat_message` (text or voice ref) | OFR | ADM (report context), RNT (report targets) |
 | `rating` (+ `rating_reply`) | RNT | OSP (aggregate) |
 | `report` | RNT | ADM (queue) |
-| `block` | RNT | OFR, MAP, SGP (effects) |
+| `block` | RNT | OSP, SGP, MAP, OFR (the canonical predicate) |
 | `support_ticket`, `ticket_message` | SUP | ADM (queue) |
 
 ## Cross-cutting rules
@@ -59,8 +61,9 @@ The index and rulebook for the data-model layer. Every entity in the system is o
 2. **The connection is sacred.** `connection` records are the platform's success unit (ADM-12) and the eligibility anchor for ratings (RNT-01), durable visibility (SGP-05), and Ostad history (SGP-03). They anonymize, never vanish.
 3. **Approved vs. pending truth (OSP-10/ADM-06):** the public always reads the last *approved* profile revision; pending edits live separately until verdict. The model, not the UI, enforces this.
 4. **No coordinates outside `ostad_profile`.** The schema contains exactly one lat/long pair in the entire system (SGP-02/MAP-10 made structural).
-5. **Blocks are checked, not copied:** a single `block` record drives chat freeze, visibility severance, offer refusal, and discovery hiding — modules query it; they don't mirror it.
+5. **Blocks are checked, not copied:** a single `block` record drives chat freeze, visibility severance, offer refusal, and discovery hiding — modules query it; they don't mirror it. The canonical predicate is defined in RNT-DM.
 6. **One canonical owner per status.** `ostad_profile.approval_status` is the publishing gate; `identity_document.verification_status` is the identity state; `user_account.status` is the account state. Workflow records (`review_case`, `moderation_action`) reference these; they never hold a second copy. Per-episode decisions are the audit log's job.
+7. **The suspended account has exactly one write path.** A suspended account may create and follow an `appeal` support ticket (SUP-DM) and nothing else. Every other model treats `suspended` as read-only for the user.
 
 ## Authorization model
 
@@ -77,9 +80,14 @@ OstadLagbo uses **static role-based access, not data-driven RBAC**, deliberately
 | A pending Ostad has full app access but is not discoverable | REG-11 | `ostad_profile.approval_status` gates discovery queries, not authentication |
 | Admin reads chat content only when a report cites it, and every read is audit-logged | OFR-07, ADM-17 | No general chat-browse query exists in the admin surface; the only read path originates from a `report` record and writes an audit entry as a side effect |
 | Non-key-field profile edits publish instantly; key-field edits require approval before going public | OSP-10 | Public reads never join an open `profile_revision` (rule 3) |
+| A suspended account may appeal and do nothing else | SUP-04, ADM-08 | The policy layer permits three operations on `support_ticket`/`ticket_message` for suspended accounts, all scoped to `category = appeal` or owned tickets (rule 7) |
 
 **Post-MVP evolution:** when the founder adds team members and admin role tiers become necessary (already marked post-MVP in ADM-20), that is the point data-driven RBAC is introduced — scoped to the admin panel, where multiple tiers actually exist to justify it. The relationship/state policy layer for end-user access is not expected to need this evolution, since its complexity is inherent to the product, not to organizational growth.
 
+## What the backend architecture decision must satisfy
+
+Collected from the module models, for the architecture decision record: **(a)** a spatial index with bounding-box and radius queries over ~1,000–10,000 points, with server-side cluster aggregation above a cap (MAP-DM); **(b)** fuzzy text matching across Latin and Bangla scripts with per-script normalization (MAP-DM, OSP-DM); **(c)** append-only storage for the audit log, enforced below the application layer (ADM-DM, NFR-05); **(d)** request-log scrubbing of coordinate parameters at the infrastructure layer (MAP-DM, NFR-06); **(e)** partial unique indexes (offers, reports, appeals, blocks) and check constraints (message authorship) — or equivalent guarantees; **(f)** scheduled jobs for offer expiry, day-5 reminders, inactivity auto-resolution, and retention purges; **(g)** transactional multi-write for offer acceptance (six writes, one commit). A backend that provides these natively is strongly preferred over one requiring auxiliary services at MVP scale (NFR-13).
+
 ## Document sequence
 
-REG ✅ → OSP ✅ → SGP ✅ → ADM ✅ → MAP → OFR → RNT → SUP, each at `modules/<module>/data-model/`, deriving from its requirements document.
+REG ✅ → OSP ✅ → SGP ✅ → ADM ✅ → MAP ✅ → OFR ✅ → RNT ✅ → SUP ✅ — **layer complete 2026-09-13.** Each at `modules/<module>/data-model/`, deriving from its requirements document. Every model passed an adversarial review before approval; the reviews found and fixed defects in OSP, ADM, MAP, OFR, RNT, and SUP.
