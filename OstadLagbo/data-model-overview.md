@@ -19,12 +19,13 @@ The index and rulebook for the data-model layer. Every entity in the system is o
 - **Timestamps:** `created_at` on everything; `updated_at` where rows mutate; all UTC.
 - **Enums:** closed value sets written in the defining document; adding a value is a change to that document.
 - **Visibility:** fields inherit the requirements' visibility classes (public / internal / system); each model document marks any field whose exposure isn't obvious.
-- **Bilingual data:** fields carrying both scripts are explicit pairs (`*_en`, `*_bn`); collation and search behavior per CL-013.
+- **Bilingual data:** fields carrying both scripts are explicit pairs (`*_en`, `*_bn`); collation and search behavior per CL-013. Outbound notifications render in `user_account.preferred_locale`.
 - **Retention encoding (OL-RET-001):** deletion is a designed operation, not a row drop. Standard fields where applicable: `deleted_at` (deactivation moment), `purge_at` (scheduled hard-purge), `anonymized` (flag for persist-anonymized records), `legal_hold` (suspends purging). Every model document ends with a **retention behavior** section mapping its entities to the policy schedule.
 - **Instrumentation:** analytics events are not entities here; they flow to the analytics store per each module's instrumentation requirement. Only *queryable product data* is modeled.
-- **Predicates over flags:** where a rule depends on live state elsewhere (discoverability, visibility, duplicate identity, thread writability, reopen windows), model documents define it as a **query-time predicate** stated once, not a stored flag that can go stale. Established by OSP-DM (discoverability), SGP-DM (permitted-Ostad visibility), ADM-DM (duplicate-ID check), OFR-DM (thread writability), SUP-DM (reopen window).
-- **Tombstone references:** purged accounts persist as tombstone rows (REG-DM), so foreign references from persisting records (connections, ratings, reports, tickets, blocks during the window) remain valid rather than being nulled. Display uses captured snapshots.
+- **Predicates over flags:** where a rule depends on live state elsewhere (discoverability, visibility, duplicate identity, thread writability, reopen windows, active suspension), model documents define it as a **query-time predicate** stated once, not a stored flag that can go stale. Established by OSP-DM (discoverability), SGP-DM (permitted-Ostad visibility), ADM-DM (duplicate-ID check, active suspension), OFR-DM (thread writability), SUP-DM (reopen window).
+- **Tombstone references:** purged accounts persist as tombstone rows (REG-DM), so foreign references from persisting records (connections, ratings, reports, tickets, consent records) remain valid rather than being nulled. Display uses captured snapshots. **Anonymization lives on the persisting record** (`rating.anonymized`, `connection.anonymized`), never on the purged party's own profile — profiles purge outright.
 - **Deliberate denormalization:** copying a value across entities is permitted only where an invariant cannot otherwise be expressed, and must be labeled as such in the defining document. Instances: `connection` party ids (survive offer purge), `rating` party ids (pair uniqueness), `report.reported_account_id` (single-table admin reads).
+- **Address chain validity:** the four `admin_area` references stored on a profile (division, district, thana, postal code) must form a valid parent chain in `admin_area`; enforced at write time, never assumed.
 
 ## Entity ownership map
 
@@ -32,9 +33,10 @@ The index and rulebook for the data-model layer. Every entity in the system is o
 |---|---|---|
 | `user_account` | REG | everything |
 | `otp_request` | REG | — |
-| `auth_session` | REG | — |
+| `auth_session` | REG | REG (push tokens) |
+| `device_push_token` | REG | OFR, ADM (notification and broadcast delivery), SUP |
 | `consent_record` | REG | ADM (account detail) |
-| `identity_document` | REG | ADM (review), OL-RET (purge) |
+| `identity_document` (many per account; one current) | REG | ADM (review), OSP (revision resubmission), OL-RET (purge) |
 | `onboarding_progress` | REG | ADM (funnel) |
 | `ostad_profile` (+ children: `skill_entry`, `education_entry`, `experience_entry`, `portfolio_item`) | OSP | MAP, OFR, RNT, ADM |
 | `profile_revision` (pending post-approval key-field changes) | OSP | ADM (review case, diff) |
@@ -44,8 +46,8 @@ The index and rulebook for the data-model layer. Every entity in the system is o
 | `admin_area` (Division → District → Thana → postal code; en + bn) | ADM | OSP, SGP |
 | `review_case` (review episode record; not the gate) | ADM | OSP (via profile_revision), REG (via identity_document) |
 | `admin_account`, `admin_session`, `admin_audit_entry` | ADM | all admin actions |
-| `moderation_action` (warn/suspend/reinstate) | ADM | REG (suspension ref), RNT, OFR, SUP (appeals) |
-| `broadcast` | ADM | — |
+| `moderation_action` (warn/suspend/reinstate/terminate) | ADM | REG (suspension ref, termination), RNT, OFR, SUP (appeals) |
+| `broadcast` | ADM | REG (token resolution) |
 | `favorite` | MAP | — |
 | `offer` | OFR | SGP (visibility), RNT (eligibility, report eligibility), ADM |
 | `connection` | OFR | RNT (rating rights), SGP (history), OSP (insights) |
@@ -62,8 +64,8 @@ The index and rulebook for the data-model layer. Every entity in the system is o
 3. **Approved vs. pending truth (OSP-10/ADM-06):** the public always reads the last *approved* profile revision; pending edits live separately until verdict. The model, not the UI, enforces this.
 4. **No coordinates outside `ostad_profile`.** The schema contains exactly one lat/long pair in the entire system (SGP-02/MAP-10 made structural).
 5. **Blocks are checked, not copied:** a single `block` record drives chat freeze, visibility severance, offer refusal, and discovery hiding — modules query it; they don't mirror it. The canonical predicate is defined in RNT-DM.
-6. **One canonical owner per status.** `ostad_profile.approval_status` is the publishing gate; `identity_document.verification_status` is the identity state; `user_account.status` is the account state. Workflow records (`review_case`, `moderation_action`) reference these; they never hold a second copy. Per-episode decisions are the audit log's job.
-7. **The suspended account has exactly one write path.** A suspended account may create and follow an `appeal` support ticket (SUP-DM) and nothing else. Every other model treats `suspended` as read-only for the user.
+6. **One canonical owner per status.** `ostad_profile.approval_status` is the publishing gate; `identity_document.verification_status` (on the current row) is the identity state; `user_account.status` is the account state. Workflow records (`review_case`, `moderation_action`) reference these; they never hold a second copy. Per-episode decisions are the audit log's job.
+7. **The suspended account has exactly one write path.** A suspended account may create and follow an `appeal` support ticket (SUP-DM) and nothing else — including during the 30-day window after termination (REG-DM). Every other model treats `suspended` as read-only for the user.
 
 ## Authorization model
 
@@ -86,8 +88,8 @@ OstadLagbo uses **static role-based access, not data-driven RBAC**, deliberately
 
 ## What the backend architecture decision must satisfy
 
-Collected from the module models, for the architecture decision record: **(a)** a spatial index with bounding-box and radius queries over ~1,000–10,000 points, with server-side cluster aggregation above a cap (MAP-DM); **(b)** fuzzy text matching across Latin and Bangla scripts with per-script normalization (MAP-DM, OSP-DM); **(c)** append-only storage for the audit log, enforced below the application layer (ADM-DM, NFR-05); **(d)** request-log scrubbing of coordinate parameters at the infrastructure layer (MAP-DM, NFR-06); **(e)** partial unique indexes (offers, reports, appeals, blocks) and check constraints (message authorship) — or equivalent guarantees; **(f)** scheduled jobs for offer expiry, day-5 reminders, inactivity auto-resolution, and retention purges; **(g)** transactional multi-write for offer acceptance (six writes, one commit). A backend that provides these natively is strongly preferred over one requiring auxiliary services at MVP scale (NFR-13).
+Collected from the module models, for the architecture decision record: **(a)** a spatial index with bounding-box and radius queries over ~1,000–10,000 points, with server-side cluster aggregation above a cap (MAP-DM); **(b)** fuzzy text matching across Latin and Bangla scripts with per-script normalization (MAP-DM, OSP-DM); **(c)** append-only storage for the audit log, enforced below the application layer (ADM-DM, NFR-05); **(d)** request-log scrubbing of coordinate parameters at the infrastructure layer (MAP-DM, NFR-06); **(e)** partial unique indexes (offers, reports, appeals, blocks) and check constraints (message authorship) — or equivalent guarantees; **(f)** scheduled jobs for offer expiry, day-5 reminders, inactivity auto-resolution, and retention purges on both deletion paths; **(g)** transactional multi-write for offer acceptance (five writes, one commit) and for termination (moderation action + account fields + session/token revocation + offer resolution); **(h)** push delivery to platform tokens with per-recipient locale rendering. A backend that provides these natively is strongly preferred over one requiring auxiliary services at MVP scale (NFR-13).
 
 ## Document sequence
 
-REG ✅ → OSP ✅ → SGP ✅ → ADM ✅ → MAP ✅ → OFR ✅ → RNT ✅ → SUP ✅ — **layer complete 2026-09-13.** Each at `modules/<module>/data-model/`, deriving from its requirements document. Every model passed an adversarial review before approval; the reviews found and fixed defects in OSP, ADM, MAP, OFR, RNT, and SUP.
+REG ✅ → OSP ✅ → SGP ✅ → ADM ✅ → MAP ✅ → OFR ✅ → RNT ✅ → SUP ✅ — **layer complete 2026-09-13**, then revised the same day by a **cross-layer review** that found five significant seams between models (banned-account termination had no mechanism; profile anonymization was a phantom; push tokens, locale, and the reminder flag were unmodeled; identity-document cardinality was undefined; consent records had no retention rule) and fixed them across REG, SGP, OFR, ADM, this overview, and OL-RET-001. Each at `modules/<module>/data-model/`, deriving from its requirements document.
