@@ -3,7 +3,7 @@ project: OstadLagbo
 module: ostad-profile
 type: data-model
 status: current
-updated: 2026-09-12
+updated: 2026-09-13
 id: OL-OSP-DM-001
 derived_from: /OstadLagbo/modules/ostad-profile/requirements/ostad-profile-requirements.md
 owner: Iftikher
@@ -11,7 +11,7 @@ owner: Iftikher
 
 # Ostad Profile — Data Model
 
-Entities owned: `ostad_profile`, `profile_revision`, `skill_entry`, `education_entry`, `experience_entry`, `portfolio_item`. Conventions per [Data Model Overview](/OstadLagbo/data-model-overview.md). This is the layer's largest model — it defines the profile that carries the platform's entire trust story, and the revision mechanism that makes "the public never sees an unapproved edit" (OSP-10) a property of the schema, not a UI convention.
+Entities owned: `ostad_profile`, `profile_revision`, `skill_entry`, `education_entry`, `experience_entry`, `portfolio_item`. Conventions per [Data Model Overview](/OstadLagbo/data-model-overview.md). This is the layer's largest model — it defines the profile that carries the platform's entire trust story, and the revision mechanism that makes "the public never sees an unapproved edit" (OSP-10) a property of the schema, not a UI convention. Revised 2026-09-13 after the cross-layer review: address-chain validity; identity-document references now point at specific rows (REG-DM's many-per-account cardinality).
 
 ## Two review paths — and which entity governs each
 
@@ -42,7 +42,7 @@ One row per Ostad, one-to-one with `user_account` (`role = ostad`). Holds the **
 | headline / about | string / text | Public | About nullable |
 | occupation / years_experience / languages | string / int / string[] | Public | |
 | street_address | string | Internal | Never served publicly (OSP-02) |
-| division_id / district_id / thana_id / postal_code_id | uuid → `admin_area` (ADM) | Public | See administrative-area dataset below |
+| division_id / district_id / thana_id / postal_code_id | uuid → `admin_area` (ADM) | Public | **Must form a valid parent chain in `admin_area`** (postal code under thana under district under division), enforced at write time — Overview: address chain validity. See administrative-area dataset below |
 | latitude / longitude | decimal | Public | **The system's only coordinate pair** (Overview rule 4) |
 | approval_status | enum: `draft` \| `pending` \| `changes_requested` \| `rejected` \| `approved` | Public (as a trust signal) | **Canonical publishing gate.** Written only by ADM verdicts (ADM-04) and by submission (REG-11). Not mirrored from `review_case` — `review_case` records the *review*; this field records the *state of the profile* |
 | paused_at | timestamp, nullable | System | OSP-11; null = not paused |
@@ -51,7 +51,7 @@ One row per Ostad, one-to-one with `user_account` (`role = ostad`). Holds the **
 | joined_at / last_active_at | timestamp / date | Public | last_active at day granularity only (OSP-08) |
 | purge_at / legal_hold | per Overview conventions | — | Retention behavior below |
 
-Identity-verification status is **not duplicated here** — it is owned by `identity_document.verification_status` (REG) and read through it. The verified badge renders when that status is `passed` and `approval_status` is `approved` (ADM-03 guarantees the first whenever the second holds).
+Identity-verification status is **not duplicated here** — it is owned by `identity_document.verification_status` on the account's **current** document row (REG-DM: `superseded_at IS NULL`) and read through it. The verified badge renders when that status is `passed` and `approval_status` is `approved` (ADM-03 guarantees the first whenever the second holds).
 
 ### Discoverability — one predicate
 
@@ -75,12 +75,12 @@ A queue of pending **post-approval** key-field changes. At most one open row per
 | id / profile_id | uuid / uuid → ostad_profile | |
 | proposed_legal_name_en / _bn | string, nullable | Set only if changed |
 | proposed_skill_entries | array of skill_entry-shaped values, nullable | A **copy** in `skill_entry` shape, not a reference to live rows (see below) |
-| proposed_identity_document_id | uuid, nullable → identity_document | Set when identity documents are resubmitted |
+| proposed_identity_document_id | uuid, nullable → identity_document | Set when identity documents are resubmitted — references the **new** `identity_document` row inserted for the resubmission (REG-DM: many rows per account; the previous current row is superseded only on approval) |
 | status | enum: `pending` \| `approved` \| `rejected` | Drives ADM-02's queue and ADM-06's publish/discard |
 | review_case_id | uuid → `review_case` (ADM) | The queue item carrying admin's verdict, notes, and diff |
 | submitted_at / resolved_at | timestamps | |
 
-**On approval:** proposed values overwrite the corresponding `ostad_profile` fields atomically; proposed skills **replace the live `skill_entry` rows wholesale** (skills are evaluated as a set, not field-by-field); `status → approved`. **On rejection:** `ostad_profile` and its live rows are untouched; `status → rejected`; the Ostad may edit and resubmit, opening a new revision (ADM-05, unlimited).
+**On approval:** proposed values overwrite the corresponding `ostad_profile` fields atomically; proposed skills **replace the live `skill_entry` rows wholesale** (skills are evaluated as a set, not field-by-field); a proposed identity document becomes the account's current one (its predecessor's `superseded_at` is set); `status → approved`. **On rejection:** `ostad_profile` and its live rows are untouched; a proposed identity document is superseded without ever having been current; `status → rejected`; the Ostad may edit and resubmit, opening a new revision (ADM-05, unlimited).
 
 ## skill_entry
 
@@ -128,13 +128,13 @@ Repeatable, typed (OSP-07). Not a key field.
 
 ## Dependency: administrative-area dataset
 
-Address fields reference `admin_area` — a **reference dataset owned by ADM** (alongside `skill_category`), holding Bangladesh's Division → District → Thana hierarchy with postal codes, each row carrying `name_en` and `name_bn` for the bilingual UI (CL-016). It is seeded data, not user-generated; OSP-02 and SGP-02 both read it. Its definition belongs to the ADM data model; this document only consumes it. *(Note for the ADM session: `admin_area` is a new entity not yet listed in the Overview's ownership map — it is added there when the ADM model is written.)*
+Address fields reference `admin_area` — a **reference dataset owned by ADM** (alongside `skill_category`), holding Bangladesh's Division → District → Thana hierarchy with postal codes, each row carrying `name_en` and `name_bn` for the bilingual UI (CL-016). It is seeded data, not user-generated; OSP-02 and SGP-02 both read it. Its definition is in `OL-ADM-DM-001`; this document only consumes it.
 
 ## Retention behavior (OL-RET-001 mapping)
 
 | Entity | On account deletion |
 |---|---|
-| ostad_profile | Purged at day 30 with the account. Ostads do not anonymize — profile and reviews leave together (RNT-05) |
+| ostad_profile | Purged at day 30 with the account (self-service or termination path). Ostads do not anonymize — profile and reviews leave together (RNT-05); `connection.ostad_profile_id` and `ostad_history_entry.ostad_profile_id` are nulled, their snapshots carry the display |
 | profile_revision | Purged with the profile; an open revision is discarded |
 | skill_entry / education_entry / experience_entry / portfolio_item | Purged with the profile (child rows) |
 
@@ -142,4 +142,4 @@ Address fields reference `admin_area` — a **reference dataset owned by ADM** (
 
 ## Queries this model must serve
 
-Public profile read (join `ostad_profile` + children; key fields from the approved state only — an open `profile_revision` is **never** joined into a public read); admin review read (profile + open revision + `identity_document`, for ADM-02's diff); map/search read (a **narrow projection** — id, display_name, photo_ref, lat/long, rating_avg, badge — never the full row, per MAP-09's scraping resistance); the discoverability predicate above; category-filtered skill lookup (`skill_entry.category_id`); insights aggregation (OSP-12 — sourced from analytics events, not this model).
+Public profile read (join `ostad_profile` + children; key fields from the approved state only — an open `profile_revision` is **never** joined into a public read); admin review read (profile + open revision + the referenced `identity_document` rows, for ADM-02's diff); map/search read (a **narrow projection** — id, display_name, photo_ref, lat/long, rating_avg, badge — never the full row, per MAP-09's scraping resistance); the discoverability predicate above; address-chain validation at write; category-filtered skill lookup (`skill_entry.category_id`); insights aggregation (OSP-12 — sourced from analytics events, not this model).
