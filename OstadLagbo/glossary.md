@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: glossary
 status: current
-updated: 2026-09-12
+updated: 2026-09-14
 id: OL-GLS-001
 owner: Iftikher
 ---
@@ -20,34 +20,49 @@ Canonical definitions for terms used throughout the OstadLagbo knowledge base. I
 | **Guest** | A visitor with no account. Can browse the map, search, and view public Ostad profiles; cannot contact, favorite, or report. |
 | **Admin** | A manually provisioned dashboard operator. Currently the founder; single full-permission tier in MVP. |
 | **Guardian** | An adult Shagred account holder acting on behalf of a minor learner. The account, chat, and arrangement legally belong to the adult (18+ gate, REG-03). |
+| **AI development agent** | The builder of the platform; held to this knowledge base as its specification (stakeholder S-10, risk R-11). |
 
 ## Core objects
 
 | Term | Definition |
 |---|---|
 | **Offer** | A free-text message a Shagred sends an Ostad proposing contact. States: pending → accepted / declined / expired (7 days) / withdrawn. |
-| **Connection** | An *accepted* offer. The platform's success unit — the anchor for chat, rating eligibility, phone/email reveal, and Ostad history. |
+| **Connection** | An *accepted* offer. The platform's success unit — the anchor for chat, rating eligibility, phone/email reveal, and Ostad history. Persists anonymized; never vanishes. |
 | **Verified badge** | Shown on an Ostad's public profile once identity verification has passed and the profile is admin-approved. Not an endorsement of skill or character (ToS §2). |
 | **Profile completion %** | A computed score reflecting how much of the optional profile content an Ostad has filled in. |
 | **Pause** (visibility pause) | An Ostad-controlled toggle that removes them from discovery and blocks new offers while preserving existing chats and pending offers already received (OSP-11). |
 | **Key field** | Legal names, identity documents, or skills — editing one returns the profile to admin review while the last approved version stays public (OSP-10). |
-| **Profile revision** | The approved/pending snapshot mechanism that makes the "public never sees unapproved edits" rule structural, not just a UI behavior. |
+| **Profile revision** | The pending-change record for post-approval key-field edits (OSP-DM); the public reads only the approved state. Initial approval uses the profile's own status, not a revision. |
+| **Skill category** | A fixed, admin-managed, bilingual group (e.g., Guitar / গিটার) that Ostads select and Shagreds filter by; the specific skill is free text within it. Seeded from OL-SKC-001. |
+| **Seed data** | Reference data loaded before any user exists — skill categories and the administrative-area dataset — founder-approved under change control. |
 
 ## Trust and safety
 
 | Term | Definition |
 |---|---|
 | **Report** | A user-filed flag against a profile, message, review, or reply, routed to the admin reports queue with a category and detail. |
-| **Block** | A user action that freezes chat, severs profile visibility, and prevents new offers between two accounts in both directions. |
+| **Block** | A user action that freezes chat, severs profile visibility, and prevents new offers between two accounts in both directions. Defined once (RNT-DM) and checked everywhere, never copied. |
 | **Suspension** | An admin action freezing an account (login blocked beyond a notice screen; Ostad pins removed; chats frozen). Reversible. |
+| **Termination** | An admin action banning an account (CL-019): it stays suspended for a 30-day appeal window — during which appeal is its only write path — then purges under the banned-account retention exception so the person cannot re-register. Reversed only by a successful appeal (reinstatement). |
+| **Appeal** | A support ticket of category `appeal`, the single action a suspended or terminated account may take (SUP-04). |
 | **Legal hold** | A flag suspending scheduled data purging on a specific account or record while an investigation, report, or legal matter is active. |
-| **Connection anonymization** | When a Shagred deletes their account, their reviews and Ostad-history entries persist with identity replaced by "Former Shagred," never removed. |
+| **Anonymization** | When a Shagred's account purges, their ratings and connections persist with identity replaced by "Former Shagred" (via `anonymized` flags on those records and captured display-name snapshots); the profile itself purges. |
+| **Tombstone** | The minimal row a purged account leaves behind (id, role, purge date, and — if banned — the banned-exception data), so records that reference the account stay valid. |
+
+## Architecture terms
+
+| Term | Definition |
+|---|---|
+| **Policy layer** | The single centralized module, in the Render API, that enforces every relationship- and state-based access rule (who may see a Shagred profile, read a chat, receive an offer). Row-level security in the database mirrors it as a second line of defense (ADR-001). |
+| **Predicate** | An access or state rule evaluated at query time against live data (discoverability, visibility, thread writability), never stored as a flag that can go stale (Data Model Overview convention). |
+| **ADR** | Architecture Decision Record (`decisions/`): an immutable record of a technical decision, its alternatives, and its consequences; changed only by a superseding ADR. ADR-001 fixes the platform stack. |
+| **Three-tier** | ADR-001's architecture: Supabase for data services, Render for the API and policy layer, Vercel for the admin dashboard and public website. |
 
 ## Governance and process terms
 
 | Term | Definition |
 |---|---|
-| **Baseline** | The founder-approved, change-controlled MVP scope document (`reference/baseline/`). Revised only by issuing a new version file; never edited in place. |
+| **Baseline** | A founder-approved, change-controlled specification in `reference/baseline/` — the MVP scope (`OL-BAS`) and seed data (`OL-SKC`). Revised only by issuing a new version file; never edited in place. |
 | **Change log** | The append-only record of every approved scope change (`CL-NNN`), each pending absorption into the next baseline version. |
 | **Requirements** | Per-module documents (`REQ`) stating what the system must do, with numbered items and acceptance criteria, derived from the baseline. |
 | **Data model** | Per-module documents (`DM`) defining entities, fields, and relationships, derived from requirements. Logical, not backend-specific. |
@@ -55,6 +70,7 @@ Canonical definitions for terms used throughout the OstadLagbo knowledge base. I
 | **MVP-core** | The product at the end of Slice 3: registration through offers, connections, and chat. The first "real product" milestone. |
 | **MVP-complete** | The product at the end of Slice 5: everything in approved scope, including analytics, support, and insights. The public-launch milestone. |
 | **Scope freeze** | The rule, effective once baseline v1.2 is cut, that new ideas during build are logged for a future version rather than implemented mid-build. |
+| **Adversarial review** | The practice, applied to every data model, of critiquing a draft against its requirements and sibling documents before approval; found defects in six of eight models and five cross-layer seams. |
 
 ## Module abbreviations
 
@@ -62,11 +78,11 @@ Canonical definitions for terms used throughout the OstadLagbo knowledge base. I
 
 ## Document ID prefixes
 
-`OL-CHR` charter · `OL-STK` stakeholder register · `OL-RSK` risk register · `OL-CHG` change log · `OL-RET` retention policy · `OL-PRV` privacy policy · `OL-TOS` terms of service · `OL-INC` incident response · `OL-BLD` build sequence · `OL-NFR` non-functional requirements · `OL-DM` data model · `OL-GLS` glossary · `OL-<MODULE>-REQ` module requirements · `OL-<MODULE>-DM` module data model
+`OL-CHR` charter · `OL-STK` stakeholder register · `OL-RSK` risk register · `OL-CHG` change log · `OL-RET` retention policy · `OL-PRV` privacy policy · `OL-TOS` terms of service · `OL-INC` incident response · `OL-BLD` build sequence · `OL-NFR` non-functional requirements · `OL-DM` data model overview · `OL-GLS` glossary · `OL-BAS` MVP scope baseline · `OL-SKC` skill-category seed data · `OL-DEC` architecture decision record · `OL-<MODULE>-REQ` module requirements · `OL-<MODULE>-DM` module data model
 
 ## External context
 
 | Term | Definition |
 |---|---|
-| **PDPA 2026** | Bangladesh's Personal Data Protection Act, in force April 2026 — governs consent, retention disclosure, erasure rights, and breach notification for this platform. |
+| **PDPA 2026** | Bangladesh's Personal Data Protection Act, in force April 2026 — governs consent, retention disclosure, erasure rights, cross-border transfer, and breach notification for this platform. |
 | **NID** | National ID card — the primary accepted identity document for Ostad verification, alongside passport and driving licence (CL-017). |
