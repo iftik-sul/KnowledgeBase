@@ -159,5 +159,6 @@ the assignment is a reasoned proposal awaiting client confirmation (see
   account **and** governance of the escrow apparatus — the approval and cancellation
   of Account Trustees and Auditing Companies (FTI #1, #2; RESC #11). See
   [open-questions.md](open-questions.md) for the one-queue-vs-two-queue decision.
-- The full role definitions are in [roles-and-responsibilities.md](roles-and-responsibilities.md);
-  the per-role service breakdown is in [role-directory.md](role-directory.md).
+- The full role definitions and responsibilities are in
+  [roles-and-responsibilities.md](roles-and-responsibilities.md); this register is
+  the by-service view of the same role assignments.

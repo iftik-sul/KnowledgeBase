@@ -20,8 +20,8 @@ Everywhere else, a user's role is recorded for audit attribution only and gates
 nothing; within Group A, roles carry genuine permissions and are protected by MFA.
 
 This document explains what each role is and what it is responsible for. For the
-exact list of which services each role finishes, see
-[role-directory.md](role-directory.md).
+list of which services each role finishes — the reverse, by-service view — see
+[services-overview.md](services-overview.md).
 
 ## The eight roles
 

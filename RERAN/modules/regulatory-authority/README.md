@@ -40,7 +40,6 @@ from every other module, and that difference shapes everything in this folder:
 | Document | What it covers |
 | :--- | :--- |
 | [roles-and-responsibilities.md](roles-and-responsibilities.md) | Plain description of each of the 8 roles and its duties |
-| [role-directory.md](role-directory.md) | Full per-role breakdown, including exactly which services each role finishes, by group |
 | [services-overview.md](services-overview.md) | The touchpoint register — all 114 external services mapped to a Group A role and channel |
 | [roles-and-actions-analysis.md](roles-and-actions-analysis.md) | Whole-system analysis: the action model, the 8-vs-3 reconciliation, cross-module dependencies, proposed build scope |
 | [open-questions.md](open-questions.md) | Unresolved decisions this module is waiting on |
