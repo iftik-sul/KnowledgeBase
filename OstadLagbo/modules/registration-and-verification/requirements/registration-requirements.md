@@ -3,7 +3,7 @@ project: OstadLagbo
 module: registration-and-verification
 type: requirements
 status: current
-updated: 2026-08-30
+updated: 2026-09-14
 id: OL-REG-REQ-001
 derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.1.md
 owner: Iftikher
@@ -89,7 +89,7 @@ Completing stage 6 submits the profile for admin review and sets the account to 
 
 ## REG-12 Platform rules inherited
 
-18+ applies to both roles (REG-03). Push notification enrollment is requested during onboarding (delivery rules per `contact-and-offers`). Self-service account deletion exists in settings for both roles; deletion of identity data follows the retention policy (see risk R-02).
+18+ applies to both roles (REG-03). Push notification enrollment is requested during onboarding (delivery rules per `contact-and-offers`); the device's push token is registered against the account and revoked on logout, suspension, deletion request, or termination. Self-service account deletion exists in settings for both roles; deletion of identity data follows the retention policy (see risk R-02).
 
 ## REG-13 Consent capture
 
@@ -97,6 +97,12 @@ Registration requires explicit acceptance of the Terms of Service and Privacy Po
 
 **Acceptance:** no account exists without a recorded consent version; a material policy change produces an in-app notice; a guest can open both documents without registering.
 
+## REG-14 Language preference
+
+On first launch, before any registration step, the user chooses **English or Bangla** (CL-016); the choice applies to the entire UI immediately. For guests the choice is device-local; at registration it is stored on the account as `preferred_locale` and thereafter governs **every UI string and every notification** sent to that account, including admin broadcasts. The preference is switchable from settings at any time, taking effect without restart where feasible (NFR-11). Phone numbers and OTP codes always render in Latin digits (NFR-11).
+
+**Acceptance:** first launch presents the choice before anything else; switching updates the UI and the language of subsequent notifications; no user-facing string appears in the other language for an account with a stored preference.
+
 ## Proposed technical defaults summary
 
-OTP 6 digits / 5 min / resend 60s / 5 per number per day / 5 attempts · password min 8 chars, letter + number · login lockout 5 fails per 15 min · sessions persistent, multi-device · selfie framing guidance mechanics. These are engineering defaults, changeable without founder re-approval; everything else in this document — including the accepted document types, per-type image rules, and the live-selfie-holding-document method — changes only with founder approval.
+OTP 6 digits / 5 min / resend 60s / 5 per number per day / 5 attempts · password min 8 chars, letter + number · login lockout 5 fails per 15 min · sessions persistent, multi-device · selfie framing guidance mechanics · language-switch restart behavior. These are engineering defaults, changeable without founder re-approval; everything else in this document — including the accepted document types, per-type image rules, the live-selfie-holding-document method, and the two-language choice — changes only with founder approval.
