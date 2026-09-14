@@ -19,8 +19,8 @@ tags:
 # Group A — Role × Screen Matrix (RBAC backbone)
 
 This is where RBAC lives at the UI level. It states, for each of the eight Group A
-roles, **which screens the role can reach** (navigation) and **what the role can do on
-them** (actions). It is effectively the navigation spec for the back-office app.
+roles, **which screens the role can reach**. It is the navigation spec for the back-office
+app. On-screen actions are owned by the individual screen specs (see §2).
 
 **The principle (do not build per-role screens).** There is one screen per piece of
 work. This matrix does not create screen copies; it controls access to the shared
@@ -56,20 +56,16 @@ not its layout.
 > not every other role's work screens — following least-privilege; a "break-glass"
 > override, if wanted, is a separate decision. **Needs client confirmation.**
 
-## 2. Action permissions — what a role can do on a reachable screen
+## 2. On-screen actions live in the screen specs, not here
 
-The generic actions across the decision screens:
+This matrix governs **navigation only** — which screens a role can reach. What a role can
+*do* on a reachable screen (view vs decide, which panels/controls are enabled, which
+columns show) is defined once, per screen, in that screen spec's **Role Variations /
+Permissions** section. This file deliberately does not restate on-screen actions, so the
+two never drift: navigation is owned here, actions are owned by the screens.
 
-| Action | Who |
-| :-- | :-- |
-| View a queue / open an item | The role(s) that reach that screen (per §1) |
-| Record a decision (approve / request-info / return / reject) | The screen's primary decision role only (C&E Auditor on Application Review; Licensing Officer on licensing items; Dispute Officer on cases) |
-| Configure (fees, permissions) | The owning config role only (Revenue & Finance; Super Admin) |
-| Read the audit trail | All roles (read-only) |
-| Administer accounts / roles / permissions | Super Admin only |
-
-Each screen spec carries its own **Role Variations / Permissions** section that refines
-this for that screen (e.g. view-only vs decide, escrow-view visibility).
+Reaching a screen (a ● above) never by itself implies permission to act on it — the
+screen spec decides that.
 
 ## 3. Cross-cutting rules
 
