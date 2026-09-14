@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: incident-response
 status: current
-updated: 2026-08-30
+updated: 2026-09-14
 id: OL-INC-001
 approved: 2026-08-30
 owner: Iftikher
@@ -29,13 +29,13 @@ When unsure between levels, treat it as the higher one.
 3. **Preserve:** place a legal hold (OL-RET-001) on both accounts' data — profiles, the chat thread, offer history, identity documents. Do this before anything else can expire or purge.
 4. **Document:** write a dated incident record — what was alleged, what you saw, what you did, timestamps. You will not remember details later; the record is what protects everyone including you.
 5. **Cooperate:** if police or a court contacts you, follow Playbook 3. Do not conduct your own investigation beyond the platform's records, and do not mediate between the parties.
-6. **Close:** resolution recorded in the reports queue; if the account is banned, banned-account retention applies; review whether the incident reveals a product gap (e.g., a missing warning) and file it as a change-request candidate.
+6. **Close:** resolution recorded in the reports queue. If the conduct warrants a ban, **terminate** the account (ADM-08, CL-019) rather than leaving it suspended indefinitely — termination starts the 30-day appeal window and, at its end, the banned-account retention that prevents re-registration; a suspension left open protects no one and expires nothing. Review whether the incident reveals a product gap (e.g., a missing warning) and file it as a change-request candidate.
 
 ## Playbook 2 — Data breach
 
 *Evidence or credible suspicion that identity documents, chats, phone numbers, or other personal data were accessed or exposed improperly — including a lost admin credential.*
 
-1. **Contain first:** revoke/rotate the compromised credential or access path; take the affected system offline if exposure is ongoing. Containment beats investigation in hour one.
+1. **Contain first:** revoke/rotate the compromised credential or access path; take the affected system offline if exposure is ongoing. Containment beats investigation in hour one. Under ADR-001 this means: rotate Supabase and Render credentials, revoke the compromised admin's TOTP and sessions (ADM-DM), and check Cloudflare and Render logs for the access window.
 2. **Assess scope:** what data categories, how many users, over what window — using the audit log (ADM-17) and infrastructure logs. Write the assessment down as you go.
 3. **Notify:** the PDPA requires notifying affected users and the relevant authority. Notify **users** plainly: what was exposed, when, what we did, what they should do (e.g., beware of scam calls if phone numbers leaked). Notify the **authority** per the Act's procedure. Statutory deadlines apply — confirm the current notification window with legal counsel *now, before any incident*, and record it here. Do not delay notification to make the message more comfortable.
 4. **Remediate:** fix the vulnerability; document root cause; add the fix to the risk register review.
@@ -55,16 +55,17 @@ When unsure between levels, treat it as the higher one.
 *Coordinated fraud ring, fake-profile farm, review manipulation, scraping surge, or OTP-spam attack.*
 
 1. **Measure:** confirm the pattern in analytics (ADM-12/14/15) and the SMS monitor (ADM-19) — one bad actor is moderation, a wave is an incident.
-2. **Stem:** suspend the involved accounts; where the vector is technical (scraping, OTP abuse), tighten the relevant engineering limits.
-3. **Sweep:** search the directories (ADM-10) for the same pattern — shared documents, sequential phone numbers, identical portfolios.
+2. **Stem:** suspend the involved accounts; where the vector is technical (scraping, OTP abuse), tighten the relevant engineering limits — Cloudflare rate limiting and Render API limits under ADR-001.
+3. **Sweep:** search the directories (ADM-10) for the same pattern — shared documents, sequential phone numbers, identical portfolios. Terminate confirmed fraud accounts (CL-019) so their identity hashes block re-registration.
 4. **Harden and record:** convert the lesson into a change request or engineering task; document the wave, accounts involved, and actions.
 
 ## Standing preparations (before soft launch)
 
 - [ ] Confirm PDPA breach-notification deadlines and authority contact procedure with counsel; record them in Playbook 2.
+- [ ] Obtain the PDPA data-residency ruling on identity documents stored in Singapore (ADR-001 open item 1).
 - [ ] Establish the incident contact email (also closes the Privacy Policy / ToS placeholders).
-- [ ] Keep an offline copy of this document and admin recovery credentials — an incident may take the dashboard down.
-- [ ] Verify legal-hold and suspension tooling work end-to-end in staging before any real user exists.
+- [ ] Keep an offline copy of this document and admin recovery credentials (Supabase, Render, Vercel, Cloudflare, FCM, SMS gateway) — an incident may take the dashboard down.
+- [ ] Verify legal-hold, suspension, and termination tooling work end-to-end in staging before any real user exists.
 
 ## Review
 
