@@ -12,14 +12,16 @@ updated: 2026-09-12
 Group A is the government / regulator side of RERAN. It is structurally different
 from every other module, and that difference shapes everything in this folder:
 
-- **It owns no services and pays no fees.** Every one of the other groups' 145
-  services is filed *to* Group A; Group A initiates none of its own.
+- **It owns no front-office services and pays no fees.** Every one of the other
+  groups' 145 applicant-filed services is filed *to* Group A; Group A initiates none.
+  It does, however, have its own small **back-office service catalogue** — the ~10
+  distinct actions it performs on that filed work (see services-overview.md).
 - **Its work is deciding on others' work.** Group A's "services" are the approval
   touchpoints of the platform — receive, review/audit, then approve, request more
   information, return, or reject — plus the administrative functions that run the
   agency (configuration, finance, inspection, adjudication, inter-state liaison).
-- **It is organised by sub-system, not by service catalogue**, because it has no
-  catalogue. The six sub-systems are the module's top-level structure.
+- **It is organised around six sub-systems**, which its ~10 back-office services sit
+  within. The sub-systems are the module's top-level structure.
 - **It is the only place RBAC applies.** Everywhere else a role is audit attribution
   only; within Group A, roles carry real permissions and MFA.
 
@@ -34,13 +36,16 @@ from every other module, and that difference shapes everything in this folder:
   Remote-Litigation System · Revenue & Settlement Dashboard.
 - **114 external services** route here; the Compliance & Escrow Auditor alone
   finishes 92 of them.
+- **~10 back-office services** of its own. Platform total: **145 front-office
+  services + ~10 Group A back-office services.**
 
 ## Documents in this module
 
 | Document | What it covers |
 | :--- | :--- |
 | [roles-and-responsibilities.md](roles-and-responsibilities.md) | Plain description of each of the 8 roles and its duties |
-| [services-overview.md](services-overview.md) | The touchpoint register — all 114 external services mapped to a Group A role and channel |
+| [services-overview.md](services-overview.md) | Group A's own back-office service catalogue — the ~10 actions it performs |
+| [touchpoint-register.md](touchpoint-register.md) | The join table — all 114 external services mapped to the Group A role, channel, and service that finishes each |
 | [roles-and-actions-analysis.md](roles-and-actions-analysis.md) | Whole-system analysis: the action model, the 8-vs-3 reconciliation, cross-module dependencies, proposed build scope |
 | [open-questions.md](open-questions.md) | Unresolved decisions this module is waiting on |
 

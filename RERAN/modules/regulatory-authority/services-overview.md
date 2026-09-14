@@ -5,160 +5,138 @@ type: services-overview
 status: draft
 contains_proposals: true
 updated: 2026-09-12
-derived_from:
-  - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
-  - "RERAN/modules/*/service-flows/"
 ---
 
 # Group A — Services Overview
 
-Group A has **no service catalogue of its own**. Unlike every other group, it does
-not file applications or pay fees. Its "services" are the approval touchpoints of
-the work other groups submit: every external service terminates in a Group A
-decision, and this document is the register of those touchpoints.
+This is Group A's own (back-office) service catalogue. Group A files no applications,
+but it *does* perform a small, well-defined set of actions on the work other groups
+submit. Each distinct action is a Group A service.
+This is the back-office counterpart to the 145 front-office (applicant-filed)
+services: an applicant files a front-office service, which lands as an item in one of
+these back-office services.
 
-Each row below is one external service (from RED, FTI, RESC, or Individual User),
-the Group A role that finishes it, and the sub-system channel that role works in.
-For the full submission logic of any service, see the originating module's own
-service-flow — this register cross-references, it does not duplicate.
+The catalogue is small — ~10 services — because the whole-system analysis showed the
+114 external touchpoints collapse onto a handful of repeated actions. A decision
+service is a **queue**: one workflow that processes many external services, not one
+service per touchpoint. (See [roles-and-actions-analysis.md](roles-and-actions-analysis.md)
+for how the collapse was derived, and the touchpoint register for which external
+service feeds which Group A service.)
 
-## Coverage
+**Status column:** *Active* = external services feed it today. *Latent* = a real
+regulatory function that no current service routes to (build deferrable).
 
-- **114 external services** route to Group A (RED 27 · FTI 18 · RESC 26 · IU 43).
-- **105 need a Group A decision**; 9 are automated lookups or wrappers that need none.
-- Channel split: Transaction Audit Queue **79** · Escrow / Trust-Account Audit **13**
-  · Licensing & Registry **9** · Tribunal & Remote-Litigation **4** · no decision **9**.
+## Catalogue
 
-`[proposed]` marks a service whose source did not name a Group A role explicitly;
-the assignment is a reasoned proposal awaiting client confirmation (see
-[open-questions.md](open-questions.md)).
+| # | Group A service (action) | Role | Sub-system | Feeds from | Status |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| A-1 | Audit & decide — application review | Compliance & Escrow Auditor | Transaction Audit Queue + Escrow / Trust-Account Audit | 92 external services (79 transaction, 13 escrow/trust) | Active |
+| A-2 | Vet & decide — licensing | Licensing & Registration Officer | Licensing & Registry Engine | 9 external services | Active |
+| A-3 | Adjudicate — dispute | Dispute Adjudication Officer | Tribunal & Remote-Litigation | 4 external services | Active |
+| A-4 | Configure fee schedule | Revenue & Finance Officer | Revenue & Settlement Dashboard | none (every fee-bearing service reads it) | Active |
+| A-5 | Reconcile settlements | Revenue & Finance Officer | Revenue & Settlement Dashboard | none (gateway events) | Active |
+| A-6 | Provision & manage access (RBAC) | System Super Administrator | Admin & Configuration Console | none (internal) | Active |
+| A-7 | Conduct site inspection | Inspection & Enforcement Officer | Inspection & Enforcement Module | 2 sub-steps (RED #27; IU inspection-required) | Latent |
+| A-8 | Issue enforcement notice | Inspection & Enforcement Officer | Inspection & Enforcement Module | none (proactive) | Latent |
+| A-9 | Harmonise land records | State Liaison Coordinator | Data harmonisation layer | none (state-bureau sync) | Latent |
+| A-10 | Executive sign-off / revocation | Director-General / Registrar | Governance | none (escalation only) | Latent |
 
-## Register
+---
 
-| Origin | # | Service | Group A role | Sub-system / channel | Processing time |
-|---|---|---|---|---|---|
-| RED | 1 | Register Initial Sale | Compliance & Escrow Auditor | Transaction Audit Queue | 6 business days |
-| RED | 2 | Register Initial Rent-to-Own | Compliance & Escrow Auditor | Transaction Audit Queue | 6 business days |
-| RED | 3 | Register Initial Usufruct | Compliance & Escrow Auditor | Transaction Audit Queue | 6 business days |
-| RED | 4 | Amend Initial Procedures Data | Compliance & Escrow Auditor | Transaction Audit Queue | 6 business days |
-| RED | 5 | Complete Initial Procedures Data | Compliance & Escrow Auditor | Transaction Audit Queue | 6 business days |
-| RED | 6 | Register Sale Associated with an Initial Mortgage | Compliance & Escrow Auditor | Transaction Audit Queue | 6 business days |
-| RED | 7 | Transfer Registration Fees Between Properties | Compliance & Escrow Auditor | Transaction Audit Queue | 6 business days |
-| RED | 8 | Escrow Account Activation | Compliance & Escrow Auditor | Escrow / Trust-Account Audit | 20 business hours |
-| RED | 9 | Escrow Account Transfer | Compliance & Escrow Auditor | Escrow / Trust-Account Audit | 24 working hours |
-| RED | 10 | Project Profit Withdrawal | Compliance & Escrow Auditor | Escrow / Trust-Account Audit | 29 business hours |
-| RED | 11 | Amend the Cap of Administrative, Marketing and VAT Expenses | Compliance & Escrow Auditor | Escrow / Trust-Account Audit | 26 business hours |
-| RED | 12 | Receive a Payment from the Project's Escrow Account | Compliance & Escrow Auditor | Escrow / Trust-Account Audit | 29 business hours |
-| RED | 13 | Registration of Real Estate Project | Compliance & Escrow Auditor | Transaction Audit Queue | Project registration: 3 business days |
-| RED | 14 | Real Estate Project Cancellation | Compliance & Escrow Auditor | Transaction Audit Queue | 15 minutes |
-| RED | 15 | Real Estate Project Sub-division | Compliance & Escrow Auditor | Transaction Audit Queue | 30 minutes |
-| RED | 16 | Changing the Name of a Real Estate Project | Compliance & Escrow Auditor | Transaction Audit Queue | 30 minutes |
-| RED | 17 | Project Re-registration | Compliance & Escrow Auditor | Transaction Audit Queue | 40 minutes |
-| RED | 18 | Settlements Application | Compliance & Escrow Auditor | Transaction Audit Queue | 7 hours 30 minutes |
-| RED | 19 | Request Termination of Initial Registration | Compliance & Escrow Auditor | Transaction Audit Queue | 8 hours 30 minutes |
-| RED | 20 | Depositing a Mortgage into an Escrow Account | Compliance & Escrow Auditor | Escrow / Trust-Account Audit | 26 working hours |
-| RED | 21 | Bank Guarantee Cancellation | Compliance & Escrow Auditor | Escrow / Trust-Account Audit | 26 business hours |
-| RED | 22 | Real Estate Licensing Application | Licensing & Registration Officer | Licensing & Registry | 5 minutes |
-| RED | 23 | Accreditation of Training Entities | Licensing & Registration Officer | Licensing & Registry | 4 business days |
-| RED | 24 | Registration/Amendment of Real Estate Project Details | Compliance & Escrow Auditor | Transaction Audit Queue | 5 business days |
-| RED | 25 | Issuing Map Application | Compliance & Escrow Auditor | Transaction Audit Queue | One business day |
-| RED | 26 | Separation or Annexing a Property | Compliance & Escrow Auditor | Transaction Audit Queue | One business day |
-| RED | 27 | Requesting a Technical Report for the Project | Compliance & Escrow Auditor | Transaction Audit Queue | 5 business days |
-| FTI | 1 | Approval / Renewal of Account Trustee & Auditing Company | Compliance & Escrow Auditor | Escrow / Trust-Account Audit | 29 business hours |
-| FTI | 2 | Cancellation of Account Trustee & Auditing Company | Compliance & Escrow Auditor | Escrow / Trust-Account Audit | 29 business hours |
-| FTI | 3 | Mortgage Registration | Compliance & Escrow Auditor | Transaction Audit Queue | 20–25 minutes |
-| FTI | 4 | Mortgage Amendment | Compliance & Escrow Auditor | Transaction Audit Queue | 10–15 minutes |
-| FTI | 5 | Mortgage Transfer | Compliance & Escrow Auditor | Transaction Audit Queue | 15–20 minutes |
-| FTI | 6 | Mortgage Release | Compliance & Escrow Auditor | Transaction Audit Queue | 10–15 minutes |
-| FTI | 7 | Grant Property Mortgage | Compliance & Escrow Auditor | Transaction Audit Queue | 15–20 minutes |
-| FTI | 8 | Finance Lease Registration | Compliance & Escrow Auditor | Transaction Audit Queue | 30–35 minutes |
-| FTI | 9 | Finance Lease Amendment | Compliance & Escrow Auditor | Transaction Audit Queue | 10–15 minutes |
-| FTI | 10 | Finance Lease Transfer | Compliance & Escrow Auditor | Transaction Audit Queue | 10–15 minutes |
-| FTI | 11 | Finance Lease Release | Compliance & Escrow Auditor | Transaction Audit Queue | 10–15 minutes |
-| FTI | 12 | Registration of Real Estate Fund Companies in the Register of Privileges | Compliance & Escrow Auditor | Transaction Audit Queue | 25–30 minutes |
-| FTI | 13 | Sale Procedure (Heirs) | Compliance & Escrow Auditor | Transaction Audit Queue | 25–30 minutes |
-| FTI | 14 | Company Shares Sale | Compliance & Escrow Auditor | Transaction Audit Queue | 25–30 minutes |
-| FTI | 15 | Updating Title Deed Information | Compliance & Escrow Auditor | Transaction Audit Queue | 25 minutes |
-| FTI | 16 | Split Ownership | Compliance & Escrow Auditor | Transaction Audit Queue | 25 minutes |
-| FTI | 17 | Issuance of Title Deed | Compliance & Escrow Auditor | Transaction Audit Queue | 25 minutes |
-| FTI | 18 | Contract Cancellation | Compliance & Escrow Auditor | Transaction Audit Queue | 15 minutes |
-| RESC | 1 | Register Company for JOP Administrative Supervision | Compliance & Escrow Auditor | Transaction Audit Queue | 5 minutes |
-| RESC | 2 | Approve Service Fees & Utilization Fees | Compliance & Escrow Auditor | Transaction Audit Queue | 25 minutes |
-| RESC | 3 | Register JOP-Competent Employees | Compliance & Escrow Auditor | Transaction Audit Queue | 5 minutes |
-| RESC | 4 | Register Owners Association | Compliance & Escrow Auditor | Transaction Audit Queue | 25 minutes |
-| RESC | 5 | Transfer JOP Escrow Account | Compliance & Escrow Auditor | Escrow / Trust-Account Audit | 1 business day |
-| RESC | 6 | Request No-Objection Letter to Close Escrow Account [proposed] | Compliance & Escrow Auditor | Escrow / Trust-Account Audit | 3 business days |
-| RESC | 7 | Accredit Escrow Account Signatories | Compliance & Escrow Auditor | Escrow / Trust-Account Audit | 1 business day |
-| RESC | 8 | Appoint Financial Auditor | Compliance & Escrow Auditor | Transaction Audit Queue | 1 business day |
-| RESC | 9 | Appoint Audit Office for JOP Financial Accounts | Compliance & Escrow Auditor | Transaction Audit Queue | 1 business day |
-| RESC | 10 | Appoint Audit Office for JOP Budget Audit | Compliance & Escrow Auditor | Transaction Audit Queue | 1 business day |
-| RESC | 11 | Approval / Renewal of Financial Auditing Company [proposed] | Compliance & Escrow Auditor | Escrow / Trust-Account Audit | 8 business days |
-| RESC | 12 | Real Estate Licensing Application | Licensing & Registration Officer | Licensing & Registry | 5 minutes |
-| RESC | 13 | Real Estate Permit Application | Licensing & Registration Officer | Licensing & Registry | 7 minutes |
-| RESC | 14 | Issue Professional Practice Card | Licensing & Registration Officer | Licensing & Registry | 5 minutes |
-| RESC | 15 | Renew Professional Practice Card [proposed] | Licensing & Registration Officer | Licensing & Registry | Automatic approval |
-| RESC | 16 | Cancel Professional Practice Card | Licensing & Registration Officer | Licensing & Registry | 2 minutes |
-| RESC | 17 | Amend Professional Practice Card [proposed] | Licensing & Registration Officer | Licensing & Registry | Automatic approval |
-| RESC | 18 | Register Real Estate Evaluation Details Certificate [proposed] | None | — | Immediate |
-| RESC | 19 | Accreditation of Training Entities (Real Estate Companies) | Licensing & Registration Officer | Licensing & Registry | 4 business days |
-| RESC | 20 | Register/Renew Management Contract | Compliance & Escrow Auditor | Transaction Audit Queue | 1 hour 35 minutes |
-| RESC | 21 | Cancel Management Contract [proposed] | None | — | Immediate |
-| RESC | 22 | Register Tenancy System User [proposed] | None | — | Immediate |
-| RESC | 23 | Permit to Sell by Public Auction [proposed] | Compliance & Escrow Auditor | Transaction Audit Queue | Within two business days |
-| RESC | 24 | Register Property Sold by Auction | Compliance & Escrow Auditor | Transaction Audit Queue | 25–30 minutes |
-| RESC | 25 | Primary Suit (Joint Property) | Dispute Adjudication Officer | Tribunal & Remote-Litigation | Registration completion: 10 minutes |
-| RESC | 26 | Execution Case (Joint Ownership) | Dispute Adjudication Officer | Tribunal & Remote-Litigation | Registration completion: 10 minutes |
-| IU | 1 | Verify Developer [proposed] | None | — | Immediate (real-time lookup) |
-| IU | 2 | Verify Development Project [proposed] | None | — | Immediate (real-time lookup) |
-| IU | 3 | Verify Property [proposed] | None | — | Immediate (real-time lookup) |
-| IU | 4 | Register Property Ownership [proposed] | Compliance & Escrow Auditor | Transaction Audit Queue | Subject to RERAN service standards |
-| IU | 5 | Transfer Property Ownership | Compliance & Escrow Auditor | Transaction Audit Queue | 25 minutes |
-| IU | 6 | Register Property Sale [proposed] | Compliance & Escrow Auditor | Transaction Audit Queue | 25–35 minutes |
-| IU | 7 | Update Property Ownership Information | Compliance & Escrow Auditor | Transaction Audit Queue | Owner/entity info amendment |
-| IU | 8 | Register Sale of Mortgaged Property | Compliance & Escrow Auditor | Transaction Audit Queue | 15–20 minutes |
-| IU | 9 | Register Gift Transfer | Compliance & Escrow Auditor | Transaction Audit Queue | 25–30 minutes |
-| IU | 10 | Register Lease-to-Own | Compliance & Escrow Auditor | Transaction Audit Queue | ~25 minutes |
-| IU | 11 | Transfer Lease-to-Own | Compliance & Escrow Auditor | Transaction Audit Queue | ~25 minutes |
-| IU | 12 | Release Lease-to-Own | Compliance & Escrow Auditor | Transaction Audit Queue | ~25 minutes |
-| IU | 13 | Amend Lease-to-Own | Compliance & Escrow Auditor | Transaction Audit Queue | ~25 minutes |
-| IU | 14 | Register Usufruct Right | Compliance & Escrow Auditor | Transaction Audit Queue | Max 30 minutes |
-| IU | 15 | Amend Usufruct Right | Compliance & Escrow Auditor | Transaction Audit Queue | 10–15 minutes |
-| IU | 16 | Terminate Usufruct Right | Compliance & Escrow Auditor | Transaction Audit Queue | 10–15 minutes |
-| IU | 17 | Grant Registration | Compliance & Escrow Auditor | Transaction Audit Queue | 25–30 minutes |
-| IU | 18 | Grant Completion | Compliance & Escrow Auditor | Transaction Audit Queue | ~25 minutes |
-| IU | 19 | Register Heirs Ownership | Compliance & Escrow Auditor | Transaction Audit Queue | 30–40 minutes |
-| IU | 20 | Register Community Land | Compliance & Escrow Auditor | Transaction Audit Queue | 30–40 minutes |
-| IU | 21 | Register Partners Division | Compliance & Escrow Auditor | Transaction Audit Queue | ~30 minutes |
-| IU | 22 | Register Industrial & Commercial Land Ownership | Compliance & Escrow Auditor | Transaction Audit Queue | ~30 minutes |
-| IU | 23 | Register Lease | Compliance & Escrow Auditor | Transaction Audit Queue | Via Real Estate Services Trustee |
-| IU | 24 | Renew Lease | Compliance & Escrow Auditor | Transaction Audit Queue | Via Real Estate Services Trustee |
-| IU | 25 | Manage Lease [proposed] | Compliance & Escrow Auditor | Transaction Audit Queue | Depends on request type |
-| IU | 26 | Submit Tenancy Dispute | Dispute Adjudication Officer | Tribunal & Remote-Litigation | Dispute registration |
-| IU | 27 | Cancel Tenancy Contract | Compliance & Escrow Auditor | Transaction Audit Queue | Via Real Estate Trustee Services |
-| IU | 28 | Request Rental Valuation | Compliance & Escrow Auditor | Transaction Audit Queue | ~20–30 minutes |
-| IU | 29 | Register Power of Attorney [proposed] | Compliance & Escrow Auditor | Transaction Audit Queue | Subject to RERAN service standards |
-| IU | 30 | Act on Behalf of Property Owner [proposed] | None | — | Depends on selected service |
-| IU | 31 | Request Detailed Real Estate Statement | Compliance & Escrow Auditor | Transaction Audit Queue | ~10–15 minutes |
-| IU | 32 | Request To Whom It May Concern Certificate | Compliance & Escrow Auditor | Transaction Audit Queue | ~10–15 minutes |
-| IU | 33 | Request Property Survey | Compliance & Escrow Auditor | Transaction Audit Queue | ~3–10 working days |
-| IU | 34 | Request Property Valuation | Compliance & Escrow Auditor | Transaction Audit Queue | ~3–10 working days |
-| IU | 35 | Request Full / Partial Indemnity | Compliance & Escrow Auditor | Transaction Audit Queue | ~10–20 minutes |
-| IU | 36 | Remote Identity Verification [proposed] | Compliance & Escrow Auditor | Transaction Audit Queue | Subject to RERAN standards |
-| IU | 37 | Remote Property Transactions [proposed] | None | — | Depends on selected transaction |
-| IU | 38 | Submit Complaint [proposed] | Dispute Adjudication Officer | Tribunal & Remote-Litigation | Subject to RERAN standards |
-| IU | 39 | Track Complaint [proposed] | None | — | Immediate (real-time lookup) |
-| IU | 40 | Upload Building Details for Leasing | Compliance & Escrow Auditor | Transaction Audit Queue | One business day |
-| IU | 41 | Register Company | Compliance & Escrow Auditor | Transaction Audit Queue | 25–30 minutes |
-| IU | 42 | Cancel Power of Attorney | Compliance & Escrow Auditor | Transaction Audit Queue | 20 minutes |
-| IU | 43 | Exchange Properties | Compliance & Escrow Auditor | Transaction Audit Queue | 25 minutes |
+## Service detail
 
-## Notes
+### A-1 — Audit & decide (application review)
+- **Trigger:** a paid, submitted application lands in the queue. For escrow/trust
+  items, this is *after* the FTI Account Trustee's pre-assessment (the two-gate).
+- **Inputs:** application data; uploaded documents; registry records to verify
+  against; for escrow items, the trustee pre-assessment; for mortgage-linked items,
+  the live FTI status check.
+- **Steps:** receive → review & audit, verifying against the registry → decide.
+- **Outcomes:** Approve · Request additional information · Return for correction · Reject.
+- **Outputs (on approve):** the applicant's artifact (e-certificate, e-title deed,
+  property map, or registry-record update) + payment receipt + audit-trail entry.
+- **Escrow variant (A3, resolved):** transaction and escrow items are one service,
+  not two — the decision loop is identical. Escrow items are handled as a documented
+  variant within this service: they arrive through the FTI Account Trustee pre-gate,
+  show escrow-account context, and carry a heavier review checklist (account-movement
+  audit, trustee-assessment review, signatory verification). The UI gives escrow its
+  own queue-view and checklist; the service-flow is one flow with an escrow branch.
 
-- The escrow / trust-account classification was verified against each service's own
-  source (not inferred from the title): it covers operations on a project escrow
-  account **and** governance of the escrow apparatus — the approval and cancellation
-  of Account Trustees and Auditing Companies (FTI #1, #2; RESC #11). See
-  [open-questions.md](open-questions.md) for the one-queue-vs-two-queue decision.
-- The full role definitions and responsibilities are in
-  [roles-and-responsibilities.md](roles-and-responsibilities.md); this register is
-  the by-service view of the same role assignments.
+### A-2 — Vet & decide (licensing)
+- **Trigger:** a licence, permit, practice-card, or accreditation application is submitted.
+- **Inputs:** applicant credentials; supporting documents; the national practitioner register.
+- **Steps:** receive → vet against eligibility → decide → issue and update the register.
+- **Outcomes:** Approve · Request information · Reject. (Some source workflows are
+  auto-approve — e.g. practice-card renew/amend — where this service records rather
+  than manually reviews.)
+- **Outputs:** e-licence / permit / practice card / accreditation; register entry.
+
+### A-3 — Adjudicate (dispute)
+- **Trigger:** a suit, execution case, tenancy dispute, or complaint is filed.
+- **Inputs:** the filing; the parties; submitted evidence.
+- **Steps:** receive → schedule mediation / hearing → conduct session(s) → record judgment.
+- **Outcomes:** multi-stage — resolved / partially resolved / dismissed / referred.
+- **Outputs:** judgment record; assignment.
+- **Note:** unlike A-1/A-2 this is a multi-session case process, not a single
+  approve/reject — it needs its own case-management workflow, not the decision loop.
+
+### A-4 — Configure fee schedule
+- **Trigger:** internal — a policy change or a new fee-bearing service.
+- **Inputs:** fee and levy definitions.
+- **Steps:** create / edit fee entries → publish the schedule.
+- **Outputs:** the active fee schedule that every fee-bearing service reads at checkout.
+- **Note:** a configuration surface, not a queue.
+
+### A-5 — Reconcile settlements
+- **Trigger:** periodic, or on gateway settlement events.
+- **Inputs:** gateway settlement data; amounts owed.
+- **Steps:** match collected against owed → flag discrepancies → remit to accounts.
+- **Outputs:** reconciliation report; remittance records.
+
+### A-6 — Provision & manage access (RBAC)
+- **Trigger:** internal — staff onboarding or a role change.
+- **Inputs:** staff identity; role assignment; permission configuration.
+- **Steps:** create account → assign role → set permissions → enrol MFA.
+- **Outputs:** a provisioned, MFA-protected staff account; audit-trail entry.
+- **Note:** this service *is* the RBAC operation. It must exist before any other
+  Group A service can be used.
+
+### A-7 — Conduct site inspection (Latent)
+- **Trigger:** a sub-step of certain services (RED #27 field visit; IU
+  inspection-required), or proactive.
+- **Inputs:** site/project reference; inspection checklist; geo-tag.
+- **Steps:** schedule → visit → record geo-tagged findings → verify milestones.
+- **Outputs:** inspection report, which feeds back into an A-1 decision.
+
+### A-8 — Issue enforcement notice (Latent)
+- **Trigger:** proactive — a violation is detected.
+- **Inputs:** violation details; the entity concerned.
+- **Steps:** assess → issue stop-work / violation notice → escalate penalty.
+- **Outputs:** notice; penalty referral.
+
+### A-9 — Harmonise land records (Latent)
+- **Trigger:** internal / periodic, or when a jurisdictional conflict is detected.
+- **Inputs:** state-bureau records; C-of-O data; platform records.
+- **Steps:** sync → detect conflicts → resolve / harmonise.
+- **Outputs:** reconciled records.
+- **Open (A4):** scope depends on whether AGIS is a design reference or a live
+  integration target.
+
+### A-10 — Executive sign-off / revocation (Latent)
+- **Trigger:** escalation — a revocation, final enforcement action, or statutory instrument.
+- **Inputs:** the escalated case; the recommendation.
+- **Steps:** review escalation → sign off / authorise.
+- **Outputs:** signed instrument; revocation record.
+
+---
+
+## How this relates to the front-office services
+
+Each external (front-office) service names, in its own service-flow, the Group A
+service that finishes it. The touchpoint register is the join table: it lists all
+114 external services and which of A-1 to A-3 (or none) each one feeds. This
+catalogue is the reverse view — Group A's own services, each aggregating many
+external ones.
+
+The platform total is best stated as: **145 front-office services + ~10 Group A
+back-office services.**

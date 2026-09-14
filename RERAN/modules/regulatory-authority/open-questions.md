@@ -8,15 +8,14 @@ updated: 2026-09-12
 
 # Group A — Open Questions
 
-Decisions this module is waiting on. Each carries a proposed position; none is
-resolved. Nothing downstream (UI, service-flows) should be built on the proposed
-items until they are confirmed.
+Decisions this module is waiting on. Each carries a proposed position or, where
+noted, a resolution. Nothing downstream (UI, service-flows) should be built on the
+proposed items until they are confirmed.
 
 ## A1 — Unconfirmed role assignments (proposed)
 
 Some services do not name a Group A role in their source; the assignment was proposed
-by module pattern. These are marked `[proposed]` throughout the register and
-directory.
+by module pattern. These are marked `[proposed]` throughout the touchpoint register.
 
 - **12 Individual User services** name only "RERAN" with no role. Proposed:
   complaint (#38) → Dispute Adjudication Officer; the rest → Compliance & Escrow
@@ -43,15 +42,19 @@ sourced roles:
 **Status: open.** Fixing the source service-flow labels is a separate correction
 pass, not part of this module's foundation.
 
-## A3 — Escrow sub-system: one queue or two?
+## A3 — Escrow sub-system: one queue or two? *(resolved 2026-09-12)*
 
 The Compliance & Escrow Auditor's 92 services split into 79 general transaction
-audits and 13 escrow / trust-account operations (verified against source). The source
-structure names Escrow / Trust-Account Audit as a distinct sub-system.
+audits and 13 escrow / trust-account operations (verified against source).
 
-**Question:** does the Compliance & Escrow Auditor work one combined queue with an
-escrow filter, or two genuinely separate sub-system queues? 13-vs-79 is a lopsided
-split. **Status: open** — affects the back-office UI design.
+**Resolved:** one service, not two. The decision loop is identical, so transaction
+and escrow are modelled as a single Group A service (A-1 in services-overview.md)
+with escrow handled as a documented variant — it arrives through the FTI Account
+Trustee pre-gate, shows escrow-account context, and carries a heavier review
+checklist. The UI gives escrow its own queue-view and checklist within the one
+service. Splitting was rejected to avoid duplicating a service-flow that starts
+identical (the drift risk); it can still be split later if escrow proves to need a
+genuinely separate workflow.
 
 ## A4 — AGIS: design reference or live integration?
 

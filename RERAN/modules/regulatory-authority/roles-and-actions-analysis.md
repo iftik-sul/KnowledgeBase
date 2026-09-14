@@ -212,8 +212,8 @@ See [open-questions.md](open-questions.md) for the live tracking of these. In br
   services were assigned by pattern. Marked `[proposed]`; see A1.
 - **9 services need no Group A decision** — automated lookups + wrappers; documented
   as system actions, no role, no queue.
-- **Escrow sub-system split** — 79 transaction vs 13 escrow, verified against
-  source; one-queue-vs-two is open (A3).
+- **Escrow sub-system** — 79 transaction vs 13 escrow, verified against source;
+  modelled as one service with an escrow variant (A3, resolved).
 - **AGIS reference vs integration** — the largest external unknown (A4).
 
 ---
