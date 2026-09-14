@@ -14,9 +14,7 @@ tags: [regulatory-authority, ui-spec, back-office, licensing, register]
 # Screen: National Practitioner Register
 
 **Archetype:** 3 — Editor / Config (with a read-heavy list).
-**Access (RBAC-gated):** Licensing & Registration Officer (write); other roles may read
-where the register backs a check (e.g. Application Review's practitioner check reads it). MFA
-required.
+**Access (RBAC-gated):** Licensing & Registration Officer (write); other roles may read where the register backs a check (e.g. Application Review's practitioner check reads it). MFA required. Navigation (which roles reach this screen) is governed by [role-screen-matrix.md](../role-screen-matrix.md); the roles named here identify who acts on this screen.
 
 The authoritative record of who is licensed to operate — developers, agents, surveyors,
 companies, and their practice cards. A-2 is its **sole writer**; every front-office

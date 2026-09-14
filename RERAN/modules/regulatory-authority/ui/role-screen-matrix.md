@@ -39,7 +39,7 @@ not its layout.
 | Work Queue — escrow | ● | | | | | | | |
 | Work Queue — licensing | | ● | | | | | | |
 | Application Review | ● | ● | | | | | | |
-| Case Queue / Workspace / Session / Judgment | | | ● | | | | | |
+| Case Queue / Case Workspace | | | ● | | | | | |
 | National Practitioner Register | | ● | | | | | | |
 | Admin Console (staff / roles / permissions) | | | | ● | | | | |
 | Fee Schedule Editor | | | | | ● | | | |

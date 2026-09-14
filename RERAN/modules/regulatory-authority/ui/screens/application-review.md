@@ -18,9 +18,8 @@ tags:
 
 # Screen: Application Review
 
-**Access (RBAC-gated):** Compliance & Escrow Auditor (transaction + escrow items);
-Licensing & Registration Officer (licensing items). Only the item's primary decision role
-may record a decision here. MFA required. See [role-screen-matrix.md](../role-screen-matrix.md).
+**Archetype:** 2 — Detail / Decision.
+**Access (RBAC-gated):** Compliance & Escrow Auditor (transaction + escrow items); Licensing & Registration Officer (licensing items). Only the item's primary decision role may record a decision here. MFA required. Navigation (which roles reach this screen) is governed by [role-screen-matrix.md](../role-screen-matrix.md); the roles named here identify who acts on this screen.
 
 The screen where the actual decision happens. A reviewer opens one item from the
 [Work Queue](work-queue.md), sees the application, its documents, and live registry checks
@@ -94,7 +93,8 @@ Four mutually exclusive outcomes:
 
 On approve, the output (certificate / title deed / map / registry update) is triggered per
 the originating service. Every outcome writes the decision, actor, and reason to the audit
-trail.
+trail. Field-level guards (mandatory reasons, escrow/mortgage blocks) are in
+[validation-rules.md](../validation-rules.md).
 
 ## Role Variations / Permissions
 
@@ -109,9 +109,9 @@ trail.
 
 ## Status transitions
 
-Uses the shared platform status vocabulary (A-1 §13): `Under Review → Information Requested
-/ Returned / Approved / Rejected`. This screen must not introduce local status words — the
-originating modules' status displays read these.
+Uses the shared decision status vocabulary — see [status-badges.md](../status-badges.md) §1
+(the single source; do not localise). This screen must not introduce local status words, as
+the originating modules' status displays read them.
 
 ## Notes
 

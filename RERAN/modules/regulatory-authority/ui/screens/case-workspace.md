@@ -14,7 +14,7 @@ tags: [regulatory-authority, ui-spec, back-office, tribunal]
 # Screen: Case Workspace
 
 **Archetype:** 5 — Case Workspace.
-**Access (RBAC-gated):** Dispute Adjudication Officer. MFA required.
+**Access (RBAC-gated):** Dispute Adjudication Officer. MFA required. Navigation (which roles reach this screen) is governed by [role-screen-matrix.md](../role-screen-matrix.md); the roles named here identify who acts on this screen.
 
 The hub for working one dispute case over multiple sessions. This is the one Group A screen
 that is not an approve/reject — it is a case worked over time, with sessions, evidence, and

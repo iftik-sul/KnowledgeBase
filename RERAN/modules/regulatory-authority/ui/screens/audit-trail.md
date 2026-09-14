@@ -14,7 +14,7 @@ tags: [regulatory-authority, ui-spec, back-office, audit]
 # Screen: Audit Trail
 
 **Archetype:** 1 — Queue (read-only, no decision).
-**Access (RBAC-gated):** all roles, read-only. MFA required.
+**Access (RBAC-gated):** all roles, read-only. MFA required. Navigation (which roles reach this screen) is governed by [role-screen-matrix.md](../role-screen-matrix.md); the roles named here identify who acts on this screen.
 
 The permanent, searchable record of every state-changing action in the back-office app.
 Every Group A service writes to it; this screen reads it. It is the accountability surface

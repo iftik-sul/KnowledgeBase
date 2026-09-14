@@ -17,10 +17,13 @@ tags:
 
 # Group A — Screen Archetypes
 
-Group A's ~16 active back-office screens reduce to **five archetypes**. Every screen spec
-declares which archetype it follows, so section shapes stay consistent and we don't
-reinvent layout per screen. This is the back-office analogue of a design pattern library
-at the spec level.
+Group A's ~16 active back-office UI surfaces reduce to **five archetypes**. They are
+delivered as **10 screen specs** in `screens/` — some specs bundle related surfaces (the
+Admin Console spec covers staff directory, account editor, and role/permission editor; the
+dispute pair of Case Queue + Case Workspace covers the queue, session, and judgment
+surfaces; Reconciliation covers reconciliation and remittance). Every screen spec declares
+which archetype it follows, so section shapes stay consistent and we don't reinvent layout
+per screen.
 
 > **Note.** These archetypes are defined against the specs. Their concrete section shapes
 > and component choices will be reconciled to the actual Figma component library in the

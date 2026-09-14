@@ -18,9 +18,8 @@ tags:
 
 # Screen: Work Queue
 
-**Access (RBAC-gated):** Compliance & Escrow Auditor (transaction + escrow views);
-Licensing & Registration Officer (licensing view). Reachable only by the role that owns
-the queue type — see [role-screen-matrix.md](../role-screen-matrix.md). MFA required.
+**Archetype:** 1 — Queue.
+**Access (RBAC-gated):** Compliance & Escrow Auditor (transaction + escrow views); Licensing & Registration Officer (licensing view). Reachable only by the role that owns the queue type — MFA required. Navigation (which roles reach this screen) is governed by [role-screen-matrix.md](../role-screen-matrix.md); the roles named here identify who acts on this screen.
 
 The single worklist a reviewer works from. Submitted, paid applications land here awaiting
 a decision; the reviewer triages and opens them into [Application Review](application-review.md).
@@ -95,7 +94,7 @@ practitioner).
 | Originating service | e.g. "RED #1 Register Initial Sale" |
 | Applicant | Person / company that filed |
 | Subject | Project / property / title / practitioner |
-| Status | Shared status vocabulary (see status-badges) |
+| Status | Shared status vocabulary (see [status-badges.md](../status-badges.md) §1) |
 | Age / SLA | Time in queue vs the originating service's SLA; breaching rows flagged |
 | Escrow flag | *(escrow view)* trustee-assessment received indicator |
 

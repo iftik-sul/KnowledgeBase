@@ -14,7 +14,7 @@ tags: [regulatory-authority, ui-spec, back-office, dashboard]
 # Screen: Dashboard
 
 **Archetype:** 4 — Dashboard / Monitor.
-**Access (RBAC-gated):** all roles (the landing screen); tiles are role-scoped. MFA required.
+**Access (RBAC-gated):** all roles (the landing screen); tiles are role-scoped. MFA required. Navigation (which roles reach this screen) is governed by [role-screen-matrix.md](../role-screen-matrix.md); the roles named here identify who acts on this screen.
 
 The staff landing screen. Each role sees at-a-glance state for *their* work and drills into
 the screens that act. It shows nothing a role cannot reach elsewhere — it is a summary and

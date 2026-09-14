@@ -14,7 +14,7 @@ tags: [regulatory-authority, ui-spec, back-office, finance]
 # Screen: Reconciliation Dashboard
 
 **Archetype:** 4 — Dashboard / Monitor (with a remittance sub-view).
-**Access (RBAC-gated):** Revenue & Finance Officer only. MFA required.
+**Access (RBAC-gated):** Revenue & Finance Officer only. MFA required. Navigation (which roles reach this screen) is governed by [role-screen-matrix.md](../role-screen-matrix.md); the roles named here identify who acts on this screen.
 
 Where gateway receipts are matched to fees owed, discrepancies surfaced, and remittances
 managed (A-5). It closes the money loop the Fee Schedule Editor opens.

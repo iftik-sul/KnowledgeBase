@@ -14,7 +14,7 @@ tags: [regulatory-authority, ui-spec, back-office, tribunal, queue]
 # Screen: Case Queue
 
 **Archetype:** 1 — Queue.
-**Access (RBAC-gated):** Dispute Adjudication Officer. MFA required.
+**Access (RBAC-gated):** Dispute Adjudication Officer. MFA required. Navigation (which roles reach this screen) is governed by [role-screen-matrix.md](../role-screen-matrix.md); the roles named here identify who acts on this screen.
 
 The worklist of dispute cases (A-3): suits, execution cases, tenancy disputes, complaints.
 Follows the Queue archetype; row click opens the [Case Workspace](case-workspace.md). Unlike

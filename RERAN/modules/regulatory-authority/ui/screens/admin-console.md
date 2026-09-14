@@ -14,8 +14,7 @@ tags: [regulatory-authority, ui-spec, back-office, rbac, admin]
 # Screen: Admin Console
 
 **Archetype:** 3 — Editor / Config.
-**Access (RBAC-gated):** System Super Administrator only. MFA required. This is the most
-sensitive surface in the app — it administers the RBAC that every other screen relies on.
+**Access (RBAC-gated):** System Super Administrator only. MFA required. This is the most sensitive surface in the app — it administers the RBAC that every other screen relies on. Navigation (which roles reach this screen) is governed by [role-screen-matrix.md](../role-screen-matrix.md); the roles named here identify who acts on this screen.
 
 Where staff accounts, roles, and permissions are managed (A-6). It is the service that *is*
 RBAC, rendered as three linked editor surfaces.
