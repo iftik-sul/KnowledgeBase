@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: data-model
 status: current
-updated: 2026-09-13
+updated: 2026-09-14
 id: OL-DM-001
 derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.1.md
 owner: Iftikher
@@ -42,7 +42,7 @@ The index and rulebook for the data-model layer. Every entity in the system is o
 | `profile_revision` (pending post-approval key-field changes) | OSP | ADM (review case, diff) |
 | `shagred_profile` | SGP | OFR (visibility), ADM |
 | `ostad_history_entry` | SGP | — (owner-only) |
-| `skill_category` (en + bn alias, active flag) | ADM | OSP, MAP |
+| `skill_category` (en + bn alias, active flag; seeded from OL-SKC-001) | ADM | OSP, MAP |
 | `admin_area` (Division → District → Thana → postal code; en + bn) | ADM | OSP, SGP |
 | `review_case` (review episode record; not the gate) | ADM | OSP (via profile_revision), REG (via identity_document) |
 | `admin_account`, `admin_session`, `admin_audit_entry` | ADM | all admin actions |
@@ -84,11 +84,13 @@ OstadLagbo uses **static role-based access, not data-driven RBAC**, deliberately
 | Non-key-field profile edits publish instantly; key-field edits require approval before going public | OSP-10 | Public reads never join an open `profile_revision` (rule 3) |
 | A suspended account may appeal and do nothing else | SUP-04, ADM-08 | The policy layer permits three operations on `support_ticket`/`ticket_message` for suspended accounts, all scoped to `category = appeal` or owned tickets (rule 7) |
 
+**Implementation under ADR-001 (two lines of defense):** the policy layer is a module of the **Render API** — every endpoint calls it; no endpoint evaluates access itself. **Supabase row-level security mirrors the same rules at the database**, so a defect in one endpoint still cannot return data the database itself refuses to serve. The API layer is the primary guard and the source of truth for these rules; RLS is the safety net, and the two are kept in sync by treating this table as the specification for both.
+
 **Post-MVP evolution:** when the founder adds team members and admin role tiers become necessary (already marked post-MVP in ADM-20), that is the point data-driven RBAC is introduced — scoped to the admin panel, where multiple tiers actually exist to justify it. The relationship/state policy layer for end-user access is not expected to need this evolution, since its complexity is inherent to the product, not to organizational growth.
 
 ## What the backend architecture decision must satisfy
 
-Collected from the module models, for the architecture decision record: **(a)** a spatial index with bounding-box and radius queries over ~1,000–10,000 points, with server-side cluster aggregation above a cap (MAP-DM); **(b)** fuzzy text matching across Latin and Bangla scripts with per-script normalization (MAP-DM, OSP-DM); **(c)** append-only storage for the audit log, enforced below the application layer (ADM-DM, NFR-05); **(d)** request-log scrubbing of coordinate parameters at the infrastructure layer (MAP-DM, NFR-06); **(e)** partial unique indexes (offers, reports, appeals, blocks) and check constraints (message authorship) — or equivalent guarantees; **(f)** scheduled jobs for offer expiry, day-5 reminders, inactivity auto-resolution, and retention purges on both deletion paths; **(g)** transactional multi-write for offer acceptance (five writes, one commit) and for termination (moderation action + account fields + session/token revocation + offer resolution); **(h)** push delivery to platform tokens with per-recipient locale rendering. A backend that provides these natively is strongly preferred over one requiring auxiliary services at MVP scale (NFR-13).
+Collected from the module models, for the architecture decision record: **(a)** a spatial index with bounding-box and radius queries over ~1,000–10,000 points, with server-side cluster aggregation above a cap (MAP-DM); **(b)** fuzzy text matching across Latin and Bangla scripts with per-script normalization (MAP-DM, OSP-DM); **(c)** append-only storage for the audit log, enforced below the application layer (ADM-DM, NFR-05); **(d)** request-log scrubbing of coordinate parameters at the infrastructure layer (MAP-DM, NFR-06); **(e)** partial unique indexes (offers, reports, appeals, blocks) and check constraints (message authorship) — or equivalent guarantees; **(f)** scheduled jobs for offer expiry, day-5 reminders, inactivity auto-resolution, and retention purges on both deletion paths; **(g)** transactional multi-write for offer acceptance (five writes, one commit) and for termination (moderation action + account fields + session/token revocation + offer resolution); **(h)** push delivery to platform tokens with per-recipient locale rendering. A backend that provides these natively is strongly preferred over one requiring auxiliary services at MVP scale (NFR-13). **Resolved by ADR-001** (accepted 2026-09-13): (a), (b), (e), (g) in Supabase PostgreSQL; (c) database permissions; (d) Cloudflare + Render log configuration; (f) pg_cron with the API handling external calls; (h) the API via Firebase Cloud Messaging.
 
 ## Document sequence
 
