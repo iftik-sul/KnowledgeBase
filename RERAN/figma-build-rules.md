@@ -82,9 +82,9 @@ Sidebar header (78) aligns with the top bar (78) on the same baseline.
   a decision/validation area. Reuse the `ValidationSummaryCard` pattern for check panels.
 
 ## 5. Component & pattern conventions
-- **KPI cards** — two house styles exist: FTI `SummaryCard` (274×127, icon chip + 4px left accent,
-  4/row) and RED `MetricCard` (218×108, no icon, 5/row). Pick per KPI count and **state which** in the
-  prompt; don't mix silently.
+- **KPI cards** — **Group A standardises on the canonical KPI card** (border `N30`, radius 14, value
+  Semibold 24 `Heading 5`, **no icon**, no accent, Foundation-tokenised, flex-1 width) on **every**
+  screen. The FTI `SummaryCard` and RED `MetricCard` are legacy — do not use them for Group A.
 - **Tables** — rows: p-12/14, gap-12/16, bottom border `N40`, cells Inter 13 (`N900`/`N400`), the
   reference/ID cell is a `blue-600` link, the row action ("View") is a `blue-600` link, right-aligned.
 - **Status pills** — the back-office hand-builds pills (rounded-100, Inter 11); the library `Badge`
@@ -124,11 +124,12 @@ The back-office (FTI/RED) screens predate full tokenisation and disagree with th
 - **After any push, verify** with `get_file_contents` on the path — don't trust the push response alone.
 
 ## 9. Tooling & access constraints
-- Figma is reached via the MCP as **Technovicinity** (`work@technovicinity.com`): **Full seat** on the
-  Technovicinity team, **View seat** on the KINGSCOTT team (where RERAN-Web-App lives).
-- **A View seat can read (with rate limits) but cannot generate.** `use_figma` (writing to canvas)
-  needs an **edit-capable seat on the KINGSCOTT team**. `get_design_context` / `get_variable_defs` are
-  intermittently gated on a View seat.
+- The Figma file lives on the **KINGSCOTT** team; edit access requires a Full/Editor seat there
+  (the `kingscotttechnologies@gmail.com` account has one). `use_figma` (writing to canvas) needs edit
+  access; read tools (`get_metadata`, `get_design_context`, `get_variable_defs`) work with read access
+  but can be rate-limited on a View seat.
+- Workflow here is **prompts-only**: deliverables are `.md` build prompts run in Figma; the assistant
+  does not edit the canvas.
 - In this environment, **bash cannot reach `figma.com`** and inline base64 screenshots render blank —
   so read design as **data** (`get_design_context`), not as images.
 - **Never push to GitHub without explicit approval.** Commit messages: one-line summary + detail body.

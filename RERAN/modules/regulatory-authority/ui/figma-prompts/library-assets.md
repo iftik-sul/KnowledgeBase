@@ -83,6 +83,11 @@ sidebar 240 · shell rows 78.
   Arrow Expand Left · Tray Arrow Up · Help · Icon/Close-Circle.
 
 ## Composed patterns (built from the above; replicate these layouts)
+- **KPI card — canonical (used on ALL Group A screens)** — white, border `N30 #EBEDF0`, **radius 14**,
+  **no icon, no accent**, Foundation-tokenised. **flex-1** width (five share the 1136 row; ≈214 each),
+  height 127. Vertical stack: label (all-caps type style, `N400`) → value (`Heading 5`, Semibold 24/−0.96,
+  bound `foreground/primary`) → sublabel (`Small/Regular`, `N400`). Props: Label / Value / Sublabel.
+  **Do NOT use the FTI `SummaryCard` or RED `MetricCard`** for Group A.
 - **Card (`Background+Border`)** — white, border **`N30`**, rounded-12, content **px-24 py-20**. Title row =
   `Body/Medium` `N900` + inline `Badge`. **Metadata row** = `16px icon + Caption/Regular 13 N400` pairs (gap-24).
   **Footer** = `N30` top border + action **links** (`16px icon + Caption/Medium 13 blue-600`, gap-6).
