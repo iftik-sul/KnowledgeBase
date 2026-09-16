@@ -59,33 +59,34 @@ shadow). Radii: 8 (buttons, inputs, chips, nav items) · 10 (checkbox) · 12 (ca
 16 (library badges) · full (avatars, dots, pills). Sizes: icon 16 · avatar 32 · chips 36 · input h-42 ·
 sidebar 240 · shell rows 78.
 
-## Components (use these; don't rebuild)
-- **Button Primary** — gradient (`Gradients/Blue 1`), `Footnote/Medium` white label, tokenised
-  padding/gap/radius, optional 16px leading icon, backdrop-blur. Only button component; secondary =
-  white + `N40` border (compose).
-- **Badge / _Badge base** — pill + leading **dot** + `Text xs/Medium`, rounded-16, Foundation semantic
-  pairs (Verified = `Green/50` + `green-700`). The official status/label asset.
-- **Input** — label `Footnote/Medium` `N900` + required `*` `#D33128`; field bg `N20`, border `N40`,
-  rounded-8, h-42, px-13 py-11, placeholder `Footnote/Regular` `N400`; label→field gap-6.
-- **Checkbox** (component set) — props: `type` Radio/Checkbox · `checked` · `indeterminate` · `size` ·
-  `state`. Base: white, border `Neutral/300 #D4D4D4`, rounded-10, 20px.
-- **Dropdown menu / _Dropdown list item** — white, border `Neutral/200 #E5E5E5`, rounded-8, `Shadow/lg`,
-  240 wide; items px-16 py-10, `Text sm/Medium` `Neutral/700 #404040`; 1px divider.
-- **Search** — white, border `N40`, rounded-8, `Blur/20`, 16px magnifier + `Caption/Medium` `N400`
-  placeholder. (Top-bar variant is *filled* `N30`, no border.)
+## Components (use these; don't rebuild) — from the Component library page (0:1)
+- **Buttons/Button** (variant set) — **Hierarchy:** Primary · Secondary color · Secondary gray · Tertiary
+  color · Tertiary gray · Link color · Link gray. **Size:** sm/md/lg/xl. **Icon:** False/Leading/Trailing/
+  Dot/Only. **State:** Default/Hover/Focused/Disabled. Group A: Primary = main action, Secondary gray =
+  secondary, Link = inline. **`Buttons/Button destructive`** (same API) for Reject / delete.
+  *(The gradient "Button Primary" is portal-only — do not use it in Group A back-office.)*
+- **Badge** (variant set) — **Size** sm/md/lg · **Icon** False/Dot/Avatar/Icon left/Icon right/Only ·
+  **Color** Brand/Gray/Error/Warning/Success/Blue/Sky/Indigo/Purple/Pink/Rose/Orange/Slate. The status/label
+  asset — set its Color; never hand-build a pill (see Status badges below).
+- **Input field** (variant set) — Type (Default/Leading dropdown/Trailing dropdown/Leading text/Payment),
+  Leading icon, Label, Hint text, Help icon, Destructive, State (Placeholder/Filled/Focused/Disabled).
+  Use for search (Leading icon=True), filter fields, and form inputs.
+- **Textarea input field** — Label, Hint text, Destructive, State. Decision reason, comments/notes.
+- **Verification code input field** — Size, Label, Digits 4/6. MFA / OTP entry (Group A requires MFA).
+- **Checkbox** — Checked, Indeterminate, Size sm/md, Type Checkbox/Radio, Text, Supporting text, State.
+  Doc mark-seen/flag, table multi-select, filter checklists.
+- **Dropdown menu** — Icon, Checkbox, Shortcut, Header (Avatar group/Heading/False). Filter menus, select
+  fields, row/kebab action menus. (`Dropdown` = the trigger control.)
+- **Avatar** (variant set) + **Avatar label group** — Size xs–2xl, Placeholder, Text, Status icon
+  (Online/Company), State. Top-bar profile, user cells (applicant/assignee), audit-trail actors.
 - **Pagination** (`Pagination` component) — table footer, ~1134×64, flex space-between. Left: page indicator
-  (`Small/Regular` `N400`; use "Showing 1–N of M" for data tables). Right: 32×32 rounded-8 buttons (gap-4) —
-  prev/next (white, `N40` border, 14px chevron), active page (`blue-600` fill, white, `Caption/Medium`),
-  inactive pages (white, `N400`). Bind: active fill → `Color/blue-600`, borders → `N40`, inactive text →
-  `N400` (not the off-palette `#6B7280`).
-- **Structure** — `Navigation` (240 portal sidebar) · `Background+HorizontalBorder` (top bar) · `Avatar` ·
-  `Menu Hamburger` · `Tray Arrow Down` (upload dropzone) · `Credit Card Rectangle`.
-- **Icons** (~40, one set): Chevron Right/Down · Check · Check Circle · Check Badge · X Mark Circle ·
-  Warning Circle · check-circle-broken · Action Eye Visible · Folder · File/File 2/Add/Success ·
-  calendar/Calendar 2 · marker-pin-02 · building-06/07 · User/user-01/03/user-plus-02 · coins-hand ·
-  credit-card-01 · tag-01 · Clipboard List · Trash Bin · Pen · Mail · Phone Left · bank · download-01 ·
-  shield-tick · home-03 · repeat-04 · copy-03 · archive · certificate-01 · Slider Vertical Circle ·
-  Arrow Expand Left · Tray Arrow Up · Help · Icon/Close-Circle.
+  (`Small/Regular` `N400`; "Showing 1–N of M"). Right: 32×32 rounded-8 buttons — prev/next (white, `N40`
+  border, chevron), active page (`Color/blue-600`, white), inactive (`N400`, not the off-palette `#6B7280`).
+- **Navigation** — nav-item component, but its label variants are IU-specific (Applications/Complaints/
+  Dashboard/…). Group A uses its own **`RA-Sidebar`**; reuse the nav-item *pattern*, not these labels.
+- **Icon library** — lives on the Component library page (0:1), in categorized frames (General, Arrows,
+  Users, Files, Communication, Alerts & feedback, Finance, Editor, Time, Maps, Weather, Security, …).
+  Pull all icons from here.
 
 ## Composed patterns (built from the above; replicate these layouts)
 - **KPI card — canonical (used on ALL Group A screens)** — white, border `N30 #EBEDF0`, **radius 14**,
@@ -104,20 +105,20 @@ sidebar 240 · shell rows 78.
   (`Caption`/`Small`, centred). e.g. "Select an application on the left to see details."
 - **List item / row** — icon/label pairs, `Caption` text, dividers via `HorizontalBorder` (`N30`/`N40`).
 
-## Status treatments — FOUR exist; standardise on the library `Badge`
-1. **Library `Badge`** (portal): dot + Inter Medium 12, rounded-16, Foundation pairs. ← **use this.**
-2. `StatusChip`: dot + Inter **Semi Bold** 12, rounded-full, **off-palette emerald** (`#ECFDF5`/`#007A55`) — drift.
-3. FTI back-office pill: Inter Medium 11, no dot, rounded-100, `#FFFAEB`/`#B54708` — drift.
-4. RED back-office pill: Inter Semi Bold 11 UPPERCASE, no dot, rounded-100, `#ECFDF3`/`#12B76A` — drift.
+## Status badges — use the `Badge` component (Color prop)
+Status pills = the **`Badge`** component (Size sm/md, Icon = **Dot**) with its **Color** set per status.
+Do NOT hand-build pills or use the portal `StatusChip` (legacy).
 
-## Group A status badge → token mapping (use the library `Badge`)
-| Status (status-badges.md §1) | Background | Dot / text | Note |
-| :-- | :-- | :-- | :-- |
-| Approved | `Green/50` | `green-700` | matches library "Verified" (confirmed) |
-| Under Review | `Blue/50` | `blue-700` | proposed |
-| Information Requested | `Yellow/50` | `orange-700` | proposed |
-| Returned | `Yellow/50` | `orange-700` | proposed — differentiate by label/icon |
-| Rejected | red tint | `#D33128` | candidate red now identified; confirm/name the token |
+| Status (status-badges.md §1) | Badge Color |
+| :-- | :-- |
+| Under Review | `Blue` |
+| Information Requested | `Warning` |
+| Returned | `Warning` (or `Orange` to differentiate) |
+| Approved | `Success` |
+| Rejected | `Error` |
+
+> Using the Badge `Color` prop resolves the earlier "no red token" gap — `Error` is built in. The FTI/RED
+> hand-built pills and the portal `StatusChip` are legacy; standardise every Group A table/screen on `Badge`.
 
 ## Normalisation (when copying a portal pattern into Group A)
 - Colours → Foundation tokens (drop `#6B7280`, `#F0F2F5`, emerald `#ECFDF5`/`#007A55`).
