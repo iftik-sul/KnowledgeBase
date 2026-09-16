@@ -73,6 +73,11 @@ sidebar 240 · shell rows 78.
   240 wide; items px-16 py-10, `Text sm/Medium` `Neutral/700 #404040`; 1px divider.
 - **Search** — white, border `N40`, rounded-8, `Blur/20`, 16px magnifier + `Caption/Medium` `N400`
   placeholder. (Top-bar variant is *filled* `N30`, no border.)
+- **Pagination** (`Pagination` component) — table footer, ~1134×64, flex space-between. Left: page indicator
+  (`Small/Regular` `N400`; use "Showing 1–N of M" for data tables). Right: 32×32 rounded-8 buttons (gap-4) —
+  prev/next (white, `N40` border, 14px chevron), active page (`blue-600` fill, white, `Caption/Medium`),
+  inactive pages (white, `N400`). Bind: active fill → `Color/blue-600`, borders → `N40`, inactive text →
+  `N400` (not the off-palette `#6B7280`).
 - **Structure** — `Navigation` (240 portal sidebar) · `Background+HorizontalBorder` (top bar) · `Avatar` ·
   `Menu Hamburger` · `Tray Arrow Down` (upload dropzone) · `Credit Card Rectangle`.
 - **Icons** (~40, one set): Chevron Right/Down · Check · Check Circle · Check Badge · X Mark Circle ·
