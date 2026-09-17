@@ -73,8 +73,8 @@ This role owns **two** queue views: **Transaction** (79 services) and **Escrow /
 Trust** (13 services). The spec models them as views of one screen.
 
 **What they see:** summary KPI cards, filters, and the queue table — reference,
-originating service, applicant, subject, status, age/SLA, and (escrow view) the
-trustee-assessment indicator.
+originating service, applicant, subject, status, age/SLA, total elapsed, and (escrow
+view) the trustee-assessment indicator.
 
 **What they do:** filter by originating service, status, age/SLA state, or channel;
 search by reference, applicant, or subject; scan for SLA-breaching rows.
@@ -202,8 +202,9 @@ The applicant responds, and it **re-enters the queue** (A-1 §12).
 > **RESOLVED (routing):** returns to the officer who queried it where that officer is
 > available — they hold the context — otherwise to the pool. Flagged as a resubmission
 > with the original query shown; a Resubmission column was added to the queue table.
-> Applied in `work-queue.md`. **SLA clock still needs the client** (default: pauses
-> while with the applicant) — open-questions A6, contractual implications.
+> Applied in `work-queue.md`. **SLA clock — RESOLVED: resets on resubmission**, giving the
+> item a fresh full window. A non-resetting Total elapsed figure sits beside it so repeated
+> query rounds cannot hide overall delay (open-questions A6).
 
 ---
 
@@ -252,7 +253,7 @@ gaps this walk exposed, and all ten are resolved below.
 | G6 | Draft/partial work | Draft note per claiming officer, discarded on release | application-review.md §5b |
 | G7 | Release / reassign / escalate | **Release** added; reassign unnecessary under pool; **no escalation tier exists in the 8-role model** | application-review.md §5b |
 | **G8** | **Post-decision routing** | **Return to queue + outcome toast; no auto-advance, no undo** | application-review.md §6 |
-| G9 | Returning-item routing | Back to the querying officer if available, flagged as resubmission | work-queue.md |
+| G9 | Returning-item routing + SLA clock | Back to the querying officer if available, flagged as resubmission; **SLA clock resets on resubmission**, Total elapsed shown alongside | work-queue.md |
 | G10 | Notifications | Screen built | screens/notifications.md |
 
 ### Still needing client confirmation
@@ -262,7 +263,7 @@ business decision, not a design one:
 
 | Item | Default taken | Why it needs the client |
 | :-- | :-- | :-- |
-| SLA clock on returned items | Pauses while with the applicant | Contractual — affects published processing times |
+| ~~SLA clock on returned items~~ | ✅ **Resolved:** resets on resubmission; Total elapsed shown alongside | — |
 | Claim lapse period | 30 minutes inactivity | Operational tempo; too short interrupts review |
 | Supervisory review tier | None (no such role exists) | If RERA expects one, it is a **new role**, not a screen change |
 | Notification delivery | In-app only | Whether SLA breach / DG escalation also go by email or SMS |

@@ -4,7 +4,7 @@ module: regulatory-authority
 type: ui-spec
 status: draft
 contains_proposals: true
-updated: 2026-09-12
+updated: 2026-09-17
 derived_from:
   - "RERAN/modules/regulatory-authority/service-flows/service-a1-audit-and-decide.md"
   - "RERAN/modules/regulatory-authority/service-flows/service-a2-vet-and-decide-licensing.md"
@@ -99,7 +99,8 @@ practitioner).
 | Subject | Project / property / title / practitioner |
 | Status | Shared status vocabulary (see [status-badges.md](../status-badges.md) §1) |
 | Resubmission | Flags an item returning after Information Requested / Returned, with the original query available (resolves flow gap G9) |
-| Age / SLA | Time in queue vs the originating service's SLA; breaching rows flagged |
+| Age / SLA | Time against the **current** SLA window vs the originating service's SLA; breaching rows flagged. Resets on resubmission (see below) |
+| Total elapsed | Time since **first** submission, across all query rounds. Does not reset — kept visible so repeated queries cannot hide overall delay |
 | Escrow flag | *(escrow view)* trustee-assessment received indicator |
 | Claimed by | Who currently holds the item, and since when. Blank = available to claim |
 
@@ -150,9 +151,19 @@ An empty table must say which of three things it means:
 routed **back to the officer who queried it** where that officer is available, otherwise to
 the pool. It is flagged as a resubmission and shows the original query.
 
+**SLA clock — resets on resubmission (confirmed).** When an item is returned to the
+applicant (Request Additional Information / Return) and the applicant resubmits, the SLA
+clock **restarts from zero** — the item gets a fresh full window from the originating
+service's published processing time. It does not pause-and-resume, and it does not run
+continuously.
+
+Consequences the UI must handle:
+- **Breaching SLA** is computed against the *current* window only, so a resubmitted item is
+  never carried in breaching on arrival.
+- Because the clock resets, an item queried repeatedly could accumulate long real-world
+  elapsed time while always showing green. The **Total elapsed** column (time since first
+  submission, never reset) is therefore shown alongside, so overall delay stays visible for
+  oversight and audit even though it does not drive the SLA badge.
+
 > **Proposed** — the exact KPI set and default sort (by SLA urgency vs age) need
 > confirmation.
-
-> **Proposed — needs client confirmation:** whether the SLA clock **pauses** while an item
-> sits with the applicant and resumes on return, or runs continuously. Suggested: pauses.
-> This has contractual implications for published processing times.

@@ -83,11 +83,16 @@ surface and the last two roles deferred until services exist that use them.
 ## A6 — Group A back-office operating decisions *(added 2026-09-17)*
 
 Surfaced by walking the Compliance & Escrow Auditor journey
-(`ui/flows/compliance-escrow-auditor.md`). Each is resolved with a working default so
-design is unblocked; each is a business decision the client should confirm.
+(`ui/flows/compliance-escrow-auditor.md`). Items marked ✅ are confirmed; the rest are
+resolved with a working default so design is unblocked, but remain business decisions the
+client should confirm.
 
-- **SLA clock on returned items.** Default: the clock **pauses** while an item sits with
-  the applicant and resumes on return. Contractual — it changes published processing times.
+- **SLA clock on returned items.** ✅ **Resolved 2026-09-17: the clock RESETS on
+  resubmission** — a resubmitted item gets a fresh full window from the originating
+  service's published processing time (not pause-and-resume, not continuous). Because a
+  repeatedly-queried item could then accumulate long real elapsed time while always showing
+  green, the queue also carries a non-resetting **Total elapsed** figure so overall delay
+  stays visible for oversight.
 - **Claim lapse period.** Default: a claim lapses after **30 minutes** of inactivity and
   the item returns to the pool.
 - **Supervisory review tier.** Default: **none.** The eight-role model has no senior/junior
