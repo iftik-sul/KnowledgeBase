@@ -80,6 +80,22 @@ review checklist (A-1 §7) rendered as live checks.
   checklist (A-1 §7). For mortgage-linked items, the live FTI mortgage status (must read
   `Completed`).
 
+### Section 5b — Claim, draft, and release *(resolves flow gaps G5, G6, G7)*
+
+- **Claim.** Opening an item from the queue claims it to this officer (shared-pool model,
+  work-queue §4). The header shows the claim and when it was taken.
+- **Draft note.** The officer may save a part-written decision note against the item,
+  visible only to the claiming officer. A considered review can span a break or a shift
+  without losing work; `M-SYS-04` warns on exit with unsaved changes.
+- **Release.** "Release item" (`M-QUE-01`) returns it to the pool with a recorded reason —
+  the path for "this isn't mine to decide" (conflict of interest, wrong specialism). The
+  draft note is discarded on release.
+
+> **No escalation path exists, by design.** The eight-role model has no senior/junior
+> auditor tier, so there is no one to escalate a transaction audit *to*. An officer who
+> cannot decide an item releases it. If the client expects a supervisory review tier, that
+> is a new role and a change to the role model — see open-questions.
+
 ### Section 6 — Decision Panel *(the core control)*
 
 Four mutually exclusive outcomes:
@@ -95,6 +111,13 @@ On approve, the output (certificate / title deed / map / registry update) is tri
 the originating service. Every outcome writes the decision, actor, and reason to the audit
 trail. Field-level guards (mandatory reasons, escrow/mortgage blocks) are in
 [validation-rules.md](../validation-rules.md).
+
+**After the decision (resolves flow gap G8).** The officer is returned to the queue with a
+success toast naming the outcome and a link back to the decided item (read-only). The queue
+does **not** auto-advance to the next item: these decisions carry mandatory written reasons
+and legal weight, so deliberate re-entry is preferred over momentum. There is **no undo** —
+approval issues the output immediately (`M-DEC-01`); the link returns to view, not to
+reverse.
 
 ## Role Variations / Permissions
 

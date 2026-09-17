@@ -24,7 +24,10 @@ tags:
 The single worklist a reviewer works from. Submitted, paid applications land here awaiting
 a decision; the reviewer triages and opens them into [Application Review](application-review.md).
 It is **one screen with queue-type views**, not separate screens — the columns and filters
-change per queue type, the layout does not.
+change per queue type, the layout does not. **Transaction and Escrow are two separate
+sidebar entries with distinct routes** that render this one screen (resolves flow gap G2):
+escrow work has a different entry gate and a heavier checklist, so it warrants its own
+entry point even though the layout is shared.
 
 ## Purpose
 
@@ -95,11 +98,36 @@ practitioner).
 | Applicant | Person / company that filed |
 | Subject | Project / property / title / practitioner |
 | Status | Shared status vocabulary (see [status-badges.md](../status-badges.md) §1) |
+| Resubmission | Flags an item returning after Information Requested / Returned, with the original query available (resolves flow gap G9) |
 | Age / SLA | Time in queue vs the originating service's SLA; breaching rows flagged |
 | Escrow flag | *(escrow view)* trustee-assessment received indicator |
+| Claimed by | Who currently holds the item, and since when. Blank = available to claim |
 
-Row click → [Application Review](application-review.md). No decision is taken from the
-queue itself; the queue triages, the review screen decides.
+Row click → [Application Review](application-review.md), which **claims** the item to the
+opening officer. No decision is taken from the queue itself; the queue triages, the review
+screen decides.
+
+### Section 4 — Work allocation *(resolves flow gap G4)*
+
+This queue is a **shared pool**, not an assigned worklist. Any Compliance & Escrow Auditor
+may claim any available item; there is no supervisor allocation step and no "assigned to
+me" concept.
+
+This deliberately differs from A-3, where dispute cases *are* assigned to a named officer.
+The reason is the nature of the work: a dispute is a long-running relationship worked over
+multiple sessions, so continuity matters; a transaction audit is a discrete task, so
+throughput matters. Pool suits high, uneven arrival volume across 92 services.
+
+Claiming is governed by claim-on-open with timed release (modals.md §9): opening claims,
+inactivity lapses the claim (`M-QUE-02`), and an officer may release deliberately
+(`M-QUE-01`). Opening an item another officer holds raises `M-QUE-03` and offers read-only.
+
+### Section 5 — Empty state *(resolves flow gap G3)*
+
+An empty table must say which of three things it means:
+- **You are clear** — nothing awaiting review in this queue.
+- **Filters hide everything** — offer to clear filters.
+- **Nothing has arrived yet** — first-run / new queue.
 
 ## Role Variations / Permissions
 
@@ -118,5 +146,13 @@ queue itself; the queue triages, the review screen decides.
 - Auto-approval licensing items (A-2 §15b) do **not** appear here — they raise no manual
   queue item.
 
+**Returning items (G9).** An item the applicant has responded to re-enters this queue
+routed **back to the officer who queried it** where that officer is available, otherwise to
+the pool. It is flagged as a resubmission and shows the original query.
+
 > **Proposed** — the exact KPI set and default sort (by SLA urgency vs age) need
 > confirmation.
+
+> **Proposed — needs client confirmation:** whether the SLA clock **pauses** while an item
+> sits with the applicant and resumes on return, or runs continuously. Suggested: pauses.
+> This has contractual implications for published processing times.

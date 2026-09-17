@@ -63,5 +63,8 @@ today), each row linking into its screen.
 
 ## Notes
 
+- **Landing destination (resolves flow gap G1).** Every role lands here after
+  authentication, not on their work screen. The SLA-breach tile is the triage signal that
+  decides which queue to open, so the Dashboard earns the first click.
 - SLA/urgency figures reuse each source screen's definitions (e.g. Work Queue SLA logic);
   the dashboard does not redefine them.
