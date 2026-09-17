@@ -54,11 +54,14 @@ built now; latent screens are deferred with their latent service-flows (open-que
 
 ## Folder structure
 
-- `role-screen-matrix.md` — which role reaches which screen, and per-screen action
-  permissions (the RBAC/navigation backbone).
+- `role-screen-matrix.md` — which role reaches which screen (the RBAC/navigation
+  backbone). On-screen actions are owned by the screen specs.
+- `screen-archetypes.md` — the five layout archetypes every screen spec declares.
 - `screens/` — the screen specs (this layer; derived from service-flows).
-- `components.md`, `status-badges.md`, `validation-rules.md` — supporting docs, added as
-  the specs need them.
+- `modals.md` — every modal, confirmation, and alert, by ID. Screens reference a modal
+  by its ID; they never restate its wording, fields, or rules.
+- `components.md`, `status-badges.md`, `validation-rules.md` — supporting docs. Status
+  wording is owned by status-badges; guard rules by validation-rules.
 - `figma-prompts/` — the Figma AI prompts, derived from the finished specs. Built last,
   never before the specs.
 
