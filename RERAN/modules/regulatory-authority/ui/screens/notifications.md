@@ -86,5 +86,8 @@ States which it is: no notifications at all, or filters hiding them.
   [Audit Trail](audit-trail.md) remain authoritative. A missed notification must never mean
   missed work.
 
-> **Proposed — needs client confirmation:** whether these also go out by email/SMS, and
-> which are urgent enough to warrant it (SLA breach and DG escalation are the candidates).
+**In-app only — confirmed (open-questions A6).** Notifications are **not** sent by email or
+SMS — not for SLA breaches, not for DG escalations. Everything surfaces inside the
+back-office app. This reinforces that notifications are a convenience surface: the queues
+and the [Audit Trail](audit-trail.md) remain authoritative, so nothing depends on an
+officer seeing a notification.
