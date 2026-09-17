@@ -62,6 +62,9 @@ built now; latent screens are deferred with their latent service-flows (open-que
   by its ID; they never restate its wording, fields, or rules.
 - `components.md`, `status-badges.md`, `validation-rules.md` — supporting docs. Status
   wording is owned by status-badges; guard rules by validation-rules.
+- `flows/` — end-to-end user journeys, one per role. Where the matrix says what a role
+  can reach and the screen specs say what a screen contains, a flow says what happens
+  in what order and what the user sees between screens.
 - `figma-prompts/` — the Figma AI prompts, derived from the finished specs. Built last,
   never before the specs.
 
