@@ -3,8 +3,8 @@ project: RERAN
 module: regulatory-authority
 type: touchpoint-register
 status: draft
-contains_proposals: true
-updated: 2026-09-12
+contains_proposals: false
+updated: 2026-09-17
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
   - "RERAN/modules/*/service-flows/"
@@ -30,9 +30,10 @@ register cross-references, it does not duplicate.
 - Channel split: Transaction Audit Queue **79** · Escrow / Trust-Account Audit **13**
   · Licensing & Registry **9** · Tribunal & Remote-Litigation **4** · no decision **9**.
 
-`[proposed]` marks a service whose source did not name a Group A role explicitly;
-the assignment is a reasoned proposal awaiting client confirmation (see
-[open-questions.md](open-questions.md)).
+All role assignments are confirmed. Where a source did not name a Group A role
+explicitly, the assignment was derived by service pattern and **confirmed 2026-09-17**
+(open-questions A1) — 20 services in total: 12 Individual User, 8 Real Estate Service
+Companies.
 
 ## Register
 
@@ -88,33 +89,33 @@ the assignment is a reasoned proposal awaiting client confirmation (see
 | RESC | 3 | Register JOP-Competent Employees | Compliance & Escrow Auditor | Transaction Audit Queue | 5 minutes |
 | RESC | 4 | Register Owners Association | Compliance & Escrow Auditor | Transaction Audit Queue | 25 minutes |
 | RESC | 5 | Transfer JOP Escrow Account | Compliance & Escrow Auditor | Escrow / Trust-Account Audit | 1 business day |
-| RESC | 6 | Request No-Objection Letter to Close Escrow Account [proposed] | Compliance & Escrow Auditor | Escrow / Trust-Account Audit | 3 business days |
+| RESC | 6 | Request No-Objection Letter to Close Escrow Account | Compliance & Escrow Auditor | Escrow / Trust-Account Audit | 3 business days |
 | RESC | 7 | Accredit Escrow Account Signatories | Compliance & Escrow Auditor | Escrow / Trust-Account Audit | 1 business day |
 | RESC | 8 | Appoint Financial Auditor | Compliance & Escrow Auditor | Transaction Audit Queue | 1 business day |
 | RESC | 9 | Appoint Audit Office for JOP Financial Accounts | Compliance & Escrow Auditor | Transaction Audit Queue | 1 business day |
 | RESC | 10 | Appoint Audit Office for JOP Budget Audit | Compliance & Escrow Auditor | Transaction Audit Queue | 1 business day |
-| RESC | 11 | Approval / Renewal of Financial Auditing Company [proposed] | Compliance & Escrow Auditor | Escrow / Trust-Account Audit | 8 business days |
+| RESC | 11 | Approval / Renewal of Financial Auditing Company | Compliance & Escrow Auditor | Escrow / Trust-Account Audit | 8 business days |
 | RESC | 12 | Real Estate Licensing Application | Licensing & Registration Officer | Licensing & Registry | 5 minutes |
 | RESC | 13 | Real Estate Permit Application | Licensing & Registration Officer | Licensing & Registry | 7 minutes |
 | RESC | 14 | Issue Professional Practice Card | Licensing & Registration Officer | Licensing & Registry | 5 minutes |
-| RESC | 15 | Renew Professional Practice Card [proposed] | Licensing & Registration Officer | Licensing & Registry | Automatic approval |
+| RESC | 15 | Renew Professional Practice Card | Licensing & Registration Officer | Licensing & Registry | Automatic approval |
 | RESC | 16 | Cancel Professional Practice Card | Licensing & Registration Officer | Licensing & Registry | 2 minutes |
-| RESC | 17 | Amend Professional Practice Card [proposed] | Licensing & Registration Officer | Licensing & Registry | Automatic approval |
-| RESC | 18 | Register Real Estate Evaluation Details Certificate [proposed] | None | — | Immediate |
+| RESC | 17 | Amend Professional Practice Card | Licensing & Registration Officer | Licensing & Registry | Automatic approval |
+| RESC | 18 | Register Real Estate Evaluation Details Certificate | None | — | Immediate |
 | RESC | 19 | Accreditation of Training Entities (Real Estate Companies) | Licensing & Registration Officer | Licensing & Registry | 4 business days |
 | RESC | 20 | Register/Renew Management Contract | Compliance & Escrow Auditor | Transaction Audit Queue | 1 hour 35 minutes |
-| RESC | 21 | Cancel Management Contract [proposed] | None | — | Immediate |
-| RESC | 22 | Register Tenancy System User [proposed] | None | — | Immediate |
-| RESC | 23 | Permit to Sell by Public Auction [proposed] | Compliance & Escrow Auditor | Transaction Audit Queue | Within two business days |
+| RESC | 21 | Cancel Management Contract | None | — | Immediate |
+| RESC | 22 | Register Tenancy System User | None | — | Immediate |
+| RESC | 23 | Permit to Sell by Public Auction | Compliance & Escrow Auditor | Transaction Audit Queue | Within two business days |
 | RESC | 24 | Register Property Sold by Auction | Compliance & Escrow Auditor | Transaction Audit Queue | 25–30 minutes |
 | RESC | 25 | Primary Suit (Joint Property) | Dispute Adjudication Officer | Tribunal & Remote-Litigation | Registration completion: 10 minutes |
 | RESC | 26 | Execution Case (Joint Ownership) | Dispute Adjudication Officer | Tribunal & Remote-Litigation | Registration completion: 10 minutes |
-| IU | 1 | Verify Developer [proposed] | None | — | Immediate (real-time lookup) |
-| IU | 2 | Verify Development Project [proposed] | None | — | Immediate (real-time lookup) |
-| IU | 3 | Verify Property [proposed] | None | — | Immediate (real-time lookup) |
-| IU | 4 | Register Property Ownership [proposed] | Compliance & Escrow Auditor | Transaction Audit Queue | Subject to RERAN service standards |
+| IU | 1 | Verify Developer | None | — | Immediate (real-time lookup) |
+| IU | 2 | Verify Development Project | None | — | Immediate (real-time lookup) |
+| IU | 3 | Verify Property | None | — | Immediate (real-time lookup) |
+| IU | 4 | Register Property Ownership | Compliance & Escrow Auditor | Transaction Audit Queue | Subject to RERAN service standards |
 | IU | 5 | Transfer Property Ownership | Compliance & Escrow Auditor | Transaction Audit Queue | 25 minutes |
-| IU | 6 | Register Property Sale [proposed] | Compliance & Escrow Auditor | Transaction Audit Queue | 25–35 minutes |
+| IU | 6 | Register Property Sale | Compliance & Escrow Auditor | Transaction Audit Queue | 25–35 minutes |
 | IU | 7 | Update Property Ownership Information | Compliance & Escrow Auditor | Transaction Audit Queue | Owner/entity info amendment |
 | IU | 8 | Register Sale of Mortgaged Property | Compliance & Escrow Auditor | Transaction Audit Queue | 15–20 minutes |
 | IU | 9 | Register Gift Transfer | Compliance & Escrow Auditor | Transaction Audit Queue | 25–30 minutes |
@@ -133,21 +134,21 @@ the assignment is a reasoned proposal awaiting client confirmation (see
 | IU | 22 | Register Industrial & Commercial Land Ownership | Compliance & Escrow Auditor | Transaction Audit Queue | ~30 minutes |
 | IU | 23 | Register Lease | Compliance & Escrow Auditor | Transaction Audit Queue | Via Real Estate Services Trustee |
 | IU | 24 | Renew Lease | Compliance & Escrow Auditor | Transaction Audit Queue | Via Real Estate Services Trustee |
-| IU | 25 | Manage Lease [proposed] | Compliance & Escrow Auditor | Transaction Audit Queue | Depends on request type |
+| IU | 25 | Manage Lease | Compliance & Escrow Auditor | Transaction Audit Queue | Depends on request type |
 | IU | 26 | Submit Tenancy Dispute | Dispute Adjudication Officer | Tribunal & Remote-Litigation | Dispute registration |
 | IU | 27 | Cancel Tenancy Contract | Compliance & Escrow Auditor | Transaction Audit Queue | Via Real Estate Trustee Services |
 | IU | 28 | Request Rental Valuation | Compliance & Escrow Auditor | Transaction Audit Queue | ~20–30 minutes |
-| IU | 29 | Register Power of Attorney [proposed] | Compliance & Escrow Auditor | Transaction Audit Queue | Subject to RERAN service standards |
-| IU | 30 | Act on Behalf of Property Owner [proposed] | None | — | Depends on selected service |
+| IU | 29 | Register Power of Attorney | Compliance & Escrow Auditor | Transaction Audit Queue | Subject to RERAN service standards |
+| IU | 30 | Act on Behalf of Property Owner | None | — | Depends on selected service |
 | IU | 31 | Request Detailed Real Estate Statement | Compliance & Escrow Auditor | Transaction Audit Queue | ~10–15 minutes |
 | IU | 32 | Request To Whom It May Concern Certificate | Compliance & Escrow Auditor | Transaction Audit Queue | ~10–15 minutes |
 | IU | 33 | Request Property Survey | Compliance & Escrow Auditor | Transaction Audit Queue | ~3–10 working days |
 | IU | 34 | Request Property Valuation | Compliance & Escrow Auditor | Transaction Audit Queue | ~3–10 working days |
 | IU | 35 | Request Full / Partial Indemnity | Compliance & Escrow Auditor | Transaction Audit Queue | ~10–20 minutes |
-| IU | 36 | Remote Identity Verification [proposed] | Compliance & Escrow Auditor | Transaction Audit Queue | Subject to RERAN standards |
-| IU | 37 | Remote Property Transactions [proposed] | None | — | Depends on selected transaction |
-| IU | 38 | Submit Complaint [proposed] | Dispute Adjudication Officer | Tribunal & Remote-Litigation | Subject to RERAN standards |
-| IU | 39 | Track Complaint [proposed] | None | — | Immediate (real-time lookup) |
+| IU | 36 | Remote Identity Verification | Compliance & Escrow Auditor | Transaction Audit Queue | Subject to RERAN standards |
+| IU | 37 | Remote Property Transactions | None | — | Depends on selected transaction |
+| IU | 38 | Submit Complaint | Dispute Adjudication Officer | Tribunal & Remote-Litigation | Subject to RERAN standards |
+| IU | 39 | Track Complaint | None | — | Immediate (real-time lookup) |
 | IU | 40 | Upload Building Details for Leasing | Compliance & Escrow Auditor | Transaction Audit Queue | One business day |
 | IU | 41 | Register Company | Compliance & Escrow Auditor | Transaction Audit Queue | 25–30 minutes |
 | IU | 42 | Cancel Power of Attorney | Compliance & Escrow Auditor | Transaction Audit Queue | 20 minutes |
@@ -160,6 +161,9 @@ the assignment is a reasoned proposal awaiting client confirmation (see
   account **and** governance of the escrow apparatus — the approval and cancellation
   of Account Trustees and Auditing Companies (FTI #1, #2; RESC #11). See
   [open-questions.md](open-questions.md) A3 for the escrow-variant modelling.
+- **IU #36 Remote Identity Verification** sits with the Compliance & Escrow Auditor even
+  though every other item in that group is a property or money transaction. This is
+  correct and confirmed (A1); the note exists so it is not later read as misfiled.
 - The full role definitions are in [roles-and-responsibilities.md](roles-and-responsibilities.md);
   the Group A services these touchpoints feed into are in
   [services-overview.md](services-overview.md). This register is the by-service view
