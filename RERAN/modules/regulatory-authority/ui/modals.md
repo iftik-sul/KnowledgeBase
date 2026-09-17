@@ -81,7 +81,7 @@ Raised from Application Review (licensing items) and the Practitioner Register.
 | :-- | :-- | :-- | :-- |
 | `M-LIC-01` | Issue credential | P1 | Confirms credential type and that the register entry will be written. |
 | `M-LIC-02` | Amend credential | P4 | Structured edit of an existing entry. |
-| `M-LIC-03` | **Cancel / revoke practice card** | P3 | Withdraws the holder's standing to operate. States effect on the register. |
+| `M-LIC-03` | **Cancel / revoke practice card** | P3 | Withdraws the holder's standing to operate. States effect on the register. Step-up re-authentication required (§9). |
 | `M-LIC-04` | Escalate revocation to DG | P2 | Reason = the recommendation the DG will review (feeds `M-GOV-01`). |
 | `M-LIC-05` | Record accreditation outcome | P4 | Captures the result of the off-platform meeting/agreement process (A-2 §15c). |
 
@@ -109,7 +109,7 @@ four-state decision vocabulary.
 | ID | Modal | Pattern | Notes |
 | :-- | :-- | :-- | :-- |
 | `M-FIN-01` | Create / edit fee entry | P4 | Service or levy, amount, effective dates. |
-| `M-FIN-02` | **Publish schedule** | P3 | **Must state blast radius**: takes effect for *every* fee-bearing service at checkout, immediately. |
+| `M-FIN-02` | **Publish schedule** | P3 | **Must state blast radius**: takes effect for *every* fee-bearing service at checkout, immediately. Step-up re-authentication required (§9). |
 | `M-FIN-03` | Revert to prior version | P3 | Restores a previous published schedule; states which version and its amounts. |
 | `M-FIN-04` | Archive entry | P1 | Retains history with effective dates. |
 | `M-FIN-05` | Run reconciliation | P1 | Names the period. |
@@ -126,17 +126,18 @@ Raised from the Admin Console. Every one of these changes who can do what.
 | :-- | :-- | :-- | :-- |
 | `M-ADM-01` | Invite / create staff account | P4 | Identity + initial role(s); account cannot act until MFA enrolled. |
 | `M-ADM-02` | Assign / revoke role | P2 | Reason recorded; states which screens the change grants or removes. |
-| `M-ADM-03` | **Change role permissions** | P3 | **Affects every user holding that role**, not one person. Must say so explicitly. |
+| `M-ADM-03` | **Change role permissions** | P3 | **Affects every user holding that role**, not one person. Must say so explicitly. Step-up re-authentication required (§9). |
 | `M-ADM-04` | Enrol / reset MFA | P4 | Reset invalidates the existing factor. |
 | `M-ADM-05` | **Suspend account** | P3 | Access withdrawn immediately; reversible. |
-| `M-ADM-06` | **Deactivate account** | P3 | Access withdrawn immediately; treated as permanent. |
+| `M-ADM-06` | **Deactivate account** | P3 | Access withdrawn immediately; treated as permanent. Step-up re-authentication required (§9). |
 
 ---
 
 ## 7. Field & governance modals (A-7, A-8, A-10)
 
-For the three roles whose screens are not yet built; listed so the catalogue is
-complete and their specs can reference it.
+**A-7 (inspection) and A-10 (sign-off) screens are now in scope** (open-questions A5);
+their modals are live. **A-8 (enforcement) and the A-9 land modals remain deferred** —
+listed so the catalogue is complete and the deferred specs need no new IDs later.
 
 | ID | Modal | Pattern | Notes |
 | :-- | :-- | :-- | :-- |
@@ -146,7 +147,7 @@ complete and their specs can reference it.
 | `M-ENF-02` | Escalate to DG sign-off | P2 | Recommendation the DG reviews. |
 | `M-ENF-03` | Escalate penalty to finance | P2 | Hands the penalty to A-5 for collection. |
 | `M-ENF-04` | Resolve / close notice | P2 | Violation remedied. |
-| `M-GOV-01` | **Authorise sign-off** | P3 + step-up | The most consequential action in the module — executes a revocation or final enforcement. Recommend re-authentication (see §9). |
+| `M-GOV-01` | **Authorise sign-off** | P3 + step-up | The most consequential action in the module — executes a revocation or final enforcement. Re-authentication **required** (§9). |
 | `M-GOV-02` | Decline sign-off | P2 | Reason returns to the originating tier. |
 | `M-LND-01` | Run harmonisation sync | P1 | Names the bureau and period. |
 | `M-LND-02` | Resolve conflict | P4 | Choose the authoritative record; bureau is authoritative for state-held data (A-9 §21). |
@@ -162,7 +163,7 @@ Added to resolve flow gaps G5 and G7 (see
 | ID | Modal | Pattern | Notes |
 | :-- | :-- | :-- | :-- |
 | `M-QUE-01` | **Release item** | P2 | Returns a claimed item to the pool. Reason recorded (e.g. conflict of interest, wrong specialism). Any draft note is discarded. |
-| `M-QUE-02` | Claim expired | P6 | The officer's claim lapsed through inactivity; the item returned to the pool and may now be held by someone else. |
+| `M-QUE-02` | Claim expired | P6 | The officer's claim lapsed through **30 minutes of inactivity**; the item returned to the pool and may now be held by someone else. |
 | `M-QUE-03` | Item already claimed | P6 | Opening an item another officer holds. Shows who holds it and since when; offers to open read-only. |
 
 ---
@@ -191,7 +192,7 @@ Cross-cutting; not raised by a single screen.
 | ID | Alert | Notes |
 | :-- | :-- | :-- |
 | `M-SYS-01` | **Item locked / already decided by another officer** | **Resolved** — claim-on-open; see below. Raises `M-QUE-03` on open, `M-QUE-02` on lapse. |
-| `M-SYS-02` | Step-up authentication | Re-authenticate before the most sensitive actions. |
+| `M-SYS-02` | Step-up authentication | **Required** before the five widest-consequence actions — see §9. |
 | `M-SYS-03` | Session expiry warning | Warn **before** timeout so an unsaved reason isn't lost. |
 | `M-SYS-04` | Unsaved changes | Leaving a review or editor mid-edit. |
 | `M-SYS-05` | Action failed / retry | A write did not complete. |
@@ -210,16 +211,15 @@ The officer may also release it deliberately (`M-QUE-01`).
 carry mandatory written reasons. Losing that work to a race is worse than briefly
 blocking a colleague. Every claim, lapse, and release is written to the audit trail.
 
-> **Proposed — needs client confirmation:** the inactivity period before a claim
-> lapses (suggested: 30 minutes). Too short interrupts genuine review; too long
-> strands items.
+**Claim lapse period — confirmed: 30 minutes of inactivity** (open-questions A6).
 
-### Step-up authentication — `M-SYS-02` *(Proposed)*
+### Step-up authentication — `M-SYS-02` *(Confirmed 2026-09-17)*
 
-Recommended for: `M-ADM-03` (change role permissions), `M-ADM-06` (deactivate
-account), `M-LIC-03` (revoke credential), `M-GOV-01` (authorise sign-off), `M-FIN-02`
-(publish schedule). **Needs client confirmation** — it trades friction for safety on
-the five actions with the widest consequences.
+**Required** on the five widest-consequence actions: `M-ADM-03` (change role
+permissions), `M-ADM-06` (deactivate account), `M-LIC-03` (revoke credential),
+`M-GOV-01` (authorise sign-off), `M-FIN-02` (publish fee schedule). The officer
+re-authenticates before the action proceeds — accepted friction on the five actions
+with the widest blast radius (open-questions A6).
 
 ---
 
