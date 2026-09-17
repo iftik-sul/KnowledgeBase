@@ -4,7 +4,7 @@ module: regulatory-authority
 type: analysis
 status: draft
 contains_proposals: true
-updated: 2026-09-12
+updated: 2026-09-17
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
   - "RERAN/modules/real-estate-developer/service-flows/"
@@ -80,7 +80,7 @@ certificates, electronic title deeds, property maps, and registry-record updates
 each with a payment receipt and an audit entry. These are the tangible outputs of
 the decision loop — the reason the applicant filed in the first place.
 
-### 1d. Actions with no application (the latent half)
+### 1d. Actions with no application
 
 The role definitions in source describe a second class of action that no current
 service routes to — work Group A initiates itself rather than in response to a
@@ -92,7 +92,8 @@ filing:
 - **Enforce** — stop-work and violation notices, penalty escalation
 - **Adjudicate** — mediation, remote-litigation sessions, recorded judgments
 - **Reconcile** — gateway settlement, penalty collection, remittance to accounts
-- **Harmonise** — C-of-O sync with State Lands Bureaus, jurisdictional conflicts
+- **Harmonise** — C-of-O reconciliation with State Lands Bureaus, jurisdictional
+  conflicts
 
 These matter because they are what most of the eight roles are *for*, even though
 the 114 services barely touch them.
@@ -121,16 +122,16 @@ small tributaries.
 
 | Role | Function | Sub-system | Note |
 | :--- | :--- | :--- | :--- |
-| **System Super Administrator** | Provisions accounts, configures modules and role permissions, owns the audit trail | Admin & Configuration Console | The role that operates RBAC itself |
+| **System Super Administrator** | Provisions accounts, configures modules and role permissions, owns the audit trail | Admin & Configuration Console | The role that operates RBAC itself. One role, no break-glass override (A7). |
 | **Revenue & Finance Officer** | Configures the fee schedule every fee-bearing service reads; reconciles gateway settlements | Revenue & Settlement Dashboard | A background/config role — no per-service decision, but the fee engine cannot run without it |
 
-### Tier 3 — Oversight & latent roles (real functions, no current service route)
+### Tier 3 — Oversight roles (no primary service route; two now have screens)
 
-| Role | Function | Why no service routes to it |
+| Role | Function | Screen status |
 | :--- | :--- | :--- |
-| **Director-General / Registrar** | Approves policy, signs statutory instruments, authorises licence revocations and final enforcement | An escalation/sign-off tier, not a first-line queue. No routine service needs the DG. |
-| **Inspection & Enforcement Officer** | Site inspections, milestone verification, stop-work notices | Inspection appears only as a *sub-step* inside two services (RED #27 field visit; two IU services flag "Property Inspection Required"). Enforcement is proactive, not application-triggered. |
-| **State Liaison Coordinator** | Syncs C-of-O data with State Lands Bureaus, resolves jurisdictional conflicts | A background integration function. This is the AGIS-integration territory (see §5). |
+| **Director-General / Registrar** | Approves policy, signs statutory instruments, authorises licence revocations and final enforcement | An escalation/sign-off tier, not a first-line queue — but A-2 *does* escalate revocations here, so its screens are built (A5). Also has read-only access to Application Review (A7). |
+| **Inspection & Enforcement Officer** | Site inspections, milestone verification, stop-work notices | Inspection appears only as a *sub-step* (RED #27; IU inspection-required) — but A-1 depends on the report, so inspection screens are built (A5), on a mobile/tablet form factor. Enforcement is proactive and stays deferred. |
+| **State Liaison Coordinator** | Reconciles C-of-O data with State Lands Bureaus, resolves jurisdictional conflicts | Nothing routes to it. Per A4 this is manual reconciliation, not integration; screens deferred. |
 
 ---
 
@@ -146,7 +147,8 @@ them shows where the build weight sits.
 | **Tribunal & Remote-Litigation** | Dispute Adjudication Officer | 4 | Light |
 | **Admin & Configuration Console** | System Super Administrator | 0 (platform-wide) | Required — hosts RBAC |
 | **Revenue & Settlement Dashboard** | Revenue & Finance Officer | 0 (all fee-bearing) | Required — hosts fee engine |
-| **Inspection & Enforcement Module** | Inspection & Enforcement Officer | 0 primary (2 sub-steps) | Deferrable |
+| **Inspection & Enforcement Module** | Inspection & Enforcement Officer | 0 primary (2 sub-steps) | Inspection built (A-1 depends on it); enforcement deferred |
+| **Governance (sign-off)** | Director-General / Registrar | 0 primary (A-2 escalations) | Built — A-2 revocations escalate here |
 
 The Tribunal sub-system, though it carries only four services, is the one place a
 Group A role does something genuinely different from the decision loop —
@@ -170,14 +172,20 @@ of that mandate the first 114 services exercise*.
   physical oversight (Inspection & Enforcement), and federalism (State Liaison).
   They are not exercised by transactions; they run the agency.
 
-**Proposed position for RBAC:** define all eight roles (so the permission model is
-complete and MFA covers the whole staff), but build functional screens and queues
-for only four: the three approval roles plus System Super Administrator. Revenue &
-Finance gets a configuration surface (the fee schedule) but no queue. Inspection &
-Enforcement and State Liaison get role definitions and placeholder permissions,
-with functional build deferred until services that exercise them exist. This keeps
-the RBAC model whole without building five back-offices for work the platform
-cannot yet generate. (Scope/sequencing is a proposal — see open-questions.md A5.)
+**Resolved (open-questions A5).** All eight roles are defined in RBAC, so the
+permission model and MFA cover the whole staff. Functional screens are then built
+**where an active service already escalates work into the role**, not by
+completeness:
+
+- **Built:** the three approval roles, System Super Administrator, Revenue & Finance
+  (configuration surface), plus **DG sign-off** (A-2 escalates revocations there and
+  would otherwise dead-end) and **Inspection** (A-1 expects inspection reports that
+  nothing could produce).
+- **Deferred:** Enforcement (proactive only, nothing triggers it) and Harmonisation
+  (nothing routes to it, and per A4 it is now simple manual reconciliation).
+
+The dependency rule is what makes this defensible: a screen exists because work
+arrives at it, not because a role appears on an org chart.
 
 ---
 
@@ -207,14 +215,23 @@ See [open-questions.md](open-questions.md) for the live tracking of these. In br
 
 - **Authority-label drift** — "Survey Department" (4 RED services), "Registrar" (RED
   #13), "Trusts Department" (FTI #13) are not among the 8 sourced roles. Proposed
-  homes recorded in open-questions A2.
-- **Unconfirmed role assignments** — 12 IU services name only "RERAN"; several RESC
-  services were assigned by pattern. Marked `[proposed]`; see A1.
+  homes recorded in open-questions A2. **The one item still open**, deliberately — it
+  requires editing other modules' files.
+- **Role assignments where the source named no officer** — 20 services (12 IU, 8 RESC).
+  All confirmed 2026-09-17; `[proposed]` tags removed. See A1.
 - **9 services need no Group A decision** — automated lookups + wrappers; documented
   as system actions, no role, no queue.
 - **Escrow sub-system** — 79 transaction vs 13 escrow, verified against source;
   modelled as one service with an escrow variant (A3, resolved).
-- **AGIS reference vs integration** — the largest external unknown (A4).
+- **AGIS** — resolved (A4): a design reference, not a live integration. A-9 is therefore
+  manual reconciliation, not a system-to-system sync.
+- **Screen scope** — resolved (A5): DG sign-off and Inspection screens are built because
+  active services escalate into them; Enforcement and Harmonisation stay deferred.
+- **Operating decisions** — resolved (A6, A7): shared-pool work allocation with
+  claim-on-open and a 30-minute lapse; SLA clock resets on resubmission; no supervisory
+  review tier (one auditor's decision is final); in-app notifications only; step-up
+  authentication on the five widest-consequence actions; no separation-of-duties
+  requirement.
 
 ---
 
@@ -236,5 +253,8 @@ proposed sequence, not a fixed plan):
    distinct multi-session flow.
 6. **Fee-schedule configuration** (Revenue & Finance Officer) — background surface.
 
-Deferrable to a later phase: the Inspection & Enforcement module and State Liaison
-integration, pending services that exercise them and the AGIS decision.
+Then, per the A5 resolution: **DG sign-off screens** (queue + detail) and the
+**Inspection screens** (queue, on-site capture, report — mobile/tablet form factor).
+
+Still deferred: the Enforcement half of A-7/A-8, and State Liaison harmonisation —
+neither has work arriving at it today.
