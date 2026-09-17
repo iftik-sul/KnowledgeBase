@@ -5,7 +5,7 @@ type: service-flow
 status: draft
 contains_proposals: true
 source_type: derived
-updated: 2026-09-12
+updated: 2026-09-17
 derived_from:
   - "RERAN/modules/regulatory-authority/services-overview.md"
   - "RERAN/modules/regulatory-authority/roles-and-actions-analysis.md"
@@ -13,17 +13,21 @@ tags:
   - regulatory-authority
   - service-flow
   - back-office
-  - latent
+  - in-scope
   - inspection
 ---
 
 # Group A Service A-7 — Conduct Site Inspection
 
-> **LATENT SERVICE.** No current front-office service routes to A-7 as a primary
-> decision; it appears only as a *sub-step* inside a couple of services (RED #27 field
-> visit; IU items that flag "inspection required"). Its functional build is deferrable
-> until services that exercise it exist (open-questions A5). This flow is a structured
-> sketch, not a build-ready spec.
+> **BUILDING (open-questions A5, resolved 2026-09-17).** A-7 has no primary decision
+> routed to it, but A-1 depends on it: field-visit items (RED #27; IU
+> inspection-required services) expect an inspection report and nothing can currently
+> produce one. Its screens are therefore in scope — inspection queue, on-site findings
+> capture, and inspection report.
+>
+> **Form factor note:** this is the only Group A role that works *on site*, capturing
+> geo-tagged findings and photos at a building. Every other Group A screen is desk-based
+> back-office, so these screens need a phone/tablet design, not a desktop one.
 
 ## 1. Service Overview
 
@@ -110,16 +114,18 @@ An inspection is **Requested**, **Scheduled**, **Completed**, or **Cancelled**.
 ## 15. Cross-Module Dependencies
 
 - **A-1** consumes inspection reports for items that require a field visit.
-- **A-8 Issue enforcement notice** may follow a failed inspection.
+- **A-8 Issue enforcement notice** may follow a failed inspection. A-8 is deferred, so
+  that downstream path is documented but not yet live.
 
 ## 16. Related Services
 
-- **A-1** (consumer), **A-8** (downstream), **A-6** (RBAC, prerequisite).
+- **A-1** (consumer), **A-8** (downstream, deferred), **A-6** (RBAC, prerequisite).
 
 ## 17. UI Screens
 
 - **Inspection queue** — requested and scheduled inspections.
 - **Inspection capture** — on-site findings, geo-tag, photos, milestone checklist.
+  **Mobile/tablet form factor** — used in the field, not at a desk.
 - **Inspection report** — the finalised report returned to a decision.
 
 ## 18. API Requirements
@@ -150,4 +156,5 @@ An inspection is **Requested**, **Scheduled**, **Completed**, or **Cancelled**.
 1. Access is role-gated (Inspection & Enforcement Officer) + MFA.
 2. Findings must be geo-tagged and evidenced.
 3. All inspections are recorded in the audit trail with the acting officer.
-4. **Latent** — functional build deferred until services exercise it (A5).
+4. **In scope (A5).** Built because A-1 depends on inspection reports for field-visit
+   items. Screens are mobile/tablet-oriented, unlike the rest of the module.

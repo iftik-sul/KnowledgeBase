@@ -5,7 +5,7 @@ type: service-flow
 status: draft
 contains_proposals: true
 source_type: derived
-updated: 2026-09-12
+updated: 2026-09-17
 derived_from:
   - "RERAN/modules/regulatory-authority/services-overview.md"
   - "RERAN/modules/regulatory-authority/roles-and-actions-analysis.md"
@@ -13,16 +13,20 @@ tags:
   - regulatory-authority
   - service-flow
   - back-office
-  - latent
+  - in-scope
   - governance
 ---
 
 # Group A Service A-10 — Executive Sign-off / Revocation
 
-> **LATENT SERVICE.** No routine front-office service routes to A-10; it is an
-> escalation/sign-off tier the Director-General acts on for the exceptional and the
-> final, not the routine. Functional build is deferrable (open-questions A5). Structured
-> sketch, not build-ready.
+> **BUILDING (open-questions A5, resolved 2026-09-17).** A-2 Licensing is active and
+> already escalates revocations here (`M-LIC-04`); without these screens that escalation
+> dead-ends. Its screens are therefore in scope — sign-off queue and sign-off detail.
+>
+> **Note:** these screens handle **two** escalation sources — licence revocations (A-2)
+> and final enforcement (A-8). Only the A-2 path is live; A-8 remains deferred. The
+> screens support both so the deferred path needs no rework, but only one source
+> currently feeds them. This is intended, not a defect.
 
 ## 1. Service Overview
 
@@ -72,7 +76,8 @@ statutory-instrument action initiated by the DG. No applicant queue.
 ## 10. Authority & Access Control
 
 - **Role:** Director-General / Registrar (Group A).
-- **Access control:** RBAC + MFA.
+- **Access control:** RBAC + MFA, with **step-up re-authentication** before authorising
+  a sign-off (`M-GOV-01`).
 - **Sub-system:** Governance (spans Admin & Configuration and the enforcement layer).
 
 ## 11. Expected Processing Time
@@ -107,12 +112,16 @@ An escalation is **Pending Sign-off**, **Authorised**, or **Declined**.
 
 ## 15. Cross-Module Dependencies
 
-- **A-2** (licence revocations escalate here), **A-8** (final enforcement escalates
-  here). A-10 is the sign-off other services defer to, not a first-line queue.
+- **A-2** (licence revocations escalate here) — **live**.
+- **A-8** (final enforcement escalates here) — **deferred**; the path is supported but no
+  matters currently arrive from it.
+- A-10 is the sign-off other services defer to, not a first-line queue.
 
 ## 16. Related Services
 
-- **A-2**, **A-8** (escalation sources), **A-6** (RBAC).
+- **A-2** (live escalation source), **A-8** (deferred escalation source), **A-6** (RBAC).
+- The DG also has **read-only** access to Application Review (open-questions A7) — able
+  to read an auditor's decision but not change it.
 
 ## 17. UI Screens
 
@@ -138,14 +147,17 @@ An escalation is **Pending Sign-off**, **Authorised**, or **Declined**.
 ## 20. Acceptance Criteria
 
 - Only the Director-General / Registrar with MFA can authorise a sign-off.
+- Authorising requires step-up re-authentication.
 - Revocations and final enforcement cannot execute without DG authorisation.
 - Declines return to the originating tier with recorded reasons.
 - Every authorisation and decline is written to the audit trail.
 
 ## 21. Business Rules
 
-1. Access is role-gated (Director-General / Registrar) + MFA.
+1. Access is role-gated (Director-General / Registrar) + MFA, with **step-up
+   re-authentication required** before authorising a sign-off (`M-GOV-01`).
 2. Serious/final actions (revocation, final enforcement) require DG authorisation before
    execution.
 3. Every authorisation and decline is recorded in the audit trail with reasons.
-4. **Latent** — functional build deferred until exercised (A5).
+4. **In scope (A5).** Built because A-2 escalates licence revocations here. The A-8
+   enforcement escalation path is supported but not yet live.

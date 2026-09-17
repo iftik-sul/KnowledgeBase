@@ -4,7 +4,7 @@ module: regulatory-authority
 type: ui-spec
 status: draft
 contains_proposals: true
-updated: 2026-09-12
+updated: 2026-09-17
 derived_from:
   - "RERAN/modules/regulatory-authority/service-flows/service-a6-provision-and-manage-access.md"
   - "RERAN/modules/regulatory-authority/ui/screen-archetypes.md"
@@ -72,5 +72,13 @@ roles are definable and assignable even where their functional screens are defer
 - Access changes are read (not edited) via the [Audit Trail](audit-trail.md), filtered to
   access actions.
 
-> **Proposed** — whether the platform-wide Super Admin is one role or split (e.g. security
-> admin vs user admin) is open; modelled here as one per source.
+**One role — confirmed.** The Super Administrator is a single role covering both staff
+accounts and role permissions; it is **not** split into separate security-admin and
+user-admin roles.
+
+**No break-glass override — confirmed.** This console is the only screen the Super
+Administrator reaches. It cannot open other officers' work queues or decision screens.
+Being locked out of operational work is the intended control, not a gap (open-questions A7).
+
+**Step-up authentication required** on `M-ADM-03` (change role permissions) and `M-ADM-06`
+(deactivate account) — the officer re-authenticates before either proceeds.

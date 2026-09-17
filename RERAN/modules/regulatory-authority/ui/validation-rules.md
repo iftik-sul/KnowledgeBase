@@ -4,7 +4,7 @@ module: regulatory-authority
 type: ui-validation
 status: draft
 contains_proposals: true
-updated: 2026-09-12
+updated: 2026-09-17
 derived_from:
   - "RERAN/modules/regulatory-authority/service-flows/"
   - "RERAN/modules/regulatory-authority/ui/role-screen-matrix.md"
@@ -57,6 +57,10 @@ these rather than restating them.
 - Every state-changing action writes an **audit-trail entry** with the acting officer.
 - Screens must not introduce local status words outside status-badges.md.
 
-> **Proposed** — separation-of-duties rules (e.g. whether the officer who requested info
-> may later approve the same item) are open (role × screen matrix §3); this file will
-> encode them once the client confirms.
+**Separation of duties — confirmed not required.** The officer who requested additional
+information on an item **may** later approve that same item; no guard blocks it
+(open-questions A7). A deliberate simplification, recorded so the absent check is visible.
+
+**Step-up authentication — required** before the five widest-consequence actions
+(`M-ADM-03`, `M-ADM-06`, `M-LIC-03`, `M-GOV-01`, `M-FIN-02`). The officer re-authenticates
+before the action proceeds (modals.md §9).
