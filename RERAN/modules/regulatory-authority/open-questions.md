@@ -95,10 +95,11 @@ client should confirm.
   stays visible for oversight.
 - **Claim lapse period.** Default: a claim lapses after **30 minutes** of inactivity and
   the item returns to the pool.
-- **Supervisory review tier.** Default: **none.** The eight-role model has no senior/junior
-  auditor tier, so an officer who cannot decide an item releases it rather than escalating.
-  If RERA expects supervisory review of transaction audits, that is a **new role** and a
-  change to the role model, not a screen change.
+- **Supervisory review tier.** ✅ **Resolved 2026-09-17: none — one auditor's decision is
+  final.** An approval issues its output directly; no senior countersignature exists. The
+  eight-role model stands, with no senior/junior auditor tier, so an officer who cannot
+  decide an item **releases** it rather than escalating. No pending-approval state, no
+  second-approver queue.
 - **Work allocation.** Default: the 92-service queue is a **shared pool** (claim-on-open),
   unlike A-3 dispute cases which are assigned. Confirm RERA does not allocate audit work
   to named officers.
