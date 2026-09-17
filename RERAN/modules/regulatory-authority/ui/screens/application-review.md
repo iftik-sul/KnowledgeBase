@@ -126,8 +126,9 @@ reverse.
   the escrow panels (Section 5) render only for escrow items and only for this role.
 - **Licensing & Registration Officer** — full view + decide on licensing items; sees a
   Practitioner-Register check in place of the property registry checks; no escrow panels.
-- **View-only roles** (if any are later granted read access, e.g. for oversight) see all
-  panels but the Decision Panel is disabled.
+- **Director-General / Registrar — read-only oversight (confirmed).** May open a decided
+  item and read every panel, but the Decision Panel is **disabled**; the DG cannot change
+  an auditor's decision. No other non-deciding role has access (open-questions A7).
 - The Decision Panel is **enabled only for the item's primary decision role**; reaching the
   screen does not by itself grant decide rights (per the matrix).
 
@@ -144,5 +145,9 @@ the originating modules' status displays read them.
 - A mortgage-registration approval flips the mortgage to `Completed` for RED #6's live check
   (A-1 §16.2).
 
-> **Proposed** — whether any non-decision role gets read-only access here (for oversight)
-> is open; the escrow review checklist itself is a `Proposed` item on A-1 §7.
+**Separation of duties — not required (confirmed).** The officer who requested additional
+information on an item **may** later approve that same item; nothing blocks it. This is a
+deliberate simplification rather than an oversight — it removes a second-pair-of-eyes check
+that some regulators impose (open-questions A7).
+
+> **Proposed** — the escrow review checklist remains a `Proposed` item on A-1 §7.

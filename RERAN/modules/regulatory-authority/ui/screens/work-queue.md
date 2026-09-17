@@ -66,21 +66,29 @@ One screen renders the view for the queue the role opened:
 | Licensing | Licensing & Registration Officer | A-2 (9 services) |
 
 *(Case, inspection, enforcement, and sign-off queues follow the same pattern but are
-separate screens/latent — see their own specs.)*
+separate screens — see their own specs.)*
 
 ## Sections
 
 ### Section 1 — Queue Summary Cards
 
-KPI cards; selecting one filters the table.
+Four cards; selecting one filters the table. Chosen as **triage signals** — each answers
+"what should I work on next" (open-questions A7).
 
-| KPI | Description |
+| Card | Description |
 | :-- | :-- |
-| Awaiting Review | Received, not yet opened |
-| Under Review | Opened by a reviewer |
-| Information Requested | Queried back to the applicant |
-| Decided This Month | Approved / returned / rejected |
-| Breaching SLA | Past the originating service's processing window |
+| Breaching deadline | Past the originating service's processing window — act now |
+| Due soon | Approaching the deadline; next in line |
+| Waiting to be picked up | Unclaimed items in the pool — the main queue |
+| My open items | Claimed by this officer, so nothing is left half-reviewed |
+
+**Default sort: most urgent deadline first, not oldest.** The 92 services carry very
+different SLAs (25 minutes to 6 business days), so a 2-day-old item can be far more urgent
+than a 5-day-old one — sorting by age would quietly bury genuinely urgent work.
+
+*Deliberately excluded:* "Decided this month" (a performance statistic, not a triage
+signal), "Information requested" (sitting with the applicant, so not actionable — available
+as a filter instead), and "Under review" (vague, and overlaps My open items).
 
 ### Section 2 — Filters & Search
 
@@ -165,5 +173,5 @@ Consequences the UI must handle:
   submission, never reset) is therefore shown alongside, so overall delay stays visible for
   oversight and audit even though it does not drive the SLA badge.
 
-> **Proposed** — the exact KPI set and default sort (by SLA urgency vs age) need
-> confirmation.
+**Claim lapse (confirmed).** A claim lapses after **30 minutes of inactivity**; the item
+returns to the pool and may be claimed by another officer (`M-QUE-02`).

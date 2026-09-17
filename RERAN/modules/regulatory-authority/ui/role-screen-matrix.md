@@ -4,7 +4,7 @@ module: regulatory-authority
 type: ui-rbac-matrix
 status: draft
 contains_proposals: true
-updated: 2026-09-12
+updated: 2026-09-17
 derived_from:
   - "RERAN/modules/regulatory-authority/roles-and-responsibilities.md"
   - "RERAN/modules/regulatory-authority/services-overview.md"
@@ -30,7 +30,7 @@ not its layout.
 
 ## 1. Navigation matrix — which role reaches which screen
 
-`●` = in this role's sidebar / reachable · blank = not reachable.
+`●` = in this role's sidebar / reachable · `○` = reachable read-only · blank = not reachable.
 
 | Screen | C&E Auditor | Licensing Officer | Dispute Officer | Super Admin | Revenue & Finance | DG/Registrar | Inspection & Enf. | State Liaison |
 | :-- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
@@ -38,7 +38,7 @@ not its layout.
 | Work Queue — transaction | ● | | | | | | | |
 | Work Queue — escrow | ● | | | | | | | |
 | Work Queue — licensing | | ● | | | | | | |
-| Application Review | ● | ● | | | | | | |
+| Application Review | ● | ● | | | | ○ | | |
 | Case Queue / Case Workspace | | | ● | | | | | |
 | National Practitioner Register | | ● | | | | | | |
 | Admin Console (staff / roles / permissions) | | | | ● | | | | |
@@ -46,16 +46,23 @@ not its layout.
 | Reconciliation / Remittance | | | | | ● | | | |
 | Notifications | ● | ● | ● | ● | ● | ● | ● | ● |
 | Audit Trail view | ● | ● | ● | ● | ● | ● | ● | ● |
-| Inspection screens *(latent)* | | | | | | | ● | |
+| Inspection screens (queue / capture / report) | | | | | | | ● | |
 | Enforcement screens *(latent)* | | | | | | ● | ● | |
 | Harmonisation screens *(latent)* | | | | | | | | ● |
-| Sign-off screens *(latent)* | | | | | | ● | | |
+| Sign-off screens (queue / detail) | | | | | | ● | | |
 
-> **Proposed.** The DG/Registrar, Inspection & Enforcement, and State Liaison rows map
-> to latent screens (open-questions A5); their navigation is defined for RBAC
-> completeness but the screens are deferred. Super Admin sees the Admin Console only —
-> not every other role's work screens — following least-privilege; a "break-glass"
-> override, if wanted, is a separate decision. **Needs client confirmation.**
+**Confirmed (open-questions A5, A7):**
+- **DG / Registrar** now gets built screens (sign-off queue + detail) because A-2
+  escalates revocations there, plus **read-only** access to Application Review (`○`) —
+  the DG may read a decision but not change it.
+- **Inspection & Enforcement** gets built inspection screens (A-1 depends on inspection
+  reports). Its *enforcement* screens remain deferred.
+- **State Liaison** harmonisation screens remain deferred.
+- **Super Administrator has no break-glass override.** The Admin Console is the only
+  screen it reaches; it cannot open other officers' work queues. Being locked out of
+  operational work is the intended control, not a gap.
+- Super Administrator is **one role**, covering staff accounts and role permissions —
+  not split into security-admin and user-admin.
 
 ## 2. On-screen actions live in the screen specs, not here
 
@@ -71,12 +78,11 @@ screen spec decides that.
 ## 3. Cross-cutting rules
 
 - **MFA is required** for every role before any screen can be acted on (per A-6).
-- **A role with no functional screens built yet** (DG, Inspection, State Liaison in the
-  first build) still exists in the permission model and can be assigned; it simply has
-  little or nothing in its sidebar until its screens are built.
+- **A role with no functional screens built yet** (State Liaison, and Inspection's
+  *enforcement* half) still exists in the permission model and can be assigned; it simply
+  has little or nothing in its sidebar until those screens are built.
 - **One person can hold more than one role**; their sidebar is the union of their roles'
   reachable screens, and their actions the union of their roles' permissions.
 
-> **Proposed** — the exact per-screen permission refinements are first-pass and need
-> confirmation against RERA's actual separation-of-duties rules (e.g. whether the same
-> officer who requests info can also later approve the same item).
+**Separation of duties — confirmed not required.** The officer who requests additional
+information on an item may later approve that same item (open-questions A7).
