@@ -40,12 +40,15 @@ Extracted from the **Individual User portal**, the tokenised layer of the app. *
 | `Green/green-600` · `green-700` | `#2FB551` · `#258D3F` | success text/icon |
 | `Orange/orange-600` · `orange-700` | `#E88800` · `#B56A00` | warning text/icon |
 | `Green/50` · `Blue/50` · `Yellow/50` | `#F0FDF4` · `#EFF6FF` · `#FEFCE8` | soft status/badge backgrounds |
-| error red (unnamed) | `#D33128` | required asterisk / error / candidate for `Rejected` |
+| `Red/600` | `#DC2626` | **confirmed named red** — `Buttons/Button destructive`'s own default fill; use for `Rejected` |
+| error red (secondary) | `#D33128` | Input field's required-asterisk/error colour only — not the button/status red |
 | `Background/primary` | `#FFFFFF` | surfaces |
 | `Gradients/Blue 1` | 157° `#44009B → #2370CA` | **primary button fill** |
 
-> The Foundation palette has no *named* red; `#D33128` is used for required/error and is the best
-> candidate for `Rejected` — confirm whether it should be promoted to a named token.
+> **Resolved:** the kit DOES have a named red — `Red/600 #DC2626` — confirmed via `Buttons/Button
+> destructive`'s default fill (no override needed there, unlike Primary's purple). Use `Red/600` for
+> `Rejected` everywhere (Badge Color=Error, any hand-styled red); `#D33128` is only the Input field's
+> error/required colour, a different, narrower use.
 
 ## Type styles
 `Body Large/Medium` 18/27 · `Body/Medium` 16/24 · `Footnote/Medium` 14/20 · `Footnote/Regular` 14/20 ·
