@@ -56,17 +56,31 @@ service. Splitting was rejected to avoid duplicating a service-flow that starts
 identical (the drift risk); it can still be split later if escrow proves to need a
 genuinely separate workflow.
 
-## A4 — AGIS: design reference or live integration?
+## A4 — AGIS: design reference or live integration? *(resolved 2026-09-17)*
 
 The client supplied the AGIS (Abuja GIS) documentation "for Group A." AGIS is the
 FCT's real land-registry agency. It models Group A's land / title / survey / deeds /
 licensing functions well but has **no escrow function at all** — so it cannot inform
 the 92-service Compliance & Escrow Auditor core.
 
-**Question:** is AGIS a *design reference* for Group A's land-side sub-systems, or a
-*live system* Group A must integrate with (via the State Liaison Coordinator, which
-is defined as syncing C-of-O data with state bureaus)? The two imply very different
-work. **Status: open** — the largest external unknown for this module.
+**Resolved: AGIS is a design reference, not a live integration target.** RERAN does
+not connect to AGIS systems; there is no data contract, no sync API, and no
+dependency on AGIS uptime or schema.
+
+Consequences:
+
+- **A-9 Harmonise Land Records is no longer blocked**, but its nature changes: the
+  State Liaison Coordinator performs **periodic manual reconciliation** — comparing
+  platform records against bureau records obtained out-of-band — rather than
+  operating a system-to-system sync. Its screens should be specced on that basis.
+- **Scope reduction:** no integration build, no AGIS schema mapping, no
+  authentication/credentials with a third-party system, and no failure modes from an
+  external dependency.
+- **AGIS remains useful as source material** for the land-side service and screen
+  design (titles, deeds, C-of-O, survey), per the AGIS ↔ Group A crosswalk — but it
+  informs *how the work is modelled*, never *what the platform connects to*.
+- The bureau remains the authoritative source for state-held data; the platform
+  records what reconciliation found, not a live mirror.
 
 ## A5 — Non-transactional roles: RBAC scope in Phase 1
 

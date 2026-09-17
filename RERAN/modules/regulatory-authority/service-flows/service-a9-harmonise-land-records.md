@@ -5,7 +5,7 @@ type: service-flow
 status: draft
 contains_proposals: true
 source_type: derived
-updated: 2026-09-12
+updated: 2026-09-17
 derived_from:
   - "RERAN/modules/regulatory-authority/services-overview.md"
   - "RERAN/modules/regulatory-authority/open-questions.md"
@@ -14,22 +14,23 @@ tags:
   - service-flow
   - back-office
   - latent
-  - integration
+  - reconciliation
 ---
 
 # Group A Service A-9 — Harmonise Land Records
 
-> **LATENT SERVICE, and the most open.** No current front-office service routes to A-9;
-> it is a background integration function. Its scope depends entirely on open-question
-> A4 — whether AGIS (and other state bureaus) is a *design reference* or a *live
-> integration target*. Until A4 is decided, this flow is a placeholder sketch.
+> **LATENT SERVICE.** No current front-office service routes to A-9; it is a background
+> reconciliation function, so its functional build stays deferred (open-questions A5).
+> **A4 is now resolved: AGIS is a design reference, not a live integration** — so this
+> service is *manual periodic reconciliation*, not a system-to-system sync.
 
 ## 1. Service Overview
 
 **Harmonise Land Records** is the federalism service: it keeps RERAN's records in step
 with the State Lands Bureaus and Surveyors-General, resolves jurisdictional conflicts,
 and harmonises Certificate-of-Occupancy (C-of-O) data across federal and state
-authorities. It is the home of any AGIS-type integration.
+authorities. AGIS informs how this work is modelled, but is not a system RERAN connects
+to (A4).
 
 ## 2. Purpose
 
@@ -38,10 +39,12 @@ so a C-of-O or boundary the platform relies on matches what the relevant bureau 
 
 ## 3. Description
 
-A State Liaison Coordinator synchronises records with a state bureau (pull and/or push),
-detects conflicts between platform and bureau data, and resolves or escalates them. The
-concrete mechanics depend on A4: a design-reference answer means periodic manual
-reconciliation; a live-integration answer means a system-to-system sync with AGIS.
+A State Liaison Coordinator compares platform records against a state bureau's records,
+detects conflicts between the two, and resolves or escalates them.
+
+Per the A4 resolution this is **periodic manual reconciliation**: bureau records are
+obtained out-of-band and compared against platform records. There is no sync API, no
+scheduled push/pull, and no live dependency on an external system.
 
 ## 4. Who Can Act
 
@@ -54,7 +57,7 @@ Internal/periodic, or when a jurisdictional conflict is detected. No applicant q
 ## 6. What the Coordinator Works With
 
 - Platform land/C-of-O records.
-- State-bureau records (via AGIS or equivalent) — reference or live per A4.
+- State-bureau records obtained out-of-band (AGIS or equivalent) — reference only.
 - Detected conflicts between the two.
 
 ## 7. Task Checklist
@@ -63,8 +66,8 @@ Internal/periodic, or when a jurisdictional conflict is detected. No applicant q
 - Conflicts are identified and characterised.
 - Resolutions are recorded and, where needed, escalated.
 
-> **Proposed / blocked on A4** — the sync mechanism and conflict-resolution rules cannot
-> be specified until the reference-vs-integration decision is made.
+> **Proposed** — conflict-resolution rules (who arbitrates, what evidence is required)
+> still need client confirmation. The *mechanism* is settled: manual reconciliation.
 
 ## 8. Service Fee / 9. Payment Required
 
@@ -83,9 +86,9 @@ N/A — background/periodic.
 ## 12. Processing Workflow
 
 ```
-Sync triggered  (periodic / conflict detected)
+Reconciliation triggered  (periodic / conflict detected)
         ↓
-Compare platform records ↔ state-bureau records  (reference or live per A4)
+Compare platform records ↔ state-bureau records  (obtained out-of-band)
         ↓
 Detect conflicts
         ↓
@@ -107,23 +110,24 @@ A harmonisation run is **Open**, **Reconciled**, or **Conflicted** (with flagged
 
 ## 15. Cross-Module Dependencies
 
-1. **AGIS (open-question A4)** — determines whether this is reference reconciliation or
-   live integration; the single biggest external unknown for the module.
+1. **AGIS — resolved (A4):** design reference only. No integration, no data contract, no
+   external uptime dependency.
 2. Any service relying on C-of-O/boundary data depends on this staying reconciled.
 
 ## 16. Related Services
 
-- **A-2** (registry consistency, adjacent), **A-6** (RBAC), and the AGIS decision (A4).
+- **A-2** (registry consistency, adjacent) and **A-6** (RBAC).
 
 ## 17. UI Screens
 
-- **Harmonisation dashboard** — sync runs, reconciled vs conflicted records, drill-in.
+- **Harmonisation dashboard** — reconciliation runs, reconciled vs conflicted records,
+  drill-in.
 - **Conflict resolution view** — compare platform vs bureau record; resolve/escalate.
 
 ## 18. API Requirements
 
 - Fetch platform land/C-of-O records
-- Fetch / integrate state-bureau records (per A4)
+- Import / record state-bureau records (manual upload or out-of-band file)
 - Run comparison; flag conflicts
 - Record resolutions
 - Write audit-log entry
@@ -132,14 +136,14 @@ A harmonisation run is **Open**, **Reconciled**, or **Conflicted** (with flagged
 
 - Harmonisation Run *(period, status)*
 - Land / C-of-O Record *(platform)*
-- Bureau Record *(reference or live)*
+- Bureau Record *(imported reference snapshot)*
 - Conflict / Resolution
 - Staff User + Role + Permission *(RBAC)*
 - Audit Log
 
 ## 20. Acceptance Criteria
 
-- Only a State Liaison Coordinator with MFA can run harmonisation.
+- Only a State Liaison Coordinator with MFA can run reconciliation.
 - Conflicts between platform and bureau records are surfaced, not hidden.
 - Resolutions are recorded and escalatable.
 - Every run is written to the audit trail.
@@ -149,5 +153,5 @@ A harmonisation run is **Open**, **Reconciled**, or **Conflicted** (with flagged
 1. Access is role-gated (State Liaison Coordinator) + MFA.
 2. The authoritative source for state-held data is the state bureau, not the platform.
 3. All runs and resolutions are recorded in the audit trail with the acting officer.
-4. **Latent + blocked on A4** — cannot be built until the AGIS reference-vs-integration
-   decision is made.
+4. **Latent** — functional build deferred until services exercise it (A5). No longer
+   blocked: A4 is resolved (design reference, manual reconciliation).
