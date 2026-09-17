@@ -42,7 +42,9 @@ Land  →  Dashboard  →  Work Queue  →  Open item  →  Review  →  Decide 
                         applicant responds → item re-enters the queue
 ```
 
-The loop back is the part no document currently describes. See §7 and §8.
+The loop back was the part no document described. It, and nine other gaps this walk
+exposed, are now resolved — see the table at the end. Each gap below states its
+resolution and where it was applied.
 
 ---
 
@@ -57,11 +59,9 @@ routes into the Work Queue, pre-filtered.
 **What they do:** read the state of their workload, then click into whatever is most
 urgent.
 
-> **Gap G1 — landing destination.** Nothing states whether this role lands on the
-> Dashboard or straight into the Work Queue. For a high-volume processing role, an
-> extra click before work every session is a real cost. **Proposed:** land on the
-> Dashboard, because the SLA-breach tile is the triage signal that decides which
-> queue to open. Needs confirmation.
+> **G1 landing destination — RESOLVED.** Every role lands on the Dashboard, not on its
+> work screen: the SLA-breach tile is the triage signal that decides which queue to
+> open, so the Dashboard earns the first click. Applied in `dashboard.md`.
 
 ---
 
@@ -79,24 +79,23 @@ trustee-assessment indicator.
 **What they do:** filter by originating service, status, age/SLA state, or channel;
 search by reference, applicant, or subject; scan for SLA-breaching rows.
 
-> **Gap G2 — how the officer switches queue view.** Tab, sidebar item, or filter? The
-> matrix lists "Work Queue — transaction" and "Work Queue — escrow" as separate
-> navigation rows, which implies **two sidebar items**; the screen spec calls them
-> views of one screen. These are not quite the same thing. **Proposed:** two sidebar
-> entries, one screen, distinct URLs — escrow work is materially different (trustee
-> pre-gate, heavier checklist) and deserves its own entry point.
+> **G2 queue-view switching — RESOLVED.** Two sidebar entries with distinct routes,
+> rendering one screen. Escrow has a different entry gate and heavier checklist, so it
+> warrants its own entry point even though the layout is shared. Applied in
+> `work-queue.md`.
 
-> **Gap G3 — empty state.** Not specified anywhere. An auditor with an empty queue
-> should see confirmation they are clear, not a blank table. Every other module
-> specs empty states (76 mentions); Group A specs none.
+> **G3 empty state — RESOLVED.** Required on the Queue archetype, and it must say
+> *which* empty it is: you are clear / filters hide everything / nothing has arrived.
+> A blank table is never acceptable. Applied in `screen-archetypes.md` (so it
+> propagates to every queue) and `work-queue.md`.
 
 ---
 
-## Step 3 — Picking up an item — **the biggest open question**
+## Step 3 — Picking up an item — **the biggest decision, now made**
 
 **What they do:** click a row → [Application Review](../screens/application-review.md).
 
-> **Gap G4 — is work assigned, or self-serve?** A-3 (dispute) explicitly **assigns** a
+> **G4 — is work assigned, or self-serve?** A-3 (dispute) explicitly **assigns** a
 > case to an officer. A-1 says nothing. So it is undefined whether the 92-service
 > queue is:
 > - **a shared pool** every auditor pulls from (self-serve), or
@@ -106,12 +105,16 @@ search by reference, applicant, or subject; scan for SLA-breaching rows.
 > items vs all items" filter, and a reassignment path. A pool model needs claim-on-
 > open (see G5) and no ownership column at all.
 >
-> **Proposed:** shared pool with claim-on-open. It suits high volume and uneven
-> arrival, and no source describes a supervisor allocation step. **This is a real
-> design decision and should be confirmed before the screen is built.**
+> **RESOLVED: shared pool with claim-on-open.** The A-1/A-3 asymmetry is deliberate
+> and explains itself — a dispute is a long-running relationship worked over multiple
+> sessions, so continuity matters and it is assigned; a transaction audit is a discrete
+> task, so throughput matters and it is pooled. Applied in `work-queue.md` §4.
+> Client confirmation logged in open-questions A6.
 
-> **Gap G5 — concurrency.** Two auditors open the same item. Raises `M-SYS-01`
-> (modals.md §9). Proposed there: claim-on-open with timed release. Unresolved.
+> **G5 concurrency — RESOLVED.** Claim-on-open with timed release: opening claims the
+> item, inactivity lapses the claim, and it returns to the pool. Opening an item another
+> officer holds offers read-only. Modals `M-QUE-01/02/03` added in `modals.md` §7b; the
+> rationale is in §9. Lapse period (30 min) logged for client confirmation.
 
 ---
 
@@ -133,15 +136,16 @@ work the review checklist rendered as live checks.
 - `M-BLK-02` escrow item with no trustee assessment → decision unavailable
 - `M-BLK-03` mortgage prerequisites unmet → approval blocked
 
-> **Gap G6 — partial work.** A considered review may span a break or a shift. Nothing
-> describes saving a draft reason or a part-finished checklist. `M-SYS-04` (unsaved
-> changes) warns on exit, but there is nowhere for the work to go. **Proposed:** allow
-> a draft decision note saved against the item, visible only to the claiming officer.
+> **G6 partial work — RESOLVED.** A draft decision note can be saved against the item,
+> visible only to the claiming officer, so a considered review can span a break or a
+> shift. Discarded on release. Applied in `application-review.md` §5b.
 
-> **Gap G7 — can the officer step back?** No path is documented for "this isn't mine
-> to decide" — no release-back-to-queue, no reassign to a colleague, no escalate to a
-> senior. A real regulator needs at least release. **Proposed:** add "Release item"
-> (returns to pool, records in audit trail). Reassign/escalate needs a client answer.
+> **G7 stepping back — RESOLVED.** "Release item" (`M-QUE-01`) returns it to the pool
+> with a recorded reason — the path for "this isn't mine to decide". Reassign is
+> unnecessary under a pool model. **Escalation has no target:** the eight-role model has
+> no senior/junior auditor tier, so an officer who cannot decide releases. If RERA
+> expects supervisory review, that is a *new role*, not a screen change (open-questions
+> A6). Applied in `application-review.md` §5b.
 
 ---
 
@@ -166,19 +170,22 @@ written to the audit trail. Status moves per [status-badges.md](../status-badges
 
 ---
 
-## Step 6 — What happens immediately after — **undocumented**
+## Step 6 — What happens immediately after
 
-> **Gap G8 — post-decision routing.** Nothing says where the officer goes after
+> **G8 — post-decision routing.** Nothing said where the officer goes after
 > submitting a decision. Three options, and the choice materially affects throughput
 > for a role processing this volume:
 > - **Return to queue** (safe, one extra click per item)
 > - **Auto-advance to the next item** (fastest; risks momentum-driven decisions)
 > - **Stay on the decided item** with a confirmation (slowest; good for verification)
 >
-> **Proposed:** return to the queue with a success toast naming the outcome and an
-> "undo-window" style link back to the item for a short period. Not auto-advance —
-> the decisions here carry mandatory reasons and legal weight; speed is not the
-> primary virtue. Needs confirmation.
+> **RESOLVED: return to the queue** with a success toast naming the outcome and a link
+> back to the decided item (read-only). **Not auto-advance** — these decisions carry
+> mandatory written reasons and legal weight, so deliberate re-entry beats momentum.
+> **And no undo:** an earlier draft of this flow proposed an undo window, which
+> contradicts `M-DEC-01` — approval issues the output immediately, so there is nothing
+> to undo. The link returns to *view*, not to reverse. Applied in
+> `application-review.md` §6.
 
 ---
 
@@ -187,23 +194,25 @@ written to the audit trail. Status moves per [status-badges.md](../status-badges
 An item decided **Request Additional Information** or **Returned** is not finished.
 The applicant responds, and it **re-enters the queue** (A-1 §12).
 
-> **Gap G9 — where does a returning item land?** Undocumented, and it matters:
+> **G9 — where does a returning item land?** This matters on three counts:
 > - Does it return to the **same officer** who queried it, or to the pool?
 > - Does it keep its original SLA clock or start a new one?
 > - Is it visually distinguished from a first-time item?
 >
-> **Proposed:** returns to the same officer where that officer is available (they hold
-> the context), visibly flagged as a resubmission with the original query shown, and
-> the SLA clock behaviour confirmed with the client — it has contractual implications.
+> **RESOLVED (routing):** returns to the officer who queried it where that officer is
+> available — they hold the context — otherwise to the pool. Flagged as a resubmission
+> with the original query shown; a Resubmission column was added to the queue table.
+> Applied in `work-queue.md`. **SLA clock still needs the client** (default: pauses
+> while with the applicant) — open-questions A6, contractual implications.
 
 ---
 
 ## Step 8 — How the officer learns anything happened
 
-> **Gap G10 — no notifications screen.** All four other modules have one; Group A has
-> none. Without it, the officer only discovers a returned item, an SLA breach, or an
-> escalation by re-opening the queue. This is the strongest argument for building the
-> Notifications screen in the Tier 1 batch rather than later.
+> **G10 notifications — RESOLVED.** [Notifications](../screens/notifications.md) is
+> built, role-scoped, with each event linking into the screen that acts on it. It is a
+> convenience surface, not a system of record — the queues and audit trail remain
+> authoritative, so a missed notification never means missed work.
 
 ---
 
@@ -222,28 +231,38 @@ edit path exists anywhere.
 | 1 | Dashboard | ✅ specced |
 | 2–3 | Work Queue (transaction + escrow views) | ✅ specced |
 | 4–6 | Application Review + Decision Panel | ✅ specced |
-| 8 | Notifications | ❌ **missing** |
+| 8 | [Notifications](../screens/notifications.md) | ✅ specced |
 | 9 | Audit Trail | ✅ specced |
 
-The officer's core path is fully specced. What is missing is **the connective tissue**
-— landing, queue switching, claiming, releasing, post-decision routing, returns, and
-notification.
+The officer's core path and its connective tissue are now both specced — landing, queue
+switching, claiming, releasing, post-decision routing, returns, and notification were the
+gaps this walk exposed, and all ten are resolved below.
 
 ---
 
-## Decisions this flow raises
+## Decisions this flow raises — **all resolved 2026-09-17**
 
-| # | Decision | Proposed |
+| # | Decision | Resolution | Applied to |
+| :-- | :-- | :-- | :-- |
+| G1 | Landing destination | Dashboard for every role | dashboard.md |
+| G2 | Queue view switching | Two sidebar entries + routes, one screen | work-queue.md |
+| G3 | Empty state | Required on the Queue archetype; must say *which* empty | screen-archetypes.md, work-queue.md, notifications.md |
+| **G4** | **Assigned vs self-serve** | **Shared pool** — discrete tasks pool, long-running cases assign (hence A-3 differs) | work-queue.md §4 |
+| G5 | Concurrency | Claim-on-open, timed release; `M-QUE-01/02/03` | modals.md §7b, §9 |
+| G6 | Draft/partial work | Draft note per claiming officer, discarded on release | application-review.md §5b |
+| G7 | Release / reassign / escalate | **Release** added; reassign unnecessary under pool; **no escalation tier exists in the 8-role model** | application-review.md §5b |
+| **G8** | **Post-decision routing** | **Return to queue + outcome toast; no auto-advance, no undo** | application-review.md §6 |
+| G9 | Returning-item routing | Back to the querying officer if available, flagged as resubmission | work-queue.md |
+| G10 | Notifications | Screen built | screens/notifications.md |
+
+### Still needing client confirmation
+
+These are resolved with a working default so the build is not blocked, but each is a
+business decision, not a design one:
+
+| Item | Default taken | Why it needs the client |
 | :-- | :-- | :-- |
-| G1 | Landing destination | Dashboard |
-| G2 | Queue view switching | Two sidebar entries, one screen |
-| G3 | Empty state | Add (platform-standard elsewhere) |
-| **G4** | **Assigned vs self-serve pool** | **Shared pool — biggest open decision** |
-| G5 | Concurrency | Claim-on-open, timed release (modals.md §9) |
-| G6 | Draft/partial work | Draft note per claiming officer |
-| G7 | Release / reassign / escalate | Add Release; reassign needs client answer |
-| **G8** | **Post-decision routing** | **Return to queue, not auto-advance** |
-| G9 | Returning-item routing + SLA clock | Same officer; SLA behaviour needs client |
-| G10 | Notifications | Build in Tier 1 |
-
-G4 and G8 are the two that change the screens themselves; the rest add to them.
+| SLA clock on returned items | Pauses while with the applicant | Contractual — affects published processing times |
+| Claim lapse period | 30 minutes inactivity | Operational tempo; too short interrupts review |
+| Supervisory review tier | None (no such role exists) | If RERA expects one, it is a **new role**, not a screen change |
+| Notification delivery | In-app only | Whether SLA breach / DG escalation also go by email or SMS |

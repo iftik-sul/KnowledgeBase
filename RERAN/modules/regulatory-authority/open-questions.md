@@ -3,7 +3,7 @@ project: RERAN
 module: regulatory-authority
 type: open-questions
 status: draft
-updated: 2026-09-12
+updated: 2026-09-17
 ---
 
 # Group A — Open Questions
@@ -79,3 +79,25 @@ MFA are complete), but build functional screens only for the three approval role
 plus System Super Administrator, with Revenue & Finance getting a configuration
 surface and the last two roles deferred until services exist that use them.
 **Status: open** — a client scope confirmation.
+
+## A6 — Group A back-office operating decisions *(added 2026-09-17)*
+
+Surfaced by walking the Compliance & Escrow Auditor journey
+(`ui/flows/compliance-escrow-auditor.md`). Each is resolved with a working default so
+design is unblocked; each is a business decision the client should confirm.
+
+- **SLA clock on returned items.** Default: the clock **pauses** while an item sits with
+  the applicant and resumes on return. Contractual — it changes published processing times.
+- **Claim lapse period.** Default: a claim lapses after **30 minutes** of inactivity and
+  the item returns to the pool.
+- **Supervisory review tier.** Default: **none.** The eight-role model has no senior/junior
+  auditor tier, so an officer who cannot decide an item releases it rather than escalating.
+  If RERA expects supervisory review of transaction audits, that is a **new role** and a
+  change to the role model, not a screen change.
+- **Work allocation.** Default: the 92-service queue is a **shared pool** (claim-on-open),
+  unlike A-3 dispute cases which are assigned. Confirm RERA does not allocate audit work
+  to named officers.
+- **Notification delivery.** Default: **in-app only.** Confirm whether SLA breaches and DG
+  escalations also warrant email/SMS.
+- **Step-up authentication.** Proposed for the five widest-consequence actions
+  (modals.md §9). Trades friction for safety.
