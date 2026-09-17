@@ -154,6 +154,19 @@ complete and their specs can reference it.
 
 ---
 
+## 7b. Queue-management modals (A-1, A-2)
+
+Added to resolve flow gaps G5 and G7 (see
+[flows/compliance-escrow-auditor.md](flows/compliance-escrow-auditor.md)).
+
+| ID | Modal | Pattern | Notes |
+| :-- | :-- | :-- | :-- |
+| `M-QUE-01` | **Release item** | P2 | Returns a claimed item to the pool. Reason recorded (e.g. conflict of interest, wrong specialism). Any draft note is discarded. |
+| `M-QUE-02` | Claim expired | P6 | The officer's claim lapsed through inactivity; the item returned to the pool and may now be held by someone else. |
+| `M-QUE-03` | Item already claimed | P6 | Opening an item another officer holds. Shows who holds it and since when; offers to open read-only. |
+
+---
+
 ## 8. Blocked-action modals (P5)
 
 These fire when a guard in [validation-rules.md](validation-rules.md) prevents an
@@ -177,28 +190,29 @@ Cross-cutting; not raised by a single screen.
 
 | ID | Alert | Notes |
 | :-- | :-- | :-- |
-| `M-SYS-01` | **Item locked / already decided by another officer** | See the concurrency note below. |
+| `M-SYS-01` | **Item locked / already decided by another officer** | **Resolved** — claim-on-open; see below. Raises `M-QUE-03` on open, `M-QUE-02` on lapse. |
 | `M-SYS-02` | Step-up authentication | Re-authenticate before the most sensitive actions. |
 | `M-SYS-03` | Session expiry warning | Warn **before** timeout so an unsaved reason isn't lost. |
 | `M-SYS-04` | Unsaved changes | Leaving a review or editor mid-edit. |
 | `M-SYS-05` | Action failed / retry | A write did not complete. |
 | `M-SYS-06` | SLA breach warning | Item past its originating service's window (non-blocking). |
 
-### Concurrency — `M-SYS-01` *(Proposed — needs a decision)*
+### Concurrency — `M-SYS-01` *(Resolved 2026-09-17)*
 
-Multiple officers work the same queue, so two auditors **will** open the same item.
-Nothing in the module currently addresses this. Two models:
+Multiple officers work the same queue, so two auditors will open the same item.
 
-- **Claim-on-open (pessimistic):** opening an item locks it to that officer; others
-  see it as claimed. Prevents duplicate work; needs lock expiry so abandoned items
-  don't stick.
-- **Optimistic:** anyone may open; the second person to submit is told the item was
-  already decided and shown the outcome.
+**Resolved: claim-on-open with timed release.** Opening an item claims it to that
+officer; others see it as claimed and may open it read-only (`M-QUE-03`). A claim
+lapses after a period of inactivity and the item returns to the pool (`M-QUE-02`).
+The officer may also release it deliberately (`M-QUE-01`).
 
-**Proposed position:** claim-on-open with a timed release. Decisions here are slow,
-considered, and carry mandatory reasons — losing that work to a race is worse than
-briefly blocking a colleague. This is a **system design decision, not just a modal**,
-and should be confirmed before build.
+**Why pessimistic rather than optimistic:** these decisions are slow, considered, and
+carry mandatory written reasons. Losing that work to a race is worse than briefly
+blocking a colleague. Every claim, lapse, and release is written to the audit trail.
+
+> **Proposed — needs client confirmation:** the inactivity period before a claim
+> lapses (suggested: 30 minutes). Too short interrupts genuine review; too long
+> strands items.
 
 ### Step-up authentication — `M-SYS-02` *(Proposed)*
 

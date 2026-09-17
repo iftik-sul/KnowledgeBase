@@ -35,6 +35,9 @@ A worklist the reviewer triages from. Row click opens a Detail/Decision screen.
 
 **Section shape:** Summary Cards (KPIs, click-to-filter) → Filters & Search → Table →
 Pagination. No decision is taken on the queue itself.
+**Empty state (required):** every Queue screen states what an empty list means — "you
+are clear" is different from "a filter hides everything" and from "nothing has arrived
+yet". A blank table is never acceptable.
 **Used by:** Work Queue (A-1, A-2); Case Queue (A-3); Inspection/Enforcement/Sign-off
 queues (A-7/A-8/A-10, latent).
 

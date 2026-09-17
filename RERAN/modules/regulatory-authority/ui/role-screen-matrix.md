@@ -44,6 +44,7 @@ not its layout.
 | Admin Console (staff / roles / permissions) | | | | ● | | | | |
 | Fee Schedule Editor | | | | | ● | | | |
 | Reconciliation / Remittance | | | | | ● | | | |
+| Notifications | ● | ● | ● | ● | ● | ● | ● | ● |
 | Audit Trail view | ● | ● | ● | ● | ● | ● | ● | ● |
 | Inspection screens *(latent)* | | | | | | | ● | |
 | Enforcement screens *(latent)* | | | | | | ● | ● | |
