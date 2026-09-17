@@ -3,7 +3,7 @@ project: RERAN
 type: skill
 scope: figma-build
 status: draft
-updated: 2026-09-15
+updated: 2026-09-16
 description: >
   Rules for building or prompting any RERAN screen in Figma. Read this BEFORE creating
   screens, writing figma-prompts, or generating with an agent, so output stays consistent
@@ -65,13 +65,20 @@ System"). New screens must look like they were always part of it. These rules ca
 
 ## 3. Layout grid (back-office desktop)
 ```
-1440 × 927  screen
-├─ Sidebar 240 (full height)
+1440 × 927  screen   — HEIGHT IS FIXED AT 927 FOR EVERY SCREEN, no exceptions
+├─ Sidebar 240 (full height, white)
 └─ MainContent 1200
-   ├─ Top bar 1200 × 78   (component)
-   └─ Workspace           inner width 1136, 32px side padding
+   ├─ Top bar 1200 × 78   (component, white)
+   └─ Workspace           inner width 1136, 32px side padding, fill N20 #F5F6F7
 ```
 Sidebar header (78) aligns with the top bar (78) on the same baseline.
+
+**Screen height is always exactly 927** — never 977, never auto/hug, regardless of content length
+(scroll the Workspace internally if content overflows). **The Workspace area's fill is `N20 #F5F6F7`**
+(not white) — sidebar and top bar stay white; cards and components placed in the workspace (KPI card,
+`Background+Border` cards, tables) keep their own white fill, which is what creates the contrast against
+the grey workspace background. Any screen built at a different height (e.g. a raw IU copy at 977) must
+be corrected to 927 before it's considered done.
 
 ## 4. Screen archetypes
 - **Queue / list** — reference: FTI **Escrow Request Queue** (`1247:36042`). Regions: Title+Actions →
