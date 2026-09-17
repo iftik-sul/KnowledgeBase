@@ -4,7 +4,7 @@ module: regulatory-authority
 type: ui-spec
 status: draft
 contains_proposals: true
-updated: 2026-09-12
+updated: 2026-09-17
 derived_from:
   - "RERAN/modules/regulatory-authority/service-flows/service-a1-audit-and-decide.md"
   - "RERAN/modules/regulatory-authority/service-flows/service-a2-vet-and-decide-licensing.md"
@@ -91,10 +91,11 @@ review checklist (A-1 §7) rendered as live checks.
   the path for "this isn't mine to decide" (conflict of interest, wrong specialism). The
   draft note is discarded on release.
 
-> **No escalation path exists, by design.** The eight-role model has no senior/junior
-> auditor tier, so there is no one to escalate a transaction audit *to*. An officer who
-> cannot decide an item releases it. If the client expects a supervisory review tier, that
-> is a new role and a change to the role model — see open-questions.
+> **No escalation path exists, by design (confirmed).** One auditor's decision is final —
+> an approval issues its output directly, with no senior countersignature. The eight-role
+> model has no senior/junior auditor tier, so there is no one to escalate a transaction
+> audit *to*: an officer who cannot decide an item releases it. There is therefore no
+> pending-approval state on this screen and no second-approver queue (open-questions A6).
 
 ### Section 6 — Decision Panel *(the core control)*
 
