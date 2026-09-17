@@ -4,7 +4,7 @@ module: regulatory-authority
 type: reference
 screen: _library-assets
 status: draft
-updated: 2026-09-15
+updated: 2026-09-16
 derived_from:
   - "RERAN-Web-App / Individual user page (113:17666) — the tokenised, component-driven layer"
   - "Button Primary (374:17399) · Badge (249:20113) · Background+HorizontalBorder (252:11940)"
@@ -65,6 +65,10 @@ sidebar 240 · shell rows 78.
   Dot/Only. **State:** Default/Hover/Focused/Disabled. Group A: Primary = main action, Secondary gray =
   secondary, Link = inline. **`Buttons/Button destructive`** (same API) for Reject / delete.
   *(The gradient "Button Primary" is portal-only — do not use it in Group A back-office.)*
+  **⚠ Hierarchy=Primary defaults to `Brand/600 #7F56D9` (purple), a kit default — NOT our accent.**
+  Every Primary-hierarchy instance in Group A must have its fill/border overridden to
+  `Color/blue-600 #006FE8` at the instance level (never edit the master component). Check this on
+  every screen that uses a Primary button.
 - **Badge** (variant set) — **Size** sm/md/lg · **Icon** False/Dot/Avatar/Icon left/Icon right/Only ·
   **Color** Brand/Gray/Error/Warning/Success/Blue/Sky/Indigo/Purple/Pink/Rose/Orange/Slate. The status/label
   asset — set its Color; never hand-build a pill (see Status badges below).
@@ -75,8 +79,17 @@ sidebar 240 · shell rows 78.
 - **Verification code input field** — Size, Label, Digits 4/6. MFA / OTP entry (Group A requires MFA).
 - **Checkbox** — Checked, Indeterminate, Size sm/md, Type Checkbox/Radio, Text, Supporting text, State.
   Doc mark-seen/flag, table multi-select, filter checklists.
-- **Dropdown menu** — Icon, Checkbox, Shortcut, Header (Avatar group/Heading/False). Filter menus, select
-  fields, row/kebab action menus. (`Dropdown` = the trigger control.)
+- **Dropdown menu** — Icon, Checkbox, Shortcut, Header (Avatar group/Heading/False). The open-state
+  menu list; used for select fields and row/kebab action menus.
+- **Filter Dropdown** (Group A component, node 1724:506) — the canonical **table filter trigger**.
+  105×40 (auto-width, hug), white, border `N40`, radius 8, padding 12/8, gap 8: label
+  (`Caption/Medium` `N900`, prop `Label`) + a literal **"▾"** glyph (`N400`, 16px) as the chevron —
+  built this way intentionally; do not swap it for an icon component. Use for every filter chip in a
+  Group A table (not the full-width `Input field` Trailing-dropdown variant).
+- **Search Bar** (Group A component, node 1733:55348) — the canonical **table search field**. 180×40,
+  white, border `N40`, radius 8, padding 12/8, gap 8: 16px search icon + placeholder text
+  (`Caption/Medium` `N400`). **The placeholder text is always exactly "Search..." — do not vary it per
+  screen.** Sits first in the filters row, followed by the Filter Dropdown triggers.
 - **Avatar** (variant set) + **Avatar label group** — Size xs–2xl, Placeholder, Text, Status icon
   (Online/Company), State. Top-bar profile, user cells (applicant/assignee), audit-trail actors.
 - **Pagination** (`Pagination` component) — table footer, ~1134×64, flex space-between. Left: page indicator
@@ -104,6 +117,22 @@ sidebar 240 · shell rows 78.
 - **Empty state** — centred in a card: illustration (undraw-style, ~117×114) + one line of guidance
   (`Caption`/`Small`, centred). e.g. "Select an application on the left to see details."
 - **List item / row** — icon/label pairs, `Caption` text, dividers via `HorizontalBorder` (`N30`/`N40`).
+- **Breadcrumb** — row, gap 8, items centre-aligned, made of `PathSegment` groups. Every segment
+  except the last: label (Inter **Medium** 13, `blue-600 #006FE8`, a link) + a real **14px `Chevron
+  Right`** icon instance (not a typed character). Last segment (current page): label (Inter **Regular**
+  13, `N400 #505F79`), no link styling, no chevron after it. Confirmed on the reference screen
+  "S3 – 02 Application Info". When used, build it from this pattern — never a single plain-text string.
+  **Only used on drill-down screens** (a screen reached by clicking into something from a top-level
+  screen — e.g. Application Review, reached from Work Queue). **Top-level sidebar destinations do NOT
+  get a breadcrumb** (Dashboard, Work Queue, Audit Trail, and similarly any other screen reached
+  directly from the sidebar) — no breadcrumb at all, not even a single current-page segment.
+- **Nested double-card (Section card + field-group card)** — confirmed on Application Review's
+  "Application Summary". Outer **Section card**: white, `N30` border, radius 12, px-24 py-20 (the
+  standard `Background+Border` card). Inside it, one or more **field-group cards**: filled **`N20
+  #F5F6F7`**, radius 8, **no border**, padding 16, gap 8 — group label (Inter Semi Bold 13, `N900`)
+  then a row of field pairs (flex-1 each, gap 24): field label (`Small/Regular` 12, `N400`) over value
+  (13, `N900`). Use this for any detail/review screen with grouped read-only fields (Case Workspace,
+  Practitioner Register detail, etc.) — reuse this exact two-tier structure, don't invent a new one.
 
 ## Status badges — use the `Badge` component (Color prop)
 Status pills = the **`Badge`** component (Size sm/md, Icon = **Dot**) with its **Color** set per status.
