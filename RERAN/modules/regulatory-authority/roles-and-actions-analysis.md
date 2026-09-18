@@ -213,10 +213,11 @@ modules it serves:
 
 See [open-questions.md](open-questions.md) for the live tracking of these. In brief:
 
-- **Authority-label drift** — resolved 2026-09-18 (A2). "Survey Department" → Inspection
-  & Enforcement Officer (confirmed as one role for all survey work); "Registrar" → System
-  Super Administrator; "Trusts Department" → Revenue & Finance Officer. Applied across
-  the RED and FTI service-flows and Figma prompts that carried the old labels.
+- **Authority-label drift** — closed 2026-09-18 (A2). "Survey Department," "Registrar,"
+  and "Trusts Department" are confirmed **independent** — not among the Regulatory
+  Authority's 8 roles, not assigned to any other group, and not folded into an existing
+  role. Checked directly against the client's AGIS document: none of the three terms
+  appears there either. RED and FTI's own files keep the labels exactly as sourced.
 - **Role assignments where the source named no officer** — 20 services (12 IU, 8 RESC).
   All confirmed 2026-09-17; `[proposed]` tags removed. See A1.
 - **9 services need no Regulatory Authority decision** — automated lookups + wrappers; documented
