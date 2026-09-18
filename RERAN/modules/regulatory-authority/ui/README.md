@@ -4,7 +4,7 @@ module: regulatory-authority
 type: ui-readme
 status: draft
 contains_proposals: true
-updated: 2026-09-12
+updated: 2026-09-17
 derived_from:
   - "RERAN/modules/regulatory-authority/services-overview.md"
   - "RERAN/modules/regulatory-authority/service-flows/"
@@ -35,40 +35,44 @@ Its screens are queues, review screens, and admin consoles — not submission wi
 
 ## Screen inventory
 
-Consolidated from the 10 service-flows (most name the same patterns). Active screens are
-built now; latent screens are deferred with their latent service-flows (open-questions A5).
+Consolidated from the 10 service-flows (most name the same patterns). A screen is built
+where an active service routes or escalates work into it; the rest are deferred
+(open-questions A5).
 
 | Screen | Serves | Status |
 | :-- | :-- | :-- |
 | Back-office shell (sidebar + top bar) | all | Active (chrome) |
-| Dashboard | all | Active |
-| **Work Queue** (transaction / escrow / licensing views) | A-1, A-2 | **Active — build first** |
-| **Application Review** (+ decision panel) | A-1, A-2 | **Active — build first** |
-| Audit Trail view | all | Active |
-| Case Queue · Case Workspace · Session view · Judgment record | A-3 | Active |
-| National Practitioner Register | A-2 | Active |
-| Admin Console: Staff Directory · Account Editor · Role & Permission Editor | A-6 | Active |
-| Fee Schedule Editor | A-4 | Active |
-| Reconciliation Dashboard · Remittance | A-5 | Active |
-| Inspection · Enforcement · Harmonisation · Sign-off screens | A-7–A-10 | Latent (deferred) |
+| [Dashboard](screens/dashboard.md) | all | Active |
+| [**Work Queue**](screens/work-queue.md) (transaction / escrow / licensing views) | A-1, A-2 | **Active — build first** |
+| [**Application Review**](screens/application-review.md) (+ decision panel) | A-1, A-2 | **Active — build first** |
+| [Notifications](screens/notifications.md) | all | Active |
+| [Audit Trail](screens/audit-trail.md) | all | Active |
+| [Case Queue](screens/case-queue.md) · [Case Workspace](screens/case-workspace.md) | A-3 | Active (session + judgment are sections of the workspace) |
+| [National Practitioner Register](screens/practitioner-register.md) | A-2 | Active |
+| [Admin Console](screens/admin-console.md): Staff Directory · Account Editor · Role & Permission Editor | A-6 | Active |
+| [Fee Schedule Editor](screens/fee-schedule-editor.md) | A-4 | Active |
+| [Reconciliation Dashboard](screens/reconciliation.md) · Remittance (tab) | A-5 | Active |
+| Inspection queue · on-site capture · inspection report | A-7 | **In scope — not yet specced** (mobile/tablet) |
+| Sign-off queue · sign-off detail | A-10 | **In scope — not yet specced** |
+| Enforcement screens | A-8 | Deferred |
+| Harmonisation screens | A-9 | Deferred |
 
 ## Folder structure
 
-- `role-screen-matrix.md` — which role reaches which screen (the RBAC/navigation
+- [`role-screen-matrix.md`](role-screen-matrix.md) — which role reaches which screen (the RBAC/navigation
   backbone). On-screen actions are owned by the screen specs.
-- `screen-archetypes.md` — the five layout archetypes every screen spec declares.
-- `screens/` — the screen specs (this layer; derived from service-flows).
-- `modals.md` — every modal, confirmation, and alert, by ID. Screens reference a modal
+- [`screen-archetypes.md`](screen-archetypes.md) — the five layout archetypes every screen spec declares.
+- `screens/` (linked in the inventory above) — the screen specs (this layer; derived from service-flows).
+- [`modals.md`](modals.md) — every modal, confirmation, and alert, by ID. Screens reference a modal
   by its ID; they never restate its wording, fields, or rules.
-- `components.md`, `status-badges.md`, `validation-rules.md` — supporting docs. Status
+- [`components.md`](components.md), [`status-badges.md`](status-badges.md), [`validation-rules.md`](validation-rules.md) — supporting docs. Status
   wording is owned by status-badges; guard rules by validation-rules.
-- `flows/` — end-to-end user journeys, one per role. Where the matrix says what a role
+- [`flows/`](flows/compliance-escrow-auditor.md) — end-to-end user journeys, one per role. Where the matrix says what a role
   can reach and the screen specs say what a screen contains, a flow says what happens
   in what order and what the user sees between screens.
-- `figma-prompts/` — the Figma AI prompts, derived from the finished specs. Built last,
-  never before the specs.
 
 ## Derivation
 
-service-flows → **screen specs (here)** → figma-prompts. Specs are the source of truth
-for behaviour; figma-prompts reference the existing Figma component library generically.
+service-flows → **screen specs (here)**. The specs are the source of truth for behaviour.
+Figma build prompts are **not kept in the KnowledgeBase** for this module — they proved to
+drift from the specs they claimed to derive from, and design work happens in Figma itself.

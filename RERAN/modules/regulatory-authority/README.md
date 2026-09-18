@@ -4,7 +4,7 @@ module: regulatory-authority
 type: readme
 status: draft
 contains_proposals: true
-updated: 2026-09-12
+updated: 2026-09-17
 ---
 
 # Group A — Regulatory Authority & Governance
@@ -30,7 +30,10 @@ from every other module, and that difference shapes everything in this folder:
 - **8 roles**, of which only 3 make decisions on the current 114 documented services
   (Compliance & Escrow Auditor, Licensing & Registration Officer, Dispute
   Adjudication Officer). The other five run the platform, the finances, and the
-  agency's governance and field functions.
+  agency's governance and field functions. Screens are built for **six of the eight** —
+  those three, plus System Super Administrator and Revenue & Finance, plus the
+  Director-General and the Inspection & Enforcement Officer, because active services
+  escalate work into both (open-questions A5).
 - **6 sub-systems**: Admin & Configuration Console · Licensing & Registry Engine ·
   Escrow / Trust-Account Audit System · Inspection & Enforcement Module · Tribunal &
   Remote-Litigation System · Revenue & Settlement Dashboard.
@@ -48,9 +51,12 @@ from every other module, and that difference shapes everything in this folder:
 | [touchpoint-register.md](touchpoint-register.md) | The join table — all 114 external services mapped to the Group A role, channel, and service that finishes each |
 | [roles-and-actions-analysis.md](roles-and-actions-analysis.md) | Whole-system analysis: the action model, the 8-vs-3 reconciliation, cross-module dependencies, proposed build scope |
 | [open-questions.md](open-questions.md) | Unresolved decisions this module is waiting on |
+| [ui/README.md](ui/README.md) | The back-office UI layer — screens, modals, RBAC matrix, flows |
 
 ## Status
 
-Draft. Foundational documentation only — no service-flows or UI yet. Several role
-assignments are reasoned proposals pending client confirmation; see
-[open-questions.md](open-questions.md).
+Draft. The module now holds its foundation, **10 service-flows** (A-1 to A-10) and **11
+screen specs** plus the modal catalogue, RBAC matrix, and the Compliance & Escrow Auditor
+flow. Screens for A-7 (inspection) and A-10 (sign-off) are in scope but **not yet specced**;
+A-8 and A-9 screens are deferred. One open question remains — A2, the authority-label drift
+— deliberately parked. See [open-questions.md](open-questions.md).

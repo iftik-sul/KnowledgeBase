@@ -4,7 +4,7 @@ module: regulatory-authority
 type: roles-and-responsibilities
 status: draft
 contains_proposals: true
-updated: 2026-09-12
+updated: 2026-09-17
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 ---
@@ -47,7 +47,9 @@ multi-step case process, not a single approve/reject decision.
 ### 4. System Super Administrator
 Runs the platform itself. Provisions staff accounts, configures modules and role
 permissions (this is the role that operates RBAC), and manages the audit trail, data
-security, and disaster recovery.
+security, and disaster recovery. One role — not split into security-admin and
+user-admin — and it has no break-glass override into other officers' work screens
+(open-questions A7).
 
 ### 5. Revenue & Finance Officer
 Owns the money configuration. Sets fee schedules and levies, reconciles what the
@@ -58,17 +60,20 @@ remittance to state and federal accounts.
 The executive head of the authority. Approves policy, signs statutory instruments,
 authorises licence revocations and final enforcement actions, and chairs the
 governing-board interface. A governance and sign-off tier, not a routine processing
-role.
+role. Also has **read-only** access to Application Review — able to read a decision
+but not change it (open-questions A7).
 
 ### 7. Inspection & Enforcement Officer
 The physical-world verification and enforcement role. Conducts geo-tagged site
 inspections, verifies construction milestones, issues stop-work and violation
-notices, and escalates penalties.
+notices, and escalates penalties. This is the only Group A role that works **on
+site**, so its screens are designed for phone/tablet rather than the desk.
 
 ### 8. State Liaison Coordinator
-The federalism role. Synchronises records with State Lands Bureaus and
+The federalism role. Reconciles records with State Lands Bureaus and
 Surveyors-General, resolves jurisdictional conflicts, and harmonises Certificate-of-
-Occupancy data across federal and state authorities.
+Occupancy data across federal and state authorities. Per open-questions A4 this is
+**periodic manual reconciliation**, not a live system integration.
 
 ## How the roles relate to the work
 
@@ -77,6 +82,11 @@ Compliance & Escrow Auditor, the Licensing & Registration Officer, and the Dispu
 Adjudication Officer. The System Super Administrator and Revenue & Finance Officer
 are active but run the platform rather than deciding on applications. The remaining
 three — Director-General, Inspection & Enforcement, and State Liaison — carry real
-regulatory functions that no current service routes to. The reasoning behind this,
-and what it means for build scope, is in
+regulatory functions that no *external* service routes to directly.
+
+Two of those three still get screens, because an **active service escalates work into
+them** (open-questions A5): the **Director-General** receives licence revocations escalated
+from A-2, and the **Inspection & Enforcement Officer** produces the inspection reports A-1
+depends on. Only the State Liaison Coordinator, and the enforcement half of Inspection &
+Enforcement, are deferred. The reasoning is in
 [roles-and-actions-analysis.md](roles-and-actions-analysis.md).

@@ -4,7 +4,7 @@ module: regulatory-authority
 type: services-overview
 status: draft
 contains_proposals: true
-updated: 2026-09-12
+updated: 2026-09-17
 ---
 
 # Group A — Services Overview
@@ -23,25 +23,29 @@ service per touchpoint. (See [roles-and-actions-analysis.md](roles-and-actions-a
 for how the collapse was derived, and the touchpoint register for which external
 service feeds which Group A service.)
 
-**Status column:** *Active* = external services feed it today. *Latent* = a real
-regulatory function that no current service routes to (build deferrable).
+**Status column:** *Active* = external services feed it today. *In scope* = no external
+service routes to it directly, but an active service escalates work into it, so its screens
+are built (open-questions A5). *Deferred* = nothing routes to it and nothing escalates into
+it; screens deferred.
 
 ## Catalogue
 
 | # | Group A service (action) | Role | Sub-system | Feeds from | Status |
 | :-- | :-- | :-- | :-- | :-- | :-- |
-| A-1 | Audit & decide — application review | Compliance & Escrow Auditor | Transaction Audit Queue + Escrow / Trust-Account Audit | 92 external services (79 transaction, 13 escrow/trust) | Active |
-| A-2 | Vet & decide — licensing | Licensing & Registration Officer | Licensing & Registry Engine | 9 external services | Active |
-| A-3 | Adjudicate — dispute | Dispute Adjudication Officer | Tribunal & Remote-Litigation | 4 external services | Active |
-| A-4 | Configure fee schedule | Revenue & Finance Officer | Revenue & Settlement Dashboard | none (every fee-bearing service reads it) | Active |
-| A-5 | Reconcile settlements | Revenue & Finance Officer | Revenue & Settlement Dashboard | none (gateway events) | Active |
-| A-6 | Provision & manage access (RBAC) | System Super Administrator | Admin & Configuration Console | none (internal) | Active |
-| A-7 | Conduct site inspection | Inspection & Enforcement Officer | Inspection & Enforcement Module | 2 sub-steps (RED #27; IU inspection-required) | Latent |
-| A-8 | Issue enforcement notice | Inspection & Enforcement Officer | Inspection & Enforcement Module | none (proactive) | Latent |
-| A-9 | Harmonise land records | State Liaison Coordinator | Data harmonisation layer | none (state-bureau sync) | Latent |
-| A-10 | Executive sign-off / revocation | Director-General / Registrar | Governance | none (escalation only) | Latent |
+| [A-1](service-flows/service-a1-audit-and-decide.md) | Audit & decide — application review | Compliance & Escrow Auditor | Transaction Audit Queue + Escrow / Trust-Account Audit | 92 external services (79 transaction, 13 escrow/trust) | Active |
+| [A-2](service-flows/service-a2-vet-and-decide-licensing.md) | Vet & decide — licensing | Licensing & Registration Officer | Licensing & Registry Engine | 9 external services | Active |
+| [A-3](service-flows/service-a3-adjudicate-dispute.md) | Adjudicate — dispute | Dispute Adjudication Officer | Tribunal & Remote-Litigation | 4 external services | Active |
+| [A-4](service-flows/service-a4-configure-fee-schedule.md) | Configure fee schedule | Revenue & Finance Officer | Revenue & Settlement Dashboard | none (every fee-bearing service reads it) | Active |
+| [A-5](service-flows/service-a5-reconcile-settlements.md) | Reconcile settlements | Revenue & Finance Officer | Revenue & Settlement Dashboard | none (gateway events) | Active |
+| [A-6](service-flows/service-a6-provision-and-manage-access.md) | Provision & manage access (RBAC) | System Super Administrator | Admin & Configuration Console | none (internal) | Active |
+| [A-7](service-flows/service-a7-conduct-site-inspection.md) | Conduct site inspection | Inspection & Enforcement Officer | Inspection & Enforcement Module | 2 sub-steps (RED #27; IU inspection-required) | **In scope** — A-1 depends on its report |
+| [A-8](service-flows/service-a8-issue-enforcement-notice.md) | Issue enforcement notice | Inspection & Enforcement Officer | Inspection & Enforcement Module | none (proactive) | Deferred |
+| [A-9](service-flows/service-a9-harmonise-land-records.md) | Harmonise land records | State Liaison Coordinator | Data harmonisation layer | none (periodic manual reconciliation) | Deferred |
+| [A-10](service-flows/service-a10-executive-signoff-revocation.md) | Executive sign-off / revocation | Director-General / Registrar | Governance | none directly; **A-2 escalates revocations here** | **In scope** |
 
 ---
+
+Each service ID links to its full service-flow in `service-flows/`.
 
 ## Service detail
 
@@ -101,32 +105,38 @@ regulatory function that no current service routes to (build deferrable).
 - **Note:** this service *is* the RBAC operation. It must exist before any other
   Group A service can be used.
 
-### A-7 — Conduct site inspection (Latent)
+### A-7 — Conduct site inspection (In scope)
 - **Trigger:** a sub-step of certain services (RED #27 field visit; IU
   inspection-required), or proactive.
 - **Inputs:** site/project reference; inspection checklist; geo-tag.
 - **Steps:** schedule → visit → record geo-tagged findings → verify milestones.
 - **Outputs:** inspection report, which feeds back into an A-1 decision.
+- **Screens in scope (A5):** inspection queue, on-site findings capture, inspection report.
+  The capture screen is **mobile/tablet** — this is the only Group A role that works on site.
 
-### A-8 — Issue enforcement notice (Latent)
+### A-8 — Issue enforcement notice (Deferred)
 - **Trigger:** proactive — a violation is detected.
 - **Inputs:** violation details; the entity concerned.
 - **Steps:** assess → issue stop-work / violation notice → escalate penalty.
 - **Outputs:** notice; penalty referral.
 
-### A-9 — Harmonise land records (Latent)
+### A-9 — Harmonise land records (Deferred)
 - **Trigger:** internal / periodic, or when a jurisdictional conflict is detected.
-- **Inputs:** state-bureau records; C-of-O data; platform records.
-- **Steps:** sync → detect conflicts → resolve / harmonise.
+- **Inputs:** state-bureau records obtained out-of-band; C-of-O data; platform records.
+- **Steps:** compare → detect conflicts → resolve / harmonise.
 - **Outputs:** reconciled records.
-- **Open (A4):** scope depends on whether AGIS is a design reference or a live
-  integration target.
+- **A4 resolved:** AGIS is a **design reference, not a live integration** — so this is
+  periodic **manual reconciliation**, not a system-to-system sync. No data contract, no
+  sync API, no external uptime dependency.
 
-### A-10 — Executive sign-off / revocation (Latent)
+### A-10 — Executive sign-off / revocation (In scope)
 - **Trigger:** escalation — a revocation, final enforcement action, or statutory instrument.
 - **Inputs:** the escalated case; the recommendation.
 - **Steps:** review escalation → sign off / authorise.
 - **Outputs:** signed instrument; revocation record.
+- **Screens in scope (A5):** sign-off queue, sign-off detail. They support two escalation
+  sources — A-2 licence revocations (**live**) and A-8 final enforcement (**deferred**) —
+  so only one currently feeds them. Intended, not a defect.
 
 ---
 
