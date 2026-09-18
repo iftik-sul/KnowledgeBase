@@ -10,34 +10,35 @@ derived_from:
   - "RERAN/modules/*/service-flows/"
 ---
 
-# Group A — Touchpoint Register
+# Regulatory Authority — Touchpoint Register
 
 This is the join table between the front-office and back-office service catalogues.
-Every external service that another group files terminates in a Group A action; this
-register lists all 114 of them and maps each to the Group A role, sub-system channel,
-and — via that channel — the Group A service that finishes it (see
-[services-overview.md](services-overview.md) for the ~10 Group A services themselves).
+Every external service that another group files terminates in a Regulatory Authority
+action; this register lists all 114 of them and maps each to the Regulatory Authority
+role, sub-system channel, and — via that channel — the Regulatory Authority service that
+finishes it (see [services-overview.md](services-overview.md) for the ~10 Regulatory
+Authority services themselves).
 
-Each row is one external service (from RED, FTI, RESC, or Individual User), the Group A
-role that finishes it, and the sub-system channel that role works in. For the full
-submission logic of any service, see the originating module's own service-flow — this
-register cross-references, it does not duplicate.
+Each row is one external service (from RED, FTI, RESC, or Individual User), the
+Regulatory Authority role that finishes it, and the sub-system channel that role works
+in. For the full submission logic of any service, see the originating module's own
+service-flow — this register cross-references, it does not duplicate.
 
 ## Coverage
 
-- **114 external services** route to Group A (RED 27 · FTI 18 · RESC 26 · IU 43).
-- **105 need a Group A decision**; 9 are automated lookups or wrappers that need none.
+- **114 external services** route to the Regulatory Authority (RED 27 · FTI 18 · RESC 26 · IU 43).
+- **105 need a Regulatory Authority decision**; 9 are automated lookups or wrappers that need none.
 - Channel split: Transaction Audit Queue **79** · Escrow / Trust-Account Audit **13**
   · Licensing & Registry **9** · Tribunal & Remote-Litigation **4** · no decision **9**.
 
-All role assignments are confirmed. Where a source did not name a Group A role
-explicitly, the assignment was derived by service pattern and **confirmed 2026-09-17**
-(open-questions A1) — 20 services in total: 12 Individual User, 8 Real Estate Service
-Companies.
+All role assignments are confirmed. Where a source did not name a Regulatory Authority
+role explicitly, the assignment was derived by service pattern and **confirmed
+2026-09-17** (open-questions A1) — 20 services in total: 12 Individual User, 8 Real
+Estate Service Companies.
 
 ## Register
 
-| Origin | # | Service | Group A role | Sub-system / channel | Processing time |
+| Origin | # | Service | Regulatory Authority role | Sub-system / channel | Processing time |
 |---|---|---|---|---|---|
 | RED | 1 | Register Initial Sale | Compliance & Escrow Auditor | Transaction Audit Queue | 6 business days |
 | RED | 2 | Register Initial Rent-to-Own | Compliance & Escrow Auditor | Transaction Audit Queue | 6 business days |
@@ -165,6 +166,6 @@ Companies.
   though every other item in that group is a property or money transaction. This is
   correct and confirmed (A1); the note exists so it is not later read as misfiled.
 - The full role definitions are in [roles-and-responsibilities.md](roles-and-responsibilities.md);
-  the Group A services these touchpoints feed into are in
+  the Regulatory Authority's services these touchpoints feed into are in
   [services-overview.md](services-overview.md). This register is the by-service view
   that joins the two.
