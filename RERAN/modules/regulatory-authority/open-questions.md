@@ -47,29 +47,33 @@ review; the Licensing & Registration Officer is recorded as the responsible role
 > this one is identity. It is correctly filed; the note exists so a later reader does
 > not assume it is misplaced.
 
-## A2 — Authority-label drift
+## A2 — Authority-label drift *(resolved 2026-09-18)*
 
-Three authority labels used in existing service-flow files are not among the Regulatory
+Three authority labels used in existing service-flow files were not among the Regulatory
 Authority's 8 sourced roles:
 
-- **"Survey Department"** (4 RED services) — this is AGIS vocabulary. Proposed:
-  internal boundary confirmation → Inspection & Enforcement Officer; external
-  Surveyor-General verification → State Liaison Coordinator.
-- **"Registrar"** (RED #13, account-opening step) — proposed → System Super
-  Administrator.
-- **"Trusts Department"** (FTI #13, heirs' distribution) — proposed → Revenue &
-  Finance Officer.
+- **"Survey Department"** (RED #15, #17, #24; referenced in allied-professionals) —
+  AGIS vocabulary. **Resolved: one role, all survey work → Inspection & Enforcement
+  Officer.** Confirmed by the client: RERA has a single person who does all survey
+  work, so the internal/external split I had proposed (dividing it between Inspection
+  & Enforcement and State Liaison) does not apply.
+- **"Registrar"** (RED #13, account-opening step) — **resolved → System Super
+  Administrator.** The account itself is renamed **"project account"** throughout
+  (it was never a role name, just carried "Registrar" in its label) to remove the
+  stale term from status names and database entities, not just prose.
+- **"Trusts Department"** (FTI #13, heirs' distribution) — **resolved → Revenue &
+  Finance Officer.**
 
-**Status: OPEN — and it affects Phase 1.** Parked on 2026-09-17 on the grounds that
-"nothing currently being built depends on it." Walking the Phase 1 service chains showed
-**that is not true** (see `RERAN/phase-1-service-chains.md`): RED #24 routes through a
-"Survey Department" review step and FTI #13 through a "RERA Trusts Department" share
-transfer, and both are in the ten selected Phase 1 services. Left unresolved, RED #24 has
-a review step no officer owns and FTI #13 has a money transfer with no role assigned to
-perform it.
+**Applied across 14 files**: the three RED service-flows and one allied-professionals
+doc for Survey Department; RED #13 plus four files that reference its pattern
+(feature-01-applications, feature-02-projects, RED #24, RED #26) for Registrar; the
+FTI #13 service-flow for Trusts Department — plus the RED #13, RED #24, and FTI #13
+Figma build prompts, whose UI copy carried the same stale labels into screen text,
+button labels, and status pills.
 
-The Survey split across two roles is the least certain of the three: if RERA has one
-person doing all survey checking, it should map to one role, not two.
+This was flagged as affecting Phase 1 (`RERAN/phase-1-service-chains.md`): RED #24's
+review step and FTI #13's post-approval transfer are both in the ten selected Phase 1
+services, and were previously unowned in the role model.
 
 ## A3 — Escrow sub-system: one queue or two? *(resolved 2026-09-12)*
 
