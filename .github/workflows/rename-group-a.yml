@@ -1,0 +1,86 @@
+name: Rename Group A to Regulatory Authority
+
+# This runs the rename script from the GitHub website — no terminal needed.
+#
+# HOW TO USE IT
+#   1. Go to the "Actions" tab at the top of the repository.
+#   2. Pick "Rename Group A to Regulatory Authority" in the left-hand list.
+#   3. Click "Run workflow" on the right.
+#   4. Leave "preview_only" set to true the first time. That changes nothing —
+#      it just shows you which files would be updated.
+#   5. Read the log, then run it again with "preview_only" set to false to
+#      actually make the change and commit it.
+#
+# Nothing is committed unless you set preview_only to false.
+
+on:
+  workflow_dispatch:
+    inputs:
+      preview_only:
+        description: "Preview only (true = show what would change, commit nothing)"
+        required: true
+        default: "true"
+        type: choice
+        options:
+          - "true"
+          - "false"
+
+permissions:
+  contents: write
+
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Preview the changes
+        if: ${{ inputs.preview_only == 'true' }}
+        run: |
+          echo "PREVIEW ONLY — nothing will be committed."
+          echo ""
+          python3 RERAN/tools/rename-group-a-to-regulatory-authority.py
+
+      - name: Apply the changes
+        if: ${{ inputs.preview_only == 'false' }}
+        run: python3 RERAN/tools/rename-group-a-to-regulatory-authority.py --apply
+
+      - name: Show what changed
+        if: ${{ inputs.preview_only == 'false' }}
+        run: |
+          echo "Files changed:"
+          git diff --name-only
+          echo ""
+          echo "Total: $(git diff --name-only | wc -l) files"
+
+      - name: Commit and push
+        if: ${{ inputs.preview_only == 'false' }}
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Nothing to commit — the rename has already been applied."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -F - <<'MSG'
+          Rename Group A to Regulatory Authority across the documentation
+
+          Applied by RERAN/tools/rename-group-a-to-regulatory-authority.py, run from
+          the Actions tab. The script places the article by position, uses "(RA)" for
+          parenthetical role tags, carries the specific grammar and meaning fixes a
+          literal find-and-replace gets wrong, and re-wraps only the paragraphs it
+          lengthened.
+
+          reference/source-of-truth/ keeps "Group A" verbatim — the client's
+          unaltered record — and Groups B-H keep their letters. The script verifies
+          both and fails if either stops being true.
+          MSG
+          git push
+          echo "Done. The changes are committed to $GITHUB_REF_NAME."
