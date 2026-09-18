@@ -39,7 +39,7 @@ Procedure (Heirs) · #15 Updating Title Deed Information · #17 Issuance of Titl
 none to Dispute, none an escrow-variant item. So the Regulatory Authority back half of
 all ten is:
 
-> **Compliance & Escrow Auditor**
+> **[RA] Compliance & Escrow Auditor**
 > → [Work Queue](modules/regulatory-authority/ui/screens/work-queue.md) (transaction view)
 > → [Application Review](modules/regulatory-authority/ui/screens/application-review.md)
 > → decision modal `M-DEC-01`…`M-DEC-04`
@@ -68,7 +68,7 @@ the item reaches the queue. Five distinct shapes:
 ### RED #1 — Register Initial Sale
 ```
 Developer (RED portal) → pay → submit
-  → [Compliance & Escrow Auditor] Work Queue → Application Review → decide
+  → [RA] Compliance & Escrow Auditor → Work Queue → Application Review → decide
   → Approved: Provisional Registration e-Certificate
   → emailed to the purchaser
 ```
@@ -82,7 +82,7 @@ Developer (RED portal) → pay → submit
   → [automatic] validate mortgage reference against FTI's records, live, same request
        ↳ not found / mismatched / not yet `Completed`
             → auto-returned to developer immediately, no officer involved
-  → [Compliance & Escrow Auditor] Work Queue → Application Review → decide
+  → [RA] Compliance & Escrow Auditor → Work Queue → Application Review → decide
   → Approved: Mortgage Provisional Registration Certificate + Electronic Map
 ```
 Fee **before** decision *and before validation* · SLA 6 business days.
@@ -102,7 +102,7 @@ Both ends are in the Phase 1 set, which makes this the path to test end-to-end f
 ```
 RERA issues the developer's licence + self-registration username   (precondition)
   → Developer applies, attaches requirements
-  → [Compliance & Escrow Auditor] Work Queue → Application Review → audit: accept or reject
+  → [RA] Compliance & Escrow Auditor → Work Queue → Application Review → audit: accept or reject
   → If accepted: developer uploads units via an approved survey company
   → Developer submits to the Registrar to open the project account
   → pay registration fee
@@ -120,7 +120,7 @@ SLA 3 business days.
 ### RED #16 — Changing the Name of a Project
 ```
 Developer (RED portal) → open project → new name + reason → submit
-  → [Compliance & Escrow Auditor] Work Queue → Application Review → decide
+  → [RA] Compliance & Escrow Auditor → Work Queue → Application Review → decide
   → Approved: Updated Real Estate Project Approval Certificate
 ```
 **No fee** · SLA 30 minutes · the simplest chain in the set.
@@ -133,7 +133,7 @@ Developer (RED portal) → enter updated details
   → pay application approval fee                      (payment 1 of 2)
   → [Survey Department] review and confirm data        ← A2 warning
   → submit
-  → [Compliance & Escrow Auditor] Work Queue → Application Review → decide
+  → [RA] Compliance & Escrow Auditor → Work Queue → Application Review → decide
   → pay approval fee in real-estate records            (payment 2 of 2)
   → Project completed?  → Electronic Certificate of Title / Title Deed
     Project not completed? → Electronic Map
@@ -149,7 +149,7 @@ Borrower completes mortgage requirements with the bank
   → Institution user files it (select property, enter details, upload docs)
   → pay via the shared gateway
   → [Internal Certifier, inside the institution] review → certify, or return to filer
-  → [Compliance & Escrow Auditor] Work Queue → Application Review → decide
+  → [RA] Compliance & Escrow Auditor → Work Queue → Application Review → decide
   → Approved: title-type certificate (Certificate of Title / Title Deed / Usufruct /
     Statement Certificate / Provisional Sale Registration Certificate — whichever matches
     the property's existing registration)
@@ -168,7 +168,7 @@ Fee **before** submission · SLA 20–25 minutes · **two gates**: certifier, th
 Fund company rep visits the Trustee Centre → submits documents
   → pay at the counter → e-receipt          (moved ahead of review, client decision 2026-08-16)
   → [Trustee Centre Operator] enter and check the transaction
-  → [Compliance & Escrow Auditor] Work Queue → Application Review → decide
+  → [RA] Compliance & Escrow Auditor → Work Queue → Application Review → decide
   → Approved: E-Ownership Certificate + Register of Privileges registration number
   → both delivered by email
 ```
@@ -181,7 +181,7 @@ Fee **before** decision · SLA 25–30 minutes · counter-originated.
 Heirs / representative visit the Trustee Centre → submit documents
   → [Trustee Centre Operator] enter data → initial audit
   → heirs pay at the counter
-  → [Compliance & Escrow Auditor] Work Queue → Application Review → audit and decide
+  → [RA] Compliance & Escrow Auditor → Work Queue → Application Review → audit and decide
   → Approved:
       → [RERA Trusts Department] transfer each heir's share to their bank account  ← A2 warning
       → Certificate of Title + Title Deed + Map + receipts, by email
@@ -196,7 +196,7 @@ post-approval money movement.**
 Customer visits the Trustee Centre → submits documents
   → [Trustee Centre Operator] verify completeness → enter data
   → customer pays → receipt
-  → [Compliance & Escrow Auditor] Work Queue → Application Review → decide
+  → [RA] Compliance & Escrow Auditor → Work Queue → Application Review → decide
   → Approved: updated Electronic Title Deed — same deed number, incremented version
   → link delivered by email
 ```
@@ -209,7 +209,7 @@ Fee **before** decision · SLA 25 minutes.
 Customer visits the Land Department → submits documents
   → [Operator] enter transaction data
   → customer pays
-  → [Compliance & Escrow Auditor] Work Queue → Application Review → decide
+  → [RA] Compliance & Escrow Auditor → Work Queue → Application Review → decide
   → Approved: Electronic Title Deed Certificate, by email
 ```
 Fee **before** decision · SLA 25 minutes · the cleanest counter-originated chain.
