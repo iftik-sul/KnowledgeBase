@@ -16,8 +16,9 @@ tags: [regulatory-authority, ui-spec, back-office, finance, config]
 **Archetype:** 3 — Editor / Config.
 **Access (RBAC-gated):** Revenue & Finance Officer only. MFA required. Navigation (which roles reach this screen) is governed by [role-screen-matrix.md](../role-screen-matrix.md); the roles named here identify who acts on this screen.
 
-Where the platform's fee and levy schedule is maintained (A-4). Every fee-bearing service
-reads what is published here — the widest-blast-radius config surface in Group A.
+Where the platform's fee and levy schedule is maintained (A-4). Every fee-bearing
+service reads what is published here — the widest-blast-radius config surface in the
+Regulatory Authority.
 
 ## Purpose
 
