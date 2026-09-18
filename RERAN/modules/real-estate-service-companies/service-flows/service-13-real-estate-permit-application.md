@@ -83,7 +83,7 @@ Applicable according to the RERAN fee schedule. RERA sets this fee directly thro
 
 ## 10. Processing Authority
 
-**Licensing & Registration Officer** (Group A) — sourced (approver column, row 60).
+**Licensing & Registration Officer** (RA) — sourced (approver column, row 60).
 
 No internal company-side certification gate exists for this service (`open-questions.md` A5).
 

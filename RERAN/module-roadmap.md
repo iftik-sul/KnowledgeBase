@@ -44,11 +44,13 @@ Service counts are verified row by row against the master service table and reco
 
 ---
 
-## The Group A Gap
+## The Regulatory Authority Gap
 
-**Group A owns zero services, yet appears as approver on nearly every one of the other 145.**
+**the Regulatory Authority owns zero services, yet appears as approver on nearly every
+one of the other 145.**
 
-The user group structure gives Group A eight roles and six platform sub-systems:
+The user group structure gives the Regulatory Authority eight roles and six platform
+sub-systems:
 
 * Admin & Configuration Console
 * Licensing & Registry Engine
@@ -61,9 +63,14 @@ The PRD independently specifies three feature modules covering the same ground: 
 
 So the regulator's own system is described at capability level in two source documents, but has no entries at all in the service table — because the service table catalogues services *offered to external users*, not the internal work of processing them.
 
-**Why this matters:** every one of the 145 external services terminates in a Group A action. The Compliance & Escrow Auditor alone is the approver for all 18 Group C services and most of Group B's — and, as of 2026-08-16, most of Group D's as well. Without Group A documented, no external service flow can describe what happens after submission, and the back-office is the largest unspecified area of the platform.
+**Why this matters:** every one of the 145 external services terminates in a Regulatory
+Authority action. The Compliance & Escrow Auditor alone is the approver for all 18 Group
+C services and most of Group B's — and, as of 2026-08-16, most of Group D's as well.
+Without the Regulatory Authority documented, no external service flow can describe what
+happens after submission, and the back-office is the largest unspecified area of the
+platform.
 
-> **Proposed** — Group A should be documented as a module organised by sub-system rather than by service, since it has no service catalogue. The six sub-systems above become the module's top-level structure, with each documenting the queues, decisions, and actions available to the roles that operate it. Needs client confirmation.
+> **Proposed** — the Regulatory Authority should be documented as a module organised by sub-system rather than by service, since it has no service catalogue. The six sub-systems above become the module's top-level structure, with each documenting the queues, decisions, and actions available to the roles that operate it. Needs client confirmation.
 
 ### Estimated shape
 
@@ -93,7 +100,13 @@ Roles are now documented (`modules/allied-professionals/roles-and-responsibiliti
 
 > **Proposed** — Group G may not need a service catalogue at all, but does need documented interfaces for the actions it performs inside other groups' flows: survey data submission, valuation filing, and Trustee Centre operator transactions. Whether this is a module or a set of shared interface documents is an open question. Needs client confirmation.
 
-**Checked 2026-08-15, unrelated to the Group C ownership correction.** This note and the Group A section above both use "owns zero services" in a group-level, catalogue-membership sense — how many of the 145 total services are filed under that group's own catalogue — not in the per-role, within-Group-C sense that `open-questions.md` A4 corrects. No change is needed here: A4 is about whether a service is restricted to a specific role *inside* Group C, not about which group a service belongs to.
+**Checked 2026-08-15, unrelated to the Group C ownership correction.** This note and the
+Regulatory Authority section above both use "owns zero services" in a group-level,
+catalogue-membership sense — how many of the 145 total services are filed under that
+group's own catalogue — not in the per-role, within-Group-C sense that
+`open-questions.md` A4 corrects. No change is needed here: A4 is about whether a service
+is restricted to a specific role *inside* Group C, not about which group a service
+belongs to.
 
 **Group D's own Service #18 raised a comparable, smaller-scale ownership question on 2026-08-16** (whether Real Estate Evaluation Details Certificate belongs to Group D or Group G) — resolved by client decision to stay in Group D, though the service's own atypical shape (an evaluation company deciding on a customer's request, not RERA reviewing a company filing) still needs its own UI treatment. See the Group D profile below.
 
@@ -213,7 +226,9 @@ Roles documented. See "The Group G Note" above for why this module has no servic
 
 **1. ~~Group C flow backfill.~~ Done, as of 2026-08-15.** *(Previously: "Smallest job on the list and it corrects a live inaccuracy: eighteen files currently assert the source is silent where it is not." This has been completed — see the Group C profile above. Retained here, struck through, rather than deleted, so the sequence's original numbering and reasoning stay legible.)*
 
-**2. Group A.** Everything else terminates here, and its absence blocks every other module's flows from describing what happens after submission. Also the largest unknown, so learning its shape early de-risks the rest.
+**2. The Regulatory Authority.** Everything else terminates here, and its absence blocks
+every other module's flows from describing what happens after submission. Also the
+largest unknown, so learning its shape early de-risks the rest.
 
 **3. Group B service flows.** UI already exists; writing the flows underneath completes the module and corrects the inverted derivation chain. Also unblocks the B↔C escrow coupling.
 
@@ -259,7 +274,18 @@ The proposed-services list runs alongside this sequence rather than inside it: i
 
 ## Cross-Cutting Observations
 
-**Escrow is the platform's spine.** It appears in Group B (developer drawdowns), Group C (trustee certification, auditor review), Group D (jointly-owned property accounts), and Group A (compliance audit). Four groups, one mechanism. It is the strongest candidate for a shared reference document rather than four independent descriptions. **Corrected 2026-08-16**: Groups B and C's own escrow status vocabularies were reconciled to one sourced vocabulary this session — a first concrete step toward that shared reference, though still living as duplicated-but-now-consistent content in each module rather than a single document either module points to. **Group D's own escrow-adjacent JOP services turned out not to share the mechanism at all** (`open-questions.md` A3, checked directly against source) — a useful negative data point showing "escrow" as a subject-matter label doesn't always imply a shared processing mechanism, even within one platform.
+**Escrow is the platform's spine.** It appears in Group B (developer drawdowns), Group C
+(trustee certification, auditor review), Group D (jointly-owned property accounts), and
+the Regulatory Authority (compliance audit). Four groups, one mechanism. It is the
+strongest candidate for a shared reference document rather than four independent
+descriptions. **Corrected 2026-08-16**: Groups B and C's own escrow status vocabularies
+were reconciled to one sourced vocabulary this session — a first concrete step toward
+that shared reference, though still living as duplicated-but-now-consistent content in
+each module rather than a single document either module points to. **Group D's own
+escrow-adjacent JOP services turned out not to share the mechanism at all**
+(`open-questions.md` A3, checked directly against source) — a useful negative data point
+showing "escrow" as a subject-matter label doesn't always imply a shared processing
+mechanism, even within one platform.
 
 **The Trustee Centre channel is pervasive.** A large share of services across E, F and C list Real Estate Registration Trustee Centres as a channel, sometimes as the only channel. Whether those services gain online equivalents is a scope decision that affects several modules at once. **Group D is the first module found to plausibly have none of this channel at all** — none of its 26 sourced rows name a Trustee Centre or walk-in counter, flagged rather than confirmed in `modules/real-estate-service-companies/navigation.md`.
 

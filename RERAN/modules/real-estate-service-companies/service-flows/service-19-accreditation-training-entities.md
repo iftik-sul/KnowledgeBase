@@ -73,7 +73,7 @@ Sourced (row 66) — the workflow contains no payment step, matching Real Estate
 
 ## 10. Processing Authority
 
-**Licensing & Registration Officer** (Group A) — sourced (approver column, row 66).
+**Licensing & Registration Officer** (RA) — sourced (approver column, row 66).
 
 ## 11. Expected Processing Time
 

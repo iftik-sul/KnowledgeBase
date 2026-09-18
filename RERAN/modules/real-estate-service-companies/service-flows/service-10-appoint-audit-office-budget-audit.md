@@ -84,7 +84,7 @@ Sourced (row 55) — confirmed against `payments.md`'s Model 1.
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (Group A) — sourced (approver column, row 55).
+**Compliance & Escrow Auditor** (RA) — sourced (approver column, row 55).
 
 No internal company-side certification gate exists for this service (`open-questions.md` A5).
 

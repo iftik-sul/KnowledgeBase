@@ -17,7 +17,7 @@ tags:
   - enforcement
 ---
 
-# Group A Service A-8 — Issue Enforcement Notice
+# Regulatory Authority Service A-8 — Issue Enforcement Notice
 
 > **LATENT SERVICE.** No current front-office service routes to A-8; enforcement is
 > proactive, initiated by RERA rather than triggered by an applicant filing. Functional
@@ -26,8 +26,8 @@ tags:
 ## 1. Service Overview
 
 **Issue Enforcement Notice** is how RERA acts on a detected violation: it issues
-stop-work or violation notices and escalates penalties. It is Group A initiating action
-against an entity, not responding to a filing.
+stop-work or violation notices and escalates penalties. It is the Regulatory Authority
+initiating action against an entity, not responding to a filing.
 
 ## 2. Purpose
 
@@ -43,7 +43,7 @@ actions may require DG sign-off (A-10).
 
 ## 4. Who Can Act
 
-**Inspection & Enforcement Officer** (Group A), under RBAC + MFA. Final/serious actions
+**Inspection & Enforcement Officer** (RA), under RBAC + MFA. Final/serious actions
 escalate to **A-10 (Director-General sign-off)**.
 
 ## 5. Trigger
@@ -72,7 +72,7 @@ applicant queue.
 
 ## 10. Authority & Access Control
 
-- **Role:** Inspection & Enforcement Officer (Group A); DG for final actions (A-10).
+- **Role:** Inspection & Enforcement Officer (RA); DG for final actions (A-10).
 - **Access control:** RBAC + MFA.
 - **Sub-system:** Inspection & Enforcement Module.
 

@@ -77,7 +77,12 @@ Two sub-sections, shown according to the record's current gate:
 
 **Internal Certification** — visible once the record has been submitted for certification. Shows the certifier's decision if made (Certified / Returned, with reason). Where the record is currently awaiting certification, the certification Decision Panel is shown to any of the institution's four roles (see [components.md](../components.md#decision-panel)): Certify or Return, reason mandatory on Return. **Corrected 2026-08-15** — previously required the viewer to hold `certify` and not be the record's own filer; both conditions are retired. Any institution user, including the filer, may certify or return their own or another user's filing.
 
-**RERAN Decision** — read-only for every Group C role; the Compliance & Escrow Auditor is a Group A user outside this module. Shows RERAN's decision (Approved / Returned for Correction / Information Requested / Rejected) with their stated reason. Where the status is Information Requested, a **Respond to Information Request** action is shown to any institution user — this is the one action a Group C user takes against a RERAN decision from this screen.
+**RERAN Decision** — read-only for every Group C role; the Compliance & Escrow Auditor
+is a Regulatory Authority user outside this module. Shows RERAN's decision (Approved /
+Returned for Correction / Information Requested / Rejected) with their stated reason.
+Where the status is Information Requested, a **Respond to Information Request** action
+is shown to any institution user — this is the one action a Group C user takes against a
+RERAN decision from this screen.
 
 ### Section 6 — Outputs
 
@@ -140,7 +145,7 @@ Application Details
 ## Notes
 
 * **"Currently with" is the load-bearing addition this screen was built with.** It replaced an earlier generic Progress Tracker with no indication of who held the record.
-* The RERAN Decision sub-section is deliberately read-only for every role in this module — Compliance & Escrow Auditor is Group A, and no Group C screen should imply that role's action happens here.
+* The RERAN Decision sub-section is deliberately read-only for every role in this module — Compliance & Escrow Auditor is a Regulatory Authority role, and no Group C screen should imply that role's action happens here.
 * Output document lists differ by service and are sourced in each service's own `service-flows/service-NN-*.md` document (Section 15, Output) — this screen displays whatever that document specifies, and does not maintain its own copy of the list.
 * Whether internal certification applies at all to a given record is itself service-dependent (see the Service × Form Matrix in [README.md](../README.md#service--form-matrix)) — the Progress Tracker's omission of that step is not always a configuration choice; sometimes it is because the step is unsourced for that service.
 * **`Approved — Awaiting Payment` no longer applies to any service, as of 2026-08-16.** This screen was corrected twice in one day (2026-08-15) around this status — first removing it entirely, then partially restoring it for #12/#18 once their exception was found sourced. A third correction (2026-08-16) removes it again, this time because the client normalized #12/#18's payment timing rather than because the earlier audit was wrong. Worth remembering as a general lesson distinct from the 2026-08-15 one: a correction can be accurate when made and still need revisiting later if the underlying business decision itself changes — check whether a "sourced exception" is still current, not just whether it was correctly read from source at the time.

@@ -85,7 +85,7 @@ Sourced (row 51) — the workflow's single email-attach step names no payment. C
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (Group A) — sourced (approver column, row 51), though the row's own workflow text does not describe an audit step explicitly the way most other Group D rows do. **Proposed**: RERA reviews the emailed form and responds with the no-objection letter or a query, following the same general audit pattern as every other Group D service, since the source's approver column names the same role that reviews every other service in this module.
+**Compliance & Escrow Auditor** (RA) — sourced (approver column, row 51), though the row's own workflow text does not describe an audit step explicitly the way most other Group D rows do. **Proposed**: RERA reviews the emailed form and responds with the no-objection letter or a query, following the same general audit pattern as every other Group D service, since the source's approver column names the same role that reviews every other service in this module.
 
 No internal company-side certification gate exists for this service (`open-questions.md` A5).
 

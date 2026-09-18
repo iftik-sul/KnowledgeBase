@@ -20,7 +20,7 @@ tags:
   - licensing
 ---
 
-# Group A Service A-2 — Vet & Decide (Licensing)
+# Regulatory Authority Service A-2 — Vet & Decide (Licensing)
 
 > **Back-office service.** Follows the reviewer-side template established by A-1
 > (Audit & Decide). Sections that don't apply to a reviewer are marked N/A with the
@@ -29,10 +29,10 @@ tags:
 
 ## 1. Service Overview
 
-**Vet & Decide** is Group A's licensing decision service. It is the review-and-decision
-workflow that finishes the **9 licensing services** — the licences, permits,
-professional practice cards, and training-entity accreditations that developers and
-service companies need before they can operate. A Licensing & Registration Officer
+**Vet & Decide** is the Regulatory Authority's licensing decision service. It is the
+review-and-decision workflow that finishes the **9 licensing services** — the licences,
+permits, professional practice cards, and training-entity accreditations that developers
+and service companies need before they can operate. A Licensing & Registration Officer
 vets each application against eligibility criteria and the National Practitioner
 Register, records a decision, and — on approval — issues the credential and updates the
 register.
@@ -62,7 +62,7 @@ See §15.
 
 ## 4. Who Can Act *(replaces "Who Can Apply")*
 
-**Licensing & Registration Officer** (Group A), under real RBAC + MFA — the same
+**Licensing & Registration Officer** (RA), under real RBAC + MFA — the same
 permission-gated model as A-1 (the one place role gates action in RERAN). Only a user
 holding this role may act on a licensing item.
 
@@ -98,17 +98,17 @@ holding this role may act on a licensing item.
 
 ## 8. Service Fee
 
-**N/A.** Group A charges no fee for vetting. The applicant paid the originating
-service's fee before submission (several licensing services are free at source; that
-belongs to their own flows).
+**N/A.** The Regulatory Authority charges no fee for vetting. The applicant paid the
+originating service's fee before submission (several licensing services are free at
+source; that belongs to their own flows).
 
 ## 9. Payment Required
 
-**N/A (Group A side).** This service never collects or holds a payment.
+**N/A (the Regulatory Authority side).** This service never collects or holds a payment.
 
 ## 10. Decision Authority & Access Control *(replaces "Processing Authority")*
 
-- **Role:** Licensing & Registration Officer (Group A).
+- **Role:** Licensing & Registration Officer (RA).
 - **Access control:** RBAC-gated + MFA.
 - **Sub-system:** Licensing & Registry Engine.
 
@@ -194,7 +194,7 @@ a standard review. The negotiation itself happens outside the platform.
    register; every other service that verifies a practitioner (e.g. front-office
    verification lookups) reads what A-2 writes. Its issue/renew/amend/cancel actions
    must keep the register authoritative.
-2. **Shared status vocabulary (§13).** As with all Group A services.
+2. **Shared status vocabulary (§13).** As with all Regulatory Authority services.
 3. No FTI handshake and no escrow two-gate apply to A-2.
 
 ## 17. Related Services

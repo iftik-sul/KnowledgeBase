@@ -77,7 +77,7 @@ Sourced (row 69) — no payment step appears anywhere in the workflow.
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (Group A) — sourced (approver column, row 69).
+**Compliance & Escrow Auditor** (RA) — sourced (approver column, row 69).
 
 ## 11. Expected Processing Time
 

@@ -18,9 +18,9 @@ tags:
   - platform
 ---
 
-# Group A Service A-6 — Provision & Manage Access (RBAC)
+# Regulatory Authority Service A-6 — Provision & Manage Access (RBAC)
 
-> **Back-office platform service — the foundation for every other Group A service.**
+> **Back-office platform service — the foundation for every other Regulatory Authority service.**
 > No external service routes to it, but A-1, A-2, and A-3 cannot be used until it
 > exists: it is the service that creates staff accounts and enforces the role
 > permissions those services depend on. This service *is* RBAC.
@@ -28,27 +28,27 @@ tags:
 ## 1. Service Overview
 
 **Provision & Manage Access** is how RERA administers who its staff are and what each is
-allowed to do inside Group A. It creates and manages staff accounts, assigns the eight
-Group A roles, configures the permissions attached to them, enrols MFA, and owns the
-audit trail. It is the one place in RERAN where real access control is administered —
-everywhere else a role is audit attribution only.
+allowed to do inside the Regulatory Authority. It creates and manages staff accounts,
+assigns the eight Regulatory Authority roles, configures the permissions attached to
+them, enrols MFA, and owns the audit trail. It is the one place in RERAN where real
+access control is administered — everywhere else a role is audit attribution only.
 
 ## 2. Purpose
 
-Make Group A's access model real and safe: every staff member has exactly the
-permissions their role requires, protected by MFA, with every access change recorded —
-so the RBAC that A-1/A-2/A-3 rely on is actually enforced and auditable.
+Make the Regulatory Authority's access model real and safe: every staff member has
+exactly the permissions their role requires, protected by MFA, with every access change
+recorded — so the RBAC that A-1/A-2/A-3 rely on is actually enforced and auditable.
 
 ## 3. Description
 
 A System Super Administrator creates a staff account, assigns one or more of the eight
-Group A roles, configures or adjusts the permissions on those roles, and enrols the
-user in MFA. The administrator can also suspend or deactivate accounts and review the
-audit trail. All of these are themselves recorded.
+Regulatory Authority roles, configures or adjusts the permissions on those roles, and
+enrols the user in MFA. The administrator can also suspend or deactivate accounts and
+review the audit trail. All of these are themselves recorded.
 
 ## 4. Who Can Act
 
-**System Super Administrator** (Group A), under RBAC + MFA. This role administers the
+**System Super Administrator** (RA), under RBAC + MFA. This role administers the
 permission model itself, so it is the most sensitive access surface on the platform.
 
 ## 5. Trigger *(replaces "Entry Conditions")*
@@ -59,7 +59,7 @@ No queue and no applicant submission.
 ## 6. What the Administrator Works With
 
 - The staff directory (existing accounts and their roles).
-- The eight Group A roles and their permission sets.
+- The eight Regulatory Authority roles and their permission sets.
 - The MFA enrolment state of each account.
 - The access audit trail.
 
@@ -76,7 +76,7 @@ No queue and no applicant submission.
 
 ## 10. Authority & Access Control
 
-- **Role:** System Super Administrator (Group A).
+- **Role:** System Super Administrator (RA).
 - **Access control:** RBAC-gated + MFA (self-referential — this service administers the
   very controls it is protected by).
 - **Sub-system:** Admin & Configuration Console.
@@ -92,7 +92,7 @@ Administrator opens Admin Console  (RBAC + MFA)
         ↓
 Create / select staff account
         ↓
-Assign role(s) from the eight Group A roles
+Assign role(s) from the eight Regulatory Authority roles
         ↓
 Configure permissions  (least-privilege)
         ↓
@@ -122,16 +122,16 @@ that role's own service surfaces are built.
 
 ## 16. Cross-Module Dependencies
 
-1. **Every other Group A service depends on this one.** A-1/A-2/A-3's "RBAC + MFA" gate
+1. **Every other Regulatory Authority service depends on this one.** A-1/A-2/A-3's "RBAC + MFA" gate
    is enforced by the roles and permissions this service administers. It must be built
    first (see the analysis's proposed build order).
 2. **The audit trail** this service owns underpins the accountability claims of every
-   other Group A service.
+   other Regulatory Authority service.
 
 ## 17. Related Services
 
 - **A-1, A-2, A-3** — all gated by the access this service administers.
-- All other Group A services (their actors are provisioned here).
+- All other Regulatory Authority services (their actors are provisioned here).
 
 ## 18. UI Screens
 
@@ -152,7 +152,7 @@ that role's own service surfaces are built.
 ## 20. Database Entities
 
 - Staff User *(account)*
-- Role *(the eight Group A roles)*
+- Role *(the eight Regulatory Authority roles)*
 - Permission *(attached to roles)*
 - MFA Enrolment
 - Audit Log *(owned here)*
@@ -161,7 +161,7 @@ that role's own service surfaces are built.
 
 - Only a System Super Administrator with MFA can administer accounts, roles, or
   permissions.
-- An account cannot act on any Group A service until it has a role and enrolled MFA.
+- An account cannot act on any Regulatory Authority service until it has a role and enrolled MFA.
 - All eight roles are definable and assignable, whether or not their functional screens
   are built.
 - Suspending or deactivating an account immediately withdraws its access.
@@ -169,7 +169,7 @@ that role's own service surfaces are built.
 
 ## 22. Business Rules
 
-1. This service administers the RBAC + MFA that every other Group A service enforces;
+1. This service administers the RBAC + MFA that every other Regulatory Authority service enforces;
    it must exist before they can be used.
 2. Permissions follow least-privilege per role.
 3. MFA enrolment is mandatory before an account can act.

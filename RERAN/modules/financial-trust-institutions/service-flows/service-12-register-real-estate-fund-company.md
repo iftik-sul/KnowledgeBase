@@ -93,9 +93,9 @@ Paid by the customer (the fund company) at the Trustee Centre counter, **before*
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (Group A) — sourced directly from row 38's approver column, as it is for every Group C service.
+**Compliance & Escrow Auditor** (RA) — sourced directly from row 38's approver column, as it is for every Group C service.
 
-> **Proposed** — row 38's workflow text separately describes an "Employee [who] enters all transaction data, checks and approves." Whether that check-and-approve step *is* the Compliance & Escrow Auditor's regulatory review, or a preliminary Trustee Centre check distinct from a separate RERA audit step, is not stated in source — the two are bundled into one clause. This document treats the workflow's "checks and approves" as the Group A approval gate itself, since no internal institutional certification step applies here (no corporate account originates this transaction) — but that specific mapping is an inference, not a sourced fact, and is labeled as such rather than folded into the sourced claim above. *(Wording corrected 2026-08-14 — previously "no institutional maker-checker layer applies here"; permission scopes are retired module-wide, see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle).)*
+> **Proposed** — row 38's workflow text separately describes an "Employee [who] enters all transaction data, checks and approves." Whether that check-and-approve step *is* the Compliance & Escrow Auditor's regulatory review, or a preliminary Trustee Centre check distinct from a separate RERA audit step, is not stated in source — the two are bundled into one clause. This document treats the workflow's "checks and approves" as the Regulatory Authority approval gate itself, since no internal institutional certification step applies here (no corporate account originates this transaction) — but that specific mapping is an inference, not a sourced fact, and is labeled as such rather than folded into the sourced claim above. *(Wording corrected 2026-08-14 — previously "no institutional maker-checker layer applies here"; permission scopes are retired module-wide, see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle).)*
 
 ## 11. Expected Processing Time
 

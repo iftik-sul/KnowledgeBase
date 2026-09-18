@@ -74,7 +74,19 @@ See Features #4, #5, and #13's own Feature Overview sections, and financial-trus
 
 ## Cross-Module Clarification: "RERA Escrow Audit" and "Compliance & Escrow Auditor" Are the Same Role
 
-**Clarified 2026-08-16.** During the correction above, a further terminology gap was found and checked directly against `RERAN_service_flows_v2.md`'s master Service Workflows table: this module's six escrow rows (8–12, 20–21) and financial-trust-institutions' mortgage/lease rows (30–39) carry the identical **"Compliance & Escrow Auditor"** value in the Regulator/Approver column. There is only one such role in the source's Groups & Roles table (Group A, Compliance Directorate). This module's "RERA Escrow Audit" / "Escrow Account Department" — phrasing carried over from the source table's own narrative Workflow-column text — names the same role financial-trust-institutions calls by its formal Groups & Roles name. Both phrasings are individually accurate to source; neither was wrong, they were simply never cross-linked before. Not renamed, since both trace to source — Features #4, #5, and #13 now note the equivalence explicitly, and financial-trust-institutions' `feature-04-escrow-request-queue.md` cross-links back.
+**Clarified 2026-08-16.** During the correction above, a further terminology gap was
+found and checked directly against `RERAN_service_flows_v2.md`'s master Service
+Workflows table: this module's six escrow rows (8–12, 20–21) and
+financial-trust-institutions' mortgage/lease rows (30–39) carry the identical
+**"Compliance & Escrow Auditor"** value in the Regulator/Approver column. There is only
+one such role in the source's Groups & Roles table (the Regulatory Authority, Compliance
+Directorate). This module's "RERA Escrow Audit" / "Escrow Account Department" — phrasing
+carried over from the source table's own narrative Workflow-column text — names the same
+role financial-trust-institutions calls by its formal Groups & Roles name. Both
+phrasings are individually accurate to source; neither was wrong, they were simply never
+cross-linked before. Not renamed, since both trace to source — Features #4, #5, and #13
+now note the equivalence explicitly, and financial-trust-institutions'
+`feature-04-escrow-request-queue.md` cross-links back.
 
 ## Cross-Module Dependency: Service #6's Mortgage Validation
 

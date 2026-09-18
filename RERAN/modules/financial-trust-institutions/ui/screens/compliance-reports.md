@@ -155,5 +155,5 @@ Compliance Reports
 
 * **Reporting cycle is unresolved.** Answer A7 settles that the template is RERA-defined; it does not settle the frequency. The obligation cards are built against a configurable cycle.
 * Answer B8 (confirmed 2026-08-15) gives institutional approvals a renewing, per-approval-term validity. An overdue compliance report should bear on renewal, and the Institution Profile screen should surface it. Whether RERAN actually gates renewal on reporting compliance is a client question.
-* Escrow audit here concerns *developer* trust accounts under this institution's trusteeship. It is distinct from RERAN's own audit of the institution, which is a Group A function.
+* Escrow audit here concerns *developer* trust accounts under this institution's trusteeship. It is distinct from RERAN's own audit of the institution, which is a Regulatory Authority function.
 * **The audit-exclusivity rule was never sourced**, and is now moot rather than merely unenforced — there is no permission-scope model left for it to constrain.

@@ -84,7 +84,7 @@ No payment step exists at any point in the sourced workflow. See `payments.md`'s
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (Group A) — sourced (approver column, row 46).
+**Compliance & Escrow Auditor** (RA) — sourced (approver column, row 46).
 
 No internal company-side certification gate exists for this service — sourced directly, confirmed against `open-questions.md` A5, which found no Group D row describes an internal maker-checker step comparable to Financial & Trust Institutions' mortgage services.
 

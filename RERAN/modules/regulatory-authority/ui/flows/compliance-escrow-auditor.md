@@ -18,9 +18,9 @@ tags:
 
 # Flow — Compliance & Escrow Auditor
 
-The end-to-end journey for Group A's busiest role: the officer who finishes **92 of
-the 114** external services. Walked step by step rather than screen by screen,
-because the transitions between screens are where the gaps are.
+The end-to-end journey for the Regulatory Authority's busiest role: the officer who
+finishes **92 of the 114** external services. Walked step by step rather than screen by
+screen, because the transitions between screens are where the gaps are.
 
 **How this differs from the other docs.** `role-screen-matrix.md` says which screens
 this role can reach; the screen specs say what each screen contains; this file says

@@ -125,7 +125,7 @@ Files and pursues formal dispute proceedings on behalf of the company, for matte
 
 ### Practical Example
 
-An owners' association judgment needs to be enforced against a defaulting unit owner. The Company Dispute Filing Officer opens the dispute system, selects the execution case service, submits the annotated judgment and supporting documents, and pays the applicable fee. The Dispute Adjudication Officer (Group A) processes the request and issues the judge's resolution.
+An owners' association judgment needs to be enforced against a defaulting unit owner. The Company Dispute Filing Officer opens the dispute system, selects the execution case service, submits the annotated judgment and supporting documents, and pays the applicable fee. The Dispute Adjudication Officer (RA) processes the request and issues the judge's resolution.
 
 Only two of the module's 26 services fall to this role by source description — the smallest responsibility set of the four, but not a smaller access footprint, since any of the four roles may still act on these services under the unified-access model.
 

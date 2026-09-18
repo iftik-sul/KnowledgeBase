@@ -16,16 +16,16 @@ tags:
   - modals
 ---
 
-# Group A — Modals & Alerts
+# Regulatory Authority — Modals & Alerts
 
 The single source for every modal, confirmation, and alert in the back-office app.
 Screen specs **reference** a modal by its ID here; they never restate its wording,
 fields, or rules. This mirrors how `status-badges.md` owns status wording and
 `validation-rules.md` owns guard rules.
 
-Group A carries the platform's most consequential actions — revocations, account
-deactivation, fee publishing, executive sign-off — so confirmation design is a real
-safety control here, not decoration.
+The Regulatory Authority carries the platform's most consequential actions —
+revocations, account deactivation, fee publishing, executive sign-off — so confirmation
+design is a real safety control here, not decoration.
 
 ## How to use this file
 

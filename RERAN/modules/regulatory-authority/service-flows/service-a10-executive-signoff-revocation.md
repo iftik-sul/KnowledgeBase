@@ -17,7 +17,7 @@ tags:
   - governance
 ---
 
-# Group A Service A-10 — Executive Sign-off / Revocation
+# Regulatory Authority Service A-10 — Executive Sign-off / Revocation
 
 > **BUILDING (open-questions A5, resolved 2026-09-17).** A-2 Licensing is active and
 > already escalates revocations here (`M-LIC-04`); without these screens that escalation
@@ -49,13 +49,13 @@ revocation is recorded and returned to the originating service to execute.
 
 ## 4. Who Can Act
 
-**Director-General / Registrar** (Group A), under RBAC + MFA. The most privileged and
-least-frequently-used action surface in Group A.
+**Director-General / Registrar** (RA), under RBAC + MFA. The most privileged and
+least-frequently-used action surface in the Regulatory Authority.
 
 ## 5. Trigger
 
-Escalation from another Group A service (revocation, final enforcement), or a policy /
-statutory-instrument action initiated by the DG. No applicant queue.
+Escalation from another Regulatory Authority service (revocation, final enforcement), or
+a policy / statutory-instrument action initiated by the DG. No applicant queue.
 
 ## 6. What the DG Works With
 
@@ -75,7 +75,7 @@ statutory-instrument action initiated by the DG. No applicant queue.
 
 ## 10. Authority & Access Control
 
-- **Role:** Director-General / Registrar (Group A).
+- **Role:** Director-General / Registrar (RA).
 - **Access control:** RBAC + MFA, with **step-up re-authentication** before authorising
   a sign-off (`M-GOV-01`).
 - **Sub-system:** Governance (spans Admin & Configuration and the enforcement layer).

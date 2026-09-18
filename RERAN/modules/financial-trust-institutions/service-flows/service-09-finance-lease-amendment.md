@@ -88,7 +88,7 @@ Applicable according to the RERAN fee schedule.
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (Group A) — sourced (approver column, row 35).
+**Compliance & Escrow Auditor** (RA) — sourced (approver column, row 35).
 
 > **Proposed** — whether an internal institutional certification gate precedes RERA review is inherited as an open question from Service #8; not explicit in row 35.
 

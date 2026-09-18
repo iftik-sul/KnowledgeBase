@@ -88,7 +88,7 @@ Paid by the customer at the Trustees Centre, **before** RERA's review and approv
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (Group A) — sourced (approver column, row 42; Step 5: "Review and approval").
+**Compliance & Escrow Auditor** (RA) — sourced (approver column, row 42; Step 5: "Review and approval").
 
 ## 11. Expected Processing Time
 

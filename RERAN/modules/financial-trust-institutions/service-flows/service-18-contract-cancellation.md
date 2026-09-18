@@ -88,7 +88,7 @@ Paid by the customer, **before** RERA's audit and approval — **corrected 2026-
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (Group A) — sourced: the Land Department employee "enters, audits and approves." Documented here as the RERA regulatory gate. No separate internal institutional certification step is described in source for this service. *(Wording corrected 2026-08-14 — previously "no separate institutional maker-checker layer"; permission scopes are retired module-wide, see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle).)*
+**Compliance & Escrow Auditor** (RA) — sourced: the Land Department employee "enters, audits and approves." Documented here as the RERA regulatory gate. No separate internal institutional certification step is described in source for this service. *(Wording corrected 2026-08-14 — previously "no separate institutional maker-checker layer"; permission scopes are retired module-wide, see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle).)*
 
 ## 11. Expected Processing Time
 

@@ -7,7 +7,7 @@ contains_proposals: true
 updated: 2026-09-17
 ---
 
-# Group A — Open Questions
+# Regulatory Authority — Open Questions
 
 Decisions this module is waiting on. Each carries a proposed position or, where
 noted, a resolution. Nothing downstream (UI, service-flows) should be built on the
@@ -15,18 +15,18 @@ proposed items until they are confirmed.
 
 ## A1 — Role assignments where the source named no officer *(resolved 2026-09-17)*
 
-Twenty services did not name a Group A role in their source; each was assigned by
-service pattern. **All twenty confirmed 2026-09-17.** The `[proposed]` tags have been
-removed from the touchpoint register accordingly.
+Twenty services did not name a Regulatory Authority role in their source; each was
+assigned by service pattern. **All twenty confirmed 2026-09-17.** The `[proposed]` tags
+have been removed from the touchpoint register accordingly.
 
 Breakdown — **12 Individual User + 8 Real Estate Service Companies**. (An earlier
 version of this entry undercounted RESC as 5; it omitted #18, #21 and #22.)
 
 The twenty fall into three kinds of assignment:
 
-**No Group A officer required (9).** Confirmed that these need no decision at all:
-IU #1 Verify Developer, #2 Verify Development Project, #3 Verify Property, #39 Track
-Complaint (registry lookups); IU #30 Act on Behalf of Property Owner, #37 Remote
+**No Regulatory Authority officer required (9).** Confirmed that these need no decision
+at all: IU #1 Verify Developer, #2 Verify Development Project, #3 Verify Property, #39
+Track Complaint (registry lookups); IU #30 Act on Behalf of Property Owner, #37 Remote
 Property Transactions (wrappers — the selected service's officer decides); RESC #18
 Register Evaluation Certificate, #21 Cancel Management Contract, #22 Register Tenancy
 System User (immediate, no review).
@@ -49,8 +49,8 @@ review; the Licensing & Registration Officer is recorded as the responsible role
 
 ## A2 — Authority-label drift
 
-Three authority labels used in existing service-flow files are not among Group A's 8
-sourced roles:
+Three authority labels used in existing service-flow files are not among the Regulatory
+Authority's 8 sourced roles:
 
 - **"Survey Department"** (4 RED services) — this is AGIS vocabulary. Proposed:
   internal boundary confirmation → Inspection & Enforcement Officer; external
@@ -71,21 +71,21 @@ should map to one role, not two.
 The Compliance & Escrow Auditor's 92 services split into 79 general transaction
 audits and 13 escrow / trust-account operations (verified against source).
 
-**Resolved:** one service, not two. The decision loop is identical, so transaction
-and escrow are modelled as a single Group A service (A-1 in services-overview.md)
-with escrow handled as a documented variant — it arrives through the FTI Account
-Trustee pre-gate, shows escrow-account context, and carries a heavier review
-checklist. The UI gives escrow its own queue-view and checklist within the one
+**Resolved:** one service, not two. The decision loop is identical, so transaction and
+escrow are modelled as a single Regulatory Authority service (A-1 in
+services-overview.md) with escrow handled as a documented variant — it arrives through
+the FTI Account Trustee pre-gate, shows escrow-account context, and carries a heavier
+review checklist. The UI gives escrow its own queue-view and checklist within the one
 service. Splitting was rejected to avoid duplicating a service-flow that starts
 identical (the drift risk); it can still be split later if escrow proves to need a
 genuinely separate workflow.
 
 ## A4 — AGIS: design reference or live integration? *(resolved 2026-09-17)*
 
-The client supplied the AGIS (Abuja GIS) documentation "for Group A." AGIS is the
-FCT's real land-registry agency. It models Group A's land / title / survey / deeds /
-licensing functions well but has **no escrow function at all** — so it cannot inform
-the 92-service Compliance & Escrow Auditor core.
+The client supplied the AGIS (Abuja GIS) documentation "for the Regulatory Authority."
+AGIS is the FCT's real land-registry agency. It models the Regulatory Authority's land /
+title / survey / deeds / licensing functions well but has **no escrow function at all**
+— so it cannot inform the 92-service Compliance & Escrow Auditor core.
 
 **Resolved: AGIS is a design reference, not a live integration target.** RERAN does
 not connect to AGIS systems; there is no data contract, no sync API, and no
@@ -101,7 +101,7 @@ Consequences:
   authentication/credentials with a third-party system, and no failure modes from an
   external dependency.
 - **AGIS remains useful as source material** for the land-side service and screen
-  design (titles, deeds, C-of-O, survey), per the AGIS ↔ Group A crosswalk — but it
+  design (titles, deeds, C-of-O, survey), per the AGIS ↔ Regulatory Authority crosswalk — but it
   informs *how the work is modelled*, never *what the platform connects to*.
 - The bureau remains the authoritative source for state-held data; the platform
   records what reconciliation found, not a live mirror.
@@ -137,13 +137,13 @@ shipped a broken path.
   (A-2) and final enforcement (A-8) — but only the A-2 path is live while A-8 is
   deferred. This must be stated in the spec so it is not later read as a defect.
 - **The Inspection & Enforcement Officer works on site**, capturing geo-tagged findings and photos at
-  a building. Every other Group A screen is desk-based back-office. These screens
+  a building. Every other Regulatory Authority screen is desk-based back-office. These screens
   therefore need a phone/tablet form factor — a different design shape from the rest of
   the module.
 - All eight roles remain defined in RBAC regardless; this decision concerns functional
   screens only.
 
-## A6 — Group A back-office operating decisions *(added 2026-09-17)*
+## A6 — Regulatory Authority back-office operating decisions *(added 2026-09-17)*
 
 Surfaced by walking the Compliance & Escrow Auditor journey
 (`ui/flows/compliance-escrow-auditor.md`). **All items resolved as of 2026-09-17.**

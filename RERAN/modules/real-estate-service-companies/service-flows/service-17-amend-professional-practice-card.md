@@ -79,7 +79,7 @@ Sourced (row 64) — the workflow contains no payment step, unlike Service #15 (
 
 ## 10. Processing Authority
 
-**Licensing & Registration Officer** (Group A) — sourced (approver column, row 64), though approval is automatic per the workflow text.
+**Licensing & Registration Officer** (RA) — sourced (approver column, row 64), though approval is automatic per the workflow text.
 
 ## 11. Expected Processing Time
 

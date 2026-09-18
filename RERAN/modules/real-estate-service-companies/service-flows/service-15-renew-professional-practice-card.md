@@ -78,7 +78,7 @@ Applicable according to the RERAN fee schedule.
 
 ## 10. Processing Authority
 
-**Licensing & Registration Officer** (Group A) — sourced (approver column, row 62), though the approval itself is automatic per the workflow text, not a manual review by this role. **Proposed**: the role is retained as the system-of-record authority even where approval is automated, consistent with how the source attributes an approver to every row regardless of whether review is manual.
+**Licensing & Registration Officer** (RA) — sourced (approver column, row 62), though the approval itself is automatic per the workflow text, not a manual review by this role. **Proposed**: the role is retained as the system-of-record authority even where approval is automated, consistent with how the source attributes an approver to every row regardless of whether review is manual.
 
 ## 11. Expected Processing Time
 

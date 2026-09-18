@@ -91,7 +91,7 @@ Applicable according to the RERAN fee schedule.
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (Group A) — sourced (approver column, row 36).
+**Compliance & Escrow Auditor** (RA) — sourced (approver column, row 36).
 
 ## 11. Expected Processing Time
 

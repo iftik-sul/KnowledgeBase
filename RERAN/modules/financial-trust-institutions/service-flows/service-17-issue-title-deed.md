@@ -89,7 +89,7 @@ Paid by the customer, **before** RERA's review and approval — sourced (row 44'
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (Group A) — sourced (approver column, row 44; Step 2–6 includes "review & approval").
+**Compliance & Escrow Auditor** (RA) — sourced (approver column, row 44; Step 2–6 includes "review & approval").
 
 ## 11. Expected Processing Time
 

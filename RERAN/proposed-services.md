@@ -104,9 +104,10 @@ These are capabilities the source material assumes exist because its own service
 
 ---
 
-## Tier 5 — Group A Internal Services
+## Tier 5 — Regulatory Authority Internal Services
 
-The roadmap already records that Group A has no services. These are the specific ones whose absence is most visible from the external side.
+The roadmap already records that the Regulatory Authority has no services. These are the
+specific ones whose absence is most visible from the external side.
 
 | ID | Proposed service | Basis | Note |
 | :---- | :---- | :---- | :---- |

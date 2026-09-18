@@ -94,7 +94,7 @@ The partner agreement required for a new approval (sourced, row 28) is unaffecte
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (Group A) — sourced: RERA "studies and audits application, decides approval or rejection."
+**Compliance & Escrow Auditor** (RA) — sourced: RERA "studies and audits application, decides approval or rejection."
 
 > **Proposed** — unlike the mortgage and finance-lease workflows, source row 28 describes no internal institutional certification step for this service; RERA reviews the application directly. If the institution chooses to route preparation and internal sign-off through an internal certify-or-return step before submission — an unrestricted action any of its four Group C users may perform, not a scope — it may do so voluntarily, but this is not described in the source for this specific service and is not assumed here. **Corrected 2026-08-14** — previously described as "internal maker-checker on its corporate account (A1/D2)"; permission scopes are retired module-wide, see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle).
 

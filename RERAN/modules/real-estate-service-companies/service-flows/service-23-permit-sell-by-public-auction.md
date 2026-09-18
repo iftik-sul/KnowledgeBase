@@ -79,7 +79,7 @@ Sourced (row 70) — no payment step appears anywhere in the workflow.
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (Group A) — sourced (approver column, row 70), though the row's own workflow text describes only "application completion notice received" without an explicit audit step named. **Proposed**: RERA review happens between submission and the completion notice, following the module's general pattern, even though not spelled out in this particular row.
+**Compliance & Escrow Auditor** (RA) — sourced (approver column, row 70), though the row's own workflow text describes only "application completion notice received" without an explicit audit step named. **Proposed**: RERA review happens between submission and the completion notice, following the module's general pattern, even though not spelled out in this particular row.
 
 ## 11. Expected Processing Time
 

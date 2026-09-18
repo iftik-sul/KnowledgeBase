@@ -156,7 +156,7 @@ A trust account's periodic statement shows a movement the Auditing Bureau Office
 | 1 | Mortgage Officer *(typically — any role may do this)* | Enters the transaction, pays the fee upfront via the shared platform gateway, and attaches documentation |
 | 2 | Any of the four roles, including the filer *(reworked 2026-08-14 — see below)* | Certifies the transaction internally, where the institution has configured this gate for the service |
 | 3 | — | Routed to the RERA Transaction Audit queue |
-| 4 | Compliance & Escrow Auditor (Group A) | Approves, queries or rejects |
+| 4 | Compliance & Escrow Auditor (RA) | Approves, queries or rejects |
 | 5 | — | Output document issued |
 | 6 | Institution Relationship Manager *(typically — any role may do this)* | Retains oversight of institution-wide outcomes |
 

@@ -79,7 +79,7 @@ Sourced (row 65) at a high level — "add evaluation details, value and notes" �
 
 ## 10. Processing Authority
 
-**Licensing & Registration Officer** (Group A) — sourced (approver column, row 65), though the workflow text itself describes no RERA review step; the "accept or reject" decision described belongs to the evaluation company, not RERA. **This remains the clearest evidence of this service's atypical shape**, unaffected by the A2 ownership decision — RERA's own approver role is named in the source table's structure, but does not appear to act anywhere in the actual described process.
+**Licensing & Registration Officer** (RA) — sourced (approver column, row 65), though the workflow text itself describes no RERA review step; the "accept or reject" decision described belongs to the evaluation company, not RERA. **This remains the clearest evidence of this service's atypical shape**, unaffected by the A2 ownership decision — RERA's own approver role is named in the source table's structure, but does not appear to act anywhere in the actual described process.
 
 ## 11. Expected Processing Time
 

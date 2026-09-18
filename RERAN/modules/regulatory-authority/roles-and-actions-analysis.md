@@ -14,30 +14,30 @@ derived_from:
   - "RERAN/module-roadmap.md"
 ---
 
-# Group A — Roles & Actions Analysis
+# Regulatory Authority — Roles & Actions Analysis
 
 ## Purpose
 
-Group A owns no services of its own and pays no fees. It exists only as the
-approval side of work initiated by every other group. This analysis therefore
-does not start from Group A's org chart — it starts from the 114 documented
-external services (RED 27, FTI 18, RESC 26, IU 43), extracts every action that
-lands on Group A, and lets the roles fall out of the actual work. The finding is
-that Group A's job is a small, repeated decision loop carried by three roles,
-wrapped in a larger set of platform and oversight functions that the current
+The Regulatory Authority owns no services of its own and pays no fees. It exists only as
+the approval side of work initiated by every other group. This analysis therefore does
+not start from the Regulatory Authority's org chart — it starts from the 114 documented
+external services (RED 27, FTI 18, RESC 26, IU 43), extracts every action that lands on
+the Regulatory Authority, and lets the roles fall out of the actual work. The finding is
+that the Regulatory Authority's job is a small, repeated decision loop carried by three
+roles, wrapped in a larger set of platform and oversight functions that the current
 service catalogue does not yet exercise.
 
 ---
 
-## 1. The action model — what Group A actually does
+## 1. The action model — what the Regulatory Authority actually does
 
-Read across all 114 services, every Group A interaction reduces to one of two
-kinds of action.
+Read across all 114 services, every Regulatory Authority interaction reduces to one of
+two kinds of action.
 
 ### 1a. The application decision loop (every routed service)
 
-Every service that reaches Group A follows the same four-step shape. The role and
-the queue change; the shape does not.
+Every service that reaches the Regulatory Authority follows the same four-step shape.
+The role and the queue change; the shape does not.
 
 1. **Receive** — the paid, submitted application lands in a role's queue.
 2. **Review / audit** — examine the application and its documents; verify against
@@ -59,31 +59,31 @@ The workflow text names the decision directly — "Approve, Return or Reject" an
 
 ### 1b. The two-gate variant (15 services)
 
-For escrow- and finance-related services, someone acts *before* Group A sees the
-application:
+For escrow- and finance-related services, someone acts *before* the Regulatory Authority
+sees the application:
 
 - **FTI custody chain (9 services):** a developer or service company touches an
   escrow account; the FTI Account Trustee assesses and forwards it; only then does
-  Group A audit and decide.
+  the Regulatory Authority audits and decides.
 - **FTI internal certify (6 services):** for mortgage and finance-lease
   registrations, an internal certifier inside the institution certifies the
-  transaction first, then Group A approves.
+  transaction first, then the Regulatory Authority approves.
 
-In both cases the Group A action is unchanged — it is still the decision loop of
-§1a. What changes is that the queue receives a pre-vetted item, and there is an
+In both cases the Regulatory Authority action is unchanged — it is still the decision
+loop of §1a. What changes is that the queue receives a pre-vetted item, and there is an
 extra return path ("Returned by Certifier").
 
 ### 1c. What approval produces
 
-On approval Group A issues one of a small set of artifacts: electronic
+On approval the Regulatory Authority issues one of a small set of artifacts: electronic
 certificates, electronic title deeds, property maps, and registry-record updates,
 each with a payment receipt and an audit entry. These are the tangible outputs of
 the decision loop — the reason the applicant filed in the first place.
 
 ### 1d. Actions with no application
 
-The role definitions in source describe a second class of action that no current
-service routes to — work Group A initiates itself rather than in response to a
+The role definitions in source describe a second class of action that no current service
+routes to — work the Regulatory Authority initiates itself rather than in response to a
 filing:
 
 - **Configure** — fee schedules and levies; modules and role permissions
@@ -102,8 +102,8 @@ the 114 services barely touch them.
 
 ## 2. The eight roles, defined by actual work
 
-The source-of-truth defines eight Group A roles. Sorting them by what the 114
-services actually demand produces three tiers.
+The source-of-truth defines eight Regulatory Authority roles. Sorting them by what the
+114 services actually demand produces three tiers.
 
 ### Tier 1 — Approval-queue roles (carry all 105 decisions)
 
@@ -114,9 +114,9 @@ services actually demand produces three tiers.
 | **Dispute Adjudication Officer** | **4** services | Tribunal & Remote-Litigation | Receives suits/complaints, adjudicates, records judgments |
 
 One role — the Compliance & Escrow Auditor — carries 81% of every decision on the
-platform. This is the single most important fact about Group A: it is not eight
-roles sharing a load, it is one role carrying it, with two specialists handling
-small tributaries.
+platform. This is the single most important fact about the Regulatory Authority: it is
+not eight roles sharing a load, it is one role carrying it, with two specialists
+handling small tributaries.
 
 ### Tier 2 — Platform & configuration roles (active, no approval queue)
 
@@ -137,8 +137,8 @@ small tributaries.
 
 ## 3. The six sub-systems
 
-Group A's source structure is six platform sub-systems. Mapping the services onto
-them shows where the build weight sits.
+The Regulatory Authority's source structure is six platform sub-systems. Mapping the
+services onto them shows where the build weight sits.
 
 | Sub-system | Primary role | Services feeding it | Build weight |
 | :--- | :--- | :--- | :--- |
@@ -151,7 +151,7 @@ them shows where the build weight sits.
 | **Governance (sign-off)** | Director-General / Registrar | 0 primary (A-2 escalations) | Built — A-2 revocations escalate here |
 
 The Tribunal sub-system, though it carries only four services, is the one place a
-Group A role does something genuinely different from the decision loop —
+Regulatory Authority role does something genuinely different from the decision loop —
 adjudication is a multi-session process, not an approve/reject. It cannot be
 folded into the audit queue.
 
@@ -160,8 +160,8 @@ folded into the audit queue.
 ## 4. The role reconciliation — 8 named, 3 active, why
 
 The gap between "eight roles" and "three roles that appear in any service" is the
-central thing to resolve before completing Group A. It is not an error in the
-sources; it is the difference between a *regulator's full mandate* and the *slice
+central thing to resolve before completing the Regulatory Authority. It is not an error
+in the sources; it is the difference between a *regulator's full mandate* and the *slice
 of that mandate the first 114 services exercise*.
 
 - **The 114 services are almost all transactional** — register a sale, approve a
@@ -189,22 +189,22 @@ arrives at it, not because a role appears on an org chart.
 
 ---
 
-## 5. Cross-system dependencies (what makes Group A un-buildable in isolation)
+## 5. Cross-system dependencies (what makes the Regulatory Authority un-buildable in isolation)
 
-Three connections mean Group A cannot be specced separately from the modules it
-serves:
+Three connections mean the Regulatory Authority cannot be specced separately from the
+modules it serves:
 
 1. **The FTI handshake (15 services).** The FTI Account Trustee's "forward to RERA"
-   step and Group A's "receive → audit → decide" step are two ends of one
+   step and the Regulatory Authority's "receive → audit → decide" step are two ends of one
    handshake. They need a shared status vocabulary or they will not connect at
    runtime.
 2. **RED #6 ↔ FTI #3 live validation.** Register Mortgage-Linked Sale runs a
    real-time check against Mortgage Registration; the mortgage must read
-   `Completed` on the FTI side. Group A's decision on the mortgage is what flips
+   `Completed` on the FTI side. The Regulatory Authority's decision on the mortgage is what flips
    that status. This is already live and synchronous.
 3. **Shared status vocabulary.** Every module's Application Status Flow ends in
-   Group A's decision states (Under Review, Information Requested, Returned,
-   Approved, Rejected). If Group A's queue uses different words, every module's
+   the Regulatory Authority's decision states (Under Review, Information Requested, Returned,
+   Approved, Rejected). If the Regulatory Authority's queue uses different words, every module's
    status display breaks.
 
 ---
@@ -219,7 +219,7 @@ See [open-questions.md](open-questions.md) for the live tracking of these. In br
   requires editing other modules' files.
 - **Role assignments where the source named no officer** — 20 services (12 IU, 8 RESC).
   All confirmed 2026-09-17; `[proposed]` tags removed. See A1.
-- **9 services need no Group A decision** — automated lookups + wrappers; documented
+- **9 services need no Regulatory Authority decision** — automated lookups + wrappers; documented
   as system actions, no role, no queue.
 - **Escrow sub-system** — 79 transaction vs 13 escrow, verified against source;
   modelled as one service with an escrow variant (A3, resolved).
@@ -235,10 +235,10 @@ See [open-questions.md](open-questions.md) for the live tracking of these. In br
 
 ---
 
-## 7. Proposed build scope to complete Group A
+## 7. Proposed build scope to complete the Regulatory Authority
 
-Given the analysis, completing Group A means building, in priority order (this is a
-proposed sequence, not a fixed plan):
+Given the analysis, completing the Regulatory Authority means building, in priority
+order (this is a proposed sequence, not a fixed plan):
 
 1. **The Transaction Audit Queue + decision loop** (Compliance & Escrow Auditor) —
    one queue, one screen pattern (receive → review → approve/return/request/reject

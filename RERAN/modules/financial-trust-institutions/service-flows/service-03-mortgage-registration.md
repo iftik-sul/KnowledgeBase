@@ -117,7 +117,7 @@ This matches the individual-user pay-then-submit model rather than differing fro
 **Two gates**, sourced from row 30 ("transaction audited by bank auditor" before it is "sent to Department for auditing"):
 
 1. **Internal Certifier** — a functional label, not a role or scope: any of the institution's four Group C users may act as internal certifier for a given transaction, including the person who filed it, with the acting user and their role recorded in the audit trail. **Corrected 2026-08-14** — previously modelled as a `checker permission scope` (A1/D2); permission scopes are retired module-wide, see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle). The source's "bank auditor" step is this unrestricted internal certify-or-return action.  
-2. **Compliance & Escrow Auditor** (Group A) — the external regulatory gate. All 18 Group C services are approved here; no Group C service is self-approving.
+2. **Compliance & Escrow Auditor** (RA) — the external regulatory gate. All 18 Group C services are approved here; no Group C service is self-approving.
 
 ## 11. Expected Processing Time
 

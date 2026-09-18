@@ -28,7 +28,7 @@ Modules follow the eight groups defined in the RERA Nigeria User Group Structure
 | `real-estate-service-companies` | Group D — Real Estate Service Companies | RESC | Roles and overview only |
 | `public-users` | Group H — Public & Informational Users | PU | Roles and overview only |
 | `allied-professionals` | Group G — Allied Professionals & Service Trustees | AP | Roles only; no service catalogue |
-| `regulatory-authority` | Group A — Regulatory Authority & Governance | RA | Not started |
+| `regulatory-authority` | Regulatory Authority & Governance | RA | Not started |
 
 Groups E (Property Owners & Landlords) and F (Tenants & Consumers) are both natural persons and are documented together as `individual-user`.
 

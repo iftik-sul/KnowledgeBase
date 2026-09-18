@@ -88,7 +88,7 @@ Genuinely sourced as free — unlike Financial & Trust Institutions' structurall
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (Group A) — sourced (approver column, row 56), though the row's own workflow text does not describe an audit step explicitly the way most portal-based Group D rows do. **Proposed**: RERA reviews the emailed application and responds with acceptance, rejection, or a query, following the same general audit pattern inferred for Service #6, since the source's approver column names the same role that reviews every other service in this module.
+**Compliance & Escrow Auditor** (RA) — sourced (approver column, row 56), though the row's own workflow text does not describe an audit step explicitly the way most portal-based Group D rows do. **Proposed**: RERA reviews the emailed application and responds with acceptance, rejection, or a query, following the same general audit pattern inferred for Service #6, since the source's approver column names the same role that reviews every other service in this module.
 
 No internal company-side certification gate exists for this service (`open-questions.md` A5).
 

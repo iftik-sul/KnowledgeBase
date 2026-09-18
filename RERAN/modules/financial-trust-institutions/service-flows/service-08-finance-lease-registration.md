@@ -108,7 +108,7 @@ Paid upfront by the institution via the shared platform payment gateway, before 
 **Two gates**, by extension of the pattern established for mortgage services, since finance lease shares the same lender-side origination and Compliance & Escrow Auditor approval:
 
 1. **Internal Certifier** — a functional label, not a role or scope: any of the institution's four Group C users may act as internal certifier, including the person who filed the transaction. **Corrected 2026-08-14** — previously `checker permission scope` (A1/D2), now retired; see [navigation.md#audit-trail-principle](../navigation.md#audit-trail-principle).  
-2. **Compliance & Escrow Auditor** (Group A).
+2. **Compliance & Escrow Auditor** (RA).
 
 > **Proposed** — row 34 does not explicitly mention an internal bank-auditor step (unlike rows 30–33, 39, which say "audited by bank auditor"). This is inferred by extension from the mortgage lifecycle sharing the same institutional origination pattern. See Open Questions.
 

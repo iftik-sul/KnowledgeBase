@@ -17,7 +17,7 @@ tags:
   - reconciliation
 ---
 
-# Group A Service A-9 — Harmonise Land Records
+# Regulatory Authority Service A-9 — Harmonise Land Records
 
 > **LATENT SERVICE.** No current front-office service routes to A-9; it is a background
 > reconciliation function, so its functional build stays deferred (open-questions A5).
@@ -48,7 +48,7 @@ scheduled push/pull, and no live dependency on an external system.
 
 ## 4. Who Can Act
 
-**State Liaison Coordinator** (Group A), under RBAC + MFA.
+**State Liaison Coordinator** (RA), under RBAC + MFA.
 
 ## 5. Trigger
 
@@ -75,7 +75,7 @@ Internal/periodic, or when a jurisdictional conflict is detected. No applicant q
 
 ## 10. Authority & Access Control
 
-- **Role:** State Liaison Coordinator (Group A).
+- **Role:** State Liaison Coordinator (RA).
 - **Access control:** RBAC + MFA.
 - **Sub-system:** cross-cutting data-harmonisation layer.
 

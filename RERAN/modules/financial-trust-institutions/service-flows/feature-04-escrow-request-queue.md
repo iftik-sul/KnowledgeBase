@@ -73,7 +73,7 @@ Not sourced as a fee-bearing action for the institution — this is an assessmen
 
 ## 10. Processing Authority
 
-**Any of the institution's four Group C roles**, unrestricted, for the `Trustee Review` stage; the **Compliance & Escrow Auditor** (Group A) — this module's standard second-gate regulator, used identically across all 18 numbered Group C services — for the subsequent `RERA Escrow Audit` that a Certify action advances a request into. Not a separate "escrow department"; see the terminology note under Feature Overview. **Corrected 2026-08-15**: previously gated by an `escrow` permission scope held by the Account Trustee; the scope is retired. Typically worked by the Account Trustee in practice — not a restriction.
+**Any of the institution's four Group C roles**, unrestricted, for the `Trustee Review` stage; the **Compliance & Escrow Auditor** (RA) — this module's standard second-gate regulator, used identically across all 18 numbered Group C services — for the subsequent `RERA Escrow Audit` that a Certify action advances a request into. Not a separate "escrow department"; see the terminology note under Feature Overview. **Corrected 2026-08-15**: previously gated by an `escrow` permission scope held by the Account Trustee; the scope is retired. Typically worked by the Account Trustee in practice — not a restriction.
 
 ## 11. Expected Processing Time
 

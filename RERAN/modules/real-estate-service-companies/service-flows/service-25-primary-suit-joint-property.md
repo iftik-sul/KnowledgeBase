@@ -89,7 +89,7 @@ Payment timing differs by channel — see Processing Workflow.
 
 ## 10. Processing Authority
 
-**Dispute Adjudication Officer** (Group A) — sourced (approver column, row 57), distinct from Compliance & Escrow Auditor, who approves most other Group D services.
+**Dispute Adjudication Officer** (RA) — sourced (approver column, row 57), distinct from Compliance & Escrow Auditor, who approves most other Group D services.
 
 ## 11. Expected Processing Time
 

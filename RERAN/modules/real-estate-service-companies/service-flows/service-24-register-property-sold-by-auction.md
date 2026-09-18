@@ -83,7 +83,7 @@ No separate audit step is named between payment and output delivery — payment 
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (Group A) — sourced (approver column, row 71).
+**Compliance & Escrow Auditor** (RA) — sourced (approver column, row 71).
 
 ## 11. Expected Processing Time
 

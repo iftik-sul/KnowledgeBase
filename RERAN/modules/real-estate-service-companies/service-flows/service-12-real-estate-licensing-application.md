@@ -84,7 +84,7 @@ Applicable according to the RERAN fee schedule.
 
 ## 10. Processing Authority
 
-**Licensing & Registration Officer** (Group A) — sourced (approver column, row 59), distinct from Compliance & Escrow Auditor, who approves most other Group D services.
+**Licensing & Registration Officer** (RA) — sourced (approver column, row 59), distinct from Compliance & Escrow Auditor, who approves most other Group D services.
 
 No internal company-side certification gate exists for this service (`open-questions.md` A5).
 

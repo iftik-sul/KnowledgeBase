@@ -18,9 +18,9 @@ tags:
   - decision-service
 ---
 
-# Group A Service A-1 — Audit & Decide (Application Review)
+# Regulatory Authority Service A-1 — Audit & Decide (Application Review)
 
-> **Back-office service.** This is a Group A service — an action RERA staff take on
+> **Back-office service.** This is a Regulatory Authority service — an action RERA staff take on
 > work another group filed, not an application an end user submits. Where the standard
 > (front-office) service-flow template describes a *submission*, this one describes a
 > *decision*. Sections that don't apply to a reviewer (service fee, applicant payment)
@@ -29,9 +29,9 @@ tags:
 
 ## 1. Service Overview
 
-**Audit & Decide** is Group A's core decision service. It is the single review-and-
-decision workflow through which **92 of the 114 external services** reach their
-outcome. When an applicant in another group (RED, FTI, RESC, or Individual User)
+**Audit & Decide** is the Regulatory Authority's core decision service. It is the single
+review-and- decision workflow through which **92 of the 114 external services** reach
+their outcome. When an applicant in another group (RED, FTI, RESC, or Individual User)
 submits and pays for a service, the application lands in this service's queue; a
 Compliance & Escrow Auditor reviews it against the registry and records one of four
 decisions. Every property, sale, lease, mortgage, financial-institution, and escrow-
@@ -64,14 +64,14 @@ application and applies a heavier escrow checklist (§15).
 
 ## 4. Who Can Act *(replaces "Who Can Apply")*
 
-**Compliance & Escrow Auditor** (Group A), operating under real role-based access
+**Compliance & Escrow Auditor** (RA), operating under real role-based access
 control. **This is a genuine permission gate** — unlike every front-office service,
 where a user's role is audit attribution only and gates nothing. Only a user holding
 the Compliance & Escrow Auditor role may act on an item in this service, and access
 requires MFA.
 
 > **Note — the one place role gates action.** Everywhere else in RERAN, unified access
-> applies. Group A is the exception; this section is where that exception lives.
+> applies. The Regulatory Authority is the exception; this section is where that exception lives.
 
 ## 5. Entry Conditions *(replaces "Prerequisites")*
 
@@ -114,18 +114,19 @@ requires MFA.
 
 ## 8. Service Fee
 
-**N/A.** Group A charges no fee for reviewing an application. The applicant paid the
-service fee to the originating front-office service before submission; no fee arises
-on the Group A side.
+**N/A.** The Regulatory Authority charges no fee for reviewing an application. The
+applicant paid the service fee to the originating front-office service before
+submission; no fee arises on the Regulatory Authority side.
 
 ## 9. Payment Required
 
-**N/A (Group A side).** Payment timing belongs to each originating service and is
-recorded there, per-service. This service never collects or holds a payment.
+**N/A (the Regulatory Authority side).** Payment timing belongs to each originating
+service and is recorded there, per-service. This service never collects or holds a
+payment.
 
 ## 10. Decision Authority & Access Control *(replaces "Processing Authority")*
 
-- **Role:** Compliance & Escrow Auditor (Group A).
+- **Role:** Compliance & Escrow Auditor (RA).
 - **Access control:** RBAC-gated + MFA (see §4).
 - **Sub-system:** Escrow / Trust-Account Audit System (escrow items) and the general
   Transaction Audit Queue (all others) — one service, two queue-views.
@@ -195,7 +196,7 @@ Escrow-apparatus items (13 services: RED #8–12, #20, #21; FTI #1, #2; RESC #5,
 
 1. **Two-gate entry.** An FTI Account Trustee assesses and forwards the item before it
    reaches this queue. There is an additional pre-queue return path ("Returned by
-   Certifier") that happens before Group A ever sees the item.
+   Certifier") that happens before the Regulatory Authority ever sees the item.
 2. **Extra context on screen.** The trustee assessment and the escrow-account state
    are shown alongside the application (§6).
 3. **Heavier checklist.** The escrow checks in §7 apply in addition to the general ones.

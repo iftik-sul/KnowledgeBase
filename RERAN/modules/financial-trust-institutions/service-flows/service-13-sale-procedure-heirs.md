@@ -96,7 +96,7 @@ Paid by the customer at the Trustee Centre, **before** RERA's audit and approval
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (Group A) — sourced (approver column, row 40). RERA's Trusts Department additionally executes the distribution of heirs' shares to their bank accounts after audit, a financial-execution step distinct from the regulatory approval itself.
+**Compliance & Escrow Auditor** (RA) — sourced (approver column, row 40). RERA's Trusts Department additionally executes the distribution of heirs' shares to their bank accounts after audit, a financial-execution step distinct from the regulatory approval itself.
 
 ## 11. Expected Processing Time
 

@@ -16,7 +16,7 @@ tags:
   - finance
 ---
 
-# Group A Service A-5 — Reconcile Settlements
+# Regulatory Authority Service A-5 — Reconcile Settlements
 
 > **Back-office finance service.** Not a decision queue and not applicant-facing. It
 > reconciles what the payment gateway actually collected against what was owed, and
@@ -43,7 +43,7 @@ records for the funds due to each account.
 
 ## 4. Who Can Act
 
-**Revenue & Finance Officer** (Group A), under RBAC + MFA.
+**Revenue & Finance Officer** (RA), under RBAC + MFA.
 
 ## 5. Trigger *(replaces "Entry Conditions")*
 
@@ -69,7 +69,7 @@ or collect a fee itself, and (per platform policy) holds no standing balance.
 
 ## 10. Authority & Access Control
 
-- **Role:** Revenue & Finance Officer (Group A).
+- **Role:** Revenue & Finance Officer (RA).
 - **Access control:** RBAC-gated + MFA.
 - **Sub-system:** Revenue & Settlement Dashboard.
 

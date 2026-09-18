@@ -58,7 +58,7 @@ System"). New screens must look like they were always part of it. These rules ca
 - **Sidebar = one component per module**, 240px, all built the same way (`FI-Sidebar`, `RED-Sidebar`,
   the portal's `Navigation`). For a new module, **duplicate `FI-Sidebar` and swap the nav items** —
   keep the RERA logo header, the Sign Out footer, and the active-item blue (`#006FE8`) pill.
-  Nav is **role-scoped** where the module has real RBAC (Group A); otherwise it's the full set.
+  Nav is **role-scoped** where the module has real RBAC (RA); otherwise it's the full set.
 - **Top bar = the `Background+HorizontalBorder` component** (1200×78). Place it and override
   title/subtitle/profile. It has a global search, a notification bell, and a profile block; it has
   **no back button and no status slot** — put those in the workspace (breadcrumb row + item header).
@@ -89,9 +89,9 @@ be corrected to 927 before it's considered done.
   a decision/validation area. Reuse the `ValidationSummaryCard` pattern for check panels.
 
 ## 5. Component & pattern conventions
-- **KPI cards** — **Group A standardises on the canonical KPI card** (border `N30`, radius 14, value
+- **KPI cards** — **the Regulatory Authority standardises on the canonical KPI card** (border `N30`, radius 14, value
   Semibold 24 `Heading 5`, **no icon**, no accent, Foundation-tokenised, flex-1 width) on **every**
-  screen. The FTI `SummaryCard` and RED `MetricCard` are legacy — do not use them for Group A.
+  screen. The FTI `SummaryCard` and RED `MetricCard` are legacy — do not use them for the Regulatory Authority.
 - **Tables** — rows: p-12/14, gap-12/16, bottom border `N40`, cells Inter 13 (`N900`/`N400`), the
   reference/ID cell is a `blue-600` link, the row action ("View") is a `blue-600` link, right-aligned.
 - **Status pills** — the back-office hand-builds pills (rounded-100, Inter 11); the library `Badge`

@@ -85,7 +85,7 @@ An institution user submits a cancellation application. RERA's Compliance & Escr
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (Group A) — sourced: RERA "studies and audits the application."
+**Compliance & Escrow Auditor** (RA) — sourced: RERA "studies and audits the application."
 
 ## 11. Expected Processing Time
 

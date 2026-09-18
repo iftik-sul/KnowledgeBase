@@ -16,7 +16,7 @@ tags:
   - configuration
 ---
 
-# Group A Service A-4 — Configure Fee Schedule
+# Regulatory Authority Service A-4 — Configure Fee Schedule
 
 > **Back-office configuration service.** Not a decision queue and not applicant-facing:
 > it is an internal action that maintains platform data every fee-bearing service
@@ -44,7 +44,7 @@ charge. Changes are versioned and recorded.
 
 ## 4. Who Can Act
 
-**Revenue & Finance Officer** (Group A), under RBAC + MFA.
+**Revenue & Finance Officer** (RA), under RBAC + MFA.
 
 ## 5. Trigger *(replaces "Entry Conditions")*
 
@@ -73,7 +73,7 @@ There is no queue and no applicant submission.
 
 ## 10. Authority & Access Control
 
-- **Role:** Revenue & Finance Officer (Group A).
+- **Role:** Revenue & Finance Officer (RA).
 - **Access control:** RBAC-gated + MFA.
 - **Sub-system:** Revenue & Settlement Dashboard.
 
@@ -109,7 +109,7 @@ effective dates. No applicant-facing status.
 
 1. **Every fee-bearing service reads this schedule.** A wrong or missing entry misprices
    or blocks checkout across the platform — this is the widest-blast-radius config
-   surface in Group A.
+   surface in the Regulatory Authority.
 2. **A-5 Reconcile settlements** reconciles gateway receipts against what this schedule
    said was owed.
 

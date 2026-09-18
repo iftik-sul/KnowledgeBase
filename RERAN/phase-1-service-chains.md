@@ -18,12 +18,12 @@ tags:
 # Phase 1 — Service Chains
 
 The end-to-end path of each of the ten Phase 1 services: who files it, every gate it
-passes before the regulator sees it, which Group A screen handles it, and what comes
-back to the applicant.
+passes before the regulator sees it, which Regulatory Authority screen handles it, and
+what comes back to the applicant.
 
-This is a **cross-module map** — it spans RED, FTI and Group A, so it sits at the
-project root rather than inside any one module. Each module's own service-flow remains
-the source for its half; this file joins them.
+This is a **cross-module map** — it spans RED, FTI and the Regulatory Authority, so it
+sits at the project root rather than inside any one module. Each module's own
+service-flow remains the source for its half; this file joins them.
 
 ## The ten
 
@@ -36,13 +36,14 @@ Procedure (Heirs) · #15 Updating Title Deed Information · #17 Issuance of Titl
 
 **All ten land on the same officer and the same screens.** Every one routes to the
 **Compliance & Escrow Auditor** in the **Transaction Audit Queue** — none to Licensing,
-none to Dispute, none an escrow-variant item. So the Group A back half of all ten is:
+none to Dispute, none an escrow-variant item. So the Regulatory Authority back half of
+all ten is:
 
 > [Work Queue](modules/regulatory-authority/ui/screens/work-queue.md) (transaction view)
 > → [Application Review](modules/regulatory-authority/ui/screens/application-review.md)
 > → decision modal `M-DEC-01`…`M-DEC-04`
 
-No Group A screen outside those two is needed for Phase 1.
+No Regulatory Authority screen outside those two is needed for Phase 1.
 
 ---
 
@@ -66,7 +67,7 @@ the item reaches the queue. Five distinct shapes:
 ### RED #1 — Register Initial Sale
 ```
 Developer (RED portal) → pay → submit
-  → [Group A] Work Queue → Application Review → decide
+  → [RA] Work Queue → Application Review → decide
   → Approved: Provisional Registration e-Certificate
   → emailed to the purchaser
 ```
@@ -80,13 +81,13 @@ Developer (RED portal) → pay → submit
   → [automatic] validate mortgage reference against FTI's records, live, same request
        ↳ not found / mismatched / not yet `Completed`
             → auto-returned to developer immediately, no officer involved
-  → [Group A] Work Queue → Application Review → decide
+  → [RA] Work Queue → Application Review → decide
   → Approved: Mortgage Provisional Registration Certificate + Electronic Map
 ```
 Fee **before** decision *and before validation* · SLA 6 business days.
 
-**This is the one true chain in Phase 1.** The mortgage it validates against only reaches
-`Completed` because Group A approved **FTI #3**. So:
+**This is the one true chain in Phase 1.** The mortgage it validates against only
+reaches `Completed` because the Regulatory Authority approved **FTI #3**. So:
 
 ```
 FTI #3 approved by the Auditor  →  mortgage = Completed  →  RED #6 can pass its check
@@ -100,7 +101,7 @@ Both ends are in the Phase 1 set, which makes this the path to test end-to-end f
 ```
 RERA issues the developer's licence + self-registration username   (precondition)
   → Developer applies, attaches requirements
-  → [Group A] Work Queue → Application Review → audit: accept or reject
+  → [RA] Work Queue → Application Review → audit: accept or reject
   → If accepted: developer uploads units via an approved survey company
   → Developer submits to the Registrar to open the project account
   → pay registration fee
@@ -109,7 +110,7 @@ RERA issues the developer's licence + self-registration username   (precondition
 Fee **after** the decision — payment releases the output rather than gating review ·
 SLA 3 business days.
 
-> **Two further Group A touches sit outside the queue:** issuing the licence up front
+> **Two further Regulatory Authority touches sit outside the queue:** issuing the licence up front
 > (Licensing & Registration Officer) and opening the project account (labelled
 > "Registrar" — an **A2** item; see below). Neither is the Transaction Audit decision.
 
@@ -118,7 +119,7 @@ SLA 3 business days.
 ### RED #16 — Changing the Name of a Project
 ```
 Developer (RED portal) → open project → new name + reason → submit
-  → [Group A] Work Queue → Application Review → decide
+  → [RA] Work Queue → Application Review → decide
   → Approved: Updated Real Estate Project Approval Certificate
 ```
 **No fee** · SLA 30 minutes · the simplest chain in the set.
@@ -131,7 +132,7 @@ Developer (RED portal) → enter updated details
   → pay application approval fee                      (payment 1 of 2)
   → [Survey Department] review and confirm data        ← A2 warning
   → submit
-  → [Group A] Work Queue → Application Review → decide
+  → [RA] Work Queue → Application Review → decide
   → pay approval fee in real-estate records            (payment 2 of 2)
   → Project completed?  → Electronic Certificate of Title / Title Deed
     Project not completed? → Electronic Map
@@ -147,7 +148,7 @@ Borrower completes mortgage requirements with the bank
   → Institution user files it (select property, enter details, upload docs)
   → pay via the shared gateway
   → [Internal Certifier, inside the institution] review → certify, or return to filer
-  → [Group A] Work Queue → Application Review → decide
+  → [RA] Work Queue → Application Review → decide
   → Approved: title-type certificate (Certificate of Title / Title Deed / Usufruct /
     Statement Certificate / Provisional Sale Registration Certificate — whichever matches
     the property's existing registration)
@@ -166,7 +167,7 @@ Fee **before** submission · SLA 20–25 minutes · **two gates**: certifier, th
 Fund company rep visits the Trustee Centre → submits documents
   → pay at the counter → e-receipt          (moved ahead of review, client decision 2026-08-16)
   → [Trustee Centre Operator] enter and check the transaction
-  → [Group A] Work Queue → Application Review → decide
+  → [RA] Work Queue → Application Review → decide
   → Approved: E-Ownership Certificate + Register of Privileges registration number
   → both delivered by email
 ```
@@ -179,7 +180,7 @@ Fee **before** decision · SLA 25–30 minutes · counter-originated.
 Heirs / representative visit the Trustee Centre → submit documents
   → [Trustee Centre Operator] enter data → initial audit
   → heirs pay at the counter
-  → [Group A] Work Queue → Application Review → audit and decide
+  → [RA] Work Queue → Application Review → audit and decide
   → Approved:
       → [RERA Trusts Department] transfer each heir's share to their bank account  ← A2 warning
       → Certificate of Title + Title Deed + Map + receipts, by email
@@ -194,7 +195,7 @@ post-approval money movement.**
 Customer visits the Trustee Centre → submits documents
   → [Trustee Centre Operator] verify completeness → enter data
   → customer pays → receipt
-  → [Group A] Work Queue → Application Review → decide
+  → [RA] Work Queue → Application Review → decide
   → Approved: updated Electronic Title Deed — same deed number, incremented version
   → link delivered by email
 ```
@@ -207,7 +208,7 @@ Fee **before** decision · SLA 25 minutes.
 Customer visits the Land Department → submits documents
   → [Operator] enter transaction data
   → customer pays
-  → [Group A] Work Queue → Application Review → decide
+  → [RA] Work Queue → Application Review → decide
   → Approved: Electronic Title Deed Certificate, by email
 ```
 Fee **before** decision · SLA 25 minutes · the cleanest counter-originated chain.
@@ -238,8 +239,8 @@ return, which happens before any officer and is not a decision.
 
 Open-question **A2** (authority-label drift) was parked on the basis that *"nothing
 currently being built depends on it."* Walking these ten chains shows **that is not
-true**. Two of the ten Phase 1 services route through a label that is not one of Group
-A's eight roles:
+true**. Two of the ten Phase 1 services route through a label that is not one of the
+Regulatory Authority's eight roles:
 
 | Service | Step | Label used | Status |
 | :-- | :-- | :-- | :-- |
@@ -261,7 +262,7 @@ that can wait for a later correction pass — it is a gap inside the Phase 1 bui
 
 ---
 
-## What this confirms for the Group A build
+## What this confirms for the Regulatory Authority build
 
 - **Two screens cover all ten services.** Work Queue (transaction view) + Application
   Review. Nothing deferred is needed.

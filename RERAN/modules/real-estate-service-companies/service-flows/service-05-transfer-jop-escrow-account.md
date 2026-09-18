@@ -85,7 +85,7 @@ Sourced (row 50) — confirmed against `payments.md`'s Model 1, and against A3's
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (Group A) — sourced (approver column, row 50). No Account Trustee step is described — see the Service Overview note above.
+**Compliance & Escrow Auditor** (RA) — sourced (approver column, row 50). No Account Trustee step is described — see the Service Overview note above.
 
 No internal company-side certification gate exists for this service (`open-questions.md` A5).
 

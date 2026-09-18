@@ -18,7 +18,7 @@ tags:
   - tribunal
 ---
 
-# Group A Service A-3 — Adjudicate (Dispute)
+# Regulatory Authority Service A-3 — Adjudicate (Dispute)
 
 > **Back-office service — the one that breaks the mould.** A-1 and A-2 are single
 > approve/reject decisions. A-3 is a *multi-session case process*: file → assign →
@@ -28,12 +28,12 @@ tags:
 
 ## 1. Service Overview
 
-**Adjudicate** is Group A's dispute-resolution service. It finishes the **4 dispute
-services** — joint-property suits, execution cases, tenancy disputes, and complaints —
-through the Tribunal & Remote-Litigation sub-system. A Dispute Adjudication Officer
-receives a filing, runs it through mediation and/or a hearing (which may be conducted
-remotely), and records a judgment. Unlike every other Group A service, resolving one
-item can take several sessions over time.
+**Adjudicate** is the Regulatory Authority's dispute-resolution service. It finishes the
+**4 dispute services** — joint-property suits, execution cases, tenancy disputes, and
+complaints — through the Tribunal & Remote-Litigation sub-system. A Dispute Adjudication
+Officer receives a filing, runs it through mediation and/or a hearing (which may be
+conducted remotely), and records a judgment. Unlike every other Regulatory Authority
+service, resolving one item can take several sessions over time.
 
 ## 2. Purpose
 
@@ -51,7 +51,7 @@ records a judgment. The case then closes with its outcome and any assignment rec
 
 ## 4. Who Can Act *(replaces "Who Can Apply")*
 
-**Dispute Adjudication Officer** (Group A), under real RBAC + MFA — the same
+**Dispute Adjudication Officer** (RA), under real RBAC + MFA — the same
 permission-gated model as A-1. Only a user holding this role may act on a case.
 
 ## 5. Entry Conditions *(replaces "Prerequisites")*
@@ -81,15 +81,16 @@ permission-gated model as A-1. Only a user holding this role may act on a case.
 
 ## 8. Service Fee
 
-**N/A (Group A side).** Any filing fee belongs to the originating service (e.g. IU #38).
+**N/A (the Regulatory Authority side).** Any filing fee belongs to the originating
+service (e.g. IU #38).
 
 ## 9. Payment Required
 
-**N/A (Group A side).**
+**N/A (the Regulatory Authority side).**
 
 ## 10. Decision Authority & Access Control *(replaces "Processing Authority")*
 
-- **Role:** Dispute Adjudication Officer (Group A).
+- **Role:** Dispute Adjudication Officer (RA).
 - **Access control:** RBAC-gated + MFA.
 - **Sub-system:** Tribunal & Remote-Litigation System.
 
@@ -166,7 +167,7 @@ Information Requested" loop.
 ## 16. Cross-Module Dependencies *(back-office-specific section)*
 
 1. **Per-originating-service status mapping** (see §13) — the main dependency.
-2. **Shared audit-trail and RBAC model** — as with all Group A services.
+2. **Shared audit-trail and RBAC model** — as with all Regulatory Authority services.
 3. No FTI handshake, no escrow two-gate, and no shared four-state decision vocabulary
    (A-3 is the exception on the last point).
 

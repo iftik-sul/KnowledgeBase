@@ -19,7 +19,8 @@ tags:
 
 18 business services, verified against the master service table (rows 28–45). This total reconciles with the source workbook's own summary: Development 2 + Transaction 15 + Title-Deed Data 1 = 18.
 
-All 18 are approved by the **Compliance & Escrow Auditor**, a Group A role. No Group C service is self-approving.
+All 18 are approved by the **Compliance & Escrow Auditor**, a Regulatory Authority role.
+No Group C service is self-approving.
 
 ## Business Services
 
@@ -161,7 +162,20 @@ This feature's vocabulary is corrected to match: the institution's own assessmen
 
 ## Cross-Module Clarification: "RERA Escrow Audit" and "Compliance & Escrow Auditor" Are the Same Role
 
-**Clarified 2026-08-16.** While correcting the status vocabulary above, a further terminology gap was checked directly against `RERAN_service_flows_v2.md`'s master Service Workflows table: real-estate-developer's six escrow rows (8–12, 20–21) and this module's mortgage/lease rows (30–39) carry the identical **"Compliance & Escrow Auditor"** value in the Regulator/Approver column. There is only one such role in the source's Groups & Roles table (Group A, Compliance Directorate — *"Audits escrow/trust accounts, vets off-plan sales, monitors disclosure, sanctions defaulters"*). This feature's own "RERA's Escrow Department" — inherited from real-estate-developer's service files, which in turn carried the source table's own narrative Workflow-column phrasing — names the same role this module already calls the Compliance & Escrow Auditor everywhere else (e.g. Service #3, Mortgage Registration). Both phrasings trace to source; neither was wrong, they were simply never cross-linked before. Feature #4 now names the role explicitly rather than leaving "escrow department" as an unlabeled synonym.
+**Clarified 2026-08-16.** While correcting the status vocabulary above, a further
+terminology gap was checked directly against `RERAN_service_flows_v2.md`'s master
+Service Workflows table: real-estate-developer's six escrow rows (8–12, 20–21) and this
+module's mortgage/lease rows (30–39) carry the identical **"Compliance & Escrow
+Auditor"** value in the Regulator/Approver column. There is only one such role in the
+source's Groups & Roles table (the Regulatory Authority, Compliance Directorate —
+*"Audits escrow/trust accounts, vets off-plan sales, monitors disclosure, sanctions
+defaulters"*). This feature's own "RERA's Escrow Department" — inherited from
+real-estate-developer's service files, which in turn carried the source table's own
+narrative Workflow-column phrasing — names the same role this module already calls the
+Compliance & Escrow Auditor everywhere else (e.g. Service #3, Mortgage Registration).
+Both phrasings trace to source; neither was wrong, they were simply never cross-linked
+before. Feature #4 now names the role explicitly rather than leaving "escrow department"
+as an unlabeled synonym.
 
 ## Platform Features Summary
 

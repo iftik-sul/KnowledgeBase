@@ -89,7 +89,7 @@ Sourced (row 67) — the workflow contains no payment step, confirmed against `p
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (Group A) — sourced (approver column, row 67).
+**Compliance & Escrow Auditor** (RA) — sourced (approver column, row 67).
 
 No internal company-side certification gate exists for this service (`open-questions.md` A5).
 

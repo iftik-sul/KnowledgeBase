@@ -17,7 +17,7 @@ tags:
   - inspection
 ---
 
-# Group A Service A-7 — Conduct Site Inspection
+# Regulatory Authority Service A-7 — Conduct Site Inspection
 
 > **BUILDING (open-questions A5, resolved 2026-09-17).** A-7 has no primary decision
 > routed to it, but A-1 depends on it: field-visit items (RED #27; IU
@@ -25,8 +25,8 @@ tags:
 > produce one. Its screens are therefore in scope — inspection queue, on-site findings
 > capture, and inspection report.
 >
-> **Form factor note:** this is the only Group A role that works *on site*, capturing
-> geo-tagged findings and photos at a building. Every other Group A screen is desk-based
+> **Form factor note:** this is the only Regulatory Authority role that works *on site*, capturing
+> geo-tagged findings and photos at a building. Every other Regulatory Authority screen is desk-based
 > back-office, so these screens need a phone/tablet design, not a desktop one.
 
 ## 1. Service Overview
@@ -49,7 +49,7 @@ and milestone verification, and returns an inspection report that a decision ser
 
 ## 4. Who Can Act
 
-**Inspection & Enforcement Officer** (Group A), under RBAC + MFA.
+**Inspection & Enforcement Officer** (RA), under RBAC + MFA.
 
 ## 5. Trigger
 
@@ -76,7 +76,7 @@ required, or the officer initiates one proactively. Not a standing applicant que
 
 ## 10. Authority & Access Control
 
-- **Role:** Inspection & Enforcement Officer (Group A).
+- **Role:** Inspection & Enforcement Officer (RA).
 - **Access control:** RBAC + MFA.
 - **Sub-system:** Inspection & Enforcement Module.
 
