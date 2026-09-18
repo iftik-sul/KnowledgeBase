@@ -4,7 +4,7 @@ module: regulatory-authority
 type: analysis
 status: draft
 contains_proposals: true
-updated: 2026-09-17
+updated: 2026-09-18
 derived_from:
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
   - "RERAN/modules/real-estate-developer/service-flows/"
@@ -213,10 +213,10 @@ modules it serves:
 
 See [open-questions.md](open-questions.md) for the live tracking of these. In brief:
 
-- **Authority-label drift** — "Survey Department" (4 RED services), "Registrar" (RED
-  #13), "Trusts Department" (FTI #13) are not among the 8 sourced roles. Proposed
-  homes recorded in open-questions A2. **The one item still open**, deliberately — it
-  requires editing other modules' files.
+- **Authority-label drift** — resolved 2026-09-18 (A2). "Survey Department" → Inspection
+  & Enforcement Officer (confirmed as one role for all survey work); "Registrar" → System
+  Super Administrator; "Trusts Department" → Revenue & Finance Officer. Applied across
+  the RED and FTI service-flows and Figma prompts that carried the old labels.
 - **Role assignments where the source named no officer** — 20 services (12 IU, 8 RESC).
   All confirmed 2026-09-17; `[proposed]` tags removed. See A1.
 - **9 services need no Regulatory Authority decision** — automated lookups + wrappers; documented
