@@ -5,7 +5,7 @@ type: service-flow
 status: draft
 contains_proposals: true
 source_type: derived
-updated: 2026-09-12
+updated: 2026-09-17
 derived_from:
   - "RERAN/modules/regulatory-authority/services-overview.md"
   - "RERAN/modules/regulatory-authority/roles-and-actions-analysis.md"
@@ -120,6 +120,7 @@ remittances are **Pending** or **Remitted**.
 - **Reconciliation dashboard** — run reconciliation, view matched vs discrepant, drill
   into flagged items.
 - **Remittance view** — computed remittances per destination account and their status.
+  Delivered as a **tab within the Reconciliation Dashboard**, not a separate screen.
 
 ## 18. API Requirements
 
