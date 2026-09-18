@@ -4,7 +4,7 @@ module: regulatory-authority
 type: ui-components
 status: placeholder
 contains_proposals: true
-updated: 2026-09-12
+updated: 2026-09-17
 derived_from:
   - "RERAN/modules/regulatory-authority/ui/screens/"
 tags:
@@ -15,11 +15,10 @@ tags:
 
 # Group A — UI Components (placeholder)
 
-> **Placeholder — to be reconciled to the real Figma component library in the Figma
-> thread.** The screen specs reference generic component types; this file lists them so
-> the Figma thread has a checklist to map onto the actual library (real component names,
-> tokens, variants). It is intentionally not authoritative yet — the figma-prompts must
-> reference the *real* library components, not these generic names.
+> **Generic component vocabulary.** The screen specs reference component *types*, not
+> library component names. This file lists them so design work in Figma has a checklist to
+> map onto the real library. It is deliberately not authoritative on naming — the real
+> component names live in Figma, not here.
 
 ## Generic component types the specs reference
 
@@ -40,10 +39,12 @@ tags:
 | Session Timeline | Case Workspace | new |
 | Audit-trail list | all | existing |
 
-## Reconciliation checklist (for the Figma thread)
+## Reconciliation checklist (for design work in Figma)
 
 1. Map each generic type above to a real library component (or flag as genuinely new).
 2. Confirm the Back-Office Sidebar is a variant of, or distinct from, the portal sidebar.
 3. Identify the closest already-built screens (esp. FTI institution-side) to adapt rather
    than regenerate.
-4. Only then write the figma-prompts, referencing real component names.
+
+Figma build prompts are **not kept in this repo** — they drifted from the specs they claimed
+to derive from. The screen specs remain the single source of truth for behaviour.

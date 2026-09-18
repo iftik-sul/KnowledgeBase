@@ -4,7 +4,7 @@ module: regulatory-authority
 type: ui-status-badges
 status: draft
 contains_proposals: true
-updated: 2026-09-12
+updated: 2026-09-17
 derived_from:
   - "RERAN/modules/regulatory-authority/service-flows/"
 tags:
@@ -58,11 +58,15 @@ Used by the Case Queue and Case Workspace. A case lifecycle, distinct from §1.
 | Reconciliation (A-5) | Open · Balanced · Discrepant; remittances Pending · Remitted |
 | Admin Console (A-6) | Invited · Active · Suspended · Deactivated |
 
-## 4. Latent statuses (A-7–A-10)
+## 4. Field & governance statuses (A-7 to A-10)
 
-Defined in each latent service-flow; not built yet. Inspection: Requested · Scheduled ·
-Completed · Cancelled. Enforcement: Draft · Issued · Escalated · Resolved. Harmonisation:
-Open · Reconciled · Conflicted. Sign-off: Pending Sign-off · Authorised · Declined.
+| Service | Badges | Screens |
+| :-- | :-- | :-- |
+| Inspection (A-7) | Requested · Scheduled · Completed · Cancelled | **In scope** — not yet specced |
+| Sign-off (A-10) | Pending Sign-off · Authorised · Declined | **In scope** — not yet specced |
+| Enforcement (A-8) | Draft · Issued · Escalated · Resolved | Deferred |
+| Harmonisation (A-9) | Open · Reconciled · Conflicted | Deferred |
 
 > **Proposed** — colour mapping (which badge group maps to which design-token colour) is
-> deferred to the Figma thread, where badges reconcile to the real component library.
+> decided in Figma against the real component library, not here. This file owns badge
+> **wording and grouping** only.
