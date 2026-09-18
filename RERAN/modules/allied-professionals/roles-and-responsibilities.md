@@ -70,7 +70,7 @@ A landlord without internet access visits a Trustee Centre to register a lease. 
 
 ### Purpose
 
-Prepares project and property survey data, matches it to approved plans, and submits it to the Regulatory Authority's Inspection & Enforcement Officer for review.
+Prepares project and property survey data, matches it to approved plans, and submits it to the Survey Department.
 
 ### Where It Appears
 
@@ -82,12 +82,12 @@ Prepares project and property survey data, matches it to approved plans, and sub
 * Accept designation by a developer or owner
 * Prepare survey data and match it to approved plans
 * Upload unit inventories for registered projects
-* Submit packages to the Inspection & Enforcement Officer for review
+* Submit packages to the Survey Department for review
 * Correct and resubmit returned packages
 
 ### Practical Example
 
-A developer registering a new project designates an accredited survey company. The company prepares the plot and unit data, matches it against the approved building plans, pays the approval fee, and submits to the Regulatory Authority. The Inspection & Enforcement Officer verifies coordinates and approves; the project data is committed to the title-deed register.
+A developer registering a new project designates an accredited survey company. The company prepares the plot and unit data, matches it against the approved building plans, pays the approval fee, and submits to the Survey Department. The department verifies coordinates and approves; the project data is committed to the title-deed register.
 
 ---
 
