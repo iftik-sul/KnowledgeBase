@@ -18,9 +18,9 @@ tags: [regulatory-authority, ui-spec, back-office, notifications]
 **Access (RBAC-gated):** all roles; contents are role-scoped. MFA required. Navigation (which roles reach this screen) is governed by [role-screen-matrix.md](../role-screen-matrix.md); the roles named here identify who acts on this screen.
 
 How a staff member learns that something needs them. Built in response to flow gap G10:
-without it, an officer only discovers a returned item, an SLA breach, or an escalation by
-re-opening a queue. All four other RERAN modules have a notifications screen; this is
-Group A's.
+without it, an officer only discovers a returned item, an SLA breach, or an escalation
+by re-opening a queue. All four other RERAN modules have a notifications screen; this is
+the Regulatory Authority's.
 
 ## Purpose
 

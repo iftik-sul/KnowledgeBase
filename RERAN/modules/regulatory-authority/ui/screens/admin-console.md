@@ -42,7 +42,7 @@ Top Bar → [Staff tab] Staff Directory → Account Editor
 | Column | Notes |
 | :-- | :-- |
 | Staff member | Name / email |
-| Role(s) | Assigned Group A role(s) |
+| Role(s) | Assigned Regulatory Authority role(s) |
 | MFA | Enrolled / not |
 | Status | Invited / Active / Suspended / Deactivated |
 
@@ -57,11 +57,11 @@ are owned by [modals.md](../modals.md) §6.
 
 ### Section 3 — Role & Permission Editor (Roles tab)
 
-The eight Group A roles and the permissions attached to each (least-privilege). Changing a
-role's permissions raises `M-ADM-03`, which must state that the change **affects every user
-holding that role**, not one person — and requires step-up re-authentication. All eight roles
-are definable and assignable even where their functional screens are deferred (A-6 §15 /
-open-questions A5).
+The eight Regulatory Authority roles and the permissions attached to each
+(least-privilege). Changing a role's permissions raises `M-ADM-03`, which must state
+that the change **affects every user holding that role**, not one person — and requires
+step-up re-authentication. All eight roles are definable and assignable even where their
+functional screens are deferred (A-6 §15 / open-questions A5).
 
 ## Role Variations / Permissions
 
