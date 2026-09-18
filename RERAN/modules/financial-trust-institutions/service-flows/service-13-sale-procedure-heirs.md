@@ -28,11 +28,11 @@ The **Sale Procedure (Heirs)** service processes the sale of a deceased owner's 
 
 ## 2. Purpose
 
-Give heirs a regulated path to sell an inherited property and receive their respective shares of the proceeds, with RERA recording the ownership change and its Revenue & Finance Officer coordinating the financial distribution.
+Give heirs a regulated path to sell an inherited property and receive their respective shares of the proceeds, with RERA recording the ownership change and coordinating the financial distribution through its Trusts Department.
 
 ## 3. Description
 
-An heir or their representative visits a Real Estate Registration Trustee Centre, submits the required documents, and the Trustee Centre operator enters the transaction and performs an initial audit. The customer pays the applicable fees. The transaction is then sent to RERA's Revenue & Finance Officer, who transfers each heir's share to their nominated bank account. Outputs are delivered by email.
+An heir or their representative visits a Real Estate Registration Trustee Centre, submits the required documents, and the Trustee Centre operator enters the transaction and performs an initial audit. The customer pays the applicable fees. The transaction is then sent to RERA's Trusts Department, which transfers each heir's share to their nominated bank account. Outputs are delivered by email.
 
 ## 4. Who Can Apply
 
@@ -96,7 +96,7 @@ Paid by the customer at the Trustee Centre, **before** RERA's audit and approval
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (RA) — sourced (approver column, row 40). The **Revenue & Finance Officer** additionally executes the distribution of heirs' shares to their bank accounts after audit — a financial-execution step distinct from the regulatory approval itself, and corrected 2026-09-18 from the source's "Trusts Department" wording, which is not one of the Regulatory Authority's eight roles (open-questions A2).
+**Compliance & Escrow Auditor** (RA) — sourced (approver column, row 40). RERA's Trusts Department additionally executes the distribution of heirs' shares to their bank accounts after audit, a financial-execution step distinct from the regulatory approval itself.
 
 ## 11. Expected Processing Time
 
@@ -132,7 +132,7 @@ Audit and Approve, Return, or Reject Transaction
 
 ↓
 
-Revenue & Finance Officer
+RERA Trusts Department
 
 Transfer Each Heir's Share to Their Bank Account
 
