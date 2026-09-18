@@ -31,7 +31,7 @@ Establish a regulated project record — the project's units, survey data, and r
 
 ## 3. Description
 
-RERA first issues the developer a real estate license and designates a username in the Developer Self Registration system. The developer applies through that system, attaching the project's requirements. RERA audits and reviews, accepting or rejecting. If accepted, the developer uploads the project's units through an approved survey company, then submits an application to the System Super Administrator to open a project account. After the registration fee is paid, the project approval certificate is issued via the online system.
+RERA first issues the developer a real estate license and designates a username in the Developer Self Registration system. The developer applies through that system, attaching the project's requirements. RERA audits and reviews, accepting or rejecting. If accepted, the developer uploads the project's units through an approved survey company, then submits an application to the Registrar to open a project account. After the registration fee is paid, the project approval certificate is issued via the online system.
 
 ## 4. Who Can Apply
 
@@ -79,7 +79,7 @@ Applicable according to the RERAN fee schedule. Paid through the shared platform
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (audit/review step); **System Super Administrator** (account-opening step) — corrected 2026-09-18, see open-questions A2.
+**Compliance & Escrow Auditor** (audit/review step); **Registrar** (account-opening step).
 
 ## 11. Expected Processing Time
 
@@ -95,7 +95,7 @@ RERA Audits and Reviews: Accept or Reject
 ↓
 If Accepted: Developer Uploads Units through Approved Survey Company
 ↓
-Developer Submits Application to System Super Administrator to Open Account
+Developer Submits Application to Registrar to Open Account
 ↓
 Pay Registration Fee
 ↓
@@ -115,7 +115,7 @@ Accepted
 ↓
 Units Uploaded
 ↓
-Project Account Requested
+Registrar Account Requested
 ↓
 Payment Pending
 ↓
@@ -163,7 +163,7 @@ Registered
 * Retrieve Application Status
 * Validate Survey Company Approval
 * Upload Project Units
-* Submit Project Account Request
+* Submit Registrar Account Request
 * Calculate Registration Fee
 * Initiate Payment
 * Verify Payment
@@ -178,7 +178,7 @@ Registered
 * Property Unit
 * Survey Company
 * Survey Report
-* Project Account
+* Registrar Account
 * Application
 * Document
 * Payment
@@ -191,7 +191,7 @@ Registered
 * Developer can apply to register a new real estate project once licensed.
 * System validates the developer's license and Developer Self Registration credentials.
 * Units can only be uploaded through an approved survey company.
-* A project account is opened by the System Super Administrator before the registration fee is collected.
+* A Registrar account is opened before the registration fee is collected.
 * Payment is completed before the certificate is issued.
 * Approved registrations generate a Real Estate Project Approval Certificate.
 * All activities are recorded in the audit log.
