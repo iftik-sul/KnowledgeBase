@@ -73,6 +73,11 @@ Live registry verification, pulled not re-keyed: developer / project / unit / ti
 applicant validity and consistency, each with a pass / attention indicator. This is the
 review checklist (A-1 §7) rendered as live checks.
 
+If a guard prevents a decision, the screen explains why rather than silently disabling the
+panel: `M-BLK-01` (registry checks unavailable), `M-BLK-02` (escrow item with no trustee
+assessment), `M-BLK-03` (mortgage prerequisites unmet), `M-BLK-05` (no decide rights),
+`M-BLK-06` (MFA not enrolled).
+
 ### Section 5 — Escrow panels *(escrow items only)*
 
 - **Trustee Assessment** — the FTI Account Trustee's uploaded assessment (A-1 §6).
@@ -83,7 +88,8 @@ review checklist (A-1 §7) rendered as live checks.
 ### Section 5b — Claim, draft, and release *(resolves flow gaps G5, G6, G7)*
 
 - **Claim.** Opening an item from the queue claims it to this officer (shared-pool model,
-  work-queue §4). The header shows the claim and when it was taken.
+  work-queue §4). The header shows the claim and when it was taken. Opening an item another
+  officer holds raises `M-QUE-03`; a lapsed claim raises `M-QUE-02`.
 - **Draft note.** The officer may save a part-written decision note against the item,
   visible only to the claiming officer. A considered review can span a break or a shift
   without losing work; `M-SYS-04` warns on exit with unsaved changes.
@@ -101,12 +107,14 @@ review checklist (A-1 §7) rendered as live checks.
 
 Four mutually exclusive outcomes:
 
-| Outcome | Effect | Reason field |
-| :-- | :-- | :-- |
-| Approve | Issues the originating service's output; item completes | Optional |
-| Request Additional Information | Returns to applicant; re-enters the queue on response | **Required** |
-| Return | Sends back for correction | **Required** |
-| Reject | Terminal | **Required** |
+| Outcome | Modal | Effect | Reason field |
+| :-- | :-- | :-- | :-- |
+| Approve | `M-DEC-01` | Issues the originating service's output; item completes | Optional |
+| Request Additional Information | `M-DEC-02` | Returns to applicant; re-enters the queue on response | **Required** |
+| Return | `M-DEC-03` | Sends back for correction | **Required** |
+| Reject | `M-DEC-04` | Terminal | **Required** |
+
+Modal wording and fields are owned by [modals.md](../modals.md) §2.
 
 On approve, the output (certificate / title deed / map / registry update) is triggered per
 the originating service. Every outcome writes the decision, actor, and reason to the audit

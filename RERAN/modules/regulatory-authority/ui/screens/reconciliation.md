@@ -4,7 +4,7 @@ module: regulatory-authority
 type: ui-spec
 status: draft
 contains_proposals: true
-updated: 2026-09-12
+updated: 2026-09-17
 derived_from:
   - "RERAN/modules/regulatory-authority/service-flows/service-a5-reconcile-settlements.md"
   - "RERAN/modules/regulatory-authority/ui/screen-archetypes.md"
@@ -38,8 +38,8 @@ Top Bar → Period selector → Summary tiles → Matched vs Discrepant table �
 
 ### Section 1 — Period & Summary tiles
 
-Select a period; tiles show Collected · Owed · Matched · Discrepant · run status
-(Open / Balanced / Discrepant, status-badges §3).
+Select a period and run reconciliation (`M-FIN-05`); tiles show Collected · Owed · Matched ·
+Discrepant · run status (Open / Balanced / Discrepant, status-badges §3).
 
 ### Section 2 — Matched vs Discrepant table
 
@@ -51,12 +51,14 @@ Select a period; tiles show Collected · Owed · Matched · Discrepant · run st
 | Collected | Per the gateway |
 | State | Matched / Discrepant (flagged) |
 
-Discrepant rows drill into an investigation view; they cannot be auto-cleared without a
-recorded reason (validation-rules).
+Discrepant rows drill into an investigation view; resolving one raises `M-FIN-06`, which
+**requires a recorded reason** — discrepancies cannot be auto-cleared (validation-rules).
 
 ### Section 3 — Remittances (tab)
 
 Computed remittances per destination account, each Pending or Remitted (status-badges §3).
+Recording a remittance raises `M-FIN-07`. Modal wording and fields are owned by
+[modals.md](../modals.md) §5.
 
 ## Role Variations / Permissions
 

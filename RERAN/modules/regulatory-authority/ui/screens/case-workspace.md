@@ -4,7 +4,7 @@ module: regulatory-authority
 type: ui-spec
 status: draft
 contains_proposals: true
-updated: 2026-09-12
+updated: 2026-09-17
 derived_from:
   - "RERAN/modules/regulatory-authority/service-flows/service-a3-adjudicate-dispute.md"
   - "RERAN/modules/regulatory-authority/ui/screen-archetypes.md"
@@ -49,14 +49,19 @@ request further evidence (moves the case to Information Requested).
 
 ### Section 3 — Session Timeline
 
-The running record of sessions. The officer can **schedule** a mediation/hearing, **conduct**
-a (remote) session and record its outcome, and **request info** between sessions — the loop
-from A-3 §12. Each session and interim note is recorded.
+The running record of sessions. The officer can **schedule** a mediation/hearing
+(`M-DIS-01`), **conduct** a (remote) session and record its outcome (`M-DIS-02`), and
+**request evidence** between sessions (`M-DIS-03`) — the loop from A-3 §12. Each session and
+interim note is recorded.
 
 ### Section 4 — Judgment / Resolution
 
-Recorded once, closes the case. Outcome is one of: Resolved · Partially Resolved · Dismissed
-· Withdrawn · Referred (A-3 §14). A recorded judgment/basis is required before close.
+Recorded once, closes the case. The officer records a judgment (`M-DIS-04`) or closes the
+case another way: dismiss (`M-DIS-05`), record withdrawal (`M-DIS-06`), or refer to another
+forum (`M-DIS-07`). Outcome is one of: Resolved · Partially Resolved · Dismissed ·
+Withdrawn · Referred (A-3 §14). A recorded judgment/basis is required before close
+(`M-BLK-04` blocks closing without one). Modal wording and fields are owned by
+[modals.md](../modals.md) §4.
 
 ## Role Variations / Permissions
 

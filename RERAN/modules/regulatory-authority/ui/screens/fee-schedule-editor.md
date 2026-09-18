@@ -4,7 +4,7 @@ module: regulatory-authority
 type: ui-spec
 status: draft
 contains_proposals: true
-updated: 2026-09-12
+updated: 2026-09-17
 derived_from:
   - "RERAN/modules/regulatory-authority/service-flows/service-a4-configure-fee-schedule.md"
   - "RERAN/modules/regulatory-authority/ui/screen-archetypes.md"
@@ -47,14 +47,17 @@ Top Bar → Fee Entry List → Fee Entry Editor → Publish → Version History
 
 ### Section 2 — Fee Entry Editor
 
-Create/edit a fee or levy entry: mapped service/levy, amount, effective dates. Validation
-per validation-rules (must map to a real service/levy; valid amount and dates; no
+Create/edit a fee or levy entry (`M-FIN-01`): mapped service/levy, amount, effective dates.
+Validation per validation-rules (must map to a real service/levy; valid amount and dates; no
 fee-bearing service left without an entry).
 
 ### Section 3 — Publish & Version History
 
-Publish makes the entry live for all fee-bearing services; superseded amounts are archived
-with their effective dates. History shows every version and who published it.
+Publish (`M-FIN-02`) makes the entry live for all fee-bearing services — that modal must
+state the blast radius, and **step-up re-authentication is required**. Superseded amounts are
+archived (`M-FIN-04`) with their effective dates; a prior version can be restored
+(`M-FIN-03`). History shows every version and who published it. Modal wording and fields are
+owned by [modals.md](../modals.md) §5.
 
 ## Role Variations / Permissions
 

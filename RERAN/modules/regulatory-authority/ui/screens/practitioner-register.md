@@ -4,7 +4,7 @@ module: regulatory-authority
 type: ui-spec
 status: draft
 contains_proposals: true
-updated: 2026-09-12
+updated: 2026-09-17
 derived_from:
   - "RERAN/modules/regulatory-authority/service-flows/service-a2-vet-and-decide-licensing.md"
   - "RERAN/modules/regulatory-authority/ui/screen-archetypes.md"
@@ -56,8 +56,12 @@ credential expiry. **Search by:** practitioner name · credential number · comp
 
 ### Section 3 — Entry Detail / Editor
 
-The full register entry; the Licensing Officer can amend or cancel it (writes flow from
-A-2's decisions, not free-hand edits). Shows the entry's issue/renew/amend/cancel history.
+The full register entry. Writes flow from A-2's decisions, not free-hand edits: issue a
+credential (`M-LIC-01`), amend one (`M-LIC-02`), or **cancel / revoke** one (`M-LIC-03` —
+destructive, **step-up re-authentication required**, and a revocation escalates to the DG via
+`M-LIC-04`). Off-platform accreditation outcomes are recorded with `M-LIC-05`. Shows the
+entry's issue/renew/amend/cancel history. Modal wording and fields are owned by
+[modals.md](../modals.md) §3.
 
 ## Role Variations / Permissions
 

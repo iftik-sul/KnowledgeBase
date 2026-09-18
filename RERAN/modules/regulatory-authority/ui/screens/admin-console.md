@@ -50,15 +50,18 @@ Row click → Account Editor.
 
 ### Section 2 — Account Editor
 
-Create/edit an account, assign one or more of the eight roles, enrol/reset MFA, and
-suspend/deactivate. An account cannot act until it has a role and enrolled MFA
-(validation-rules).
+Create or invite an account (`M-ADM-01`), assign or revoke roles (`M-ADM-02`), enrol/reset
+MFA (`M-ADM-04`), and **suspend** (`M-ADM-05`) or **deactivate** (`M-ADM-06`) it. An account
+cannot act until it has a role and enrolled MFA (validation-rules). Modal wording and fields
+are owned by [modals.md](../modals.md) §6.
 
 ### Section 3 — Role & Permission Editor (Roles tab)
 
-The eight Group A roles and the permissions attached to each (least-privilege). All eight
-roles are definable and assignable even where their functional screens are deferred (A-6
-§15 / open-questions A5).
+The eight Group A roles and the permissions attached to each (least-privilege). Changing a
+role's permissions raises `M-ADM-03`, which must state that the change **affects every user
+holding that role**, not one person — and requires step-up re-authentication. All eight roles
+are definable and assignable even where their functional screens are deferred (A-6 §15 /
+open-questions A5).
 
 ## Role Variations / Permissions
 
