@@ -65,7 +65,7 @@ Set by the selected service — not uniform across #13–#19. See Feature #1's n
 
 ## 10. Processing Authority
 
-**RERA — Compliance & Escrow Auditor**, or the System Super Administrator for specific services (account-opening steps; corrected 2026-09-18, open-questions A2). Any of the developer's four Group B roles may act on this screen — role is audit-trail attribution only.
+**RERA — Compliance & Escrow Auditor**, or the Registrar for specific services. Any of the developer's four Group B roles may act on this screen — role is audit-trail attribution only.
 
 ## 11. Expected Processing Time
 
@@ -85,7 +85,7 @@ Upload Required Documents
 ↓
 Submit
 ↓
-RERA Reviews *(routing and steps vary by service — see Service #13's own longer chain: License → Apply → Audit → Upload Units → System Super Administrator Account → Pay → Certificate)*
+RERA Reviews *(routing and steps vary by service — see Service #13's own longer chain: License → Apply → Audit → Upload Units → Registrar Account → Pay → Certificate)*
 ↓
 Application Tracked Under **Applications** *(Feature #1)*
 
