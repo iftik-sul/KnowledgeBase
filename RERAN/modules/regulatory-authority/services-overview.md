@@ -7,21 +7,21 @@ contains_proposals: true
 updated: 2026-09-17
 ---
 
-# Group A — Services Overview
+# Regulatory Authority — Services Overview
 
-This is Group A's own (back-office) service catalogue. Group A files no applications,
-but it *does* perform a small, well-defined set of actions on the work other groups
-submit. Each distinct action is a Group A service.
-This is the back-office counterpart to the 145 front-office (applicant-filed)
+This is the Regulatory Authority's own (back-office) service catalogue. The Regulatory
+Authority files no applications, but it *does* perform a small, well-defined set of
+actions on the work other groups submit. Each distinct action is a Regulatory Authority
+service. This is the back-office counterpart to the 145 front-office (applicant-filed)
 services: an applicant files a front-office service, which lands as an item in one of
 these back-office services.
 
-The catalogue is small — ~10 services — because the whole-system analysis showed the
-114 external touchpoints collapse onto a handful of repeated actions. A decision
-service is a **queue**: one workflow that processes many external services, not one
-service per touchpoint. (See [roles-and-actions-analysis.md](roles-and-actions-analysis.md)
-for how the collapse was derived, and the touchpoint register for which external
-service feeds which Group A service.)
+The catalogue is small — ~10 services — because the whole-system analysis showed the 114
+external touchpoints collapse onto a handful of repeated actions. A decision service is
+a **queue**: one workflow that processes many external services, not one service per
+touchpoint. (See [roles-and-actions-analysis.md](roles-and-actions-analysis.md) for how
+the collapse was derived, and the touchpoint register for which external service feeds
+which Regulatory Authority service.)
 
 **Status column:** *Active* = external services feed it today. *In scope* = no external
 service routes to it directly, but an active service escalates work into it, so its screens
@@ -30,7 +30,7 @@ it; screens deferred.
 
 ## Catalogue
 
-| # | Group A service (action) | Role | Sub-system | Feeds from | Status |
+| # | Regulatory Authority service (action) | Role | Sub-system | Feeds from | Status |
 | :-- | :-- | :-- | :-- | :-- | :-- |
 | [A-1](service-flows/service-a1-audit-and-decide.md) | Audit & decide — application review | Compliance & Escrow Auditor | Transaction Audit Queue + Escrow / Trust-Account Audit | 92 external services (79 transaction, 13 escrow/trust) | Active |
 | [A-2](service-flows/service-a2-vet-and-decide-licensing.md) | Vet & decide — licensing | Licensing & Registration Officer | Licensing & Registry Engine | 9 external services | Active |
@@ -103,7 +103,7 @@ Each service ID links to its full service-flow in `service-flows/`.
 - **Steps:** create account → assign role → set permissions → enrol MFA.
 - **Outputs:** a provisioned, MFA-protected staff account; audit-trail entry.
 - **Note:** this service *is* the RBAC operation. It must exist before any other
-  Group A service can be used.
+  Regulatory Authority service can be used.
 
 ### A-7 — Conduct site inspection (In scope)
 - **Trigger:** a sub-step of certain services (RED #27 field visit; IU
@@ -112,7 +112,8 @@ Each service ID links to its full service-flow in `service-flows/`.
 - **Steps:** schedule → visit → record geo-tagged findings → verify milestones.
 - **Outputs:** inspection report, which feeds back into an A-1 decision.
 - **Screens in scope (A5):** inspection queue, on-site findings capture, inspection report.
-  The capture screen is **mobile/tablet** — this is the only Group A role that works on site.
+  The capture screen is **mobile/tablet** — this is the only Regulatory Authority role
+  that works on site.
 
 ### A-8 — Issue enforcement notice (Deferred)
 - **Trigger:** proactive — a violation is detected.
@@ -142,11 +143,11 @@ Each service ID links to its full service-flow in `service-flows/`.
 
 ## How this relates to the front-office services
 
-Each external (front-office) service names, in its own service-flow, the Group A
-service that finishes it. The touchpoint register is the join table: it lists all
-114 external services and which of A-1 to A-3 (or none) each one feeds. This
-catalogue is the reverse view — Group A's own services, each aggregating many
-external ones.
+Each external (front-office) service names, in its own service-flow, the Regulatory
+Authority service that finishes it. The touchpoint register is the join table: it lists
+all 114 external services and which of A-1 to A-3 (or none) each one feeds. This
+catalogue is the reverse view — the Regulatory Authority's own services, each
+aggregating many external ones.
 
-The platform total is best stated as: **145 front-office services + ~10 Group A
-back-office services.**
+The platform total is best stated as: **145 front-office services + ~10 Regulatory
+Authority back-office services.**
