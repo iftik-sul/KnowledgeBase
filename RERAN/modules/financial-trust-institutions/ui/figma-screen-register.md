@@ -123,7 +123,7 @@ Screens that existed in the Figma file before this design pass. This list is inc
 | S13 – 07 | Step 6 — Review & Submit | Specified | Heirs rendered as a table, not label/value pairs |
 | S13 – 08 | Application Submitted | Specified | |
 | S13 – 09 | Application Details | Specified | Timeline includes the distribution stage |
-| S13 – 10 | Distribution Confirmation | Specified | **Unique to this service.** Revenue & Finance Officer transfers |
+| S13 – 10 | Distribution Confirmation | Specified | **Unique to this service.** Trusts Department transfers |
 | S13 – 11 | Registration Confirmation | Specified | |
 
 ### S15 — Updating Title Deed Information (10 screens)
