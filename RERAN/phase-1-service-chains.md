@@ -1,0 +1,273 @@
+---
+project: RERAN
+type: cross-module-map
+status: draft
+contains_proposals: true
+updated: 2026-09-18
+derived_from:
+  - "RERAN/modules/real-estate-developer/service-flows/ (#1, #6, #13, #16, #24)"
+  - "RERAN/modules/financial-trust-institutions/service-flows/ (#3, #12, #13, #15, #17)"
+  - "RERAN/modules/regulatory-authority/touchpoint-register.md"
+  - "RERAN/modules/regulatory-authority/ui/screens/"
+tags:
+  - phase-1
+  - cross-module
+  - regulatory-authority
+---
+
+# Phase 1 — Service Chains
+
+The end-to-end path of each of the ten Phase 1 services: who files it, every gate it
+passes before the regulator sees it, which Group A screen handles it, and what comes
+back to the applicant.
+
+This is a **cross-module map** — it spans RED, FTI and Group A, so it sits at the
+project root rather than inside any one module. Each module's own service-flow remains
+the source for its half; this file joins them.
+
+## The ten
+
+**RED:** #1 Register Initial Sale · #6 Register Mortgage-Linked Sale · #13 Registration
+of Real Estate Project · #16 Changing the Name of a Project · #24 Registration/Amendment
+of Project Details
+
+**FTI:** #3 Mortgage Registration · #12 Register Real Estate Fund Company · #13 Sale
+Procedure (Heirs) · #15 Updating Title Deed Information · #17 Issuance of Title Deed
+
+**All ten land on the same officer and the same screens.** Every one routes to the
+**Compliance & Escrow Auditor** in the **Transaction Audit Queue** — none to Licensing,
+none to Dispute, none an escrow-variant item. So the Group A back half of all ten is:
+
+> [Work Queue](modules/regulatory-authority/ui/screens/work-queue.md) (transaction view)
+> → [Application Review](modules/regulatory-authority/ui/screens/application-review.md)
+> → decision modal `M-DEC-01`…`M-DEC-04`
+
+No Group A screen outside those two is needed for Phase 1.
+
+---
+
+## What differs between them is the **pre-gate**
+
+The regulator's step is identical across all ten. What varies is what happens *before*
+the item reaches the queue. Five distinct shapes:
+
+| Pre-gate | Services | What it is |
+| :-- | :-- | :-- |
+| **None** | RED #1, RED #16 | Developer submits; straight to the queue |
+| **Automatic system check** | RED #6 | Live validation against FTI records; fails → instant auto-return, no human |
+| **Internal certifier** | FTI #3 | Someone inside the institution certifies before the regulator sees it |
+| **Trustee Centre operator** | FTI #12, #13, #15, #17 | Counter-based: operator enters and checks the transaction on the customer's behalf |
+| **Survey Department** | RED #24 | A survey confirmation step — **see the A2 warning below** |
+
+---
+
+## The chains
+
+### RED #1 — Register Initial Sale
+```
+Developer (RED portal) → pay → submit
+  → [Group A] Work Queue → Application Review → decide
+  → Approved: Provisional Registration e-Certificate
+  → emailed to the purchaser
+```
+Fee **before** decision · SLA 6 business days · no pre-gate.
+
+---
+
+### RED #6 — Register Mortgage-Linked Sale  ← *the chained one*
+```
+Developer (RED portal) → pay → submit
+  → [automatic] validate mortgage reference against FTI's records, live, same request
+       ↳ not found / mismatched / not yet `Completed`
+            → auto-returned to developer immediately, no officer involved
+  → [Group A] Work Queue → Application Review → decide
+  → Approved: Mortgage Provisional Registration Certificate + Electronic Map
+```
+Fee **before** decision *and before validation* · SLA 6 business days.
+
+**This is the one true chain in Phase 1.** The mortgage it validates against only reaches
+`Completed` because Group A approved **FTI #3**. So:
+
+```
+FTI #3 approved by the Auditor  →  mortgage = Completed  →  RED #6 can pass its check
+```
+
+Both ends are in the Phase 1 set, which makes this the path to test end-to-end first.
+
+---
+
+### RED #13 — Registration of Real Estate Project
+```
+RERA issues the developer's licence + self-registration username   (precondition)
+  → Developer applies, attaches requirements
+  → [Group A] Work Queue → Application Review → audit: accept or reject
+  → If accepted: developer uploads units via an approved survey company
+  → Developer submits to the Registrar to open the project account
+  → pay registration fee
+  → Real Estate Project Approval Certificate
+```
+Fee **after** the decision — payment releases the output rather than gating review ·
+SLA 3 business days.
+
+> **Two further Group A touches sit outside the queue:** issuing the licence up front
+> (Licensing & Registration Officer) and opening the project account (labelled
+> "Registrar" — an **A2** item; see below). Neither is the Transaction Audit decision.
+
+---
+
+### RED #16 — Changing the Name of a Project
+```
+Developer (RED portal) → open project → new name + reason → submit
+  → [Group A] Work Queue → Application Review → decide
+  → Approved: Updated Real Estate Project Approval Certificate
+```
+**No fee** · SLA 30 minutes · the simplest chain in the set.
+
+---
+
+### RED #24 — Registration/Amendment of Project Details
+```
+Developer (RED portal) → enter updated details
+  → pay application approval fee                      (payment 1 of 2)
+  → [Survey Department] review and confirm data        ← A2 warning
+  → submit
+  → [Group A] Work Queue → Application Review → decide
+  → pay approval fee in real-estate records            (payment 2 of 2)
+  → Project completed?  → Electronic Certificate of Title / Title Deed
+    Project not completed? → Electronic Map
+```
+**Two payments**, one either side of the decision — the only service in the set that does
+this · SLA 5 business days · conditional output.
+
+---
+
+### FTI #3 — Mortgage Registration  ← *feeds RED #6*
+```
+Borrower completes mortgage requirements with the bank
+  → Institution user files it (select property, enter details, upload docs)
+  → pay via the shared gateway
+  → [Internal Certifier, inside the institution] review → certify, or return to filer
+  → [Group A] Work Queue → Application Review → decide
+  → Approved: title-type certificate (Certificate of Title / Title Deed / Usufruct /
+    Statement Certificate / Provisional Sale Registration Certificate — whichever matches
+    the property's existing registration)
+  → emailed to the customer
+  → record reaches `Completed` → RED #6 can now validate against it
+```
+Fee **before** submission · SLA 20–25 minutes · **two gates**: certifier, then regulator.
+
+> Also has an assisted counter path (Trustee Centre operator files on the institution's
+> behalf) — marked `Proposed` in the source.
+
+---
+
+### FTI #12 — Register Real Estate Fund Company
+```
+Fund company rep visits the Trustee Centre → submits documents
+  → pay at the counter → e-receipt          (moved ahead of review, client decision 2026-08-16)
+  → [Trustee Centre Operator] enter and check the transaction
+  → [Group A] Work Queue → Application Review → decide
+  → Approved: E-Ownership Certificate + Register of Privileges registration number
+  → both delivered by email
+```
+Fee **before** decision · SLA 25–30 minutes · counter-originated.
+
+---
+
+### FTI #13 — Sale Procedure (Heirs)
+```
+Heirs / representative visit the Trustee Centre → submit documents
+  → [Trustee Centre Operator] enter data → initial audit
+  → heirs pay at the counter
+  → [Group A] Work Queue → Application Review → audit and decide
+  → Approved:
+      → [RERA Trusts Department] transfer each heir's share to their bank account  ← A2 warning
+      → Certificate of Title + Title Deed + Map + receipts, by email
+```
+Fee **before** decision · SLA 25–30 minutes · **the only service in the set with a
+post-approval money movement.**
+
+---
+
+### FTI #15 — Updating Title Deed Information
+```
+Customer visits the Trustee Centre → submits documents
+  → [Trustee Centre Operator] verify completeness → enter data
+  → customer pays → receipt
+  → [Group A] Work Queue → Application Review → decide
+  → Approved: updated Electronic Title Deed — same deed number, incremented version
+  → link delivered by email
+```
+Fee **before** decision · SLA 25 minutes.
+
+---
+
+### FTI #17 — Issuance of Title Deed
+```
+Customer visits the Land Department → submits documents
+  → [Operator] enter transaction data
+  → customer pays
+  → [Group A] Work Queue → Application Review → decide
+  → Approved: Electronic Title Deed Certificate, by email
+```
+Fee **before** decision · SLA 25 minutes · the cleanest counter-originated chain.
+
+---
+
+## The return path (all ten)
+
+Every service shares the same not-approved routes, because they share the decision loop:
+
+```
+Application Review → Request Additional Information (M-DEC-02)  ─┐
+                   → Return for Correction        (M-DEC-03)  ─┤→ back to applicant
+                   → Reject                       (M-DEC-04)     → terminal
+
+applicant responds → re-enters the Work Queue
+   · routed back to the officer who queried it, where available
+   · flagged as a Resubmission, original query shown
+   · SLA clock RESETS — a fresh full window (Total elapsed keeps the real duration visible)
+```
+
+RED #6 has one extra return that no other service has: the **automatic** mortgage-validation
+return, which happens before any officer and is not a decision.
+
+---
+
+## ⚠ A2 affects Phase 1 — a correction
+
+Open-question **A2** (authority-label drift) was parked on the basis that *"nothing
+currently being built depends on it."* Walking these ten chains shows **that is not
+true**. Two of the ten Phase 1 services route through a label that is not one of Group
+A's eight roles:
+
+| Service | Step | Label used | Status |
+| :-- | :-- | :-- | :-- |
+| **RED #24** | Pre-decision review | **"Survey Department"** | Not one of the 8 roles |
+| **FTI #13** | Post-approval share transfer | **"RERA Trusts Department"** | Not one of the 8 roles |
+| *(RED #13)* | Opening the project account | "Registrar" | Not one of the 8 roles |
+
+These are real steps in services we are building. If the labels stay unresolved, RED #24
+has a review step with no officer who owns it, and FTI #13 has a money transfer with no
+role assigned to perform it.
+
+**Proposed mapping** (unchanged from A2): Survey Department → Inspection & Enforcement
+Officer for internal boundary confirmation, State Liaison Coordinator for external
+Surveyor-General verification; Trusts Department → Revenue & Finance Officer; Registrar →
+System Super Administrator.
+
+**Recommendation: unpark A2 for these three labels at least.** It is no longer a tidy-up
+that can wait for a later correction pass — it is a gap inside the Phase 1 build.
+
+---
+
+## What this confirms for the Group A build
+
+- **Two screens cover all ten services.** Work Queue (transaction view) + Application
+  Review. Nothing deferred is needed.
+- **The SLA spread is real**: 25 minutes (FTI #15, #17) to 6 business days (RED #1, #6)
+  within the same queue. This is exactly why the queue sorts by urgency, not age.
+- **Payment timing varies and the queue must not assume it**: eight pay before the
+  decision, RED #13 pays after, RED #24 pays twice.
+- **FTI #3 → RED #6 is the integration to test first** — both ends are in scope and the
+  dependency is live and synchronous.
