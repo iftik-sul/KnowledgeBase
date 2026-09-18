@@ -36,7 +36,7 @@ tags:
 | 4 | **No internal certification gate** | Unlike #3, this service has a single approval authority (Compliance & Escrow Auditor). Review & Submit goes straight to Submitted. |
 | 5 | **Heirs live in Step 1, property and sale in Step 2** | Step 1 is the parties (institution, deceased owner, heirs); Step 2 is the transaction (property, sale, distribution). Matches the source's own screen ordering — Heir Information before Property & Sale Information. |
 | 6 | **Select Property folded into Step 2** | Same call as #3 — a 7th tracker step would break consistency. |
-| 7 | **Distribution Confirmation and Registration Confirmation kept as separate screens** | The source lists both, and they are genuinely different events: the Trusts Department transfers the money, RERA issues the documents. Merging them into one completion screen is a defensible simplification if you'd rather — say so and I'll rewrite. |
+| 7 | **Distribution Confirmation and Registration Confirmation kept as separate screens** | The source lists both, and they are genuinely different events: the Revenue & Finance Officer transfers the money, RERA issues the documents. Merging them into one completion screen is a defensible simplification if you'd rather — say so and I'll rewrite. |
 | 8 | Fee figures are **placeholders** | Exact fee is unresolved client data. |
 
 **New component this service needs:** a **repeatable heir block** — an add/remove group where each entry captures one heir's identity, share and bank account. This is the main reason #13 is in the set. `S13 – 02` is the screen that defines it; get it right there and the rest follows.
@@ -60,7 +60,7 @@ tags:
 - Title Deed Number: `TD-2026-004598`
 - Processing time: 25–30 minutes
 - Approving authority: RERA — Compliance & Escrow Auditor
-- Distributing authority: RERA — Trusts Department
+- Distributing authority: RERA — Revenue & Finance Officer
 
 ---
 
@@ -93,11 +93,11 @@ Workspace content, top to bottom:
    Applicable Fee: ₦80,000 (per RERAN fee schedule)
    Approving Authority: RERA — Compliance & Escrow Auditor
    Payment Timing: Payable before RERA review
-   Below the grid, a full-width description paragraph: "Processes the sale of a deceased owner's registered property on behalf of the heirs. On approval, RERA records the ownership change and the Trusts Department transfers each heir's share of the proceeds to their nominated bank account."
+   Below the grid, a full-width description paragraph: "Processes the sale of a deceased owner's registered property on behalf of the heirs. On approval, RERA records the ownership change and the Revenue & Finance Officer transfers each heir's share of the proceeds to their nominated bank account."
 
 4. Card — "How It Works". A single horizontal row of six numbered steps, evenly spaced, each with a number badge and a short label underneath:
    1 Application Info · 2 Service Info · 3 Documents · 4 Validation · 5 Payment · 6 Review & Submit
-   Beneath the row, a single grey line: "After RERA approves, the Trusts Department distributes each heir's share before the final documents are issued."
+   Beneath the row, a single grey line: "After RERA approves, the Revenue & Finance Officer distributes each heir's share before the final documents are issued."
 
 5. Card — "What You'll Need". Two columns side by side.
    Left column heading "Required Information", as a simple bulleted list:
@@ -558,7 +558,7 @@ Workspace content, top to bottom:
 
 2. Card — "What Happens Next". Three numbered rows, each with a number badge, a short bold label and one grey line beneath:
    1  RERA Review — The Compliance & Escrow Auditor validates the heirship documentation and the sale details.
-   2  Distribution of Proceeds — On approval, the RERA Trusts Department transfers each heir's share to their nominated bank account.
+   2  Distribution of Proceeds — On approval, the Revenue & Finance Officer transfers each heir's share to their nominated bank account.
    3  Registration Complete — The ownership change is recorded and the Certificate of Title, Title Deed and Map are emailed to the heirs.
 
 3. Two buttons, centred side by side beneath the cards: secondary "Back to Dashboard", blue primary "View Application".
@@ -601,7 +601,7 @@ Workspace content, top to bottom:
    Submitted — Aug 17, 2026, 11:30 AM — Chukwuemeka Okonkwo  (complete)
    Under Review — Aug 17, 2026, 11:33 AM — RERA, Compliance & Escrow Auditor  (current)
    Approved — Pending  (future)
-   Distribution of Proceeds — Pending — RERA Trusts Department  (future)
+   Distribution of Proceeds — Pending — Revenue & Finance Officer  (future)
    Completed — Pending  (future)
 
 5. Card — "Estate & Sale Details". Read-only label/value grid, three sub-groups separated by dividers with small uppercase grey sub-headings — DECEASED OWNER, PROPERTY, SALE — using the same fields and values as the corresponding sub-groups on the Review & Submit screen.
@@ -655,12 +655,12 @@ Workspace content, top to bottom:
 
 2. Page header row: heading "APP-2026-0179" with the status pill "Approved" beside it on the left. On the right, secondary button "View Application" and blue primary button "Download Distribution Statement".
 
-3. A success notice card, full width, using the existing subtle success treatment: a green check icon on the left, then bold text "Heirs' Shares Distributed" and a grey line beneath: "The RERA Trusts Department transferred each heir's share on Aug 17, 2026. Confirmation has been emailed to every heir."
+3. A success notice card, full width, using the existing subtle success treatment: a green check icon on the left, then bold text "Heirs' Shares Distributed" and a grey line beneath: "The Revenue & Finance Officer transferred each heir's share on Aug 17, 2026. Confirmation has been emailed to every heir."
 
 4. Card — "Distribution Summary". Two-column label/value grid:
    Distribution Reference: DST-2026-000417
    Distribution Date: Aug 17, 2026 — 12:04 PM
-   Executing Authority: RERA — Trusts Department
+   Executing Authority: RERA — Revenue & Finance Officer
    Total Distributed: ₦185,000,000
    Number of Heirs: 3
    Distribution Status: Completed (green status pill)
