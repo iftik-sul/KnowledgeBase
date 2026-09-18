@@ -14,7 +14,7 @@ tags:
   - validation
 ---
 
-# Group A — Validation Rules
+# Regulatory Authority — Validation Rules
 
 Cross-screen validation and guard rules for the back-office app. Screen specs reference
 these rather than restating them.

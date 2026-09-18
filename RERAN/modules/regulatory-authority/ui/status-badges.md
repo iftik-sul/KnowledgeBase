@@ -13,13 +13,13 @@ tags:
   - status-badges
 ---
 
-# Group A — Status Badges
+# Regulatory Authority — Status Badges
 
-The status vocabularies the back-office screens display. Group A drives the **decision
-half** of every originating service's status flow, so its badges must match the shared
-platform vocabulary — the originating modules' status displays read the same words (see
-A-1 §13). This file is the single source for badge wording and grouping; screens
-reference it rather than defining status inline.
+The status vocabularies the back-office screens display. The Regulatory Authority drives
+the **decision half** of every originating service's status flow, so its badges must
+match the shared platform vocabulary — the originating modules' status displays read the
+same words (see A-1 §13). This file is the single source for badge wording and grouping;
+screens reference it rather than defining status inline.
 
 ## 1. Shared decision statuses (A-1, A-2 — the 92 + 9 services)
 

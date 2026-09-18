@@ -16,11 +16,11 @@ tags:
   - navigation
 ---
 
-# Group A — Role × Screen Matrix (RBAC backbone)
+# Regulatory Authority — Role × Screen Matrix (RBAC backbone)
 
-This is where RBAC lives at the UI level. It states, for each of the eight Group A
-roles, **which screens the role can reach**. It is the navigation spec for the back-office
-app. On-screen actions are owned by the individual screen specs (see §2).
+This is where RBAC lives at the UI level. It states, for each of the eight Regulatory
+Authority roles, **which screens the role can reach**. It is the navigation spec for the
+back-office app. On-screen actions are owned by the individual screen specs (see §2).
 
 **The principle (do not build per-role screens).** There is one screen per piece of
 work. This matrix does not create screen copies; it controls access to the shared
@@ -47,8 +47,8 @@ not its layout.
 | Notifications | ● | ● | ● | ● | ● | ● | ● | ● |
 | Audit Trail view | ● | ● | ● | ● | ● | ● | ● | ● |
 | Inspection screens (queue / capture / report) | | | | | | | ● | |
-| Enforcement screens *(latent)* | | | | | | ● | ● | |
-| Harmonisation screens *(latent)* | | | | | | | | ● |
+| Enforcement screens *(deferred)* | | | | | | ● | ● | |
+| Harmonisation screens *(deferred)* | | | | | | | | ● |
 | Sign-off screens (queue / detail) | | | | | | ● | | |
 
 **Confirmed (open-questions A5, A7):**
