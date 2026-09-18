@@ -4,7 +4,7 @@ module: regulatory-authority
 type: open-questions
 status: draft
 contains_proposals: true
-updated: 2026-09-17
+updated: 2026-09-18
 ---
 
 # Regulatory Authority — Open Questions
@@ -60,11 +60,16 @@ Authority's 8 sourced roles:
 - **"Trusts Department"** (FTI #13, heirs' distribution) — proposed → Revenue &
   Finance Officer.
 
-**Status: open — deliberately parked 2026-09-17.** Nothing currently being built
-depends on it, and clearing it means editing other modules' service-flow files (RED,
-FTI), so it is a separate correction pass. The Survey split across two roles is the
-least certain of the three: if RERA has one person doing all survey checking, it
-should map to one role, not two.
+**Status: OPEN — and it affects Phase 1.** Parked on 2026-09-17 on the grounds that
+"nothing currently being built depends on it." Walking the Phase 1 service chains showed
+**that is not true** (see `RERAN/phase-1-service-chains.md`): RED #24 routes through a
+"Survey Department" review step and FTI #13 through a "RERA Trusts Department" share
+transfer, and both are in the ten selected Phase 1 services. Left unresolved, RED #24 has
+a review step no officer owns and FTI #13 has a money transfer with no role assigned to
+perform it.
+
+The Survey split across two roles is the least certain of the three: if RERA has one
+person doing all survey checking, it should map to one role, not two.
 
 ## A3 — Escrow sub-system: one queue or two? *(resolved 2026-09-12)*
 
@@ -196,3 +201,31 @@ individual specs.
   earlier draft: *Decided this month* (a performance statistic, not a triage signal),
   *Information requested* (work sitting with the applicant, so not actionable — better
   as a filter), and *Under review* (vague, and overlaps My open items).
+
+## A8 — Terminology: "Group A" → "Regulatory Authority" *(resolved 2026-09-18)*
+
+The module and everything about it is named **Regulatory Authority**, short form **RA**,
+matching the `regulatory-authority` folder. Groups B–H keep their letters: the Regulatory
+Authority is not a user group like the others — it owns no services, pays no fees, and is
+the only place RBAC applies — so a name rather than a letter reflects a real difference.
+
+**Applied across 87 files** (this module, the project-root documents, and the
+cross-references in RED, FTI and RESC) by
+`RERAN/tools/rename-group-a-to-regulatory-authority.py`, run from the Actions tab.
+
+### Two rules this established, which outlast the rename
+
+- **`reference/source-of-truth/` is never edited.** It keeps "Group A" verbatim — 3
+  occurrences. Those are the client's original documents and the whole derivation chain
+  depends on them being an unaltered record. Derived documents use our terminology;
+  sources never do. The script fails its own verification if this stops being true.
+- **A rename of this size is not a find-and-replace.** A literal substitution produced
+  broken English in ~20 places and one **meaning error**: "Compliance & Escrow Auditor is
+  Group A" meant the role *belongs to* that group, but renamed literally it asserted the
+  officer *is* the entire authority. The script carries fixes for every case found; the
+  reasoning is in its comments.
+
+### Where the short form is used
+
+`(RA)` replaces `(Group A)` in parenthetical role tags — e.g. **Compliance & Escrow
+Auditor** (RA) — and `[RA]` in the chain diagrams. Prose uses the full name.
