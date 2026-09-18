@@ -98,7 +98,7 @@ This module's payment timing is genuinely not uniform across services (confirmed
 
 ## 10. Processing Authority
 
-**RERA — Compliance & Escrow Auditor**, or the Registrar / Account Trustee for specific services, per the originating domain. Responses and resubmissions route back to whichever authority is currently reviewing the application.
+**RERA — Compliance & Escrow Auditor**, or the System Super Administrator / Account Trustee for specific services, per the originating domain (corrected 2026-09-18, open-questions A2). Responses and resubmissions route back to whichever authority is currently reviewing the application.
 
 ## 11. Expected Processing Time
 
