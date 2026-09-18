@@ -3,6 +3,7 @@ project: RERAN
 module: regulatory-authority
 type: open-questions
 status: draft
+contains_proposals: true
 updated: 2026-09-17
 ---
 
@@ -120,7 +121,7 @@ shipped a broken path.
 - **Director-General / Registrar — 2 screens** (sign-off queue; sign-off detail).
   A-2 Licensing is active and already escalates revocations here (`M-LIC-04`). Without
   these screens that escalation dead-ends.
-- **Inspection Officer — 3 screens** (inspection queue; on-site findings capture;
+- **Inspection & Enforcement Officer — 3 screens** (inspection queue; on-site findings capture;
   inspection report). A-1 expects an inspection report for field-visit items (RED #27
   and the IU inspection-required services), and nothing can currently produce one.
 
@@ -135,7 +136,7 @@ shipped a broken path.
 - The DG sign-off screens handle **two** escalation sources — licence revocations
   (A-2) and final enforcement (A-8) — but only the A-2 path is live while A-8 is
   deferred. This must be stated in the spec so it is not later read as a defect.
-- **The Inspection Officer works on site**, capturing geo-tagged findings and photos at
+- **The Inspection & Enforcement Officer works on site**, capturing geo-tagged findings and photos at
   a building. Every other Group A screen is desk-based back-office. These screens
   therefore need a phone/tablet form factor — a different design shape from the rest of
   the module.
