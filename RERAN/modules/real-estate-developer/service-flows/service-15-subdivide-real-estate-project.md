@@ -32,7 +32,7 @@ Allow a project to be split into separately manageable sub-projects — for exam
 
 ## 3. Description
 
-The developer submits a sub-division request identifying the parent project and the proposed sub-project boundaries/unit allocations. RERA's project registration function processes the request, and the Inspection & Enforcement Officer conducts the underlying survey work to confirm boundaries before the sub-divided projects are approved.
+The developer submits a sub-division request identifying the parent project and the proposed sub-project boundaries/unit allocations. RERA's project registration function processes the request, and the Survey Department conducts the underlying survey work to confirm boundaries before the sub-divided projects are approved.
 
 ## 4. Who Can Apply
 
@@ -69,7 +69,7 @@ Applicable according to the RERAN fee schedule. Paid through the shared platform
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (project registration step); **Inspection & Enforcement Officer** (boundary confirmation) — corrected 2026-09-18, see open-questions A2.
+**Compliance & Escrow Auditor** (project registration step); **Survey Department** (boundary confirmation).
 
 ## 11. Expected Processing Time
 
@@ -89,7 +89,7 @@ Submit Application Online
 ↓
 Project Registration Reviews Application
 ↓
-Inspection & Enforcement Officer Confirms Boundaries
+Survey Department Confirms Boundaries
 ↓
 Pay Registration Fee via Payment Gateway
 ↓
@@ -103,7 +103,7 @@ Submitted
 ↓
 Project Registration Review
 ↓
-Inspection & Enforcement Officer Review
+Survey Department Review
 ↓
 Approved
 ↓
@@ -145,7 +145,7 @@ Sub-divided
 
 * Retrieve Parent Project
 * Submit Sub-division Application
-* Notify Inspection & Enforcement Officer
+* Notify Survey Department
 * Retrieve Survey Confirmation
 * Retrieve Application Status
 * Calculate Registration Fee
@@ -171,7 +171,7 @@ Sub-divided
 
 * Developer can request sub-division of an existing registered project.
 * System validates the parent project and proposed unit allocation.
-* The Inspection & Enforcement Officer confirms boundaries before approval.
+* Survey Department confirms boundaries before approval.
 * Approved sub-divisions generate a Real Estate Project Approval Certificate per sub-project.
 * All activities are recorded in the audit log.
 * Payment is completed after approval and before the sub-project certificates are issued.
@@ -179,6 +179,6 @@ Sub-divided
 ## 21. Business Rules
 
 1. Only a registered project may be sub-divided under this service.
-2. Inspection & Enforcement Officer confirmation is required before a sub-division is approved, independent of the project registration review — corrected 2026-09-18 (open-questions A2).
+2. Survey Department confirmation is required before a sub-division is approved, independent of the project registration review.
 3. Each resulting sub-project receives its own project reference number.
 4. All submissions, reviews, and notifications must be permanently recorded in the audit trail.
