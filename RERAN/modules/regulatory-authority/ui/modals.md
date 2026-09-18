@@ -149,7 +149,7 @@ listed so the catalogue is complete and the deferred specs need no new IDs later
 | `M-ENF-04` | Resolve / close notice | P2 | Violation remedied. |
 | `M-GOV-01` | **Authorise sign-off** | P3 + step-up | The most consequential action in the module — executes a revocation or final enforcement. Re-authentication **required** (§9). |
 | `M-GOV-02` | Decline sign-off | P2 | Reason returns to the originating tier. |
-| `M-LND-01` | Run harmonisation sync | P1 | Names the bureau and period. |
+| `M-LND-01` | Run harmonisation comparison | P1 | Names the bureau and period. Manual reconciliation, not a sync (A4). |
 | `M-LND-02` | Resolve conflict | P4 | Choose the authoritative record; bureau is authoritative for state-held data (A-9 §21). |
 | `M-LND-03` | Escalate jurisdictional dispute | P2 | |
 
@@ -192,7 +192,7 @@ Cross-cutting; not raised by a single screen.
 | ID | Alert | Notes |
 | :-- | :-- | :-- |
 | `M-SYS-01` | **Item locked / already decided by another officer** | **Resolved** — claim-on-open; see below. Raises `M-QUE-03` on open, `M-QUE-02` on lapse. |
-| `M-SYS-02` | Step-up authentication | **Required** before the five widest-consequence actions — see §9. |
+| `M-SYS-02` | Step-up authentication | **Required** before the five widest-consequence actions — see below. |
 | `M-SYS-03` | Session expiry warning | Warn **before** timeout so an unsaved reason isn't lost. |
 | `M-SYS-04` | Unsaved changes | Leaving a review or editor mid-edit. |
 | `M-SYS-05` | Action failed / retry | A write did not complete. |
@@ -220,6 +220,20 @@ permissions), `M-ADM-06` (deactivate account), `M-LIC-03` (revoke credential),
 `M-GOV-01` (authorise sign-off), `M-FIN-02` (publish fee schedule). The officer
 re-authenticates before the action proceeds — accepted friction on the five actions
 with the widest blast radius (open-questions A6).
+
+---
+
+## 9b. Modals not yet cited by a screen
+
+Every modal should be cited by the screen that raises it. These are the exceptions, and each
+is expected — listed so an audit does not re-flag them:
+
+| Modals | Why uncited |
+| :-- | :-- |
+| `M-INS-01`, `M-INS-02`, `M-GOV-02` | A-7 and A-10 are **in scope but not yet specced**; their screens will cite these. |
+| `M-ENF-01`…`M-ENF-04` | A-8 enforcement is **deferred** — no screens. |
+| `M-LND-01`…`M-LND-03` | A-9 harmonisation is **deferred** — no screens. |
+| `M-SYS-01`, `M-SYS-02`, `M-SYS-03`, `M-SYS-05`, `M-SYS-06` | Cross-cutting system alerts raised by the app shell, not by one screen. |
 
 ---
 
