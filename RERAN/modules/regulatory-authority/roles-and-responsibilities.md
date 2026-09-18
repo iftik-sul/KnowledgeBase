@@ -9,20 +9,21 @@ derived_from:
   - "RERAN/reference/source-of-truth/RERAN_user_group_structure_v2.md"
 ---
 
-# Group A — Roles & Responsibilities
+# Regulatory Authority — Roles & Responsibilities
 
-Group A (Regulatory Authority & Governance) is the government side of RERAN. It owns
+The Regulatory Authority is the government side of RERAN. It owns
 no services and pays no fees; its role is to decide on, oversee, and govern the work
 every other group submits. It has eight roles across six platform sub-systems.
 
-Group A is also the only part of RERAN where real role-based access control applies.
-Everywhere else, a user's role is recorded for audit attribution only and gates
-nothing; within Group A, roles carry genuine permissions and are protected by MFA.
+The Regulatory Authority is also the only part of RERAN where real role-based access
+control applies. Everywhere else, a user's role is recorded for audit attribution only
+and gates nothing; within the Regulatory Authority, roles carry genuine permissions and
+are protected by MFA.
 
-This document explains what each role is and what it is responsible for. For the
-list of which external services each role finishes, see the by-service
-[touchpoint-register.md](touchpoint-register.md); for the Group A services (the
-actions) each role performs, see [services-overview.md](services-overview.md).
+This document explains what each role is and what it is responsible for. For the list of
+which external services each role finishes, see the by-service
+[touchpoint-register.md](touchpoint-register.md); for the Regulatory Authority services
+(the actions) each role performs, see [services-overview.md](services-overview.md).
 
 ## The eight roles
 
@@ -31,7 +32,7 @@ Reviews and approves the large majority of everything filed on the platform —
 property registrations, sales, leases, mortgages, financial-institution filings, and
 all escrow-account operations. Audits project escrow and trust accounts, vets
 off-plan sale registrations, monitors developer disclosure, and sanctions
-defaulters. This is the busiest role in Group A by a wide margin.
+defaulters. This is the busiest role in the Regulatory Authority by a wide margin.
 
 ### 2. Licensing & Registration Officer
 Decides who is allowed to operate in the sector. Vets and approves developer, agent,
@@ -66,7 +67,7 @@ but not change it (open-questions A7).
 ### 7. Inspection & Enforcement Officer
 The physical-world verification and enforcement role. Conducts geo-tagged site
 inspections, verifies construction milestones, issues stop-work and violation
-notices, and escalates penalties. This is the only Group A role that works **on
+notices, and escalates penalties. This is the only Regulatory Authority role that works **on
 site**, so its screens are designed for phone/tablet rather than the desk.
 
 ### 8. State Liaison Coordinator
