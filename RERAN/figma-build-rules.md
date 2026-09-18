@@ -45,6 +45,10 @@ patterns are inlined below so this file alone is sufficient.
 6. **Normalise HTML-imported patterns.** The Individual User portal screens are HTML imports —
    replicate their clean structure, but convert off-palette hex, Liberation Mono, and sub-pixel values
    to the tokens in Section 1.
+7. **All sample data is Nigerian.** Names, companies, addresses, phone numbers, currency (₦/NGN),
+   institutions, and locations in every screen's sample content must be Nigerian — this is RERAN, the
+   Nigerian real estate regulatory platform. Never default to generic/Western placeholder data (e.g.
+   "Acme Corp", "John Smith", US-style addresses).
 
 ## 1. Colour tokens
 | Token | Hex | Role |
