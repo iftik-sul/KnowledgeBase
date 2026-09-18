@@ -59,7 +59,7 @@ the item reaches the queue. Five distinct shapes:
 | **Automatic system check** | RED #6 | Live validation against FTI records; fails → instant auto-return, no human |
 | **Internal certifier** | FTI #3 | Someone inside the institution certifies before the regulator sees it |
 | **Trustee Centre operator** | FTI #12, #13, #15, #17 | Counter-based: operator enters and checks the transaction on the customer's behalf |
-| **Survey Department** | RED #24 | A survey confirmation step — **see the A2 warning below** |
+| **Inspection & Enforcement Officer** | RED #24 | A survey confirmation step (resolved 2026-09-18, A2) |
 
 ---
 
@@ -104,7 +104,7 @@ RERA issues the developer's licence + self-registration username   (precondition
   → Developer applies, attaches requirements
   → [RA] Compliance & Escrow Auditor → Work Queue → Application Review → audit: accept or reject
   → If accepted: developer uploads units via an approved survey company
-  → Developer submits to the Registrar to open the project account
+  → Developer submits to the System Super Administrator to open the project account
   → pay registration fee
   → Real Estate Project Approval Certificate
 ```
@@ -112,8 +112,9 @@ Fee **after** the decision — payment releases the output rather than gating re
 SLA 3 business days.
 
 > **Two further Regulatory Authority touches sit outside the queue:** issuing the licence
-> up front (Licensing & Registration Officer) and opening the project account (labelled
-> "Registrar" — an **A2** item; see below). Neither is the Transaction Audit decision.
+> up front (Licensing & Registration Officer) and opening the project account
+> (System Super Administrator — resolved 2026-09-18, A2). Neither is the Transaction
+> Audit decision.
 
 ---
 
@@ -131,7 +132,7 @@ Developer (RED portal) → open project → new name + reason → submit
 ```
 Developer (RED portal) → enter updated details
   → pay application approval fee                      (payment 1 of 2)
-  → [Survey Department] review and confirm data        ← A2 warning
+  → [Inspection & Enforcement Officer] review and confirm data  (resolved, A2)
   → submit
   → [RA] Compliance & Escrow Auditor → Work Queue → Application Review → decide
   → pay approval fee in real-estate records            (payment 2 of 2)
@@ -183,7 +184,7 @@ Heirs / representative visit the Trustee Centre → submit documents
   → heirs pay at the counter
   → [RA] Compliance & Escrow Auditor → Work Queue → Application Review → audit and decide
   → Approved:
-      → [RERA Trusts Department] transfer each heir's share to their bank account  ← A2 warning
+      → [Revenue & Finance Officer] transfer each heir's share to their bank account  (resolved, A2)
       → Certificate of Title + Title Deed + Map + receipts, by email
 ```
 Fee **before** decision · SLA 25–30 minutes · **the only service in the set with a
@@ -236,30 +237,26 @@ return, which happens before any officer and is not a decision.
 
 ---
 
-## ⚠ A2 affects Phase 1 — a correction
+## ✅ A2, resolved — the labels this chain map exposed are fixed
 
-Open-question **A2** (authority-label drift) was parked on the basis that *"nothing
-currently being built depends on it."* Walking these ten chains shows **that is not
-true**. Two of the ten Phase 1 services route through a label that is not one of the
-Regulatory Authority's eight roles:
+Walking these ten chains found that two of them route through a label that wasn't one of
+the Regulatory Authority's eight roles: RED #24's pre-decision review and FTI #13's
+post-approval share transfer. That finding reopened open-question **A2**, which is now
+**resolved**:
 
-| Service | Step | Label used | Status |
+| Service | Step | Old label | Resolved to |
 | :-- | :-- | :-- | :-- |
-| **RED #24** | Pre-decision review | **"Survey Department"** | Not one of the 8 roles |
-| **FTI #13** | Post-approval share transfer | **"RERA Trusts Department"** | Not one of the 8 roles |
-| *(RED #13)* | Opening the project account | "Registrar" | Not one of the 8 roles |
+| **RED #24** | Pre-decision review | "Survey Department" | **Inspection & Enforcement Officer** |
+| **FTI #13** | Post-approval share transfer | "RERA Trusts Department" | **Revenue & Finance Officer** |
+| *(RED #13)* | Opening the project account | "Registrar" | **System Super Administrator** |
 
-These are real steps in services we are building. If the labels stay unresolved, RED #24
-has a review step with no officer who owns it, and FTI #13 has a money transfer with no
-role assigned to perform it.
+The Survey Department mapping is confirmed rather than proposed: RERA has a single person
+who does all survey work, so it is one role throughout — not split between Inspection &
+Enforcement and State Liaison as earlier drafts of A2 had it.
 
-**Proposed mapping** (unchanged from A2): Survey Department → Inspection & Enforcement
-Officer for internal boundary confirmation, State Liaison Coordinator for external
-Surveyor-General verification; Trusts Department → Revenue & Finance Officer; Registrar →
-System Super Administrator.
-
-**Recommendation: unpark A2 for these three labels at least.** It is no longer a tidy-up
-that can wait for a later correction pass — it is a gap inside the Phase 1 build.
+Applied across every RED and FTI service-flow and Figma build prompt carrying the old
+labels, including UI copy (button text, status pills, screen titles). See
+`modules/regulatory-authority/open-questions.md` A2 for the full file list.
 
 ---
 
