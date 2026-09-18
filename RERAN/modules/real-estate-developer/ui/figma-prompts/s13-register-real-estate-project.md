@@ -34,7 +34,7 @@ tags:
 
 Group C's `s03-mortgage-registration.md` pack — the reference this one is modelled on — uses one continuous 6-step wizard (Application Info → Service Info → Documents → Validation → Payment → Review & Submit), because that service really is one continuous submission: fill it in, pay, submit, done.
 
-**Service #13 does not have that shape.** Its own sourced workflow has a hard gate in the middle: the developer submits an initial application, RERA accepts or rejects it, and only *after acceptance* can the developer upload units, request a Registrar account, and pay. Forcing that into one 6-step wizard would misrepresent a service where step 5 genuinely cannot happen until RERA acts on step 4. This pack instead uses two trackers:
+**Service #13 does not have that shape.** Its own sourced workflow has a hard gate in the middle: the developer submits an initial application, RERA accepts or rejects it, and only *after acceptance* can the developer upload units, request a project account, and pay. Forcing that into one 6-step wizard would misrepresent a service where step 5 genuinely cannot happen until RERA acts on step 4. This pack instead uses two trackers:
 
 - A **4-step horizontal wizard** (`S13 – 02` through `S13 – 05`) for the initial application only — Project Information, Survey Information, Documents, Review & Submit.
 - The module's own **vertical status timeline** (the same pattern used on `applications.md`'s Application Details screen) for everything from submission onward, since that phase is a sequence of gated stages rather than a form the developer fills in continuously.
@@ -45,8 +45,8 @@ Group C's `s03-mortgage-registration.md` pack — the reference this one is mode
 
 | # | Assumption | Why |
 | :-- | :-- | :-- |
-| 1 | **Payment sits near the end, after RERA's initial acceptance** | Sourced directly — Section 9 of the service file states this is a genuine payment-timing exception, verified against this service's own row, not inferred. Fee is paid only once the Registrar account request is in, right before the certificate is issued. |
-| 2 | **Two separate authorities act at two separate points** | Sourced — Compliance & Escrow Auditor handles the initial accept/reject; the Registrar handles the account-opening step after units are uploaded. Both are shown, not collapsed into one "RERA" actor. |
+| 1 | **Payment sits near the end, after RERA's initial acceptance** | Sourced directly — Section 9 of the service file states this is a genuine payment-timing exception, verified against this service's own row, not inferred. Fee is paid only once the project account request is in, right before the certificate is issued. |
+| 2 | **Two separate authorities act at two separate points** | Sourced — Compliance & Escrow Auditor handles the initial accept/reject; the System Super Administrator handles the account-opening step after units are uploaded. Both are shown, not collapsed into one "RERA" actor. Role name corrected 2026-09-18 (open-questions A2) — the source's "Registrar" is not one of the Regulatory Authority's eight roles. |
 | 3 | **Unit upload happens through an approved survey company, not a raw file upload** | Sourced ("Developer Uploads Units through Approved Survey Company"). Shown as a company-selection step, not a generic document attach. |
 | 4 | **Required documents follow the general project-registration pattern** | The source specifies only "attach requirements," not an itemized list — flagged `contains_proposals: true` in the service file itself, carried through here unchanged. |
 | 5 | **Output document not itemized beyond "certificate"** | Source is clear only on the certificate name; this pack shows one output document, matching what's sourced. |
@@ -63,13 +63,13 @@ Group C's `s03-mortgage-registration.md` pack — the reference this one is mode
 - Project: Gwarinpa Heights · Plot 14, Gwarinpa District, Abuja Municipal Area Council, FCT · Mixed Use · 86 units
 - Survey Company: Meridian Geospatial Surveys Ltd. (RERA-approved)
 - Survey Reference: `SUR-2026-00812`
-- Registrar Account Reference: `REG-ACC-2026-0143`
+- Project Account Reference: `REG-ACC-2026-0143`
 - Fee: Registration Fee ₦850,000 · Processing Levy ₦15,000 · VAT (7.5%) ₦64,875 · **Total ₦929,875**
 - Payment Reference: `PAY-2026-01044`
 - Project Approval Certificate Number: `RERA-CERT-PRJ-2026-00341`
 - Processing time: 3 business days (the initial audit step; source does not give a combined figure for the full multi-gate journey)
 - Initial audit authority: RERA — Compliance & Escrow Auditor
-- Account-opening authority: RERA — Registrar
+- Account-opening authority: RERA — System Super Administrator
 
 ---
 
@@ -100,16 +100,16 @@ Workspace content, top to bottom:
    Service Category: Real Estate Development Services
    Processing Time: 3 business days (initial audit step)
    Applicable Fee: ₦850,000 (per RERAN fee schedule)
-   Approving Authority: RERA — Compliance & Escrow Auditor (initial review), RERA — Registrar (account opening)
+   Approving Authority: RERA — Compliance & Escrow Auditor (initial review), RERA — System Super Administrator (account opening)
    Payment Timing: Paid after RERA's initial acceptance, before the certificate is issued
    Below the grid, a full-width description paragraph: "Registers a new real estate project with RERA — the foundational step before any unit within it can be sold, leased, or otherwise transacted. Most other Group B services depend on a project already being registered under this service."
 
-4. A single-line inline notice beneath the Service Overview card, using the existing subtle notice style: "This is a multi-stage service. RERA must accept your initial application before you can upload units and request a Registrar account — those steps cannot be completed upfront."
+4. A single-line inline notice beneath the Service Overview card, using the existing subtle notice style: "This is a multi-stage service. RERA must accept your initial application before you can upload units and request a project account — those steps cannot be completed upfront."
 
 5. Card — "How It Works". Two rows, since this service has two distinct phases:
    Phase 1 row, four numbered steps evenly spaced: 1 Project Information · 2 Survey Information · 3 Documents · 4 Review & Submit
    A short label beneath phase 1: "Your initial application to RERA"
-   Phase 2 row, four numbered steps evenly spaced, greyed slightly to show they come later: 5 RERA Review · 6 Upload Units · 7 Registrar Account · 8 Payment & Certificate
+   Phase 2 row, four numbered steps evenly spaced, greyed slightly to show they come later: 5 RERA Review · 6 Upload Units · 7 Project Account · 8 Payment & Certificate
    A short label beneath phase 2: "After RERA accepts your application"
 
 6. Card — "What You'll Need". Two columns side by side.
@@ -292,7 +292,7 @@ Reuse existing components and styles from this file wherever one already exists 
 
 Keep it simple: stacked white cards, one blue primary action at the top and bottom. No illustrations.
 
-IMPORTANT: this screen submits the INITIAL application only — there is no payment step here, and no mention of a fee amount. Payment happens much later, after RERA accepts this application and the Registrar account is requested (see S13 – 10). Do not add a payment summary card to this screen.
+IMPORTANT: this screen submits the INITIAL application only — there is no payment step here, and no mention of a fee amount. Payment happens much later, after RERA accepts this application and the project account is requested (see S13 – 10). Do not add a payment summary card to this screen.
 
 Workspace content, top to bottom:
 
@@ -370,7 +370,7 @@ Workspace content, top to bottom:
 2. Card — "What Happens Next". Four numbered rows, each with a number badge, a short bold label and one grey line beneath:
    1  RERA Review — RERA's Compliance & Escrow Auditor reviews this application and either accepts or rejects it.
    2  Upload Units — Once accepted, upload the project's units through your approved survey company.
-   3  Registrar Account — Submit a request to open a Registrar account for this project.
+   3  Project Account — Submit a request to open a project account for this project.
    4  Payment & Certificate — Pay the registration fee, then your Real Estate Project Approval Certificate is issued.
 
 3. Two buttons, centred side by side beneath the cards: secondary "View Application", blue primary "Back to Projects".
@@ -415,7 +415,7 @@ Workspace content, top to bottom:
    Under Review — Aug 15, 2026, 9:45 AM — RERA, Compliance & Escrow Auditor  (current)
    Accepted — Pending  (future)
    Units Uploaded — Pending  (future)
-   Registrar Account Requested — Pending  (future)
+   Project Account Requested — Pending  (future)
    Payment Successful — Pending  (future)
    Registered — Pending  (future)
 
@@ -486,16 +486,16 @@ Workspace content, top to bottom:
 
 ---
 
-## S13 – 09 · Registrar Account Request
+## S13 – 09 · Project Account Request
 
 ```
-Create a new screen frame named "S13 – 09 Registrar Account Request", 1440px wide, light grey background.
+Create a new screen frame named "S13 – 09 Project Account Request", 1440px wide, light grey background.
 
 Layer structure exactly:
-- S13 – 09 Registrar Account Request
+- S13 – 09 Project Account Request
   - RED-Sidebar       (instance of the existing sidebar component — active nav item = "Applications")
   - MainContent
-    - TopBar          (instance of the existing top bar component — title "Registrar Account Request", subtitle "APP-2026-0221 — Registration of Real Estate Project")
+    - TopBar          (instance of the existing top bar component — title "Project Account Request", subtitle "APP-2026-0221 — Registration of Real Estate Project")
     - Workspace
 
 Reuse existing components and styles from this file wherever one already exists — cards, buttons, breadcrumbs, status pills, the application metadata strip, label/value grids, inline notices. Do not invent new colours, type scales, or card treatments.
@@ -504,11 +504,11 @@ Keep it simple: one status card, one summary card, one confirmation panel. No il
 
 Workspace content, top to bottom:
 
-1. Breadcrumb: Applications / APP-2026-0221 / Registrar Account Request
+1. Breadcrumb: Applications / APP-2026-0221 / Project Account Request
 
-2. Page header row: heading "Registrar Account Request" with the status pill "Units Uploaded" beside it on the left. On the right, a blue primary button "Request Registrar Account".
+2. Page header row: heading "Project Account Request" with the status pill "Units Uploaded" beside it on the left. On the right, a blue primary button "Request Project Account".
 
-3. A success notice card, full width: a green check icon on the left, bold text "86 Units Successfully Uploaded" and a grey line beneath: "Uploaded on Aug 19, 2026 via Meridian Geospatial Surveys Ltd. You can now request a Registrar account to open this project's official record."
+3. A success notice card, full width: a green check icon on the left, bold text "86 Units Successfully Uploaded" and a grey line beneath: "Uploaded on Aug 19, 2026 via Meridian Geospatial Surveys Ltd. You can now request a project account to open this project's official record."
 
 4. Application metadata strip:
    APPLICATION ID: APP-2026-0221
@@ -524,9 +524,9 @@ Workspace content, top to bottom:
    Survey Company: Meridian Geospatial Surveys Ltd.
    Real Estate License: RERA-DEV-2024-00437
 
-6. Card — "Registrar Account Request". A short explanation line: "Requesting a Registrar account opens this project's official record with RERA. This is required before the registration fee can be paid." Beneath it, a single confirmation checkbox: "I confirm the project and unit information above is accurate, and request that a Registrar account be opened for this project."
+6. Card — "Project Account Request". A short explanation line: "Requesting a project account opens this project's official record with RERA. This is required before the registration fee can be paid." Beneath it, a single confirmation checkbox: "I confirm the project and unit information above is accurate, and request that a project account be opened for this project."
 
-7. Bottom-right: blue primary button "Request Registrar Account".
+7. Bottom-right: blue primary button "Request Project Account".
 ```
 
 ---
@@ -553,13 +553,13 @@ Workspace content, top to bottom:
 
 1. Breadcrumb: Applications / APP-2026-0221 / Payment
 
-2. Page header row: heading "Payment" with the status pill "Registrar Account Requested" beside it on the left.
+2. Page header row: heading "Payment" with the status pill "Project Account Requested" beside it on the left.
 
 3. Application metadata strip:
    APPLICATION ID: APP-2026-0221
    SERVICE NAME: Registration of Real Estate Project
    STATUS: Payment Pending (pill)
-   REGISTRAR ACCOUNT REFERENCE: REG-ACC-2026-0143
+   PROJECT ACCOUNT REFERENCE: REG-ACC-2026-0143
 
 4. Card — "Fee Breakdown". A simple stacked list of label/amount rows, right-aligned amounts, with a divider before the total:
    Registration Fee — ₦850,000
@@ -612,15 +612,15 @@ Workspace content, top to bottom:
    Under Review — Aug 15, 2026, 9:45 AM — RERA, Compliance & Escrow Auditor  (complete)
    Accepted — Aug 18, 2026, 11:15 AM — RERA, Compliance & Escrow Auditor  (complete)
    Units Uploaded — Aug 19, 2026, 3:20 PM — Adaeze Nwosu  (complete)
-   Registrar Account Requested — Aug 19, 2026, 3:31 PM — Adaeze Nwosu, REG-ACC-2026-0143  (complete)
+   Project Account Requested — Aug 19, 2026, 3:31 PM — Adaeze Nwosu, REG-ACC-2026-0143  (complete)
    Payment Successful — Aug 20, 2026, 10:05 AM — ₦929,875, PAY-2026-01044  (complete)
-   Registered — Aug 21, 2026, 4:12 PM — RERA, Registrar  (complete)
+   Registered — Aug 21, 2026, 4:12 PM — RERA, System Super Administrator  (complete)
 
 5. Card — "Project Record". Two-column label/value grid:
    Project Reference Number: PRJ-2026-0022
    Project Approval Certificate Number: RERA-CERT-PRJ-2026-00341
    Registration Date: Aug 21, 2026
-   Registrar Account Reference: REG-ACC-2026-0143
+   Project Account Reference: REG-ACC-2026-0143
    Real Estate License: RERA-DEV-2024-00437
    Project Name: Gwarinpa Heights
    Project Location: Plot 14, Gwarinpa District, Abuja Municipal Area Council, FCT  (full width row)
