@@ -25,7 +25,7 @@ tags:
 
 The **Registration/Amendment of Real Estate Project Details** service issues title-deed-level data for a project — an Electronic Certificate of Title / Title Deed where the project is completed, or an Electronic Map where it is not — reflecting the project's current, detailed data with RERA's Title Deed Data function rather than the general project-registration workflow.
 
-> **Near-duplicate concern with rows 4, 5, 16, 17 — resolved 2026-08-15 (issue #37).** Checked against each of those services' own files rather than the master table's row summaries alone: **#4 and #5 act on a provisional *transaction* registration** (Services #1–#3's individual sale/rent-to-own/usufruct records), not the project record — a different object from this service entirely. **#17 (Re-registration)** is a redo-after-lapse trigger (committee resolution, notice period, fresh unit upload, new Registrar account), not ongoing maintenance — a different trigger from this service's. Neither is a genuine duplicate.
+> **Near-duplicate concern with rows 4, 5, 16, 17 — resolved 2026-08-15 (issue #37).** Checked against each of those services' own files rather than the master table's row summaries alone: **#4 and #5 act on a provisional *transaction* registration** (Services #1–#3's individual sale/rent-to-own/usufruct records), not the project record — a different object from this service entirely. **#17 (Re-registration)** is a redo-after-lapse trigger (committee resolution, notice period, fresh unit upload, new account with the System Super Administrator), not ongoing maintenance — a different trigger from this service's. Neither is a genuine duplicate.
 >
 > **#16 (Rename) is the one real overlap, and the client has confirmed both routes are valid for a name change** — a developer may use the narrow, no-fee Rename Project service, or include the name among the fields changed here. Neither is the sole correct path; whichever the developer selects is what's recorded.
 
@@ -35,9 +35,9 @@ Keep the Title Deed data record for a project current, issuing the completion-ap
 
 ## 3. Description
 
-The developer submits updated project details. Survey Department reviews and confirms the data before RERA's Compliance & Escrow Auditor function makes the final decision. On approval, the output depends on the project's completion status: a completed project receives an Electronic Certificate of Title / Title Deed; an uncompleted project receives an Electronic Map.
+The developer submits updated project details. The Inspection & Enforcement Officer reviews and confirms the data before RERA's Compliance & Escrow Auditor function makes the final decision. On approval, the output depends on the project's completion status: a completed project receives an Electronic Certificate of Title / Title Deed; an uncompleted project receives an Electronic Map.
 
-**Corrected 2026-08-16.** This section, along with Sections 10 and 12, previously omitted the Survey Department step that Section 9 already quoted directly from the source row ("Pay application approval fees **and send from survey company to Survey Department**"). Section 9's own quote was correct and never changed; Sections 3, 10, and 12 are the ones brought into line with it here — found during a full file-by-file audit.
+**Corrected 2026-08-16.** This section, along with Sections 10 and 12, previously omitted the survey-review step that Section 9 already quoted directly from the source row ("Pay application approval fees **and send from survey company to Survey Department**"). Section 9's own quote was correct and never changed; Sections 3, 10, and 12 are the ones brought into line with it here — found during a full file-by-file audit. **Corrected again 2026-09-18:** the source's "Survey Department" is not one of the Regulatory Authority's eight roles; per open-questions A2 it maps to the **Inspection & Enforcement Officer**, who performs all survey work as a single role.
 
 ## 4. Who Can Apply
 
@@ -69,13 +69,13 @@ Applicable according to the RERAN fee schedule. Paid through the shared platform
 
 ## 9. Payment Required
 
-**Yes — in two stages, one before RERA's decision and one after.** Uniquely among the 27, this service's source row contains two distinct payment steps: an *application approval fee* paid before the Survey Department reviews, and an *approval fee in the real estate records* paid after approval and before the output is issued. Both are charged per transaction through the shared platform payment gateway. Neither stage may be collapsed into the other.
+**Yes — in two stages, one before RERA's decision and one after.** Uniquely among the 27, this service's source row contains two distinct payment steps: an *application approval fee* paid before the Inspection & Enforcement Officer reviews, and an *approval fee in the real estate records* paid after approval and before the output is issued. Both are charged per transaction through the shared platform payment gateway. Neither stage may be collapsed into the other.
 
-> **Who tenders the first payment is not settled by the source.** The row reads "Pay application approval fees **and send from survey company to Survey Department**," which attributes the transmission — and possibly the payment itself — to the developer's designated survey company rather than to the developer directly. The workflow below documents it as a developer-side gateway payment, since that is the only payment route this module has; whether the survey company pays on the developer's behalf, or merely forwards an application the developer has already paid for, is **proposed** and needs client confirmation. The second payment is unambiguously the developer's.
+> **Who tenders the first payment is not settled by the source.** The row reads "Pay application approval fees **and send from survey company to Survey Department**" — the "Survey Department" wording is the source's own text, quoted verbatim for the payment-routing question; the role that department maps to is resolved above. The quote attributes the transmission — and possibly the payment itself — to the developer's designated survey company rather than to the developer directly. The workflow below documents it as a developer-side gateway payment, since that is the only payment route this module has; whether the survey company pays on the developer's behalf, or merely forwards an application the developer has already paid for, is **proposed** and needs client confirmation. The second payment is unambiguously the developer's.
 
 ## 10. Processing Authority
 
-**Survey Department** (initial review, before the first payment stage) **and Compliance & Escrow Auditor** (final decision, before the output is issued) — corrected 2026-08-16 to include the Survey Department step Section 9 already sourced; see the note in Section 3.
+**Inspection & Enforcement Officer** (initial review, before the first payment stage) **and Compliance & Escrow Auditor** (final decision, before the output is issued) — corrected 2026-08-16 to include this step, and again 2026-09-18 for the role name; see the note in Section 3.
 
 ## 11. Expected Processing Time
 
@@ -93,9 +93,9 @@ Enter Updated Details
 ↓
 Pay Application Approval Fee via Payment Gateway
 ↓
-Application Sent to Survey Department for Review
+Application Sent to Inspection & Enforcement Officer for Review
 ↓
-Survey Department Confirms Data
+Inspection & Enforcement Officer Confirms Data
 ↓
 Submit Application Online
 ↓
@@ -115,7 +115,7 @@ Application Fee Pending
 ↓
 Application Fee Paid
 ↓
-Survey Department Review
+Inspection & Enforcement Officer Review
 ↓
 Submitted
 ↓
@@ -164,8 +164,8 @@ Issued
 
 * Retrieve Project
 * Submit Project Details Registration/Amendment
-* Notify Survey Department
-* Retrieve Survey Department Confirmation
+* Notify Inspection & Enforcement Officer
+* Retrieve Survey Confirmation
 * Determine Project Completion Status
 * Retrieve Application Status
 * Calculate Application Approval Fee
@@ -191,16 +191,16 @@ Issued
 ## 20. Acceptance Criteria
 
 * Developer can submit project details for registration or amendment against an existing project.
-* Survey Department confirms updated data before RERA's final decision.
+* The Inspection & Enforcement Officer confirms updated data before RERA's final decision.
 * System determines the project's completion status to select the correct output document.
 * Approved submissions generate the completion-appropriate title document.
 * All activities are recorded in the audit log.
-* The application approval fee is completed before Survey Department review, and the approval fee in the real estate records after approval and before the output is issued.
+* The application approval fee is completed before Inspection & Enforcement Officer review, and the approval fee in the real estate records after approval and before the output is issued.
 
 ## 21. Business Rules
 
 1. Only a registered project's details may be registered/amended under this service.
-2. Survey Department review precedes RERA's final decision — corrected 2026-08-16, see Sections 3 and 10.
+2. Inspection & Enforcement Officer review precedes RERA's final decision — corrected 2026-08-16, see Sections 3 and 10; role name corrected 2026-09-18 (open-questions A2).
 3. The output document depends on the project's completion status at time of approval.
 4. **A name change may be submitted through this service or through Service #16 — client-confirmed 2026-08-15, issue #37.** Neither is the exclusive path; whichever the developer selects is what's recorded.
 5. All submissions, reviews, and notifications must be permanently recorded in the audit trail.

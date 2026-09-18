@@ -32,7 +32,7 @@ Provide a path back to active registration for a project that has lapsed or been
 
 ## 3. Description
 
-The developer submits a re-registration application referencing the prior project record, with updated survey confirmation where required. Project registration reviews the application; the Survey Department confirms current boundary and unit data before re-approval.
+The developer submits a re-registration application referencing the prior project record, with updated survey confirmation where required. Project registration reviews the application; the Inspection & Enforcement Officer confirms current boundary and unit data before re-approval.
 
 ## 4. Who Can Apply
 
@@ -68,7 +68,7 @@ Applicable according to the RERAN fee schedule. Paid through the shared platform
 
 ## 10. Processing Authority
 
-**Compliance & Escrow Auditor** (project registration step); **Survey Department** (boundary/unit confirmation).
+**Compliance & Escrow Auditor** (project registration step); **Inspection & Enforcement Officer** (boundary/unit confirmation) — corrected 2026-09-18, see open-questions A2.
 
 ## 11. Expected Processing Time
 
@@ -88,7 +88,7 @@ Submit Application Online
 ↓
 Project Registration Reviews Application
 ↓
-Survey Department Confirms Current Data
+Inspection & Enforcement Officer Confirms Current Data
 ↓
 Pay Registration Fee via Payment Gateway
 ↓
@@ -102,7 +102,7 @@ Submitted
 ↓
 Project Registration Review
 ↓
-Survey Department Review
+Inspection & Enforcement Officer Review
 ↓
 Approved
 ↓
@@ -144,7 +144,7 @@ Re-registered
 
 * Retrieve Prior Project Record
 * Submit Re-registration Application
-* Notify Survey Department
+* Notify Inspection & Enforcement Officer
 * Retrieve Survey Confirmation
 * Retrieve Application Status
 * Calculate Registration Fee
@@ -168,7 +168,7 @@ Re-registered
 ## 20. Acceptance Criteria
 
 * Developer can submit a re-registration application referencing a prior project record.
-* Survey Department confirms current data before re-approval.
+* The Inspection & Enforcement Officer confirms current data before re-approval.
 * Approved re-registrations generate a Real Estate Project Approval Certificate.
 * All activities are recorded in the audit log.
 * Payment is completed after approval and before the certificate is re-issued.
@@ -176,5 +176,5 @@ Re-registered
 ## 21. Business Rules
 
 1. A re-registration application must reference an existing prior project record.
-2. Survey Department confirmation is required before re-registration is approved, independent of the project registration review.
+2. Inspection & Enforcement Officer confirmation is required before re-registration is approved, independent of the project registration review — corrected 2026-09-18 (open-questions A2).
 3. All submissions, reviews, and notifications must be permanently recorded in the audit trail.
