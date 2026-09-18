@@ -47,33 +47,40 @@ review; the Licensing & Registration Officer is recorded as the responsible role
 > this one is identity. It is correctly filed; the note exists so a later reader does
 > not assume it is misplaced.
 
-## A2 — Authority-label drift *(resolved 2026-09-18)*
+## A2 — Authority-label drift *(closed 2026-09-18 — independent, unassigned)*
 
-Three authority labels used in existing service-flow files were not among the Regulatory
-Authority's 8 sourced roles:
+Three labels used in RED and FTI's own service-flow files — **"Survey Department,"
+"Registrar," and "Trusts Department"** — are not among the Regulatory Authority's
+8 sourced roles.
 
-- **"Survey Department"** (RED #15, #17, #24; referenced in allied-professionals) —
-  AGIS vocabulary. **Resolved: one role, all survey work → Inspection & Enforcement
-  Officer.** Confirmed by the client: RERA has a single person who does all survey
-  work, so the internal/external split I had proposed (dividing it between Inspection
-  & Enforcement and State Liaison) does not apply.
-- **"Registrar"** (RED #13, account-opening step) — **resolved → System Super
-  Administrator.** The account itself is renamed **"project account"** throughout
-  (it was never a role name, just carried "Registrar" in its label) to remove the
-  stale term from status names and database entities, not just prose.
-- **"Trusts Department"** (FTI #13, heirs' distribution) — **resolved → Revenue &
-  Finance Officer.**
+**First attempt (2026-09-18, reverted the same day):** mapped each to an existing RA
+role — Survey Department → Inspection & Enforcement Officer, Registrar → System Super
+Administrator, Trusts Department → Revenue & Finance Officer — and applied across 14
+files. **This was wrong.** The client's actual instruction was to add the three as
+independent entities, not to fold them into existing RA roles. Every file the mapping
+touched was reverted to its original wording.
 
-**Applied across 14 files**: the three RED service-flows and one allied-professionals
-doc for Survey Department; RED #13 plus four files that reference its pattern
-(feature-01-applications, feature-02-projects, RED #24, RED #26) for Registrar; the
-FTI #13 service-flow for Trusts Department — plus the RED #13, RED #24, and FTI #13
-Figma build prompts, whose UI copy carried the same stale labels into screen text,
-button labels, and status pills.
+**Checked against the real AGIS document (client-supplied, 2026-09-18).** None of the
+three terms appears in AGIS verbatim. The closest real structures:
 
-This was flagged as affecting Phase 1 (`RERAN/phase-1-service-chains.md`): RED #24's
-review step and FTI #13's post-approval transfer are both in the ten selected Phase 1
-services, and were previously unowned in the role model.
+- A **Survey Unit** inside AGIS's own GIS division ("Head, Surveying"), distinct from
+  the external **Surveyor-General's office**, which licenses and verifies survey plans.
+  RED #24's step ("send from survey company to Survey Department") reads closer to the
+  external Surveyor-General verification than an internal AGIS unit.
+- A **"Deed registrar"** — a named person's title inside AGIS's **Deeds Registry**
+  division (title revocation/reinstatement, Power of Attorney registration, C-of-O
+  collection, legal searches). Not a standalone "Registrar" role.
+- **No trust-related unit or division anywhere in AGIS.** "Trusts Department" has no
+  source in AGIS, in RERAN's own source-of-truth, or in Group G.
+
+**Resolved: all three are independent — not assigned to any group, not folded into an
+existing role.** They stay in RED #13/#15/#17/#24, FTI #13, and allied-professionals
+exactly as their own source describes them. This is not a gap awaiting future work; it
+is the correct final state — these are genuinely undefined actors the source never
+placed inside RERAN's eight-group model, and forcing them into one misrepresents the
+source. If the client later wants them formalised as their own roles (with an assigned
+group, a Player, and a Core Function, matching the source's own table format), that is
+a new decision, not a resolution of this one.
 
 ## A3 — Escrow sub-system: one queue or two? *(resolved 2026-09-12)*
 
