@@ -4,7 +4,7 @@ module: regulatory-authority
 type: ui-archetypes
 status: draft
 contains_proposals: true
-updated: 2026-09-12
+updated: 2026-09-18
 derived_from:
   - "RERAN/modules/regulatory-authority/ui/screens/work-queue.md"
   - "RERAN/modules/regulatory-authority/ui/screens/application-review.md"
@@ -15,19 +15,19 @@ tags:
   - archetypes
 ---
 
-# Group A — Screen Archetypes
+# Regulatory Authority — Screen Archetypes
 
-Group A's ~16 active back-office UI surfaces reduce to **five archetypes**. They are
-delivered as **10 screen specs** in `screens/` — some specs bundle related surfaces (the
-Admin Console spec covers staff directory, account editor, and role/permission editor; the
-dispute pair of Case Queue + Case Workspace covers the queue, session, and judgment
-surfaces; Reconciliation covers reconciliation and remittance). Every screen spec declares
-which archetype it follows, so section shapes stay consistent and we don't reinvent layout
-per screen.
+The Regulatory Authority's ~16 active back-office UI surfaces reduce to **five
+archetypes**. They are delivered as **10 screen specs** in `screens/` — some specs
+bundle related surfaces (the Admin Console spec covers staff directory, account editor,
+and role/permission editor; the dispute pair of Case Queue + Case Workspace covers the
+queue, session, and judgment surfaces; Reconciliation covers reconciliation and
+remittance). Every screen spec declares which archetype it follows, so section shapes
+stay consistent and we don't reinvent layout per screen.
 
 > **Note.** These archetypes are defined against the specs. Their concrete section shapes
-> and component choices will be reconciled to the actual Figma component library in the
-> Figma thread; treat the component names here as generic until then.
+> and component choices are reconciled to the real Figma component library during design
+> work; treat the component names here as generic.
 
 ## Archetype 1 — Queue
 
@@ -38,8 +38,9 @@ Pagination. No decision is taken on the queue itself.
 **Empty state (required):** every Queue screen states what an empty list means — "you
 are clear" is different from "a filter hides everything" and from "nothing has arrived
 yet". A blank table is never acceptable.
-**Used by:** Work Queue (A-1, A-2); Case Queue (A-3); Inspection/Enforcement/Sign-off
-queues (A-7/A-8/A-10, latent).
+**Used by:** Work Queue (A-1, A-2); Case Queue (A-3); the Inspection queue (A-7) and
+Sign-off queue (A-10), both in scope but not yet specced; Enforcement queues (A-8,
+deferred).
 
 ## Archetype 2 — Detail / Decision
 
@@ -77,8 +78,8 @@ A hub for a matter worked over multiple sessions across time — not a single de
 **Section shape:** Case Header → Parties & Evidence → Session Timeline (schedule/conduct
 sessions, request info between them) → Judgment/Resolution (recorded once, closes the
 case). Its status is a case lifecycle, not the shared four-state decision vocabulary.
-**Used by:** Case Workspace (A-3) only. It is deliberately its own archetype because it is
-the one Group A screen that is not an approve/reject.
+**Used by:** Case Workspace (A-3) only. It is deliberately its own archetype because it
+is the one Regulatory Authority screen that is not an approve/reject.
 
 ## Quick map
 

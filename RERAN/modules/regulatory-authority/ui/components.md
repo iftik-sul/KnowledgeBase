@@ -13,7 +13,7 @@ tags:
   - components
 ---
 
-# Group A — UI Components (placeholder)
+# Regulatory Authority — UI Components (placeholder)
 
 > **Generic component vocabulary.** The screen specs reference component *types*, not
 > library component names. This file lists them so design work in Figma has a checklist to

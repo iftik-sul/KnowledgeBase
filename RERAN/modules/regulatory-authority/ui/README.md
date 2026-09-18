@@ -14,13 +14,14 @@ tags:
   - back-office
 ---
 
-# Group A — UI (Back-Office App)
+# Regulatory Authority — UI (Back-Office App)
 
-Group A's UI is the **back-office / staff app**, distinct from the applicant-facing
-portals every other module documents. Per the monorepo decision it is a separate app.
-Its screens are queues, review screens, and admin consoles — not submission wizards.
+The Regulatory Authority's UI is the **back-office / staff app**, distinct from the
+applicant-facing portals every other module documents. Per the monorepo decision it is a
+separate app. Its screens are queues, review screens, and admin consoles — not
+submission wizards.
 
-## The two things that make Group A's UI different
+## The two things that make the Regulatory Authority's UI different
 
 1. **RBAC is real here.** Everywhere else a role is audit attribution only and gates
    nothing. In the back-office app, the role decides **which screens a user can reach**
