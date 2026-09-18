@@ -31,7 +31,7 @@ tags:
 
 Two things, and neither appears anywhere else in this folder:
 
-1. **Two separate payment stages, not one.** Sourced directly, Section 9: an *application approval fee* paid before the Inspection & Enforcement Officer reviews the amendment, and a second *approval fee in the real estate records* paid after RERA approves, before the output is issued. `S24 – 04`/`S24 – 05` are the first payment; `S24 – 09` is the second, much later, after a full review cycle has already happened in between. These are not framed as one fee shown twice — they are genuinely two transactions, with two different receipts.
+1. **Two separate payment stages, not one.** Sourced directly, Section 9: an *application approval fee* paid before the Survey Department reviews the amendment, and a second *approval fee in the real estate records* paid after RERA approves, before the output is issued. `S24 – 04`/`S24 – 05` are the first payment; `S24 – 09` is the second, much later, after a full review cycle has already happened in between. These are not framed as one fee shown twice — they are genuinely two transactions, with two different receipts.
 
 2. **The output depends on the project's own completion status**, decided automatically, not chosen by the developer: a completed project gets an **Electronic Certificate of Title / Title Deed**; an incomplete one gets an **Electronic Map**. Like Service #6's pack, this one shows two endings — `S24 – 10` is the main path (Banana Island Villas, still under construction, so it gets the Map), and `S24 – 11` is an alternate ending showing the Title Deed outcome, using a project that's actually complete.
 
@@ -43,7 +43,7 @@ Everything else about this service is an **amend**, not a **create** — Step 1 
 
 | # | Assumption | Why |
 | :-- | :-- | :-- |
-| 1 | **Inspection & Enforcement Officer review sits between the two payment stages, as its own visible stage** | Sourced, corrected 2026-08-16 in the service file itself — this step was previously missing from three of the file's own sections and had to be added back in. Shown here as a distinct status on the timeline, not folded into "Under Review." Role name corrected 2026-09-18 (open-questions A2) — the source's "Survey Department" is not one of the Regulatory Authority's eight roles. |
+| 1 | **Survey Department review sits between the two payment stages, as its own visible stage** | Sourced, corrected 2026-08-16 in the service file itself — this step was previously missing from three of the file's own sections and had to be added back in. Shown here as a distinct status on the timeline, not folded into "Under Review." |
 | 2 | **Who pays the first fee is shown as the developer, via the shared gateway** | The source row attributes the transmission — possibly the payment — to the survey company rather than the developer; the service file flags this explicitly as unresolved. This pack follows the only payment route this module has (developer, via the gateway) and is proposed, not sourced. |
 | 3 | **Project Name is shown as an editable field but left unchanged in the worked example** | The service file confirms a name change may be submitted through this service (the overlap with Service #16), so the field must exist — but changing it isn't the point of this particular walkthrough. |
 | 4 | **Required documents follow the general pattern** | Not itemized in the source; carried through from the service file's own flagged proposal. |
@@ -99,8 +99,8 @@ Workspace content, top to bottom:
    Service Code: #24
    Service Category: Title Deed Data Services
    Processing Time: 5 business days
-   Applicable Fee: Two stages — ₦25,000 before Inspection & Enforcement Officer review, ₦60,000 after RERA approval
-   Approving Authority: RERA — Inspection & Enforcement Officer (initial review), RERA — Compliance & Escrow Auditor (final decision)
+   Applicable Fee: Two stages — ₦25,000 before Survey Department review, ₦60,000 after RERA approval
+   Approving Authority: RERA — Survey Department (initial review), RERA — Compliance & Escrow Auditor (final decision)
    Payment Timing: Two separate payments — one before review, one after approval
    Below the grid, a full-width description paragraph: "Keeps a project's Title Deed data record current as project details change. The output depends on the project's completion status: a completed project receives a Title Deed, an incomplete one receives an Electronic Map."
 
@@ -108,7 +108,7 @@ Workspace content, top to bottom:
 
 5. Card — "How It Works". A single horizontal row of four numbered steps, evenly spaced, each with a number badge and a short label underneath:
    1 Project Details · 2 Documents · 3 Application Approval Fee · 4 Review & Submit
-   Beneath the row, a single grey line: "After submission, the Inspection & Enforcement Officer confirms your updated data before RERA makes its final decision. A second fee is charged after approval, before your output document is issued."
+   Beneath the row, a single grey line: "After submission, the Survey Department confirms your updated data before RERA makes its final decision. A second fee is charged after approval, before your output document is issued."
 
 6. Card — "What You'll Need". Two columns side by side.
    Left column heading "Required Information", as a simple bulleted list:
@@ -252,7 +252,7 @@ Workspace content, top to bottom:
    Processing Levy — ₦1,500
    — divider —
    Total Amount Due Now — ₦26,500  (larger, bold)
-   Beneath the total, a small grey line: "This fee sends your amendment to the Inspection & Enforcement Officer for review. A second, separate fee will be charged after RERA approves, before your output document is issued."
+   Beneath the total, a small grey line: "This fee sends your amendment to the Survey Department for review. A second, separate fee will be charged after RERA approves, before your output document is issued."
 
 6. Card — "Payment Method". A vertical radio group with three plain options, first one selected: Card Payment · Bank Transfer · USSD, each with a short grey helper line beneath.
 
@@ -320,7 +320,7 @@ Workspace content, top to bottom:
 
 1. Breadcrumb: Projects / PRJ-2026-0014 — Banana Island Villas / Amend Project Details
 
-2. Page header row: heading "Review Application" on the left. On the right, secondary button "Save Draft" and blue primary button "Submit for Inspection & Enforcement Officer Review".
+2. Page header row: heading "Review Application" on the left. On the right, secondary button "Save Draft" and blue primary button "Submit for Survey Department Review".
 
 3. Application metadata strip, same five fields as the previous steps, but STATUS pill now reads "Ready for Review".
 
@@ -346,12 +346,12 @@ Workspace content, top to bottom:
 
 10. Card — "Declaration". A checked checkbox with the standard accuracy declaration text.
 
-11. Bottom-right: blue primary button "Submit for Inspection & Enforcement Officer Review".
+11. Bottom-right: blue primary button "Submit for Survey Department Review".
 ```
 
 ---
 
-## S24 – 07 · Application Submitted — Inspection & Enforcement Officer Review
+## S24 – 07 · Application Submitted — Survey Department Review
 
 ```
 Create a new screen frame named "S24 – 07 Submitted for Survey Review", 1440px wide, light grey background.
@@ -360,7 +360,7 @@ Layer structure exactly:
 - S24 – 07 Submitted for Survey Review
   - RED-Sidebar       (instance of the existing sidebar component — active nav item = "Applications")
   - MainContent
-    - TopBar          (instance of the existing top bar component — title "Submitted for Inspection & Enforcement Officer Review", subtitle "Amend Project Details")
+    - TopBar          (instance of the existing top bar component — title "Submitted for Survey Department Review", subtitle "Amend Project Details")
     - Workspace
 
 Reuse existing components and styles from this file wherever one already exists — cards, buttons, status pills, label/value rows, success icon treatment, numbered list rows.
@@ -371,19 +371,19 @@ Workspace content, top to bottom:
 
 1. One centred card, roughly 720px wide:
    - A single green circular check icon, centred, modest in size
-   - Heading, centred: "Submitted for Inspection & Enforcement Officer Review"
-   - Sub-line, centred, grey: "Your amendment is first confirmed by the Inspection & Enforcement Officer before RERA makes a final decision."
+   - Heading, centred: "Submitted for Survey Department Review"
+   - Sub-line, centred, grey: "Your amendment is first confirmed by the Survey Department before RERA makes a final decision."
    - The reference, centred and large: APP-2026-0241
    - A divider
    - A two-column label/value grid:
        Service Name: Registration/Amendment of Real Estate Project Details
-       Status: Inspection & Enforcement Officer Review (status pill)
+       Status: Survey Department Review (status pill)
        Submitted On: Aug 18, 2026 — 9:20 AM
        Submitted By: Adaeze Nwosu
        Stage 1 Fee Paid: ₦26,500
 
 2. Card — "What Happens Next". Three numbered rows, each with a number badge, a short bold label and one grey line beneath:
-   1  Inspection & Enforcement Officer Confirms Data — Reviews the updated details against survey records.
+   1  Survey Department Confirms Data — Reviews the updated details against survey records.
    2  RERA Review — RERA's Compliance & Escrow Auditor makes the final decision.
    3  Second Fee & Output — After approval, a second fee is charged, then your Electronic Certificate of Title or Electronic Map is issued, depending on the project's completion status.
 
@@ -425,7 +425,7 @@ Workspace content, top to bottom:
    Draft — Aug 17, 2026, 10:50 AM — Adaeze Nwosu  (complete)
    Application Fee Paid — Aug 18, 2026, 9:05 AM — ₦26,500, PAY-2026-01130  (complete)
    Submitted — Aug 18, 2026, 9:20 AM — Adaeze Nwosu  (complete)
-   Inspection & Enforcement Officer Review — Aug 18, 2026, 2:40 PM — Confirmed via Meridian Geospatial Surveys Ltd., SUR-2026-00847  (complete)
+   Survey Department Review — Aug 18, 2026, 2:40 PM — Confirmed via Meridian Geospatial Surveys Ltd., SUR-2026-00847  (complete)
    Under Review — Aug 19, 2026, 8:10 AM — RERA, Compliance & Escrow Auditor  (current)
    Approved — Pending  (future)
    Approval Fee Pending — Pending  (future)
@@ -518,7 +518,7 @@ Workspace content, top to bottom:
    Draft — Aug 17, 2026, 10:50 AM — Adaeze Nwosu  (complete)
    Application Fee Paid — Aug 18, 2026, 9:05 AM — ₦26,500, PAY-2026-01130  (complete)
    Submitted — Aug 18, 2026, 9:20 AM — Adaeze Nwosu  (complete)
-   Inspection & Enforcement Officer Review — Aug 18, 2026, 2:40 PM — Confirmed  (complete)
+   Survey Department Review — Aug 18, 2026, 2:40 PM — Confirmed  (complete)
    Under Review — Aug 19, 2026, 8:10 AM — RERA, Compliance & Escrow Auditor  (complete)
    Approved — Aug 21, 2026, 11:30 AM — RERA, Compliance & Escrow Auditor  (complete)
    Approval Fee Paid — Aug 21, 2026, 11:52 AM — ₦63,000, PAY-2026-01158  (complete)
@@ -571,7 +571,7 @@ Workspace content, top to bottom:
    Draft — Jul 4, 2026 — Adaeze Nwosu  (complete)
    Application Fee Paid — Jul 5, 2026 — ₦25,000 + levy  (complete)
    Submitted — Jul 5, 2026 — Adaeze Nwosu  (complete)
-   Inspection & Enforcement Officer Review — Jul 6, 2026 — Confirmed  (complete)
+   Survey Department Review — Jul 6, 2026 — Confirmed  (complete)
    Under Review — Jul 8, 2026 — RERA, Compliance & Escrow Auditor  (complete)
    Approved — Jul 12, 2026 — RERA, Compliance & Escrow Auditor  (complete)
    Approval Fee Paid — Jul 12, 2026 — ₦60,000 + levy  (complete)
