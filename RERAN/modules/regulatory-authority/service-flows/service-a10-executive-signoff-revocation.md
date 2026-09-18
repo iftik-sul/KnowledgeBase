@@ -107,8 +107,8 @@ An escalation is **Pending Sign-off**, **Authorised**, or **Declined**.
 ## 14. Possible Outcomes
 
 - **Authorised** — the revocation / instrument / final action is signed and returned to
-  execute.
-- **Declined** — sent back to the originating tier with reasons.
+  execute (`M-GOV-01`).
+- **Declined** — sent back to the originating tier with reasons (`M-GOV-02`).
 
 ## 15. Cross-Module Dependencies
 
@@ -126,7 +126,7 @@ An escalation is **Pending Sign-off**, **Authorised**, or **Declined**.
 ## 17. UI Screens
 
 - **Sign-off queue** — matters pending executive authorisation.
-- **Sign-off view** — the escalation, recommendation, and record; authorise/decline with
+- **Sign-off detail** — the escalation, recommendation, and record; authorise/decline with
   reasons.
 
 ## 18. API Requirements
