@@ -8,13 +8,12 @@ updated: 2026-09-18
 derived_from:
   - "RERAN/modules/regulatory-authority/service-flows/service-a7-conduct-site-inspection.md"
   - "RERAN/modules/regulatory-authority/ui/screen-archetypes.md"
-tags: [regulatory-authority, ui-spec, inspection, report, mobile]
+tags: [regulatory-authority, ui-spec, inspection, report]
 ---
 
 # Screen: Inspection Report
 
-**Archetype:** 2 — Detail (read-only report). **Form factor: mobile / tablet** for the field officer;
-also viewable on desktop by the consuming decision service.
+**Archetype:** 2 — Detail (read-only report). Desktop back-office.
 **Access (RBAC-gated):** Inspection & Enforcement Officer (author). The report is **consumed** by A-1
 Application Review (the decision reviewer reads it). Navigation is governed by [role-screen-matrix.md](../role-screen-matrix.md).
 
@@ -30,14 +29,15 @@ was found on site, so a decision can be made on verified ground truth.
 
 ## Layout
 
-* **Visible Sidebar:** none on mobile (field view); the desktop A-1 consumer opens it as a linked
-  panel/record from Application Review.
+* **Visible Sidebar:** Back-Office Sidebar (role-scoped)
 * **Top Bar Title:** {Site / project} — Inspection Report
-* **Breadcrumb (desktop consumer view):** Application Review › Inspection Report
+* **Breadcrumb:** the A-1 reviewer opens it as a linked record from Application Review
+  (Application Review › Inspection Report); the officer opens it from the Inspection Queue
+  (Inspection Queue › {Site / project}).
 
 ```
-Top Bar → Report header → Site + geo-tag result → Milestone results → Findings + evidence →
-Overall result → (returned to dependent decision)
+Top Bar → Breadcrumb → Report header → Site + geo-tag result → Milestone results →
+Findings + evidence → Overall result → (returned to dependent decision)
 ```
 
 ## Sections
@@ -66,7 +66,8 @@ dependent A-1 decision (or an A-8 enforcement action, deferred).
 
 ## Role Variations / Permissions
 
-- **Inspection & Enforcement Officer** authors/views the report (read-only once submitted).
+- **Inspection & Enforcement Officer** authors/views the report (read-only once submitted), reached
+  from the Inspection Queue.
 - **A-1 reviewer** (C&E Auditor / Licensing Officer) consumes it read-only from Application Review as
   the field-check evidence for a decision. The report does not itself make the decision.
 

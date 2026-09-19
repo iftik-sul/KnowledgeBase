@@ -8,33 +8,32 @@ updated: 2026-09-18
 derived_from:
   - "RERAN/modules/regulatory-authority/service-flows/service-a7-conduct-site-inspection.md"
   - "RERAN/modules/regulatory-authority/ui/screen-archetypes.md"
-tags: [regulatory-authority, ui-spec, inspection, capture, mobile]
+tags: [regulatory-authority, ui-spec, inspection, capture]
 ---
 
 # Screen: Inspection Capture
 
-**Archetype:** Capture / Form (on-site). **Form factor: mobile / tablet** — used in the field at the
-building, not at a desk (per A-7 service flow).
+**Archetype:** Capture / Form (on-site data entry). Desktop back-office.
 **Access (RBAC-gated):** Inspection & Enforcement Officer. MFA required. Navigation is governed by [role-screen-matrix.md](../role-screen-matrix.md).
 
 The on-site data-capture screen (A-7): the officer records geo-tagged findings, photos, and milestone
-verification while physically at the site. Reached by tapping a scheduled inspection in the
+verification from a site visit. Reached by opening a scheduled inspection from the
 [Inspection Queue](inspection-queue.md). On completion it produces the
 [Inspection Report](inspection-report.md).
 
 ## Purpose
 
-Let the officer capture geo-tagged, evidenced findings on the ground — the things documents alone
-cannot confirm — quickly and reliably from a phone/tablet.
+Let the officer record geo-tagged, evidenced findings from a site visit — the things documents alone
+cannot confirm — into a single structured form.
 
-## Layout (mobile / tablet)
+## Layout
 
-* **Visible Sidebar:** none — mobile top bar with a Back affordance to the queue.
+* **Visible Sidebar:** Back-Office Sidebar (role-scoped)
 * **Top Bar Title:** {Site / project} — Inspection
-* Single-column, stacked, touch-first form.
+* **Breadcrumb:** Inspection Queue › {Site / project}
 
 ```
-Mobile Top Bar → Site header (with geo-tag capture) → Milestone / checklist → Findings +
+Top Bar → Breadcrumb → Site header (with geo-tag) → Milestone / checklist → Findings +
 Photo evidence → Overall result → Submit (produces report)
 ```
 
@@ -42,13 +41,13 @@ Photo evidence → Overall result → Submit (produces report)
 
 ### Section 1 — Site header + geo-tag
 
-Site / project reference and filed location, plus a **Capture location** control that records the
-device's geo-tag and shows it against the filed location (match / mismatch indicator). Geo-tagging is
-mandatory (A-7 business rule).
+Site / project reference and filed location, plus a **geo-tag** field recording the captured visit
+coordinates against the filed location (match / mismatch indicator). Geo-tagging is mandatory (A-7
+business rule).
 
 ### Section 2 — Milestone / checklist
 
-The inspection checklist for the matter — each item a pass/fail/NA control (mobile toggle or radio),
+The inspection checklist for the matter — each item a pass/fail/NA control (Checkbox/radio group),
 e.g. construction milestone verification for a RED field visit.
 
 > **Proposed** — the specific checklist items are not detailed in current source (A-7 §7 marks the
@@ -56,8 +55,8 @@ e.g. construction milestone verification for a RED field visit.
 
 ### Section 3 — Findings + photo evidence
 
-Per finding: a short note (text) + one or more **photos** captured from the device camera. Evidence
-must be attached (A-7 business rule: findings geo-tagged and evidenced).
+Per finding: a short note (text) + one or more **photos** (uploaded/attached). Evidence must be
+attached (A-7 business rule: findings geo-tagged and evidenced).
 
 ### Section 4 — Overall result
 
@@ -76,6 +75,5 @@ cannot submit without a captured geo-tag and at least the required evidence.
 
 ## Notes
 
-- **Mobile/tablet form factor**, camera + location permissions required. Design for one-handed,
-  on-site use.
+- Desktop back-office, same 1440×927 shell as every other Regulatory Authority screen.
 - Geo-tag and evidence are mandatory before submit (A-7 acceptance criteria).
