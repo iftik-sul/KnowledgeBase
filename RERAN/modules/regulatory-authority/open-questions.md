@@ -156,6 +156,8 @@ shipped a broken path.
   a building. Every other Regulatory Authority screen is desk-based back-office. These screens
   therefore need a phone/tablet form factor — a different design shape from the rest of
   the module.
+  *(Superseded 2026-09-18: the client decided all screens are desktop-only; the
+  inspection screens were specced and built as desktop back-office like the rest.)*
 - All eight roles remain defined in RBAC regardless; this decision concerns functional
   screens only.
 
@@ -240,3 +242,40 @@ cross-references in RED, FTI and RESC) by
 
 `(RA)` replaces `(Group A)` in parenthetical role tags — e.g. **Compliance & Escrow
 Auditor** (RA) — and `[RA]` in the chain diagrams. Prose uses the full name.
+
+## A9 — Audit Trail visibility of access-control actions *(resolved 2026-09-18)*
+
+The Audit Trail is one shared, module-wide, append-only record — every role reaches it
+read-only (audit-trail.md), with filtering (actor, action type, date range, subsystem,
+item reference) rather than per-role siloing as the way to narrow the view. Confirmed
+correct: a role-siloed audit trail would defeat the accountability purpose, so decision
+and config actions remain visible to all roles.
+
+**But access-control actions are the exception.** Question raised: should sensitive
+access-control actions (Super Admin's role assignments, account activations/suspensions/
+deactivations, MFA resets — the A-6 "access" action type) be visible to every ordinary
+officer, or only to oversight roles?
+
+**Resolved: only to oversight roles — System Super Administrator and Director-General /
+Registrar.** Access/security events are hidden from ordinary operational roles (C&E
+Auditor, Licensing Officer, Dispute Officer, Revenue & Finance Officer, Inspection &
+Enforcement Officer). Everyone still sees decision and config actions; the **access**
+action-type rows are gated to the two oversight roles.
+
+Rationale: revealing who was granted/revoked which permission, whose account was
+suspended, or whose MFA was reset to every staff member is a security-information-
+disclosure risk with no operational benefit to non-oversight officers. Restricting it is
+the more defensible posture and does not weaken accountability — the oversight roles that
+review access decisions still see the full access trail.
+
+**Consequences to carry into the specs and screens:**
+
+- audit-trail.md: the earlier statement that the A-6 "Access audit" is simply "this
+  screen filtered to access actions" is refined — access-action rows are RBAC-gated to
+  Super Admin + DG/Registrar, not visible to other roles.
+- On the built Audit Trail screens: the five ordinary-officer Audit Trails (C&E,
+  Licensing, Dispute, Revenue & Finance, Inspection) must NOT show access-type rows in
+  their sample content; the two oversight Audit Trails (Super Admin, DG/Registrar) DO show
+  them. Decision and config rows appear on all seven.
+- This is an additional row-level RBAC rule on one action-type, not a new screen or a
+  siloing of the trail as a whole.
