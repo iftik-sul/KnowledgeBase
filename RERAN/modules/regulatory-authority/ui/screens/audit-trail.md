@@ -59,9 +59,23 @@ Row click → read-only detail of the entry.
 
 - **All roles: read-only.** The audit trail cannot be edited or deleted by anyone,
   including Super Admin (append-only).
-- Super Admin's access-change entries and decision entries share this one trail; the
-  "Access audit" referenced by A-6 is this screen filtered to access actions.
+- **Decision and config actions are visible to all roles.** The trail is one shared,
+  module-wide record; narrowing the view is done by **filtering** (actor, action type,
+  date range, subsystem, item reference), never by giving each role a siloed trail.
+- **Access-control actions are gated to oversight roles (open-questions A9, resolved
+  2026-09-18).** The `access` action type — role assignments, account activations /
+  suspensions / deactivations, MFA resets (the A-6 access actions) — is visible **only to
+  the System Super Administrator and the Director-General / Registrar**. Ordinary
+  operational roles (C&E Auditor, Licensing Officer, Dispute Officer, Revenue & Finance
+  Officer, Inspection & Enforcement Officer) do **not** see access-type rows. This is a
+  row-level RBAC rule on one action-type, not a siloing of the trail as a whole — those
+  roles still see every decision and config entry.
+- The "Access audit" referenced by A-6 is this screen filtered to access actions, shown
+  to the two oversight roles that are permitted to see them.
 
 ## Notes
 
 - Append-only by design; there is no edit or delete action anywhere on this screen.
+- Sample content per role: the five ordinary-officer Audit Trails show only decision and
+  config rows; the Super Admin and DG / Registrar Audit Trails additionally show access
+  rows.
