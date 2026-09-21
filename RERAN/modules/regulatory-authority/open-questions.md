@@ -4,7 +4,7 @@ module: regulatory-authority
 type: open-questions
 status: draft
 contains_proposals: true
-updated: 2026-09-18
+updated: 2026-09-21
 ---
 
 # Regulatory Authority — Open Questions
@@ -279,3 +279,36 @@ review access decisions still see the full access trail.
   them. Decision and config rows appear on all seven.
 - This is an additional row-level RBAC rule on one action-type, not a new screen or a
   siloing of the trail as a whole.
+
+## A10 — How dispute cases get assigned to an officer *(OPEN — with client 2026-09-21)*
+
+The dispute service (A-3 §12) makes **"Assign to Dispute Adjudication Officer"** an
+explicit lifecycle step (`Filed → Assigned`), and A6 established that dispute cases are
+**"assigned to a named officer"** — deliberately unlike the auditor work queues, which
+are a shared claim-on-open pool. But **the source does not say who assigns a case or
+how.** This is the open question.
+
+Three candidate models (not yet decided — **with the client**):
+
+1. **Self-assign / claim.** Filed cases sit unassigned; an officer opens one and clicks
+   "Assign to me," which sticks it to them (unlike the auditor's 30-minute lapse, a
+   dispute claim is permanent). Needs no new role. Consistent with A6 having removed any
+   senior/junior tier. **Proposed default if the client has no preference.**
+2. **Auto-assign by rule.** The system assigns on filing (round-robin / load-balanced);
+   officers receive a caseload with no assign action in the UI.
+3. **Supervisor-assigned.** A lead/registrar dockets cases to officers — the most literal
+   reading of "assigned to a named officer," and closest to how real tribunals work, but
+   it **requires a supervisory role that does not currently exist** (A6 removed the senior
+   tier for auditors; there is no dispute-lead role defined).
+
+**Why it matters / what it blocks:** the choice changes what the Case Queue and Case
+Workspace show for a not-yet-assigned case — an "Assign to me" button (model 1), nothing
+(model 2), or a supervisor's assign control (model 3) — and whether a "supervisor/lead"
+role needs adding to the RBAC model (model 3 only).
+
+**Built in the meantime (model-agnostic):** the Case Workspace now shows an **"Assigned
+to"** field and the Case Queue an **"Assigned to"** column, both displaying the
+adjudicator's name where a case is assigned and **"Unassigned"** where it is not. This is
+correct under all three models — only the *mechanism* of assignment is unresolved, not
+the display of it. The "Assign to me" affordance (model 1) or a supervisor control (model
+3) is deliberately **not** built until the client decides.
