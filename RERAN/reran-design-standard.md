@@ -38,9 +38,9 @@ B splits the two **surface types** (back-office vs portal), because some rules d
 ## A0. Golden rules
 1. **Bind to tokens/components, never raw hex or hand-built substitutes.** Use A1's tokens and A4's
    components.
-2. **Use the shared component; don't hand-build what exists.** Stat cards, top bars, sidebars, badges,
-   buttons, inputs, pagination, icons are all components. Compose only what has no component (tables,
-   card sections, panels), per A5.
+2. **Use the canonical component; don't hand-build what exists.** Stat cards, top bars, sidebars,
+   badges, buttons, inputs, pagination, icons are all components. Compose only what has no component
+   (tables, card sections, panels), per A5.
 3. **Adapt, don't reinvent.** Every new screen has a close sibling already built — mirror its structure,
    change only content.
 4. **Don't invent content.** Status words come from the module's `status-badges.md`; RA nav/guards from
@@ -83,26 +83,41 @@ Every screen frame is **1440 × 927**, fixed. Never auto/hug, never a stray 917/
 than 927 scrolls inside the frame (the frame is a viewport window, not a fit-to-content box) — resize
 the outer frame to 927, never squash the content. Sidebar and any full-height element span the full 927.
 
-## A4. Shared components (instance these — never hand-build)
-- **Stat / KPI card** — the canonical stat tile: white, `N30` border, radius 14, **no icon**, props
-  Label (all-caps `N400`) / Value (`Heading 5` `N900`) / Sublabel (`Small/Regular` `N400`). Flex-1 in a
-  row. (Legacy `SummaryCard`/`MetricCard`/hand-built KpiCard are retired — instance the shared card.)
-- **Top bar** (`Background+HorizontalBorder`) — 1200×78, white; props Title/Subtitle/Name/Role; carries
-  the notification bell + profile block. Never hand-build a "TopBar" frame.
-- **Sidebar** — 240×927, white, construction: SidebarHeader (78, RERA logo) / SidebarNav
-  (NavItem + one NavItemActive at `blue-600`) / SidebarFooter (Sign Out). **One sidebar component per
-  module** (RA-Sidebar, FI-Sidebar, RED-Sidebar, …) — same construction, module-specific nav items. No
-  per-item count badges.
-- **`Badge`** — the ONLY status/label asset. Size sm, Icon False; set the **Color** prop per the
-  module's status vocabulary (A8). Never hand-build a status pill.
-- **`Buttons/Button`** — Hierarchy Primary/Secondary color/Secondary gray/Tertiary/Link; Size sm–xl.
-  **⚠ Primary defaults to `Brand/600` purple — override its fill to `blue-600` on every instance.**
-- **`Buttons/Button destructive`** — same API; its default `Red/600` is correct, no override. Reject/
-  delete/dismiss.
+## A4. Canonical components (instance these — never hand-build)
+> **These are local components on the Regulatory Body (RA) page — not a published team library.** Any
+> screen on any page in this file instances them from there; cross-page component use within the file
+> works natively (the FTI/RED portal already does this — 21 of its instances point back to RA-page
+> components). Reference by name + node ID: the name is the durable anchor, the node ID the precise
+> pointer (an ID only goes stale if the component is deleted and rebuilt). `Badge`, `Buttons/Button`,
+> the form/identity atoms, and icons are different — they come from the **published UI-kit library**
+> (remote components), and are referenced by name only, as before.
+
+- **Stat / KPI card** (RA-page-local, node `1692:528`) — the canonical stat tile: white, `N30` border,
+  radius 14, **no icon**, props Label (all-caps `N400`) / Value (`Heading 5` `N900`) / Sublabel
+  (`Small/Regular` `N400`). Flex-1 in a row. (Legacy `SummaryCard`/`MetricCard`/hand-built KpiCard are
+  retired — instance this one.)
+- **Top bar** (`Background+HorizontalBorder`, RA-page-local, node `1692:536`) — 1200×78, white; props
+  Title/Subtitle/Name/Role; carries the notification bell + profile block. Never hand-build a "TopBar".
+- **Sidebar** (`RA-Sidebar`, RA-page-local, node `1667:43811`, 8 persona variants) — 240×927, white,
+  construction: SidebarHeader (78, RERA logo) / SidebarNav (NavItem + one NavItemActive at `blue-600`)
+  / SidebarFooter (Sign Out). **One sidebar component per module** (RA-Sidebar, FI-Sidebar,
+  RED-Sidebar, …) — same construction, module-specific nav items. No per-item count badges.
+- **`Filter Dropdown`** (RA-page-local, node `1724:506`, 105×40) — the canonical table filter trigger.
+- **`Search Bar`** (RA-page-local, node `1733:55348`, 180×40) — the canonical table search field.
+- **`Pagination`** (RA-page-local, node `1712:376`, 1136×64) — table footer, "Showing 1–N of M",
+  32×32 rounded-8 prev/next + active page.
+- **`Badge`** (published UI-kit library) — the ONLY status/label asset. Size sm, Icon False; set the
+  **Color** prop per the module's status vocabulary (A8). Never hand-build a status pill.
+- **`Buttons/Button`** (published UI-kit library) — Hierarchy Primary/Secondary color/Secondary
+  gray/Tertiary/Link; Size sm–xl. **⚠ Primary defaults to `Brand/600` purple — override its fill to
+  `blue-600` on every instance.**
+- **`Buttons/Button destructive`** (published UI-kit library) — same API; its default `Red/600` is
+  correct, no override. Reject/delete/dismiss.
 - **`Input field`** / **`Textarea input field`** / **`Verification code input field`** / **`Checkbox`**
-  / **`Dropdown menu`** / **`Avatar`** (+ label group) — the form + identity atoms.
-- **`Pagination`** — table footer, "Showing 1–N of M", 32×32 rounded-8 prev/next + active page.
-- **Icon library** — the categorized icon frames on the Component library page. Pull all icons here.
+  / **`Dropdown menu`** / **`Avatar`** (+ label group) (published UI-kit library) — the form + identity
+  atoms.
+- **Icon library** (published UI-kit library) — the categorized icon frames on the Component library
+  page. Pull all icons here.
 
 ## A5. Composed patterns (no component — build to spec)
 - **Breadcrumb** — real `PathSegment`s (label + 14px `Chevron Right` icon), non-final = `blue-600`
@@ -140,12 +155,12 @@ Core rules (all types):
    `colW[i] = floor(available × prop[i]/100)`; remainder → Col 0, so `sum(colW)+gaps = rowWidth`.
    Typical proportions: primary id ~45% · short label ~12% · date ~13% · status ~16% · action ~14%.
 6. **Pagination — by table role, not by current row count.** The **primary full-page table** of a
-   queue/list/editor screen (Types B, C, D, and standalone E) **always ends with the `Pagination`
-   component instance** — the real dataset spans many pages even when the mock shows only ~8–11 rows.
-   An **embedded sub-table** (a Type-A simple table inside a Dashboard section or a detail card — e.g.
-   "Recent Activity", a documents sub-list) has **no pagination**; it shows a short fixed set (~5) and
-   uses a "See All" link instead if more exist. Rule of thumb: *if the table is the screen's main
-   content it paginates; if it's a widget inside another section it doesn't.*
+   queue/list/editor screen (Types B, C, D, and standalone E) **always ends with an instance of the
+   `Pagination` component (RA page, `1712:376`)** — the real dataset spans many pages even when the
+   mock shows only ~8–11 rows. An **embedded sub-table** (a Type-A simple table inside a Dashboard
+   section or a detail card — e.g. "Recent Activity", a documents sub-list) has **no pagination**; it
+   shows a short fixed set (~5) and uses a "See All" link instead if more exist. Rule of thumb: *if the
+   table is the screen's main content it paginates; if it's a widget inside another section it doesn't.*
 
 ### A5a.1 — Type A: Simple table
 Header + data, no filter, no title, no wrapping card. Sub-section of a screen (dashboard activity,
@@ -158,10 +173,10 @@ card. The queue/list workhorse. *RA ref:* Work Queue, Audit Trail, Case Queue, R
 Table card (VERTICAL, FILL×HUG, white, N30 border, r12, clipsContent)
 ├─ Controls (VERTICAL, gap 16, pad 20/20/16/20)
 │   ├─ Title row (HORIZONTAL, FILL×HUG) — section title left
-│   └─ Filters (HORIZONTAL, gap 12, h40) — Search Bar + Filter Dropdown instances
+│   └─ Filters (HORIZONTAL, gap 12, h40) — Search Bar (`1733:55348`) + Filter Dropdown (`1724:506`) instances
 ├─ Header row
 ├─ Data row × N
-└─ Pagination (component instance, FILL×HUG)
+└─ Pagination (`1712:376`, FILL×HUG)
 ```
 
 ### A5a.3 — Type C: Table with title-action button
@@ -332,7 +347,8 @@ cards; don't impose B1's back-office shell rules where they don't fit.
 - Nav/visibility: `role-screen-matrix.md`. Guards/step-up: `validation-rules.md`.
 - RA is the only module where RBAC genuinely gates access; the only place `figma-prompts/` was removed
   (design lives in Figma, not prompt files). **RA tables and cards are the canonical reference for
-  A5a/A6 — never changed; other modules harmonise to them.**
+  A5a/A6 — never changed; other modules harmonise to them.** The 6 RA-page-local components (A4) are
+  instanced cross-page by every other module; nothing here needs a published library.
 
 ## C2. FTI + RED (the "Financial & Real Estate" portal page)
 - **Two module families share one page** — FTI (institution services) and RED (developer services),
@@ -355,9 +371,10 @@ A9; tables/cards → A5a/A6. No module-specific components beyond its own sideba
 ---
 
 ## Do / Don't (platform-wide)
-- ✅ Instance the shared components; bind to A1 tokens; mirror a built reference; Badge for every status
-  (Color by A8); override Primary buttons to `blue-600`; 1440×927; Nigerian data; build tables/cards to
-  the A5a/A6 taxonomies (all-FIXED cells, 48px rows, no table header fill; white/`N30`/r12 cards with
+- ✅ Instance the canonical RA-page-local components (A4, by name + node ID) and the published UI-kit
+  components (by name); bind to A1 tokens; mirror a built reference; Badge for every status (Color by
+  A8); override Primary buttons to `blue-600`; 1440×927; Nigerian data; build tables/cards to the
+  A5a/A6 taxonomies (all-FIXED cells, 48px rows, no table header fill; white/`N30`/r12 cards with
   `N20` sub-cards); row-action buttons are the ONE borderless text-link style (blue-600 normal,
   Red/600 destructive); the main table paginates, an embedded sub-table doesn't; verify against Figma.
 - ❌ Raw hex; hand-built pills/cards/sidebars/top bars; grey table-header bars; 46px rows; HUG/FILL
