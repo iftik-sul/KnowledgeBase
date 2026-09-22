@@ -163,9 +163,26 @@ Fee Entry", "Invite Staff"). *RA ref:* Fee Schedule "Fee Entries", Admin Console
 button and a filters row can coexist.
 
 ### A5a.4 — Type D: Table with row actions
-Each data row ends with an action control (`Buttons/Button` "Review"/"Edit", or icon/link) in a FIXED
-rightmost action cell. *RA ref:* Fee Schedule (Edit per row), Application Review documents (Review per
-row). Destructive row action → `Buttons/Button destructive`. Action cell FIXED, never HUG.
+Each data row ends with an action control in a **FIXED rightmost action cell** (never HUG). The action
+cell holds one of three button styles, chosen by what the action does — this is a real, verified RA
+pattern, not a free choice:
+
+| Row action does… | Button | Style (verified on canvas) | RA ref |
+| :-- | :-- | :-- | :-- |
+| **Opens / views** (drill into a detail, "Review", "View", "Open") | `Buttons/Button`, **Hierarchy = Link color**, Size sm | borderless, no fill, **`blue-600` text**, ~20 tall | Application Review "Review" per document row |
+| **Edits / manages** (changes the record, "Edit", "Manage") | `Buttons/Button`, **Hierarchy = Secondary gray**, Size sm | **white fill, `N40` border**, radius 8, ~36 tall, `N900` label | Fee Schedule "Edit" per row |
+| **Removes / revokes** ("Delete", "Revoke", "Deactivate") | `Buttons/Button destructive`, Size sm | destructive `Red/600` (default, no override) | — |
+
+Rules:
+- **Navigational actions use the Link-color button** (borderless blue) — lighter, reads as "go look".
+- **Operative actions use the Secondary-gray button** (bordered) — more button-like, reads as "do".
+- **Removing actions use the destructive button.**
+- Size is always **sm**. The action cell is FIXED width (~110–120), the button left- or centre-aligned
+  in it consistently down the column.
+- A row may also have **no button** — the whole row is click-to-open instead (e.g. Practitioner
+  Register rows open Entry Detail on row click). That's valid; don't add a redundant "View" button.
+- Never use a Primary (blue-filled) button as a row action — Primary is reserved for the screen's main
+  action (title-action button, decision panel), not per-row.
 
 ### A5a.5 — Type E: Bare table wrapped in a card
 A Type-A simple table given its own container (white, `N30` border, r12, clipsContent) when standalone.
@@ -335,8 +352,9 @@ A9; tables/cards → A5a/A6. No module-specific components beyond its own sideba
 - ✅ Instance the shared components; bind to A1 tokens; mirror a built reference; Badge for every status
   (Color by A8); override Primary buttons to `blue-600`; 1440×927; Nigerian data; build tables/cards to
   the A5a/A6 taxonomies (all-FIXED cells, 48px rows, no table header fill; white/`N30`/r12 cards with
-  `N20` sub-cards); verify against Figma.
+  `N20` sub-cards); row-action buttons per A5a.4 (Link=view, Secondary gray=edit, destructive=remove);
+  verify against Figma.
 - ❌ Raw hex; hand-built pills/cards/sidebars/top bars; grey table-header bars; 46px rows; HUG/FILL
-  cells; underlined cell text; a Primary button left purple; a Badge showing "Label"; a breadcrumb on a
-  top-level screen; Liberation Mono; off-927 heights; inventing status words; forcing back-office shell
-  rules onto portal flow screens; pushing to GitHub without approval.
+  cells; underlined cell text; a Primary button left purple or as a table row action; a Badge showing
+  "Label"; a breadcrumb on a top-level screen; Liberation Mono; off-927 heights; inventing status words;
+  forcing back-office shell rules onto portal flow screens; pushing to GitHub without approval.
