@@ -3,14 +3,14 @@ project: RERAN
 type: skill
 scope: figma-build
 status: draft
-updated: 2026-09-21
+updated: 2026-09-22
 description: >
   The RERAN-wide Figma design standard. Read this BEFORE building or prompting ANY screen in ANY module
   (Regulatory Authority, FTI, RED, Individual User, Public Users, Allied Professionals, RESC). It
-  defines the platform's shared tokens, components, status vocabulary, geometry, and typography, plus
-  the old-hex→token migration map used to harmonise legacy screens. Section A is universal (all
-  modules). Section B is surface-specific (back-office vs applicant portal). Section C is per-module
-  specifics. This supersedes the RA-only scope of the former figma-build-rules.md.
+  defines the platform's shared tokens, components, status vocabulary, geometry, typography, the full
+  table and card taxonomies, plus the old-hex→token migration map used to harmonise legacy screens.
+  Section A is universal (all modules). Section B is surface-specific (back-office vs applicant portal).
+  Section C is per-module specifics. This supersedes the RA-only scope of the former figma-build-rules.md.
 authorities:
   - "Each module's ui/status-badges.md — the status vocabulary for that module"
   - "regulatory-authority/ui/role-screen-matrix.md, validation-rules.md — RA nav + guards"
@@ -105,21 +105,139 @@ the outer frame to 927, never squash the content. Sidebar and any full-height el
 - **Icon library** — the categorized icon frames on the Component library page. Pull all icons here.
 
 ## A5. Composed patterns (no component — build to spec)
-- **Card** — white, `N30` border, radius 12, px-24 py-20; title `Body/Medium` `N900` (+ inline Badge if
-  it carries status); optional footer: `N30` top border + action links (16px icon + `Caption/Medium` 13
-  `blue-600`).
-- **Nested double-card** — for grouped read-only fields: outer Card; inside, field-group sub-cards
-  filled `N20`, radius 8, no border, padding 16 — group label (`Semi Bold` 13 `N900`) then field pairs
-  (label `Small/Regular` 12 `N400` over value 13 `N900`).
-- **Table row** — padding 12, gap 16, bottom border `N40`, cells 13 (`N900`/`N400`); reference/ID cell =
-  `blue-600` Semibold underlined link; status cell = real Badge. Bare or wrapped in a titled card —
-  consistent within a screen.
 - **Breadcrumb** — real `PathSegment`s (label + 14px `Chevron Right` icon), non-final = `blue-600`
   Medium 13 links, final = `N400` Regular 13 no chevron. **Drill-down screens only** — a top-level
   sidebar destination never gets one.
 - **Empty state** — centred illustration + one line of `Caption`/`Small` guidance.
 - **Info/warning banner** — rounded-12, tinted background (the semantic `*/50` token), icon chip +
   title (`Semi Bold` 13) + description (`Regular` 12).
+- **Tables** and **Cards** — the two big composed patterns — have their own full taxonomies in A5a and
+  A6 below.
+
+## A5a. TABLES — complete taxonomy (canonical from RA; FTI/RED harmonise to this)
+Five table archetypes, all sharing one core row/cell construction. RA tables are canonical and NOT
+changed; FTI/RED tables harmonise to match (see A5a.7).
+
+### A5a.0 — Core construction (EVERY table type)
+```
+Header row  (HORIZONTAL, FILL×HUG ~38–40, gap 12, pad 12/20/12/20)
+            NO fill (transparent, inherits white) · N40 bottom-only stroke
+            cell text: Caption/Medium 13, N400
+Data row × N (HORIZONTAL, FILL×FIXED 48, gap 12, pad 0/20/0/20)
+            NO fill · N40 bottom-only stroke · counter-align CENTER
+            Col 0 (primary id): Inter Semi Bold 13, blue-600 (link) or N900
+            other cols: Inter Regular 13, N900 (or N400 secondary)
+            status col: real Badge instance (sm), left-aligned
+```
+Core rules (all types):
+1. **Every cell — header AND data — is `FIXED` width.** Never HUG/FILL. Header and data cell widths
+   identical per column. Badge/button cells sit in a FIXED wrapper.
+2. **Data row height FIXED 48.** Header row HUG (~38–40).
+3. **Row separation = bottom-only `N40` stroke**, not item spacing (spacing 0).
+4. **No underline on any table cell text** (`textDecoration: NONE`); the only underline in the app is a
+   real hyperlink outside a table.
+5. **Column-width formula (always):** `available = rowWidth − (nCols−1)×gap`;
+   `colW[i] = floor(available × prop[i]/100)`; remainder → Col 0, so `sum(colW)+gaps = rowWidth`.
+   Typical proportions: primary id ~45% · short label ~12% · date ~13% · status ~16% · action ~14%.
+
+### A5a.1 — Type A: Simple table
+Header + data, no filter, no title, no wrapping card. Sub-section of a screen (dashboard activity,
+detail sub-list). *RA ref:* Dashboard "Recent Activity".
+
+### A5a.2 — Type B: Table with filter
+Header + data preceded by a Controls block (title + Search Bar + Filter Dropdowns), inside a titled
+card. The queue/list workhorse. *RA ref:* Work Queue, Audit Trail, Case Queue, Register, Notifications.
+```
+Table card (VERTICAL, FILL×HUG, white, N30 border, r12, clipsContent)
+├─ Controls (VERTICAL, gap 16, pad 20/20/16/20)
+│   ├─ Title row (HORIZONTAL, FILL×HUG) — section title left
+│   └─ Filters (HORIZONTAL, gap 12, h40) — Search Bar + Filter Dropdown instances
+├─ Header row
+├─ Data row × N
+└─ Pagination (component instance, FILL×HUG)
+```
+
+### A5a.3 — Type C: Table with title-action button
+Like B (or simple) but the title row carries a right-aligned action button (`Buttons/Button` — "New
+Fee Entry", "Invite Staff"). *RA ref:* Fee Schedule "Fee Entries", Admin Console "Staff". Title-action
+button and a filters row can coexist.
+
+### A5a.4 — Type D: Table with row actions
+Each data row ends with an action control (`Buttons/Button` "Review"/"Edit", or icon/link) in a FIXED
+rightmost action cell. *RA ref:* Fee Schedule (Edit per row), Application Review documents (Review per
+row). Destructive row action → `Buttons/Button destructive`. Action cell FIXED, never HUG.
+
+### A5a.5 — Type E: Bare table wrapped in a card
+A Type-A simple table given its own container (white, `N30` border, r12, clipsContent) when standalone.
+The wrapper Types B/C use, minus the Controls block.
+
+### A5a.6 — NOT tables
+FTI/RED `OverviewCard`/`InstitutionCard`/`ApplicantCard`/`ServiceCard`/`AppDetailsCard`/`SuccessCard`/
+`ConfirmationCard` are **key/value summary cards** (the nested double-card, A6 Type 3), not tables —
+harmonise them as cards.
+
+### A5a.7 — FTI/RED table harmonisation gaps
+| Aspect | RA canonical | FTI/RED current | Fix |
+| :-- | :-- | :-- | :-- |
+| Outer container | white, `N30` border, r12 | often bare | wrap in Type-E card (fill+`N30`+r12) |
+| **Header fill** | **transparent** | **`N20` grey bar** | **remove header fill** |
+| Header bottom stroke | `N40` | `N40` ✓ | keep |
+| **Data row height** | **48** | **46** | set to **48** |
+| **Cell sizing** | **all FIXED** | Col 0 FILL, Badge HUG | make every cell FIXED (A5a.0 r5) |
+| Col 0 weight | Semi Bold 13 | sometimes Regular | Col 0 = Semi Bold |
+| Cell underline | none | occasional | remove (`NONE`) |
+
+## A6. CARDS — complete taxonomy (canonical from RA)
+Five card types; the "single card" and "double nested card" are Types 1 and 3.
+
+### Type 1 — Section card (the single card, base of everything)
+**White, `N30 #EBEDF0` border, radius 12, padding 20/24**, VERTICAL gap 16, FILL×HUG. Most common card.
+```
+Section card
+├─ Title (Body/Medium 16, N900)  [+ inline Badge right, if it carries status]
+├─ ... content ...
+└─ [optional] Footer — N30 top-border + action links (16px icon + Caption/Medium 13, blue-600)
+```
+Variants: title-only · title + inline status Badge · title + footer links · header+metadata (pad 16).
+
+### Type 2 — Field-group sub-card
+Inner unit of a nested double-card (also standalone inside any card). **`N20 #F5F6F7` fill, NO border,
+radius 8, padding 16, gap 8.** The N20 fill is the separator — never border it.
+```
+Field-group card (VERTICAL, N20, r8, no border, pad 16, gap 8)
+├─ Subsection label (Caption/Medium 13, N900)
+└─ Fields row (HORIZONTAL, gap 24) → field × N (VERTICAL, gap 2)
+    ├─ Label (Small/Regular 12, N400)
+    └─ Value (Caption/Medium 13, N900)
+```
+
+### Type 3 — Nested double-card (single card + field-group sub-cards)
+A Type-1 Section card whose content is one or more Type-2 sub-cards. White-outer / N20-inner contrast
+is the point. *RA ref:* Application Summary, Parties & Case Details, Entry Details. FTI/RED
+`OverviewCard`/`InstitutionCard`/`SuccessCard` map here.
+
+### Type 4 — Table card
+A Type-1 card wrapping a table (A5a Types B/C/E). White, `N30`/`N40` border, r12, clipsContent.
+
+### Type 5 — Stat / KPI card (component)
+The metric tile — a component. **White, `N30` border, radius 14** (note 14, not 12), no icon. Props
+Label (all-caps `N400`) / Value (`Heading 5` `N900`) / Sublabel (`Small/Regular` `N400`), flex-1.
+Retired: `SummaryCard`, `MetricCard`, hand-built `KpiCard`.
+
+### Card rules (all types)
+1. **Radius:** 12 (section/table/outer) · **8** (field-group sub-cards, inputs) · **14** (stat card).
+2. **Border:** `N30` on white cards; **none** on `N20` sub-cards (fill separates); `N40` ok on table
+   cards/inputs.
+3. **Nesting = fill contrast:** white outer → `N20` inner. Never white-on-white or a second inner
+   border.
+4. **Padding:** section 20/24 · sub-card 16 · header/metadata 16.
+5. **Title:** `Body/Medium` 16 `N900`; inline status = real Badge, right-aligned.
+6. **Footer (optional):** `N30` top-border + action links (16px icon + `Caption/Medium` 13 `blue-600`).
+
+### FTI/RED card harmonisation
+FTI/RED cards map onto these types (mostly Type 1 or 3). Harmonise: white fill, `N30` border (not
+`#E4E7EC`), radius 12; group fields into Type-2 `N20`/r8/no-border sub-cards; a grey `#F4F5F7`/`#E4E7EC`
+body → `N20` if a sub-card, else white + `N30`.
 
 ## A8. Status = Badge, colour by treatment
 Every status is a `Badge` (Size sm, Icon False) with its **Color** set. Each module's `status-badges.md`
@@ -172,10 +290,10 @@ two-column body → sticky decision panel), Dashboard, Editor/Config.
 ## B2. Applicant portal (FTI, RED, Individual User, …)
 Public/applicant-facing multi-step flows (Application Info → Service Info → Documents → Payment →
 Review → Submit → Details → Confirmation) plus nav screens (catalog, queues, profile, notifications).
-Same tokens/components/status/geometry as A. **But** the "N20 workspace backdrop" and "breadcrumb only
-on drill-down" back-office rules do NOT force onto portal flow screens — a portal step screen has its
-own layout (stepper, form, payment). Apply A's tokens/components/status/geometry; don't impose B1's
-back-office shell rules where they don't fit.
+Same tokens/components/status/geometry/tables/cards as A. **But** the "N20 workspace backdrop" and
+"breadcrumb only on drill-down" back-office rules do NOT force onto portal flow screens — a portal step
+screen has its own layout (stepper, form, payment). Apply A's tokens/components/status/geometry/tables/
+cards; don't impose B1's back-office shell rules where they don't fit.
 
 ---
 
@@ -190,7 +308,8 @@ back-office shell rules where they don't fit.
   config, field/governance, document review) — all with confirmed Badge Colours.
 - Nav/visibility: `role-screen-matrix.md`. Guards/step-up: `validation-rules.md`.
 - RA is the only module where RBAC genuinely gates access; the only place `figma-prompts/` was removed
-  (design lives in Figma, not prompt files).
+  (design lives in Figma, not prompt files). **RA tables and cards are the canonical reference for
+  A5a/A6 — never changed; other modules harmonise to them.**
 
 ## C2. FTI + RED (the "Financial & Real Estate" portal page)
 - **Two module families share one page** — FTI (institution services) and RED (developer services),
@@ -201,18 +320,23 @@ back-office shell rules where they don't fit.
   platform-wide.
 - **Harmonised to this standard in Sept 2026:** KPI cards → shared card component; TopBar → shared top
   bar; both sidebars → RA construction; ~636 status pills → Badge (818 instances); all 113 frames →
-  1440×927; ~1,700 off-token colours → tokens (via A9's map). Fully token-compliant.
+  1440×927; ~1,700 off-token colours → tokens (via A9's map). Fully token-compliant. **Tables and cards
+  still to be harmonised to A5a/A6** (remove grey table-header fills, 46→48 rows, all-FIXED cells;
+  cards → white/`N30`/r12 with `N20` sub-cards).
 
 ## C3. Other modules (Individual User, Public Users, Allied Professionals, RESC)
 Bind to Section A + the relevant Section B surface. Each has (or needs) its own `status-badges.md` with
 a Treatment column; map to Badge Colours via A8. Where a legacy screen shows off-token colour, apply
-A9. No module-specific components beyond its own sidebar unless a real need is confirmed on canvas.
+A9; tables/cards → A5a/A6. No module-specific components beyond its own sidebar unless confirmed on canvas.
 
 ---
 
 ## Do / Don't (platform-wide)
 - ✅ Instance the shared components; bind to A1 tokens; mirror a built reference; Badge for every status
-  (Color by A8); override Primary buttons to `blue-600`; 1440×927; Nigerian data; verify against Figma.
-- ❌ Raw hex; hand-built pills/cards/sidebars/top bars; a Primary button left purple; a Badge showing
-  "Label"; a breadcrumb on a top-level screen; Liberation Mono; off-927 heights; inventing status words;
-  forcing back-office shell rules onto portal flow screens; pushing to GitHub without approval.
+  (Color by A8); override Primary buttons to `blue-600`; 1440×927; Nigerian data; build tables/cards to
+  the A5a/A6 taxonomies (all-FIXED cells, 48px rows, no table header fill; white/`N30`/r12 cards with
+  `N20` sub-cards); verify against Figma.
+- ❌ Raw hex; hand-built pills/cards/sidebars/top bars; grey table-header bars; 46px rows; HUG/FILL
+  cells; underlined cell text; a Primary button left purple; a Badge showing "Label"; a breadcrumb on a
+  top-level screen; Liberation Mono; off-927 heights; inventing status words; forcing back-office shell
+  rules onto portal flow screens; pushing to GitHub without approval.
