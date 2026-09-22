@@ -139,6 +139,13 @@ Core rules (all types):
 5. **Column-width formula (always):** `available = rowWidth − (nCols−1)×gap`;
    `colW[i] = floor(available × prop[i]/100)`; remainder → Col 0, so `sum(colW)+gaps = rowWidth`.
    Typical proportions: primary id ~45% · short label ~12% · date ~13% · status ~16% · action ~14%.
+6. **Pagination — by table role, not by current row count.** The **primary full-page table** of a
+   queue/list/editor screen (Types B, C, D, and standalone E) **always ends with the `Pagination`
+   component instance** — the real dataset spans many pages even when the mock shows only ~8–11 rows.
+   An **embedded sub-table** (a Type-A simple table inside a Dashboard section or a detail card — e.g.
+   "Recent Activity", a documents sub-list) has **no pagination**; it shows a short fixed set (~5) and
+   uses a "See All" link instead if more exist. Rule of thumb: *if the table is the screen's main
+   content it paginates; if it's a widget inside another section it doesn't.*
 
 ### A5a.1 — Type A: Simple table
 Header + data, no filter, no title, no wrapping card. Sub-section of a screen (dashboard activity,
@@ -163,26 +170,25 @@ Fee Entry", "Invite Staff"). *RA ref:* Fee Schedule "Fee Entries", Admin Console
 button and a filters row can coexist.
 
 ### A5a.4 — Type D: Table with row actions
-Each data row ends with an action control in a **FIXED rightmost action cell** (never HUG). The action
-cell holds one of three button styles, chosen by what the action does — this is a real, verified RA
-pattern, not a free choice:
+Each data row ends with an action control in a **FIXED rightmost action cell** (never HUG). **Every
+row-action button uses ONE style: the borderless text-link.** No bordered buttons, no filled buttons
+in table rows — ever.
 
-| Row action does… | Button | Style (verified on canvas) | RA ref |
-| :-- | :-- | :-- | :-- |
-| **Opens / views** (drill into a detail, "Review", "View", "Open") | `Buttons/Button`, **Hierarchy = Link color**, Size sm | borderless, no fill, **`blue-600` text**, ~20 tall | Application Review "Review" per document row |
-| **Edits / manages** (changes the record, "Edit", "Manage") | `Buttons/Button`, **Hierarchy = Secondary gray**, Size sm | **white fill, `N40` border**, radius 8, ~36 tall, `N900` label | Fee Schedule "Edit" per row |
-| **Removes / revokes** ("Delete", "Revoke", "Deactivate") | `Buttons/Button destructive`, Size sm | destructive `Red/600` (default, no override) | — |
+**The one row-action style:** `Buttons/Button`, **Hierarchy = Link color**, **Size sm** — borderless,
+no fill, text only.
+- **Normal action** ("Review", "View", "Open", "Edit", "Manage") → **`blue-600` text**.
+- **Destructive action** ("Delete", "Revoke", "Deactivate") → same borderless text-link, but
+  **`Red/600` text** (`Buttons/Button destructive`, Link hierarchy — no fill, red text).
 
 Rules:
-- **Navigational actions use the Link-color button** (borderless blue) — lighter, reads as "go look".
-- **Operative actions use the Secondary-gray button** (bordered) — more button-like, reads as "do".
-- **Removing actions use the destructive button.**
-- Size is always **sm**. The action cell is FIXED width (~110–120), the button left- or centre-aligned
-  in it consistently down the column.
+- **One pattern for all row actions** — always the borderless text-link. Never a bordered
+  (Secondary-gray) or filled (Primary) button inside a table row.
+- Colour carries the meaning: `blue-600` for normal, `Red/600` for destructive. Nothing else changes.
+- Size is always **sm**. The action cell is FIXED width (~110–120), the text-link left- or
+  centre-aligned in it consistently down the column.
 - A row may also have **no button** — the whole row is click-to-open instead (e.g. Practitioner
-  Register rows open Entry Detail on row click). That's valid; don't add a redundant "View" button.
-- Never use a Primary (blue-filled) button as a row action — Primary is reserved for the screen's main
-  action (title-action button, decision panel), not per-row.
+  Register rows open Entry Detail on row click). That's valid; don't add a redundant "View" link.
+- *RA ref:* Application Review "Review" per document row (the canonical borderless text-link).
 
 ### A5a.5 — Type E: Bare table wrapped in a card
 A Type-A simple table given its own container (white, `N30` border, r12, clipsContent) when standalone.
@@ -352,9 +358,10 @@ A9; tables/cards → A5a/A6. No module-specific components beyond its own sideba
 - ✅ Instance the shared components; bind to A1 tokens; mirror a built reference; Badge for every status
   (Color by A8); override Primary buttons to `blue-600`; 1440×927; Nigerian data; build tables/cards to
   the A5a/A6 taxonomies (all-FIXED cells, 48px rows, no table header fill; white/`N30`/r12 cards with
-  `N20` sub-cards); row-action buttons per A5a.4 (Link=view, Secondary gray=edit, destructive=remove);
-  verify against Figma.
+  `N20` sub-cards); row-action buttons are the ONE borderless text-link style (blue-600 normal,
+  Red/600 destructive); the main table paginates, an embedded sub-table doesn't; verify against Figma.
 - ❌ Raw hex; hand-built pills/cards/sidebars/top bars; grey table-header bars; 46px rows; HUG/FILL
-  cells; underlined cell text; a Primary button left purple or as a table row action; a Badge showing
-  "Label"; a breadcrumb on a top-level screen; Liberation Mono; off-927 heights; inventing status words;
-  forcing back-office shell rules onto portal flow screens; pushing to GitHub without approval.
+  cells; underlined cell text; a Primary button left purple or as a table row action; a bordered/filled
+  button as a row action; a Badge showing "Label"; a breadcrumb on a top-level screen; Liberation Mono;
+  off-927 heights; inventing status words; forcing back-office shell rules onto portal flow screens;
+  pushing to GitHub without approval.
