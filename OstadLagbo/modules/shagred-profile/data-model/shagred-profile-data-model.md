@@ -3,7 +3,7 @@ project: OstadLagbo
 module: shagred-profile
 type: data-model
 status: current
-updated: 2026-09-13
+updated: 2026-09-24
 id: OL-SGP-DM-001
 derived_from: /OstadLagbo/modules/shagred-profile/requirements/shagred-profile-requirements.md
 owner: Iftikher
@@ -11,7 +11,7 @@ owner: Iftikher
 
 # Shagred Profile — Data Model
 
-Entities owned: `shagred_profile`, `ostad_history_entry`. Conventions per [Data Model Overview](/OstadLagbo/data-model-overview.md). This model is deliberately small — it exists to hold the little a Shagred is, and to make the Shagred-invisibility principle (SGP design principle; Overview rule 4) structurally impossible to violate. Revised 2026-09-13 after the cross-layer review: profile anonymization removed (it was a phantom state — nothing references the profile after purge); address-chain validity added.
+Entities owned: `shagred_profile`, `ostad_history_entry`. Conventions per [Data Model Overview](/OstadLagbo/data-model-overview.md). This model is deliberately small — it exists to hold the little a Shagred is, and to make the Shagred-invisibility principle (SGP design principle; Overview rule 4) structurally impossible to violate. Revised 2026-09-13 after the cross-layer review: profile anonymization removed; address-chain validity added. Revised 2026-09-24 after the SGP api review: visibility ends at the deletion request, not at purge; history entries display only their snapshot.
 
 ## What this model deliberately does not contain
 
@@ -20,6 +20,7 @@ Entities owned: `shagred_profile`, `ostad_history_entry`. Conventions per [Data 
 - **No counters** — no offers-sent, acceptance-rate, or activity fields that could leak a Shagred's behavior to any viewer (SGP-04).
 - **No revision machinery** — Shagreds undergo no review (SGP-06); every edit publishes to the permitted audience instantly.
 - **No anonymized state** — the profile purges outright at day 30. "Former Shagred" is rendered from `rating.anonymized` and `connection.anonymized` with their display-name snapshots (RNT-DM, OFR-DM); nothing reads this profile after purge, so there is nothing to anonymize here (Overview: tombstone references).
+- **No view log** — reads of a Shagred profile are never recorded, in this model or in analytics (SGP api).
 
 ## shagred_profile
 
@@ -27,7 +28,7 @@ One row per Shagred, one-to-one with `user_account` (`role = shagred`).
 
 | Field | Type | Visibility | Rules |
 |---|---|---|---|
-| id / account_id | uuid / uuid | — | 1:1 with `user_account` |
+| id / account_id | uuid / uuid | — | 1:1 with `user_account`. `id` is the Shagred's public handle; `account_id` never leaves the API (OL-API-001 → identifiers) |
 | display_name | string | Permitted Ostads (SGP-05) | Required (REG-08) |
 | photo_ref | storage ref, nullable | Permitted Ostads | Optional |
 | gender | enum, nullable | Permitted Ostads | Optional |
@@ -47,10 +48,14 @@ A Shagred profile row is returned to an Ostad **only when all of these hold**:
 an `offer` exists from this Shagred to this Ostad with status = pending
    OR a `connection` exists between them            (SGP-05 lifecycle)
 no block exists between the two accounts             (RNT-08)
-shagred user_account.status ≠ purged
+shagred user_account.status IN (active, suspended)
 ```
 
+The last clause makes visibility end **the moment the Shagred requests deletion** — SGP-05's "Shagred deletes account → all visibility ends" and the retention policy's deletion model, under which a deleting account is invisible on all surfaces immediately. *(Corrected 2026-09-24: the earlier clause, "status ≠ purged," would have kept a departing Shagred visible for the 30-day window.)* A suspended Shagred stays visible to an Ostad already holding their offer or connection, so the Ostad keeps the context needed to understand a frozen chat or to report.
+
 No other read path exists: a Shagred profile is never listable, searchable, mappable, or reachable by ID without satisfying this predicate. The predicate is evaluated by the centralized policy layer (Overview → Authorization model), not by individual endpoints. Declined, expired, and withdrawn offers satisfy neither clause — visibility lapses the moment the offer leaves `pending` without becoming a connection.
+
+**A lapsed offer is still a handle, not a window.** After visibility lapses, the offer itself remains in the Ostad's offer history (OFR) — its message text and dates, without any part of this profile — and it remains a valid target for **reporting and blocking** the Shagred (RNT-07's reportability survives lapse; RNT-08's block is the anti-pestering tool). The API resolves the Shagred from the offer server-side; the Ostad never regains sight of the profile.
 
 The **projection** served to a permitted Ostad is fixed: `display_name`, `photo_ref`, `gender`, `district_id`, `thana_id`, `joined_at`. Never `street_address`, `postal_code_id`, or anything from `user_account`.
 
@@ -62,9 +67,11 @@ A system-derived, **immutable, owner-only** record: one row per connection this 
 |---|---|---|
 | id / shagred_profile_id | uuid / uuid | |
 | connection_id | uuid → `connection` (OFR) | The source of truth; this row is a projection of it, created on connection |
-| ostad_display_name_snapshot | string | Captured at connection time so the entry survives the Ostad's later deletion |
-| ostad_profile_id | uuid, nullable → ostad_profile | Nulled when the Ostad's profile row is deleted at purge; the entry remains, displayed as "deleted account" |
+| ostad_display_name_snapshot | string | Captured at connection time; **the only name ever displayed** for the entry |
+| ostad_profile_id | uuid, nullable → ostad_profile | The link target to the Ostad's public profile; nulled when the Ostad's profile row is deleted at purge, after which the entry shows "deleted account" |
 | connected_at | timestamp | The connection's acceptance timestamp |
+
+**Display rule: snapshot only.** An entry shows its snapshot name and date, plus a link to the Ostad's public profile — never the Ostad's *live* name or photo. The link resolves under the public profile's own rules (OSP api), so an Ostad who later blocked the Shagred, was suspended, or paused looks the same in the history as any other entry; only following the link reveals availability, and then identically for every cause of unavailability. No entry, by how it renders, reveals anything about what happened to the Ostad after the connection.
 
 **No mutation path.** No endpoint updates, hides, or deletes an `ostad_history_entry` — not for the Shagred, not for admin. The only write is the insert at connection time. This is the structural form of the founder's "history is a fixed record" ruling.
 
@@ -74,11 +81,11 @@ A system-derived, **immutable, owner-only** record: one row per connection this 
 
 | Entity | On the Shagred's deletion | On a listed Ostad's deletion |
 |---|---|---|
-| shagred_profile | **Purged outright at day 30** with the account (tombstone remains on `user_account`). Persisting records that involved this Shagred — ratings, connections, reports, tickets — keep their tombstone references and their own display-name snapshots; none reads this row afterward | — |
+| shagred_profile | Invisible to every Ostad from the deletion request; **purged outright at day 30** with the account (tombstone remains on `user_account`). Persisting records that involved this Shagred — ratings, connections, reports, tickets — keep their tombstone references and their own display-name snapshots; none reads this row afterward | — |
 | ostad_history_entry | Purged with the owning Shagred at day 30 — no one else can see them, so nothing is lost | `ostad_profile_id` nulled; `ostad_display_name_snapshot` and `connected_at` retained; row persists |
 
 **Storage objects:** `photo_ref` deletion follows the same-operation rule as OSP (object deleted with the field; swept by ADM-18; out of backups within 90 days).
 
 ## Queries this model must serve
 
-Permitted-Ostad profile read (the predicate above, then the fixed projection); the owning Shagred's own profile read (full row); the owning Shagred's history list (`ostad_history_entry` ordered by `connected_at desc`, joined to `ostad_profile` where not null); admin account-detail read (ADM-10, full row + history, audit-logged); address-chain validation at write; existence checks by `account_id` for OFR's offer creation.
+Permitted-Ostad profile read (the predicate above, then the fixed projection); the owning Shagred's own profile read (full row); the owning Shagred's history list (`ostad_history_entry` ordered by `connected_at desc`, returning the snapshot name and the link id — **no join to the Ostad's live profile for display**); admin account-detail read (ADM-10, full row + history, audit-logged); address-chain validation at write; Shagred resolution from an offer id for report and block targets (RNT, via OFR); existence checks by `account_id` for OFR's offer creation.
