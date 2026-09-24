@@ -77,19 +77,19 @@ Whether a phone number has an account is sensitive (it identifies who uses the p
 | `app_update_required` | 426 | Build below minimum |
 | `rate_limited` | 429 | `Retry-After` header set |
 
-**The opacity rule.** A refusal must never reveal a **block** (RNT-08: the blocked party is never told). Any read or write that fails only because a block exists returns `not_found`, identical to the resource not existing. A refusal because an Ostad is **paused** is explicit (`state_conflict`, `details.reason = "ostad_not_accepting"`) — pause is public state (OSP-11). Module documents mark every endpoint where the opacity rule applies.
+**The opacity rule.** A refusal must never reveal a **block** (RNT-08: the blocked party is never told). Any read or write that fails only because a block exists returns `not_found`, identical to the resource not existing. A refusal because an Ostad is **paused** is explicit (`state_conflict`, `details.reason = "ostad_not_accepting"`) — pause is public state (OSP-11). Module documents mark every endpoint where the opacity rule applies. **Stated limit:** opacity holds *within the blocked party's own account view*. Public content — an approved Ostad's profile — stays readable to anyone logged out, so a blocked user who logs out and compares could infer a block. This cannot be prevented without making profiles non-public, which would break guest browsing (MAP-03); it is accepted, and the block's real protections (no contact, no offers, no chat, no visibility of the blocker's private data) are unaffected.
 
 **Pagination.** Cursor-based on every list: `?limit=` (max 50, default 20) and `?cursor=` (opaque). Responses carry `next_cursor` (null at the end). Never offset-based — lists change under the reader.
 
 **Idempotency.** Every `POST` that creates something a user would notice twice — offers, ratings, replies, tickets, ticket messages, chat messages, reports, favorites — accepts an `Idempotency-Key` header (client-generated UUID). A retry with the same key within **24 hours** returns the original result and creates nothing. Keys are scoped to the caller (account, or guest session) and held as **infrastructure state for 24 hours** — not product data, not modeled, not backed up beyond that window. This is NFR-03's "never silently lost, never duplicated" made concrete.
 
-**Rate limits.** Per IP for guests, per account for users, per admin for the dashboard, and **per phone string** for OTP and login attempts; the map's viewport queries carry their own cap (MAP-DM, scraping resistance). Limits are engineering defaults surfaced to ADM-19 and ADM-21; `429` always carries `Retry-After`.
+**Rate limits.** Per IP for guests, per account for users, per admin for the dashboard, and **per phone string** for OTP and login attempts; the map's viewport queries and the skill typeahead carry their own caps (MAP-DM scraping resistance; OSP api). Limits are engineering defaults surfaced to ADM-19 and ADM-21; `429` always carries `Retry-After`.
 
 **Media.** Uploads never pass through the API body. The client asks the API for an **upload ticket** (`POST /v1/uploads`, stating the purpose), receives a short-lived signed URL and an `upload_id`, `PUT`s the bytes to Supabase Storage, then references the `upload_id` in the endpoint that consumes it. The API re-validates the stored object at consumption (real content type, size, duration — NFR-04, OSP-07, OFR-05) and moves it to its permanent, purpose-appropriate bucket. Identity documents and selfies go to the **encrypted vault bucket** and are never URL-addressable outside admin review (ADM-17 audit on every view). Downloads are likewise short-lived signed URLs issued per read.
 
 **Realtime.** Chat message *delivery* is a Supabase Realtime subscription on the participant's own threads (RLS-scoped, status-checked). Chat message *sending* is an API call (OFR api). The API is the only writer; Realtime is a read channel.
 
-**Analytics events.** Client-side events (map sessions, searches, zero-result searches, profile views, share taps, screen views) are batched to `POST /v1/events` under a pseudonymous session id — never phone, name, or precise coordinates (NFR-06; MAP-DM coarsening). The API validates each against the event catalog, strips disallowed properties, and writes to the **analytics store defined by ADR-002** (a separate append-only schema in the same database). Server-side events (offers, connections, verdicts, tickets) are written by the API itself. Both feed ADM-12…15.
+**Analytics events.** Client-side events (map sessions, searches, zero-result searches, share taps, screen views) are batched to `POST /v1/events` under a pseudonymous session id — never phone, name, or precise coordinates (NFR-06; MAP-DM coarsening). The API validates each against the event catalog, strips disallowed properties, and writes to the **analytics store defined by ADR-002** (a separate append-only schema in the same database). Server-side events (profile views, offers, connections, verdicts, tickets) are written by the API itself. Both feed ADM-12…15.
 
 **Timestamps and IDs.** ISO-8601 UTC timestamps; UUID identifiers; money never appears (out of scope).
 
@@ -107,4 +107,4 @@ followed by **flows** (multi-step sequences, showing which endpoints fire in whi
 
 ## Document sequence
 
-REG → OSP → SGP → ADM → MAP → OFR → RNT → SUP, each at `modules/<module>/api/`, deriving from its requirements document and citing its data model. Each drafted, adversarially reviewed, then approved.
+REG ✅ → OSP ✅ → SGP → ADM → MAP → OFR → RNT → SUP, each at `modules/<module>/api/`, deriving from its requirements document and citing its data model. Each drafted, adversarially reviewed, then approved.
