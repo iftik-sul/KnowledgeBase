@@ -3,7 +3,7 @@ project: OstadLagbo
 module: admin-review
 type: data-model
 status: current
-updated: 2026-09-13
+updated: 2026-09-24
 id: OL-ADM-DM-001
 derived_from: /OstadLagbo/modules/admin-review/requirements/admin-review-requirements.md
 owner: Iftikher
@@ -11,7 +11,7 @@ owner: Iftikher
 
 # Admin Review & Dashboard — Data Model
 
-Entities owned: `admin_account`, `admin_session`, `review_case`, `moderation_action`, `skill_category`, `admin_area`, `broadcast`, `admin_audit_entry`. Conventions per [Data Model Overview](/OstadLagbo/data-model-overview.md). `report` and `support_ticket` are owned by `ratings-and-trust` and `support` respectively; this document only defines how ADM queues and acts on them. Revised 2026-09-13 after the cross-layer review: `terminate` action (CL-019); active-suspension derivation; duplicate check against current documents.
+Entities owned: `admin_account`, `admin_session`, `review_case`, `moderation_action`, `skill_category`, `admin_area`, `broadcast`, `admin_audit_entry`. Conventions per [Data Model Overview](/OstadLagbo/data-model-overview.md). `report` and `support_ticket` are owned by `ratings-and-trust` and `support` respectively; this document only defines how ADM queues and acts on them. Revised 2026-09-13 after the cross-layer review: `terminate` action (CL-019); active-suspension derivation; duplicate check against current documents. Revised 2026-09-24 after the ADM api review: appeal-linked reinstatement; selfie shown for photo-only revisions; identity-view rate limiting.
 
 ## review_case — the record, not the gate
 
@@ -24,6 +24,7 @@ Entities owned: `admin_account`, `admin_session`, `review_case`, `moderation_act
 | profile_revision_id | uuid, nullable → profile_revision | Set iff kind = `revision` |
 | identity_document_id | uuid, nullable → identity_document | The specific document row under review (REG-DM: many rows per account); nullable after purge (see retention) |
 | identity_recheck_required | boolean | `true` for every `initial` case, and for `revision` cases whose revision changes legal names or identity documents; `false` for skills-only revisions, which carry the existing passed status forward without re-examination |
+| photo_recheck_required | boolean | `true` when the revision changes the profile photo (CL-021). A photo change is an **identity-grade** judgment — the reviewer compares the proposed photo against the account's current identity selfie — so **the review screen always surfaces the current selfie when this is true**, even for a photo-only revision that needs no document recheck |
 | verdict | enum: `approve` \| `request_changes` \| `reject`, nullable | Null while status = open |
 | verdict_note | text, nullable | **Required** when verdict is request_changes or reject (ADM-04); delivered to the Ostad in-app (REG-11) |
 | reviewer_admin_id | uuid → admin_account | |
@@ -55,6 +56,8 @@ Every verdict resolves the case (`status → resolved`). A resubmission always o
 
 `admin_session` follows REG-DM's `auth_session` pattern (id, admin_account_id, device_label, created_at, last_seen_at, revoked_at) with `admin_account` as the principal. The 24-hour inactivity expiry (ADM-20) is enforced by comparing `last_seen_at` at session-check time. Single permission tier in MVP — no role/permission fields, per the Overview's authorization model (static roles; RBAC deferred to post-MVP admin tiers).
 
+**Identity-view rate limiting (NFR-05, ADM api review).** Issuing a signed URL to a vault object (identity document or selfie) is rate-limited **per admin session** — a small number per minute (engineering default) — and every issuance is an `identity_document_viewed` audit entry. This is the structural guard against a single compromised admin token paging through every NID: the audit log records a breach, but the rate limit and the operations-view spike alert (ADM-15/19) make mass exfiltration slow and visible rather than silent. It bounds the blast radius of the one credential the whole vault trusts.
+
 ## moderation_action
 
 The single record behind every warn, suspend, reinstate, and terminate (ADM-08, CL-019) — `user_account.suspension_reason_ref` (REG-DM) points here.
@@ -66,6 +69,7 @@ The single record behind every warn, suspend, reinstate, and terminate (ADM-08, 
 | reason | text | **Internal** — the admin's record of why; required; never shown to the user |
 | user_message | text, nullable | **User-facing** — the text delivered to the account; **required for `warn` and `terminate`** (the user must be told they are banned and may appeal), optional for suspend (the suspension-notice screen shows it if present) |
 | related_report_id | uuid, nullable → report (RNT) | Set when the action resolves a report |
+| resolves_appeal_ticket_id | uuid, nullable → support_ticket | **Reinstate only:** set when the reinstatement resolves an appeal (ADM api). The API closes that appeal ticket in the same transaction and tags this record as appeal-driven, so quality analytics (ADM-15) can distinguish a successful appeal from a suspension lifted for another reason |
 | actor_admin_id | uuid → admin_account | |
 | created_at | timestamp | |
 
@@ -75,7 +79,7 @@ The single record behind every warn, suspend, reinstate, and terminate (ADM-08, 
 |---|---|---|
 | `warn` | none | Delivers `user_message`; audit `warn` |
 | `suspend` | `status → suspended`, `suspended_at`, `suspension_reason_ref` | Sessions and push tokens revoked; pending offers frozen (OFR-DM); audit `suspend` |
-| `reinstate` | `status → active`; clears `suspended_at`, `suspension_reason_ref`, **and** `banned_at` / `deleted_at` / `purge_at` if a termination was pending | Audit `reinstate`. Reinstating a terminated account is the outcome of a successful appeal |
+| `reinstate` | `status → active`; clears `suspended_at`, `suspension_reason_ref`, **and** `banned_at` / `deleted_at` / `purge_at` if a termination was pending | Resolves `resolves_appeal_ticket_id` if present; audit `reinstate`. Reinstating a terminated account is the outcome of a successful appeal |
 | `terminate` | If not already suspended, suspends first (same effects as `suspend`); then sets `banned_at`, `deleted_at = now`, `purge_at = now + 30d` — status **remains `suspended`** through the appeal window (Overview rule 7) | Pending offers resolved with `resolution_source = deletion` (OFR-DM); at `purge_at`, the retention job purges under the banned-account exception (OL-RET-001); audit `terminate` |
 
 **Active suspension is derived, not stored** (Overview: predicates over flags): an account is under an active suspension iff its latest `suspend` or `terminate` action has no later `reinstate`. `user_account.status = suspended` is the canonical state (rule 6); this derivation exists so SUP-DM's appeal linkage (`related_moderation_action_id`) resolves to *which* action is being contested — the latest `suspend`/`terminate` without a subsequent `reinstate`.
@@ -89,7 +93,7 @@ The single record behind every warn, suspend, reinstate, and terminate (ADM-08, 
 | active | boolean | Deactivated categories excluded from selection (ADM-11) but remain on existing `skill_entry` rows until next edit |
 | created_at / updated_at | timestamps | Renames propagate by reference — `skill_entry.category_id` is a live foreign key; no denormalized copies exist |
 
-Usage counts (ADM-11) are computed from `skill_entry` at read time, not stored.
+Usage counts (ADM-11) are computed from `skill_entry` at read time, not stored. **Categories are never deleted, only deactivated** (ADM-11); deactivation is always safe because it leaves the category on existing profiles until their owners next edit skills, so no Ostad is ever stripped of a category out from under them. There is therefore no delete endpoint and no last-category hazard to guard against.
 
 ## admin_area
 
@@ -115,7 +119,7 @@ The shared administrative-geography dataset OSP-02 and SGP-02 both reference —
 | sent_at | timestamp | |
 | recipient_count | int | Snapshot at send time: the count of **accounts** in the segment with at least one active push token, not the count of tokens |
 
-Delivery resolves segment → active accounts (status = active) → `device_push_token` rows (REG-DM). Suspended and pending-deletion accounts are excluded from broadcasts.
+Delivery resolves segment → active accounts (status = active) → `device_push_token` rows (REG-DM). Suspended and pending-deletion accounts are excluded from broadcasts. **A broadcast is irreversible once sent**, so the API offers a preview that returns `recipient_count` before sending (ADM api), the one confirmation step on a mass action.
 
 ## admin_audit_entry
 
@@ -143,4 +147,4 @@ Append-only at the storage level (NFR-05) — no update or delete path exists in
 
 ## Queries this model must serve
 
-The review queue (`review_case where status = open`, oldest first, ADM-02); the **identity-duplicate check** — `identity_document.id_number` matched across the **current** document (`superseded_at IS NULL`) of every other account where `user_account.status = active`, plus the ID-number hash of banned tombstones (REG-DM) — run at case open (to flag) and again at verdict time (to enforce); the reports queue (RNT's `report` joined to reporter/reported context); the active-suspension derivation for appeals; category typeahead source for OSP-04/MAP-06 (`skill_category where active`, both scripts); administrative-area cascades and chain validation for OSP-02/SGP-02; broadcast segment resolution to active accounts and tokens; the audit-log viewer's filters (actor, action_type, target, date range); dormancy analytics distinguishing paused (OSP) from suspended (`user_account.status`) from genuinely inactive; the reconciliation check that the latest resolved `initial` or identity-changing case for a profile agrees with the current document's `verification_status`.
+The review queue (`review_case where status = open`, oldest first, ADM-02), **excluding cases whose subject account is mid-purge** (no ghost work); the **identity-duplicate check** — `identity_document.id_number` matched across the **current** document (`superseded_at IS NULL`) of every other account where `user_account.status = active`, plus the ID-number hash of banned tombstones (REG-DM) — run at case open (to flag) and again at verdict time (to enforce); the reports queue (RNT's `report` joined to reporter/reported context), likewise excluding mid-purge subjects; the active-suspension derivation for appeals; the appeal-ticket-to-moderation-action link for reinstatement; category typeahead source for OSP-04/MAP-06 (`skill_category where active`, both scripts); administrative-area cascades and chain validation for OSP-02/SGP-02; broadcast segment resolution to active accounts and tokens, with a pre-send recipient count; the pending-abandonment list (revisions and drafts due for 90-day discard, REG-DM/OSP-DM) for the retention view; identity-view rate-limit state per admin session; the audit-log viewer's filters (actor, action_type, target, date range); dormancy analytics distinguishing paused (OSP) from suspended (`user_account.status`) from genuinely inactive; the reconciliation check that the latest resolved `initial` or identity-changing case for a profile agrees with the current document's `verification_status`.
