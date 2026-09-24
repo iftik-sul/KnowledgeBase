@@ -3,7 +3,7 @@ project: OstadLagbo
 module: ostad-profile
 type: requirements
 status: current
-updated: 2026-08-30
+updated: 2026-09-24
 id: OL-OSP-REQ-001
 derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.1.md
 owner: Iftikher
@@ -21,10 +21,10 @@ Every field belongs to one class. **Public** — visible to any user viewing the
 
 | Field | Required | Visibility |
 |---|---|---|
-| Full legal name (English) | Yes | Public |
-| Full legal name (Bangla) | Yes | Public |
+| Full legal name (English) | Yes | Public — **key field** (OSP-10) |
+| Full legal name (Bangla) | Yes | Public — **key field** (OSP-10) |
 | Display name | Yes | Public — used on map cards and chat headers; full legal name heads the profile page |
-| Profile photo | Yes | Public |
+| Profile photo | Yes | Public — **key field** (OSP-10, CL-021): after approval, a new photo publishes only on review |
 | Date of birth | Yes (18+ gate, REG-03) | Internal — age and DOB never shown |
 | Gender | Yes | Public |
 
@@ -81,9 +81,13 @@ Public: identity-verification status, admin-approval status, verified badge (gra
 
 ## OSP-10 Editing and re-review
 
-All fields are editable by the Ostad at any time. Edits to **key fields** — legal names, identity documents, skills — return the profile to review per baseline §5, remaining discoverable with the last approved version until re-approved. All other edits publish immediately. Field-level change tracking must make the diff visible to admin review.
+All fields are editable by the Ostad. **Key fields** are: **legal names, identity documents, skills, and profile photo** (the photo added by CL-021). Everything else is a non-key field.
 
-**Acceptance:** editing a skill triggers re-review and the public profile keeps showing the prior approved skill set until approval; editing the About publishes instantly.
+**Before first approval:** fields are written through onboarding (REG-09). While the initial review is in progress, **key fields are locked** — the review is deciding them — and non-key fields remain editable (REG-11).
+
+**After approval:** non-key edits publish immediately. Key-field edits collect in **one pending revision** that the Ostad **submits for review** when ready — so a legal-name correction, a new photo, a skills change, and new identity documents can go through a single review rather than several. Until a verdict, the public profile keeps showing the last approved values. A submitted revision is **locked while under review**; if the admin requests changes it returns to the Ostad editable and resubmittable; approval publishes it; rejection discards it. A revision **never submitted** may be discarded by the Ostad. An unsubmitted revision with **no activity for 90 days** is discarded automatically, with prior notice, and any identity documents or photo uploaded into it are deleted (OL-RET-001). Field-level change tracking makes the diff visible to admin review; a photo change is reviewed against the Ostad's current identity selfie.
+
+**Acceptance:** editing a skill or the photo after approval changes nothing public until the revision is approved; editing the About publishes instantly; a revision under review cannot be edited; an unsubmitted revision is discarded after 90 days of inactivity with its uploads deleted.
 
 Non-key-field edits publishing without review is a deliberate trade-off: post-approval abuse of freely-editable fields (display name, headline, about, portfolio) is moderated reactively through reports (RNT-07) and admin action, not preemptively.
 
@@ -101,4 +105,4 @@ A private insights screen for the Ostad (CL-014): **profile view counts** (7- an
 
 ## Proposed technical defaults summary
 
-Character caps, image/document size limits, video resolution, completion formula, insight refresh cadence, and the Bangladesh address dataset choice are engineering defaults, changeable without founder re-approval. Field inventory, visibility classes, the one-video-45s rule, taxonomy structure, cross-script fuzzy matching, the visibility-pause semantics, counts-only insights, and re-review triggers change only with founder approval.
+Character caps, image/document size limits, video resolution, completion formula, insight refresh cadence, and the Bangladesh address dataset choice are engineering defaults, changeable without founder re-approval. Field inventory, visibility classes, the one-video-45s rule, taxonomy structure, cross-script fuzzy matching, the visibility-pause semantics, counts-only insights, the key-field list, the revision flow and its 90-day abandonment rule, and re-review triggers change only with founder approval.
