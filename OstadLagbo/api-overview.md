@@ -42,6 +42,16 @@ Every authenticated user request resolves the caller's `user_account` and its `s
 
 **The policy layer.** Every handler calls the centralized policy module (Data Model Overview → authorization model) before touching data. Module api documents state, per endpoint, **who may call it and which rule the policy layer checks.** No handler evaluates access on its own.
 
+## Identifiers
+
+**Clients only ever hold profile ids for other people; account ids never leave the API** — except a caller's own, returned to them in the account summary (REG api).
+
+- An Ostad is addressed everywhere by `ostad_profile.id`; a Shagred by `shagred_profile.id`. These are the handles in every URL, payload, and embedded projection (`GET /v1/ostads/{id}`, `GET /v1/shagreds/{id}`, offer and chat payloads, favorites, history entries).
+- Objects a caller is party to are addressed by their own ids — offers, connections, chat threads and messages, ratings, reports, tickets, uploads.
+- Where the data model stores an **account** id — blocks, reports, ratings, connections, offers, sessions (REG-DM identity spine) — the API **resolves** the profile id (or object id) the client sent into the account id server-side. A client never needs, and is never given, another user's account id.
+
+Why: the account id is the identity spine and the tombstone key — it outlives the profile (REG-DM tombstones) and links every record a person ever touched. There is no reason for any other user to hold it, and withholding it means no client can cross-reference a person across records the API chose not to connect for it. Resolving handles server-side also lets an **object stand in for a person** where the person must stay hidden: a report or block against a Shagred whose offer has lapsed targets the **offer id**, and the API resolves the Shagred without re-exposing their profile (SGP api).
+
 ## Account existence
 
 Whether a phone number has an account is sensitive (it identifies who uses the platform). The API's stance, stated once so every module applies it consistently:
@@ -77,7 +87,7 @@ Whether a phone number has an account is sensitive (it identifies who uses the p
 | `app_update_required` | 426 | Build below minimum |
 | `rate_limited` | 429 | `Retry-After` header set |
 
-**The opacity rule.** A refusal must never reveal a **block** (RNT-08: the blocked party is never told). Any read or write that fails only because a block exists returns `not_found`, identical to the resource not existing. A refusal because an Ostad is **paused** is explicit (`state_conflict`, `details.reason = "ostad_not_accepting"`) — pause is public state (OSP-11). Module documents mark every endpoint where the opacity rule applies. **Stated limit:** opacity holds *within the blocked party's own account view*. Public content — an approved Ostad's profile — stays readable to anyone logged out, so a blocked user who logs out and compares could infer a block. This cannot be prevented without making profiles non-public, which would break guest browsing (MAP-03); it is accepted, and the block's real protections (no contact, no offers, no chat, no visibility of the blocker's private data) are unaffected.
+**The opacity rule.** A refusal must never reveal a **block** (RNT-08: the blocked party is never told). Any read or write that fails only because a block exists returns `not_found`, identical to the resource not existing. Where several different causes can refuse the same read, **all of them return `not_found`**, so the block is never the one distinguishable cause (SGP api). A refusal because an Ostad is **paused** is explicit (`state_conflict`, `details.reason = "ostad_not_accepting"`) — pause is public state (OSP-11). Module documents mark every endpoint where the opacity rule applies. **Stated limit:** opacity holds *within the blocked party's own account view*. Public content — an approved Ostad's profile — stays readable to anyone logged out, so a blocked user who logs out and compares could infer a block. This cannot be prevented without making profiles non-public, which would break guest browsing (MAP-03); it is accepted, and the block's real protections (no contact, no offers, no chat, no visibility of the blocker's private data) are unaffected.
 
 **Pagination.** Cursor-based on every list: `?limit=` (max 50, default 20) and `?cursor=` (opaque). Responses carry `next_cursor` (null at the end). Never offset-based — lists change under the reader.
 
@@ -89,11 +99,11 @@ Whether a phone number has an account is sensitive (it identifies who uses the p
 
 **Realtime.** Chat message *delivery* is a Supabase Realtime subscription on the participant's own threads (RLS-scoped, status-checked). Chat message *sending* is an API call (OFR api). The API is the only writer; Realtime is a read channel.
 
-**Analytics events.** Client-side events (map sessions, searches, zero-result searches, share taps, screen views) are batched to `POST /v1/events` under a pseudonymous session id — never phone, name, or precise coordinates (NFR-06; MAP-DM coarsening). The API validates each against the event catalog, strips disallowed properties, and writes to the **analytics store defined by ADR-002** (a separate append-only schema in the same database). Server-side events (profile views, offers, connections, verdicts, tickets) are written by the API itself. Both feed ADM-12…15.
+**Analytics events.** Client-side events (map sessions, searches, zero-result searches, share taps, screen views) are batched to `POST /v1/events` under a pseudonymous session id — never phone, name, or precise coordinates (NFR-06; MAP-DM coarsening). The API validates each against the event catalog, strips disallowed properties, and writes to the **analytics store defined by ADR-002** (a separate append-only schema in the same database). Server-side events (Ostad profile views, offers, connections, verdicts, tickets) are written by the API itself. Shagred profile reads are never recorded (SGP api). Both feed ADM-12…15.
 
-**Timestamps and IDs.** ISO-8601 UTC timestamps; UUID identifiers; money never appears (out of scope).
+**Timestamps and IDs.** ISO-8601 UTC timestamps; UUID identifiers (see Identifiers for which ids a client may hold); money never appears (out of scope).
 
-**Health and admin.** `GET /v1/health` (unauthenticated, for uptime monitoring, NFR-09). Admin endpoints live under `/v1/admin/` and appear only in the ADM api document.
+**Health and admin.** `GET /v1/health` (unauthenticated, for uptime monitoring, NFR-09). Admin endpoints live under `/v1/admin/` and appear only in the ADM api document. Admin surfaces are the one exception to the identifier rule: the admin dashboard sees account ids, because account-level moderation is its job.
 
 ## Endpoint document template
 
@@ -107,4 +117,4 @@ followed by **flows** (multi-step sequences, showing which endpoints fire in whi
 
 ## Document sequence
 
-REG ✅ → OSP ✅ → SGP → ADM → MAP → OFR → RNT → SUP, each at `modules/<module>/api/`, deriving from its requirements document and citing its data model. Each drafted, adversarially reviewed, then approved.
+REG ✅ → OSP ✅ → SGP ✅ → ADM → MAP → OFR → RNT → SUP, each at `modules/<module>/api/`, deriving from its requirements document and citing its data model. Each drafted, adversarially reviewed, then approved.
