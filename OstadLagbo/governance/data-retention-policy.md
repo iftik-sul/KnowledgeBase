@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: retention-policy
 status: current
-updated: 2026-09-13
+updated: 2026-09-24
 id: OL-RET-001
 approved: 2026-08-30
 owner: Iftikher
@@ -33,11 +33,13 @@ Account deletion is self-service (REG-12). On request: the account **deactivates
 
 | Data category | While account lives | On deletion |
 |---|---|---|
-| Identity documents (NID/passport/licence images, selfie) | Retained encrypted; admin-review access only | **Purged at day 30** with the account |
+| Identity documents (NID/passport/licence images, selfie) | Retained encrypted; admin-review access only. **Draft documents replaced before review are deleted at replacement** (REG-DM) | **Purged at day 30** with the account |
 | ID number (NID, passport, or licence number) | Retained | Retained **12 months after deletion** solely for abuse and safety investigations — a report filed against a deleted account within this window can still be traced to a real identity — then purged |
 | Account & profile data (names, photos, address, profile content) | Retained | Purged at day 30 |
+| Pending registrations (details submitted before the phone is verified) | Deleted at verification (converted into the account) or at 15-minute expiry | — |
 | Consent records (accepted document versions and timestamps) | Retained | **Retained 3 years after purge** as proof of lawful basis under the PDPA, alongside the account tombstone; then purged |
-| Abandoned Ostad onboarding drafts (incl. uploaded documents) | — | Purged after **90 days of draft inactivity**, with prior notice |
+| Abandoned Ostad onboarding drafts (incl. uploaded documents) | Purged after **90 days of draft inactivity**, with prior notice | — |
+| Abandoned profile revisions (proposed key-field changes, incl. uploaded identity documents and photos) | Discarded after **90 days of inactivity**, with prior notice; their uploads deleted (OSP-10, CL-021) | Purged with the account |
 | Chat messages & voice notes | Life of the relationship; one party's deletion freezes the thread, the other keeps history (OFR-06) | Full thread purge **90 days after both parties are gone** |
 | Reviews & ratings | Persist | Anonymized ("Former Shagred"), persist with aggregate weight (RNT-05) |
 | Connection records (accepted offers) | Persist | Anonymized; Ostad-history entries show "deleted account" (SGP-03) |
@@ -47,7 +49,7 @@ Account deletion is self-service (REG-12). On request: the account **deactivates
 | Admin audit log | Append-only, **3-year rolling retention** | Unaffected by user deletion (accountability record) |
 | OTP codes / OTP request logs | Minutes / **90 days** | — |
 | Push device tokens | Retained while the device session lives | Revoked at logout, suspension, or deletion request; purged with the account |
-| User-linked analytics events | **24 months**, then aggregate-only | De-linked at day 30 |
+| User-linked analytics events (ADR-002) | **24 months**, then aggregate-only | De-linked at day 30 |
 | Backups | Standard cycles | Deleted data ages out of all backups within **90 days** of purge |
 
 ## Banned-account exception
@@ -64,8 +66,8 @@ The MVP processes no payments, so no tax/financial record retention applies. Whe
 
 ## Operational obligations
 
-ADM-18 tooling implements: day-30 purge automation (self-service and termination paths), the 12-month ID-number purge, the 3-year consent-record purge, draft-inactivity purge, both-parties-gone chat purge, banned-account minimal retention, storage-object deletion in the same operation as the referencing row (with orphan sweeps), and legal-hold flags. Purges are audit-logged. Hosting and backup architecture must honor the 90-day backup age-out and the PDPA's data-residency rules for restricted-category data (engineering + legal checkpoint before infrastructure selection).
+ADM-18 tooling implements: day-30 purge automation (self-service and termination paths), the 12-month ID-number purge, the 3-year consent-record purge, pending-registration expiry, draft-inactivity purge, abandoned-revision discard, both-parties-gone chat purge, banned-account minimal retention, storage-object deletion in the same operation as the referencing row (with orphan sweeps), and legal-hold flags. Purges are audit-logged. Hosting and backup architecture must honor the 90-day backup age-out and the PDPA's data-residency rules for restricted-category data (engineering + legal checkpoint before infrastructure selection).
 
 ## Review
 
-Revisited annually, on any PDPA amendment, and on any scope change touching data collection. Changes to durations require founder approval and a change-log entry when they alter user-facing commitments.
+Revisited annually, on any PDPA amendment, and on any scope change touching data collection. Changes to durations require founder approval and a change-log entry when they alter user-facing commitments. **Pending for the Privacy Policy v1.1 refresh:** the pending-registration, abandoned-revision, and analytics-store rows added since v1.0.
