@@ -3,7 +3,7 @@ project: OstadLagbo
 module: support
 type: data-model
 status: current
-updated: 2026-09-13
+updated: 2026-09-24
 id: OL-SUP-DM-001
 derived_from: /OstadLagbo/modules/support/requirements/support-requirements.md
 owner: Iftikher
@@ -11,7 +11,7 @@ owner: Iftikher
 
 # Support — Data Model
 
-Entities owned: `support_ticket`, `ticket_message`. Conventions per [Data Model Overview](/OstadLagbo/data-model-overview.md). The smallest model in the layer, with two rules that matter more than its size suggests: the **suspension-appeal exception** (the one case where a locked-out account may still write to the platform) and the **14-day reopen window** as a state rule rather than a UI convention.
+Entities owned: `support_ticket`, `ticket_message`. Conventions per [Data Model Overview](/OstadLagbo/data-model-overview.md). The smallest model in the layer, with two rules that matter more than its size suggests: the **suspension-appeal exception** (the one case where a locked-out account may still write to the platform) and the **14-day reopen window** as a state rule rather than a UI convention. Revised 2026-09-24: the pending-deletion rule corrected (such accounts hold no session), and the appeal exception's supporting operations named.
 
 ## support_ticket
 
@@ -35,9 +35,9 @@ Entities owned: `support_ticket`, `ticket_message`. Conventions per [Data Model 
 
 ### The suspension-appeal exception (SUP-04, ADM-08)
 
-`user_account.status = suspended` locks the account out of the app except the suspension-notice screen. **That screen may create exactly one kind of write: an `appeal` ticket** — and may read that ticket's thread to follow the appeal. The policy layer permits, for a suspended account: `INSERT support_ticket WHERE category = appeal`, `INSERT ticket_message` on tickets that account owns, and `SELECT` on those same tickets. **Nothing else.** This is stated here because every other model treats `suspended` as fully read-only for the user; this is the single documented exception, and it exists so the ToS §7 appeal promise has a working door.
+`user_account.status = suspended` locks the account out of the app except the suspension-notice screen. **That screen may create exactly one kind of write: an `appeal` ticket** — and may read that ticket's thread to follow the appeal. The policy layer permits, for a suspended account: `INSERT support_ticket WHERE category = appeal`, `INSERT ticket_message` on tickets that account owns, and `SELECT` on those same tickets. Three **supporting operations** make the appeal usable and are the only other things a suspended account may do: request a `ticket_attachment` upload (so an appeal can carry a screenshot), register a push token from its restricted session (so the admin's reply reaches it — REG-DM), and change its language or log out. **Nothing else.** This is stated here because every other model treats `suspended` as fully read-only for the user; this is the single documented exception, and it exists so the ToS §7 appeal promise has a working door.
 
-`pending_deletion` accounts may also create and follow tickets (they can log in to recover; support is part of that). `purged` accounts cannot — there is no account to act.
+`pending_deletion` accounts hold **no session** — the deletion request revoked every session, and logging in recovers the account (REG-02). They therefore never use support *as* pending-deletion accounts: a user who wants help logs in, is recovered, and uses support as an ordinary active user, and any tickets opened before the deletion request simply wait. `purged` accounts cannot act at all — there is no account.
 
 ### Reopen window — a state rule (SUP-03)
 
@@ -78,7 +78,7 @@ Both author ids are null for `system`; exactly one is set otherwise — a check 
 - A ticket and its messages are readable **only** by the owning account (`support_ticket.account_id`) and admin. No other user can reach a ticket by id.
 - Attachments follow the same rule — the storage object is served only to the owner and admin, never linkable elsewhere.
 - Admin reads are through ADM-22's queue and ADM-10's account detail; admin support actions are audit-logged.
-- The suspension-appeal exception above is the **only** write path a suspended account holds anywhere in the system.
+- The suspension-appeal exception above, with its three supporting operations, is the **only** write path a suspended account holds anywhere in the system.
 
 ## Retention behavior (OL-RET-001 mapping)
 
