@@ -5,7 +5,7 @@ type: data-model
 status: current
 updated: 2026-09-24
 id: OL-REG-DM-001
-derived_from: /OstadLagbo/modules/registration-and-verification/requirements/registration-requirements.md
+derived_from: /OstadLagbo/modules/registration-and-verification/requirements/registration-and-verification-requirements.md
 owner: Iftikher
 ---
 

@@ -5,13 +5,13 @@ type: api
 status: current
 updated: 2026-09-25
 id: OL-REG-API-001
-derived_from: /OstadLagbo/modules/registration-and-verification/requirements/registration-requirements.md
+derived_from: /OstadLagbo/modules/registration-and-verification/requirements/registration-and-verification-requirements.md
 owner: Iftikher
 ---
 
 # Registration & Verification — API
 
-Endpoints for accounts, authentication, onboarding, identity capture, consent, uploads, analytics ingestion, health, and device registration. Conventions per [API Overview](/OstadLagbo/api-overview.md); entities per [REG Data Model](/OstadLagbo/modules/registration-and-verification/data-model/registration-data-model.md). Stage payloads for onboarding stages 1, 3, and 5 (profile fields) are defined in the OSP api; stage 4 (location) in the MAP api; this document owns the wizard itself, stage 2 (identity), and the cross-cutting shared endpoints (uploads, analytics events, health).
+Endpoints for accounts, authentication, onboarding, identity capture, consent, uploads, analytics ingestion, health, and device registration. Conventions per [API Overview](/OstadLagbo/api-overview.md); entities per [REG Data Model](/OstadLagbo/modules/registration-and-verification/data-model/registration-and-verification-data-model.md). Stage payloads for onboarding stages 1, 3, and 5 (profile fields) are defined in the OSP api; stage 4 (location) in the MAP api; this document owns the wizard itself, stage 2 (identity), and the cross-cutting shared endpoints (uploads, analytics events, health).
 
 ## Endpoints — authentication
 
