@@ -19,7 +19,7 @@ The visual layer the `ui-overview` deliberately left open ("colour, typography, 
 
 ## Brand palette (flat — no gradients)
 
-Bound in Figma as the `Ostad Lagbo` variable collection; use the same tokens in the Flutter theme.
+Bound in Figma as the `Athena` variable collection; use the same tokens in the Flutter theme.
 
 | Token | Hex | Role |
 |---|---|---|
