@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: api
 status: current
-updated: 2026-09-24
+updated: 2026-09-25
 id: OL-API-001
 derived_from: /OstadLagbo/decisions/adr-001-platform-architecture.md
 owner: Iftikher
@@ -35,7 +35,7 @@ Every authenticated user request resolves the caller's `user_account` and its `s
 |---|---|
 | `active` | Everything the role permits |
 | `pending_deletion` | **No session exists** — the deletion request revoked them all. A login recovers the account (REG-02), after which it is `active` |
-| `suspended` (incl. terminated) | A **restricted session** (REG-DM `auth_session.restricted`) permitting only: the suspension-notice read, `appeal` ticket create/read/message (SUP), a `ticket_attachment` upload ticket, push-token registration, locale change, and logout (Data Model Overview rule 7). Everything else is `suspended` (403) |
+| `suspended` (incl. terminated) | A **restricted session** (REG-DM `auth_session.restricted`) permitting only: the suspension-notice read, `appeal` ticket create, plus read and message on any ticket the account owns (SUP), a `ticket_attachment` upload ticket, push-token registration, locale change, and logout (Data Model Overview rule 7). Everything else is `suspended` (403) |
 | `purged` | Token invalid |
 
 **Direct channels enforce account status.** A suspended user's token is still a valid Supabase JWT, so the API's refusal alone is not enough: **every row-level-security policy on a table or bucket the app reaches directly (Realtime chat subscriptions, Storage objects) additionally requires the caller's account status to be `active`.** A suspended account therefore receives no chat delivery and can fetch no media directly; its appeal attachments and ticket thread come through the API. Suspension also revokes the account's Supabase refresh tokens, and the RLS status check closes the window before the last access token expires.
@@ -117,4 +117,4 @@ followed by **flows** (multi-step sequences, showing which endpoints fire in whi
 
 ## Document sequence
 
-REG ✅ → OSP ✅ → SGP ✅ → ADM → MAP → OFR → RNT → SUP, each at `modules/<module>/api/`, deriving from its requirements document and citing its data model. Each drafted, adversarially reviewed, then approved.
+REG ✅ → OSP ✅ → SGP ✅ → ADM ✅ → MAP ✅ → OFR ✅ → RNT ✅ → SUP ✅, each at `modules/<module>/api/`, deriving from its requirements document and citing its data model. Each drafted, adversarially reviewed, then approved.
