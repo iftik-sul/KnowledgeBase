@@ -120,4 +120,4 @@ followed by **flows** (multi-screen sequences) where a task crosses screens.
 
 ## Document sequence
 
-`ui-overview.md` (this) → REG → OSP → SGP → MAP → OFR → RNT → SUP → ADM (dashboard) → `ui/public-website.md` (CL-020). Each derives from its requirements, cites its api/data-model, is drafted, adversarially reviewed, then approved — the same discipline as the api layer.
+`ui-overview.md` (this) → REG ✅ → OSP ✅ → SGP ✅ → MAP ✅ → OFR ✅ → RNT ✅ → SUP ✅ → ADM ✅ (dashboard) → `ui/public-website.md` ✅ (CL-020). Each derives from its requirements, cites its api/data-model, is drafted, adversarially reviewed, then approved — the same discipline as the api layer.
