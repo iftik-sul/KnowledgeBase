@@ -5,13 +5,13 @@ type: requirements
 status: current
 updated: 2026-09-24
 id: OL-OSP-REQ-001
-derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.1.md
+derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.2.md
 owner: Iftikher
 ---
 
 # Ostad Profile — Requirements
 
-Derived from MVP Scope Baseline v1.1 §2. Defines every field of the Ostad profile, its validation, and its visibility. Capture flow is governed by `registration-and-verification` (REG-09, REG-10); location capture by `map-discovery`; re-review triggers by `admin-review`; rating aggregation by `ratings-and-trust`.
+Derived from MVP Scope Baseline v1.2 §2. Defines every field of the Ostad profile, its validation, and its visibility. Capture flow is governed by `registration-and-verification` (REG-09, REG-10); location capture by `map-discovery`; re-review triggers by `admin-review`; rating aggregation by `ratings-and-trust`.
 
 ## Visibility classes
 

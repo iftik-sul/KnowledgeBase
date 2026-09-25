@@ -5,13 +5,13 @@ type: requirements
 status: current
 updated: 2026-08-30
 id: OL-SUP-REQ-001
-derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.1.md
+derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.2.md
 owner: Iftikher
 ---
 
 # Support — Requirements
 
-Added by founder decision 2026-08-30 (change log CL-009; to be absorbed in baseline v1.2). Gives users an in-app channel for help and appeals. Ticket *handling* lives in the admin panel (ADM-22); abuse reporting is a separate system (RNT-07) and is never replaced by tickets.
+Added by founder decision 2026-08-30 (change log CL-009; absorbed in baseline v1.2). Gives users an in-app channel for help and appeals. Ticket *handling* lives in the admin panel (ADM-22); abuse reporting is a separate system (RNT-07) and is never replaced by tickets.
 
 ## SUP-01 Help & Support screen
 

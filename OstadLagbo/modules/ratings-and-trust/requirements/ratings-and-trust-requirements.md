@@ -5,13 +5,13 @@ type: requirements
 status: current
 updated: 2026-08-30
 id: OL-RNT-REQ-001
-derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.1.md
+derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.2.md
 owner: Iftikher
 ---
 
 # Ratings & Trust — Requirements
 
-Derived from MVP Scope Baseline v1.1 §6. Governs ratings and reviews, review replies, reporting, and blocking. Aggregates render per OSP-08; reports are handled per ADM-07; block effects on chat and visibility execute per OFR-06 and SGP-05.
+Derived from MVP Scope Baseline v1.2 §6. Governs ratings and reviews, review replies, reporting, and blocking. Aggregates render per OSP-08; reports are handled per ADM-07; block effects on chat and visibility execute per OFR-06 and SGP-05.
 
 ## RNT-01 Rating eligibility
 

@@ -5,13 +5,13 @@ type: requirements
 status: current
 updated: 2026-08-30
 id: OL-SGP-REQ-001
-derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.1.md
+derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.2.md
 owner: Iftikher
 ---
 
 # Shagred Profile — Requirements
 
-Derived from MVP Scope Baseline v1.1 §2. Account creation is governed by `registration-and-verification` (REG-08); offer mechanics by `contact-and-offers`; blocking by `ratings-and-trust`.
+Derived from MVP Scope Baseline v1.2 §2. Account creation is governed by `registration-and-verification` (REG-08); offer mechanics by `contact-and-offers`; blocking by `ratings-and-trust`.
 
 ## Design principle
 

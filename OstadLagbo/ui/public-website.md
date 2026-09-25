@@ -4,7 +4,7 @@ type: ui
 status: current
 updated: 2026-09-25
 id: OL-UI-002
-derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.1.md
+derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.2.md
 owner: Iftikher
 ---
 

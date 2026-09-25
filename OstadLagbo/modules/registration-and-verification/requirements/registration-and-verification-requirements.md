@@ -5,13 +5,13 @@ type: requirements
 status: current
 updated: 2026-09-14
 id: OL-REG-REQ-001
-derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.1.md
+derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.2.md
 owner: Iftikher
 ---
 
 # Registration & Verification — Requirements
 
-Derived from MVP Scope Baseline v1.1 §1 and §7. Governs account creation, authentication, and Ostad onboarding through submission for review. Admin-side review is governed by the `admin-review` module; profile field definitions by `ostad-profile` and `shagred-profile`.
+Derived from MVP Scope Baseline v1.2 §1 and §8. Governs account creation, authentication, and Ostad onboarding through submission for review. Admin-side review is governed by the `admin-review` module; profile field definitions by `ostad-profile` and `shagred-profile`.
 
 ## Actors
 

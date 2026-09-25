@@ -1,7 +1,7 @@
 ---
 project: OstadLagbo
 type: baseline
-status: current
+status: superseded
 updated: 2026-08-30
 version: "1.1"
 approval: written

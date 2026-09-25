@@ -5,13 +5,13 @@ type: requirements
 status: current
 updated: 2026-09-13
 id: OL-ADM-REQ-001
-derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.1.md
+derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.2.md
 owner: Iftikher
 ---
 
 # Admin Review & Dashboard — Requirements
 
-Derived from MVP Scope Baseline v1.1 §5: a full administrative control panel — review, moderation, user management, business analytics, communication, compliance tooling, and support all ship in the MVP. Report *creation* and blocking are governed by `ratings-and-trust`; profile fields by `ostad-profile` / `shagred-profile`.
+Derived from MVP Scope Baseline v1.2 §5: a full administrative control panel — review, moderation, user management, business analytics, communication, compliance tooling, and support all ship in the MVP. Report *creation* and blocking are governed by `ratings-and-trust`; profile fields by `ostad-profile` / `shagred-profile`.
 
 The dashboard is a separate web application, English-only, desktop-oriented, and is the **only** interface holding these powers — none exist in the Flutter app.
 
