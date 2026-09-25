@@ -19,7 +19,7 @@ Reports and blocks name a **person**, but the client never holds that person's a
 
 - an **`ostad_id`** (public profile id) — anyone holds it;
 - a **`shagred_id`** (profile id) — an Ostad holds it only while the Shagred is visible (SGP-05);
-- an **`offer_id`** — the Ostad's own party object, held **after visibility has lapsed**; only the Ostad recipient of that offer may use it, and the API resolves it to the Shagred's account (and, for a report, to the `shagred_profile` target) without returning who they are.
+- an **`offer_id`** — the Ostad's own party object, held **after visibility has lapsed**; only the Ostad recipient of that offer may use it, and the API resolves it to the Shagred's account (and, for a report, to the `shagred_profile` target) without returning who they are. **For a report, the offer is also retained on the report as `via_offer_id`** (RNT-DM), so the moderator can read the offer's message as evidence — the target stays `shagred_profile`; `via_offer_id` is an evidence pointer, not the target.
 
 This is how an Ostad reports or blocks the sender of a declined, expired, or withdrawn offer (the OFR handoff). The resolved `reported_account_id` / `blocked_account_id` is stored; it is never sent back to any user. Any write whose resolved target is the caller themself is rejected (`validation_failed` — `blocker ≠ blocked`, no self-report).
 
@@ -53,7 +53,7 @@ A reply carries no rating value and is **removed automatically when its rating i
 **`target_type` values and who may report each** (RNT-07):
 
 - **`ostad_profile`** (`target_id` = `ostad_id`) — any registered user.
-- **`shagred_profile`** — an Ostad who **holds or has held** an offer from that Shagred (offer-history check, *any* status — reportability does not lapse with visibility, RNT-DM). Addressed by **`shagred_id`** while visible, or by **`offer_id`** once identity has lapsed; the API resolves either to the `shagred_profile` target and the Shagred's account.
+- **`shagred_profile`** — an Ostad who **holds or has held** an offer from that Shagred (offer-history check, *any* status — reportability does not lapse with visibility, RNT-DM). Addressed by **`shagred_id`** while visible, or by **`offer_id`** once identity has lapsed; the API resolves either to the `shagred_profile` target and the Shagred's account, and when addressed by `offer_id` stores that offer as `via_offer_id` so the moderator can read its message as evidence (ADM api).
 - **`chat_message`** (`target_id` = the primary message; `cited_message_ids` ≥1, including `target_id`, **all in one thread the reporter participates in**) — a **participant** of that thread. This array is the *only* thing that later unlocks the admin's ±10-message context read (OFR-DM, ADM-07); the thread is derived from it, never supplied.
 - **`rating`** / **`rating_reply`** (`target_id` = that row) — any registered viewer.
 

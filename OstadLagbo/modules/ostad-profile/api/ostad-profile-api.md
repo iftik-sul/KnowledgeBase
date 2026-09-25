@@ -3,7 +3,7 @@ project: OstadLagbo
 module: ostad-profile
 type: api
 status: current
-updated: 2026-09-24
+updated: 2026-09-25
 id: OL-OSP-API-001
 derived_from: /OstadLagbo/modules/ostad-profile/requirements/ostad-profile-requirements.md
 owner: Iftikher
@@ -43,7 +43,7 @@ Non-key edits during initial review are permitted because REG-11 lets a pending 
   education[]:  { level, credential_name, institution, passing_year },     // grouped by level, highest first
   experience[]: { group, title, organization, period, description },
   portfolio[]:  { id, item_type, url (signed) | external_url, duration_seconds? },
-  stats: { rating_avg | null, rating_count, is_new, joined_at, last_active },  // last_active as a day-granularity label
+  stats: { rating_avg | null, rating_count, joined_at, last_active },  // last_active a day-granularity label; the client renders "New" when rating_count == 0 (RNT-03), as it does on the map
   trust: { verified, completion_pct },
   accepting_offers,
   viewer?: { favorited, offer: { id, status } | null } }    // authenticated viewers only; values computed by the MAP and OFR rules

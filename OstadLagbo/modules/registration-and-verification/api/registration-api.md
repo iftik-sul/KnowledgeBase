@@ -3,7 +3,7 @@ project: OstadLagbo
 module: registration-and-verification
 type: api
 status: current
-updated: 2026-09-24
+updated: 2026-09-25
 id: OL-REG-API-001
 derived_from: /OstadLagbo/modules/registration-and-verification/requirements/registration-requirements.md
 owner: Iftikher
@@ -11,7 +11,7 @@ owner: Iftikher
 
 # Registration & Verification — API
 
-Endpoints for accounts, authentication, onboarding, identity capture, consent, uploads, and device registration. Conventions per [API Overview](/OstadLagbo/api-overview.md); entities per [REG Data Model](/OstadLagbo/modules/registration-and-verification/data-model/registration-data-model.md). Stage payloads for onboarding stages 1, 3, and 5 (profile fields) are defined in the OSP api; stage 4 (location) in the MAP api; this document owns the wizard itself and stage 2 (identity).
+Endpoints for accounts, authentication, onboarding, identity capture, consent, uploads, analytics ingestion, health, and device registration. Conventions per [API Overview](/OstadLagbo/api-overview.md); entities per [REG Data Model](/OstadLagbo/modules/registration-and-verification/data-model/registration-data-model.md). Stage payloads for onboarding stages 1, 3, and 5 (profile fields) are defined in the OSP api; stage 4 (location) in the MAP api; this document owns the wizard itself, stage 2 (identity), and the cross-cutting shared endpoints (uploads, analytics events, health).
 
 ## Endpoints — authentication
 
@@ -98,6 +98,15 @@ Errors: `validation_failed` (`details.images = "back_required" | "back_not_allow
 
 An upload ticket is consumed exactly once by the endpoint that references its `upload_id`; unconsumed tickets expire and their objects are swept (ADM-18). The API re-validates the stored object at consumption.
 
+## Endpoints — analytics events & health (shared)
+
+| Endpoint | Caller & policy check | Request | Response | Errors |
+|---|---|---|---|---|
+| `POST /v1/events` | Any session or **guest** (a pseudonymous `session_id`; no auth required — client analytics must work before login, NFR-06); rate-limited per IP and per account | `{ events: [ { name, ts, session_id, props } ] }` — a batch of **client-side events only** (map sessions, searches, zero-result searches, share taps, screen views; API Overview → analytics). The API validates each against the **event catalog**, **strips any disallowed property** and coarsens area to thana/grid (never phone, name, or precise coordinates — NFR-06, MAP-DM), then writes accepted events to the analytics store (ADR-002) | `204` — the batch is accepted; an individually invalid event is dropped, not failed, so one bad event never loses the batch | `validation_failed` (malformed envelope); `rate_limited` |
+| `GET /v1/health` | Anyone, unauthenticated | — | `{ status: "ok" }` — for uptime monitoring (NFR-09); no auth, no body | — |
+
+**Server-side events are never posted here.** Ostad profile views (OSP), offer/connection/message/phone-reveal events (OFR), rating/report/block events (RNT), verdicts and moderation (ADM), and ticket events (SUP) are written by the API itself at the moment of the action — `POST /v1/events` carries only what the client observes (API Overview → analytics events). Both streams land in the same ADR-002 store and feed ADM-12…15.
+
 ## Endpoints — legal documents (guest-reachable)
 
 | Endpoint | Caller & policy check | Request | Response |
@@ -113,8 +122,8 @@ An upload ticket is consumed exactly once by the endpoint that references its `u
 
 **Deletion and recovery.** `DELETE /v1/me` → `pending_deletion`, no sessions → any `POST /v1/auth/login` within 30 days recovers (REG-02, CL-015); `register/start` with that phone during the window returns `account_recoverable` and the client offers the login screen.
 
-**Suspension.** `login` succeeds into a restricted session → the client renders `suspension_notice`, registers a push token, and offers the appeal → the only calls that succeed are the SUP api's appeal endpoints, a `ticket_attachment` upload, `PATCH /v1/me/locale`, push-token registration, and `logout` (Data Model Overview rule 7). Direct Realtime and Storage access is refused by RLS.
+**Suspension.** `login` succeeds into a restricted session → the client renders `suspension_notice`, registers a push token, and offers the appeal → the only calls that succeed are the SUP api's ticket endpoints (create an appeal, and read or reply to any ticket the account owns), a `ticket_attachment` upload, `PATCH /v1/me/locale`, push-token registration, and `logout` (Data Model Overview rule 7). Direct Realtime and Storage access is refused by RLS.
 
 ## What this module does not expose
 
-No endpoint returns a date of birth, a password hash, an OTP code, another user's phone or email (OFR's contact reveal is the only path, in the OFR api), an identity document or selfie to any user (admin-only, ADM api, audit-logged), a pending registration's contents, whether a given phone number has an account outside registration itself (API Overview → account existence), or whether a duplicate-ID flag was raised.
+No endpoint returns a date of birth, a password hash, an OTP code, another user's phone or email (OFR's contact reveal is the only path, in the OFR api), an identity document or selfie to any user (admin-only, ADM api, audit-logged), a pending registration's contents, whether a given phone number has an account outside registration itself (API Overview → account existence), or whether a duplicate-ID flag was raised. `POST /v1/events` accepts only client-observable events and never a viewer's precise coordinates, phone, or name (NFR-06).

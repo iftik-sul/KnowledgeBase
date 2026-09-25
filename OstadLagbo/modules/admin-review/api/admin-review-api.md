@@ -3,7 +3,7 @@ project: OstadLagbo
 module: admin-review
 type: api
 status: current
-updated: 2026-09-24
+updated: 2026-09-25
 id: OL-ADM-API-001
 derived_from: /OstadLagbo/modules/admin-review/requirements/admin-review-requirements.md
 owner: Iftikher
@@ -15,7 +15,7 @@ Every endpoint the admin dashboard calls. Conventions per [API Overview](/OstadL
 
 1. **All endpoints are under `/v1/admin/`** and require an **admin token** (email + password + TOTP, ADM-20/CL-018). A user token here is `unauthorized`; the two families never cross (API Overview → authentication).
 2. **The admin sees account ids.** This module is the stated exception to the identifier rule (API Overview → identifiers): account-level moderation is its job, so directories, detail views, and actions address accounts directly.
-3. **Reads that touch sensitive data write an audit entry as a side effect.** Viewing an identity document, viewing report-cited chat context, and every action write to `admin_audit_entry` (ADM-17). The audit is not an endpoint the admin calls; it is a consequence the API guarantees. There is **no way to read an identity document or a chat message without the read being logged.**
+3. **Reads that touch sensitive data write an audit entry as a side effect.** Viewing an identity document, viewing report-cited chat context, viewing a Shagred's Ostad history (SGP-03), and every action write to `admin_audit_entry` (ADM-17). The audit is not an endpoint the admin calls; it is a consequence the API guarantees. There is **no way to read an identity document, a chat message, or a Shagred's history without the read being logged.**
 4. **Vault reads are rate-limited per session.** Signed-URL issuance for identity documents and selfies is capped per admin session (ADM-DM); an unusual spike is flagged in the operations view. A single stolen admin token cannot silently exfiltrate every NID — mass reads are slow and visible.
 
 ## Admin authentication
@@ -47,8 +47,8 @@ Admin accounts are **provisioned out of band** (ADM-20): there is no admin regis
 
 | Endpoint | Request | Response | Errors |
 |---|---|---|---|
-| `GET /v1/admin/reports` | `?state=open&target_type=&category=&limit=&cursor=` | The reports queue (ADM-07), oldest first: `[ { report_id, target_type, category, reporter: { account_id }, reported: { account_id, display_name }, created_at, has_cited_messages } ]` — reporter identity is admin-only (RNT-07); mid-purge subjects excluded | — |
-| `GET /v1/admin/reports/{report_id}` | — | Report detail: the report, the **reported content** inline (profile, review, reply, **or the offer message** when the target is an offer against a hidden Shagred — SGP api), and for a message report the cited messages **with ±N context** (OFR-07) as signed reads — **this read audits `chat_context_viewed`** and returns only the cited window, never a browsable chat | `not_found` |
+| `GET /v1/admin/reports` | `?state=open&target_type=&category=&limit=&cursor=` | The reports queue (ADM-07), oldest first: `[ { report_id, target_type, category, reporter: { account_id }, reported: { account_id, display_name }, created_at, has_cited_messages, via_offer } ]` — reporter identity is admin-only (RNT-07); mid-purge subjects excluded | — |
+| `GET /v1/admin/reports/{report_id}` | — | Report detail: the report, the **reported content** inline (profile, review, reply, or — when the report carries a `via_offer_id` (a hidden-Shagred report filed through a lapsed offer, RNT/SGP) — **that offer's message as the evidence**), and for a message report the cited messages **with ±N context** (OFR-07) as signed reads — **this read audits `chat_context_viewed`** and returns only the cited window, never a browsable chat | `not_found` |
 | `POST /v1/admin/reports/{report_id}/resolve` | `resolution: "dismiss" \| "warn" \| "suspend" \| "remove_content"`, `internal_reason` (**required**), `user_message?` (required for `warn`) | `204` — `remove_content` sets `removed_at` and recomputes the Ostad's aggregate (RNT-DM); `warn`/`suspend` create a `moderation_action`; all audit `report_resolution` (+ `content_removal`) | `validation_failed`; `state_conflict` |
 | `GET /v1/admin/blocks` | `?limit=&cursor=` | The block overview (ADM-09), read-only: most-blocked accounts and recent blocks over **active** blocks (RNT-DM) | — |
 
@@ -58,7 +58,7 @@ Admin accounts are **provisioned out of band** (ADM-20): there is no admin regis
 |---|---|---|---|
 | `GET /v1/admin/ostads` | `?status=&q=&district=&category=&sort=&limit=&cursor=` — `q` matches name, phone, or ID number (ADM-10) | `[ { account_id, display_name, approval_status, account_status, district, submitted_at } ]` | — |
 | `GET /v1/admin/shagreds` | `?status=&q=&limit=&cursor=` — `q` matches name or phone | `[ { account_id, display_name, account_status, joined_at } ]` | — |
-| `GET /v1/admin/accounts/{account_id}` | — | The account detail view (ADM-10): full profile **including every internal field** (street address, DOB, contact, identity metadata; identity images only via the audited, rate-limited signed-URL path); verdict history; **report history as both reporter and reported**; audit entries touching this account; the Shagred's Ostad history if a Shagred (SGP-03, admin path); the applicable actions | `not_found` |
+| `GET /v1/admin/accounts/{account_id}` | — | The account detail view (ADM-10): full profile **including every internal field** (street address, DOB, contact, identity metadata; identity images only via the audited, rate-limited signed-URL path); verdict history; **report history as both reporter and reported**; audit entries touching this account; **the Shagred's Ostad history if a Shagred (SGP-03, admin path — this read writes a `shagred_history_viewed` audit entry, honoring SGP's audit guarantee)**; the applicable actions | `not_found` |
 | `POST /v1/admin/accounts/{account_id}/warn` | `internal_reason`, `user_message` (required) | `204` — a `moderation_action` (warn); delivers the message; audits `warn` | `state_conflict` (purged) |
 | `POST /v1/admin/accounts/{account_id}/suspend` | `internal_reason`, `user_message?` | `204` — status → suspended; revokes sessions and push tokens; freezes chats; pending offers frozen; audits `suspend` | `state_conflict` (already suspended or purged) |
 | `POST /v1/admin/accounts/{account_id}/reinstate` | `internal_reason`, `appeal_ticket_id?` | `204` — status → active; clears a pending termination (REG-DM); **if `appeal_ticket_id` is present, resolves that appeal ticket in the same transaction and tags the action appeal-driven** (ADM-DM); audits `reinstate` | `state_conflict` (not suspended) |
@@ -116,7 +116,7 @@ Resolving an appeal ticket does **not** itself reinstate the account; the admin 
 
 **Reviewing an Ostad.** `GET /v1/admin/reviews` → open a case → `GET …/{case_id}` (identity URLs issued, rate-limited, each audited; selfie shown for a photo change) → compare selfie, documents, and claimed names → `POST …/identity {passed}` → `POST …/verdict {approve}`. The approve is refused until identity is passed and any duplicate is resolved.
 
-**Handling a harassment report against a hidden Shagred.** The report targets an **offer id** (SGP api) → `GET …/{report_id}` shows the offer's message (the evidence) and the reported Shagred resolved server-side → `POST …/resolve {suspend}`. The reporting Ostad never regained sight of the Shagred's profile.
+**Handling a harassment report against a hidden Shagred.** The report was filed through a lapsed **offer** and carries `via_offer_id` (RNT/SGP) → `GET …/{report_id}` shows that offer's message (the evidence) and the reported Shagred resolved server-side → `POST …/resolve {suspend}`. The reporting Ostad never regained sight of the Shagred's profile.
 
 **Appeal.** A terminated account appeals → the ticket arrives flagged first → `GET …/{ticket_id}` shows the contested action → to grant: `POST …/accounts/{id}/reinstate {appeal_ticket_id}` (reinstates and closes the ticket together); to deny: `POST …/tickets/{id}/resolve {reason}` (suspension stands).
 
@@ -124,4 +124,4 @@ Resolving an appeal ticket does **not** itself reinstate the account; the admin 
 
 ## What this module does not expose
 
-No endpoint returns an identity document image, or a chat message, without writing an audit entry for the read and consuming the per-session vault-read budget; no endpoint lets the admin browse chats absent a report citing specific messages (OFR-07); no endpoint edits or deletes the audit log; no admin registration, password-reset, or self-provisioning endpoint exists (ADM-20); and the admin token is accepted by no Supabase channel and no user endpoint (API Overview).
+No endpoint returns an identity document image, a chat message, or a Shagred's Ostad history without writing an audit entry for the read (and, for identity documents, consuming the per-session vault-read budget); no endpoint lets the admin browse chats absent a report citing specific messages (OFR-07); no endpoint edits or deletes the audit log; no admin registration, password-reset, or self-provisioning endpoint exists (ADM-20); and the admin token is accepted by no Supabase channel and no user endpoint (API Overview).
