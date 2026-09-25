@@ -112,6 +112,14 @@ Charts read the **rollup tables** (ADR-002), never raw events — every response
 
 Resolving an appeal ticket does **not** itself reinstate the account; the admin reinstates through `POST /v1/admin/accounts/{id}/reinstate` with the `appeal_ticket_id`, which resolves the ticket and reinstates in one transaction (ADM-DM). Resolving the ticket alone is how an appeal is *denied* (with a closing reason), leaving the suspension in place.
 
+## K. Settings — platform configuration (ADM-21)
+
+| Endpoint | Request | Response |
+|---|---|---|
+| `GET /v1/admin/config` | — | The current platform values the **read-only** Settings page shows (ADM-21): offer expiry days; radius min/max; portfolio limits (image/video/document/link counts and sizes, the 45-s video); OTP parameters (length, expiry, resend window, per-number daily cap); login-lockout thresholds; and the review-turnaround target. These are **deployment configuration** in the MVP — there is **no write endpoint**; changing a value is an engineering deploy (editable config is post-MVP, ADM-21). |
+
+The values are read from the same engineering-default constants the rest of the API enforces (offer expiry OFR-DM, radius/portfolio MAP/OSP, OTP REG-DM), surfaced here so the founder can see the live configuration in one place without reading code.
+
 ## Flows
 
 **Reviewing an Ostad.** `GET /v1/admin/reviews` → open a case → `GET …/{case_id}` (identity URLs issued, rate-limited, each audited; selfie shown for a photo change) → compare selfie, documents, and claimed names → `POST …/identity {passed}` → `POST …/verdict {approve}`. The approve is refused until identity is passed and any duplicate is resolved.
