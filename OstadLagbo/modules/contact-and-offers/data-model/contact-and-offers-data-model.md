@@ -3,7 +3,7 @@ project: OstadLagbo
 module: contact-and-offers
 type: data-model
 status: current
-updated: 2026-09-13
+updated: 2026-09-25
 id: OL-OFR-DM-001
 derived_from: /OstadLagbo/modules/contact-and-offers/requirements/contact-and-offers-requirements.md
 owner: Iftikher
@@ -11,7 +11,7 @@ owner: Iftikher
 
 # Contact & Offers — Data Model
 
-Entities owned: `offer`, `connection`, `chat_thread`, `chat_message`. Conventions per [Data Model Overview](/OstadLagbo/data-model-overview.md). This model holds the platform's success unit — the connection — and the relationship machinery around it. Its central design commitment: **`offer` is transient, `connection` is permanent.** An offer is a request that resolves one way or another; a connection is a fact that, once true, is never untrue (Overview rule 2). Revised 2026-09-13 after the cross-layer review: reminder flag added; symmetric purge of non-accepted offers; the retention claim about SGP-DM corrected.
+Entities owned: `offer`, `connection`, `chat_thread`, `chat_message`. Conventions per [Data Model Overview](/OstadLagbo/data-model-overview.md). This model holds the platform's success unit — the connection — and the relationship machinery around it. Its central design commitment: **`offer` is transient, `connection` is permanent.** An offer is a request that resolves one way or another; a connection is a fact that, once true, is never untrue (Overview rule 2). Revised 2026-09-13 after the cross-layer review: reminder flag added; symmetric purge of non-accepted offers; the retention claim about SGP-DM corrected. Revised 2026-09-25: inbox-display clarification vs OFR-06 (below).
 
 **Identifier convention for this model:** every party reference is a `user_account` id (the identity spine, Overview rule 1). Where an Ostad's *profile* is needed for a join, `ostad_profile_id` is carried additionally — never instead.
 
@@ -125,7 +125,9 @@ Every push this module emits — offer received, day-5 reminder, accepted, decli
 
 ## Inbox reads (OFR-09)
 
-**Shagred sent-offers list:** `offer where shagred_account_id = :me`, ordered `created_at desc`, each with live `status` and, for pending, `expires_at` (client renders "N days remaining"). **Ostad received-offers list:** `offer where ostad_account_id = :me`, pending first ordered `expires_at asc` (soonest-to-expire on top), then resolved. **Chat list (both roles):** `chat_thread where :me ∈ participants`, ordered `last_message_at desc`, each with the counterpart's display name (live profile where it exists, else the connection snapshot) and an unread count (`chat_message where read_at is null and sender_account_id ≠ :me`).
+**Shagred sent-offers list:** `offer where shagred_account_id = :me`, ordered `created_at desc`, each with live `status` and, for pending, `expires_at` (client renders "N days remaining"). **Ostad received-offers list:** `offer where ostad_account_id = :me`, pending first ordered `expires_at asc` (soonest-to-expire on top), then resolved. **Chat list (both roles):** `chat_thread where :me ∈ participants`, ordered `last_message_at desc`, each with the counterpart's display name (the live profile where it exists; a counterpart in `pending_deletion` or `purged` shows to the other participant as **"deleted account"** per OFR-06) and an unread count (`chat_message where read_at is null and sender_account_id ≠ :me`).
+
+**Snapshot vs. live display (clarification, 2026-09-25).** The `shagred_display_name_snapshot` / `ostad_display_name_snapshot` on `connection` back the connection **record** — keeping it readable for admin, history (SGP-DM), and analytics after a party purges. They are **not** the live inbox/chat display shown to the *other participant*: once a counterpart enters `pending_deletion` or `purges`, that participant sees them as **"deleted account"** (OFR-06), not the snapshot name. The two surfaces serve different readers.
 
 ## Retention behavior (OL-RET-001 mapping)
 
