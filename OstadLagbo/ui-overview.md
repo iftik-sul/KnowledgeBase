@@ -59,7 +59,7 @@ Every screen handles the API's closed error enum (API Overview) the same way. A 
 | `forbidden` | "You can't do this" state appropriate to the screen; rare, since the client hides actions a role can't take |
 | `suspended` | Drop to the suspension-notice shell; the notice payload is in `details` |
 | `not_found` | One neutral "not available" state — **never** distinguishes a block from a deletion or a missing record (opacity rule). The client never says or implies "you've been blocked" |
-| `conflict` | Screen-specific, keyed on `details` where present (`duplicate_pending_pair`, `pending_limit_reached`, name-in-use, second rating, second reply) |
+| `conflict` | Screen-specific, keyed on `details` where present (`duplicate_pending_pair`, `pending_limit_reached`, `open_ticket_limit`, `duplicate_open_appeal`, name-in-use, second rating, second reply) — illustrative, not exhaustive |
 | `state_conflict` | Screen-specific, keyed on `details` (`reason`, or `use`/`field` where a module uses them): `ostad_not_accepting` → the not-accepting notice; `profile_incomplete` → route to Shagred setup; `reopen_window_closed` → offer a new ticket; `thread_frozen:<clause>` → the frozen-chat banner; `rating_removed` → "removed by moderation"; `under_review` → the locked-revision state; OSP's `use: onboarding` / `use: patch` → send the edit to the right editor |
 | `account_recoverable` | Registration → offer the login/recover path (REG-02) |
 | `locked_out` | Disable the action and show the countdown from `details.retry_after_seconds` |
