@@ -38,7 +38,7 @@ The app presents one of three shells depending on who is holding the phone. Whic
 - **Ostad shell** — bottom navigation: **Offers** (received-offers inbox, the home surface), **Chats**, **Insights**, **Profile/Settings**. An Ostad has no discovery loop — they are *found*, not finding — so the discovery map is **not** a top-level Ostad tab; an Ostad checks how their own pin looks through the self-preview under Profile (MAP-01). Profile/Settings holds the public profile, the pause toggle, key-field revisions, and account settings; **Insights** (OSP-12) is its own tab.
 
 **Two shells stand apart from the tab bars:**
-- **Onboarding** (Ostad) — the fixed stage-1→5 wizard (REG-09) occupies the whole screen until submitted; the tab bar appears only once the account can use it.
+- **Onboarding** (Ostad) — the fixed stage 1→6 wizard (REG-09), stage 6 being Review & submit, occupies the whole screen until submitted; the tab bar appears only once the account can use it.
 - **Suspension notice** — a `suspended` login lands here and nowhere else (REG-api, SUP-04): the notice text, an **Appeal** action, and the user's own ticket threads (create an appeal; read and reply to any ticket they already own), plus language and logout. This is the UI face of the restricted-session whitelist.
 
 ## Localisation (CL-016, REG-14, NFR-11)
