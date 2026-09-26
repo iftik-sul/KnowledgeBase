@@ -18,6 +18,8 @@ legal_review: pending
 
 ## 1. Who we are
 
+**[Controller to be named before launch — see OL-STR-001.** This section must identify the person or registered entity that controls the data: Google Play requires the policy to name the entity, and the Personal Data Protection Act, 2026 requires an identifiable data controller. Absent a registered company, that is the founder personally — a position worth legal advice before launch, given the identity documents held.**]**
+
 Ostad Lagbo is a Bangladesh-based platform connecting people who want to learn skills (Shagreds) with local teachers and experts (Ostads). We handle your data as described here and only with your consent, which you give when you register and can withdraw at any time (Section 8).
 
 ## 2. What we collect
