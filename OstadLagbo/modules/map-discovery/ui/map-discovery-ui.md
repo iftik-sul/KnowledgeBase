@@ -38,9 +38,9 @@ Screens for the discovery map, search and filters, favourites, share links, and 
   - **Keyword search** — a query (≥2 chars) matched **fuzzily and cross-script over skills only** (category names, their Bangla aliases, and free-text skill names) — never headline, about, or names (MAP-06). "gitar" and "গিটার" both find Guitar Ostads.
   - **Category filter** — single-select via the **fuzzy category picker** (shared component; deactivated categories never appear).
   - **Gender filter** — Any (default) / Male / Female (MAP-05). Profiles stored as **Other** (CL-031) appear only under "Any"; there is no "Other" filter chip.
-  - **Radius slider** — 1–30 km (default 5), measured **from the map centre**, not the viewer; the active radius is visibly indicated; the nearest-first radius read is `GET /v1/discovery/radius` (MAP-04).
+  - **Radius slider** — 1–30 km (default 5), measured **from the map centre**, not the viewer; the active radius is visibly indicated. It rides the **same** `GET /v1/discovery/map` read as `centre` + `radius_km`, exactly like the other filters (MAP-04, CL-033).
 - **States:** changing radius or a filter updates results without a fresh text search; **clear filters** restores the unfiltered map; a zero-result combination shows the empty state and widen action.
-- **Data & actions:** the params ride the `discovery/map` and `discovery/radius` reads; `q` carries a **tighter rate limit** (fuzzy is the most expensive query). Searches, filter applications with result counts, **zero/low-result events** (tagged category, keyword, script, gender, coarsened area — never the exact centre), and radius changes are posted to `POST /v1/events` (MAP-11).
+- **Data & actions:** all params ride the single `discovery/map` read (CL-033); `q` carries a **tighter rate limit** (fuzzy is the most expensive query). Searches, filter applications with result counts, **zero/low-result events** (tagged category, keyword, script, gender, coarsened area — never the exact centre), and radius changes are posted to `POST /v1/events` (MAP-11).
 - **Never shows:** the exact map centre in any analytics — area is coarsened before it leaves the device/at ingestion (MAP-10, REG events endpoint).
 
 ## Group C — Favourites (MAP-08)

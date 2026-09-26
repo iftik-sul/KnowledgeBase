@@ -49,9 +49,10 @@ an `offer` exists from this Shagred to this Ostad with status = pending
    OR a `connection` exists between them            (SGP-05 lifecycle)
 no block exists between the two accounts             (RNT-08)
 shagred user_account.status IN (active, suspended)
+shagred user_account.deleted_at IS NULL               (departing or terminated — CL-032)
 ```
 
-The last clause makes visibility end **the moment the Shagred requests deletion** — SGP-05's "Shagred deletes account → all visibility ends" and the retention policy's deletion model, under which a deleting account is invisible on all surfaces immediately. *(Corrected 2026-09-24: the earlier clause, "status ≠ purged," would have kept a departing Shagred visible for the 30-day window.)* A suspended Shagred stays visible to an Ostad already holding their offer or connection, so the Ostad keeps the context needed to understand a frozen chat or to report.
+The last two clauses make visibility end **the moment the Shagred is leaving** — whether they requested deletion themselves (`status = pending_deletion`) **or an admin terminated them** (status stays `suspended`, but `deleted_at` is set — REG-DM/CL-019). Both present to the Ostad as a departed account immediately, not at purge. *(Corrected 2026-09-24: the earlier clause, "status ≠ purged," would have kept a departing Shagred visible for the 30-day window. Extended 2026-09-26 (CL-032): termination keeps `suspended` status, so the status clause alone left a banned Shagred fully visible for the whole 30-day appeal window — longer than someone who left voluntarily.)* A **plain** suspension (no `deleted_at`) still keeps the Shagred visible to an Ostad already holding their offer or connection, so the Ostad keeps the context needed to understand a frozen chat or to report; a reinstated account clears `deleted_at` and reappears.
 
 No other read path exists: a Shagred profile is never listable, searchable, mappable, or reachable by ID without satisfying this predicate. The predicate is evaluated by the centralized policy layer (Overview → Authorization model), not by individual endpoints. Declined, expired, and withdrawn offers satisfy neither clause — visibility lapses the moment the offer leaves `pending` without becoming a connection.
 

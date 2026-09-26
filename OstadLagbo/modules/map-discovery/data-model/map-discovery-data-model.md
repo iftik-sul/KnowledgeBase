@@ -60,7 +60,7 @@ Input: a bounding box (the visible map area) + zoom level. Output: the discovery
 
 ### 2. Radius query (MAP-04)
 
-Input: a center point + radius in km. Output: the discovery projection for discoverable, non-blocked Ostads within the radius, with `distance_km` computed from the center. Combines with query 1 as an additional filter.
+Input: a center point + radius in km, carried on the **same** discovery read as the viewport (there is no separate radius endpoint — CL-033). Output: the discovery projection for discoverable, non-blocked Ostads within the radius. It **composes with query 1 as one more AND filter**, so the viewport cap and clustering apply to it unchanged — a radius read can never enumerate more Ostads than the cap. No `distance_km` is returned: with no list view (MAP-02) nothing needs server-side distance, and the client computes it from its own map centre on-device.
 
 **The center is a query parameter, not a datum.** It is the map's current center — which, until the user pans, may equal the device's GPS-initialized position. It is transmitted to serve the query, **never persisted, and scrubbed from request logs** (NFR-06). No table, event, or log line receives it. See "Privacy guarantees" below.
 

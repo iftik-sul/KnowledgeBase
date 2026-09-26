@@ -33,7 +33,7 @@ The map, search, filters, and full public Ostad profiles are available **without
 
 ## MAP-04 Radius and empty states
 
-A user-adjustable radius slider (proposed default 5 km, range 1–30 km) filters which Ostads render, measured from the current map center — not the user's position — so any area can be explored. The active radius is visibly indicated. When radius + filters + search produce **zero results**, the map shows a clear empty state ("No Ostads here yet") with a one-tap **widen radius** action; the zero-result event is logged per MAP-11.
+A user-adjustable radius slider (proposed default 5 km, range 1–30 km) filters which Ostads render, measured from the current map center — not the user's position — so any area can be explored. The radius is **one more filter on the single discovery read** that draws the pins (CL-033), so clustering and the viewport cap apply to it as to any other filter. The active radius is visibly indicated. When radius + filters + search produce **zero results**, the map shows a clear empty state ("No Ostads here yet") with a one-tap **widen radius** action; the zero-result event is logged per MAP-11.
 
 **Acceptance:** changing radius updates results without re-search; the empty state and widen action appear on every zero-result combination.
 

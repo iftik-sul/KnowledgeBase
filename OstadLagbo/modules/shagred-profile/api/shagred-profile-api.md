@@ -41,9 +41,10 @@ AND ( an offer from this Shagred to the caller is pending
       OR a connection exists between them )
 AND no block exists between them                      (RNT-08)
 AND the Shagred's account status is active or suspended
+AND the Shagred's `deleted_at` is null                 (departing or terminated — CL-032)
 ```
 
-The last clause ends visibility **the moment the Shagred requests deletion** (SGP-05; retention policy's deletion model), not at purge. A suspended Shagred remains visible to an Ostad already holding their offer or connection, so the Ostad keeps the context needed to understand a frozen chat or to report.
+The last two clauses end visibility **the moment the Shagred is leaving** — self-requested deletion (`pending_deletion`) **or admin termination** (status stays `suspended` with `deleted_at` set, CL-019) — not at purge. A **plain** suspension (no `deleted_at`) still leaves the Shagred visible to an Ostad already holding their offer or connection, so the Ostad keeps the context needed to understand a frozen chat or to report; a reinstated account clears `deleted_at` and reappears.
 
 **Every refusal is `not_found`.** Whether the caller is a guest or another Shagred, the offer lapsed, no relationship ever existed, the Shagred is deleting, or a block exists, the response is identical. If a lapsed offer returned `forbidden` while a block returned `not_found`, the difference would reveal the block; making all refusals the same keeps the opacity rule intact (API Overview).
 
