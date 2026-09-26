@@ -25,8 +25,11 @@ updated: 2026-09-25
 - [Data Model Overview](/OstadLagbo/data-model-overview.md) — conventions, entity ownership map, cross-cutting rules, and the authorization model. The index to all eight module data models.
 - [API Overview](/OstadLagbo/api-overview.md) — the api-layer rulebook: authentication, the identifier and opacity rules, the closed error enum, idempotency, media, and the endpoint template every module api obeys.
 - [UI Overview](/OstadLagbo/ui-overview.md) — the ui-layer rulebook: the four surfaces, the app shells, the error-to-UI mapping, shared components, and the screen-spec template every module ui obeys.
-- [ADR-001 Platform Architecture](/OstadLagbo/decisions/adr-001-platform-architecture.md) — the accepted three-tier architecture, why it was chosen over the alternatives, the phased cost model, and the open items it created.
-- [Change Log](/OstadLagbo/governance/change-log.md) — every approved scope change (CL-001…021), and the rule that changes are logged before implementation.
+- [ADR-001 Platform Architecture](/OstadLagbo/decisions/adr-001-platform-architecture.md) — the accepted three-tier architecture, why it was chosen over the alternatives, the phased cost model, and the open items it created (amended in part by ADR-003/004).
+- [ADR-002 Analytics Event Store](/OstadLagbo/decisions/adr-002-analytics-event-store.md) — where and how client and server analytics events are stored.
+- [ADR-003 Implementation Stack and Repository](/OstadLagbo/decisions/adr-003-implementation-stack.md) — the build toolchain and the split between the `KnowledgeBase` spec repo and the `athena` code repo.
+- [ADR-004 Authentication Authority and Token Model](/OstadLagbo/decisions/adr-004-authentication-authority.md) — the API owns passwords and mints Supabase-valid JWTs; no `auth.users` row.
+- [Change Log](/OstadLagbo/governance/change-log.md) — every approved scope change (CL-001…022), and the rule that changes are logged before implementation.
 - [Project Charter](/OstadLagbo/governance/project-charter.md) · [Stakeholder Register](/OstadLagbo/governance/stakeholder-register.md) · [Risk Register](/OstadLagbo/governance/risk-register.md) · [Build Sequence](/OstadLagbo/governance/build-sequence.md)
 - Policies: [Data Retention](/OstadLagbo/governance/data-retention-policy.md) · [Privacy Policy](/OstadLagbo/governance/privacy-policy.md) · [Terms of Service](/OstadLagbo/governance/terms-of-service.md) · [Incident Response](/OstadLagbo/governance/incident-response.md) — retention is in force; the user-facing pair need a v1.1 refresh (driving licence, email reveal, termination, Singapore data location) and then Bangladesh legal review before launch.
 - `modules/<module>/requirements/` — approved requirements for all eight modules: REG, OSP, SGP, MAP, OFR, ADM, RNT, SUP.
@@ -38,7 +41,7 @@ updated: 2026-09-25
 
 ## Current phase
 
-Planning — technical design, **specification complete**. The full derivation chain now exists for all eight modules: requirements → data models → **APIs** → **UI**, on top of the governance, decisions (ADR-001/002), reference, and non-functional layers.
+Planning — technical design, **specification complete**. The full derivation chain now exists for all eight modules: requirements → data models → **APIs** → **UI**, on top of the governance, decisions (ADR-001…004), reference, and non-functional layers.
 
 Milestones so far: the requirements layer was twice feature-audited; the governance policy bundle completed; the 2026-09-12 planning review added the build sequence, NFRs, the authorization model, and the glossary; the data-model layer completed 2026-09-13 with a same-day cross-layer review (adding CL-019 termination); ADR-001 and the skill-category seed data were accepted 2026-09-13; a whole-KB review on 2026-09-14 sequenced termination, added REG-14 language preference, and logged CL-020 (public website); the **api layer** was built per module against the data models, then given a full **cross-layer audit** (which surfaced CL-021 photo-as-key-field and several consistency fixes); and the **ui layer** was built per module against the api — the seven app modules, the admin dashboard, and the public website — each adversarially reviewed before merge.
 

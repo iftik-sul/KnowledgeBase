@@ -1,11 +1,13 @@
 ---
 project: OstadLagbo
 type: decision
-status: accepted
+status: current
 updated: 2026-09-25
 id: OL-DEC-003
 supersedes: none
 owner: Iftikher
+decision_status: accepted
+accepted: 2026-09-25
 ---
 
 # ADR-003 — Implementation stack and repository

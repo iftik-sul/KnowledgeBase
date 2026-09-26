@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: change-log
 status: current
-updated: 2026-09-25
+updated: 2026-09-26
 id: OL-CHG-001
 owner: Iftikher
 ---
@@ -13,6 +13,7 @@ Records every founder-approved change to the MVP scope baseline. Newest first. E
 
 | ID | Date | Change | Rationale | Absorbed in |
 |---|---|---|---|---|
+| CL-022 | 2026-09-26 | **Documentation alignment to ADR-004 (auth authority):** api-overview, REG api, and REG data-model rewritten so the **API** — not Supabase Auth — owns the password (`user_account.password_hash`) and mints Supabase-valid JWTs, with **no `auth.users` row**; `auth_session` named the source of truth for refresh/revocation. NFR-05 now permits **scrypt** (user passwords use it per ADR-004). ADR-001 amended (Auth line, dev-OTP line) and marked superseded-in-part by ADR-003/004; ADR-003/004 frontmatter `status` corrected `accepted → current`. **No scope or behaviour change** | The two ADRs accepted 2026-09-25 were never propagated into the older layers, leaving the build agent two conflicting auth designs (audit 2026-09-26, items A1/A2/A3/A5) | **No baseline change (documentation fix)**; OL-API-001, OL-REG-API-001, OL-REG-DM-001, OL-NFR-001, OL-DEC-001, OL-DEC-003, OL-DEC-004 |
 | CL-021 | 2026-09-24 | **Profile photo becomes a key field:** after approval, a new photo publishes only when an admin approves it through a revision, like legal names, identity documents, and skills. Alongside it, the key-field revision flow is specified: changes collect in one pending revision the Ostad submits; it is locked while under review; a never-submitted revision may be discarded; an unsubmitted revision inactive for 90 days is discarded with prior notice, its uploaded documents deleted | A verified Ostad could otherwise swap their face for anyone's under the verified badge — the strongest impersonation vector on the platform. Photo changes are rare and quick to review. Surfaced by the OSP api review | **Baseline v1.2**; OSP-01, OSP-10, OL-OSP-DM-001, OL-RET-001, OL-OSP-API-001 |
 | CL-020 | 2026-09-14 | **Public website added as a deliverable:** landing/marketing pages and guest-reachable legal documents, hosted on Vercel (ADR-001); guest legal pages built in Slice 2, marketing pages in Slice 5 | ADR-001 created a web surface the baseline's modules never named; logged so it is built with scope, not around it | **Baseline v1.2**; ADR-001, OL-BLD-001, ui layer |
 | CL-019 | 2026-09-13 | **Admin account termination:** a `terminate` moderation action that bans an account — it stays suspended for a 30-day appeal window (rule 7: appeal is the only write path), then purges with the retention policy's banned-account exception (ID-number hash, phone, legal name, violation records retained while the ban stands). Suspended users cannot self-delete, so without this action a banned account would sit suspended forever | Surfaced by the cross-layer data-model review: OL-RET-001 promised banned-account retention that no model or requirement could execute | **Baseline v1.2**; ADM-08, OL-ADM-DM-001, OL-REG-DM-001, OL-RET-001 |
