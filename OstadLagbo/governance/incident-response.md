@@ -10,7 +10,7 @@ owner: Iftikher
 
 # Incident Response Process
 
-Internal playbook for when things go wrong. Written for the actual responder — currently one person — as checklists to follow under stress, not process theater. Required before soft launch (risk R-03); operationalizes the breach-notification duty of the Personal Data Protection Act, 2026. Every action taken under this process is recorded in the audit log (ADM-17); legal holds triggered here follow the Retention Policy (OL-RET-001).
+Internal playbook for when things go wrong. Written for the actual responder — currently one person — as checklists to follow under stress, not process theater. Required before soft launch (risk R-03): **Playbooks 1–3 must be fully operable at soft launch; Playbook 4's dashboard-dependent steps run manually until its tooling ships in Slice 5** (CL-034). Operationalizes the breach-notification duty of the Personal Data Protection Act, 2026. Every action taken under this process is recorded in the audit log (ADM-17); legal holds triggered here follow the Retention Policy (OL-RET-001).
 
 ## Severity levels
 
@@ -54,9 +54,11 @@ When unsure between levels, treat it as the higher one.
 
 *Coordinated fraud ring, fake-profile farm, review manipulation, scraping surge, or OTP-spam attack.*
 
-1. **Measure:** confirm the pattern in analytics (ADM-12/14/15) and the SMS monitor (ADM-19) — one bad actor is moderation, a wave is an incident.
+> **Tooling note (CL-034):** steps 1 and 3 name dashboards that ship in **Slice 5** (ADM-10, ADM-12/14/15, ADM-19). **At soft launch (Slice 4) this playbook is run manually** — the same checks by direct query against the database and the admin account detail that does exist. At soft-launch volumes (seeded supply, one launch area) a wave is small enough to see by hand. The dashboard-driven version is required before **public** launch.
+
+1. **Measure:** confirm the pattern in analytics (ADM-12/14/15) and the SMS monitor (ADM-19) — one bad actor is moderation, a wave is an incident. *(Pre-Slice 5: query the analytics store and the SMS send log directly.)*
 2. **Stem:** suspend the involved accounts; where the vector is technical (scraping, OTP abuse), tighten the relevant engineering limits — Cloudflare rate limiting and Render API limits under ADR-001.
-3. **Sweep:** search the directories (ADM-10) for the same pattern — shared documents, sequential phone numbers, identical portfolios. Terminate confirmed fraud accounts (CL-019) so their identity hashes block re-registration.
+3. **Sweep:** search the directories (ADM-10) for the same pattern — shared documents, sequential phone numbers, identical portfolios. *(Pre-Slice 5: query the account and identity-document tables directly.)* Terminate confirmed fraud accounts (CL-019) so their identity hashes block re-registration.
 4. **Harden and record:** convert the lesson into a change request or engineering task; document the wave, accounts involved, and actions.
 
 ## Standing preparations (before soft launch)
