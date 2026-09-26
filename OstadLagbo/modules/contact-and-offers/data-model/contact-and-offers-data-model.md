@@ -84,6 +84,7 @@ One per connection; created atomically with it.
 | connection_id | uuid → connection | 1:1; the only link between the two |
 | participant_a_account_id / participant_b_account_id | uuid / uuid → user_account | **Exactly two participants**, fixed at creation — the structural basis of OFR-07's "readable only by its two participants." There is no third slot |
 | last_message_at | timestamp, nullable | Denormalized cache for inbox ordering; maintained on message insert; recomputable from `chat_message` |
+| block_frozen_at | timestamp, nullable | Set when either participant blocks the other; **not cleared on unblock** — the thread stays frozen (RNT-08, CL-023), cleared only when a new accepted offer forms a new connection. null = writable, subject to the suspension/deletion predicate |
 
 **Freeze state — block is stored, suspension/deletion are predicate.** Whether a thread accepts new messages combines one **stored** flag (block) with query-time predicates (suspension, deletion). `chat_thread` gains a nullable `block_frozen_at` timestamp for this.
 

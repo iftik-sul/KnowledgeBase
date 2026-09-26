@@ -50,6 +50,7 @@ One per (Shagred, Ostad) pair, ever (RNT-01, RNT-06).
 | shagred_account_id / ostad_account_id | uuid / uuid → user_account | **Copied from the connection at insert — denormalized deliberately**, because the pair-uniqueness invariant below cannot be expressed through `connection_id` alone (a pair may accumulate many connections; OFR-DM). Same justification as `connection`'s own denormalization |
 | stars | int 1–5 | Required (RNT-02) |
 | review_text | text | **Required**, proposed cap 600 chars (RNT-02 — star-only submissions are refused) |
+| reviewer_initial | string (1 char) | The reviewer's first initial (e.g. "R."), captured at submission — the **only** reviewer identity ever shown publicly (CL-028), never the display name |
 | created_at / updated_at | timestamps | Editable by the author at any time (RNT-01); `updated_at` tracks edits |
 | anonymized | boolean | Set when the author's account purges (RNT-05) |
 | removed_at / removal_reason | timestamp, nullable / text, nullable | Set only by admin content removal (RNT-06, ADM-07); a removed rating is excluded from display and aggregate but the row persists — the pair's one slot is consumed |
@@ -90,10 +91,10 @@ The author is the Ostad identified by `rating.ostad_account_id`; not stored sepa
 | category | enum: `fake_profile` \| `inappropriate_content` \| `harassment` \| `scam_or_fraud` \| `safety_concern` \| `other` | RNT-07 proposed set (the list is an engineering default; the existence of a category is required) |
 | detail | text, nullable | **Required when category = `other`** |
 | status | enum: `open` \| `resolved` | |
-| resolution | enum: `dismissed` \| `warned` \| `suspended` \| `content_removed`, nullable | ADM-07's actions; null while open |
+| resolution | enum: `dismissed` \| `warned` \| `suspended` \| `terminated` \| `content_removed`, nullable | ADM-07's actions; the API verbs `dismiss` / `warn` / `suspend` / `terminate` / `remove_content` map 1:1 to these stored states (ADM api); null while open |
 | resolution_note | text, nullable | |
 | resolved_by_admin_id | uuid, nullable → admin_account | |
-| moderation_action_id | uuid, nullable → moderation_action | Set when resolution is `warned` or `suspended` (ADM-DM) |
+| moderation_action_id | uuid, nullable → moderation_action | Set when resolution is `warned`, `suspended`, or `terminated` (ADM-DM) |
 | created_at / resolved_at | timestamps | |
 
 **Constraints:**
@@ -105,7 +106,7 @@ The author is the Ostad identified by `rating.ostad_account_id`; not stored sepa
 
 ## Effects that flow from admin resolution (not stored here)
 
-`content_removed` on a `rating` or `rating_reply` sets that row's `removed_at` (above) and triggers aggregate recomputation. `warned` / `suspended` create a `moderation_action` (ADM-DM) referenced by `moderation_action_id`. `dismissed` writes nothing beyond this row. All four write an `admin_audit_entry` (`report_resolution`, plus `content_removal` where applicable).
+`content_removed` on a `rating` or `rating_reply` sets that row's `removed_at` (above) and triggers aggregate recomputation. `warned` / `suspended` / `terminated` create a `moderation_action` (ADM-DM) referenced by `moderation_action_id`. `dismissed` writes nothing beyond this row. All four write an `admin_audit_entry` (`report_resolution`, plus `content_removal` where applicable).
 
 ## Retention behavior (OL-RET-001 mapping)
 

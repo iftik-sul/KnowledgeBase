@@ -85,7 +85,7 @@ Follows the `ui-overview` mapping table. Implemented visuals: inline field error
 
 ## Notes for the Flutter build
 
-- One config file holds the API base URL: `https://athena-api-ujpl.onrender.com`.
+- One config file holds the API base URL, **per environment**. It must point at the **Cloudflare-proxied custom domain**, not the raw `*.onrender.com` host — calling Render directly bypasses the edge's coordinate-log scrubbing and rate limiting (ADR-001). The `athena-api-ujpl.onrender.com` origin is used only in early Slice 0 before Cloudflare is configured.
 - Put the palette and type into a single theme file; reference tokens, not raw hex, so re-theming is one place.
 - **Bangla copy in Figma is placeholder for layout** — founder-authored strings replace the text layers (Bangla copy is founder-authored per project standards).
 - Localise from bundled string tables; the client never translates API text (already-localised from the API).
