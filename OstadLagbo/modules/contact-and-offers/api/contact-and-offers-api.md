@@ -82,7 +82,7 @@ writable  iff  no block between the two participants (RNT-08)
           AND  neither account is pending_deletion or purged (OFR-06)
 ```
 
-A failing clause becomes the `state_conflict` reason the client shows ("You can no longer message this person"), and the header/inbox `frozen_reason`. Because nothing is stored, unblock or reinstatement restores writability with no bookkeeping; a deletion-frozen thread stays frozen permanently (the tombstone status never changes).
+A failing clause becomes the `state_conflict` reason the client shows ("You can no longer message this person"), and the header/inbox `frozen_reason`. A **block freeze is stored** (`chat_thread.block_frozen_at`) and is **not** lifted by unblocking (RNT-08, CL-023) — the old thread stays frozen, and messaging resumes only after a new accepted offer forms a new connection. Suspension freeze clears on reinstatement (predicate); a deletion-frozen thread stays frozen permanently (the tombstone status never changes).
 
 ## Instrumentation (OFR-08)
 
@@ -112,7 +112,7 @@ Not endpoints of this module, but the transitions its rows obey when REG/ADM act
 
 **A lapsed abusive offer.** Shagred sends an offensive `message` → Ostad declines → in `GET /v1/offers/received` the entry now shows the message and status but **no Shagred identity** → the Ostad taps "report" → the RNT api takes the **`offer_id`**, resolves the Shagred server-side, and files the report against them without re-revealing who they were.
 
-**Block freezes a live chat.** A participant blocks the other (RNT) → the next `POST …/messages` fails `state_conflict reason: "thread_frozen:blocked"` → both still read history via `GET …/messages` → the header's `contact` is now `null` → if the block is later lifted, the very next send succeeds, no bookkeeping.
+**Block freezes a live chat.** A participant blocks the other (RNT) → the next `POST …/messages` fails `state_conflict reason: "thread_frozen:blocked"` → both still read history via `GET …/messages` → the header's `contact` is now `null` → **unblocking does not reopen this chat** (the freeze is stored, RNT-08 / CL-023); messaging resumes only after a new offer is accepted, forming a new connection.
 
 ## What this module does not expose
 

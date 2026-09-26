@@ -41,7 +41,7 @@ Account deletion is self-service (REG-12). On request: the account **deactivates
 | Abandoned Ostad onboarding drafts (incl. uploaded documents) | Purged after **90 days of draft inactivity**, with prior notice | — |
 | Abandoned profile revisions (proposed key-field changes, incl. uploaded identity documents and photos) | Discarded after **90 days of inactivity**, with prior notice; their uploads deleted (OSP-10, CL-021) | Purged with the account |
 | Chat messages & voice notes | Life of the relationship; one party's deletion freezes the thread, the other keeps history (OFR-06) | Full thread purge **90 days after both parties are gone** |
-| Reviews & ratings | Persist | Anonymized ("Former Shagred"), persist with aggregate weight (RNT-05) |
+| Reviews & ratings | Persist | Anonymized ("Former Shagred"), persist with aggregate weight (RNT-05) — a banned account's ratings are retained by decision (CL-024); admins remove individual fraudulent reviews via `remove_content` |
 | Connection records (accepted offers) | Persist | Anonymized; Ostad-history entries show "deleted account" (SGP-03) |
 | Offers (declined / expired / withdrawn) | Retained 12 months for analytics, then aggregate-only | Purged at day 30 when either party purges |
 | Reports & moderation records | Retained | **2 years after resolution**; longer under legal hold |
@@ -66,7 +66,7 @@ The MVP processes no payments, so no tax/financial record retention applies. Whe
 
 ## Operational obligations
 
-ADM-18 tooling implements: day-30 purge automation (self-service and termination paths), the 12-month ID-number purge, the 3-year consent-record purge, pending-registration expiry, draft-inactivity purge, abandoned-revision discard, both-parties-gone chat purge, banned-account minimal retention, storage-object deletion in the same operation as the referencing row (with orphan sweeps), and legal-hold flags. Purges are audit-logged. Hosting and backup architecture must honor the 90-day backup age-out and the PDPA's data-residency rules for restricted-category data — the ruling on identity documents stored in Singapore is an open legal item that must close before Slice 1 (ADR-001).
+ADM-18 tooling implements: day-30 purge automation (self-service and termination paths), the 12-month ID-number purge, the 3-year consent-record purge, pending-registration expiry, draft-inactivity purge, abandoned-revision discard, both-parties-gone chat purge, banned-account minimal retention, storage-object deletion in the same operation as the referencing row (with orphan sweeps), and legal-hold flags. Purges are audit-logged. Hosting and backup architecture must honor the 90-day backup age-out and the PDPA's data-residency rules for restricted-category data — the ruling on identity documents stored in Singapore is deferred by founder decision (CL-025, 2026-09-26): Singapore storage is accepted through development, and compliance for restricted-category data (in-country storage or legal sign-off) is required **before public launch**. Real identity documents are collected from Slice 1, so this carries live-data risk from Slice 1 until resolved (R-10, ADR-001).
 
 ## Review
 

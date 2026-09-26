@@ -37,7 +37,7 @@ block_exists(a, b)  iff
 
 **Direction-agnostic in effect, direction-specific in authorship** (RNT-08): a single active row in *either* direction makes the predicate true for the pair, so every effect — chat freeze (OFR-DM), visibility severance (SGP-DM), discovery and favorites hiding (MAP-DM), offer refusal (OFR-DM), contact-reveal withdrawal (OFR-DM) — lands on both parties. Only the `blocker` may revoke. The blocked party is never notified, and no read path exposes to them that a block exists — the effects present as absence (no pin, no profile, a frozen chat with no stated cause on their side).
 
-Unblock stores nothing beyond `revoked_at`: the thread-writable predicate (OFR-DM) simply passes again; MAP-DM's hidden favorites reappear. Blocks are **not** `moderation_action` rows — they are user actions — but they are visible in ADM-09's block overview and ADM-10's account detail as reads over this entity.
+Unblock sets `revoked_at`, which restores discovery and MAP-DM's hidden favorites. It does **not** reopen a frozen chat — the block-freeze is stored on the thread (`chat_thread.block_frozen_at`, OFR-DM) and a new connection (a new accepted offer) is required to message again (RNT-08, CL-023). Blocks are **not** `moderation_action` rows — they are user actions — but they are visible in ADM-09's block overview and ADM-10's account detail as reads over this entity.
 
 ## rating
 

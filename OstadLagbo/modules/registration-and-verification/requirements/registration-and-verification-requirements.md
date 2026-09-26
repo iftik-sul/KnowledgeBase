@@ -83,7 +83,7 @@ The stage states plainly that documents are seen only by admin review and never 
 
 ## REG-11 Submission and pending state
 
-Completing stage 6 submits the profile for admin review and sets the account to **pending**. A pending Ostad has full app access — browsing the map, viewing profiles, editing their own profile — but is not discoverable and cannot receive offers. The app shows current review status (pending / changes requested / rejected / approved) and any admin reason. Editing and resubmitting after rejection or change requests follows the `admin-review` module's rules.
+Completing stage 6 submits the profile for admin review and sets the account to **pending**. A pending Ostad can view profiles and edit their own profile, but has **no discovery-map tab and no favourites** (those are Shagred-only — CL-026, MAP-08); the Ostad is not discoverable and cannot receive offers. The app shows current review status (pending / changes requested / rejected / approved) and any admin reason. Editing and resubmitting after rejection or change requests follows the `admin-review` module's rules.
 
 **Acceptance:** pending Ostads never appear in map, search, or category results; status and admin reasons are visible in-app; approval flips discoverability without re-login.
 

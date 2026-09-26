@@ -85,16 +85,16 @@ One per connection; created atomically with it.
 | participant_a_account_id / participant_b_account_id | uuid / uuid → user_account | **Exactly two participants**, fixed at creation — the structural basis of OFR-07's "readable only by its two participants." There is no third slot |
 | last_message_at | timestamp, nullable | Denormalized cache for inbox ordering; maintained on message insert; recomputable from `chat_message` |
 
-**No stored freeze state.** Whether a thread accepts new messages is a **query-time predicate** (Overview: predicates over flags; rule 5: blocks are checked, not copied):
+**Freeze state — block is stored, suspension/deletion are predicate.** Whether a thread accepts new messages combines one **stored** flag (block) with query-time predicates (suspension, deletion). `chat_thread` gains a nullable `block_frozen_at` timestamp for this.
 
 ```
 thread is writable  iff
-  no block exists between participant_a and participant_b        (RNT-08)
+  chat_thread.block_frozen_at is null                            (RNT-08, stored)
   AND neither participant's user_account.status is suspended     (ADM-08)
   AND neither participant's user_account.status is pending_deletion or purged   (OFR-06)
 ```
 
-A thread that fails the predicate is **frozen**: readable by participants (history persists), rejecting inserts. Because nothing is stored, unblock and reinstatement restore writability with no bookkeeping, a thread that is both blocked and suspended stays frozen until *both* clear, and a deletion-frozen thread stays frozen permanently because the tombstone status never changes. The UI derives the "why frozen" message from the same predicate's failing clause.
+**Block is persistent (CL-023, RNT-08).** Blocking sets `chat_thread.block_frozen_at` on the pair's thread and it is **not** cleared by unblocking — unblocking restores only discoverability, so the old thread stays frozen. Messaging resumes only when a **new offer is accepted** between the two accounts, which forms a new connection and clears `block_frozen_at` (a fresh, writable thread). **Suspension and deletion stay query-time:** a suspended participant freezes the thread until reinstated; a deletion/termination tombstone freezes it permanently. A frozen thread is readable by participants (history persists) and rejects inserts; the UI derives the "why frozen" message from the failing clause (block / suspended / deleted).
 
 ## chat_message
 

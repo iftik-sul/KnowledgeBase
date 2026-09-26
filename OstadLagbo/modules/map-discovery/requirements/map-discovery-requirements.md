@@ -60,7 +60,7 @@ Every public Ostad profile has a **Share** action producing a deep link. Opening
 
 ## MAP-08 Favorites
 
-Any registered user can favorite an Ostad from the preview card or profile, building a private **Favorites list** screen (name, photo, badge, rating, distance; tap-through to profile; unfavorite anywhere). Favorites are **strictly private**: the Ostad is never notified, and no count or indicator appears on any profile. Guests tapping favorite are routed to registration (MAP-03).
+Any **Shagred** can favorite an Ostad from the preview card or profile (favourites are Shagred-only — CL-026), building a private **Favorites list** screen (name, photo, badge, rating, distance; tap-through to profile; unfavorite anywhere). Favorites are **strictly private**: the Ostad is never notified, and no count or indicator appears on any profile. Guests tapping favorite are routed to registration (MAP-03).
 
 **Acceptance:** no API response or UI surface exposes who favorited an Ostad or how many did; the list survives logout/login.
 
