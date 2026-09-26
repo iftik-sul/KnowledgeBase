@@ -42,7 +42,7 @@ A user-adjustable radius slider (proposed default 5 km, range 1–30 km) filters
 Two filters, combinable with search and radius under AND semantics:
 
 - **Category** — single-select from the admin-managed list (ADM-11), entered via the OSP-04 fuzzy typeahead; deactivated categories never appear.
-- **Gender** — Any (default) / Male / Female, filtering on the Ostad's public gender field (OSP-01). Included deliberately for the family-comfort dynamics of the Bangladesh tutoring market.
+- **Gender** — Any (default) / Male / Female, filtering on the Ostad's public gender field (OSP-01). Included deliberately for the family-comfort dynamics of the Bangladesh tutoring market. The stored value set is Male / Female / **Other** (CL-031); there is **no "Other" filter option** — an Ostad whose gender is `other` is returned only under "Any", never under a Male or Female filter.
 
 **Acceptance:** each filter works alone and combined; clearing filters restores the unfiltered map.
 

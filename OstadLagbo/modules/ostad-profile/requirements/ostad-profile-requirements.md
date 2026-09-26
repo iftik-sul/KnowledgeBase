@@ -26,7 +26,7 @@ Every field belongs to one class. **Public** — visible to any user viewing the
 | Display name | Yes | Public — used on map cards and chat headers; full legal name heads the profile page |
 | Profile photo | Yes | Public — **key field** (OSP-10, CL-021): after approval, a new photo publishes only on review |
 | Date of birth | Yes (18+ gate, REG-03) | Internal — age and DOB never shown |
-| Gender | Yes | Public |
+| Gender | Yes | Public — **Male / Female / Other** (CL-031) |
 
 Legal names must match the identity document; mismatch is grounds for admin change-request. Bangla legal name must accept full Bangla script input even though the UI is English.
 

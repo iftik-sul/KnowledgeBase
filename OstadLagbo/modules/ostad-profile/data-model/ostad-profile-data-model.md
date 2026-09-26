@@ -38,7 +38,7 @@ One row per Ostad, one-to-one with `user_account` (`role = ostad`). Holds the **
 | legal_name_en / legal_name_bn | string | Public | **Key field.** Must match identity document (ADM-02) |
 | display_name | string | Public | Not a key field; edits publish instantly |
 | photo_ref | storage ref | Public | **Key field** (CL-021). After approval, a new photo arrives only through a revision |
-| gender | enum | Public | |
+| gender | enum: `male` \| `female` \| `other` | Public | Required (OSP-01). `other` is a valid stored value but has **no dedicated filter option** — such an Ostad matches only the map's "Any" (MAP-05, CL-031) |
 | headline / about | string / text | Public | About nullable |
 | occupation / years_experience / languages | string / int / string[] | Public | |
 | street_address | string | Internal | Never served publicly (OSP-02) |

@@ -24,7 +24,7 @@ The profile is deliberately minimal and deliberately hidden. Ostads exist to be 
 | Display name | Yes | Visible to permitted Ostads (SGP-05) |
 | Profile photo | Optional | Visible to permitted Ostads |
 | Date of birth | Yes (18+ gate, REG-03) | Internal — never shown to anyone |
-| Gender | Optional | Visible to permitted Ostads if provided |
+| Gender | Optional | **Male / Female / Other** (CL-031); visible to permitted Ostads if provided |
 | Address (SGP-02) | Yes | Thana + District visible to permitted Ostads; street line and postal code never shown |
 | Phone (verified) / email (optional) | Per REG | Never shown; phone reveal on acceptance is governed by `contact-and-offers` |
 

@@ -31,7 +31,7 @@ One row per Shagred, one-to-one with `user_account` (`role = shagred`).
 | id / account_id | uuid / uuid | — | 1:1 with `user_account`. `id` is the Shagred's public handle; `account_id` never leaves the API (OL-API-001 → identifiers) |
 | display_name | string | Permitted Ostads (SGP-05) | Required (REG-08) |
 | photo_ref | storage ref, nullable | Permitted Ostads | Optional |
-| gender | enum, nullable | Permitted Ostads | Optional |
+| gender | enum: `male` \| `female` \| `other`, nullable | Permitted Ostads | Optional; same value set as `ostad_profile.gender` (CL-031) |
 | street_address | string | **Private** — Shagred and admin only | Never served to any Ostad (SGP-01) |
 | division_id / district_id / thana_id | uuid → `admin_area` (ADM) | Thana + District to permitted Ostads; Division implied | The only locational data (SGP-02). **The four `admin_area` references must form a valid parent chain** (postal code under thana under district under division), enforced at write time (Overview: address chain validity) |
 | postal_code_id | uuid → `admin_area` (ADM) | **Private** — Shagred and admin only | Collected per CL-008; never served to Ostads (SGP-01) |

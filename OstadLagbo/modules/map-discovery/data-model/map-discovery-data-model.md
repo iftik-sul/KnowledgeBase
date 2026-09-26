@@ -70,7 +70,7 @@ Adds `EXISTS skill_entry WHERE category_id = :selected` to queries 1–2. Single
 
 ### 4. Gender filter (MAP-05)
 
-Adds `ostad_profile.gender = :selected` when not "Any." Trivial; listed for completeness of the AND-composition.
+Adds `ostad_profile.gender = :selected` when not "Any." The selectable values are `male` and `female` only; an Ostad stored as `other` therefore matches **only** "Any" (CL-031). Trivial; listed for completeness of the AND-composition.
 
 ### 5. Keyword search (MAP-06, CL-013)
 
