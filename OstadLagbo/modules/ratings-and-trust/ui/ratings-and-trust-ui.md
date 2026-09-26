@@ -3,7 +3,7 @@ project: OstadLagbo
 module: ratings-and-trust
 type: ui
 status: current
-updated: 2026-09-25
+updated: 2026-09-26
 id: OL-RNT-UI-001
 derived_from: /OstadLagbo/modules/ratings-and-trust/requirements/ratings-and-trust-requirements.md
 owner: Iftikher
@@ -22,6 +22,7 @@ This module owns two shared surfaces every other module reaches into: the **repo
 - **Shell:** Shagred — reached from the **Ostad's public profile** (a "Rate this Ostad" affordance, or "Edit your review" when one exists) once a **connection** exists; also linkable from a connection/chat.
 - **Structure:** a **1–5 star** selector (required) and a **written review** (required, ≤600 chars, counter) — star-only cannot be submitted (RNT-02).
 - **Eligibility & states:** the affordance appears **only when the Shagred holds a connection** with this Ostad (accepted offer — unlocks immediately on connecting, RNT-01); no connection → no rating path (`forbidden`); **one rating per pair, ever** — a second attempt is refused (`conflict`), and this holds even after an admin removes a review (the slot stays consumed, RNT-06); editing is **unlimited** and recomputes the aggregate live.
+- **States:** **loading** → submit disabled with progress; the idempotency key means a double tap cannot consume the one-per-pair slot twice. **Empty** → not applicable; the form is the content. **Error** → `forbidden` (no connection) should be unreachable, since the affordance is only rendered with a connection — if it appears, the client says the rating isn't available rather than explaining the eligibility rule; `conflict` (the slot is already used) switches the screen to **edit** the existing review instead of refusing; `state_conflict: rating_removed` shows *"this review was removed by moderation"* and offers no resurrection; a lost connection **preserves the typed review** and retries (NFR-02) — a 600-character review lost to a dropped request is the kind of failure that stops someone reviewing again.
 - **Data & actions:** `POST /v1/ratings {ostad_id, stars, review_text}` (idempotency key); `PATCH /v1/ratings/{id}` to edit. If the review was **removed by moderation**, edit returns `state_conflict: rating_removed` → the client shows "this review was removed by moderation" and offers no resurrection.
 - **No delete:** there is **no** user action to delete a review (RNT-05) — account-cycling cannot erase it; only admin removal does.
 
@@ -30,6 +31,7 @@ This module owns two shared surfaces every other module reaches into: the **repo
 ### Reviews list (component on the public profile)
 - **Where:** the reviews section of the Ostad's public profile (OSP ui); this module owns the component.
 - **Structure:** reviews `created_at` newest first — each with its **stars**, **written review**, the reviewer's **first initial only** (e.g. **"R."** — never the full name; CL-028), the date, and the **Ostad's reply beneath** where present. The viewer's **own** review (if any) is marked for quick **Edit** (Group A).
+- **States:** **loading** → skeleton rows inside the profile, so the rest of the profile renders without waiting on reviews. **Empty** → **"New"** rather than a zero score (MAP-02 uses the same treatment on preview cards) — a new Ostad must not look badly rated. Where the viewer holds a connection, the empty state carries the **Rate this Ostad** action. **Error** → the reviews section alone shows a retry; a failed reviews read never blocks the profile around it.
 - **Data:** `GET /v1/ostads/{id}/ratings` (removed reviews never appear; readable when the profile is — approved incl. paused, else "not available").
 
 ### Ostad reply

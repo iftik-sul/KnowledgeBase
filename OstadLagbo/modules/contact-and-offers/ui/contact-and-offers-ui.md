@@ -3,7 +3,7 @@ project: OstadLagbo
 module: contact-and-offers
 type: ui
 status: current
-updated: 2026-09-25
+updated: 2026-09-26
 id: OL-OFR-UI-001
 derived_from: /OstadLagbo/modules/contact-and-offers/requirements/contact-and-offers-requirements.md
 owner: Iftikher
@@ -22,6 +22,7 @@ Two shapes govern everything here: **only a Shagred initiates** (an Ostad has no
 - **Shell:** Shagred — from an **Ostad's public profile** (OSP ui) and preview card.
 - **Structure:** a free-text message field (≤500 chars, counter shown); a note that the Ostad will see the Shagred's profile once sent (SGP-05), and that **if the Ostad accepts, the Shagred's phone number and any verified email will be shared with them (and the Ostad's with the Shagred)** — the informed-consent counterpart to the Ostad's acceptance confirmation (OFR-04); send.
 - **States — the action is disabled or refused before it is sent where possible:** **paused Ostad** → the offer action is disabled with the not-accepting notice (`state_conflict: ostad_not_accepting`); **incomplete Shagred profile** → routed to Shagred setup (`state_conflict: profile_incomplete`, SGP ui); **a pending offer to this Ostad already exists** → the action points to the existing offer (`conflict: duplicate_pending_pair`); **five pending offers already** → a clear "resolve one first" message (`conflict: pending_limit_reached`); a blocked/absent Ostad → the profile was already "not available" (opacity).
+- **States:** **loading** → the send action shows progress and is disabled, so a double tap cannot produce two offers (the idempotency key is the guarantee; the disabled button is the courtesy). **Empty** → not applicable; the composer always has content to show. **Error** → `state_conflict: pending_offer_exists` explains an offer to this Ostad is already open and links to it; `state_conflict: offer_cap_reached` names the 5-pending cap and links to Sent offers to withdraw one; `state_conflict: profile_incomplete` routes to Shagred setup and returns here; `forbidden` (blocked, paused, suspended, or no longer discoverable) shows one neutral **"This Ostad isn't available right now"** — never distinguishing a block from a pause, per RNT-08 opacity. On a dropped connection the message is **queued and retried** (NFR-02), never silently lost.
 - **Data & actions:** `POST /v1/offers {ostad_id, message}` (idempotency key) → a `pending` offer; the Ostad is pushed "offer received"; the Shagred lands in their sent-offers inbox on the new item.
 - **Never shows:** no Ostad-initiated equivalent exists — there is no "message this Shagred" anywhere (OFR-01).
 
@@ -33,6 +34,7 @@ The **Offers** tab, one per role, with badge counts (OFR-03 notification princip
 - **Shell:** Shagred shell → **Offers** tab.
 - **Structure:** every offer the Shagred sent, `created_at` newest first, each with the **Ostad** card (public: photo, name, verified badge) and its live state — **pending** (with "N days remaining"), accepted, declined, expired, withdrawn; tap-through to the Ostad profile always works.
 - **Actions:** **Withdraw** on a pending item (`POST /v1/offers/{id}/withdraw`); an **accepted** item links into the chat; after a decline/expiry/withdrawal the Shagred **may re-offer immediately** (the Ostad profile's send action is live again — repeat-pestering is the Ostad's block to wield, not a cooldown).
+- **States:** **loading** → skeleton rows. **Empty** → *"You haven't sent any offers yet"* with a one-tap **Find an Ostad** action returning to the map — the empty inbox is the Shagred's main activation surface, so it carries the next step rather than an apology (ui overview: never a blank screen). **Error** → a retry affordance keeping any already-loaded page; a withdraw that fails leaves the item pending and offers retry, never a state the server disagrees with.
 - **Data:** `GET /v1/offers/sent`.
 
 ### Received offers — Ostad
@@ -41,6 +43,7 @@ The **Offers** tab, one per role, with badge counts (OFR-03 notification princip
   - **pending / accepted** → the Shagred card shows (SGP ui: name, photo, gender, District + Thana, joined) with tap-through;
   - **declined / expired / withdrawn** → **no Shagred identity** — the card is gone; only the **offer message and dates** remain, with **Report** and **Block** actions that target the **offer id** (RNT ui resolves the Shagred; the Ostad never sees them again).
 - **Actions:** **Take** → the acceptance confirmation (Group C); **Decline** (`POST /v1/offers/{id}/decline`, no reason required); Report/Block on any offer via the offer id.
+- **States:** **loading** → skeleton rows, pending section first. **Empty** → for an **approved** Ostad, *"No offers yet"* with a line pointing at the things that earn them — completing the profile (OSP-09) and staying un-paused (OSP-11); for a **pending** Ostad, the review-status message instead, because no offer can arrive before approval and an empty inbox would otherwise read as failure. **Error** → retry, preserving loaded pages; a Take or Decline that fails leaves the offer pending and retryable.
 - **Data:** `GET /v1/offers/received`.
 
 **Transitions are retry-safe:** re-tapping Take on an already-accepted offer opens the existing connection; a `state_conflict` appears only when the offer has since moved to a *different* terminal state (e.g., it expired before the Ostad tapped) — the client shows that state and refreshes the list.
@@ -51,6 +54,7 @@ The **Offers** tab, one per role, with badge counts (OFR-03 notification princip
 - **Purpose:** the Ostad confirms, understanding that contact details will be exchanged.
 - **Entry:** **Take** on a pending received offer.
 - **Structure:** a confirmation that plainly states **your phone number and any verified email will be shared with this Shagred, and theirs with you — this cannot be undone** (OFR-04; a consent surface). Confirm / cancel.
+- **States:** **loading** → confirm disabled with progress while the five-write acceptance transaction commits; it either completes or does not, so there is no partial state to render. **Error** → `state_conflict` (withdrawn, expired, or already resolved while this screen was open) explains what changed and returns to Received offers, refreshed — the commonest real case, since an offer can expire between opening the screen and confirming; `forbidden` (the Shagred deleted, was suspended, or a block landed) shows the neutral unavailable copy and dismisses.
 - **Data & actions:** confirm → `POST /v1/offers/{id}/accept` (idempotency key) → the connection, the chat thread, and the offer message as its first message are created together; contact is now revealed both ways; the Shagred is pushed "accepted" → both parties land in the new chat.
 - **Never shows:** contact **before** acceptance — a number is revealed only at this moment, never earlier (OFR-04).
 
@@ -65,6 +69,7 @@ The **Offers** tab, one per role, with badge counts (OFR-03 notification princip
 - **Voice notes:** an in-app recorder **capped at 2 minutes**, compressed before upload; a longer recording cannot be sent (enforced client-side and re-validated server-side).
 - **Frozen state (OFR-06):** when the thread is frozen — a **block**, a **suspension**, or the counterpart's **deletion** — the composer is replaced by a **banner** and the **history stays readable**; a send attempt returns `state_conflict: thread_frozen:unavailable` (block or suspension — neutral) or `:deleted` (CL-030). No freeze notice is ever written into the chat. **The banner respects opacity (RNT-08):** to the **blocked** party it is strictly neutral ("You can no longer message this person") and **never** attributes the freeze to a block; only the **blocker** — who placed it and sees it in their own block list — sees it framed as their own block; a **suspension** freeze is likewise neutral to the counterpart (moderation status never leaks); a **deletion** shows "deleted account" (OFR-06). Unblock or reinstatement restores the composer with no further step.
 - **No edit or delete:** there is **no** message edit or delete action anywhere — chat history is moderation evidence (OFR-05, CL-015). Report is per-message via the message's overflow action (RNT ui, citing the message).
+- **States:** **loading** → the header and the message list load separately; the header first, so the contact details a user opened the chat for are never behind the history. **Empty** → cannot occur: the offer text is always the first message (OFR-04). **Frozen** → a neutral banner and a disabled composer; the history stays readable (OFR-06). The banner never names a block (CL-030, RNT-08 opacity) — only `deleted` is disclosed, as **"deleted account"**. **Error** → a failed send marks that message **failed with a retry action**, leaving it in place rather than discarding what the user typed; `forbidden` on a thread that froze mid-session swaps the composer for the banner without losing scroll position; offline shows the indicator and keeps the loaded history readable (NFR-02). A voice note that fails to upload stays retryable and is never silently dropped.
 - **Data & actions:** `GET /v1/chat/threads/{id}` (header + contact), `GET .../messages` (history, readable even when frozen), `POST .../messages` (text `{body}` or voice `{upload_id, duration}` via the upload-ticket flow), `POST .../receipts` (delivered/read). New messages push (suppressed while that chat is open on-screen).
 - **Never shows:** the thread to anyone but its two participants; contact before acceptance or after a block; any edit/delete affordance; admin never appears here (admin sees cited messages only through a report, ADM ui).
 
@@ -73,6 +78,7 @@ The **Offers** tab, one per role, with badge counts (OFR-03 notification princip
 ### Chats list
 - **Shell:** both roles → **Chats** tab.
 - **Structure:** threads the user is in, most-recent activity first, each with the counterpart's name (live, or **"deleted account"** once they've left), photo where live, an **unread count**, the last-message preview, and a **frozen** indicator where applicable.
+- **States:** **loading** → skeleton rows. **Empty** → for a Shagred, *"No conversations yet — send an offer to start one"* with the map action; for an Ostad, *"No conversations yet"* pointing at the Offers tab. A chat list is empty until a first offer is accepted, so for both roles this state is the **normal** early experience, not an error. **Error** → retry with loaded threads kept; offline keeps the list readable from cache with the offline indicator (NFR-02).
 - **Data:** `GET /v1/chat/threads`. Unread badges derive from the data, so a notifications-denied user misses nothing (OFR-03).
 
 ## Notifications (OFR-03)

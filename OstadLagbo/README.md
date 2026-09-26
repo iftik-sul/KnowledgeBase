@@ -20,6 +20,10 @@ updated: 2026-09-26
 - [Project Standards](/OstadLagbo/project-standards.md) — module definition, derivation chain, vocabulary. Read before creating any document.
 - [Glossary](/OstadLagbo/glossary.md) — canonical term definitions for the whole project.
 - [MVP Scope Baseline v1.2](/OstadLagbo/reference/baseline/mvp-scope-v1.2.md) — the approved, change-controlled definition of MVP scope, now **frozen** for the build. It reads standalone: CL-009…021 are consolidated into it, so scope questions are answered here directly. (v1.1 is retained as superseded.)
+- [Environments, Deployment and Recovery](/OstadLagbo/governance/environments-and-operations.md) — the two environments, CI, migration safety, and the Storage backup the database backups miss.
+- [Test and Acceptance Plan](/OstadLagbo/governance/test-and-acceptance-plan.md) — the eight critical paths, per-slice acceptance, and bilingual review.
+- [Threat Model](/OstadLagbo/governance/threat-model.md) — what an attacker goes after, and which "engineering defaults" need real numbers.
+- [App Store Release Checklist](/OstadLagbo/governance/store-release-checklist.md) — what Play and the App Store require, with owners and long-lead items.
 - [Analytics Event Catalog](/OstadLagbo/reference/catalogs/analytics-event-catalog.md) — every client and server event, and what `POST /v1/events` validates against.
 - [Notification Catalog](/OstadLagbo/reference/catalogs/notification-catalog.md) — every push, its in-app counterpart, and the silences that are deliberate.
 - [Launch Area & Success Metrics](/OstadLagbo/governance/launch-metrics.md) — the launch area (Dhanmondi) and the soft-launch targets the Slice 5 gate reads.

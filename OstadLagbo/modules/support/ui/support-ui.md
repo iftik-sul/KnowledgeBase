@@ -3,7 +3,7 @@ project: OstadLagbo
 module: support
 type: ui
 status: current
-updated: 2026-09-25
+updated: 2026-09-26
 id: OL-SUP-UI-001
 derived_from: /OstadLagbo/modules/support/requirements/support-requirements.md
 owner: Iftikher
@@ -21,6 +21,7 @@ Two things anchor these screens: a **ticket is a private thread with support, no
 - **Purpose:** the user's door to help, their tickets, and the legal documents.
 - **Shell:** Shagred and Ostad shells (including a **pending** Ostad) → Profile/Settings → **Help & Support**. **Guests do not see it** — the store listing and the public contact email are their channel.
 - **Structure:** **Create a ticket**, **My tickets** (history and open threads), and links to **Terms** and **Privacy** (`GET /v1/legal/*`).
+- **States:** **loading** → the entry list renders immediately; only the unread indicator on **My tickets** waits on data. **Empty** → not applicable; this screen is navigation. **Error** → if the ticket count cannot be read the entries still work, unbadged — help must never be unreachable because a badge query failed, least of all for a suspended user whose only route out is an appeal.
 - **Never shows:** to a guest at all.
 
 ## Group B — Creating a ticket (SUP-02)
@@ -38,6 +39,7 @@ Two things anchor these screens: a **ticket is a private thread with support, no
 ### My tickets
 - **Shell:** Help & Support → **My tickets**.
 - **Structure:** the user's tickets, most-recent activity first, each with its **category**, **state** (open / resolved), and an **unread-reply indicator** (any admin or system message the user hasn't opened).
+- **States:** **loading** → skeleton rows. **Empty** → *"No tickets yet"* with the **Create a ticket** action — and for a **suspended or terminated** user reaching this from the suspension shell, the **Appeal this decision** action instead, since an appeal is the only write they have (SUP-04, rule 7). **Error** → retry, keeping loaded pages; for a suspended user a failure here must still leave the appeal route reachable from the notice screen, because this list is not their only door to it.
 - **Data:** `GET /v1/support/tickets`. Unread badges derive from the data, so a notifications-denied user misses nothing (SUP-03, OFR-03 principle).
 
 ### Ticket thread

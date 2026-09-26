@@ -47,7 +47,7 @@ Ratings, replies, aggregation, review moderation, trust signals, and rating/bloc
 
 Support tickets and the support queue (SUP-01…03, SUP-05, SUP-06, ADM-22 — SUP-04 appeals shipped in Slice 3, principle 6); analytics charts and business intelligence (ADM-12…15); Ostad insights (OSP-12); bilingual broadcasts (ADM-16); SMS/OTP monitor (ADM-19); block overview and full directories (ADM-09, ADM-10); read-only settings (ADM-21); **the public website's marketing pages (CL-020)**.
 
-**Gate:** app-store compliance checklist passed; funnel metrics from soft launch reviewed against **the targets in OL-MET-001** (CL-037) — the success unit being offer→acceptance ≥35% and zero-result searches under 20%. **Public launch.**
+**Gate:** the app-store compliance checklist (**OL-STR-001**, CL-043) passed — note its long-lead items (developer-account entity, D-U-N-S) start far earlier; funnel metrics from soft launch reviewed against **the targets in OL-MET-001** (CL-037) — the success unit being offer→acceptance ≥35% and zero-result searches under 20%. **Public launch.**
 
 ## Principles
 

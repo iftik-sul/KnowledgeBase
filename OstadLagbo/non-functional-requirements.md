@@ -38,7 +38,7 @@ No personal data in application logs, crash reports, or analytics payloads: anal
 
 ## NFR-07 Backup and recovery
 
-Daily automated backups; **backups retained no longer than 90 days** so purged data ages out per OL-RET-001. Recovery point objective 24 h; recovery time objective 24 h. A full restore is rehearsed in staging before soft launch and repeated quarterly.
+Daily automated backups; **backups retained no longer than 90 days** so purged data ages out per OL-RET-001. Recovery point objective 24 h; recovery time objective 24 h. A full restore is rehearsed in staging before soft launch and repeated quarterly. **Database backups do not cover object Storage** — the identity vault, portfolio media and voice notes need their own daily encrypted copy, and the restore rehearsal must restore and reconcile **both** halves; the plan is OL-OPS-001 (CL-042).
 
 ## NFR-08 Availability and capacity
 
@@ -46,7 +46,7 @@ Target 99.5 % monthly availability in MVP; planned maintenance announced by broa
 
 ## NFR-09 Observability
 
-Crash reporting on both platforms; error tracking with alerting for backend failures; uptime monitoring with alerts to the founder; structured logs (PII-free per NFR-06). The founder can answer "is the app up and are users failing at anything" within five minutes from a phone.
+Crash reporting on both platforms; error tracking with alerting for backend failures; uptime monitoring with alerts to the founder; structured logs (PII-free per NFR-06). The founder can answer "is the app up and are users failing at anything" within five minutes from a phone. Environments, CI, deployment, migration safety and the monitoring obligations are specified in **OL-OPS-001** (CL-042).
 
 ## NFR-10 Accessibility and inclusivity
 
@@ -66,7 +66,7 @@ Every infrastructure choice is free or free-tier-viable at MVP scale (NFR-08) an
 
 ## NFR-14 Quality and maintainability
 
-Automated tests cover every acceptance criterion of Slices 0–3 (OL-BLD-001) before soft launch; CI runs tests, linting, and dependency scans on every change; the codebase lives in the founder's GitHub with the knowledge base as its specification of record. Any deviation from a requirements document is raised as a gap, never silently coded around (per project standards' AI-agent notes).
+Automated tests cover every acceptance criterion of Slices 0–3 (OL-BLD-001) before soft launch — **and Slices 4–5, plus the bilingual review process CL-016 never received, are covered by OL-TST-001 (CL-044)**; CI runs tests, linting, and dependency scans on every change; the codebase lives in the founder's GitHub with the knowledge base as its specification of record. Any deviation from a requirements document is raised as a gap, never silently coded around (per project standards' AI-agent notes).
 
 ## Founder-approval boundary
 
