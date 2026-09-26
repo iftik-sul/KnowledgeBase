@@ -41,6 +41,9 @@ What has **not** changed is the pattern itself. Supabase explicitly documents mi
 
 ## Open items
 
+*Tracked live in [OL-OPN-001](/OstadLagbo/governance/open-items.md); this list is context.*
+
+
 1. **Slice 0, 60 seconds:** on creating the Supabase project, confirm in Settings → JWT Keys whether any legacy JWT secret exists. Documentation does not state this outright for brand-new projects, and it is the one fact that could not be settled from the docs.
 2. **Slice 0:** verify the ES256 signing key works end-to-end against **Realtime** (chat, private channels) and **Storage** (signed URLs) — not just the Data API — before Slice 3 depends on it.
 3. **Slice 0:** confirm local-versus-hosted signing parity, and record the fallback if it fails.

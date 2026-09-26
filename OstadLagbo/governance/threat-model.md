@@ -89,6 +89,9 @@ The 18+ gate is a self-declared date of birth (REG-03). A determined minor passe
 
 ## Unverified assumptions
 
+*Tracked live in [OL-OPN-001](/OstadLagbo/governance/open-items.md).*
+
+
 1. **Cloudflare's free plan rate-limiting capacity is unchecked.** ADR-001 relies on Cloudflare for "infrastructure-level request-log control and rate limiting" (NFR-05's requirement (d)), but nobody has confirmed the free plan offers enough rules, or enough granularity, to express the per-IP, per-endpoint and per-parameter limits T-1 and T-4 need. **Verify in Slice 0** — if it does not, either the limits move into the API or the edge tier becomes a cost line.
 2. **Monitoring and crash-reporting tools are unnamed** (NFR-09, OL-OPS-001 open item 1). A threat you cannot see is unmitigated regardless of the controls on paper.
 3. **No content filter exists** (store-release checklist, section B) — Apple Guideline 1.2 requires one, and it is also T-6's and T-8's cheapest partial mitigation.

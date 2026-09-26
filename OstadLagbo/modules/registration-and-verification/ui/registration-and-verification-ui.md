@@ -37,6 +37,7 @@ This is the module that stands up the three shells. A visitor arrives at the **g
 - **Purpose:** choose Ostad or Shagred — permanent, never changeable.
 - **Entry:** Create account.
 - **Structure:** the two roles with a one-line description of each, and a plain statement that the choice is permanent.
+- **States:** **loading / empty / error** → none of the three apply: the screen is static, reads nothing from the server, and writes nothing. It is listed here so its absence of states is a **recorded fact rather than an omission** — the next reader does not have to re-derive it.
 - **Data & actions:** the choice is held client-side and sent with `register/start`.
 - **Copy notes:** the permanence line must be unmissable — there is no role change anywhere later (REG-01).
 
@@ -62,6 +63,7 @@ This is the module that stands up the three shells. A visitor arrives at the **g
 - **Purpose:** turn a registration attempt on a deletion-window number into a recovery, not a duplicate.
 - **Entry:** `register/start` returned `account_recoverable`.
 - **Structure:** a short explanation that this number has an account being deleted, and a **Log in to restore** action.
+- **States:** **loading / empty** → not applicable; the screen is reached with everything it needs already in hand. **Error** → none of its own; it only routes to login, which owns its own states. **Never** does this screen confirm an account exists beyond what `register/start` already disclosed by routing here — the account-existence boundary (REG-api) is not widened by the recovery path.
 - **Data & actions:** → login (a successful login within the 30-day window recovers the account, REG-02).
 
 ## Group C — Authentication
@@ -99,6 +101,7 @@ The **onboarding shell**: a full-screen, six-stage sequence that owns the screen
 
 ### Stage 1 — Personal information
 - **Structure:** legal name (English), legal name (Bangla — accepts Bangla script in either UI language), display name, **profile photo (required)**, gender — fields per OSP api (stage-1 payload).
+- **States:** **loading** → on re-entry, previously saved stage values load before the fields become editable, so a returning Ostad never types over what they already saved. **Empty** → not applicable; a first visit opens blank by design. **Uploading** → the required profile photo shows progress with a cancel; the stage cannot be advanced while an upload is in flight. **Error** → `validation_failed` marks the field inline and **retains every other entry on the stage**. This is the rule for all six stages and the one that matters most: onboarding is a six-stage wizard over intermittent 4G (NFR-02), and a stage that discards typed input on a failed save is how an Ostad abandons onboarding permanently. A failed save keeps the stage dirty and retryable; offline queues it.
 - **Data:** `PUT /v1/onboarding/stages/1`. Photo via upload ticket (`profile_photo`).
 - **Note:** DOB is **not** re-collected — captured at registration (REG-03).
 
@@ -111,6 +114,7 @@ The **onboarding shell**: a full-screen, six-stage sequence that owns the screen
 
 ### Stage 3 — Address
 - **Structure:** street line + the cascading address picker — fields per OSP api (stage-3 payload).
+- **States:** as stage 1 — saved values load before editing, entries survive a failed save, offline queues. **Error, specific to this stage:** `details.address = "invalid_chain"` means the Division→District→Thana→postal chain disagrees; the picker resets **only the inconsistent level and below**, never the whole address, and says which level broke.
 - **Data:** `PUT /v1/onboarding/stages/3`; `details.address = "invalid_chain"` if the Division→postal chain is inconsistent.
 
 ### Stage 4 — Map location (MAP-01)
@@ -121,6 +125,7 @@ The **onboarding shell**: a full-screen, six-stage sequence that owns the screen
 
 ### Stage 5 — Professional details
 - **Structure:** headline, about, occupation, years of experience, languages; **skills (1–5)** via the fuzzy cross-script category picker plus free-text skill name, level, per-skill years; repeatable **education**; **experience**; and **portfolio** (images / one intro video ≤45 s / documents / links) — all field rules per OSP api (stage-5 payload and portfolio endpoints).
+- **States:** as stage 1 — saved values load first, entries survive a failed save, offline queues. This is the **largest stage**, carrying skills, education, experience and portfolio, so partial-save behaviour is most consequential here: a failure in one repeatable row must not discard the others. **Uploading** → portfolio items follow the portfolio manager's rules (OSP ui) — per-item progress, cancel, retry, and no partial item left behind. **Error** → `category_inactive` (a deactivated category) clears that one skill row and re-opens the picker, keeping the rest of the stage.
 - **Data:** `PUT /v1/onboarding/stages/5`; portfolio via upload tickets. Deactivated categories never offered (`category_inactive` rejected).
 
 ### Stage 6 — Review & submit (REG-11)
@@ -144,12 +149,18 @@ The **onboarding shell**: a full-screen, six-stage sequence that owns the screen
 
 ### Settings home
 - **Structure:** **Language** toggle (`PATCH /v1/me/locale`, re-renders immediately); **Account** (phone, email, password); **Legal** (Terms, Privacy); **Notifications** note (OS-level only — no in-app per-category toggles, CL-015); **Log out** (`POST /v1/auth/logout`, optionally all devices); **Delete account**.
+- **States:** **loading** → the list renders immediately with the account values (phone, email) as placeholders until they arrive; navigation never waits on them. **Empty** → not applicable. **Error** → if `GET /v1/me` fails, **every navigation item still works** and only the displayed values show a retry. Settings is the route to log out, to the legal documents and to account deletion — none of those may become unreachable because a summary read failed.
 - **Data:** `GET /v1/me` for the current values.
 
 ### Change phone (REG-07) · Manage email (REG-04) · Change password (REG-06)
 - **Change phone:** new number → OTP **on the new number** → done; `conflict` if the number belongs to another account (reported only to this caller). `POST /v1/me/phone/change/start|verify`.
 - **Manage email:** add (stored unverified) → verify by code → verified; remove; `conflict` if the email is verified on another account. `POST /v1/me/email`, `/email/verify`, `DELETE /v1/me/email`.
 - **Change password:** current + new; all other sessions end on success. `PATCH /v1/me/password`; `unauthorized` if the current password is wrong.
+- **States (all three flows):** **loading** → the submit action shows progress and is not re-tappable, so a double tap cannot spend two OTPs or fire two changes. **Empty** → not applicable. **Error** → each flow fails without stranding the account in a half-changed state:
+  - **Phone:** a failure between `start` and `verify` leaves the **old number in force** and the change simply abandoned — never an account whose login number is uncertain. `conflict` (the number is on another account) is reported **only to this caller** and never discloses whose. OTP states match registration (resend floor, attempts remaining, lockout).
+  - **Email:** a failed verify leaves the address **stored unverified**, which is a valid resting state (REG-04) — the screen says so rather than implying the add failed. `conflict` refuses without revealing the other account.
+  - **Password:** `unauthorized` marks the current-password field only and **keeps the new password typed**. On success all other sessions end — the screen states that before submitting, since being signed out elsewhere is a surprise otherwise.
+  Offline queues nothing here: these are security-sensitive writes, so they fail visibly and are retried by the user rather than replayed silently later.
 
 ### Delete account (REG-12)
 - **Purpose:** self-service deletion for both roles.
@@ -162,6 +173,7 @@ The **onboarding shell**: a full-screen, six-stage sequence that owns the screen
 - **Purpose:** capture re-acceptance when Terms or Privacy change materially.
 - **Entry:** shown on next open when the account summary reports `consent_current = false`.
 - **Structure:** what changed, the documents, and an accept action; blocks nothing destructive but is surfaced until accepted.
+- **States:** **loading** → the accept action shows progress and is not re-tappable. **Empty** → not applicable. **Error** → a failed accept leaves the notice **in place** and retryable, and the user keeps whatever access they had; `validation_failed` (the versions are no longer current) silently refetches the current versions and re-presents rather than blaming the user. The notice must never become an unrecoverable wall: a consent screen that errors and blocks is an app the user cannot use and cannot leave.
 - **Data:** `POST /v1/me/consent {tos_version, privacy_version}`.
 
 ## Group H — Suspension shell (REG-api, SUP-04)
@@ -170,6 +182,7 @@ The **onboarding shell**: a full-screen, six-stage sequence that owns the screen
 - **Purpose:** the only screen a suspended (or terminated) account can reach.
 - **Entry:** a `suspended` login lands here; any other call in this state returns `suspended` and returns here.
 - **Structure:** the **suspension notice** (from `details`/the reduced account summary), an **Appeal** action, the user's **own ticket threads** (create an appeal; read and reply to any ticket they already own — SUP ui), a **language** toggle, and **log out**. Nothing else in the app is reachable.
+- **States:** **loading** → the notice text renders from the reduced summary; the **Appeal** action is available as soon as the notice is, never gated behind a slower ticket-list read. **Empty** → a user with no tickets yet sees the appeal path alone, which is the normal first state here. **Error** → the notice and the **Appeal action remain reachable even if the ticket list fails to load**. This is the most consequential error state in the app: it is the only screen a suspended or terminated account can reach, and the Terms promise an appeal (§7) — an error here that hides the appeal turns a 30-day right into a dead end. A failed locale change or logout retries in place without affecting the appeal route.
 - **Data & actions:** appeal and tickets are the SUP api; `PATCH /v1/me/locale`, `POST /v1/me/push-tokens` (so the reply reaches them), `POST /v1/auth/logout` all work; the reduced summary comes from `GET /v1/me`.
 - **Never shows:** the full account summary (only id, role, status, locale, `banned_at`, `suspension_notice`); no profile, map, chat, or offer surface.
 

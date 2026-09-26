@@ -92,6 +92,9 @@ NFR-09 requires crash reporting, error tracking with alerting, uptime monitoring
 
 ## Open items
 
+*Tracked live in [OL-OPN-001](/OstadLagbo/governance/open-items.md); this list is context.*
+
+
 1. **Slice 0:** choose and wire the monitoring and crash-reporting tools; NFR-09 names obligations and no products.
 2. **Slice 0:** decide where the Storage backup copy lives, and confirm its cost fits the posture (NFR-13). It is currently unbudgeted.
 3. **Slice 4:** first full restore rehearsal — database *and* Storage — before soft launch, per NFR-07.

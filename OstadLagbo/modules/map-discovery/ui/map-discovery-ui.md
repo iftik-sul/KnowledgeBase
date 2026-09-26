@@ -58,6 +58,7 @@ Screens for the discovery map, search and filters, favourites, share links, and 
 ### Share a profile
 - **Purpose:** send someone a link to an Ostad.
 - **Where:** the Share action on any public profile (OSP ui) and preview card.
+- **States:** **loading** → the share action shows brief progress while the link is fetched; the OS share sheet opens only once a link exists, never with a placeholder. **Empty** → not applicable. **Error** → a failed fetch keeps the user on the profile with a retry and **no share sheet**, rather than sharing a broken link; offline says the link cannot be created right now. On the **receiving** side a link that cannot resolve — paused, blocked, deleted, or purged — opens the profile's own state per MAP-07, and the blocked case stays the neutral **"not available"**, never distinguishable from a deleted one.
 - **Data & actions:** `GET /v1/ostads/{id}/share` returns a deep link. Opening it in the app lands on the profile — for guests too (MAP-03); without the app it resolves to the store listing (deferred deep link, so the profile opens after install). A link to a **paused** profile opens it with the not-accepting notice; a link the viewer is **blocked** from resolves to "not available" (opacity). Share taps and link opens are instrumented (MAP-11).
 - **Never shows:** a shared link grants no special access — it resolves under the profile's own public rules.
 

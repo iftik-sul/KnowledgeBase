@@ -20,6 +20,7 @@ updated: 2026-09-26
 - [Project Standards](/OstadLagbo/project-standards.md) — module definition, derivation chain, vocabulary. Read before creating any document.
 - [Glossary](/OstadLagbo/glossary.md) — canonical term definitions for the whole project.
 - [MVP Scope Baseline v1.2](/OstadLagbo/reference/baseline/mvp-scope-v1.2.md) — the approved, change-controlled definition of MVP scope, now **frozen** for the build. It reads standalone: CL-009…021 are consolidated into it, so scope questions are answered here directly. (v1.1 is retained as superseded.)
+- [**Open Items Register**](/OstadLagbo/governance/open-items.md) — every unresolved item, by when it must be resolved. **Authoritative** where a source document disagrees.
 - [Environments, Deployment and Recovery](/OstadLagbo/governance/environments-and-operations.md) — the two environments, CI, migration safety, and the Storage backup the database backups miss.
 - [Test and Acceptance Plan](/OstadLagbo/governance/test-and-acceptance-plan.md) — the eight critical paths, per-slice acceptance, and bilingual review.
 - [Threat Model](/OstadLagbo/governance/threat-model.md) — what an attacker goes after, and which "engineering defaults" need real numbers.
