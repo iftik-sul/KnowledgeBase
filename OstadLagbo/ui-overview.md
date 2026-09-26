@@ -80,7 +80,7 @@ Defined once here; module docs reference them by name rather than re-describing 
 - **Ostad preview card / map pin** — the map projection (MAP): photo, display name, verified badge, headline, rating + count (or "New" when count is 0), distance (computed on-device from map centre). Tapping opens the public profile.
 - **Public Ostad profile** — the full `GET /v1/ostads/{id}` shape (OSP): identity, skills, education, experience, portfolio, exact map pin, reviews, trust signals, and — for a signed-in viewer — their own offer/favourite state. Paused Ostads show the not-accepting banner.
 - **Shagred projection** — the fixed narrow card an Ostad sees (SGP): name, photo, gender, area (district + thana), joined date. Never more, and it disappears when an offer lapses.
-- **Rating stars & review** — 1–5 display and input, the written review, the Ostad's reply beneath, "Former Shagred" for anonymised authors.
+- **Rating stars & review** — 1–5 display and input, the written review, the Ostad's reply beneath, and the reviewer's first initial only (e.g. "R.", CL-028) for every author.
 - **Verified badge** — shown only for approved Ostads; granted solely by admin (ADM-03/RNT-09).
 - **Offer row** — status, countdown for pending, the action set for the role (withdraw / accept-decline), the status-dependent counterpart projection.
 - **Chat bubble & composer** — text and voice notes only (OFR-05), delivery/read ticks, the frozen-chat banner when the writable predicate fails, the revealed-contact header on connection.

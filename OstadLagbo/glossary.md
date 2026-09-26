@@ -47,7 +47,7 @@ Canonical definitions for terms used throughout the OstadLagbo knowledge base. I
 | **Appeal** | A support ticket of category `appeal`, the single action a suspended or terminated account may take (SUP-04), with its three supporting operations (attachment upload, push-token registration, language/logout). |
 | **Restricted session** | The session a suspended account receives at login — valid only for the appeal and its supporting operations; refused by every direct Supabase channel. |
 | **Legal hold** | A flag suspending scheduled data purging on a specific account or record while an investigation, report, or legal matter is active. |
-| **Anonymization** | When a Shagred's account purges, their ratings and connections persist with identity replaced by "Former Shagred" (via `anonymized` flags on those records and captured display-name snapshots); the profile itself purges. |
+| **Anonymization** | When a Shagred's account purges, their **connections** persist with identity replaced by "Former Shagred" (via the `anonymized` flag and a captured display-name snapshot); their **reviews** show only a stored first initial (e.g. "R.", CL-028) at all times, so nothing changes on purge; the profile itself purges. |
 | **Tombstone** | The minimal row a purged account leaves behind (id, role, purge date, and — if banned — the banned-exception data), so records that reference the account stay valid. |
 
 ## Architecture terms

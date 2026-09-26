@@ -78,9 +78,9 @@ Every stage write saves immediately (REG-09). After `changes_requested` or `reje
 `PUT /v1/onboarding/stages/2` body:
 
 ```
-{ doc_type: "nid" | "passport" | "driving_licence",
+{ doc_type: "nid" | "passport",           // identity only; driving licence is a portfolio credential, not ID (CL-027)
   id_number,
-  front_upload_id, back_upload_id?,        // back required for nid and driving_licence; must be absent for passport
+  front_upload_id, back_upload_id?,        // back required for nid; must be absent for passport
   selfie_upload_id }                        // must be an upload ticket issued with purpose "identity_selfie"
 ```
 

@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: privacy-policy
 status: current
-updated: 2026-08-30
+updated: 2026-09-26
 id: OL-PRV-001
 approved: 2026-08-30
 derived_from: /OstadLagbo/governance/data-retention-policy.md
@@ -12,7 +12,7 @@ legal_review: pending
 
 # Ostad Lagbo — Privacy Policy (Working Draft)
 
-*User-facing document. Plain-language disclosure of what Ostad Lagbo (ওস্তাদ লাগবো) collects, why, who sees it, how long it is kept, and your rights under Bangladesh's Personal Data Protection Act, 2026. Durations herein are supplied by the Data Retention & Deletion Policy (OL-RET-001) and must never understate it. Pending review by a Bangladesh-qualified lawyer before launch; a Bangla version ships alongside the app's Bangla release.*
+*User-facing document. Plain-language disclosure of what Ostad Lagbo (ওস্তাদ লাগবো) collects, why, who sees it, how long it is kept, and your rights under Bangladesh's Personal Data Protection Act, 2026. Durations herein are supplied by the Data Retention & Deletion Policy (OL-RET-001) and must never understate it. Pending review by a Bangladesh-qualified lawyer before launch; a Bangla version ships at launch (the app is bilingual from day one, CL-016).*
 
 ---
 
@@ -22,7 +22,7 @@ Ostad Lagbo is a Bangladesh-based platform connecting people who want to learn s
 
 ## 2. What we collect
 
-**If you register as an Ostad:** phone number (verified), password, date of birth, legal names (English and Bangla), display name, photo, gender; identity documents — NID or passport number, document images, and a selfie; address (street line, Thana, District, Division, Postal Code); a map location you place yourself; professional details, skills, education, experience, and portfolio media including one short intro video; optionally a verified email.
+**If you register as an Ostad:** phone number (verified), password, date of birth, legal names (English and Bangla), display name, photo, gender; identity documents — NID or passport number, document images, and a selfie; address (street line, Thana, District, Division, Postal Code); a map location you place yourself; professional details, skills, education, experience, and portfolio media including one short intro video (and, for those who teach driving, a driving licence as a teaching credential); optionally a verified email.
 
 **If you register as a Shagred:** phone number (verified), password, date of birth, display name, address (street line, Thana, District, Division, Postal Code); optionally a photo, gender, and verified email.
 
@@ -42,15 +42,15 @@ To operate the service: creating and verifying accounts, showing Ostads on the m
 
 **Everyone (including guests)** sees an approved Ostad's public profile: legal names, display name, photo, gender, headline and professional details, skills, education, experience, portfolio, Division/District/Thana/Postal Code, exact map pin, verified badge, ratings and reviews. **Nobody** ever sees an Ostad's identity documents, selfie, date of birth, street-address line, phone, or email — except our admin review, under access logging.
 
-**A Shagred is never publicly visible.** Only an Ostad who has received your offer sees your display name, photo, gender (if provided), Thana and District, and joined date — never your date of birth, street address, postal code, phone, or email. That visibility ends if your offer is declined, expires, or is withdrawn, and ends immediately on blocking.
+**A Shagred is never publicly visible.** When you write a review of an Ostad, only your **first initial** (e.g. "R.") and the review text appear on their public profile — never your name. Only an Ostad who has received your offer sees your display name, photo, gender (if provided), Thana and District, and joined date — never your date of birth, street address, postal code, phone, or email. That visibility ends if your offer is declined, expires, or is withdrawn, and ends immediately on blocking.
 
-**Phone numbers** are revealed only mutually, only when an offer is accepted — never before.
+**Phone number and verified email** (if you added one) are revealed only mutually, only when an offer is accepted — never before.
 
 **Chats** are private between the two participants. Our admin can see specific messages only when one of you reports them, with limited surrounding context, and every such access is logged.
 
 ## 6. How long we keep it
 
-Deleting your account (self-service, in settings) deactivates it immediately; you have **30 days** to change your mind by logging back in, after which your data is permanently erased — including identity document images and your selfie. Exceptions, kept deliberately narrow: your NID/passport **number** is kept for **12 months** after deletion, used solely if an abuse or safety report requires tracing a deleted account to a real identity, then erased. If your account was banned for fraud or safety violations, we keep the minimum needed to prevent re-registration (ID-number hash, phone, legal name, and the violation records) while the ban stands. Chats are fully erased 90 days after both participants have left; your reviews remain but are anonymized to "Former Shagred." Reports are kept 2 years after resolution; data relevant to an active legal matter is preserved until it resolves. Analytics are de-linked from you at deletion. Backups clear within 90 days of any erasure.
+Deleting your account (self-service, in settings) deactivates it immediately; you have **30 days** to change your mind by logging back in, after which your data is permanently erased — including identity document images and your selfie. Exceptions, kept deliberately narrow: your NID/passport **number** is kept for **12 months** after deletion, used solely if an abuse or safety report requires tracing a deleted account to a real identity, then erased. If your account was banned for fraud or safety violations, we keep the minimum needed to prevent re-registration (ID-number hash, phone, legal name, and the violation records) while the ban stands. Chats are fully erased 90 days after both participants have left; your reviews remain (they only ever show your first initial, e.g. "R."). Offers that were never accepted are erased after 12 months; support tickets are kept 2 years after they close; reports are kept 2 years after resolution; data relevant to an active legal matter is preserved until it resolves. Analytics are de-linked from you at deletion. Backups clear within 90 days of any erasure.
 
 ## 7. Security
 
@@ -62,7 +62,7 @@ Under the Personal Data Protection Act, 2026 you may: **access** the data we hol
 
 ## 9. Third parties
 
-We use service providers to operate: SMS delivery for OTP codes, cloud hosting and storage, map rendering, and push notifications. They process data only on our instructions to provide their function. We comply with the Act's rules on data residency and cross-border handling for any restricted-category data. We disclose data to authorities only under valid legal process, and we preserve rather than volunteer.
+We use service providers to operate: SMS delivery for OTP codes (a Bangladesh gateway), cloud hosting and storage, map rendering, push notifications (Google / Firebase), and edge security (Cloudflare). They process data only on our instructions to provide their function. **Your data, including identity documents, is stored on servers in Singapore.** We disclose this cross-border storage and, before public launch, will confirm compliance with the Act's data-residency rules for restricted-category data. We disclose data to authorities only under valid legal process, and we preserve rather than volunteer.
 
 ## 10. Age
 
@@ -72,4 +72,4 @@ Ostad Lagbo is for adults — you must be 18 or older to hold an account, enforc
 
 We will notify you in-app of material changes to this policy before they take effect; continued use after notice means acceptance, and you can always delete your account instead. Contact: [contact email — to be established before launch].
 
-*Effective date: set at launch. Version 1.0 (working draft).*
+*Effective date: set at launch. Version 1.1 (working draft) — updated 2026-09-26 for driving-licence handling, email reveal on connection, reviewer first-initial display, Singapore storage disclosure, and support-ticket / non-accepted-offer retention. Pending Bangladesh legal review.*

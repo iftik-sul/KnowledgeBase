@@ -29,7 +29,7 @@ This module owns two shared surfaces every other module reaches into: the **repo
 
 ### Reviews list (component on the public profile)
 - **Where:** the reviews section of the Ostad's public profile (OSP ui); this module owns the component.
-- **Structure:** reviews `created_at` newest first — each with its **stars**, **written review**, the reviewer's **live display name** (or the literal **"Former Shagred"** once that account has purged, RNT-05), the date, and the **Ostad's reply beneath** where present. The viewer's **own** review (if any) is marked for quick **Edit** (Group A).
+- **Structure:** reviews `created_at` newest first — each with its **stars**, **written review**, the reviewer's **first initial only** (e.g. **"R."** — never the full name; CL-028), the date, and the **Ostad's reply beneath** where present. The viewer's **own** review (if any) is marked for quick **Edit** (Group A).
 - **Data:** `GET /v1/ostads/{id}/ratings` (removed reviews never appear; readable when the profile is — approved incl. paused, else "not available").
 
 ### Ostad reply

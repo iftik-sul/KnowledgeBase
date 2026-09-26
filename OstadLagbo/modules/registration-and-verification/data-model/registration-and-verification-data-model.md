@@ -131,9 +131,9 @@ The vault. Encrypted at rest; internal visibility; every read audit-logged (ADM-
 | Field | Type | Rules |
 |---|---|---|
 | id / account_id | uuid / uuid | Ostad accounts only |
-| doc_type | enum: `nid` \| `passport` \| `driving_licence` | CL-017 |
+| doc_type | enum: `nid` \| `passport` | Identity verification is NID **or** passport only (CL-027, correcting CL-017). A driving licence is **not** an identity document — it is a teaching credential for the driving category, collected via portfolio (OSP-07 `portfolio_document`), never in this vault |
 | id_number | string, encrypted | **Flagged on match with another active account's current document** (REG-10/ADM-03 duplicate gate, evaluated at case open and verdict — ADM-DM) |
-| front_image_ref / back_image_ref / selfie_ref | storage refs | Per-type image rule: nid and driving_licence require front + back; passport requires photo page (front) only. Selfie is **live in-app capture only, holding the document** (REG-10/CL-017). All encrypted objects |
+| front_image_ref / back_image_ref / selfie_ref | storage refs | Per-type image rule: nid requires front + back; passport requires photo page (front) only. Selfie is **live in-app capture only, holding the document** (REG-10/CL-017). All encrypted objects |
 | submitted_at | timestamp | |
 | superseded_at | timestamp, nullable | Null = the account's current document |
 | verification_status | enum: `pending` \| `passed` \| `failed` | **Canonical identity state** (Overview rule 6). Set only by ADM-03's reviewer action; `passed` on the current row is a precondition of approval |

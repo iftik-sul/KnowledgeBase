@@ -41,7 +41,7 @@ Account deletion is self-service (REG-12). On request: the account **deactivates
 | Abandoned Ostad onboarding drafts (incl. uploaded documents) | Purged after **90 days of draft inactivity**, with prior notice | — |
 | Abandoned profile revisions (proposed key-field changes, incl. uploaded identity documents and photos) | Discarded after **90 days of inactivity**, with prior notice; their uploads deleted (OSP-10, CL-021) | Purged with the account |
 | Chat messages & voice notes | Life of the relationship; one party's deletion freezes the thread, the other keeps history (OFR-06) | Full thread purge **90 days after both parties are gone** |
-| Reviews & ratings | Persist | Anonymized ("Former Shagred"), persist with aggregate weight (RNT-05) — a banned account's ratings are retained by decision (CL-024); admins remove individual fraudulent reviews via `remove_content` |
+| Reviews & ratings | Persist | Shown only by the reviewer's first initial (e.g. "R.", CL-028), so nothing changes on deletion; persist with aggregate weight (RNT-05) — a banned account's ratings are retained by decision (CL-024); admins remove individual fraudulent reviews via `remove_content` |
 | Connection records (accepted offers) | Persist | Anonymized; Ostad-history entries show "deleted account" (SGP-03) |
 | Offers (declined / expired / withdrawn) | Retained 12 months for analytics, then aggregate-only | Purged at day 30 when either party purges |
 | Reports & moderation records | Retained | **2 years after resolution**; longer under legal hold |

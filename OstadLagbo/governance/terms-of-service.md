@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: terms-of-service
 status: current
-updated: 2026-08-30
+updated: 2026-09-26
 id: OL-TOS-001
 approved: 2026-08-30
 owner: Iftikher
@@ -11,7 +11,7 @@ legal_review: pending
 
 # Ostad Lagbo — Terms of Service (Working Draft)
 
-*User-facing document. The agreement between Ostad Lagbo (ওস্তাদ লাগবো) and everyone who uses it. Plain language by intent. Pending review by a Bangladesh-qualified lawyer before launch; a Bangla version ships alongside the app's Bangla release.*
+*User-facing document. The agreement between Ostad Lagbo (ওস্তাদ লাগবো) and everyone who uses it. Plain language by intent. Pending review by a Bangladesh-qualified lawyer before launch; a Bangla version ships at launch (the app is bilingual from day one, CL-016).*
 
 ---
 
@@ -37,11 +37,11 @@ You own what you post — profile content, portfolio, messages, reviews. You gra
 
 ## 6. Offers, chat, and phone numbers
 
-Offers expire after 7 days if unanswered; you may withdraw a pending offer; a declined offer may be re-sent, and repeated unwanted contact is grounds for blocking and enforcement. **Accepting an offer reveals both parties' phone numbers to each other — this cannot be undone.** Chats support text and voice notes, are private between participants, and may be reviewed by our moderation team only when reported, with access logged.
+Offers expire after 7 days if unanswered; you may withdraw a pending offer; a declined offer may be re-sent, and repeated unwanted contact is grounds for blocking and enforcement. **Accepting an offer reveals both parties' phone numbers — and verified email, if provided — to each other; this cannot be undone.** Chats support text and voice notes, are private between participants, and may be reviewed by our moderation team only when reported, with access logged.
 
 ## 7. Moderation and enforcement
 
-To keep the marketplace trustworthy we may, with recorded reasons: request changes to or reject profile submissions, remove reviews or replies that violate these terms, warn accounts, suspend accounts (which freezes chats and removes map presence), and ban repeat or severe violators — including retaining minimal identity data to prevent banned users from returning, as described in the Privacy Policy. Reports are reviewed by a human. If you believe an enforcement action was wrong, contact us (Section 12) and we will review it.
+To keep the marketplace trustworthy we may, with recorded reasons: request changes to or reject profile submissions, remove reviews or replies that violate these terms, warn accounts, suspend accounts (which freezes chats and removes map presence), and ban repeat or severe violators — including retaining minimal identity data to prevent banned users from returning, as described in the Privacy Policy. Reports are reviewed by a human. If you believe an enforcement action was wrong, you can **appeal in the app** — a suspended or terminated account keeps an appeal path for **30 days** — and a human reviews it.
 
 ## 8. Privacy
 
@@ -63,4 +63,4 @@ You may stop using Ostad Lagbo and delete your account at any time, in-app, with
 
 These terms are governed by the laws of the People's Republic of Bangladesh; disputes are subject to the jurisdiction of the courts of Bangladesh. We will notify you in-app of material changes to these terms before they take effect; continued use after notice means acceptance — deleting your account is always available instead. Contact: [contact email — to be established before launch].
 
-*Effective date: set at launch. Version 1.0 (working draft).*
+*Effective date: set at launch. Version 1.1 (working draft) — updated 2026-09-26 for email reveal on connection and in-app appeals with the 30-day window. Pending Bangladesh legal review.*

@@ -19,7 +19,7 @@ Entities owned: `shagred_profile`, `ostad_history_entry`. Conventions per [Data 
 - **No rating fields** — rating is one-directional (baseline §6); Shagreds are never rated.
 - **No counters** — no offers-sent, acceptance-rate, or activity fields that could leak a Shagred's behavior to any viewer (SGP-04).
 - **No revision machinery** — Shagreds undergo no review (SGP-06); every edit publishes to the permitted audience instantly.
-- **No anonymized state** — the profile purges outright at day 30. "Former Shagred" is rendered from `rating.anonymized` and `connection.anonymized` with their display-name snapshots (RNT-DM, OFR-DM); nothing reads this profile after purge, so there is nothing to anonymize here (Overview: tombstone references).
+- **No anonymized state** — the profile purges outright at day 30. "Former Shagred" is rendered from `connection.anonymized` with its display-name snapshot (OFR-DM); reviews show only their stored `reviewer_initial` at all times (RNT-DM, CL-028); nothing reads this profile after purge, so there is nothing to anonymize here (Overview: tombstone references).
 - **No view log** — reads of a Shagred profile are never recorded, in this model or in analytics (SGP api).
 
 ## shagred_profile

@@ -73,7 +73,7 @@ Ostad onboarding is a fixed sequence of stages, in this order: **1 Personal info
 
 ## REG-10 Identity document capture
 
-Stage 2 collects: document type — **NID, passport, or driving licence** (CL-017) — ID number, and document images **per type: NID front + back · passport photo page · driving licence front + back** (image requirements are per-type rules, so adding a document type never restructures the flow). Document images may be captured by camera or gallery upload.
+Stage 2 collects: document type — **NID or passport** (CL-027, correcting CL-017) — ID number, and document images **per type: NID front + back · passport photo page** (image requirements are per-type rules, so adding a document type never restructures the flow). Document images may be captured by camera or gallery upload. A **driving licence is not an identity document** — it is a teaching credential collected only from Ostads who teach driving, added through their portfolio (OSP-07 `portfolio_document`), not this stage.
 
 The **verification selfie is live in-app camera capture only — no gallery path exists — taken holding the identity document beside the face** (CL-017). This gives review a three-way check: live face ↔ document photo ↔ document in hand. On-screen guidance shows correct framing with retake support.
 

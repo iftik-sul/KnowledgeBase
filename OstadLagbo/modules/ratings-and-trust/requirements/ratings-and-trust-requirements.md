@@ -21,7 +21,7 @@ Only a Shagred holding a **connection** (accepted offer, OFR-04) with an Ostad m
 
 ## RNT-02 Rating content
 
-A rating is **1–5 stars (required) plus a written review (required**, proposed cap 600 characters). Star-only submissions are refused — the written component is what makes a review useful to the next Shagred. The review displays on the Ostad's profile with the reviewer's display name and the rating date.
+A rating is **1–5 stars (required) plus a written review (required**, proposed cap 600 characters). Star-only submissions are refused — the written component is what makes a review useful to the next Shagred. The review displays on the Ostad's profile with the reviewer's **first initial only** (e.g. "R." — never the full display name, so a Shagred is never publicly identifiable; CL-028) and the rating date.
 
 ## RNT-03 Aggregation
 
@@ -35,7 +35,7 @@ An Ostad may post **one public reply per review** (proposed cap 600 characters),
 
 ## RNT-05 Persistence
 
-Reviews **persist through blocks** — blocking someone does not erase what they experienced. When a reviewer deletes their account, the review persists **anonymized** ("Former Shagred") with stars, text, and date intact, still counted in the aggregate. When an Ostad deletes their account, their profile and its reviews leave the platform together. Only admin action (RNT-06) removes a living review.
+Reviews **persist through blocks** — blocking someone does not erase what they experienced. When a reviewer deletes their account, the review persists with stars, text, date, and its stored first initial intact, still counted in the aggregate (the initial was never identifying, so nothing changes on deletion; CL-028). When an Ostad deletes their account, their profile and its reviews leave the platform together. Only admin action (RNT-06) removes a living review.
 
 **Acceptance:** account-cycling cannot remove a review; anonymized reviews keep their aggregate weight.
 
