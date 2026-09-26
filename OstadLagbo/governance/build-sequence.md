@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: build-plan
 status: current
-updated: 2026-09-25
+updated: 2026-09-26
 id: OL-BLD-001
 derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.2.md
 owner: Iftikher
@@ -10,11 +10,11 @@ owner: Iftikher
 
 # MVP Build Sequence
 
-Sequences the approved MVP scope into six **slices**, each ending in something usable and testable. **Nothing is cut** — every requirement in every module is placed in exactly one slice. The purpose is to convert an all-or-nothing build into a staircase, so the product becomes real early (risk R-06), supply seeding can start before the build finishes (risk R-01), and a solo builder always has a working system to stand on (risk R-05). Bilingual UI (CL-016) ships with every slice from the first, because i18n is architecture, not a feature. *(Revised 2026-09-14: termination (CL-019), language preference (REG-14), push-token registration, and the public website (CL-020) placed.)*
+Sequences the approved MVP scope into six **slices**, each ending in something usable and testable. **Nothing is cut** — every requirement is placed. A few requirements with distinct sub-parts are **phased across two slices**, each part named where it lands: **REG-02** (registration in Slice 0; deletion-window recovery routing in Slice 4) and **ADM-18** (draft retention in Slice 1; full retention purges in Slice 4). The purpose is to convert an all-or-nothing build into a staircase, so the product becomes real early (risk R-06), supply seeding can start before the build finishes (risk R-01), and a solo builder always has a working system to stand on (risk R-05). Bilingual UI (CL-016) ships with every slice from the first, because i18n is architecture, not a feature. *(Revised 2026-09-14: termination (CL-019), language preference (REG-14), push-token registration, and the public website (CL-020) placed. Revised 2026-09-26: slice lists de-duplicated and the four instrumentation/cross-ref requirements (OFR-06, OFR-08, RNT-09, RNT-10) placed explicitly.)*
 
 ## Slice 0 — Foundation *(nothing visible; everything depends on it)*
 
-Backend and hosting per ADR-001 (Supabase, Render, Vercel, Cloudflare, FCM; free tiers throughout development); localization architecture with both locale files live and **language selection with stored preference (REG-14)**; `user_account` and auth (REG-01…07, REG-13 consent capture); the append-only audit log (ADM-17) and admin authentication with TOTP (ADM-20); the analytics event pipeline (events are emitted from slice 1 onward — never retrofitted); encrypted object storage for the identity vault; the `skill_category` and `admin_area` seed migrations (OL-SKC-001; ADM-DM); ADR-001's Slice 0 open items (Dhaka latency test, SMS gateway selection, Bangla fuzzy-match verification, coordinate log scrubbing, API framework and RLS baseline).
+Backend and hosting per ADR-001 (Supabase, Render, Vercel, Cloudflare, FCM; free tiers throughout development); localization architecture with both locale files live and **language selection with stored preference (REG-14)**; `user_account` and auth (REG-01…05, REG-13 consent capture; REG-06 password change and REG-07 phone change land in Slice 4); the append-only audit log (ADM-17) and admin authentication with TOTP (ADM-20); the analytics event pipeline (events are emitted from slice 1 onward — never retrofitted); encrypted object storage for the identity vault; the `skill_category` and `admin_area` seed migrations (OL-SKC-001; ADM-DM); ADR-001's Slice 0 open items (Dhaka latency test, SMS gateway selection, Bangla fuzzy-match verification, coordinate log scrubbing, API framework and RLS baseline).
 
 **Gate:** register both roles, log in, log out on Android and iOS in both languages; an audit entry writes; an analytics event lands; the fuzzy-match test set (OL-SKC-001) passes.
 
@@ -33,19 +33,19 @@ Map with exact pins, radius, category and gender filters, cross-script fuzzy sea
 
 ## Slice 3 — Connection *(the product's success unit works end to end)* → **MVP-core**
 
-Offer lifecycle, inboxes, acceptance effects with contact reveal (OFR-01…04, OFR-09); chat with text and voice notes, **push-token registration and locale-rendered notifications** (OFR-03, OFR-05; REG-DM `device_push_token`); Shagred-profile visibility lifecycle and Ostad history (SGP-03, SGP-05); blocks and reports with the reports queue, warnings, suspension, **and termination with the 30-day appeal window** (RNT-07, RNT-08, ADM-07, ADM-08 incl. CL-019); chat-context access for reports (OFR-07); the suspension-notice screen.
+Offer lifecycle, inboxes, acceptance effects with contact reveal, thread ending/freezing, and offer instrumentation (OFR-01…04, OFR-06, OFR-08, OFR-09); chat with text and voice notes, **push-token registration and locale-rendered notifications** (OFR-03, OFR-05; REG-DM `device_push_token`); Shagred-profile visibility lifecycle and Ostad history (SGP-03, SGP-05); blocks and reports with the reports queue, warnings, suspension, **and termination with the 30-day appeal window** (RNT-07, RNT-08, ADM-07, ADM-08 incl. CL-019); chat-context access for reports (OFR-07); the suspension-notice screen.
 
 **Gate:** offer → accept → chat → phone reveal → block/report all function on real devices; a terminated test account can appeal and do nothing else. **The product is usable.** Friends-and-family testing starts; seed Ostads can receive real offers.
 
 ## Slice 4 — Trust *(soft-launch readiness)*
 
-Ratings, replies, aggregation, review moderation (RNT-01…06); visibility pause (OSP-11); favorites and shareable deep links (MAP-07, MAP-08); full account deletion with the 30-day recovery window and retention purges on both deletion paths (REG-12, ADM-18 complete); pending-deletion recovery routing (REG-02); phone change and password change (REG-06, REG-07).
+Ratings, replies, aggregation, review moderation, trust signals, and rating/block instrumentation (RNT-01…06, RNT-09, RNT-10); visibility pause (OSP-11); favorites and shareable deep links (MAP-07, MAP-08); full account deletion with the 30-day recovery window and retention purges on both deletion paths (REG-12, ADM-18 complete); pending-deletion recovery routing (REG-02); phone change and password change (REG-06, REG-07).
 
 **Gate:** the incident-response standing preparations are complete, legal review of the privacy policy and ToS is done (including the PDPA data-residency ruling, ADR-001 open item 1), and the retention purge has been verified in staging. **Soft launch** with seeded supply in the launch area.
 
 ## Slice 5 — Operate & grow *(public-launch readiness)* → **MVP-complete**
 
-Support tickets and the support queue with suspension appeals (SUP-01…06, ADM-22); analytics charts and business intelligence (ADM-12…15); Ostad insights (OSP-12); bilingual broadcasts (ADM-16); SMS/OTP monitor (ADM-19); block overview and full directories (ADM-09, ADM-10); read-only settings (ADM-21); **the public website's marketing pages (CL-020)**.
+Support tickets and the support queue (SUP-01…03, SUP-05, SUP-06, ADM-22 — SUP-04 appeals shipped in Slice 3, principle 6); analytics charts and business intelligence (ADM-12…15); Ostad insights (OSP-12); bilingual broadcasts (ADM-16); SMS/OTP monitor (ADM-19); block overview and full directories (ADM-09, ADM-10); read-only settings (ADM-21); **the public website's marketing pages (CL-020)**.
 
 **Gate:** app-store compliance checklist passed; funnel metrics from soft launch reviewed against targets. **Public launch.**
 
