@@ -66,7 +66,7 @@ The MVP processes no payments, so no tax/financial record retention applies. Whe
 
 ## Operational obligations
 
-ADM-18 tooling implements: day-30 purge automation (self-service and termination paths), the 12-month ID-number purge, the 3-year consent-record purge, pending-registration expiry, draft-inactivity purge, abandoned-revision discard, both-parties-gone chat purge, banned-account minimal retention, storage-object deletion in the same operation as the referencing row (with orphan sweeps), and legal-hold flags. Purges are audit-logged. Hosting and backup architecture must honor the 90-day backup age-out and the PDPA's data-residency rules for restricted-category data (engineering + legal checkpoint before infrastructure selection).
+ADM-18 tooling implements: day-30 purge automation (self-service and termination paths), the 12-month ID-number purge, the 3-year consent-record purge, pending-registration expiry, draft-inactivity purge, abandoned-revision discard, both-parties-gone chat purge, banned-account minimal retention, storage-object deletion in the same operation as the referencing row (with orphan sweeps), and legal-hold flags. Purges are audit-logged. Hosting and backup architecture must honor the 90-day backup age-out and the PDPA's data-residency rules for restricted-category data — the ruling on identity documents stored in Singapore is an open legal item that must close before Slice 1 (ADR-001).
 
 ## Review
 

@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: build-plan
 status: current
-updated: 2026-09-14
+updated: 2026-09-25
 id: OL-BLD-001
 derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.2.md
 owner: Iftikher

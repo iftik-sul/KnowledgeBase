@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: charter
 status: current
-updated: 2026-08-28
+updated: 2026-09-26
 id: OL-CHR-001
 approved: 2026-08-28
 owner: Iftikher
@@ -33,7 +33,7 @@ People in Bangladesh find skill teachers through Facebook groups, scattered phon
 | Admin verification, approval, verified badge | |
 | Ratings, reviews, profile statistics | |
 
-The detailed, change-controlled scope definition lives in `reference/baseline/` once produced during planning; this table is the charter-level summary.
+The detailed, change-controlled scope definition lives in `reference/baseline/` (currently baseline v1.2, frozen 2026-09-25); this table is the charter-level summary.
 
 ## Stakeholders and governance
 
@@ -46,15 +46,15 @@ Sponsor, project manager, and product owner: **Iftikher** (sole founder), holdin
 3. **Trust and safety** — the platform facilitates in-person meetings between strangers.
 4. **Solo-founder capacity** — single point of failure for delivery and operations.
 
-Risks move to a dedicated risk register during planning.
+Risks are tracked in the [Risk Register](/OstadLagbo/governance/risk-register.md).
 
 ## Summary milestones
 
-Charter approval → planning documentation complete → MVP build → supply seeding → soft launch → public launch. Dates are set during planning.
+Charter approval → planning documentation complete → MVP build → supply seeding → soft launch → public launch. Dates are set in the schedule and milestone plan, still to be produced (a standing execution item).
 
 ## Budget
 
-Defined during planning. Working assumption: solo, bootstrap.
+Still to be produced; ADR-001's phased cost model ($0 through development, ≈ $52/month + SMS from the first real user) is the infrastructure input. Working assumption: solo, bootstrap.
 
 ## Approval
 

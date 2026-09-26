@@ -3,7 +3,7 @@ project: OstadLagbo
 type: ui
 status: current
 updated: 2026-09-26
-id: OL-UI-DF-001
+id: OL-UI-003
 derived_from: /OstadLagbo/ui-overview.md
 owner: Iftikher
 ---
