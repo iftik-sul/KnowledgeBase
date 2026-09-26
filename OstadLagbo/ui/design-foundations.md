@@ -85,7 +85,7 @@ Follows the `ui-overview` mapping table. Implemented visuals: inline field error
 
 ## Notes for the Flutter build
 
-- One config file holds the API base URL, **per environment**. It must point at the **Cloudflare-proxied custom domain**, not the raw `*.onrender.com` host — calling Render directly bypasses the edge's coordinate-log scrubbing and rate limiting (ADR-001). The `athena-api-ujpl.onrender.com` origin is used only in early Slice 0 before Cloudflare is configured.
+- One config file holds the API base URL, **per environment**. It must point at the **Cloudflare-proxied custom domain**, not the raw `*.onrender.com` host — calling Render directly bypasses the edge's coordinate-log scrubbing and rate limiting (ADR-001). The `athena-api-ujpl.onrender.com` origin is used only in early Slice 0 before Cloudflare is configured. **Cloudflare is deferred until a domain is bought (CL-049, register item S4-9)** — so the raw host is the base URL for the whole of Slices 0–3. That is accepted: there are no real users and no stored coordinates until then. It must change **before soft launch**, and `S2-1`'s rate limits therefore have to live in the API rather than only at the edge.
 - Put the palette and type into a single theme file; reference tokens, not raw hex, so re-theming is one place.
 - **Bangla copy in Figma is placeholder for layout** — founder-authored strings replace the text layers (Bangla copy is founder-authored per project standards).
 - Localise from bundled string tables; the client never translates API text (already-localised from the API).

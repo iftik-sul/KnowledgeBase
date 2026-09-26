@@ -31,9 +31,9 @@ Ordered by **when it must be resolved**, not by importance — the point is to s
 | **S0-3** | Confirm **local-vs-hosted signing parity**; record the fallback if it fails | ADR-005 |
 | **S0-4** | **Dhaka → Singapore latency test** for phone → Render → Supabase; confirm NFR-02 | ADR-001 |
 | **S0-5** | Verify **Bangla fuzzy matching** against the OL-SKC-001 test set | ADR-001 |
-| **S0-6** | Confirm **coordinate scrubbing** in Cloudflare and Render logs | ADR-001, MAP-10 |
+| **S0-6** | Confirm **coordinate scrubbing** in the Render logs. The Cloudflare half waits on **S4-9** — until then Render is the only log layer there is | ADR-001, MAP-10 |
 | **S0-7** | Establish the **Supabase RLS baseline** as second-line guard | ADR-001 |
-| **S0-8** | **Can Cloudflare's free plan express the rate limits NFR-05 assumes?** If not, limits move into the API or the edge becomes a cost line | OL-THR-001 |
+| **S0-8** | **Can Cloudflare's free plan express the rate limits NFR-05 assumes?** Answerable on paper now; testable only once **S4-9** lands. If it cannot, the limits move into the API or the edge becomes a cost line — either way that is a decision, not a default | OL-THR-001 |
 | **S0-9** | Choose and wire **monitoring and crash reporting** — NFR-09 names obligations, no products | OL-OPS-001, NFR-09 |
 | **S0-10** | Decide where the **Storage backup** lives and what it costs — currently unbudgeted | OL-OPS-001 |
 | **S0-11** | **Map tile provider bake-off** — MapTiler vs Stadia vs Google, on one Dhanmondi viewport. **Before any map screen exists** | CL-035 |
@@ -44,12 +44,14 @@ Ordered by **when it must be resolved**, not by importance — the point is to s
 | # | Item | Source |
 |---|---|---|
 | **S1-1** | Apply for the **masked SMS sender ID** once an entity exists (3–7 business days) | CL-036 |
-| **S2-1** | Set the **viewport cap and scraping rate numbers** so a full sweep of the launch area costs days, not minutes | OL-THR-001 |
+| **S2-1** | Set the **viewport cap and scraping rate numbers** so a full sweep of the launch area costs days, not minutes. **Implement them in the API, not only at the edge** — there is no edge yet (S4-9), and the app talks to Render directly | OL-THR-001 |
 
 ## Before soft launch (Slice 4)
 
 | # | Item | Source |
 |---|---|---|
+| **S4-9** | **Buy the domain, then put Cloudflare in front of the API** (founder decision 2026-09-26: deferred until a domain exists — no domain, no edge). ADR-001 puts Cloudflare in the stack for requirement (d) — infrastructure-level request-log control and rate limiting — and `design-foundations` requires the app's base URL to be the **Cloudflare-proxied domain, not the raw `*.onrender.com` host**, permitting the raw host *"only in early Slice 0"*. **While deferred, the app calls Render directly and there is no edge log scrubbing and no edge rate limiting at all**, so the threat model's two main mitigations (T-1 scraping, T-4 OTP abuse) rest entirely on limits inside the API — see S2-1 and S0-12. Acceptable through development, where there are no real users and no stored coordinates; **not acceptable at soft launch**, when both arrive | ADR-001, NFR-05(d), OL-THR-001, OL-UI-003 |
+| **S4-10** | The **domain gates three separate things**, so buying it early unblocks more than the edge: Cloudflare (S4-9), the **public web account-deletion page Google Play mandates** (OL-STR-001 §B), and — if an entity is registered (N-1) — Apple's organization enrolment, which requires a working website on the company's own domain | OL-STR-001 |
 | **S4-1** | Confirm **PDPA breach-notification deadlines** and the authority's procedure with counsel — Playbook 2 says *before* an incident, not during | OL-INC-001 |
 | **S4-2** | Establish the **incident contact email** — also closes the placeholders in the Privacy Policy and Terms | OL-INC-001 |
 | **S4-3** | Keep an **offline copy** of the incident process and all recovery credentials | OL-INC-001 |
