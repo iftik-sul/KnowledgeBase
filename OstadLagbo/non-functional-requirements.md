@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: requirements
 status: current
-updated: 2026-09-12
+updated: 2026-09-26
 id: OL-NFR-001
 derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.2.md
 owner: Iftikher
@@ -62,7 +62,7 @@ Minimal permissions — location (foreground only), camera, microphone (voice no
 
 ## NFR-13 Cost posture
 
-Every infrastructure choice is free or free-tier-viable at MVP scale (NFR-08) and degrades to predictable pay-as-you-grow; no commitment contracts; the monthly infrastructure ceiling is set in the budget document and monitored via the admin SMS monitor (ADM-19) and provider billing alerts.
+Every infrastructure choice is free or free-tier-viable at MVP scale (NFR-08) and degrades to predictable pay-as-you-grow; no commitment contracts; the monthly infrastructure ceiling is set in the budget document and monitored via the admin SMS monitor (ADM-19) and provider billing alerts. **Map tiles are the one line that is free in development but not at launch** (CL-035): every credible raster vendor's free tier is licensed non-commercial, so tiles become a paid line (≈ $20–30/month) at soft launch unless Google's mobile SDK is adopted.
 
 ## NFR-14 Quality and maintainability
 

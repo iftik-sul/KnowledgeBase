@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: decision
 status: current
-updated: 2026-09-13
+updated: 2026-09-26
 id: OL-DEC-001
 derived_from: /OstadLagbo/data-model-overview.md
 owner: Iftikher
@@ -109,6 +109,8 @@ The decision body above is preserved as accepted on 2026-09-13. Two later ADRs r
 
 - **Auth (2026-09-25, ADR-004).** The "Auth (phone OTP, sessions, password hashing)" line in the Data-services row, and the "hand-rolled login is how identity data gets breached" note, are superseded in part: the **API** is the authentication authority — it owns `user_account.password_hash` (scrypt) and mints Supabase-valid JWTs signed with the project's Supabase JWT secret; **no `auth.users` row is created**. Supabase Auth is not the password store or token issuer. Supabase still verifies those tokens' signatures on its direct channels (Realtime, Storage), and RLS remains the second line of defense — so ADR-001's security rationale (don't expose identity data; keep RLS behind the policy layer) stands. The warning against "hand-rolled login" is satisfied by using the platform's built-in scrypt and Supabase-valid JWTs, not a bespoke scheme.
 - **OTP in development (2026-09-25, ADR-003).** The cost-model line "Supabase Auth test phone numbers with fixed OTP codes" no longer applies (Supabase Auth is not used). In development, OTP uses a **stub that logs the code**; no real SMS is sent until the Slice 0 gateway is selected. The $0-in-development outcome is unchanged.
+
+- **Map tiles (2026-09-26, CL-035).** The service-map row "Map tiles | OpenStreetMap-based via `flutter_map` | No per-load billing" and the cost-model row "Map tiles | Free | Free (paid tile CDN only at scale)" are **corrected, not merely refined — both were factually wrong**. OpenStreetMap's tile usage policy forbids commercial products on its community-funded servers, forbids prefetching, and states that "offline use is not permitted"; OSM public tiles are therefore **development-only** and are never shipped. Separately, every *vector* basemap on mobile renders through MapLibre, which **cannot shape Bengali script** — ruling out the free vector options for a Bangla-first product. The shipping provider is a **raster** vendor (≈ $20–30/month, free tiers being non-commercial) **or** Google's own mobile SDK ($0, but it replaces `flutter_map`). The provider is selected in **Slice 0, before any MAP screen is built**; the development-phase outcome ($0) is unchanged, but the "from the first real user" total rises from ≈ $52/month to ≈ $72–82/month + SMS unless Google is chosen.
 
 ## Superseded by
 

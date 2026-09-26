@@ -54,7 +54,7 @@ Charter approval → planning documentation complete → MVP build → supply se
 
 ## Budget
 
-Still to be produced; ADR-001's phased cost model ($0 through development, ≈ $52/month + SMS from the first real user) is the infrastructure input. Working assumption: solo, bootstrap.
+Still to be produced; ADR-001's phased cost model ($0 through development, ≈ $52/month + SMS from the first real user — rising to **≈ $72–82/month** once map tiles become a paid line at soft launch, or staying at ≈ $52 if Google's free mobile SDK is chosen; ADR-001 amendment, CL-035) is the infrastructure input. Working assumption: solo, bootstrap.
 
 ## Approval
 

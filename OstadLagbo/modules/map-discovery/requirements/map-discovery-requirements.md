@@ -3,7 +3,7 @@ project: OstadLagbo
 module: map-discovery
 type: requirements
 status: current
-updated: 2026-08-30
+updated: 2026-09-26
 id: OL-MAP-REQ-001
 derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.2.md
 owner: Iftikher
@@ -23,7 +23,9 @@ During onboarding stage 4 (REG-09) and afterward from profile editing, an Ostad 
 
 The map shows every approved, non-suspended, **non-paused (OSP-11)** Ostad as a pin at exact stored coordinates — **pins only; no list view exists in the MVP**. The view centers on the user's live GPS position when permitted, else on a default city center (engineering default: Dhaka), supports free pan and zoom anywhere in Bangladesh, and provides a **recenter-to-me button** whenever GPS is available. Tapping a pin opens a preview card — profile photo, display name, verified badge, headline, average rating and review count, distance from map center — and tapping the card opens the full public profile.
 
-**Acceptance:** pending, rejected, suspended, and paused Ostads never render a pin; recenter returns to live position in one tap; denied GPS still yields a fully usable map.
+**Map attribution is permanently visible** on the map surface: `© OpenStreetMap contributors` together with whatever credit the chosen tile provider requires (CL-035). It is not dismissible, and no card, sheet, or overlay may cover it. This is a licence obligation, not a design preference.
+
+**Acceptance:** pending, rejected, suspended, and paused Ostads never render a pin; recenter returns to live position in one tap; denied GPS still yields a fully usable map; the attribution is legible at every zoom level and behind every overlay.
 
 ## MAP-03 Guest browsing
 
@@ -80,4 +82,11 @@ This module emits the events ADM-12/13/14 require: map sessions (guest and regis
 
 ## Proposed technical defaults summary
 
-Default center, radius default/range, cluster thresholds, rate limits, viewport caps, deep-link mechanics, and the map provider are engineering defaults — with one recorded constraint: provider choice must respect the bootstrap cost posture (free or free-tier-viable at MVP scale; e.g., OpenStreetMap-based rendering avoids per-load billing). Everything else — exact pins, the consent statement, guest access boundaries, pins-only presentation, the filter set, cross-script search scope, favorites privacy, and the no-stored-user-location rule — changes only with founder approval.
+Default center, radius default/range, cluster thresholds, rate limits, viewport caps, and deep-link mechanics are engineering defaults. **The map provider is a deliberately deferred decision carrying four recorded constraints (CL-035):**
+
+- **Raster, not vector.** MapLibre — the renderer behind every vector basemap on mobile — cannot shape Bengali script, so Bangla place names render as broken, disconnected glyphs; Protomaps' own localization documentation lists Bengali under "no support", alongside Tamil, Telugu and Khmer. A Bangla-first product therefore ships **server-rendered raster tiles** (where the shaping happens on the provider's machine) or Google's own SDK, and **no vector basemap**. This rules out precisely the free options — OpenFreeMap, self-hosted Protomaps — whose price is what this constraint costs.
+- **OpenStreetMap's public tiles are development-only.** Their usage policy forbids commercial products on community-funded servers, forbids any prefetching, and states plainly that "offline use is not permitted". Development use must send an app-identifying User-Agent rather than a library default. **They are never shipped.**
+- **Cost posture (NFR-13) holds in development and changes at soft launch.** Free while building; then ≈ $20–30/month on a raster vendor, every credible free tier being non-commercial — or $0 on Google's mobile SDK, which costs `flutter_map` instead.
+- **The choice is made in Slice 0, before any MAP screen exists** (OL-BLD-001), by rendering one launch-area viewport in each candidate — MapTiler, Stadia Maps, Google — and comparing Bangla label rendering and Dhaka data density directly. Deferred past that gate, the decision stops being a configuration line and becomes a rewrite of this module's screens.
+
+Everything else — exact pins, the consent statement, guest access boundaries, pins-only presentation, the filter set, cross-script search scope, favorites privacy, and the no-stored-user-location rule — changes only with founder approval.

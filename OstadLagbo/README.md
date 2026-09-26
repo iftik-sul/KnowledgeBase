@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: overview
 status: current
-updated: 2026-09-25
+updated: 2026-09-26
 ---
 
 # OstadLagbo
@@ -13,7 +13,7 @@ updated: 2026-09-25
 
 - **Status:** Active — entering Execution. The full specification chain is complete: requirements, NFRs, governance policies, data models, platform architecture, seed data, **APIs, and UI** — all eight modules across every layer, plus the admin dashboard and public website. **Scope is frozen at baseline v1.2** (CL-009…021 consolidated). Next: the build, starting with Slice 0 (Foundation); alongside it, schedule/milestones/budget and the Privacy Policy & ToS v1.1 refresh ahead of legal review.
 - **Owner:** Iftikher (sole founder: sponsor, project manager, product owner)
-- **Stack (ADR-001):** Flutter (Android + iOS), bilingual English + Bangla UI (CL-016) · **Supabase** (Singapore) for database, storage, realtime, and scheduled jobs · **Render** (Singapore) for the API, the policy layer, and the authentication authority (the API owns passwords and mints Supabase-valid tokens — ADR-004) · **Vercel** for the admin dashboard and public website · Firebase Cloud Messaging for push · a Bangladesh SMS gateway for OTP · OpenStreetMap tiles · Cloudflare at the edge. **$0 through development; ≈ $52/month + SMS from the first real user.**
+- **Stack (ADR-001):** Flutter (Android + iOS), bilingual English + Bangla UI (CL-016) · **Supabase** (Singapore) for database, storage, realtime, and scheduled jobs · **Render** (Singapore) for the API, the policy layer, and the authentication authority (the API owns passwords and mints Supabase-valid tokens — ADR-004) · **Vercel** for the admin dashboard and public website · Firebase Cloud Messaging for push · a Bangladesh SMS gateway for OTP · a map tile provider (selected in Slice 0 — CL-035; **OpenStreetMap's public tiles are development-only**) · Cloudflare at the edge. **$0 through development; ≈ $72–82/month + SMS from the first real user** (≈ $52 + map tiles, or ≈ $52 if Google's free mobile SDK is chosen).
 
 ## Entry points
 

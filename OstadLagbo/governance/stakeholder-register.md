@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: stakeholder-register
 status: current
-updated: 2026-09-14
+updated: 2026-09-26
 id: OL-STK-001
 owner: Iftikher
 ---
@@ -20,7 +20,7 @@ The founder currently holds every internal role. This register maps the stakehol
 | S-05 | Admin reviewers (initially the founder) | Verify identity, approve profiles, moderate content, handle appeals | Medium | Medium | Workflow fully specified (ADM-01…22) and modeled; audit-logged so the role is transferable |
 | S-06 | Future team / contractors | Design, engineering, operations help when engaged | Medium | Medium | Documentation kept hire-ready; clear specs before delegation |
 | S-07 | Regulators / legal context | NID and identity-data handling under the Personal Data Protection Act, 2026 | High (compliance) | Low (passive) | Retention, privacy, ToS, and incident-response documents drafted; Bangladesh-qualified legal review before launch, including the data-residency ruling on Singapore-hosted identity documents (ADR-001 open item 1) |
-| S-08 | External providers | Critical dependencies fixed by ADR-001: **Supabase** (data services), **Render** (API), **Vercel** (web), **Firebase Cloud Messaging** (push), **Cloudflare** (edge), a **Bangladesh SMS gateway** (OTP — to be selected in Slice 0), OpenStreetMap tiles | Medium | Low | Free tiers through development; paid tiers from Slice 1; cost monitored via ADM-19 and provider billing alerts; portability preserved (standard PostgreSQL, portable API) |
+| S-08 | External providers | Critical dependencies fixed by ADR-001: **Supabase** (data services), **Render** (API), **Vercel** (web), **Firebase Cloud Messaging** (push), **Cloudflare** (edge), a **Bangladesh SMS gateway** (OTP — to be selected in Slice 0), a **map tile provider** (also selected in Slice 0 — CL-035; OSM's public tiles are development-only) | Medium | Low | Free tiers through development; paid tiers from Slice 1; cost monitored via ADM-19 and provider billing alerts; portability preserved (standard PostgreSQL, portable API) |
 | S-09 | Investors / partners (potential) | May fund or accelerate post-MVP | Low now | Low now | Charter and metrics kept pitch-ready; revisited post-MVP |
 | S-10 | The AI development agent | Builds the platform from this knowledge base | High (delivery) | — | Held to the knowledge base as its specification; conventional stack chosen for its output quality (ADR-001); generated code reviewed at every slice gate (risk R-11) |
 

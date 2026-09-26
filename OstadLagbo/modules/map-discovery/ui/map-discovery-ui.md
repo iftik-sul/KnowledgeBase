@@ -3,7 +3,7 @@ project: OstadLagbo
 module: map-discovery
 type: ui
 status: current
-updated: 2026-09-25
+updated: 2026-09-26
 id: OL-MAP-UI-001
 derived_from: /OstadLagbo/modules/map-discovery/requirements/map-discovery-requirements.md
 owner: Iftikher
@@ -21,7 +21,7 @@ Screens for the discovery map, search and filters, favourites, share links, and 
 - **Purpose:** browse nearby Ostads as pins; the home surface for guests and Shagreds.
 - **Shell(s):** guest, Shagred (home tab).
 - **Entry:** app open (guest lands here after language choice; Shagred's Map tab); a "view on map" from a profile's pin.
-- **Structure:** a full-screen map — **pins only, no list view** (MAP-02) — over Bangladesh, free pan and zoom; a **search bar**; a **filter control** (category, gender) and a **radius slider**; a **recenter-to-me** button when GPS is available; and, in the guest shell, **Log in / Create account** and the **Terms / Privacy** links in the chrome (MAP-03, REG-13).
+- **Structure:** a full-screen map — **pins only, no list view** (MAP-02) — over Bangladesh, free pan and zoom; a **search bar**; a **filter control** (category, gender) and a **radius slider**; a **recenter-to-me** button when GPS is available; and, in the guest shell, **Log in / Create account** and the **Terms / Privacy** links in the chrome (MAP-03, REG-13). **Map attribution** — `© OpenStreetMap contributors` plus the tile provider's required credit — sits permanently on the map surface and is never covered by the preview card, filter sheet, or empty state (MAP-02, CL-035).
 - **Centring:** opens on the user's live GPS position when permitted, else a default city centre (Dhaka). GPS is used **only on-device**; it is never transmitted.
 - **Pins & clustering:** each approved, non-suspended, **non-paused** Ostad is a pin at exact coordinates; at low zoom or above the viewport cap the map shows **cluster counts** that expand on zoom (MAP-09, also the anti-scraping guard) — no individual pins are enumerated beyond the cap.
 - **Preview card (component):** tapping a pin opens the card — photo, display name, verified badge, headline, rating average + review count (or **"New"**), and **distance from the map centre** (computed on-device). The card carries quick **Favourite** and **Share** actions (MAP-08/07; a guest tapping favourite routes to registration). Tapping the card opens the full public profile (OSP ui).

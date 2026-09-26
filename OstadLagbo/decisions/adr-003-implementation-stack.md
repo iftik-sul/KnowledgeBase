@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: decision
 status: current
-updated: 2026-09-25
+updated: 2026-09-26
 id: OL-DEC-003
 supersedes: none
 owner: Iftikher
@@ -48,6 +48,12 @@ athena/
 - NestJS is heavier than a micro-framework, but its structure is the point: the policy layer, guards, and module boundaries map directly onto the API Overview, and the shape stays navigable at MVP size and beyond.
 - All free-tier through development (ADR-001); paid tiers switch on at Slice 1.
 - **Still open (unchanged by this record):** the SMS/OTP gateway is not yet selected — OTP delivery uses a development stub (logged codes) until it is, a Slice 0 open item; and ADR-001's PDPA data-residency ruling must close before Slice 1 captures a real identity document.
+
+## Amendments
+
+The decision body above is preserved as accepted. Later records revised parts of the context it cites (an accepted ADR is immutable, so this is recorded here rather than edited above):
+
+- **Map tiles (2026-09-26, CL-035).** The Context section describes ADR-001 as having fixed "OSM tiles" among the hosting and services. That remains an accurate account of what ADR-001 said, but the decision itself has since been amended: OpenStreetMap's public tiles are **development-only**, the shipping basemap must be **raster** (MapLibre cannot shape Bengali), and the provider is selected at a Slice 0 bake-off. Nothing in this ADR's own decision — the languages, frameworks, or codebase layout — is affected, except that the Flutter map package is no longer settled: `flutter_map` holds unless the bake-off selects Google's mobile SDK, which replaces it.
 
 ## Alternatives considered
 
