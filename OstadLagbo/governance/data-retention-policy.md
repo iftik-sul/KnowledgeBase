@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: retention-policy
 status: current
-updated: 2026-09-24
+updated: 2026-09-26
 id: OL-RET-001
 approved: 2026-08-30
 owner: Iftikher
@@ -58,7 +58,9 @@ When an account is **terminated by admin** (CL-019) for fraud, safety violations
 
 ## Legal hold
 
-An active report alleging serious harm, a law-enforcement request, litigation, or an insurance-relevant incident suspends purging of the specifically relevant data until the matter resolves, after which the schedule resumes. A report filed against a deleted account within the 12-month ID-number window triggers a hold on that identity data. Legal holds are recorded and audit-logged.
+An active report alleging serious harm, a law-enforcement request, litigation, or an insurance-relevant incident suspends purging of the specifically relevant data until the matter resolves, after which the schedule resumes. A report filed against a deleted account within the 12-month ID-number window triggers a hold on that identity data. Legal holds are recorded and audit-logged (`legal_hold_set` / `legal_hold_released`).
+
+**How a hold is placed (CL-041).** An admin sets or releases it from the account detail or retention view (ADM-18), with a written reason; the flag is `user_account.legal_hold`, and every module's retention section already honours it. The tooling ships in **Slice 4** with the rest of ADM-18's automated retention; before then a hold is applied by direct database update, the same interim pattern as manual purge (CL-034). **A separate, automatic protection also applies: an open appeal ticket pauses the purge of the account it contests** — see REG-DM's purgeable predicate.
 
 ## No financial retention
 

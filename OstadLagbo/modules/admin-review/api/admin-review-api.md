@@ -3,7 +3,7 @@ project: OstadLagbo
 module: admin-review
 type: api
 status: current
-updated: 2026-09-25
+updated: 2026-09-26
 id: OL-ADM-API-001
 derived_from: /OstadLagbo/modules/admin-review/requirements/admin-review-requirements.md
 owner: Iftikher
@@ -99,6 +99,8 @@ Charts read the **rollup tables** (ADR-002), never raw events — every response
 |---|---|---|
 | `GET /v1/admin/audit` | `?actor=&action_type=&target=&from=&to=&limit=&cursor=` | The append-only audit log viewer (ADM-17): actor, action, target, timestamp, metadata. **Read-only — no write, edit, or delete endpoint exists for the audit log**, by design (append-only at storage, NFR-05) |
 | `GET /v1/admin/retention` | — | Identity-document storage status per account; purge-due items; **the pending-abandonment list** — revisions and onboarding drafts due for 90-day discard (REG-DM/OSP-DM), so nothing is auto-discarded unseen |
+| `POST /v1/admin/accounts/{account_id}/legal-hold` | `internal_reason` (required) | `204` — sets `user_account.legal_hold = true`, suspending every purge touching the account (REG-DM, CL-041); audits `legal_hold_set`. Idempotent — holding a held account succeeds and re-audits | `state_conflict` (purged — nothing left to hold) |
+| `DELETE /v1/admin/accounts/{account_id}/legal-hold` | `internal_reason` (required) | `204` — clears the flag; audits `legal_hold_released`. Purges due while the hold stood run at the next sweep | `state_conflict` (no hold in place) |
 | `POST /v1/admin/retention/purge/{account_id}` | — | Executes a scheduled purge early where policy allows; audits `retention_purge`. Routine purges run on schedule (pg_cron); this is the manual control |
 
 ## I. Support

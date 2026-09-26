@@ -3,7 +3,7 @@ project: OstadLagbo
 module: support
 type: data-model
 status: current
-updated: 2026-09-24
+updated: 2026-09-26
 id: OL-SUP-DM-001
 derived_from: /OstadLagbo/modules/support/requirements/support-requirements.md
 owner: Iftikher
@@ -25,7 +25,7 @@ Entities owned: `support_ticket`, `ticket_message`. Conventions per [Data Model 
 | status | enum: `open` \| `resolved` | |
 | resolved_at | timestamp, nullable | Set on resolve; the reopen window is computed from it, not stored |
 | reopened_count | int, default 0 | Incremented on each reopen; informational for ADM-15's reopen rate |
-| related_moderation_action_id | uuid, nullable → moderation_action | **Required for an `appeal` created from the suspension-notice screen** — the active `suspend` action being contested (ADM-DM). Nullable otherwise: an appeal of a warning may reference the `warn` action; an appeal of a **content removal carries no link**, because removals are not `moderation_action` rows (they live on the rating/reply row and the audit log) — the user describes it in text |
+| related_moderation_action_id | uuid, nullable → moderation_action | **Required for an `appeal` created from the suspension-notice screen** — the **latest active `suspend` *or* `terminate` action** being contested (ADM-DM, CL-041). It must be the `terminate` row where the account has been terminated: a termination is a different decision from the suspension that preceded it, and the two are separately appealable. Linking both to the `suspend` row would let the one-open-appeal index refuse a termination appeal from anyone who had already appealed their suspension — leaving a banned user with no appeal at all, against the Terms' §7 promise. Nullable otherwise: an appeal of a warning may reference the `warn` action; an appeal of a **content removal carries no link**, because removals are not `moderation_action` rows (they live on the rating/reply row and the audit log) — the user describes it in text |
 | last_activity_at | timestamp | Updated on every message insert and status change; drives inactivity auto-resolution and the owner's list ordering |
 | created_at / updated_at | timestamps | |
 

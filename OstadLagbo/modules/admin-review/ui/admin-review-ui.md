@@ -3,7 +3,7 @@ project: OstadLagbo
 module: admin-review
 type: ui
 status: current
-updated: 2026-09-25
+updated: 2026-09-26
 id: OL-ADM-UI-001
 derived_from: /OstadLagbo/modules/admin-review/requirements/admin-review-requirements.md
 owner: Iftikher
@@ -67,7 +67,7 @@ Five boards, each full charts and time-series with **7 / 30 / 90-day** ranges, r
 
 ## H — Operations & compliance (ADM-17…19)
 - **Audit log (ADM-17):** a searchable, filterable viewer (actor, action type, target, date range) over the **append-only** log — **read-only; no edit or delete endpoint exists**. `GET /v1/admin/audit`.
-- **Retention tools (ADM-18):** identity-document storage status per account; the **pending-abandonment list** (revisions/onboarding drafts due for 90-day discard); execute a scheduled purge early where policy allows (audit-logged). `GET /v1/admin/retention`, `POST …/retention/purge/{account_id}`.
+- **Retention tools (ADM-18):** identity-document storage status per account; the **pending-abandonment list** (revisions/onboarding drafts due for 90-day discard); execute a scheduled purge early where policy allows (audit-logged); and **legal hold — place / release** (CL-041), each requiring a written reason and audit-logged, with held accounts badged **On legal hold** here and on the account detail so a stalled purge is never a mystery. `GET /v1/admin/retention`, `POST …/retention/purge/{account_id}`, `POST|DELETE /v1/admin/accounts/{account_id}/legal-hold`.
 - **SMS/OTP monitor (ADM-19):** OTP volume by day, per-number rate-limit hits, estimated spend — read-only (folded into the operations analytics feed).
 
 ## I — Settings (ADM-21, read-only)

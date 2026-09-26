@@ -102,6 +102,12 @@ Every admin action — verdicts, identity marks, warns, suspensions, reinstateme
 ### ADM-18 Identity-data retention tools
 Dashboard tooling to execute the retention policy: view identity-document storage status per account, and purge identity documents of deleted and terminated accounts per policy schedule. Purges are themselves audit-logged. (Makes R-02's "retention and deletion policy" operational.)
 
+**Legal hold — set and release (CL-041).** An admin can place a **legal hold** on an account and release it again, from the account detail (ADM-10) and the retention view. A hold sets `user_account.legal_hold`, which suspends **every** purge touching that account — its profile, identity documents, chats, offers, reports and tickets (each module's retention section already honours the flag). Both actions require a written reason and are audit-logged as `legal_hold_set` / `legal_hold_released`.
+
+This closes the gap that made the flag inert: `legal_hold` existed in the schema and the retention policy, and **incident-response Playbook 1 step 3 and Playbook 3 step 2 both instruct the responder to place one before anything can expire** — with no control anywhere to do it. A held account is visibly marked as held wherever it is listed, so no one wonders why a purge is not running.
+
+**Acceptance:** a held account survives every purge sweep until released; setting and releasing both appear in the audit log with their reason; the hold is visible on the account detail without opening the retention view.
+
 ### ADM-19 SMS/OTP monitor
 Usage view: OTP volume by day, per-number rate-limit hits, estimated spend — costed at the **Alpha SMS** rate in force (৳0.40 non-masked / ৳0.64 masked at selection; CL-036) and shown in BDT, the currency the credit is bought in. Read-only; limits themselves are engineering config. (Risk R-08.)
 

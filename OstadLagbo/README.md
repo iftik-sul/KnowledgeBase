@@ -20,6 +20,8 @@ updated: 2026-09-26
 - [Project Standards](/OstadLagbo/project-standards.md) — module definition, derivation chain, vocabulary. Read before creating any document.
 - [Glossary](/OstadLagbo/glossary.md) — canonical term definitions for the whole project.
 - [MVP Scope Baseline v1.2](/OstadLagbo/reference/baseline/mvp-scope-v1.2.md) — the approved, change-controlled definition of MVP scope, now **frozen** for the build. It reads standalone: CL-009…021 are consolidated into it, so scope questions are answered here directly. (v1.1 is retained as superseded.)
+- [Analytics Event Catalog](/OstadLagbo/reference/catalogs/analytics-event-catalog.md) — every client and server event, and what `POST /v1/events` validates against.
+- [Notification Catalog](/OstadLagbo/reference/catalogs/notification-catalog.md) — every push, its in-app counterpart, and the silences that are deliberate.
 - [Launch Area & Success Metrics](/OstadLagbo/governance/launch-metrics.md) — the launch area (Dhanmondi) and the soft-launch targets the Slice 5 gate reads.
 - [Skill Categories v1.0](/OstadLagbo/reference/baseline/skill-categories-v1.0.md) — the approved bilingual seed taxonomy (51 categories), launch-focus categories, and the fuzzy-matching test set.
 - [Non-Functional Requirements](/OstadLagbo/non-functional-requirements.md) — performance, security, device floor, and quality targets every module inherits.

@@ -3,7 +3,7 @@ project: OstadLagbo
 module: admin-review
 type: data-model
 status: current
-updated: 2026-09-24
+updated: 2026-09-26
 id: OL-ADM-DM-001
 derived_from: /OstadLagbo/modules/admin-review/requirements/admin-review-requirements.md
 owner: Iftikher
@@ -129,7 +129,7 @@ Append-only at the storage level (NFR-05) — no update or delete path exists in
 |---|---|---|
 | id | uuid | |
 | actor_admin_id | uuid → admin_account | |
-| action_type | enum | Every ADM-17 category: `verdict`, `identity_mark`, `warn`, `suspend`, `reinstate`, `terminate`, `category_change`, `report_resolution`, `content_removal`, `support_reply`, `support_resolution`, `broadcast_sent`, `identity_document_viewed`, `chat_context_viewed`, `retention_purge` |
+| action_type | enum | Every ADM-17 category: `verdict`, `identity_mark`, `warn`, `suspend`, `reinstate`, `terminate`, `category_change`, `report_resolution`, `content_removal`, `support_reply`, `support_resolution`, `broadcast_sent`, `identity_document_viewed`, `chat_context_viewed`, `retention_purge`, `legal_hold_set`, `legal_hold_released` (CL-041) |
 | target_type / target_id | string / uuid | Polymorphic reference to the affected entity |
 | metadata | json | Whatever makes the action reconstructable — the verdict and note, the identity mark value, the category diff, the purge scope |
 | created_at | timestamp | The only timestamp; no updated_at, by design |

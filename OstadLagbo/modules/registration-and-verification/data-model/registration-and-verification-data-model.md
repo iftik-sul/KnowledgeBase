@@ -40,10 +40,20 @@ The identity spine. One row per person; role-specific profiles hang off it one-t
 
 ```
 active ──(self-service deletion, REG-12)──► pending_deletion ──(login within 30d)──► active
-                                                    └──(day 30, no legal_hold)──► purged
+                                                    └──(day 30, purgeable)──► purged
 active ◄──(suspend / reinstate, ADM-08)──► suspended
-suspended ──(terminate, CL-019: sets banned_at, deleted_at, purge_at)──► suspended [30-day appeal window] ──(day 30)──► purged
+suspended ──(terminate, CL-019: sets banned_at, deleted_at, purge_at)──► suspended [30-day appeal window] ──(day 30, purgeable)──► purged
 ```
+
+**Purgeable (CL-041)** — the purge sweep acts on an account only when **all three** hold:
+
+```
+purge_at <= now
+AND legal_hold IS false
+AND NOT EXISTS (an open appeal ticket owned by this account)      (CL-041)
+```
+
+**An open appeal pauses the purge.** Without the third clause the day-30 sweep destroys a live appeal and the account it contests: a user terminated on day 0 who appeals on day 28 loses both the appeal and any route back if an admin has not resolved it by day 30 — the Terms promise an appeal (§7) that the clock could silently cancel. When an appeal resolves **against** the user, `purge_at` is reset to `max(purge_at, resolved_at + 7 days)`, so they receive the outcome and the evidence survives a few days past it rather than vanishing in the same sweep. A **successful** appeal is `reinstate`, which clears `purge_at` entirely.
 
 Termination does not change `status` — the account remains `suspended` (so rule 7's appeal path stays open and nothing else does) while `purge_at` runs. A successful appeal is `reinstate`, which clears `banned_at`, `deleted_at`, and `purge_at`. A suspended account **cannot** self-delete (settings are unreachable; SUP-DM's exception permits only appeals) — termination is the only route from `suspended` to `purged`. A `pending_deletion` account holds **no session** (the deletion request revoked them all); the only way back in is a login, which recovers it.
 

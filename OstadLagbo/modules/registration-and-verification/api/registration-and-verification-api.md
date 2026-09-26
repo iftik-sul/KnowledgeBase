@@ -3,7 +3,7 @@ project: OstadLagbo
 module: registration-and-verification
 type: api
 status: current
-updated: 2026-09-25
+updated: 2026-09-26
 id: OL-REG-API-001
 derived_from: /OstadLagbo/modules/registration-and-verification/requirements/registration-and-verification-requirements.md
 owner: Iftikher
@@ -102,7 +102,7 @@ An upload ticket is consumed exactly once by the endpoint that references its `u
 
 | Endpoint | Caller & policy check | Request | Response | Errors |
 |---|---|---|---|---|
-| `POST /v1/events` | Any session or **guest** (a pseudonymous `session_id`; no auth required — client analytics must work before login, NFR-06); rate-limited per IP and per account | `{ events: [ { name, ts, session_id, props } ] }` — a batch of **client-side events only** (map sessions, searches, zero-result searches, share taps, screen views; API Overview → analytics). The API validates each against the **event catalog**, **strips any disallowed property** and coarsens area to thana/grid (never phone, name, or precise coordinates — NFR-06, MAP-DM), then writes accepted events to the analytics store (ADR-002) | `204` — the batch is accepted; an individually invalid event is dropped, not failed, so one bad event never loses the batch | `validation_failed` (malformed envelope); `rate_limited` |
+| `POST /v1/events` | Any session or **guest** (a pseudonymous `session_id`; no auth required — client analytics must work before login, NFR-06); rate-limited per IP and per account | `{ events: [ { name, ts, session_id, props } ] }` — a batch of **client-side events only** (map sessions, searches, zero-result searches, share taps, screen views; API Overview → analytics). The API validates each against the **[event catalog](/OstadLagbo/reference/catalogs/analytics-event-catalog.md)** (OL-CAT-EVT-001 — an event absent from it is dropped), **strips any disallowed property** and coarsens area to thana/grid (never phone, name, or precise coordinates — NFR-06, MAP-DM), then writes accepted events to the analytics store (ADR-002) | `204` — the batch is accepted; an individually invalid event is dropped, not failed, so one bad event never loses the batch | `validation_failed` (malformed envelope); `rate_limited` |
 | `GET /v1/health` | Anyone, unauthenticated | — | `{ status: "ok" }` — for uptime monitoring (NFR-09); no auth, no body | — |
 
 **Server-side events are never posted here.** Ostad profile views (OSP), offer/connection/message/phone-reveal events (OFR), rating/report/block events (RNT), verdicts and moderation (ADM), and ticket events (SUP) are written by the API itself at the moment of the action — `POST /v1/events` carries only what the client observes (API Overview → analytics events). Both streams land in the same ADR-002 store and feed ADM-12…15.
