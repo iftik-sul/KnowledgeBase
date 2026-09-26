@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: glossary
 status: current
-updated: 2026-09-24
+updated: 2026-09-26
 id: OL-GLS-001
 owner: Iftikher
 ---
@@ -57,7 +57,7 @@ Canonical definitions for terms used throughout the OstadLagbo knowledge base. I
 | **Policy layer** | The single centralized module, in the Render API, that enforces every relationship- and state-based access rule (who may see a Shagred profile, read a chat, receive an offer). Row-level security in the database mirrors it as a second line of defense (ADR-001). |
 | **Predicate** | An access or state rule evaluated at query time against live data (discoverability, visibility, thread writability, revision review state), never stored as a flag that can go stale (Data Model Overview convention). |
 | **Opacity rule** | An API refusal caused only by a block returns `not_found`, indistinguishable from nonexistence, so a block is never revealed to the blocked party (OL-API-001). |
-| **ADR** | Architecture Decision Record (`decisions/`): an immutable record of a technical decision, its alternatives, and its consequences; changed only by a superseding ADR. ADR-001 fixes the platform stack; ADR-002 the analytics store; ADR-003 the implementation stack and the spec/code repository split; ADR-004 the authentication authority and token model. |
+| **ADR** | Architecture Decision Record (`decisions/`): an immutable record of a technical decision, its alternatives, and its consequences; changed only by a superseding ADR. ADR-001 fixes the platform stack; ADR-002 the analytics store; ADR-003 the implementation stack and the spec/code repository split; ADR-004 the authentication authority and token model; ADR-005 the token signing key. |
 | **Three-tier** | ADR-001's architecture: Supabase for data services, Render for the API and policy layer, Vercel for the admin dashboard and public website. |
 | **Upload ticket** | A short-lived signed URL the API issues for one file of one declared purpose; media never passes through the API body (OL-API-001). |
 

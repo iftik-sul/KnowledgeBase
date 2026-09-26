@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: incident-response
 status: current
-updated: 2026-09-14
+updated: 2026-09-26
 id: OL-INC-001
 approved: 2026-08-30
 owner: Iftikher
@@ -35,7 +35,7 @@ When unsure between levels, treat it as the higher one.
 
 *Evidence or credible suspicion that identity documents, chats, phone numbers, or other personal data were accessed or exposed improperly — including a lost admin credential.*
 
-1. **Contain first:** revoke/rotate the compromised credential or access path; take the affected system offline if exposure is ongoing. Containment beats investigation in hour one. Under ADR-001/ADR-004 this means: rotate Supabase and Render credentials **including the Supabase JWT signing secret** (the API's token-signing key under ADR-004 — its compromise forges any user session; rotating it invalidates live access tokens, and `auth_session` still governs refresh), revoke the compromised admin's TOTP and sessions (ADM-DM), and check Cloudflare and Render logs for the access window.
+1. **Contain first:** revoke/rotate the compromised credential or access path; take the affected system offline if exposure is ongoing. Containment beats investigation in hour one. Under ADR-001/ADR-004 this means: rotate Supabase and Render credentials **including the API's JWT signing key** (ADR-005 — its compromise forges any user session). Rotation is a **standby → current** promotion in Settings → JWT Keys, so it does **not** sign users out; `auth_session` still governs refresh. Rotate the **publishable/secret API keys** too, and treat any leaked *shared* secret as permanently compromised — it can impersonate users indefinitely, revoke the compromised admin's TOTP and sessions (ADM-DM), and check Cloudflare and Render logs for the access window.
 2. **Assess scope:** what data categories, how many users, over what window — using the audit log (ADM-17) and infrastructure logs. Write the assessment down as you go.
 3. **Notify:** the PDPA requires notifying affected users and the relevant authority. Notify **users** plainly: what was exposed, when, what we did, what they should do (e.g., beware of scam calls if phone numbers leaked). Notify the **authority** per the Act's procedure. Statutory deadlines apply — confirm the current notification window with legal counsel *now, before any incident*, and record it here. Do not delay notification to make the message more comfortable.
 4. **Remediate:** fix the vulnerability; document root cause; add the fix to the risk register review.

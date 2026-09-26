@@ -2,9 +2,10 @@
 project: OstadLagbo
 type: decision
 status: current
-updated: 2026-09-25
+updated: 2026-09-26
 id: OL-DEC-004
 supersedes: none
+superseded_by: adr-005 (the signing-key clause only)
 owner: Iftikher
 decision_status: accepted
 accepted: 2026-09-25
@@ -79,6 +80,12 @@ their signature — it does not need to have minted them.
   accepts: a short-lived access token stays valid until it expires; RLS's
   status check and refresh revocation close the window. Access-token lifetime is
   kept short (engineering default) to bound it.
+
+## Amendments
+
+The decision body above is preserved as accepted on 2026-09-25.
+
+- **Signing key (2026-09-26, ADR-005).** The Decision bullet "The API mints the tokens, signing them with the **project's Supabase JWT secret** (HS256)" is **superseded**, and so is the Consequences note that "the Supabase JWT secret is now a signing secret held only by the API". Supabase deprecated the legacy shared JWT secret, and projects created after 1 October 2025 — which includes ours, created in Slice 0 — are issued asymmetric signing keys instead. The API now signs with an **ES256 key it generates and imports** into the project's JWT Signing Keys, adds a `kid` header, and treats `sub` / `role` / `exp` as the claim contract. **Everything else in this ADR stands**: the API remains the authentication authority, it still owns `password_hash`, `auth_session` is still the refresh/revocation source of truth, and no `auth.users` row is created. See ADR-005.
 
 ## Alternatives considered
 

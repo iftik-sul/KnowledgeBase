@@ -2,7 +2,7 @@
 project: OstadLagbo
 type: api
 status: current
-updated: 2026-09-25
+updated: 2026-09-26
 id: OL-API-001
 derived_from: /OstadLagbo/decisions/adr-001-platform-architecture.md
 owner: Iftikher
@@ -25,7 +25,7 @@ The rulebook for the api layer: how the mobile app and the admin dashboard talk 
 
 There are **two token families, and they never cross.**
 
-**User tokens** are Supabase-valid JWTs **minted by the API** (HS256, signed with the project's Supabase JWT secret), obtained only through the API's auth endpoints. The API is the **authentication authority**: it owns the password (`user_account.password_hash`, hashed at `register/start`) and signs the tokens — **no Supabase Auth user (`auth.users`) is created** (ADR-004). Each access token carries `sub = user_account.id`, `role` and `aud` of `"authenticated"`, and a short expiry. They are accepted by the API and, because the signature verifies against the same secret, by Supabase Realtime and Storage on the direct channels. `Authorization: Bearer <token>`; **no header = guest.**
+**User tokens** are Supabase-valid JWTs **minted by the API** (ES256, signed with a JWT signing key we generate and import into the Supabase project — ADR-005; the legacy shared JWT secret ADR-004 originally named is deprecated and not issued to projects created after 1 October 2025), obtained only through the API's auth endpoints. The API is the **authentication authority**: it owns the password (`user_account.password_hash`, hashed at `register/start`) and signs the tokens — **no Supabase Auth user (`auth.users`) is created** (ADR-004). Each access token carries a **`kid` header** naming the signing key, and the claims `sub = user_account.id` (a UUID — `auth.uid()` casts it), `role = "authenticated"` (a real Postgres role; application roles live in `app_metadata`, never here), `aud = "authenticated"`, and a short expiry. They are accepted by the API and, because Supabase holds the public half of the signing key, by Supabase Realtime and Storage on the direct channels. The separate `apikey` header carries a **publishable key**, never a minted token (ADR-005). `Authorization: Bearer <token>`; **no header = guest.**
 
 **Admin tokens** are issued by the **API itself** after email + password + TOTP verification against `admin_account` (ADM-DM, ADM-20, CL-018). Admins are **not** Supabase Auth users. Admin tokens are signed by the API with a separate key and audience, accepted only by `/v1/admin/*` endpoints, and never by Supabase. A user token presented to an admin endpoint — or an admin token to a user endpoint — is `unauthorized`. The 24-hour inactivity expiry is enforced against `admin_session` (ADM-DM).
 
