@@ -3,7 +3,7 @@ project: OstadLagbo
 module: admin-review
 type: requirements
 status: current
-updated: 2026-09-13
+updated: 2026-09-26
 id: OL-ADM-REQ-001
 derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.2.md
 owner: Iftikher
@@ -103,7 +103,7 @@ Every admin action — verdicts, identity marks, warns, suspensions, reinstateme
 Dashboard tooling to execute the retention policy: view identity-document storage status per account, and purge identity documents of deleted and terminated accounts per policy schedule. Purges are themselves audit-logged. (Makes R-02's "retention and deletion policy" operational.)
 
 ### ADM-19 SMS/OTP monitor
-Usage view: OTP volume by day, per-number rate-limit hits, estimated spend. Read-only; limits themselves are engineering config. (Risk R-08.)
+Usage view: OTP volume by day, per-number rate-limit hits, estimated spend — costed at the **Alpha SMS** rate in force (৳0.40 non-masked / ৳0.64 masked at selection; CL-036) and shown in BDT, the currency the credit is bought in. Read-only; limits themselves are engineering config. (Risk R-08.)
 
 ### ADM-20 Admin accounts and access
 Admin accounts are provisioned manually (no registration path), authenticate with email + password **plus a TOTP second factor** (CL-018; NFR-05) under REG-05 lockout rules. All admins currently hold full permission; role tiers are post-MVP. Admin sessions expire after 24 hours of inactivity.

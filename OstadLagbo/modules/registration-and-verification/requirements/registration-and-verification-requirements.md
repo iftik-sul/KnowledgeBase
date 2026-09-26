@@ -3,7 +3,7 @@ project: OstadLagbo
 module: registration-and-verification
 type: requirements
 status: current
-updated: 2026-09-14
+updated: 2026-09-26
 id: OL-REG-REQ-001
 derived_from: /OstadLagbo/reference/baseline/mvp-scope-v1.2.md
 owner: Iftikher
@@ -27,7 +27,11 @@ A visitor registering must choose exactly one role: Ostad or Shagred. The role i
 
 Registration requires a Bangladeshi mobile number, verified by OTP before the account is created. Proposed defaults: 6-digit OTP, 5-minute expiry, resend allowed after 60 seconds, maximum 5 OTP requests per number per 24 hours, maximum 5 wrong attempts per OTP before it is invalidated. One account per phone number per role is not enforced — one account per phone number, full stop. A registration attempt with a phone number belonging to an account inside its 30-day deletion window is routed to **account recovery** (log in to restore) rather than refused or duplicated (CL-015).
 
-**Acceptance:** unverified numbers never produce accounts; rate limits verifiably block the 6th request in 24h; a phone number in use cannot register a second account; a deletion-window number routes to recovery, never to a new account.
+**Message content is regulated, not free-form (CL-036).** BTRC has required since **7 March 2022** that bulk SMS templates be written **in Bangla**; digits, the OTP code itself, and URLs may remain in English, but the wrapping text must be Bengali. The OTP template is therefore authored in Bangla for **both** locales — this is a legal constraint on the SMS channel, not a user language preference, and it does not follow `preferred_locale` (REG-14). OTP must also be sent down the transactional route, never a promotional one: misclassification is a leading cause of route suspension in Bangladesh.
+
+**Sender identity.** The platform launches on a **non-masked** (numeric) sender and moves to the masked sender ID `OstadLagbo` once BTRC masking is approved — masking requires a trade licence, BIN/TIN, and a letterhead application, and takes 3–7 business days (open procurement item, ADR-001).
+
+**Acceptance:** unverified numbers never produce accounts; rate limits verifiably block the 6th request in 24h; a phone number in use cannot register a second account; a deletion-window number routes to recovery, never to a new account; the OTP template renders in Bangla regardless of the account's locale.
 
 ## REG-03 Password and date-of-birth gate
 

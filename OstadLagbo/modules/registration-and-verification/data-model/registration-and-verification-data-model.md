@@ -3,7 +3,7 @@ project: OstadLagbo
 module: registration-and-verification
 type: data-model
 status: current
-updated: 2026-09-24
+updated: 2026-09-26
 id: OL-REG-DM-001
 derived_from: /OstadLagbo/modules/registration-and-verification/requirements/registration-and-verification-requirements.md
 owner: Iftikher
@@ -70,10 +70,16 @@ On successful verify, the row is consumed: its values create `user_account` and 
 
 | Field | Type | Rules |
 |---|---|---|
-| id / phone / purpose | uuid / string / enum: `signup` \| `password_reset` \| `phone_change` | |
+| id | uuid | PK |
+| account_id | uuid → user_account, nullable | **Null only for `signup`**, where no account exists yet; set for every other purpose, all of which act on a live account (CL-036) |
+| purpose | enum: `signup` \| `password_reset` \| `phone_change` \| `email_verify` | `email_verify` added CL-036 — REG-04's verification code previously had **no storage defined anywhere** |
+| phone | string, nullable | The destination for every purpose except `email_verify`. For `phone_change` this is the **new** number being proved, never the account's current one |
+| email | string, nullable | The destination for `email_verify` only (REG-04) |
 | code_hash | string | Never the code itself |
 | expires_at / attempts / consumed_at | timestamp / int / timestamp | 5-min expiry, 5 attempts, single consumption (REG-02 defaults) |
 | created_at | timestamp | Rate limits computed over this (5/number/24h) |
+
+**Constraint:** exactly one of `phone` / `email` is non-null, and it must match `purpose` — `email_verify` carries an email, every other purpose carries a phone. Rate limits (5 per destination per 24 h) are computed per destination, so email and phone limits do not share a budget.
 
 Retention: rows purge at 90 days (OL-RET-001).
 
