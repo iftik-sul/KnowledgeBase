@@ -103,9 +103,9 @@ thread is writable  iff
 |---|---|---|
 | id | uuid | |
 | thread_id | uuid → chat_thread | |
-| kind | enum: `text` \| `voice` \| `system` | `system` only for markers the platform inserts (freeze/unfreeze notices); the offer's first message is `text` |
-| sender_account_id | uuid, nullable → user_account | **Required for `text` and `voice`, and constrained to the thread's two participants at the database level**; **null for `system`** |
-| body | text, nullable | Required for `text` and `system`; null for `voice` |
+| kind | enum: `text` \| `voice` | The offer's first message is `text`. **There is no `system` kind** — a freeze is conveyed by the thread's frozen state and a neutral client banner, never by a stored message (CL-030) |
+| sender_account_id | uuid → user_account | **Required, and constrained to the thread's two participants at the database level** |
+| body | text, nullable | Required for `text`; null for `voice` |
 | voice_ref | storage ref, nullable | Required for `voice`; null otherwise. Compressed, ≤2 min (OFR-05 default; NFR-04 budget) |
 | voice_duration_seconds | int, nullable | ≤120 enforced by constraint |
 | sent_at | timestamp | |
