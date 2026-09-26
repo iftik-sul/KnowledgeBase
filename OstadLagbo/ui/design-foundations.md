@@ -34,8 +34,12 @@ Bound in Figma as the `Athena` variable collection; use the same tokens in the F
 | `base/border` | `#E2E8E5` | Hairlines, field borders |
 | `feedback/danger` | `#C8302A` | Errors, destructive (Log out) |
 | `feedback/success` | `#1FA36B` | Success states |
+| `feedback/danger-tint` | `#FDECEA` | Error banner background only |
+| `feedback/warning-tint` | `#FEF6E6` | Warning banner background only |
 
-Tints used for banners (backgrounds only): error `#FDECEA`, warning `#FEF6E6`.
+Banner backgrounds use the two tint tokens above (`feedback/danger-tint`, `feedback/warning-tint`) — backgrounds only, never text.
+
+**All page-4 fills are bound to the `Athena` variable collection (no raw hex); the Flutter theme uses the same token names.**
 
 ## Typography
 
