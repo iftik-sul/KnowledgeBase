@@ -12,7 +12,9 @@ owner: Iftikher
 
 Every analytics event the platform emits, in one place. The events themselves were already specified — scattered across MAP-11, OFR-08, RNT-10, OSP-12 and the ADM-12…15 requirements they feed. This collects them so the build has a single checklist and `POST /v1/events`' validator has something to validate *against* (the REG api requires the API to check each client event "against the **event catalog**" — this is that catalog).
 
-**Naming convention:** `subject.verb_past`, lower snake case. Names are stable contracts — an event may gain properties, never be renamed, because a rename silently breaks every historical series.
+**Naming convention:** flat `lower_snake_case`, matching what is already shipped in `packages/shared/src/events.ts` in the code repository. Names are stable contracts — an event may gain properties, **never be renamed**, because a rename silently breaks every historical series.
+
+> **Reconciled 2026-09-26 (CL-048).** The first draft of this catalog proposed a `subject.verb_past` convention and a different name set, written without reading the code. Six client events were **already shipped**; by this catalog's own no-rename rule those names win. They are marked **shipped** below and must not change. The additions carry MAP-11's remaining instrumentation obligations in the same convention.
 
 **Two streams, one store.** Client events are posted in batches to `POST /v1/events`; server events are written by the API at the moment of the action and are **never** accepted from a client. Both land in the ADR-002 analytics store.
 
@@ -22,65 +24,68 @@ Every analytics event the platform emits, in one place. The events themselves we
 
 Accepted from any session **or a guest** (pseudonymous `session_id`, no auth — analytics must work before login). Envelope: `{ name, ts, session_id, props }`.
 
-| Event | Fired when | Properties | Feeds |
-|---|---|---|---|
-| `app.launched` | Cold start, after locale resolution | `locale`, `is_guest` | ADM-13 |
-| `language.selected` | First-launch choice or a later settings switch | `locale`, `at` (`first_launch` \| `settings`) | REG-14 adoption |
-| `map.session_started` | Discovery map becomes visible | `is_guest`, `area` (coarsened), `centre_source` (`gps` \| `default`) | ADM-12 demand funnel, ADM-13 |
-| `map.recentred` | Recenter-to-me tapped | — | MAP-02 usability |
-| `map.radius_changed` | Radius slider settles | `radius_km`, `result_count` | MAP-11, ADM-14 |
-| `search.performed` | Keyword search returns | `query_script` (`latin` \| `bangla`), `result_count`, `area` | ADM-14 |
-| `search.zero_result` | A search/filter combination returns **0** | `category?`, `keyword_hash`, `query_script`, `gender_filter`, `area` | **ADM-14 — the recruitment compass** |
-| `search.low_result` | Returns above zero but below the low-result threshold | as above, plus `result_count` | ADM-14 |
-| `filter.applied` | Category or gender filter set | `filter_type`, `value`, `result_count` | ADM-14 |
-| `profile.viewed_from_pin` | Full profile opened from a preview card | `ostad_id`, `is_guest` | ADM-12, OSP-12 |
-| `favorite.added` / `favorite.removed` | Favourite toggled | `ostad_id` | MAP-11 |
-| `share.tapped` | Share action on a profile or card | `ostad_id` | MAP-07 |
-| `share_link.opened` | App opened via a deep link | `ostad_id`, `had_app_installed` | MAP-07 |
-| `guest.registration_prompted` | A guest hits an identity-gated action | `trigger` (`offer` \| `favorite` \| `other`) | ADM-12 guest→registration |
-| `screen.viewed` | Any screen presented | `screen_name` | funnel diagnosis |
+| Event | Status | Fired when | Properties | Feeds |
+|---|---|---|---|---|
+| `map_session_start` | **shipped** | Discovery map becomes visible | `is_guest`, `area` (coarsened), `centre_source` (`gps` \| `default`) | ADM-12 demand funnel, ADM-13 |
+| `map_viewport_search` | **shipped** | The map re-queries on pan or zoom | `result_count`, `area`, `zoom` | ADM-14, T-1 scraping watch |
+| `category_search` | **shipped** | Keyword or category search returns | `query_script` (`latin` \| `bangla`), `result_count`, `category?`, `area` | ADM-14 |
+| `zero_result_search` | **shipped** | A search/filter combination returns **0** | `category?`, `keyword_hash`, `query_script`, `gender_filter`, `area` | **ADM-14 — the recruitment compass** |
+| `share_tap` | **shipped** | Share action on a profile or card | `ostad_id` | MAP-07 |
+| `screen_view` | **shipped** | Any screen presented | `screen_name` | funnel diagnosis |
+| `app_launch` | add | Cold start, after locale resolution | `locale`, `is_guest` | ADM-13 |
+| `language_select` | add | First-launch choice or a later settings switch | `locale`, `at` (`first_launch` \| `settings`) | REG-14 adoption |
+| `map_recenter` | add | Recenter-to-me tapped | — | MAP-02 usability |
+| `radius_change` | add | Radius slider settles | `radius_km`, `result_count` | MAP-11, ADM-14 |
+| `low_result_search` | add | Returns above zero but below the low-result threshold | as `zero_result_search`, plus `result_count` | ADM-14 |
+| `filter_apply` | add | Category or gender filter set | `filter_type`, `value`, `result_count` | ADM-14 |
+| `profile_view_from_pin` | add | Full profile opened from a preview card | `ostad_id`, `is_guest` | ADM-12, OSP-12 |
+| `favorite_add` / `favorite_remove` | add | Favourite toggled | `ostad_id` | MAP-11 |
+| `share_link_open` | add | App opened via a deep link | `ostad_id`, `had_app_installed` | MAP-07 |
+| `guest_registration_prompt` | add | A guest hits an identity-gated action | `trigger` (`offer` \| `favorite` \| `other`) | ADM-12 guest→registration |
+
+**Adding an event is a two-file change:** this catalog **and** `CLIENT_EVENT_NAMES` in `packages/shared/src/events.ts`. `POST /v1/events` drops any name absent from that constant (`events.service.ts` — *"drop unknown/server events"*), so an event added here alone is silently discarded.
 
 **Never a client event:** anything the server can observe itself. A client-reported connection or approval is unverifiable and forgeable.
 
 ## Server events — written by the API
 
-No client can post these. Each is written in the same transaction as the action it records, so the count cannot drift from the truth.
+No client can post these. Each is written in the same transaction as the action it records, so the count cannot drift from the truth. **None is implemented yet** — Slice 0 has no offers, ratings or reports — so unlike the client names above, these are still free to change. They follow the same flat `lower_snake_case` as the client names.
 
 ### Registration and supply funnel
 
 | Event | Fired when | Properties | Feeds |
 |---|---|---|---|
-| `otp.requested` / `otp.verified` / `otp.failed` | OTP lifecycle | `purpose`, `attempt_no` | ADM-19, R-08 |
-| `account.registered` | `register/verify` commits | `role`, `locale` | ADM-12, ADM-13 |
-| `onboarding.stage_completed` | Each Ostad wizard stage | `stage` (1–6) | **ADM-12 supply funnel** |
-| `onboarding.submitted` | Stage 6 submit | `elapsed_since_registration` | ADM-12, ADM-13 |
-| `review_case.verdict` | Admin approves / requests changes / rejects | `verdict`, `turnaround_hours`, `resubmission_no` | ADM-12, ADM-15 (48h target) |
-| `account.deleted_requested` / `account.purged` | Deletion path | `role`, `days_to_purge?` | ADM-18 |
+| `otp_request` / `otp_verify` / `otp_fail` | OTP lifecycle | `purpose`, `attempt_no` | ADM-19, R-08 |
+| `account_register` | `register/verify` commits | `role`, `locale` | ADM-12, ADM-13 |
+| `onboarding_stage_complete` | Each Ostad wizard stage | `stage` (1–6) | **ADM-12 supply funnel** |
+| `onboarding_submit` | Stage 6 submit | `elapsed_since_registration` | ADM-12, ADM-13 |
+| `review_verdict` | Admin approves / requests changes / rejects | `verdict`, `turnaround_hours`, `resubmission_no` | ADM-12, ADM-15 (48h target) |
+| `account_delete_request` / `account_purge` | Deletion path | `role`, `days_to_purge?` | ADM-18 |
 
 ### Offers, connections, chat — the success unit
 
 | Event | Fired when | Properties | Feeds |
 |---|---|---|---|
-| `offer.sent` | Offer created | `ostad_id`, `shagred_id`, `category` | ADM-12 |
-| `offer.accepted` | **The connection.** Acceptance transaction commits | `response_hours`, `is_first_pair_connection` | **ADM-12 success unit**, OSP-12 |
-| `offer.declined` / `offer.expired` / `offer.withdrawn` | Terminal states | `response_hours?` | ADM-12 offer health |
-| `offer.reminder_sent` | Day-5 pending reminder | — | OFR-03 efficacy |
-| `connection.contact_revealed` | Phone/email revealed on acceptance | `had_email` | ADM-12 |
-| `message.sent` | Chat message committed | `kind` (`text` \| `voice`) | ADM-12 |
-| `thread.frozen` | Block, suspension, or deletion freezes a thread | `cause` (`block` \| `suspension` \| `deletion`) | ADM-15 |
+| `offer_sent` | Offer created | `ostad_id`, `shagred_id`, `category` | ADM-12 |
+| `offer_accept` | **The connection.** Acceptance transaction commits | `response_hours`, `is_first_pair_connection` | **ADM-12 success unit**, OSP-12 |
+| `offer_decline` / `offer_expire` / `offer_withdraw` | Terminal states | `response_hours?` | ADM-12 offer health |
+| `offer_reminder_sent` | Day-5 pending reminder | — | OFR-03 efficacy |
+| `contact_reveal` | Phone/email revealed on acceptance | `had_email` | ADM-12 |
+| `message_sent` | Chat message committed | `kind` (`text` \| `voice`) | ADM-12 |
+| `thread_freeze` | Block, suspension, or deletion freezes a thread | `cause` (`block` \| `suspension` \| `deletion`) | ADM-15 |
 
 ### Trust, safety and support
 
 | Event | Fired when | Properties | Feeds |
 |---|---|---|---|
-| `rating.created` / `rating.edited` | Review submitted or edited | `stars`, `has_text` | ADM-15 |
-| `rating.replied` | Ostad posts their one public reply | — | RNT-04 |
-| `report.created` | Report filed | `category`, `surface` | ADM-15 |
-| `report.resolved` | Admin resolves | `resolution`, `hours_open` | ADM-15 |
-| `block.created` / `block.reversed` | Block toggled | — | ADM-09, ADM-15 |
-| `moderation.action` | Warning, suspension, termination, reinstatement | `action`, `role` | ADM-15 |
-| `ticket.created` / `ticket.replied` / `ticket.resolved` / `ticket.reopened` | Support lifecycle | `category`, `is_appeal`, `hours_open?` | ADM-15, SUP-06 |
-| `broadcast.sent` | Admin broadcast dispatched | `segment`, `recipient_count` | ADM-16 |
+| `rating_create` / `rating_edit` | Review submitted or edited | `stars`, `has_text` | ADM-15 |
+| `rating_reply` | Ostad posts their one public reply | — | RNT-04 |
+| `report_create` | Report filed | `category`, `surface` | ADM-15 |
+| `report_resolve` | Admin resolves | `resolution`, `hours_open` | ADM-15 |
+| `block_create` / `block_reverse` | Block toggled | — | ADM-09, ADM-15 |
+| `moderation_action` | Warning, suspension, termination, reinstatement | `action`, `role` | ADM-15 |
+| `ticket_create` / `ticket_reply` / `ticket_resolve` / `ticket_reopen` | Support lifecycle | `category`, `is_appeal`, `hours_open?` | ADM-15, SUP-06 |
+| `broadcast_sent` | Admin broadcast dispatched | `segment`, `recipient_count` | ADM-16 |
 
 ## Derived, not emitted
 
