@@ -30,7 +30,7 @@ Per-Ostad ceilings, consistent with OSP-07: images compressed client-side to ≤
 
 ## NFR-05 Security baseline
 
-TLS 1.2+ everywhere; no plaintext endpoints. Identity vault objects and ID numbers encrypted at rest (AES-256-class or provider-managed KMS) with keys outside application code. Passwords hashed with Argon2id or bcrypt; OTP codes stored hashed only. Secrets in a secret manager or environment — never in the repository. Rate limiting on OTP, login, search, and viewport queries (REG-02, MAP-03). Audit log append-only at the storage level, not merely by convention. Dependency vulnerability scanning in CI. **Admin dashboard requires a second factor (TOTP)** in addition to email + password (ADM-20, CL-018) — the panel holds identity documents; a single stolen password must not open it.
+TLS 1.2+ everywhere; no plaintext endpoints. Identity vault objects and ID numbers encrypted at rest (AES-256-class or provider-managed KMS) with keys outside application code. Passwords hashed with a memory-hard/strong algorithm — **Argon2id, scrypt, or bcrypt**; user-account passwords use **scrypt** as the authentication authority specifies (ADR-004), admin passwords any of the three; OTP codes stored hashed only. Secrets in a secret manager or environment — never in the repository. Rate limiting on OTP, login, search, and viewport queries (REG-02, MAP-03). Audit log append-only at the storage level, not merely by convention. Dependency vulnerability scanning in CI. **Admin dashboard requires a second factor (TOTP)** in addition to email + password (ADM-20, CL-018) — the panel holds identity documents; a single stolen password must not open it.
 
 ## NFR-06 Privacy by design
 

@@ -103,6 +103,13 @@ The founder's constraint is honored: **development costs nothing.** The meter tu
 7. **Budget:** Apple Developer account timing — before the first physical-iPhone test.
 8. **Budget:** confirm the Vercel Pro line at launch or switch the web tier to Cloudflare Pages.
 
+## Amendments
+
+The decision body above is preserved as accepted on 2026-09-13. Two later ADRs revised parts of it (an accepted ADR is immutable, so these are recorded here rather than edited into the tables above):
+
+- **Auth (2026-09-25, ADR-004).** The "Auth (phone OTP, sessions, password hashing)" line in the Data-services row, and the "hand-rolled login is how identity data gets breached" note, are superseded in part: the **API** is the authentication authority — it owns `user_account.password_hash` (scrypt) and mints Supabase-valid JWTs signed with the project's Supabase JWT secret; **no `auth.users` row is created**. Supabase Auth is not the password store or token issuer. Supabase still verifies those tokens' signatures on its direct channels (Realtime, Storage), and RLS remains the second line of defense — so ADR-001's security rationale (don't expose identity data; keep RLS behind the policy layer) stands. The warning against "hand-rolled login" is satisfied by using the platform's built-in scrypt and Supabase-valid JWTs, not a bespoke scheme.
+- **OTP in development (2026-09-25, ADR-003).** The cost-model line "Supabase Auth test phone numbers with fixed OTP codes" no longer applies (Supabase Auth is not used). In development, OTP uses a **stub that logs the code**; no real SMS is sent until the Slice 0 gateway is selected. The $0-in-development outcome is unchanged.
+
 ## Superseded by
 
-None.
+In part by **ADR-004** (authentication authority — the Auth line) and **ADR-003** (implementation stack — the development-OTP line). The architecture (three tiers, Singapore, RLS-as-second-line, the cost model) otherwise stands.

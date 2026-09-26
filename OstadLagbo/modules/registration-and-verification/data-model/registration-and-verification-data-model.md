@@ -86,7 +86,7 @@ Retention: rows purge at 90 days (OL-RET-001).
 | restricted | boolean | `true` for a session opened by a suspended account — valid only for rule 7's operations (API Overview status table) |
 | revoked_at | timestamp, nullable | Set by logout, password change (REG-06), suspension, deletion request, termination |
 
-Engineering note: a managed auth provider may subsume this entity; the *behaviors* (multi-device, revoke-on-password-change, revoke-on-suspension, restricted sessions for suspended accounts) are the requirement, not the table itself.
+Engineering note: `auth_session` is the **source of truth for refresh and revocation** — the API mints the tokens and refresh checks this row is not revoked and the account is still valid (ADR-004); it is **not** subsumed by a managed auth provider. The *behaviors* (multi-device, revoke-on-password-change, revoke-on-suspension, restricted sessions for suspended accounts) are enforced against this table.
 
 **Login lockout** (REG-05) is keyed on the **submitted phone string**, whether or not an account exists for it, so a lockout response never reveals account existence (API Overview → account existence). It is rate-limit state, not a stored entity.
 
