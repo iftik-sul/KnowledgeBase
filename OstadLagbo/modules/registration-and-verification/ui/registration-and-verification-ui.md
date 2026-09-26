@@ -3,7 +3,7 @@ project: OstadLagbo
 module: registration-and-verification
 type: ui
 status: current
-updated: 2026-09-25
+updated: 2026-09-26
 id: OL-REG-UI-001
 derived_from: /OstadLagbo/modules/registration-and-verification/requirements/registration-and-verification-requirements.md
 owner: Iftikher
@@ -55,7 +55,7 @@ This is the module that stands up the three shells. A visitor arrives at the **g
 - **Entry:** from the registration form.
 - **Structure:** 6-digit code entry, a resend control, and the expiry indication.
 - **States:** resend disabled until `resend_available_at`; wrong-code shows `details.attempts_remaining`; `locked_out` disables entry with the retry countdown; expired code offers resend or restart.
-- **Data & actions:** verify → `POST /v1/auth/register/verify {registration_id, otp}` → the account is created and a session returned. Resend → `POST /v1/auth/register/resend`. On success, route by role: **Shagred → Shagred setup**; **Ostad → onboarding wizard at stage 1**.
+- **Data & actions:** verify → `POST /v1/auth/register/verify {registration_id, otp}` → the account is created and a session returned. Resend → `POST /v1/auth/register/resend`. On success the client **registers the device push token** (`POST /v1/me/push-tokens`) before routing — the first of the every-session-start registrations (REG-12, CL-038); the OS permission prompt is *not* raised here. Then route by role: **Shagred → Shagred setup**; **Ostad → onboarding wizard at stage 1**.
 - **Never shows:** the code itself in any log or echo; codes render in Latin digits (NFR-11).
 
 ### Account-recovery interstitial (REG-02, CL-015)
@@ -71,7 +71,7 @@ This is the module that stands up the three shells. A visitor arrives at the **g
 - **Entry:** Welcome, the recovery interstitial, or any `unauthorized` redirect.
 - **Structure:** phone, password, a **Forgot password** link.
 - **States:** `unauthorized` shows one message whether phone or password is wrong; `locked_out` shows the retry countdown (5 fails / 15 min, keyed on the phone string).
-- **Data & actions:** → `POST /v1/auth/login`. On success: **active** → the role's shell; **`recovered`** → a brief "welcome back, your account is restored" note then the shell; **suspended** → the suspension shell (Group H); a `pending_deletion` number logging in *is* the recovery path.
+- **Data & actions:** → `POST /v1/auth/login`. On success: **active** → the role's shell; **`recovered`** → a brief "welcome back, your account is restored" note then the shell; **suspended** → the suspension shell (Group H); a `pending_deletion` number logging in *is* the recovery path. On **every** successful login — active, recovered, or suspended — the client registers the device push token (`POST /v1/me/push-tokens`, upsert), which is what makes pushes work on a new or reinstalled device (REG-12, CL-038).
 - **Never shows:** which of phone/password was wrong; whether a number exists (the uniform message and phone-keyed lockout hold, REG-api).
 
 ### Password reset (REG-06)
@@ -89,7 +89,7 @@ This is the module that stands up the three shells. A visitor arrives at the **g
 - **Entry:** immediately after `register/verify` for a Shagred (the account summary shows `shagred.profile_complete = false`).
 - **Structure:** display name (required), the **cascading address picker** (Division→District→Thana→postal, shared component), optional photo and gender — field rules per the SGP api.
 - **States:** first-time setup uses `PUT`; a re-opened, already-complete profile edits via `PATCH` (SGP api) — the client picks by `profile_complete`.
-- **Data & actions:** → `PUT /v1/shagred-profile` → on success, the Shagred shell (Map home). Photo via the upload-ticket flow.
+- **Data & actions:** → `PUT /v1/shagred-profile` → on success, **raise the OS notification permission prompt** (the Shagred's once-per-install moment — the next thing that happens to them is an offer outcome, REG-12/CL-038), then the Shagred shell (Map home). Photo via the upload-ticket flow.
 - **Note:** the map itself is reachable as a guest, so setup is not a hard gate on the map; it is enforced at **send-offer** (`state_conflict: profile_incomplete` routes back here, per the overview mapping and OFR).
 - **Never shows:** any Shagred discovery surface — there is none (SGP).
 
@@ -126,7 +126,7 @@ The **onboarding shell**: a full-screen, six-stage sequence that owns the screen
 ### Stage 6 — Review & submit (REG-11)
 - **Purpose:** a read-back of every stage, then submit for review.
 - **Structure:** a summary of stages 1–5 with per-stage **Edit** jumps; a **push-notification enrollment** prompt (so verdict and offer notifications arrive, REG-12); a submit action.
-- **Data:** submit → `POST /v1/onboarding/submit` → `approval_status = pending`; push token via `POST /v1/me/push-tokens`.
+- **Data:** submit → `POST /v1/onboarding/submit` → `approval_status = pending`; this is the **Ostad's once-per-install OS permission prompt** moment (a verdict is the next thing they will want to hear about). The token itself was already registered at `register/verify` and re-registers at every session start — this screen raises the *prompt*, not the registration (REG-12, CL-038).
 - **States:** submit refused with `state_conflict details.incomplete_stages` if any stage is incomplete — the summary flags which.
 
 ## Group F — Review status and pending state (REG-11)

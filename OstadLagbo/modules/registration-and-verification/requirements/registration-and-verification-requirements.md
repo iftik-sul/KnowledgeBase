@@ -93,7 +93,16 @@ Completing stage 6 submits the profile for admin review and sets the account to 
 
 ## REG-12 Platform rules inherited
 
-18+ applies to both roles (REG-03). Push notification enrollment is requested during onboarding (delivery rules per `contact-and-offers`); the device's push token is registered against the account and revoked on logout, suspension, deletion request, or termination. Self-service account deletion exists in settings for both roles; deletion of identity data follows the retention policy (see risk R-02).
+18+ applies to both roles (REG-03). Self-service account deletion exists in settings for both roles (the user-facing delete ships in Slice 1 — CL-034); deletion of identity data follows the retention policy (see risk R-02).
+
+**Push enrollment and push-token registration are two different things, and only the first belongs to onboarding (CL-038).** Conflating them is why pushes previously reached almost no one:
+
+- **The OS permission prompt** is asked **once per install**, at a role-appropriate moment: for an **Ostad**, at onboarding stage 6, where the next thing to happen is a verdict worth hearing about; for a **Shagred**, at the end of setup (REG-08), where the next thing is an offer outcome. A declined prompt is never re-asked in-app — the OS owns that setting (CL-015).
+- **Token registration is silent, and happens on every session start** — after `register/verify`, after **every** login, and on every app launch that resumes a live session — and again whenever the OS rotates the token, which it does on its own schedule without asking anyone. `POST /v1/me/push-tokens` is an upsert bound to the calling session (REG-api), so registering repeatedly is free and idempotent.
+
+Tokens are revoked on logout (that device only, unless `all_devices`), suspension, deletion request, and termination. Delivery rules are per `contact-and-offers`.
+
+**Acceptance:** a Shagred, who never sees an onboarding wizard, still receives offer-outcome pushes; logging in on a second or reinstalled device registers that device's token with no user action beyond the OS permission grant; a token the OS rotates reaches the server without user action; logging out of one device leaves the other device's pushes working.
 
 ## REG-13 Consent capture
 

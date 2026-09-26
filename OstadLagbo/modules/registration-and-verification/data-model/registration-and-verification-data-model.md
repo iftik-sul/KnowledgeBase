@@ -109,6 +109,8 @@ The delivery address for every push notification (OFR-03, REG-11 status pushes, 
 | created_at / last_refreshed_at | timestamps | Platforms rotate tokens; refresh updates in place |
 | revoked_at | timestamp, nullable | Set by logout, session revocation, suspension, deletion request, termination |
 
+**When rows are written (CL-038):** on every session start — after `register/verify`, after every login, and on every app launch resuming a live session — and on every OS token rotation. The write is an upsert on `token`, rebinding it to the calling session, so a row per device converges rather than accumulating. This entity always supported that cadence; nothing but the `ui` and requirements layers needed to change.
+
 **Suspension and push:** suspension revokes every existing token along with every session. When the suspended user logs in to the restricted session, the app **registers a fresh token against that session** — the one device operation rule 7 permits beyond the appeal itself — so the admin's reply to an appeal can reach them.
 
 **Delivery rule:** a notification is sent to every non-revoked token of the recipient account, rendered in `user_account.preferred_locale`. Broadcasts (ADM-16) resolve a segment to accounts, then accounts to active tokens; `recipient_count` on the broadcast is the count of accounts, not tokens. Suspended accounts receive **only** appeal-ticket notifications (rule 7); pending-deletion accounts hold no tokens and receive none.
