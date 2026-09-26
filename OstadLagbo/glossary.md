@@ -82,7 +82,7 @@ Canonical definitions for terms used throughout the OstadLagbo knowledge base. I
 
 ## Document ID prefixes
 
-`OL-CHR` charter · `OL-STK` stakeholder register · `OL-RSK` risk register · `OL-CHG` change log · `OL-RET` retention policy · `OL-PRV` privacy policy · `OL-TOS` terms of service · `OL-INC` incident response · `OL-BLD` build sequence · `OL-NFR` non-functional requirements · `OL-DM` data model overview · `OL-API` api overview · `OL-UI` UI layer (overview, design foundations, public website) · `OL-GLS` glossary · `OL-BAS` MVP scope baseline · `OL-SKC` skill-category seed data · `OL-DEC` architecture decision record · `OL-<MODULE>-REQ` module requirements · `OL-<MODULE>-DM` module data model · `OL-<MODULE>-API` module api
+`OL-CHR` charter · `OL-STK` stakeholder register · `OL-RSK` risk register · `OL-CHG` change log · `OL-RET` retention policy · `OL-PRV` privacy policy · `OL-TOS` terms of service · `OL-INC` incident response · `OL-BLD` build sequence · `OL-NFR` non-functional requirements · `OL-DM` data model overview · `OL-API` api overview · `OL-UI` UI layer (overview, design foundations, public website) · `OL-GLS` glossary · `OL-BAS` MVP scope baseline · `OL-SKC` skill-category seed data · `OL-DEC` architecture decision record · `OL-<MODULE>-REQ` module requirements · `OL-<MODULE>-DM` module data model · `OL-<MODULE>-API` module api · `OL-<MODULE>-UI` module ui
 
 ## External context
 
