@@ -14,7 +14,7 @@ The visual layer the `ui-overview` deliberately left open ("colour, typography, 
 
 **Source of truth for pixels:** the Figma file below. This doc is the text mirror for review and handoff.
 
-- **Figma file:** https://www.figma.com/design/yksNam3zlSoECaUzScjCFc/ (page **App Design**)
+- **Figma file:** https://www.figma.com/design/yksNam3zlSoECaUzScjCFc/Untitled?node-id=1-2&t=FYHH6GAKbuginRmC-1 — the app screens live on **page 4**; ignore all other pages in the file.
 - **Logo source:** the `athena` frame (editable vector) → component `Logo / Mark`.
 
 ## Brand palette (flat — no gradients)
