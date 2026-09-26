@@ -13,7 +13,7 @@ updated: 2026-09-25
 
 - **Status:** Active — entering Execution. The full specification chain is complete: requirements, NFRs, governance policies, data models, platform architecture, seed data, **APIs, and UI** — all eight modules across every layer, plus the admin dashboard and public website. **Scope is frozen at baseline v1.2** (CL-009…021 consolidated). Next: the build, starting with Slice 0 (Foundation); alongside it, schedule/milestones/budget and the Privacy Policy & ToS v1.1 refresh ahead of legal review.
 - **Owner:** Iftikher (sole founder: sponsor, project manager, product owner)
-- **Stack (ADR-001):** Flutter (Android + iOS), bilingual English + Bangla UI (CL-016) · **Supabase** (Singapore) for database, auth, storage, realtime, and scheduled jobs · **Render** (Singapore) for the API and policy layer · **Vercel** for the admin dashboard and public website · Firebase Cloud Messaging for push · a Bangladesh SMS gateway for OTP · OpenStreetMap tiles · Cloudflare at the edge. **$0 through development; ≈ $52/month + SMS from the first real user.**
+- **Stack (ADR-001):** Flutter (Android + iOS), bilingual English + Bangla UI (CL-016) · **Supabase** (Singapore) for database, storage, realtime, and scheduled jobs · **Render** (Singapore) for the API, the policy layer, and the authentication authority (the API owns passwords and mints Supabase-valid tokens — ADR-004) · **Vercel** for the admin dashboard and public website · Firebase Cloud Messaging for push · a Bangladesh SMS gateway for OTP · OpenStreetMap tiles · Cloudflare at the edge. **$0 through development; ≈ $52/month + SMS from the first real user.**
 
 ## Entry points
 
@@ -41,7 +41,7 @@ updated: 2026-09-25
 
 ## Current phase
 
-Planning — technical design, **specification complete**. The full derivation chain now exists for all eight modules: requirements → data models → **APIs** → **UI**, on top of the governance, decisions (ADR-001…004), reference, and non-functional layers.
+Execution — building Slice 0 (Foundation). The specification is **complete and frozen at baseline v1.2**: the full derivation chain exists for all eight modules — requirements → data models → **APIs** → **UI** — on top of the governance, decisions (ADR-001…004), reference, and non-functional layers.
 
 Milestones so far: the requirements layer was twice feature-audited; the governance policy bundle completed; the 2026-09-12 planning review added the build sequence, NFRs, the authorization model, and the glossary; the data-model layer completed 2026-09-13 with a same-day cross-layer review (adding CL-019 termination); ADR-001 and the skill-category seed data were accepted 2026-09-13; a whole-KB review on 2026-09-14 sequenced termination, added REG-14 language preference, and logged CL-020 (public website); the **api layer** was built per module against the data models, then given a full **cross-layer audit** (which surfaced CL-021 photo-as-key-field and several consistency fixes); and the **ui layer** was built per module against the api — the seven app modules, the admin dashboard, and the public website — each adversarially reviewed before merge.
 
