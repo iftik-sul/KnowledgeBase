@@ -23,9 +23,9 @@ Bound in Figma as the `Athena` variable collection; use the same tokens in the F
 
 | Token | Hex | Role |
 |---|---|---|
-| `brand/green` | `#0E8A6E` | Primary. Pin, primary buttons, and **large/bold** text (headings, button labels). **Not for small/normal-weight text or links on white** — 4.3:1, fails WCAG AA at body size |
-| `brand/green-dark` | `#0B7259` | Pressed/active state of primary |
-| `brand/navy` | `#112841` | Figure, body text, **all links and small/normal-weight text on light backgrounds**, dark buttons |
+| `brand/green` | `#0B7A61` | Primary. Pin, primary buttons, links, headers. 5.29:1 on white — passes WCAG AA at all sizes (darkened from `#0E8A6E`, which was 4.3:1) |
+| `brand/green-dark` | `#095E4B` | Pressed/active state of primary (kept clearly darker than the base green) |
+| `brand/navy` | `#112841` | Figure, body text, dark buttons |
 | `brand/amber` | `#FBAE28` | Accent only (logo star, highlights). **Never text on white** — fails WCAG AA |
 | `base/white` | `#FFFFFF` | Logo circle, card surfaces |
 | `base/bg` | `#F7FAF8` | App background |
@@ -53,7 +53,7 @@ Tints used for banners (backgrounds only): error `#FDECEA`, warning `#FEF6E6`.
 
 ## Accessibility (inherited from NFR-10)
 
-Touch targets ≥ 44 dp (buttons/fields are 52–64 px); text respects OS font scaling; portrait-first, left-to-right in both languages. **Contrast (WCAG AA):** navy on white passes at every size; **green (`#0E8A6E`) on white is 4.3:1 — it passes only for large or bold text** (≥ 24 px regular / ≥ 18.66 px bold), so green is used for fills, the logo, headings, and bold button labels, while **links and small/normal-weight text use navy (`brand/navy`)**. Amber is accent-only, never text on white.
+Touch targets ≥ 44 dp (buttons/fields are 52–64 px); text respects OS font scaling; contrast meets WCAG AA — **navy (15:1) and green (`#0B7A61`, 5.29:1) on white both pass at all sizes**, and white on the green button fill is the same 5.29:1; amber is accent-only (never text on white); portrait-first, left-to-right in both languages. The primary green was darkened from `#0E8A6E` (4.3:1, failed AA for body-size text) so green links and button labels pass without moving to another colour.
 
 ## Components (Figma library)
 
